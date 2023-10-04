@@ -6,17 +6,50 @@ const colors = {
         900: '#FF0000',
 
     },
+    white: {
+        100: "#fff"
+    },
+    black: {
+        100: '#000'
+    },
     gray: {
-        100:'#BBBBC7',
+        100: '#BBBBC7',
         light: '#797979',
         text: "#4A4A4A"
+    },
+    blue: {
+        500: "#2CA5C3"
+
     }
 }
 const fonts = {
-    openSans: `'Open Sans'`
+    openSans: `'Open Sans'`,
+    Nunito:`'Nunito'`
 
 }
 const components = {
+    Button: {
+        variants: {
+            "blue-btn": {
+                bg: "blue.500",
+                color: "white.100",
+                fontWeight:500,
+                width:'200px',
+                fontSize:'18px',
+            }
+        }
+    },
+    Link: {
+        variants: {
+            "blue-link": {
+                color: 'blue.500',
+                fontFamily: 'var(--chakra-\fonts-openSans)',
+                fontWeight: 600,
+                fontSize: "20px"
+
+            }
+        }
+    },
 
     FormLabel: {
         variants: {
