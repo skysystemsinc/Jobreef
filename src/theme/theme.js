@@ -1,4 +1,5 @@
 import { extendTheme } from '@chakra-ui/react'
+import { StepsTheme as Steps } from "chakra-ui-steps";
 const colors = {
     test: "#ff000",
     brand: {
@@ -14,6 +15,7 @@ const colors = {
     },
     gray: {
         100: '#BBBBC7',
+        200: "#F7F9FB",
         light: '#797979',
         text: "#4A4A4A"
     },
@@ -24,28 +26,62 @@ const colors = {
 }
 const fonts = {
     openSans: `'Open Sans'`,
-    Nunito:`'Nunito'`
+    Nunito: `'Nunito'`
 
 }
 const components = {
+    Steps,
     Button: {
+
         variants: {
+
             "blue-btn": {
                 bg: "blue.500",
+                height: "50px",
+                width: '200px',
+
+                boxShadow: "0px 4px 11px 0px rgba(70, 146, 254, 0.15)",
                 color: "white.100",
-                fontWeight:500,
-                width:'200px',
-                fontSize:'18px',
-            }
+                fontWeight: 500,
+                fontSize: '18px',
+
+            },
+            "outline-blue": {
+                bg: "transparent",
+                height: "50px",
+                width: '200px',
+                border: "2px solid",
+                borderColor: "blue.500",
+                boxShadow: "0px 4px 11px 0px rgba(70, 146, 254, 0.15)",
+                color: "blue.500",
+                fontWeight: 600,
+                fontSize: '18px',
+
+            },
+
         }
     },
     Link: {
+        sizes: {
+
+            sm: {
+
+                fontSize: "1px"
+            }
+
+        }
+        ,
         variants: {
             "blue-link": {
                 color: 'blue.500',
                 fontFamily: 'var(--chakra-\fonts-openSans)',
                 fontWeight: 600,
-                fontSize: "20px"
+                // fontSize: "20px",
+                fontSize: {
+                    sm: "20px",
+                    base: "17px"
+                },
+
 
             }
         }
@@ -55,7 +91,11 @@ const components = {
         variants: {
             "label": {
                 color: "gray.text",
-                fontSize: "20px",
+                fontSize: {
+
+                    sm: "20px",
+                    base: "18px"
+                },
                 fontFamily: 'var(--chakra-\fonts-openSans)',
                 fontWeight: 400,
 
@@ -68,6 +108,8 @@ const components = {
         variants: {
             "shadow-input": {
                 field: {
+                    height: { sm: "58px", base: "53PX" },
+                    borderRadius: "8px",
 
                     // bg: "text.gray !important",
                     border: "none ",
@@ -76,7 +118,25 @@ const components = {
                     _placeholder: { color: 'gray.light', fontWeight: 400, fontSize: "18px" }
                 },
                 width: "100px !important",
-                fontSize: "42px",
+
+                color: "brand.100",
+                "::placeholder": {
+                }
+
+            },
+            "bg-input": {
+                field: {
+                    height: { sm: "58px", base: "53PX" },
+                    borderRadius: "8px",
+
+                    bg: "gray.200 !important",
+                    border: "none ",
+                    // borderColor: "red",
+                    // boxShadow: " 0px 4px 20px 0px #0000000D !important",
+                    _placeholder: { color: 'gray.100', fontWeight: 400, fontSize: "20px" }
+                },
+                width: "100px !important",
+
                 color: "brand.100",
                 "::placeholder": {
                 }
@@ -94,14 +154,26 @@ const components = {
         variants: {
             // Variant for h1
             'h1': {
-                fontSize: '2xl',
-                color: 'brand.100',
+                fontSize: '40px',
+                color: 'white.100',
+                fontFamily: 'var(--chakra-\fonts-openSans)',
+                fontWeight: 600
+
             },
             // Variant for h2
+
             'h2': {
                 fontSize: 'xl',
                 color: 'brand.900',
             },
+            "p1": {
+                fontWeight: 400,
+                color: 'gray.light',
+                lineHeight: '28px',
+                fontFamily: 'var(--chakra-\fonts-openSans)',
+                fontSize: "16px",
+                margin:"0px"
+            }
             // Add more variants for other heading levels as needed
         },
     },
