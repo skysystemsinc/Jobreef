@@ -2,7 +2,7 @@ import { Button, Icon, Input, InputGroup, InputRightElement } from "@chakra-ui/r
 import { useState } from "react"
 import { HiOutlineEye } from "react-icons/hi";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
-function PasswordInput({variant}) {
+function PasswordInput({variant , placeholder}) {
     const [show, setShow] = useState(false)
     const handleClick = () => setShow(!show)
 
@@ -11,7 +11,7 @@ function PasswordInput({variant}) {
             <Input
                 pr='4.5rem'
                 type={show ? 'text' : 'password'}
-                placeholder='Enter your password'
+                placeholder={placeholder}
                 variant={variant}
             />
             <InputRightElement width='4.5rem'>
