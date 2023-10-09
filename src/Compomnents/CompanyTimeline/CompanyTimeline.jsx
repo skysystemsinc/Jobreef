@@ -13,6 +13,7 @@ import { Step, Steps, useSteps } from "chakra-ui-steps";
 import CompanyBio from "./CompanyBio";
 import CompanyLocation from "./CompanyLocation";
 import SocialLink from "./SocialLink";
+import { useRouter } from "next/router";
 
 // import PersonalInfo from "./PersonalInfo";
 // import Password from "./Password";
@@ -34,6 +35,7 @@ const CustomeSteps = () => {
 };
 
 export const CompanyTimeline = ({ variant }) => {
+  const router = useRouter();
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
@@ -72,7 +74,7 @@ export const CompanyTimeline = ({ variant }) => {
       ) : (
         <Steps
           responsive={false}
-          checkIcon={CustomeSteps}
+          checkIcon={false}
           sx={{
             width: {
               md: "404px",
@@ -225,6 +227,8 @@ export const CompanyTimeline = ({ variant }) => {
             onClick={() => {
               if (!hasCompletedAllSteps) {
                 nextStep();
+              } else {
+                router.push("/profile-setting");
               }
             }}
           >

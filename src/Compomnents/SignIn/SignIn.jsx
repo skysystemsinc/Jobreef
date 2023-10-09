@@ -6,7 +6,7 @@ import cartoon from "@/assets/Images/cartoon.svg";
 import leftblue_2 from "@/assets/Images/leftblue_2.png";
 import whitetick from "@/assets/Images/white-tick.svg";
 import SignUpLayout from "../Layout/SignUpLayout";
-import Logo from "@/assets/Logo/Logo";
+import Logo from "@/Compomnents/Logo/Logo";
 
 const SignIn = () => {
   return (

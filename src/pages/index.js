@@ -52,7 +52,8 @@ export default function Home() {
         <Box
           mx={"20px"}
           width={{
-            xl: "564px",
+            "2xl": "564px",
+            xl: "490px",
             lg: "564px",
             md: "564px",
             sm: "100%",
@@ -96,24 +97,31 @@ export default function Home() {
             <Link
               variant={"blue-link"}
               marginTop={{ md: "24px", base: "18px" }}
+              _hover={{ textDecoration: "none" }}
               href={"/"}
             >
               Forgot Password
             </Link>
           </Box>
           <Box margin={{ md: "41px 0px 69px 0px", base: "31px 0px 49px 0px" }}>
-            <Link
-              variant={"blue-link"}
-              size={"sm"}
+            <Heading
+              variant="p7"
+              // variant={"blue-link"}
+              as={"p"}
+              // size={"sm"}
               color={"black.100 !important"}
-              href={"/sign-up"}
             >
               Don’t have an account?{" "}
-              <Text display={"inline"} color={"blue.500"}>
+              <Link
+                href={"/sign-up"}
+                display={"inline"}
+                _hover={{ textDecoration: "underline" }}
+                color={"blue.500"}
+              >
                 {" "}
                 Sign up
-              </Text>
-            </Link>
+              </Link>
+            </Heading>
           </Box>
 
           <Box

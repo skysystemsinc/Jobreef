@@ -48,7 +48,7 @@ export const Timeline = ({ variant }) => {
     >
       <Steps
         responsive={false}
-        checkIcon={CustomeSteps}
+        checkIcon={false}
         sx={{
           width: {
             md: "404px",

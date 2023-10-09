@@ -19,7 +19,8 @@ const colors = {
   },
   black: {
     100: "#000",
-    200:"#111"
+    200: "#111",
+    300: "#1111114d",
   },
   gray: {
     100: "#BBBBC7",
@@ -36,8 +37,19 @@ const fonts = {
   openSans: `'Open Sans'`,
   Nunito: `${nunito.variable}`,
 };
+const breakpoints = {
+  base: "0em", // 0px
+  sm: "30em", // ~480px. em is a relative unit and is dependant on the font size.
+  md: "48em", // ~768px
+  lg: "62em", // ~992px
+  xl: "80em", // ~1280px
+  "2xl": "96em", // ~1536px
+};
 const components = {
   Steps,
+  Text: {
+    variants: {},
+  },
   Button: {
     variants: {
       "blue-btn": {
@@ -75,7 +87,10 @@ const components = {
         fontWeight: 600,
         // fontSize: "20px",
         fontSize: {
-          md: "20px",
+          "2xl": "20px",
+          xl: "18px",
+          lg: "18px",
+          md: "17px",
           base: "17px",
         },
       },
@@ -104,7 +119,8 @@ const components = {
         color: "gray.text",
         fontSize: {
           md: "20px",
-          base: "17px",
+          sm: "17px",
+          base: "15px",
         },
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 400,
@@ -115,7 +131,7 @@ const components = {
     variants: {
       "shadow-input": {
         field: {
-          height: { sm: "58px", base: "53PX" },
+          height: { md: "58px", base: "53px" },
           borderRadius: "8px",
 
           // bg: "text.gray !important",
@@ -134,7 +150,7 @@ const components = {
       },
       "bg-input": {
         field: {
-          height: { sm: "58px", base: "53PX" },
+          height: { md: "58px", base: "47px" },
           borderRadius: "8px",
 
           bg: "gray.200 !important",
@@ -155,11 +171,10 @@ const components = {
   Select: {
     variants: {
       "bg-dropdown": {
-        option:{
-          color:"red !important",
+        option: {
+          color: "red !important",
         },
         field: {
-
           height: { sm: "58px", base: "53px" },
           borderRadius: "8px",
           color: "gray.light !important",
@@ -173,7 +188,6 @@ const components = {
 
           bg: "gray.200 !important",
         },
-        
       },
     },
   },
@@ -211,8 +225,7 @@ const components = {
 
           bg: "gray.200 !important",
           border: "none ",
-          // borderColor: "red",
-          // boxShadow: " 0px 4px 20px 0px #0000000D !important",
+
           _placeholder: {
             color: "gray.100",
             fontWeight: 400,
@@ -241,10 +254,10 @@ const components = {
       },
       // Variant for h2
 
-      h2: {
-        fontSize: "xl",
-        color: "brand.900",
-      },
+      // h2: {
+      //   fontSize: "xl",
+      //   color: "brand.900",
+      // },
       p1: {
         fontWeight: 400,
         color: "gray.light",
@@ -253,31 +266,69 @@ const components = {
         fontSize: "16px",
         margin: "0px",
       },
-      p3: {
-        fontWeight: 400,
-        color: "gray.text ",
-        // lineHeight: { md:"51px", sm:"20px"},
-        // fontFamily: "var(--chakra-\fonts-Nunito)",
-        fontFamily: "var(--chakra-\fonts-openSans)",
 
-        fontSize: {md:"30px", sm:"20px" , base:"1px"},
-        // margin: "0px",
-      },
       p2: {
         fontWeight: 500,
 
         color: "gray.text",
-        // color:{md:"red", sm:"yellow"},
+
         lineHeight: { md: "28px", base: "20px" },
         fontFamily: "var(--chakra-\fonts-openSans)",
-        // fontSize: {  base:'2px !important'},
+
         // fontSize:"12px",
         margin: "0px",
+      },
+      p3: {
+        fontWeight: 400,
+        color: "gray.text ",
+
+        // fontFamily: "var(--chakra-\fonts-Nunito)",
+        fontFamily: "var(--chakra-\fonts-openSans)",
+      },
+      p4: {
+        fontWeight: 400,
+        color: "black.200 ",
+        fontFamily: "var(--chakra-\fonts-openSans)",
+        fontSize: ["15px", "15px", "20px"],
+
+        // fontSize: "20px",
+      },
+      p5: {
+        fontWeight: 400,
+        color: "black.200 ",
+
+        fontSize: ["18px", "15px", "15px"],
+      },
+      p6: {
+        fontWeight: 400,
+        color: "gray.text ",
+        fontFamily: "var(--chakra-\fonts-openSans)",
+
+        fontSize: ["22px", "22px", "25px", "30px"],
+      },
+      p7: {
+        color: "blue.500",
+        fontFamily: "var(--chakra-\fonts-openSans)",
+        fontWeight: 600,
+        fontSize: ["17px", "17px", "17px", "17px", "17px", "20px", "20px"],
+        // fontSize: {
+        //   md: "20px",
+        //   base: "17px",
+        // },
       },
       // Add more variants for other heading levels as needed
     },
   },
-
+  Tabs: {
+    variant: {
+      "blue-tab": {
+        border: "1px solid red",
+        TabList: {
+          border: "1px solid red",
+        },
+      },
+    },
+  },
   PinInput: {
     variants: {
       otp: {
@@ -298,4 +349,4 @@ const components = {
     fontSize: "18px",
   },
 };
-export const theme = extendTheme({ colors, components, fonts });
+export const theme = extendTheme({ colors, components, fonts, breakpoints });
