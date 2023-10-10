@@ -40,7 +40,7 @@ const fonts = {
 const breakpoints = {
   base: "0em", // 0px
   sm: "30em", // ~480px. em is a relative unit and is dependant on the font size.
-  md: "48em", // ~768px
+  md: "49em", // ~768px
   lg: "62em", // ~992px
   xl: "80em", // ~1280px
   "2xl": "96em", // ~1536px
@@ -54,23 +54,41 @@ const components = {
     variants: {
       "blue-btn": {
         bg: "blue.500",
-        height: { md: "50px", base: "44px" },
-        width: { md: "200px", base: "180px" },
+        height: { "2xl": "50px", sm: "44px", base: "40px" },
+        // width: { md: "200px", sm: "180px", base: "168px" },
+        width: {
+          "2xl": "200px",
+          xl: "150px",
+          md: "160px",
+          lg: "140px",
+          sm: "130px",
+          base: "120px",
+        },
 
         boxShadow: "0px 4px 11px 0px rgba(70, 146, 254, 0.15)",
         color: "white.100",
         fontWeight: 500,
-        fontSize: { md: "18px", base: "15px" },
+        fontSize: { "2xl": "18px", base: "14px" },
       },
       "outline-blue": {
         bg: "transparent",
         // height: "50px",
         // width: '200px',
-        height: { md: "50px", base: "44px" },
-        width: { md: "200px", base: "180px" },
+        // height: { md: "50px", base: "40px" },
+        height: { "2xl": "50px", sm: "44px", base: "40px" },
+
+        // width: { md: "200px", base: "160px" },
+        width: {
+          "2xl": "200px",
+          xl: "160px",
+          md: "160px",
+          lg: "140px",
+          sm: "130px",
+          base: "120px",
+        },
 
         border: "2px solid",
-        fontSize: { md: "18px", base: "15px" },
+        fontSize: { "2xl": "18px", base: "14px" },
 
         borderColor: "blue.500",
         boxShadow: "0px 4px 11px 0px rgba(70, 146, 254, 0.15)",
@@ -91,7 +109,8 @@ const components = {
           xl: "18px",
           lg: "18px",
           md: "17px",
-          base: "17px",
+
+          base: "14px",
         },
       },
     },
@@ -118,9 +137,11 @@ const components = {
       label: {
         color: "gray.text",
         fontSize: {
-          md: "20px",
-          sm: "17px",
-          base: "15px",
+          "2xl": "20px",
+          xl: "16px",
+          // md: "20px",
+          // sm: "15px",
+          base: "14px",
         },
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 400,
@@ -131,7 +152,7 @@ const components = {
     variants: {
       "shadow-input": {
         field: {
-          height: { md: "58px", base: "53px" },
+          height: { "2xl": "58px", base: "53px" },
           borderRadius: "8px",
 
           // bg: "text.gray !important",
@@ -141,7 +162,7 @@ const components = {
           _placeholder: {
             color: "gray.light",
             fontWeight: 400,
-            fontSize: { md: "18px", base: "16px" },
+            fontSize: { "2xl": "18px", base: "14px" },
           },
         },
 
@@ -150,7 +171,7 @@ const components = {
       },
       "bg-input": {
         field: {
-          height: { md: "58px", base: "47px" },
+          height: { "2xl": "58px", base: "47px" },
           borderRadius: "8px",
 
           bg: "gray.200 !important",
@@ -160,7 +181,7 @@ const components = {
           _placeholder: {
             color: "gray.100",
             fontWeight: 400,
-            fontSize: { md: "18px", base: "16px" },
+            fontSize: { "2xl": "18px", base: "14px" },
           },
         },
 
@@ -171,20 +192,18 @@ const components = {
   Select: {
     variants: {
       "bg-dropdown": {
-        option: {
-          color: "red !important",
-        },
         field: {
-          height: { sm: "58px", base: "53px" },
+          height: { "2xl": "58px", base: "47px" },
+
           borderRadius: "8px",
           color: "gray.light !important",
           fontWeight: 400,
-          fontSize: { md: "18px", base: "16px" },
-          _placeholder: {
-            color: "red !important",
-            fontWeight: 400,
-            fontSize: { md: "18px", base: "16px" },
-          },
+          fontSize: { "2xl": "18px", base: "16px" },
+          // _placeholder: {
+          //   color: "red !important",
+          //   fontWeight: 400,
+          //   fontSize: { md: "18px", base: "16px" },
+          // },
 
           bg: "gray.200 !important",
         },
@@ -212,7 +231,7 @@ const components = {
           // p: "20px 20px 20px 20px",
 
           fontWeight: 400,
-          fontSize: { md: "25px", base: "16px" },
+          fontSize: { base: "16px" },
           //   },
         },
 
@@ -247,7 +266,8 @@ const components = {
     variants: {
       // Variant for h1
       h1: {
-        fontSize: "40px",
+        // fontSize: { "2xl": "40px" , base:"20px" },
+        fontSize: ["28px", "28px", "28px", "28px", "28px", "28px", "48px"],
         color: "white.100",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
@@ -263,7 +283,7 @@ const components = {
         color: "gray.light",
         lineHeight: "28px",
         fontFamily: "var(--chakra-\fonts-openSans)",
-        fontSize: "16px",
+        fontSize: "14px",
         margin: "0px",
       },
 
@@ -310,25 +330,19 @@ const components = {
         color: "blue.500",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
-        fontSize: ["17px", "17px", "17px", "17px", "17px", "20px", "20px"],
-        // fontSize: {
-        //   md: "20px",
-        //   base: "17px",
-        // },
+        fontSize: ["14px", "15px", "17px", "17px", "17px", "20px"],
+      },
+      p8: {
+        color: "gray.text",
+        fontFamily: "var(--chakra-\fonts-openSans)",
+        fontWeight: 400,
+        lineHeight: { lg: "47px", md: "47px" },
+        fontSize: ["21px", "24px", "27px", "33px", "33px", "36px"],
       },
       // Add more variants for other heading levels as needed
     },
   },
-  Tabs: {
-    variant: {
-      "blue-tab": {
-        border: "1px solid red",
-        TabList: {
-          border: "1px solid red",
-        },
-      },
-    },
-  },
+
   PinInput: {
     variants: {
       otp: {

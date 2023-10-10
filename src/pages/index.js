@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import {
   Box,
   Button,
+  Center,
   FormLabel,
   Heading,
   Image,
@@ -17,13 +18,16 @@ import logo from "@/assets/Images/logo.svg";
 import google from "@/assets/Images/google.svg";
 import PasswordInput from "@/Compomnents/PasswordInput/PasswordInput";
 import { Link } from "@chakra-ui/next-js";
+import LabelInput from "@/Compomnents/LabelInput/LabelInput";
+import { FcGoogle } from "react-icons/fc";
+import { color } from "framer-motion";
 
 export default function Home() {
   const [isSmallerThe500] = useMediaQuery("(max-width: 500px)");
   return (
     <>
       <Image
-        width={"40%"}
+        width={{ "2xl": "40%", base: "30%" }}
         position={"absolute"}
         top={"0px"}
         right={"0px"}
@@ -33,7 +37,7 @@ export default function Home() {
       />
       <Image
         zIndex={"-1"}
-        width={"40%"}
+        width={{ "2xl": "40%", base: "30%" }}
         position={"absolute"}
         bottom={"0px"}
         // zIndex={2}
@@ -42,10 +46,10 @@ export default function Home() {
         alt="Dan Abramov"
       />
       <Box
-        //  height={isSmallerThe500 ? "auto" : "100vh"} width={"100%"}
         minH={"100vh"}
+        // border={"1px solid red"}
         display={"flex"}
-        padding={"70px 0px 50px 0px"}
+        padding={{ "2xl": "70px 0px 50px 0px", base: "30px 0px 30px 0px" }}
         justifyContent={"center"}
         alignItems={"center"}
       >
@@ -53,57 +57,54 @@ export default function Home() {
           mx={"20px"}
           width={{
             "2xl": "564px",
-            xl: "490px",
-            lg: "564px",
-            md: "564px",
-            sm: "100%",
+            xl: "420px",
+            lg: "420px",
+            md: "420px",
+
+            sm: "80%",
             base: "100%",
           }}
           textAlign={"center"}
         >
           <Box display={"flex"} justifyContent={"center"} mb={"41px"}>
             <Image
-              width={isSmallerThe500 ? "200px" : "250px"}
+              width={{ "2xl": "250px", md: "190px", sm: "160px", base:"140px" }}
               src={logo.src}
               alt="Dan Abramov"
             />
           </Box>
-          <Box marginBottom={{ sm: "50px", base: "40px" }}>
-            <FormLabel
-              marginBottom={{ md: "15px", base: "10px" }}
-              variant={"label"}
-            >
-              Email
-            </FormLabel>
-            <Input
+          <Box marginBottom={{ "2xl": "50px", base: "30px" }}>
+            <LabelInput
+              labelVariant={"label"}
+              type="email"
               variant={"shadow-input"}
               placeholder="Enter Email"
-              type="email"
+              label={"Email"}
             />
           </Box>
           <Box>
-            <FormLabel
-              marginBottom={{ md: "15px", base: "10px" }}
-              variant={"label"}
-            >
-              Password
-            </FormLabel>
-            <PasswordInput
+            <LabelInput
+              labelVariant={"label"}
+              type="password"
+              passworInput
               variant={"shadow-input"}
-              placeholder={"Enter your Password"}
+              placeholder="Enter your Password"
+              label={"Password"}
             />
           </Box>
           <Box display={"flex"} justifyContent={"flex-end"}>
             <Link
               variant={"blue-link"}
-              marginTop={{ md: "24px", base: "18px" }}
+              marginTop={{ "2xl": "24px", base: "12px" }}
               _hover={{ textDecoration: "none" }}
               href={"/"}
             >
               Forgot Password
             </Link>
           </Box>
-          <Box margin={{ md: "41px 0px 69px 0px", base: "31px 0px 49px 0px" }}>
+          <Box
+            margin={{ "2xl": "41px 0px 69px 0px", base: "31px 0px 49px 0px" }}
+          >
             <Heading
               variant="p7"
               // variant={"blue-link"}
@@ -134,15 +135,28 @@ export default function Home() {
               marginBottom={"15px"}
               className="nintoFont"
               variant={"blue-btn"}
+              width={{ "2xl": "200px", sm: "175px", base: "140px" }}
             >
               Login
             </Button>
-
-            <Image
-              width={{ sm: "193px", md: "212px ", base: "193px" }}
-              src={google.src}
-              alt="Dan Abramov"
-            />
+            <Button
+              width={{ base: "max-content" }}
+              boxShadow="0px 0px 4px 0px rgba(0, 0, 0, 0.25)"
+              variant={"outline"}
+              fontSize={{ "2xl": "16px", sm: "14px" , base:"12px" }}
+              leftIcon={<FcGoogle />}
+              px={{ "2xl": "20px", base: "10px" }}
+            >
+              <Center>
+                <Text
+                  variant={"p1"}
+                  color={"gray.text"}
+                  fontSize={{ "2xl": "16px", sm: "13px", base:"11px" }}
+                >
+                  Sign in with Google
+                </Text>
+              </Center>
+            </Button>
           </Box>
         </Box>
       </Box>

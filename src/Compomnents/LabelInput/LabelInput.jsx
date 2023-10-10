@@ -1,4 +1,4 @@
-import DropDown from "@/DropDown/DropDown";
+import DropDown from "@/Compomnents/DropDown/DropDown";
 import { Box, FormLabel, Heading, Input, Textarea } from "@chakra-ui/react";
 import React from "react";
 import PasswordInput from "../PasswordInput/PasswordInput";
@@ -18,7 +18,7 @@ const LabelInput = ({
   return (
     <Box width={"100%"}>
       <FormLabel
-        marginBottom={{ md: "17px", base: "10px" }}
+        marginBottom={{ xl: "10px", "2xl": "15px", base: "10px" }}
         variant={labelVariant}
         display={"flex"}
         justifyContent={"space-between"}
@@ -28,7 +28,9 @@ const LabelInput = ({
         {showEndLable ? (
           <Box display={"flex"} alignItems={"center"} gap={"21px"}>
             {icon}
-            <Heading className="nintoFont" variant={"p5"}>Edit</Heading>
+            <Heading className="nintoFont" variant={"p5"}>
+              Edit
+            </Heading>
           </Box>
         ) : null}
       </FormLabel>

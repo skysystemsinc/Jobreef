@@ -18,15 +18,16 @@ const CompanyRegiteration = () => {
       justifyContent={"center"}
     >
       <SignUpLayout
-        icon={<Image src={whitetick.src} />}
+        icon={<Image width={"26px"} src={whitetick.src} />}
+        personVectorW={{ "2xl": "450px", base: "350px" }}
         bottomCartoon={cartoon.src}
         leftPic={leftblue_2.src}
         tittle={"1. About You"}
-        subtitle={"2. About Your Comapny"}
+        subtitle={"2. About Your Company"}
       />
       <Box
-      // border={"1px solid  red"}
-        width={{ md: "100%",  base: "100%" }}
+        // border={"1px solid  red"}
+        width={{ md: "100%", base: "100%" }}
         ml={{ xl: "600px", base: "0px" }}
       >
         <Box display={"flex"} justifyContent={"center"} mb={"52px"}>

@@ -26,8 +26,8 @@ const CompanyBio = () => {
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
-          placeholder="Enter Company Name"
-          label={"Company Name*"}
+          placeholder="Enter Company Website url"
+          label={"Company Website"}
         />
         <LabelInput
           dropdown
@@ -38,28 +38,7 @@ const CompanyBio = () => {
           label={"Industry"}
         />
       </InputWrapper>
-      {/* <Box
-        display={"flex"}
-        alignItems={"center"}
-        gap={"20px"}
-        width={"100%"}
-        marginBottom={{ sm: "40px", base: "26px" }}
-      >
-        <LabelInput
-          labelVariant={"label"}
-          type="text"
-          variant={"bg-input"}
-          placeholder="Enter Company Name"
-          label={"Company Name*"}
-        />
-        <LabelInput
-          labelVariant={"label"}
-          type="text"
-          variant={"bg-input"}
-          placeholder="Selectc Industry"
-          label={"Industry"}
-        />
-      </Box> */}
+
       <InputWrapper>
         <LabelInput
           labelVariant={"label"}
@@ -120,7 +99,7 @@ const CompanyBio = () => {
                 alignItems: "center",
                 // lineHeight: "28px",
                 fontFamily: "var(--chakra-\fonts-Nunito)",
-                fontSize: { md: "18px", base: "16px" },
+                fontSize: { "2xl": "18px", base: "15px" },
               }}
             >
               <ListIcon fontSize={"40px"} as={BsDot} color="blue.500" />
@@ -135,7 +114,7 @@ const CompanyBio = () => {
                 color: "gray.light",
                 // lineHeight: "28px",
                 fontFamily: "var(--chakra-\fonts-Nunito)",
-                fontSize: { md: "18px", base: "16px" },
+                fontSize: { "2xl": "18px", base: "15px" },
               }}
             >
               <ListIcon as={BsDot} fontSize={"40px"} color="blue.500" />

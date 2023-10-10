@@ -12,7 +12,7 @@ const ChangePassword = () => {
       <Box width={{ md: "564px", base: "100%" }}>
         <Heading
           textAlign={"center"}
-          m={{ md: "62px 0px 44px 0px", base: "30px 0px 30px 0px" }}
+          m={{ md: "62px 0px 40px 0px", base: "30px 0px 30px 0px" }}
           variant={"p6"}
         >
           Change Password
@@ -37,7 +37,7 @@ const ChangePassword = () => {
             label={"Enter New Password"}
           />
         </Box>
-        <Box mb={{ md: "36px", base: "20px" }}>
+        <Box mb={{ md: "32px", base: "20px" }}>
           <LabelInput
             passworInput
             labelVariant={"label"}

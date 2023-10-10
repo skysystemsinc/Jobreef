@@ -15,21 +15,9 @@ import PersonalInfo from "./PersonalInfo";
 import Password from "./Password";
 import Otp from "./Otp";
 import { useRouter } from "next/router";
+import { role, roles } from "@/Utils/role";
+import globalStyles from "@/styles/globalStyles";
 const steps = [{ label: "Step 1" }, { label: "Step 2" }, { label: "Step 3" }];
-
-const CustomeSteps = () => {
-  return (
-    <Heading
-      color={"white.100"}
-      as={"p"}
-      margin={"0px"}
-      fontWeight={"700"}
-      variant={"p1"}
-    >
-      1
-    </Heading>
-  );
-};
 
 export const Timeline = ({ variant }) => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
@@ -37,8 +25,25 @@ export const Timeline = ({ variant }) => {
   });
   const isLastStep = activeStep === steps.length - 1;
   const hasCompletedAllSteps = activeStep === steps.length;
-  console.log("activeStep", activeStep)
+
   const router = useRouter();
+
+  const CustomeSteps = (props) => {
+    console.log("props", props);
+    return (
+      <Heading
+        color={"white.100"}
+        as={"p"}
+        margin={"0px"}
+        fontWeight={"700"}
+        variant={"p1"}
+      >
+        {/* {props+1} */}
+        {activeStep}
+      </Heading>
+    );
+  };
+
   return (
     <Flex
       flexDir="column"
@@ -48,76 +53,8 @@ export const Timeline = ({ variant }) => {
     >
       <Steps
         responsive={false}
-        checkIcon={false}
-        sx={{
-          width: {
-            md: "404px",
-            base: "70%",
-          },
-          flexDir: "row !important",
-          // border: "1px solid red",
-          // width: "404px",
-
-          "& .cui-steps__step-icon-container": {
-            bg: "transparent",
-            border: "4px solid gray.light !important",
-            borderColor: "gray.light !important",
-            width: "36px !important",
-            height: "36px !important",
-            // "&:first-child": {
-            //   // borderColor: "blue.500 !important",
-            //   span:{
-            //     color:"red !important "
-
-            //   }
-
-            // },
-            _active: {
-              border: "4px solid blue.500 !important",
-              borderColor: "blue.500 !important",
-              "& .cui-steps__horizontal-step": {
-                "&::after": {
-                  bg: "blue.500 !important",
-                },
-              },
-
-              bg: "blue.500",
-              span: {
-                color: "blue.500",
-              },
-            },
-            span: {
-              color: "gray.light ",
-            },
-          },
-
-          "& .cui-steps__horizontal-step": {
-            _active: {
-              "&::after": {
-                bg: "blue.500 !important",
-              },
-            },
-            "&::after": {
-              bg: "gray.light !important",
-              height: "3px !important",
-
-              marginInlineEnd: "0px !important",
-              marginInlineStart: "0px !important",
-            },
-          },
-          "& .cui-steps__horizontal-step:first-of-type": {
-            // border: '1px solid ',
-            "& .cui-steps__step-icon-container": {
-              borderColor: "blue.500 !important",
-            },
-            span: {
-              color: "blue.500 ",
-            },
-            "&::after": {
-              // bg: "blue.500 !important",
-            },
-          },
-        }}
+        checkIcon={CustomeSteps}
+        sx={globalStyles.stepperContainter}
         variant={variant}
         colorScheme="blue"
         activeStep={activeStep}
@@ -183,23 +120,28 @@ export const Timeline = ({ variant }) => {
         width="100%"
         justify="center"
         mt={{ md: "53px", base: "43px" }}
+        pb={"30px"}
         gap={4}
       >
         <>
           <Button
             isDisabled={activeStep === 0}
             onClick={prevStep}
-            width={{ md: "200px", sm: "180px", base: "140px" }}
+            // width={{ md: "200px", sm: "180px", base: "130px" }}
             variant="outline-blue"
           >
             {isLastStep ? "Change Email" : "Go Back"}
           </Button>
           <Button
-            width={{ md: "200px", sm: "180px", base: "140px" }}
+            // width={{ md: "200px", sm: "180px", base: "130px" }}
             variant={"blue-btn"}
             onClick={() => {
-              if (activeStep==2) {
-                router.push("/registeraion");
+              if (activeStep == 2) {
+                if (role == roles.employee) {
+                  router.push("/profile-setting");
+                } else {
+                  router.push("/registeraion");
+                }
               } else {
                 nextStep();
               }

@@ -6,8 +6,9 @@ const EmailTabs = () => {
     <Box
       display={"flex"}
       justifyContent={"center"}
-      mt={{ md: "140px", base: "70px" }}
-      mb={{ md: "120px", base: "70px" }}
+      mt={{ md: "140px", base: "80px" }}
+      mb={{ md: "120px", base: "0px" }}
+      
     >
       <Box width={{ md: "564px", base: "100%" }}>
         <LabelInput

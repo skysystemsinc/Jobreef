@@ -14,7 +14,30 @@ import profile from "@/assets/Images/profile.svg";
 import { Link } from "@chakra-ui/next-js";
 import dasboadrd from "@/assets/Images/dashboard.svg";
 import square from "@/assets/Images/square.svg";
+import { role, roles } from "@/Utils/role";
 const HeaderDropdown = () => {
+  const dropdown = [
+    {
+      title: "Dashboard",
+      icon: <Image src={dasboadrd.src} />,
+      role: roles.company,
+    },
+    {
+      title: "My Resume",
+      icon: <Image src={square.src} />,
+      role: roles.employee,
+    },
+    {
+      title: "My Jobs",
+      icon: <Image src={square.src} />,
+      role: roles.employee,
+    },
+    {
+      title: "Profile Settings",
+      icon: <Image src={square.src} />,
+      role: roles.company,
+    },
+  ];
   return (
     <Menu>
       <MenuButton
@@ -53,30 +76,51 @@ const HeaderDropdown = () => {
           />
         </Box>
       </MenuButton>
-      <MenuList  _active={{bg:"transparent"}}  >
-        <MenuItem bg="transparent" _hover={{bg:'transparent'}} borderBottom={"1px solid #0000001a"} p={"10px 20px 16px 20px"} mb={"6px"}>
-          <Box border={"1px solid black.100"} display={"flex"} justifyContent={"center"} alignItems={"center"} gap={"10px"}>
-            
-            <Image src={dasboadrd.src} />
-            <Heading mb="1px" as={"p"} variant={"p4"}>
-              {" "}
-              Dashboard
-            </Heading>
-          </Box>
-        </MenuItem>
-        
-        <MenuItem  _hover={{bg:'transparent'}} p={"10px 20px"}>
-          <Box  border={"1px solid black.100"} display={"flex"} justifyContent={"center"} alignItems={"center"} gap={"10px"}>
-            
+      <MenuList _active={{ bg: "transparent" }}>
+        {dropdown.map((item, index) => {
+          return item.role == role ? (
+            <MenuItem
+              key={index}
+              bg="transparent"
+              _hover={{ bg: "transparent" }}
+              borderBottom={"1px solid #0000001a"}
+              p={"10px 20px 16px 20px"}
+              mb={"6px"}
+            >
+              <Box
+                border={"1px solid black.100"}
+                display={"flex"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                gap={"10px"}
+              >
+                {/* <Image src={dasboadrd.src} /> */}
+                {item.icon}
+
+                <Heading mb="1px" as={"p"} variant={"p4"}>
+                  {" "}
+                  {item.title}
+                </Heading>
+              </Box>
+            </MenuItem>
+          ) : null;
+        })}
+
+        {/* <MenuItem _hover={{ bg: "transparent" }} p={"10px 20px"}>
+          <Box
+            border={"1px solid black.100"}
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            gap={"10px"}
+          >
             <Image src={square.src} />
             <Heading mb="1px" as={"p"} variant={"p4"}>
               {" "}
-              Profile Settings 
+              Profile Settings
             </Heading>
           </Box>
-        </MenuItem>
-
-
+        </MenuItem> */}
       </MenuList>
     </Menu>
   );

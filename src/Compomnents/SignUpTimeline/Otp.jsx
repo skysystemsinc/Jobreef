@@ -13,9 +13,9 @@ const Otp = () => {
     <Box textAlign={"center"}>
       <Heading
         as={"p"}
-        fontSize={{ lg: "30px", base: "16px", sm: "19px" }}
+        fontSize={{ "2xl": "30px", base: "16px", sm: "19px" }}
         textAlign={"center"}
-        m={{ lg: "60px 0px 76px -62px", base: "30px 0px 46px 0px" }}
+        m={{ "2xl": "60px 0px 76px -62px", base: "30px 0px 46px 0px" }}
         whiteSpace={{ lg: "nowrap", base: "wrap" }}
         variant={"p2"}
       >

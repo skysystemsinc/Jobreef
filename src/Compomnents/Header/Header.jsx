@@ -1,5 +1,3 @@
-"use client";
-
 import Logo from "@/Compomnents/Logo/Logo";
 import {
   Box,
@@ -29,11 +27,19 @@ import { AiOutlineClose } from "react-icons/ai";
 //   ChevronRightIcon,
 // } from '@chakra-ui/icons';
 import { RxHamburgerMenu } from "react-icons/rx";
-import HeaderDropdown from "../HeaderDropdown/HeaderDropdown";
+// import HeaderDropdown from "../HeaderDropdown/HeaderDropdown";
+
 import { IoNotificationsOutline } from "react-icons/io5";
 import { Link } from "@chakra-ui/next-js";
 import { BsHeart } from "react-icons/bs";
 import heart from "@/assets/Images/heart.svg";
+import dynamic from "next/dynamic";
+const HeaderDropdown = dynamic(
+  () => import("../HeaderDropdown/HeaderDropdown"),
+  {
+    ssr: false,
+  }
+);
 export default function Header() {
   const { isOpen, onToggle } = useDisclosure();
   const [isSmallerThe500] = useMediaQuery("(max-width: 500px)");

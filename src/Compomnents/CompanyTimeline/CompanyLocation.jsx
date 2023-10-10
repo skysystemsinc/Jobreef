@@ -46,14 +46,14 @@ const CompanyLocation = () => {
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
-          placeholder="Select City"
+          placeholder="Enter City"
           label={"City"}
         />
         <LabelInput
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
-          dropdown
+          
           placeholder="Enter Street Address"
           label={"Street Address"}
         />

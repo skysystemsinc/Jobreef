@@ -35,7 +35,7 @@ const SocialLink = () => {
           type="text"
           variant={"bg-input"}
           placeholder="Paste link to company social network page"
-          label={"State/Province"}
+          label={"Url"}
         />
       </InputWrapper>
     </Box>

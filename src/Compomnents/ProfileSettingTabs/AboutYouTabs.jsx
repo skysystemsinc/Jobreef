@@ -13,7 +13,7 @@ import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
 const AboutYouTabs = () => {
   return (
-    <Box mt={{ md: "91px", base: "40px" }}>
+    <Box mt={{ md: "91px", lg:'60px', base: "40px" }}>
       {/* <Image src={profile.src} /> */}
       <Box display={"flex"} justifyContent={"center"}>
         <Avatar
@@ -34,7 +34,7 @@ const AboutYouTabs = () => {
         </Avatar>
       </Box>
       <Box mt={"50px"}>
-        <InputWrapper gap={{ xl: "152px", base: "20px" }}>
+        <InputWrapper gap={{ xl:"70px", "2xl": "142px", base: "20px" }}>
           <LabelInput
             labelVariant={"label"}
             type="text"
@@ -51,7 +51,7 @@ const AboutYouTabs = () => {
           />
         </InputWrapper>
 
-        <InputWrapper gap={{ xl: "152px", base: "20px" }}>
+        <InputWrapper gap={{ xl:"70px", "2xl": "142px", base: "20px" }}>
           <LabelInput
             labelVariant={"label"}
             type="text"

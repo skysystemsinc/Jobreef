@@ -15,74 +15,38 @@ import AboutYouTabs from "./AboutYouTabs";
 import waves from "@/assets/Images/waves.svg";
 import EmailTabs from "./EmailTabs";
 import ChangePassword from "./ChangePassword";
+import globalStyles from "@/styles/globalStyles";
+import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
+import { useRouter } from "next/router";
+import { role, roles } from "@/Utils/role";
 const ProfileSettingTabs = () => {
-  const tabelinkStyle = {
-    fontWeight: 400,
-    color: "gray.text",
-    lineHeight: "28px",
-    fontFamily: "var(--chakra-\fonts-openSans)",
-    // fontSize: { md: "16px", base: "14px" },
-    margin: "0px",
-  };
-  const selectTab = {
-    position: "relative",
-    fontWeight: 600,
-    color: "blue.500",
-    "&::after": {
-      content: `""`,
-      position: "absolute",
-      top: { md: "48px", base: "43px" },
-      bg: "blue.500",
-      borderRadius: "12px 12px 0px 0px",
-      left: "10%",
-      width: "80%",
-      height: "6px",
-    },
-  };
+  const router = useRouter();
   let [tabIndex, setTabIndex] = useState(0);
   return (
     <>
-      <Image
-        src={waves.src}
-        position={"absolute"}
-        bottom={"0px"}
-        left={"0px"}
-        width={"100%"}
-      />
-      <Tabs
-        onChange={(index) => {}}
-        index={tabIndex}
-        variant={"blue-tab"}
-        isFitted
-      >
-        <TabList
-          border={"1px solid "}
-          mx={"auto"}
-          borderColor={"blue.500"}
-          width={{ xl: "60%", md: "70%", base: "100%" }}
-          py={{ md: "10px", base: "6px" }}
-          bg={"gray.200"}
-          borderRadius={"5px"}
-        >
+      <BottomWaveImage />
+
+      <Tabs onChange={(index) => {}} index={tabIndex} isFitted>
+        <TabList sx={globalStyles.fullTab}>
           <Tab
             fontSize={{ md: "16px", base: "14px" }}
-            sx={tabelinkStyle}
-            _selected={selectTab}
+            sx={globalStyles.tabelinkStyle}
+            _selected={globalStyles.selectTab}
           >
             {" "}
             About You
           </Tab>
           <Tab
             fontSize={{ md: "16px", base: "14px" }}
-            _selected={selectTab}
-            sx={tabelinkStyle}
+            _selected={globalStyles.selectTab}
+            sx={globalStyles.tabelinkStyle}
           >
             Email
           </Tab>
           <Tab
             fontSize={{ md: "16px", base: "14px" }}
-            _selected={selectTab}
-            sx={tabelinkStyle}
+            _selected={globalStyles.selectTab}
+            sx={globalStyles.tabelinkStyle}
           >
             Password
           </Tab>
@@ -93,7 +57,9 @@ const ProfileSettingTabs = () => {
             <AboutYouTabs />
           </TabPanel>
           <TabPanel>
-            <EmailTabs />
+            <Box pb={"90px"}>
+              <EmailTabs />
+            </Box>
           </TabPanel>
           <TabPanel>
             <ChangePassword />
@@ -104,22 +70,28 @@ const ProfileSettingTabs = () => {
       <Box
         display={"flex"}
         justifyContent={"center"}
-        gap={"20px"}
+        gap={{ md: "20px", base: "10px" }}
         my={{ md: "56px", base: "20px" }}
-        mb={"56px"}
+        pb={"39px"}
       >
         <Button
           onClick={() => {
-            tabIndex == 2 ? null : setTabIndex(++tabIndex);
+            tabIndex == 2
+              ? role == roles.employee
+                ? router.push("/my-resume")
+                : router.push("/")
+              : setTabIndex(++tabIndex);
           }}
-          width={{ md: "200px", sm: "180px", base: "140px" }}
+          width={{ md: "160px", lg: "200px", sm: "140px", base: "120px" }}
           variant={"blue-btn"}
         >
           Save
         </Button>
         <Button
-          onClick={() => setTabIndex(--tabIndex)}
-          width={{ md: "200px", sm: "180px", base: "140px" }}
+          onClick={() => {
+            tabIndex == 0 ? null : setTabIndex(--tabIndex);
+          }}
+          width={{ md: "160px", lg: "200px", sm: "140px", base: "120px" }}
           variant="outline-blue"
         >
           Cencel

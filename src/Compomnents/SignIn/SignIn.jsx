@@ -1,12 +1,18 @@
 import { Box, Heading, useMediaQuery, Image } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { Timeline } from "../SignUpTimeline/SignUpTimeline";
 import logo from "@/assets/Images/logo.svg";
 import cartoon from "@/assets/Images/cartoon.svg";
+import teamVector from "@/assets/Images/teamVector.svg";
 import leftblue_2 from "@/assets/Images/leftblue_2.png";
 import whitetick from "@/assets/Images/white-tick.svg";
-import SignUpLayout from "../Layout/SignUpLayout";
+// import SignUpLayout from "../Layout/SignUpLayout";
 import Logo from "@/Compomnents/Logo/Logo";
+import { role, roles } from "@/Utils/role";
+import dynamic from "next/dynamic";
+const SignUpLayout = dynamic(() => import("../Layout/SignUpLayout"), {
+  ssr: false,
+});
 
 const SignIn = () => {
   return (
@@ -16,12 +22,29 @@ const SignIn = () => {
       display={"flex"}
       justifyContent={"center"}
     >
-      <SignUpLayout
-        bottomCartoon={cartoon.src}
-        leftPic={leftblue_2.src}
-        tittle={"1. About You"}
-        subtitle={"2. About Your Comapny"}
-      />
+      {role == roles.employee ? (
+        <>
+          <SignUpLayout
+            personVectorW={{ "2xl": "450px", base: "330px" }}
+            bottomCartoon={teamVector.src}
+            leftPic={leftblue_2.src}
+            tittle={"1. About You"}
+            subtitle={"2. Your Resume"}
+          />
+        </>
+      ) : (
+        <>
+          <SignUpLayout
+            // personVectorW={"600px"}
+            personVectorW={{ "2xl": "600px", base: "450px" }}
+            icon={<Image src={whitetick.src} width={"26px"}  />}
+            bottomCartoon={cartoon.src}
+            leftPic={leftblue_2.src}
+            tittle={"1. About You"}
+            subtitle={"2. About Your Company"}
+          />
+        </>
+      )}
       <Box
         width={{ md: "630px", base: "100%" }}
         ml={{ xl: "600px", base: "0px" }}
