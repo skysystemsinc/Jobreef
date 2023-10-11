@@ -26,7 +26,13 @@ const ProfileSettingTabs = () => {
     <>
       <BottomWaveImage />
 
-      <Tabs onChange={(index) => {}} index={tabIndex} isFitted>
+      <Tabs
+        onChange={(index) => {
+          setTabIndex(index);
+        }}
+        index={tabIndex}
+        isFitted
+      >
         <TabList sx={globalStyles.fullTab}>
           <Tab
             fontSize={{ md: "16px", base: "14px" }}
@@ -57,7 +63,7 @@ const ProfileSettingTabs = () => {
             <AboutYouTabs />
           </TabPanel>
           <TabPanel>
-            <Box pb={"90px"}>
+            <Box pb={{ md: "90px", base: "40px" }}>
               <EmailTabs />
             </Box>
           </TabPanel>
@@ -76,25 +82,27 @@ const ProfileSettingTabs = () => {
       >
         <Button
           onClick={() => {
-            tabIndex == 2
-              ? role == roles.employee
-                ? router.push("/my-resume")
-                : router.push("/")
-              : setTabIndex(++tabIndex);
+            router.push("/");
+
+            // tabIndex == 2
+            //   ? role == roles.employee
+            //     ? router.push("/my-resume")
+            //     : router.push("/")
+            //   : setTabIndex(++tabIndex);
           }}
-          width={{ md: "160px", lg: "200px", sm: "140px", base: "120px" }}
           variant={"blue-btn"}
         >
           Save
         </Button>
         <Button
           onClick={() => {
-            tabIndex == 0 ? null : setTabIndex(--tabIndex);
+            // tabIndex == 0 ? null : setTabIndex(--tabIndex);
+
+            router.push("/");
           }}
-          width={{ md: "160px", lg: "200px", sm: "140px", base: "120px" }}
           variant="outline-blue"
         >
-          Cencel
+          Cancel
         </Button>
       </Box>
     </>

@@ -114,7 +114,7 @@ export default function Home() {
             >
               Don’t have an account?{" "}
               <Link
-                href={"/sign-up"}
+                href={"/candidate/sign-up"}
                 display={"inline"}
                 _hover={{ textDecoration: "underline" }}
                 color={"blue.500"}

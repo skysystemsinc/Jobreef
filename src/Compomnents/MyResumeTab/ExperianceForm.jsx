@@ -75,8 +75,8 @@ const ExperianceForm = ({ setaddExperiance, setTabIndex, tabIndex }) => {
 
                   borderColor={"black.200"}
                   border={"2px solid "}
-                  size="md"
-                  rounded={"md"}
+                  size="sm"
+                  rounded={"base"}
                   colorScheme="blue"
                 />
                 <Heading variant={"p1"} color={"black.100"}>
@@ -155,7 +155,7 @@ const ExperianceForm = ({ setaddExperiance, setTabIndex, tabIndex }) => {
               setaddExperiance(false);
               // tabIndex == 0 ? null : setTabIndex(--tabIndex);
             }}
-            width={{ md: "160px", lg: "200px", sm: "140px", base: "120px" }}
+            
             variant="outline-blue"
           >
             Cancel

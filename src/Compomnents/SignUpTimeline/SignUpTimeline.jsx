@@ -19,7 +19,7 @@ import { role, roles } from "@/Utils/role";
 import globalStyles from "@/styles/globalStyles";
 const steps = [{ label: "Step 1" }, { label: "Step 2" }, { label: "Step 3" }];
 
-export const Timeline = ({ variant }) => {
+export const SignUpTimeline = ({ candidate, variant }) => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
@@ -137,8 +137,8 @@ export const Timeline = ({ variant }) => {
             variant={"blue-btn"}
             onClick={() => {
               if (activeStep == 2) {
-                if (role == roles.employee) {
-                  router.push("/profile-setting");
+                if (candidate) {
+                  router.push("/candidate/profile-setting");
                 } else {
                   router.push("/registeraion");
                 }

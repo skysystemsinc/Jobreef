@@ -25,6 +25,8 @@ const colors = {
   gray: {
     100: "#BBBBC7",
     200: "#F7F9FB",
+    300: "#D9D9D9",
+    400: "#79797966",
     light: "#797979",
     text: "#4A4A4A",
   },
@@ -54,41 +56,42 @@ const components = {
     variants: {
       "blue-btn": {
         bg: "blue.500",
-        height: { "2xl": "50px", sm: "44px", base: "40px" },
+        height: { "2xl": "50px", sm: "38px", base: "36px" },
         // width: { md: "200px", sm: "180px", base: "168px" },
         width: {
           "2xl": "200px",
           xl: "150px",
-          md: "160px",
+          md: "150px",
           lg: "140px",
           sm: "130px",
-          base: "120px",
+          base: "110px",
         },
 
         boxShadow: "0px 4px 11px 0px rgba(70, 146, 254, 0.15)",
         color: "white.100",
         fontWeight: 500,
-        fontSize: { "2xl": "18px", base: "14px" },
+        fontSize: { "2xl": "18px", sm: "13px", base:"12px" },
       },
       "outline-blue": {
         bg: "transparent",
         // height: "50px",
         // width: '200px',
-        // height: { md: "50px", base: "40px" },
-        height: { "2xl": "50px", sm: "44px", base: "40px" },
+        // height: { md: "50px", base: "36px" },
+        height: { "2xl": "50px", sm: "38px", base: "36px" },
 
         // width: { md: "200px", base: "160px" },
         width: {
           "2xl": "200px",
-          xl: "160px",
-          md: "160px",
+          xl: "150px",
+          md: "150px",
           lg: "140px",
           sm: "130px",
-          base: "120px",
+          base: "110px",
         },
+        fontSize: { "2xl": "18px", base: "12px" },
 
         border: "2px solid",
-        fontSize: { "2xl": "18px", base: "14px" },
+        // fontSize: { "2xl": "18px", base: "14px" },
 
         borderColor: "blue.500",
         boxShadow: "0px 4px 11px 0px rgba(70, 146, 254, 0.15)",
@@ -126,13 +129,13 @@ const components = {
         width: "max-content",
 
         fontFamily: "var(--chakra-\fonts-Nunito)",
-        padding: "0px 20px",
-        fontSize: "16px",
+        padding: { md: "0px 20px", base: "0px 15px" },
+        fontSize: ["14px", "14px", "16px", "16px", "16px", "16px"],
         fontWeight: 400,
-        fontSize: "16px",
+        // fontSize: "16px",
         color: "gray.100",
 
-        height: "50px",
+        height: { md: "48px", base: "40px" },
       },
       label: {
         color: "gray.text",
@@ -152,7 +155,7 @@ const components = {
     variants: {
       "shadow-input": {
         field: {
-          height: { "2xl": "58px", base: "53px" },
+          height: { "2xl": "58px", base: "50px" },
           borderRadius: "8px",
 
           // bg: "text.gray !important",
@@ -162,6 +165,7 @@ const components = {
           _placeholder: {
             color: "gray.light",
             fontWeight: 400,
+            textTransform: " capitalize",
             fontSize: { "2xl": "18px", base: "14px" },
           },
         },
@@ -171,7 +175,7 @@ const components = {
       },
       "bg-input": {
         field: {
-          height: { "2xl": "58px", base: "47px" },
+          height: { "2xl": "58px", base: "40px" },
           borderRadius: "8px",
 
           bg: "gray.200 !important",
@@ -179,6 +183,8 @@ const components = {
           // borderColor: "red",
           // boxShadow: " 0px 4px 20px 0px #0000000D !important",
           _placeholder: {
+            textTransform: " capitalize",
+
             color: "gray.100",
             fontWeight: 400,
             fontSize: { "2xl": "18px", base: "14px" },
@@ -193,12 +199,14 @@ const components = {
     variants: {
       "bg-dropdown": {
         field: {
-          height: { "2xl": "58px", base: "47px" },
+          height: { "2xl": "58px", base: "40px" },
 
           borderRadius: "8px",
           color: "gray.light !important",
           fontWeight: 400,
-          fontSize: { "2xl": "18px", base: "16px" },
+          fontSize: { "2xl": "18px", base: "14px" },
+          textTransform: " capitalize",
+
           // _placeholder: {
           //   color: "red !important",
           //   fontWeight: 400,
@@ -229,9 +237,10 @@ const components = {
           color: "gray.100    ",
           fontFamily: "var(--chakra-\fonts-openSans)",
           // p: "20px 20px 20px 20px",
+          textTransform: " capitalize",
 
           fontWeight: 400,
-          fontSize: { base: "16px" },
+          fontSize: { sm: "15px", base:'14px' },
           //   },
         },
 
@@ -247,6 +256,8 @@ const components = {
 
           _placeholder: {
             color: "gray.100",
+            textTransform: " capitalize",
+
             fontWeight: 400,
             fontSize: { md: "18px", base: "16px" },
           },
@@ -309,35 +320,36 @@ const components = {
         fontWeight: 400,
         color: "black.200 ",
         fontFamily: "var(--chakra-\fonts-openSans)",
-        fontSize: ["15px", "15px", "20px"],
+        fontSize: ["13px", "14px", "16px"],
 
         // fontSize: "20px",
       },
       p5: {
         fontWeight: 400,
         color: "black.200 ",
-
-        fontSize: ["18px", "15px", "15px"],
+        fontFamily: "var(--chakra-\fonts-openSans)",
+        lineHeight: ["24px"],
+        fontSize: ["14px", "15px", "17px"],
       },
       p6: {
         fontWeight: 400,
         color: "gray.text ",
         fontFamily: "var(--chakra-\fonts-openSans)",
 
-        fontSize: ["22px", "22px", "25px", "30px"],
+        fontSize: ["20px", "22px", "25px", "27px"],
       },
       p7: {
         color: "blue.500",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
-        fontSize: ["14px", "15px", "17px", "17px", "17px", "20px"],
+        fontSize: ["14px", "14px", "17px", "17px", "17px", "20px"],
       },
       p8: {
         color: "gray.text",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 400,
-        lineHeight: { lg: "47px", md: "47px" },
-        fontSize: ["21px", "24px", "27px", "33px", "33px", "36px"],
+        lineHeight: ["26px", "33px", "40px", "40px", "40px", "54px"],
+        fontSize: ["18px", "23px", "27px", "27px", "30px", "36px"],
       },
       // Add more variants for other heading levels as needed
     },

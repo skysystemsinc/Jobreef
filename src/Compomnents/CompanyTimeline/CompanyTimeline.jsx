@@ -6,6 +6,7 @@ import {
   Flex,
   FormLabel,
   Heading,
+  Image,
   Input,
   useMediaQuery,
 } from "@chakra-ui/react";
@@ -15,7 +16,7 @@ import CompanyLocation from "./CompanyLocation";
 import SocialLink from "./SocialLink";
 import { useRouter } from "next/router";
 import globalStyles from "@/styles/globalStyles";
-
+import blueclick from "@/assets/Images/blueclick.svg";
 // import PersonalInfo from "./PersonalInfo";
 // import Password from "./Password";
 // import Otp from "./Otp";
@@ -53,16 +54,19 @@ export const CompanyTimeline = ({ variant }) => {
         <Box
           display={"flex"}
           justifyContent={"center"}
+          flexDirection={"column"}
+          alignItems={"center"}
           m={{
-            md: "160px 0px 160px 0px",
-            sm: "100px 0px 100px 0px",
-            base: "40px 0px 60px 0px",
+            "2xl": "100px 0px 100px 0px",
+            sm: "30px 0px 30px 0px",
+            base: "0px 0px 20px 0px",
           }}
         >
+          <Image width={{md:"60px", base:"40px"}} mb={{ md:"40px", base:"30px"}} src={blueclick.src} />
           <Heading
             maxW={"733px"}
-            fontSize={{ md: "30px", sm: "25px", base: "20px" }}
-            lineHeight={{ md: "51px", sm: "37px", base: "29px" }}
+            fontSize={{ "2xl": "30px", md: "23px", base: "18px" }}
+            lineHeight={{ "2xl": "51px", md: "37px", base: "26px" }}
             textAlign={"center"}
             variant={"p3"}
           >
@@ -148,13 +152,13 @@ export const CompanyTimeline = ({ variant }) => {
           <Button
             isDisabled={activeStep === 0}
             onClick={prevStep}
-            width={{ "2xl": "200px", sm: "120px", base: "100px" }}
+            // width={{ "2xl": "200px ", md: "140px", sm: "120px", base: "100px" }}
             variant="outline-blue"
           >
-            { "Go Back"}
+            {"Go Back"}
           </Button>
           <Button
-            width={{ "2xl": "200px", sm: "120px", base: "100px" }}
+            // width={{ "2xl": "200px", md: "140px", sm: "120px", base: "100px" }}
             variant={"blue-btn"}
             onClick={() => {
               if (!hasCompletedAllSteps) {
@@ -164,7 +168,7 @@ export const CompanyTimeline = ({ variant }) => {
               }
             }}
           >
-            { "Next"}
+            {"Next"}
           </Button>
         </>
       </Flex>

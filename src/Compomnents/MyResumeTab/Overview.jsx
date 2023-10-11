@@ -12,7 +12,9 @@ import profile from "@/assets/Images/profile.svg";
 import edit from "@/assets/Images/edit.svg";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
+import { useRouter } from "next/router";
 const Overview = ({setTabIndex , tabIndex}) => {
+  const router = useRouter()
   return (
     <Box mt={{ md: "50px", lg: "60px", base: "20px" }} width={{md:"70%", sm:"100%"}}  >
       {/* <Image src={profile.src} /> */}
@@ -74,9 +76,10 @@ const Overview = ({setTabIndex , tabIndex}) => {
         >
           <Button
             onClick={() => {
-              tabIndex == 0 ? null : setTabIndex(--tabIndex);
+              // tabIndex == 0 ? null : setTabIndex(--tabIndex);
+              router.push("/")
             }}
-            width={{ md: "160px", lg: "200px", sm: "140px", base: "120px" }}
+            // width={{ md: "160px", lg: "200px", sm: "140px", base: "120px" }}
             variant="outline-blue"
           >
             Cencel
@@ -84,9 +87,11 @@ const Overview = ({setTabIndex , tabIndex}) => {
 
           <Button
             onClick={() => {
-              tabIndex == 2 ? null : setTabIndex(++tabIndex);
+              // tabIndex == 2 ? null : setTabIndex(++tabIndex);
+              router.push("/")
+
             }}
-            width={{ md: "160px", lg: "200px", sm: "140px", base: "120px" }}
+            // width={{ md: "160px", lg: "200px", sm: "140px", base: "120px" }}
             variant={"blue-btn"}
           >
             Save

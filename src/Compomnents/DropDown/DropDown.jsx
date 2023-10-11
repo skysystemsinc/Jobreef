@@ -8,7 +8,7 @@ const DropDown = ({ placeholder }) => {
       <Select
         sx={{ color: "gray.100" }}
         variant={"bg-dropdown"}
-        icon={<HiOutlineChevronDown color="gray.text" />}
+        // icon={<HiOutlineChevronDown  style={{fontSize:"1px !importantt", fill:"red", width:"2px"}}  color="red" />}
         placeholder={placeholder}
       >
         <option

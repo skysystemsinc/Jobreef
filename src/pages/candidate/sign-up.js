@@ -8,7 +8,7 @@ const Login = () => {
     return (
         <Box height={{ base: "100vh", }}>
 
-            <SignIn />
+            <SignIn candidate />
         </Box>
     )
 }

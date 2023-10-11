@@ -34,7 +34,7 @@ const CompanyBio = () => {
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
-          placeholder="Selectc Industry"
+          placeholder="Select Industry"
           label={"Industry"}
         />
       </InputWrapper>
@@ -52,7 +52,7 @@ const CompanyBio = () => {
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
-          placeholder="Enter Number of employees"
+          placeholder="Enter Number of Employees"
           label={"Number of Employees"}
         />
       </InputWrapper>
@@ -77,11 +77,11 @@ const CompanyBio = () => {
           labelVariant={"label"}
           textarea
           variant={"bg-teaxtarea"}
-          placeholder="Describe your company..."
+          placeholder="Describe Your Company..."
           label={"Description*"}
         />
       </InputWrapper>
-      <Box mt={"80px"}>
+      <Box mt={{ md: "80px", base:"40px"}}>
         <Box textAlign={"center"}>
           <Link textDecoration={"none"} variant={"blue-link"} href={"/"}>
             Upload Company Logo
@@ -99,7 +99,7 @@ const CompanyBio = () => {
                 alignItems: "center",
                 // lineHeight: "28px",
                 fontFamily: "var(--chakra-\fonts-Nunito)",
-                fontSize: { "2xl": "18px", base: "15px" },
+                fontSize: { "2xl": "18px", sm: "15px" ,base: "13px"},
               }}
             >
               <ListIcon fontSize={"40px"} as={BsDot} color="blue.500" />
@@ -114,7 +114,7 @@ const CompanyBio = () => {
                 color: "gray.light",
                 // lineHeight: "28px",
                 fontFamily: "var(--chakra-\fonts-Nunito)",
-                fontSize: { "2xl": "18px", base: "15px" },
+                fontSize: { "2xl": "18px", sm: "15px" ,base: "13px"},
               }}
             >
               <ListIcon as={BsDot} fontSize={"40px"} color="blue.500" />
@@ -123,7 +123,7 @@ const CompanyBio = () => {
           </List>
         </Box>
 
-        <Box display={"flex"} justifyContent={"center"}>
+        <Box mt={{base:"20px", md:"0px"}} display={"flex"} justifyContent={"center"}>
           <FormLabel
             border={"1px dashed  #BBBBC7"}
             display={"flex"}
@@ -132,7 +132,7 @@ const CompanyBio = () => {
             gap={"14px"}
             variant={"lightblue"}
           >
-            <Image src={upload.src} /> Drag & Drop
+            <Image src={upload.src}  width={{md:"20px", base:"17px"}} /> Drag & Drop
             <Input type="file" hidden />
           </FormLabel>
         </Box>

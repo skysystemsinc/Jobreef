@@ -1,6 +1,6 @@
 import { Box, Heading, useMediaQuery, Image } from "@chakra-ui/react";
 import React, { useEffect } from "react";
-import { Timeline } from "../SignUpTimeline/SignUpTimeline";
+import { SignUpTimeline } from "../SignUpTimeline/SignUpTimeline";
 import logo from "@/assets/Images/logo.svg";
 import cartoon from "@/assets/Images/cartoon.svg";
 import teamVector from "@/assets/Images/teamVector.svg";
@@ -14,7 +14,7 @@ const SignUpLayout = dynamic(() => import("../Layout/SignUpLayout"), {
   ssr: false,
 });
 
-const SignIn = () => {
+const SignIn = ({candidate}) => {
   return (
     <Box
       padding={{ md: "75px 30px 0px 30px", base: "75px 15px 0px 15px" }}
@@ -22,7 +22,7 @@ const SignIn = () => {
       display={"flex"}
       justifyContent={"center"}
     >
-      {role == roles.employee ? (
+      {candidate ? (
         <>
           <SignUpLayout
             personVectorW={{ "2xl": "450px", base: "330px" }}
@@ -35,7 +35,7 @@ const SignIn = () => {
       ) : (
         <>
           <SignUpLayout
-            // personVectorW={"600px"}
+            
             personVectorW={{ "2xl": "600px", base: "450px" }}
             icon={<Image src={whitetick.src} width={"26px"}  />}
             bottomCartoon={cartoon.src}
@@ -52,7 +52,7 @@ const SignIn = () => {
         <Box display={"flex"} justifyContent={"center"} mb={"52px"}>
           <Logo />
         </Box>
-        <Timeline />
+        <SignUpTimeline candidate={candidate}/>
       </Box>
     </Box>
   );

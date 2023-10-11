@@ -80,7 +80,7 @@ export default function Header() {
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", xl: "start" }}>
           <Link href={"/"}>
-            <Logo width={{ md: "180px", base: "150px" }} />
+            <Logo width={{ "2xl": "180px", base: "150px" }} />
           </Link>
 
           <Flex display={{ base: "none", xl: "flex" }} mx={"auto"}>
@@ -96,16 +96,16 @@ export default function Header() {
           // border={"1px solid red"}
           // width={{ lg: "auto", base: "auto" }}
           // justifyContent={"center"}
-          spacing={10}
+          spacing={6}
         >
           <IconButton
             isRound={true}
             variant="solid"
             colorScheme="blue"
             aria-label="Done"
-            fontSize={{ base: "18px", sm: "22px" }}
-            width={{ lg: "50px", base: "40px" }}
-            height={{ lg: "50px", base: "40px" }}
+            fontSize={{ base: "18px", sm: "20px" }}
+            width={{ "2xl": "50px", base: "40px" }}
+            height={{ "2xl": "50px", base: "40px" }}
             // size={"lg"}
             // size={["md", "md", "lg", "lg"]}
             icon={<IoNotificationsOutline />}

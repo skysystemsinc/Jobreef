@@ -66,34 +66,23 @@ const globalStyles = {
 
     "& .cui-steps__step-icon-container": {
       bg: "transparent",
-      border: "4px solid gray.light !important",
-      borderColor: "gray.light !important",
+      border: "4px solid gray.light ",
+      borderColor: "gray.light ",
       width: { "2xl": "36px !important", base: "32px" },
       height: { "2xl": "36px !important", base: "32px" },
       span: {
-        color: "gray.light ",
+        color: "gray.light",
         fontSize: { "2xl": "16px", base: "13px" },
       },
-      // "&:first-child": {
-      //   // borderColor: "blue.500 !important",
-      //   span:{
-      //     color:"red !important "
 
-      //   }
-
-      // },
       _active: {
         border: "4px solid blue.500 !important",
         borderColor: "blue.500 !important",
+        bg: "blue.500",
         "& .cui-steps__horizontal-step": {
           "&::after": {
             bg: "blue.500 !important",
           },
-        },
-
-        bg: "blue.500",
-        span: {
-          color: "blue.500",
         },
       },
     },
@@ -118,12 +107,18 @@ const globalStyles = {
         borderColor: "blue.500 !important",
       },
       span: {
-        color: "blue.500 ",
-      },
-      "&::after": {
-        // bg: "blue.500 !important",
+        color: "blue.500",
       },
     },
+    // "& .cui-steps__horizontal-step:nth-child(1)": {
+    //   _active: {
+    //     border: "1px solid red", 
+    //     span: {
+    //       color: "blue.500 !important",
+    //     },
+        
+    //   },
+    // },
   },
 };
 export default globalStyles;

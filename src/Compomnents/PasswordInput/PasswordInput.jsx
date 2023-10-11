@@ -22,9 +22,9 @@ function PasswordInput({ variant, placeholder }) {
       />
       <InputRightElement width="4.5rem">
         <Icon
-          fontSize={{ "2xl": "25px", base: "20px" }}
+          fontSize={{ "2xl": "25px", sm: "20px" , base:"16px" }}
           onClick={handleClick}
-          marginTop={{ md: "20px", base: "8px" }}
+          // marginTop={{ md: "0px", base: "8px" }}
           cursor={"pointer"}
           color={"gray.100"}
           as={show ? HiOutlineEye : AiOutlineEyeInvisible}

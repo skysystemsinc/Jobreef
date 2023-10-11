@@ -1,6 +1,6 @@
 import { Box, Heading, useMediaQuery, Image } from "@chakra-ui/react";
 import React from "react";
-import { Timeline } from "../SignUpTimeline/SignUpTimeline";
+
 import logo from "@/assets/Images/logo.svg";
 import cartoon from "@/assets/Images/cartoon.svg";
 import leftblue_2 from "@/assets/Images/leftblue_2.png";
@@ -30,7 +30,7 @@ const CompanyRegiteration = () => {
         width={{ md: "100%", base: "100%" }}
         ml={{ xl: "600px", base: "0px" }}
       >
-        <Box display={"flex"} justifyContent={"center"} mb={"52px"}>
+        <Box display={"flex"} justifyContent={"center"} mb={{ md:"52px", base:"30px"}}>
           <Logo />
         </Box>
         <CompanyTimeline />

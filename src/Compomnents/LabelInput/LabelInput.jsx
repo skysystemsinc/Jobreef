@@ -1,13 +1,25 @@
 import DropDown from "@/Compomnents/DropDown/DropDown";
-import { Box, FormLabel, Heading, Input, Textarea } from "@chakra-ui/react";
-import React from "react";
+import {
+  Box,
+  FormLabel,
+  Heading,
+  Image,
+  Input,
+  Textarea,
+} from "@chakra-ui/react";
+import React, { useEffect, useRef, useState } from "react";
 import PasswordInput from "../PasswordInput/PasswordInput";
+import edit_outline from "@/assets/Images/edit_outline.svg";
+import { AiOutlineCheck } from "react-icons/ai";
 
 const LabelInput = ({
   textarea,
   icon,
+  state,
+  setState,
   type,
   showEndLable,
+  inputRef,
   passworInput,
   labelVariant,
   variant,
@@ -15,6 +27,18 @@ const LabelInput = ({
   dropdown,
   label,
 }) => {
+  const [readOnly, setreadOnly] = useState(showEndLable ? true : false);
+  const initialRender = useRef(true);
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+      return;
+    }
+    if (inputRef?.current) {
+      inputRef.current.focus();
+    }
+  }, [readOnly]);
+
   return (
     <Box width={"100%"}>
       <FormLabel
@@ -26,11 +50,35 @@ const LabelInput = ({
       >
         {label}
         {showEndLable ? (
-          <Box display={"flex"} alignItems={"center"} gap={"21px"}>
-            {icon}
-            <Heading className="nintoFont" variant={"p5"}>
-              Edit
-            </Heading>
+          <Box
+            display={"flex"}
+            alignItems={"center"}
+            gap={{ md: "15px", base: "10px" }}
+          >
+            {readOnly ? (
+              <>
+                {/* {icon} */}
+                <Image
+                  onClick={() => setreadOnly(false)}
+                  width={{ md: "17px", base: "15px" }}
+                  src={edit_outline.src}
+                />
+                <Heading className="nintoFont" variant={"p5"}>
+                  Edit
+                </Heading>
+              </>
+            ) : (
+              <>
+                {/* {icon} */}
+                <AiOutlineCheck
+                  onClick={() => setreadOnly(true)}
+                  color="#2CA5C3"
+                />
+                <Heading className="nintoFont" variant={"p5"}>
+                  Save
+                </Heading>
+              </>
+            )}
           </Box>
         ) : null}
       </FormLabel>
@@ -47,7 +95,13 @@ const LabelInput = ({
       ) : passworInput ? (
         <PasswordInput placeholder={placeholder} variant={variant} />
       ) : (
-        <Input variant={variant} placeholder={placeholder} type={type} />
+        <Input
+          ref={inputRef}
+          readOnly={readOnly}
+          variant={variant}
+          placeholder={placeholder}
+          type={type}
+        />
       )}
     </Box>
   );
