@@ -35,7 +35,7 @@ const SocialLink = () => {
     <Box pr={"20px"}>
       {linkArray.map((item, index) => {
         return (
-          <InputWrapper gap={"15px"}>
+          <InputWrapper key={index} gap={"15px"}>
             <LabelInput
               labelVariant={"label"}
               type="text"
