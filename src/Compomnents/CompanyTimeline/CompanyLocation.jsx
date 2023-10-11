@@ -1,4 +1,3 @@
-
 import {
   Box,
   Checkbox,
@@ -48,12 +47,12 @@ const CompanyLocation = () => {
           variant={"bg-input"}
           placeholder="Enter City"
           label={"City"}
+          dropdown
         />
         <LabelInput
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
-          
           placeholder="Enter Street Address"
           label={"Street Address"}
         />

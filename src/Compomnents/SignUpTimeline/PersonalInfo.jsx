@@ -1,8 +1,16 @@
 import { Box, Checkbox, FormLabel, Heading, Input } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext } from "react";
 import LabelInput from "../LabelInput/LabelInput";
+import { Role_context } from "@/context/context";
 
 const PersonalInfo = () => {
+  const { company, setCompany } = useContext(Role_context);
+  const handleSelectCompany = (e) => {
+    console.log("e.target.value", e.target.checked);
+    setCompany(e.target.checked);
+    localStorage.setItem("company", e.target.checked);
+  };
+
   return (
     <Box>
       <Box marginBottom={{ sm: "40px", base: "26px" }}>
@@ -13,17 +21,6 @@ const PersonalInfo = () => {
           placeholder="Enter First Name"
           label={"First Name"}
         />
-        {/* <FormLabel
-          marginBottom={{ sm: "19px", base: "10px" }}
-          variant={"label"}
-        >
-          First Name
-        </FormLabel>
-        <Input
-          variant={"bg-input"}
-          placeholder="Enter First Name"
-          type="text"
-        /> */}
       </Box>
 
       <Box marginBottom={{ sm: "40px", base: "26px" }}>
@@ -34,16 +31,9 @@ const PersonalInfo = () => {
           placeholder="Enter Last Name"
           label={"Last Name"}
         />
-        {/* <FormLabel
-          marginBottom={{ sm: "19px", base: "10px" }}
-          variant={"label"}
-        >
-          Last Name
-        </FormLabel>
-        <Input variant={"bg-input"} placeholder="Enter Last Name" type="text" /> */}
       </Box>
 
-      <Box marginBottom={{ sm: "20px", base: "26px" }}>
+      <Box marginBottom={{ sm: "10px", base: "10px" }}>
         <LabelInput
           labelVariant={"label"}
           type="text"
@@ -51,26 +41,24 @@ const PersonalInfo = () => {
           placeholder="Enter  Email"
           label={"Email"}
         />
-        {/* <FormLabel
-          marginBottom={{ sm: "19px", base: "10px" }}
-          variant={"label"}
-        >
-          Email
-        </FormLabel>
-        <Input
-          variant={"bg-input"}
-          placeholder="Enter Last Email"
-          type="email"
-        /> */}
       </Box>
       <Box display={"flex"} alignItems={"center"} gap={"10px"}>
         <Checkbox
           borderRadius={"10px"}
-          defaultChecked
+          onChange={handleSelectCompany}
+          checked={company}
           size="md"
+          defaultChecked
           colorScheme="blue"
+          // border={"1px solid "}
+          borderColor={company ? "blue.500" : "gray.text"}
+          rounded={"sm"}
         />
-        <Heading variant={"p1"} color={"blue.500"} margin={"0px"}>
+        <Heading
+          variant={"p1"}
+          color={company ? "blue.500" : "gray.text"}
+          margin={"0px"}
+        >
           Register as Employer{" "}
         </Heading>
       </Box>

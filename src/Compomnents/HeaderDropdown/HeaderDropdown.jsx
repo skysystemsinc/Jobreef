@@ -22,7 +22,7 @@ const HeaderDropdown = () => {
     {
       title: "Dashboard",
       icon: <Image width={{ md: "22px", base: "19px" }} src={dasboadrd.src} />,
-      pathname: "/",
+      pathname: router.pathname,
     },
     {
       title: "Profile Settings",
@@ -34,7 +34,7 @@ const HeaderDropdown = () => {
     {
       title: "Dashboard",
       icon: <Image width={{ md: "22px", base: "19px" }} src={dasboadrd.src} />,
-      pathname: "/",
+      pathname: "/candidate/my-resume",
     },
     {
       title: "My Resume",

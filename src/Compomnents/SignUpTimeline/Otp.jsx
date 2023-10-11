@@ -31,7 +31,7 @@ const Otp = () => {
       </HStack>
 
       <Box mt={"49px"}>
-        <Link variant={"blue-link"} href="/">
+        <Link _hover={{textDecoration:'none'}} variant={"blue-link"} href="/">
           Resend OTP
         </Link>
       </Box>

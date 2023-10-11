@@ -17,9 +17,13 @@ import Otp from "./Otp";
 import { useRouter } from "next/router";
 import { role, roles } from "@/Utils/role";
 import globalStyles from "@/styles/globalStyles";
+import { useContext } from "react";
+import { Role_context } from "@/context/context";
 const steps = [{ label: "Step 1" }, { label: "Step 2" }, { label: "Step 3" }];
 
 export const SignUpTimeline = ({ candidate, variant }) => {
+  const { company, setCompany } = useContext(Role_context);
+
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
@@ -29,7 +33,7 @@ export const SignUpTimeline = ({ candidate, variant }) => {
   const router = useRouter();
 
   const CustomeSteps = (props) => {
-    console.log("props", props);
+    
     return (
       <Heading
         color={"white.100"}
@@ -137,7 +141,7 @@ export const SignUpTimeline = ({ candidate, variant }) => {
             variant={"blue-btn"}
             onClick={() => {
               if (activeStep == 2) {
-                if (candidate) {
+                if (!company) {
                   router.push("/candidate/profile-setting");
                 } else {
                   router.push("/registeraion");

@@ -81,9 +81,21 @@ const CompanyBio = () => {
           label={"Description*"}
         />
       </InputWrapper>
-      <Box mt={{ md: "80px", base:"40px"}}>
+      <Box
+        border={"lpx solid red !important"}
+        sx={{ border: "1px solid red" }}
+        borderColor={"gray.500 !important"}
+        borderRadius={"8px"}
+        p={"15px"}
+        mt={{ md: "80px", base: "40px" }}
+      >
         <Box textAlign={"center"}>
-          <Link textDecoration={"none"} variant={"blue-link"} href={"/"}>
+          <Link
+            _hover={{ textDecoration: "none" }}
+            textDecoration={"none"}
+            variant={"blue-link"}
+            href={"/"}
+          >
             Upload Company Logo
           </Link>
         </Box>
@@ -99,7 +111,7 @@ const CompanyBio = () => {
                 alignItems: "center",
                 // lineHeight: "28px",
                 fontFamily: "var(--chakra-\fonts-Nunito)",
-                fontSize: { "2xl": "18px", sm: "15px" ,base: "13px"},
+                fontSize: { "2xl": "18px", sm: "15px", base: "13px" },
               }}
             >
               <ListIcon fontSize={"40px"} as={BsDot} color="blue.500" />
@@ -114,7 +126,7 @@ const CompanyBio = () => {
                 color: "gray.light",
                 // lineHeight: "28px",
                 fontFamily: "var(--chakra-\fonts-Nunito)",
-                fontSize: { "2xl": "18px", sm: "15px" ,base: "13px"},
+                fontSize: { "2xl": "18px", sm: "15px", base: "13px" },
               }}
             >
               <ListIcon as={BsDot} fontSize={"40px"} color="blue.500" />
@@ -123,16 +135,21 @@ const CompanyBio = () => {
           </List>
         </Box>
 
-        <Box mt={{base:"20px", md:"0px"}} display={"flex"} justifyContent={"center"}>
+        <Box
+          mt={{ base: "20px", md: "0px" }}
+          display={"flex"}
+          justifyContent={"center"}
+        >
           <FormLabel
-            border={"1px dashed  #BBBBC7"}
+            border={"lpx solid red dashed  #BBBBC7"}
             display={"flex"}
             justifyContent={"center"}
             alignItems={"center"}
             gap={"14px"}
             variant={"lightblue"}
           >
-            <Image src={upload.src}  width={{md:"20px", base:"17px"}} /> Drag & Drop
+            <Image src={upload.src} width={{ md: "20px", base: "17px" }} /> Drag
+            & Drop
             <Input type="file" hidden />
           </FormLabel>
         </Box>

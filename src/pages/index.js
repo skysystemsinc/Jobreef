@@ -21,9 +21,14 @@ import { Link } from "@chakra-ui/next-js";
 import LabelInput from "@/Compomnents/LabelInput/LabelInput";
 import { FcGoogle } from "react-icons/fc";
 import { color } from "framer-motion";
+import { useEffect } from "react";
 
 export default function Home() {
   const [isSmallerThe500] = useMediaQuery("(max-width: 500px)");
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
+
   return (
     <>
       <Image
@@ -68,7 +73,12 @@ export default function Home() {
         >
           <Box display={"flex"} justifyContent={"center"} mb={"41px"}>
             <Image
-              width={{ "2xl": "250px", md: "190px", sm: "160px", base:"140px" }}
+              width={{
+                "2xl": "250px",
+                md: "190px",
+                sm: "160px",
+                base: "140px",
+              }}
               src={logo.src}
               alt="Dan Abramov"
             />
@@ -114,9 +124,9 @@ export default function Home() {
             >
               Don’t have an account?{" "}
               <Link
-                href={"/candidate/sign-up"}
+                href={"/company/sign-up"}
                 display={"inline"}
-                _hover={{ textDecoration: "underline" }}
+                _hover={{ textDecoration: "none" }}
                 color={"blue.500"}
               >
                 {" "}
@@ -143,7 +153,7 @@ export default function Home() {
               width={{ base: "max-content" }}
               boxShadow="0px 0px 4px 0px rgba(0, 0, 0, 0.25)"
               variant={"outline"}
-              fontSize={{ "2xl": "16px", sm: "14px" , base:"12px" }}
+              fontSize={{ "2xl": "16px", sm: "14px", base: "12px" }}
               leftIcon={<FcGoogle />}
               px={{ "2xl": "20px", base: "10px" }}
             >
@@ -151,7 +161,7 @@ export default function Home() {
                 <Text
                   variant={"p1"}
                   color={"gray.text"}
-                  fontSize={{ "2xl": "16px", sm: "13px", base:"11px" }}
+                  fontSize={{ "2xl": "16px", sm: "13px", base: "11px" }}
                 >
                   Sign in with Google
                 </Text>

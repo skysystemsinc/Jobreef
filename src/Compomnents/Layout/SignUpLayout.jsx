@@ -13,7 +13,7 @@ const SignUpLayout = ({
     <Box>
       <Image
         // width={isSmallerThe500 ? "200px" : "250px"}
-        width={{ "2xl": "710px", xl: "40%", sm:"33%",  base: "40%" }}
+        width={{ "2xl": "710px", xl: "39%", sm:"33%",  base: "40%" }}
         src={leftPic}
         position={"absolute"}
         top={"0px"}
@@ -28,7 +28,7 @@ const SignUpLayout = ({
         zIndex={2}
         display={{ xl: "block", base: "none" }}
         position={"absolute"}
-        bottom={"-30px"}
+        bottom={"0px"}
         left={"50px"}
         src={bottomCartoon}
         alt="Dan Abramov"

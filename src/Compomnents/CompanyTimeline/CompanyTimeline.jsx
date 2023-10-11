@@ -62,7 +62,11 @@ export const CompanyTimeline = ({ variant }) => {
             base: "0px 0px 20px 0px",
           }}
         >
-          <Image width={{md:"60px", base:"40px"}} mb={{ md:"40px", base:"30px"}} src={blueclick.src} />
+          <Image
+            width={{ md: "60px", base: "40px" }}
+            mb={{ md: "40px", base: "30px" }}
+            src={blueclick.src}
+          />
           <Heading
             maxW={"733px"}
             fontSize={{ "2xl": "30px", md: "23px", base: "18px" }}
@@ -100,7 +104,7 @@ export const CompanyTimeline = ({ variant }) => {
                   position={"relative"}
                   left={"-20px"}
                 >
-                  Company Website
+                  Company Bio
                 </Heading>
                 <Heading
                   as={"h6"}
@@ -145,7 +149,7 @@ export const CompanyTimeline = ({ variant }) => {
       <Flex
         width="100%"
         justify="center"
-        mt={{ md: "23px", base: "14px" }}
+        mt={{ md: "17px", base: "14px" }}
         gap={4}
       >
         <>
@@ -164,7 +168,7 @@ export const CompanyTimeline = ({ variant }) => {
               if (!hasCompletedAllSteps) {
                 nextStep();
               } else {
-                router.push("/profile-setting");
+                router.push("/company/profile-setting");
               }
             }}
           >

@@ -15,7 +15,7 @@ import edit from "@/assets/Images/edit.svg";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
-const ExperianceForm = ({ setaddExperiance, setTabIndex, tabIndex }) => {
+const ExperianceForm = ({ setexperianceData, setaddExperiance, setTabIndex, tabIndex }) => {
   const router = useRouter();
   return (
     <Box
@@ -165,6 +165,7 @@ const ExperianceForm = ({ setaddExperiance, setTabIndex, tabIndex }) => {
             onClick={() => {
               // tabIndex == 2 ? null : setTabIndex(++tabIndex);
               // router.push("/");
+              setexperianceData([1])
               setaddExperiance(false);
             }}
             // width={{ md: "160px", lg: "200px", sm: "140px", base: "120px" }}

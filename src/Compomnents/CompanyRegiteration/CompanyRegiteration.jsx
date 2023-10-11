@@ -12,7 +12,7 @@ import { CompanyTimeline } from "../CompanyTimeline/CompanyTimeline";
 const CompanyRegiteration = () => {
   return (
     <Box
-      padding={{ md: "75px 30px 40px 30px", base: "75px 15px 30px 15px" }}
+      padding={{ md: "65px 30px 40px 30px", base: "45px 15px 30px 15px" }}
       width={"100%"}
       display={"flex"}
       justifyContent={"center"}

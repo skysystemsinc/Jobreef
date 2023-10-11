@@ -5,17 +5,19 @@ import ExperianceCard from "../ExperianceCard/ExperianceCard";
 
 const WorkExperiance = () => {
   const [addExperiance, setaddExperiance] = useState(false);
-  const experianceData = [{}];
+  const [experianceData, setexperianceData] = useState([]);
+  // const experianceData = [];
+
   return (
     <Box>
       {addExperiance ? (
         <Box display={"flex"} justifyContent={"center"}>
-          <ExperianceForm setaddExperiance={setaddExperiance} />
+          <ExperianceForm  setexperianceData={setexperianceData} setaddExperiance={setaddExperiance} />
         </Box>
       ) : experianceData.length > 0 ? (
         <Box mt={"30px"} width={{ lg: "73%", base: "100%" }} mx={"auto"}>
           <ExperianceCard />
-          <ExperianceCard />
+          
 
           <Flex justifyContent={"center"}>
             <Button
