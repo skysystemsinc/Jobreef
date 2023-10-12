@@ -64,7 +64,7 @@ export const SignUpTimeline = ({ candidate, variant }) => {
         activeStep={activeStep}
       >
         {steps.map(({ label }, index) => (
-          <Step re flexDirection={"column"} key={label}>
+          <Step  flexDirection={"column"} key={label}>
             <Box
               width={"415px"}
               display={{ md: "flex", base: "none" }}
@@ -123,7 +123,7 @@ export const SignUpTimeline = ({ candidate, variant }) => {
       <Flex
         width="100%"
         justify="center"
-        mt={{ md: "53px", base: "43px" }}
+        mt={{ md: "43px", base: "43px" }}
         pb={"30px"}
         gap={4}
       >

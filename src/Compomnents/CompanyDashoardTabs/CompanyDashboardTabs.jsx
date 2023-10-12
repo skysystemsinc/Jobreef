@@ -11,17 +11,13 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import AboutYouTabs from "./AboutYouTabs";
-import waves from "@/assets/Images/waves.svg";
-import EmailTabs from "./EmailTabs";
-import ChangePassword from "./ChangePassword";
+
 import globalStyles from "@/styles/globalStyles";
 import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
 import { useRouter } from "next/router";
-import { role, roles } from "@/Utils/role";
-import Preferences from "./Preferences";
-import Billing from "./Billing";
-const ProfileSettingTabs = ({ company }) => {
+import AboutYouTabs from "../ProfileSettingTabs/AboutYouTabs";
+import CompanyBio from "./CompanyBio";
+const CompanyTabs = ({ company }) => {
   const router = useRouter();
   let [tabIndex, setTabIndex] = useState(0);
   return (
@@ -32,24 +28,26 @@ const ProfileSettingTabs = ({ company }) => {
         onChange={(index) => {
           setTabIndex(index);
         }}
+        // border={"1px solid red"}
+        width={"70%"}
         index={tabIndex}
         isFitted
       >
-        <TabList sx={{ ...globalStyles.fullTab, width: "100%" }}>
+        <TabList sx={{ ...globalStyles.fullTab, width: "70%", border:"1px solid red" }}>
           <Tab
             fontSize={{ md: "16px", base: "14px" }}
             sx={globalStyles.tabelinkStyle}
             _selected={globalStyles.selectTab}
           >
             {" "}
-            About You
+            Company Bio
           </Tab>
           <Tab
             fontSize={{ md: "16px", base: "14px" }}
             _selected={globalStyles.selectTab}
             sx={globalStyles.tabelinkStyle}
           >
-            Email
+            Company Location
           </Tab>
 
           <Tab
@@ -57,7 +55,7 @@ const ProfileSettingTabs = ({ company }) => {
             _selected={globalStyles.selectTab}
             sx={globalStyles.tabelinkStyle}
           >
-            Password
+            Social Links
           </Tab>
 
           {company ? (
@@ -82,27 +80,27 @@ const ProfileSettingTabs = ({ company }) => {
 
         <TabPanels>
           <TabPanel>
-            <AboutYouTabs />
+            <CompanyBio />
           </TabPanel>
-          <TabPanel>
-            <Box pb={{ md: "90px", base: "40px" }}>
-              <EmailTabs />
-            </Box>
-          </TabPanel>
-          <TabPanel>
-            <ChangePassword />
-          </TabPanel>
-
-          <TabPanel>
-            <Preferences />
-          </TabPanel>
-          <TabPanel>
-            <Billing />
-          </TabPanel>
+          {/* <TabPanel>
+              <Box pb={{ md: "90px", base: "40px" }}>
+                <EmailTabs />
+              </Box>
+            </TabPanel>
+            <TabPanel>
+              <ChangePassword />
+            </TabPanel>
+  
+            <TabPanel>
+              <Preferences />
+            </TabPanel>
+            <TabPanel>
+              <Billing />
+            </TabPanel> */}
         </TabPanels>
       </Tabs>
     </>
   );
 };
 
-export default ProfileSettingTabs;
+export default CompanyTabs;

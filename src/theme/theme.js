@@ -27,12 +27,14 @@ const colors = {
     200: "#F7F9FB",
     300: "#D9D9D9",
     400: "#79797966",
-    500:'#EBEBEB',
+    500: "#EBEBEB",
+    600: "#494949",
     light: "#797979",
     text: "#4A4A4A",
   },
   blue: {
     500: "#2CA5C3",
+    400: "#DFF1F6",
     100: "#F4F9FF",
   },
 };
@@ -70,8 +72,8 @@ const components = {
 
         boxShadow: "0px 4px 11px 0px rgba(70, 146, 254, 0.15)",
         color: "white.100",
-        fontWeight: 500,
-        fontSize: { "2xl": "18px", sm: "13px", base:"12px" },
+        fontWeight: 400,
+        fontSize: { "2xl": "18px", sm: "13px", base: "12px" },
       },
       "outline-blue": {
         bg: "transparent",
@@ -97,7 +99,7 @@ const components = {
         borderColor: "blue.500",
         boxShadow: "0px 4px 11px 0px rgba(70, 146, 254, 0.15)",
         color: "blue.500",
-        fontWeight: 600,
+        fontWeight: 500,
       },
     },
   },
@@ -241,7 +243,7 @@ const components = {
           textTransform: " capitalize",
 
           fontWeight: 400,
-          fontSize: { sm: "15px", base:'14px' },
+          fontSize: { sm: "15px", base: "14px" },
           //   },
         },
 
@@ -306,8 +308,6 @@ const components = {
 
         lineHeight: { md: "28px", base: "20px" },
         fontFamily: "var(--chakra-\fonts-openSans)",
-
-        // fontSize:"12px",
         margin: "0px",
       },
       p3: {
@@ -337,7 +337,7 @@ const components = {
         color: "gray.text ",
         fontFamily: "var(--chakra-\fonts-openSans)",
 
-        fontSize: ["20px", "22px", "25px", "27px"],
+        fontSize: ["20px", "22px", "25px", "25px"],
       },
       p7: {
         color: "blue.500",
@@ -352,6 +352,12 @@ const components = {
         lineHeight: ["26px", "33px", "40px", "40px", "40px", "54px"],
         fontSize: ["18px", "23px", "27px", "27px", "30px", "36px"],
       },
+      p9: {
+        color: "black.100",
+        fontFamily: "var(--chakra-\fonts-openSans)",
+        fontWeight: 400,
+        fontSize: "10px",
+      },
       // Add more variants for other heading levels as needed
     },
   },
@@ -361,10 +367,14 @@ const components = {
       otp: {
         // border:"1px solid red",
         borderRadius: "8px",
-        width: "58px",
-        height: "58px",
+        width: { md: "58px", base: "50px" },
+        height: { md: "58px", base: "50px" },
         bg: "gray.200",
-        _placeholder: { color: "gray.100", fontWeight: 400, fontSize: " 20px" },
+        _placeholder: {
+          color: "gray.100",
+          fontWeight: 400,
+          fontSize: { md: " 20px", base: "16px" },
+        },
       },
     },
   },

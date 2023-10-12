@@ -17,6 +17,9 @@ import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
 import AboutYouTabs from "../ProfileSettingTabs/AboutYouTabs";
 import Overview from "./Overview";
 import WorkExperiance from "./WorkExperiance";
+import Education from "./Education";
+import Certification from "./Certification";
+import Skills from "./Skills";
 const MyResumeTabs = () => {
   let [tabIndex, setTabIndex] = useState(0);
   const tabList = [
@@ -69,20 +72,6 @@ const MyResumeTabs = () => {
               </Tab>
             );
           })}
-          {/* <Tab
-            fontSize={{ md: "16px", base: "14px" }}
-            _selected={globalStyles.selectTab}
-            sx={globalStyles.tabelinkStyle}
-          >
-            Email
-          </Tab>
-          <Tab
-            fontSize={{ md: "16px", base: "14px" }}
-            _selected={globalStyles.selectTab}
-            sx={globalStyles.tabelinkStyle}
-          >
-            Password
-          </Tab> */}
         </TabList>
 
         <TabPanels>
@@ -94,9 +83,15 @@ const MyResumeTabs = () => {
           <TabPanel>
             <WorkExperiance />
           </TabPanel>
-          {/* <TabPanel>
-              <ChangePassword />
-            </TabPanel> */}
+          <TabPanel>
+            <Education />
+          </TabPanel>
+          <TabPanel>
+            <Certification />
+          </TabPanel>
+          <TabPanel>
+            <Skills />
+          </TabPanel>
         </TabPanels>
       </Tabs>
     </>

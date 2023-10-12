@@ -27,6 +27,7 @@ export const CompanyTimeline = ({ variant }) => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
+  console.log("activeStep", activeStep);
   const isLastStep = activeStep === steps.length - 1;
   const hasCompletedAllSteps = activeStep === steps.length;
   const CustomeSteps = () => {
@@ -89,7 +90,7 @@ export const CompanyTimeline = ({ variant }) => {
           activeStep={activeStep}
         >
           {steps.map(({ label }, index) => (
-            <Step re flexDirection={"column"} key={label}>
+            <Step flexDirection={"column"} key={label}>
               <Box
                 width={"415px"}
                 display={{ md: "flex", base: "none" }}
@@ -107,6 +108,11 @@ export const CompanyTimeline = ({ variant }) => {
                   Company Bio
                 </Heading>
                 <Heading
+                  color={
+                    activeStep == 1 || activeStep == 2
+                      ? "blue.500"
+                      : "gray.light"
+                  }
                   as={"h6"}
                   variant={"p1"}
                   position={"relative"}
@@ -115,6 +121,7 @@ export const CompanyTimeline = ({ variant }) => {
                   Company Location
                 </Heading>
                 <Heading
+                  color={activeStep == 2 ? "blue.500" : "gray.light"}
                   as={"h6"}
                   variant={"p1"}
                   position={"relative"}

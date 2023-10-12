@@ -5,7 +5,7 @@ import { GoDotFill } from "react-icons/go";
 import { HiLocationMarker } from "react-icons/hi";
 import edit_outline from "@/assets/Images/edit_outline.svg";
 import trash from "@/assets/Images/trash.svg";
-const ExperianceCard = () => {
+const EducationCard = () => {
   return (
     <Box
       p={{ sm: "20px", base: "12px" }}
@@ -31,22 +31,22 @@ const ExperianceCard = () => {
           alignItems={"flex-start"}
           gap={{ md: "18px", base: "12px" }}
         >
-          <Box>
+          {/* <Box>
             <Image width={{ md: "53px", base: "35px" }} src={microsoft.src} />
-          </Box>
+          </Box> */}
           <Box>
             <Heading variant={"p7"} color={"gray.text"}>
-              Senior System’s Design Engineer
+              Diploma Name
             </Heading>
             <Box
               mt={{ md: "8px", base: "3px" }}
               display={"flex"}
               alignItems={"center"}
               flexWrap={"wrap"}
-              gap={{ md: "18px", sm: "6px", base: "5px" }}
+              gap={{ md: "13px", sm: "6px", base: "5px" }}
             >
               <Heading color={"gray.text"} variant={"p4"}>
-                Microsoft
+                Walter Payton College Preparatory High School
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
@@ -66,7 +66,8 @@ const ExperianceCard = () => {
                 variant={"p4"}
               >
                 {" "}
-                <HiLocationMarker style={{ color: "#4A4A4A" }} /> USA
+                <HiLocationMarker style={{ color: "#4A4A4A" }} /> Chicago,
+                Illinois, USA
               </Heading>
             </Box>
           </Box>
@@ -75,7 +76,7 @@ const ExperianceCard = () => {
         <Box
           display={"flex"}
           alignItems={"center"}
-          mt={{ md: "0px", base: "10px" }}
+          mt={{ xl: "0px", base: "10px" }}
           justifyContent={"flex-end"}
           width={{ xl: "auto", base: "100%" }}
           gap={"20px"}
@@ -116,4 +117,4 @@ const ExperianceCard = () => {
   );
 };
 
-export default ExperianceCard;
+export default EducationCard;

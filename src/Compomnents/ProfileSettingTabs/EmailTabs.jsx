@@ -1,36 +1,100 @@
-import { Box, Image } from "@chakra-ui/react";
+import { Box, Button, Heading, Image } from "@chakra-ui/react";
 import LabelInput from "../LabelInput/LabelInput";
 import edit_outline from "@/assets/Images/edit_outline.svg";
 import { useRef, useState } from "react";
+import white_edit from "@/assets/Images/white-edit.svg";
+import Otp from "../SignUpTimeline/Otp";
+
 const EmailTabs = () => {
   const [email, setemail] = useState("");
   const inputRef = useRef();
+  const [isEdit, setisEdit] = useState(false);
+  const [otp, setotp] = useState(false);
+  const [readOnly, setreadOnly] = useState(true);
+  const handleEdit = () => {
+    setisEdit(true);
+    setreadOnly(false);
+  };
+  const handleSave = () => {
+    setisEdit(false);
+    setotp(true);
+    setreadOnly(true);
+  };
+  const handleCancel = () => {
+    setisEdit(false);
+    setotp(false);
+    setreadOnly(true);
+  };
 
   return (
     <Box
       display={"flex"}
       justifyContent={"center"}
-      mt={{ md: "140px", base: "50px" }}
-      mb={{ md: "120px", base: "0px" }}
+      flexDirection={"column"}
+      alignItems={"center"}
+      // mt={{ md: "60px", base: "40px" }}
+      // pb={{ md: "20px", base: "0px" }}
     >
-      <Box width={{ md: "564px", base: "100%" }}>
-        <LabelInput
-          showEndLable
-          labelVariant={"label"}
-          type="text"
-          inputRef={inputRef}
-          variant={"shadow-input"}
-          placeholder="jacobjones9@gmail.com"
-          label={"Email"}
-          state={email}
-          setState={setemail}
-          icon={
-            <Image
-              width={{ md: "17px", base: "15px" }}
-              src={edit_outline.src}
-            />
-          }
-        />
+      {isEdit ? (
+        <Heading
+          textAlign={"center"}
+          // mb={{ md: "0px", base: "30px" }}
+          mt={{ md: "40px", base: "20px" }}
+          variant={"p6"}
+        >
+          Change Email
+        </Heading>
+      ) : null}
+
+      {otp ? (
+        <Box mt={{ md:"20px" , base:'0px'}}>
+          <Otp />
+        </Box>
+      ) : (
+        <Box
+          mt={{ md: "50px", base: "40px" }}
+          width={{ md: "564px", base: "100%" }}
+        >
+          <LabelInput
+            showEndLable
+            readOnly={readOnly}
+            setreadOnly={setreadOnly}
+            handleEdit={handleEdit}
+            labelVariant={"label"}
+            type="text"
+            inputRef={inputRef}
+            variant={"shadow-input"}
+            placeholder="jacobjones9@gmail.com"
+            label={"Email"}
+            state={email}
+            setState={setemail}
+            icon={
+              <Image
+                width={{ md: "17px", base: "15px" }}
+                src={edit_outline.src}
+              />
+            }
+          />
+        </Box>
+      )}
+
+      <Box
+        display={"flex"}
+        justifyContent={"center"}
+        gap={{ md: "20px", base: "10px" }}
+        // my={{ md: "96px", base: "20px" }}
+        mt={{ md: "80px", base: "60px" }}
+      >
+        {isEdit || otp ? (
+          <>
+            <Button onClick={handleCancel} variant="outline-blue">
+              Cancel
+            </Button>
+            <Button onClick={handleSave} variant={"blue-btn"}>
+              {otp ? "Verify" : "Save"}
+            </Button>
+          </>
+        ) : null}
       </Box>
     </Box>
   );

@@ -10,10 +10,13 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { HiOutlineChevronDown } from "react-icons/hi";
-import profile from "@/assets/Images/profile.svg";
+import profile from "@/assets/Images/headerProfile.svg";
 import { Link } from "@chakra-ui/next-js";
 import dasboadrd from "@/assets/Images/dashboard.svg";
 import square from "@/assets/Images/square.svg";
+import chat from "@/assets/Images/chat.svg";
+import header_profile from "@/assets/Images/profile.svg";
+import logout from "@/assets/Images/logout.svg";
 import { role, roles } from "@/Utils/role";
 import { useRouter } from "next/router";
 const HeaderDropdown = () => {
@@ -25,8 +28,18 @@ const HeaderDropdown = () => {
       pathname: router.pathname,
     },
     {
+      title: "Messages",
+      icon: <Image width={{ md: "22px", base: "19px" }} src={chat.src} />,
+      pathname: "/",
+    },
+    {
       title: "Profile Settings",
-      icon: <Image width={{ md: "22px", base: "19px" }} src={square.src} />,
+      icon: <Image width={{ md: "22px", base: "19px" }} src={profile .src} />,
+      pathname: "/",
+    },
+    {
+      title: "Log Out",
+      icon: <Image width={{ md: "22px", base: "19px" }} src={logout.src} />,
       pathname: "/",
     },
   ];
@@ -74,7 +87,7 @@ const HeaderDropdown = () => {
             height={{ "2xl": "58px", base: "50px" }}
             borderRadius={"100px"}
             objectFit={"cover"}
-            src={profile.src}
+            src={header_profile.src}
           />
           <Box textAlign={"start"}>
             <Heading as={"p"} variant={"p4"}>

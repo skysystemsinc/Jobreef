@@ -76,14 +76,14 @@ const SocialLink = () => {
         );
       })}
 
-      <Flex justifyContent={"center"}>
+      {/* <Flex justifyContent={"center"}> */}
         <Button
           onClick={() => setlinkArray([...linkArray, 2])}
           variant={"blue-btn"}
         >
           Add more
         </Button>
-      </Flex>
+      {/* </Flex> */}
     </Box>
   );
 };

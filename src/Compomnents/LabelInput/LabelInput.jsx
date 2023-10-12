@@ -11,12 +11,13 @@ import React, { useEffect, useRef, useState } from "react";
 import PasswordInput from "../PasswordInput/PasswordInput";
 import edit_outline from "@/assets/Images/edit_outline.svg";
 import { AiOutlineCheck } from "react-icons/ai";
-
+import calendar from "@/assets/Images/calendar.svg";
 const LabelInput = ({
   textarea,
   icon,
   state,
   setState,
+  handleEdit,
   type,
   showEndLable,
   inputRef,
@@ -25,20 +26,10 @@ const LabelInput = ({
   variant,
   placeholder,
   dropdown,
+  readOnly,
+  setreadOnly,
   label,
 }) => {
-  const [readOnly, setreadOnly] = useState(showEndLable ? true : false);
-  const initialRender = useRef(true);
-  useEffect(() => {
-    if (initialRender.current) {
-      initialRender.current = false;
-      return;
-    }
-    if (inputRef?.current) {
-      inputRef.current.focus();
-    }
-  }, [readOnly]);
-
   return (
     <Box width={"100%"}>
       <FormLabel
@@ -59,26 +50,16 @@ const LabelInput = ({
               <>
                 {/* {icon} */}
                 <Image
-                  onClick={() => setreadOnly(false)}
+                  onClick={handleEdit}
                   width={{ md: "17px", base: "15px" }}
+                  cursor={"pointer"}
                   src={edit_outline.src}
                 />
                 <Heading className="nintoFont" variant={"p5"}>
                   Edit
                 </Heading>
               </>
-            ) : (
-              <>
-                {/* {icon} */}
-                <AiOutlineCheck
-                  onClick={() => setreadOnly(true)}
-                  color="#2CA5C3"
-                />
-                <Heading className="nintoFont" variant={"p5"}>
-                  Save
-                </Heading>
-              </>
-            )}
+            ) : null}
           </Box>
         ) : null}
       </FormLabel>
@@ -93,9 +74,14 @@ const LabelInput = ({
       ) : dropdown ? (
         <DropDown placeholder={placeholder} />
       ) : passworInput ? (
-        <PasswordInput placeholder={placeholder} variant={variant} />
+        <PasswordInput
+          readOnly={readOnly}
+          placeholder={placeholder}
+          variant={variant}
+        />
       ) : (
         <Input
+        
           ref={inputRef}
           readOnly={readOnly}
           variant={variant}
