@@ -45,7 +45,7 @@ export default function Header() {
   const [isSmallerThe500] = useMediaQuery("(max-width: 500px)");
 
   return (
-    <Box>
+    <Box zIndex={3} position={"sticky"} top={"0px"}>
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
@@ -53,10 +53,10 @@ export default function Header() {
         py={{ base: 4, "2xl": 6 }}
         pb={{ base: 4, "2xl": 7 }}
         px={{ "2xl": 8, base: 3 }}
-        position={"relative"}
-        top={"0px"}
+        // position={"relative"}
+        // top={"0px"}
 
-        zIndex={2}
+        
         // pr={{base:20}}
         borderBottom={1}
         boxShadow={" 0px 4px 4px 0px rgba(0, 0, 0, 0.25)"}
@@ -97,9 +97,7 @@ export default function Header() {
           justify={"flex-end"}
           direction={"row"}
           alignItems={"center"}
-          // border={"1px solid red"}
-          // width={{ lg: "auto", base: "auto" }}
-          // justifyContent={"center"}
+          
           spacing={6}
         >
           <IconButton

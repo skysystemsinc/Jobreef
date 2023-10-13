@@ -33,7 +33,7 @@ const Education = () => {
             padding={{ md:"22px 43px", base:"20px 18px"}}
           >
             <Heading variant={"p7"} color={"gray.text"}>
-              Elevate Your Profile: Include Your Bachelor's Degree
+              {"Elevate Your Profile: Include Your Bachelor 's Degree"}
             </Heading>
           </Box>
 

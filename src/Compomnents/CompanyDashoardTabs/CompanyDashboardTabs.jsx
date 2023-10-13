@@ -17,23 +17,35 @@ import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
 import { useRouter } from "next/router";
 import AboutYouTabs from "../ProfileSettingTabs/AboutYouTabs";
 import CompanyBio from "./CompanyBio";
+import CompanyLocation from "./CompanyLocation";
+import SocialLink from "./SocialLinks";
 const CompanyTabs = ({ company }) => {
   const router = useRouter();
   let [tabIndex, setTabIndex] = useState(0);
   return (
     <>
-      <BottomWaveImage />
+      
 
       <Tabs
         onChange={(index) => {
           setTabIndex(index);
         }}
         // border={"1px solid red"}
-        width={"70%"}
+        width={{ lg: "70%", base: "100%" }}
+        // mx={"auto"}
         index={tabIndex}
         isFitted
       >
-        <TabList sx={{ ...globalStyles.fullTab, width: "70%", border:"1px solid red" }}>
+        <TabList
+          sx={{
+            ...globalStyles.fullTab,
+            ...globalStyles.scrollBar,
+            whiteSpace: "nowrap",
+            overflowX: "scroll",
+            width: { lg: "70%", base: "100%" },
+            border: "1px solid red",
+          }}
+        >
           <Tab
             fontSize={{ md: "16px", base: "14px" }}
             sx={globalStyles.tabelinkStyle}
@@ -82,14 +94,13 @@ const CompanyTabs = ({ company }) => {
           <TabPanel>
             <CompanyBio />
           </TabPanel>
-          {/* <TabPanel>
-              <Box pb={{ md: "90px", base: "40px" }}>
-                <EmailTabs />
-              </Box>
-            </TabPanel>
-            <TabPanel>
-              <ChangePassword />
-            </TabPanel>
+          <TabPanel>
+            <CompanyLocation />
+          </TabPanel>
+          <TabPanel>
+            <SocialLink />
+          </TabPanel>
+          {/*
   
             <TabPanel>
               <Preferences />

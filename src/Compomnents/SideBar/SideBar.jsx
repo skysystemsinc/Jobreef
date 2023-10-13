@@ -7,6 +7,8 @@ import job_post from "@/assets/Images/job-post.svg";
 import candidate from "@/assets/Images/candidate.svg";
 import team from "@/assets/Images/team.svg";
 import building from "@/assets/Images/building.svg";
+import blue_building from "@/assets/Images/blue_building.svg";
+import white_team from "@/assets/Images/white_team.svg";
 import { useRouter } from "next/router";
 
 const SideBar = () => {
@@ -29,51 +31,68 @@ const SideBar = () => {
     },
     {
       title: "Team Members",
-      icon: team,
-      pathname: "/",
+      icon: router.pathname == "/company/team-members" ? white_team : team,
+      pathname: "/company/team-members",
     },
     {
       title: "Company Details",
-      icon: building,
+      icon:
+        router.pathname == "/company/comapany-details"
+          ? building
+          : blue_building,
       pathname: "/company/comapany-details",
     },
   ];
   const activeStyle = {
     backgroundColor: "blue.500",
-    borderRadius: "6px",
+    borderRadius: { xl: "6px", base: "100px" },
+    width: { xl: "auto", base: "40px" },
+    height: { xl: "auto", base: "40px" },
+    display: "flex",
+    justifyContent: { xl: "flex-start", base: "center" },
+    // mx:"auto",
+    padding:'12px 10px',
+    img: {
+      width: { xl: "22px", sm: "17px", base: "15px" },
+      
+    },
     "& a": {
       color: "#fff",
     },
   };
   return (
     <Box
-      width={"300px"}
+      width={{ xl: "280px", base: "55px" }}
       position={"fixed"}
       top={"0px"}
+      bg={"#fff"}
       height={"100vh"}
-      zIndex={1}
+      zIndex={2}
       left={"0px"}
       boxShadow=" 0px 2px 15px 0px rgba(0, 0, 0, 0.06)"
-      p={"160px 40px 0px 10px"}
+      p={{ xl: "130px 20px 0px 10px", base: "100px 10px 0px 7px" }}
     >
       {navLinks.map((item, ind) => {
         return (
           <Box
             sx={item.pathname == router.pathname ? activeStyle : null}
-            padding={"15px 10px"}
-            gap={"20px"}
+            padding={{ xl: "12px 10px", base: "10px 6px" }}
+            pl={{ md: "10px", base: "11px" }}
+            gap={"15px"}
             key={ind}
-            mb={"11px"}
+            mb={{ xl: "7px", base: "7px" }}
             display={"flex"}
             alignItems={"center"}
           >
-            <Image src={item.icon.src} width={"25px"} />
+            <Image src={item.icon.src} width={{ xl: "25px", base: "21px" }} />
             <Link
-            fontWeight={500}
+              display={{ xl: "block", base: "none" }}
+              fontWeight={500}
               _hover={{ textDecor: "none" }}
               color={"gray.light"}
               variant={"blue-link"}
-              href={"/"}
+              fontSize={"16px"}
+              href={item.pathname}
             >
               {item.title}
             </Link>

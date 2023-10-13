@@ -68,10 +68,10 @@ const UploadBox = ({ titie, list }) => {
             display={"flex"}
             justifyContent={"center"}
             alignItems={"center"}
-            gap={"14px"}
+            gap={"10px"}
+            
           >
-            <Image src={upload.src} width={{ md: "20px", base: "17px" }} /> Drag
-            & Drop
+            <Image src={upload.src} width={{ md: "20px", base: "17px" }} /> Upload
             <Input type="file" hidden />
           </FormLabel>
         </Box>

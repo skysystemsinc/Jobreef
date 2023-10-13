@@ -95,11 +95,23 @@ const components = {
 
         border: "2px solid",
         // fontSize: { "2xl": "18px", base: "14px" },
+        fontFamily: "var(--chakra-\fonts-openSans)",
 
         borderColor: "blue.500",
         boxShadow: "0px 4px 11px 0px rgba(70, 146, 254, 0.15)",
         color: "blue.500",
         fontWeight: 500,
+      },
+      "square-btn": {
+        fontFamily: "var(--chakra-\fonts-openSans)",
+        fontWeight: 500,
+        width: { md: "34px", base: "28px" },
+        height: { md: "34px", base: "30px" },
+        fontSize: { md: "16px" , base:"14px"},
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        boxShadow: "none",
       },
     },
   },
@@ -132,7 +144,7 @@ const components = {
         width: "max-content",
 
         fontFamily: "var(--chakra-\fonts-Nunito)",
-        padding: { md: "0px 20px", base: "0px 15px" },
+        padding: { md: "0px 25px", base: "0px 15px" },
         fontSize: ["14px", "14px", "16px", "16px", "16px", "16px"],
         fontWeight: 400,
         // fontSize: "16px",
@@ -378,12 +390,77 @@ const components = {
       },
     },
   },
-  ListItem: {
-    fontWeight: 600,
-    color: "gray.light",
-    lineHeight: "28px",
-    fontFamily: "var(--chakra-\fonts-Nunito)",
-    fontSize: "18px",
+  // ListItem: {
+  //   fontWeight: 600,
+  //   color: "gray.light",
+  //   lineHeight: "28px",
+  //   fontFamily: "var(--chakra-\fonts-Nunito)",
+  //   fontSize: "18px",
+  // },
+  Table: {
+    variants: {
+      "custome-table": {
+        backgroundColor: "#fff",
+
+        table: {
+          backgroundColor: "#fff",
+          padding: "10px 0px",
+          tbody: {
+            tr: {
+              verticalAlign: "middle",
+              boxShadow: " 0px 2px 15px 0px rgba(0, 0, 0, 0.06)",
+              border: "1px solid ",
+              borderColor: "gray.500",
+              "& td:first-child": {
+                color: "blue.500",
+              },
+              td: {
+                margin: "10px 0px",
+                padding: { md: "20px 20px", base: "17px 10px" },
+                // fontSize: "15px",
+                fontSize: { md: "15px", base: "13px" },
+
+                fontWeight: 400,
+                color: "black.200",
+              },
+            },
+          },
+          thead: {
+            bg: "blue.500",
+            th: {
+              padding: { md: "23px 30px", base: "16px 20px" },
+              fontSize: { md: "15px", base: "12px" },
+              position: "relative",
+
+              // border: "1px solid red",
+              "& .vertical-divider": {
+                position: "absolute",
+                top: { md: "21px", base: "16px" },
+                left: { md: "20px", base: "10px" },
+                width: "1px",
+                height: { md: "20px", base: "17px" },
+                zIndex: 99,
+                backgroundColor: "#fff",
+
+                // border: "1px solid red",
+              },
+              textTransform: "capitalize",
+
+              fontWeight: 500,
+              color: "white.100",
+            },
+          },
+          // border: "1px solid red",
+          // bg: "blue.500",
+          // borderRadius:"6px",
+          // boxShadow: "0px 2px 15px 0px rgba(0, 0, 0, 0.06)",
+        },
+
+        // tr: {
+        //   border: "1px solid red",
+        // },
+      },
+    },
   },
 };
 export const theme = extendTheme({ colors, components, fonts, breakpoints });

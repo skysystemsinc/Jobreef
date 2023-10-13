@@ -10,6 +10,9 @@ const BottomWaveImage = () => {
       bottom={"0px"}
       left={"0px"}
       width={"100%"}
+      zIndex={-1}
+
+      // zIndex={"-1 !important"}
     />
   );
 };

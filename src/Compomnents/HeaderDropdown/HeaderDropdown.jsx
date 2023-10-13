@@ -35,7 +35,7 @@ const HeaderDropdown = () => {
     {
       title: "Profile Settings",
       icon: <Image width={{ md: "22px", base: "19px" }} src={profile .src} />,
-      pathname: "/",
+      pathname: "/company/profile-setting",
     },
     {
       title: "Log Out",
