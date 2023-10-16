@@ -7,7 +7,9 @@ const AddTeamMembers = () => {
   return (
     <>
       <CompanyDasboard>
-        <AddMemebersForm />
+        <Box display={"flex"} justifyContent={"center"}>
+          <AddMemebersForm />
+        </Box>
       </CompanyDasboard>
     </>
   );

@@ -15,6 +15,7 @@ import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
 import { roles } from "@/Utils/role";
+import EditProifle from "../EditProifle/EditProifle";
 const AboutYouTabs = () => {
   const [isEdit, setisEdit] = useState(false);
   const [readOnly, setreadOnly] = useState(true);
@@ -22,7 +23,8 @@ const AboutYouTabs = () => {
   return (
     <Box mt={{ md: "91px", lg: "60px", base: "40px" }}>
       <Box display={"flex"} justifyContent={"center"}>
-        <Avatar
+        <EditProifle profile={profile}/>
+        {/* <Avatar
           src={profile.src}
           width={{ md: "120px", base: "90px" }}
           height={{ md: "120px", base: "90px" }}
@@ -37,7 +39,7 @@ const AboutYouTabs = () => {
             </AvatarBadge>
             <Input type="file" hidden />
           </FormLabel>
-        </Avatar>
+        </Avatar> */}
       </Box>
       <Box mt={"50px"}>
         <InputWrapper gap={{ xl: "70px", "2xl": "142px", base: "20px" }}>

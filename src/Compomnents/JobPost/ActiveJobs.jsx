@@ -50,7 +50,8 @@ const ActiveJobs = () => {
   };
   return (
     <>
-      <Box minH={"78vh"} pb={"20px"}>
+      <Box minH={"78vh"} pb={"20px"}  > 
+
         <PaginatedTable
           pageSize={pageSize}
           currentPage={currentPage}

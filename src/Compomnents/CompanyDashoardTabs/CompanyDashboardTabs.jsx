@@ -42,7 +42,8 @@ const CompanyTabs = ({ company }) => {
             ...globalStyles.scrollBar,
             whiteSpace: "nowrap",
             overflowX: "scroll",
-            width: { lg: "70%", base: "100%" },
+            width: { lg: "70%", base: "95%" },
+            // mx:{lg:"0px", base:"10px"},
             border: "1px solid red",
           }}
         >

@@ -9,7 +9,9 @@ const comapanyDetails = () => {
   return (
     <>
       <CompanyDasboard>
-        <CompanyTabs />
+        <Box display={"flex"} justifyContent={"center"}>
+          <CompanyTabs />
+        </Box>
       </CompanyDasboard>
     </>
   );

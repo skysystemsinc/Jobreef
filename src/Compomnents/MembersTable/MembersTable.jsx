@@ -57,7 +57,7 @@ const PaginatedTable = ({
             <Tr>
               {columns.map((item, ind) => {
                 return (
-                  <Th className="nintoFont">
+                  <Th key={ind} className="nintoFont">
                     <Box display={"flex"} alignItems={"center"} gap={"10px"}>
                       {item}
                       <Box className="vertical-divider"></Box>
@@ -107,10 +107,10 @@ const PaginatedTable = ({
         <Heading color={"blue.500"} variant={"p4"}>
           {`Showing 1 to ${pageSize} of ${totalPages} Pages`}
         </Heading>
-        <Box display={"flex"} alignItems={"center"} gap={"10px"}>
+        <Box display={"flex"} alignItems={"center"} gap={{ md: "10px" , base:"3px"}}>
           <Image
             cursor={"progress"}
-            width={{ md: "22px", base: "19px" }}
+            width={{ md: "22px", base: "16px" }}
             src={arrow_right.src}
           />
           <Button
@@ -133,7 +133,7 @@ const PaginatedTable = ({
           <Image
             onClick={() => onPageChange(currentPage + 1)}
             cursor={"pointer"}
-            width={{ md: "22px", base: "19px" }}
+            width={{ md: "22px", base: "16px" }}
             src={arrow_left.src}
           />
         </Box>

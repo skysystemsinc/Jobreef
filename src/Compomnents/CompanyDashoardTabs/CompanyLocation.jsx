@@ -104,6 +104,9 @@ const CompanyLocation = () => {
           justifyContent={"center"}
         >
           <IconButton
+          variant={"blue-btn"}
+          iconSize="18px"
+
             btnLabel={"Edit"}
             handleEvent={handleEdit}
             icon={white_edit}

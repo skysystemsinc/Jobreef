@@ -139,6 +139,9 @@ const CompanyBio = () => {
           </>
         ) : (
           <IconButton
+          iconSize="18px"
+          variant={"blue-btn"}
+
             btnLabel={"Edit"}
             handleEvent={handleEdit}
             icon={white_edit}

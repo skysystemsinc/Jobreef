@@ -30,9 +30,10 @@ const Popovers = ({ actionList }) => {
       >
         
         <PopoverBody p={"0px"}>
-          {actionList.map((item) => {
+          {actionList.map((item , index) => {
             return (
               <Box
+              key={index}
                 padding={"12px  20px"}
                 borderBottom={"1px solid"}
                 borderColor={"gray.500"}

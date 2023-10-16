@@ -1,17 +1,18 @@
-import { Box, Select } from "@chakra-ui/react";
+import { Box, Image, Select } from "@chakra-ui/react";
 import React from "react";
 import { HiOutlineChevronDown } from "react-icons/hi";
-
-const DropDown = ({ placeholder }) => {
+ 
+const DropDown = ({icon, variant, placeholder }) => {
   return (
     <Box>
       <Select
-        sx={{ color: "gray.100" }}
-        variant={"bg-dropdown"}
-        // icon={<HiOutlineChevronDown  style={{fontSize:"1px !importantt", fill:"red", width:"2px"}}  color="red" />}
+        // sx={{ color: "blue.500" }}
+        variant={variant?variant:"outline-dropdown"}
+        icon={icon}
         placeholder={placeholder}
       >
         <option
+         
          
           value="option1"
         >

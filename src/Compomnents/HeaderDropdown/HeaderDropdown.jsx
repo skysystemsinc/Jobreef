@@ -25,7 +25,8 @@ const HeaderDropdown = () => {
     {
       title: "Dashboard",
       icon: <Image width={{ md: "22px", base: "19px" }} src={dasboadrd.src} />,
-      pathname: router.pathname,
+      pathname:"/company/comapany-details" 
+      ,
     },
     {
       title: "Messages",

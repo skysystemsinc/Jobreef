@@ -43,7 +43,13 @@ const TeamMembers = () => {
   };
   return (
     <>
-      <Box minH={"78vh"} width={{ md: "100%", base: "100%" }} pb={"20px"} mr={"10px"} >
+      <Box
+        minH={"78vh"}
+        width={"99%"}
+        // border={"1px solid red"}
+        pb={"20px"}
+        // mr={{ md: "20px", base: "5px" }}
+      >
         <Flex justifyContent={"flex-end"} mb={"17px"}>
           <Button
             onClick={() => router.push("/company/add-members")}

@@ -11,7 +11,9 @@ const index = () => {
   return (
     <>
       <CompanyDasboard>
-        <TeamMembers />
+        <Box display={"flex"} px={{md:"4px" , base:"5px"}}  justifyContent={"center"}>
+          <TeamMembers />
+        </Box>
       </CompanyDasboard>
     </>
   );

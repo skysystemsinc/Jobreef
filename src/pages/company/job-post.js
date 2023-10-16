@@ -11,8 +11,10 @@ const index = () => {
   const router = useRouter();
   return (
     <>
-      <CompanyDasboard placement="flex-start" >
-        <JobPostTabs />
+      <CompanyDasboard >
+        <Box px={"10px"}>
+          <JobPostTabs />
+        </Box>
       </CompanyDasboard>
     </>
   );

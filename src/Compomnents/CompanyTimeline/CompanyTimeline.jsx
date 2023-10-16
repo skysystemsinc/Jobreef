@@ -27,7 +27,7 @@ export const CompanyTimeline = ({ variant }) => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
-  console.log("activeStep", activeStep);
+  
   const isLastStep = activeStep === steps.length - 1;
   const hasCompletedAllSteps = activeStep === steps.length;
   const CustomeSteps = () => {

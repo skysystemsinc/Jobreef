@@ -29,6 +29,8 @@ const colors = {
     400: "#79797966",
     500: "#EBEBEB",
     600: "#494949",
+    700:'#AFAFAF',
+    800:"#FEFEFE",
     light: "#797979",
     text: "#4A4A4A",
   },
@@ -58,6 +60,7 @@ const components = {
   Button: {
     variants: {
       "blue-btn": {
+        textAlign:"center",
         bg: "blue.500",
         height: { "2xl": "50px", sm: "38px", base: "36px" },
         // width: { md: "200px", sm: "180px", base: "168px" },
@@ -105,13 +108,26 @@ const components = {
       "square-btn": {
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 500,
-        width: { md: "34px", base: "28px" },
+        width: { md: "34px", base: "15px" },
+        minWidth:'12px',
         height: { md: "34px", base: "30px" },
         fontSize: { md: "16px" , base:"14px"},
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         boxShadow: "none",
+      },
+      "unstyled": {
+        fontFamily: "var(--chakra-\fonts-openSans)",
+        fontWeight: 400,
+        
+        
+        fontSize: { md: "16px" , base:"14px"},
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        boxShadow: "none",
+
       },
     },
   },
@@ -212,7 +228,7 @@ const components = {
   },
   Select: {
     variants: {
-      "bg-dropdown": {
+      "outline-dropdown": {
         field: {
           height: { "2xl": "58px", base: "40px" },
 
@@ -231,6 +247,34 @@ const components = {
           bg: "gray.200 !important",
         },
       },
+      "bg-dropdown": {
+        px:"30px",
+        
+        // color:"blue.500",
+        field: {
+          width:"200px",
+          px:"30px",
+          height: { "2xl": "58px", base: "40px" },
+          border:"2px solid ",
+          borderColor:"blue.500",
+          color:"blue.500",
+        
+          borderRadius: "8px"   ,
+          bg:'gray.200',
+          
+          fontWeight: 600,
+          fontSize: { "2xl": "18px", base: "14px" },
+          textTransform: " capitalize",
+
+          // _placeholder: {
+          //   color: "red !important",
+          //   fontWeight: 400,
+          //   fontSize: { md: "18px", base: "16px" },
+          // },
+
+          
+        },
+      },
     },
   },
   Textarea: {
@@ -247,7 +291,7 @@ const components = {
         // borderColor: "red",
         borderRadius: "8px",
         p: "20px 20px 20px 20px",
-        boxShadow: " 0px 4px 20px 0px #0000000D !important",
+        // boxShadow: " 0px 4px 20px 0px #0000000D !important",
         _placeholder: {
           color: "gray.100    ",
           fontFamily: "var(--chakra-\fonts-openSans)",
@@ -349,7 +393,7 @@ const components = {
         color: "gray.text ",
         fontFamily: "var(--chakra-\fonts-openSans)",
 
-        fontSize: ["20px", "22px", "25px", "25px"],
+        fontSize: ["18px", "20px", "25px", "25px"],
       },
       p7: {
         color: "blue.500",
@@ -369,6 +413,14 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 400,
         fontSize: "10px",
+      },
+      p10: {
+        color: "gray.text",
+        fontFamily: "var(--chakra-\fonts-openSans)",
+        fontWeight: 600,
+        
+        fontSize: ["14px", "14px", "16px", "16px", "16px", "18px"],
+
       },
       // Add more variants for other heading levels as needed
     },

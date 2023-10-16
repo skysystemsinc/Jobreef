@@ -20,7 +20,6 @@ const globalStyles = {
     color: "gray.text",
     lineHeight: "28px",
     fontFamily: "var(--chakra-\fonts-openSans)",
-    // fontSize: { md: "16px", base: "14px" },
     margin: "0px",
   },
   fullTab: {
@@ -32,7 +31,48 @@ const globalStyles = {
     py: { md: "10px", base: "6px" },
     width: { xl: "60%", md: "70%", sm: "80%", base: "100%" },
   },
+  outlineTab: {
+    borderBottom: "1px solid ",
+    borderColor: "gray.700",
+    backgroundColor: "transparent",
+    // mx: "auto",
+    alignItems: "flex-end",
+    paddingLeft:'56px',
+    // border:"1px solid red",
+    // width:'60% !important',
+    
+    selectTab: {
+      position: "relative",
+      fontWeight: 600,
+      height: "34px",
+      padding: "0px !important",
 
+      color: "blue.500",
+      "&::after": {
+        content: `""`,
+        position: "absolute",
+        top: "31px",
+        bg: "blue.500",
+        // borderRadius: "12px 12px 0px 0px",
+        left: "6%",
+        width: "87%",
+        height: "3px",
+      },
+    },
+    tabelinkStyle: {
+      fontWeight: 400,
+      color: "gray.text",
+      height: "34px",
+      // border: "1px solid red",
+      width: "100px !important",
+
+      // lineHeight: "28px",
+      // border:"1px solid red",
+      padding: "0px !important",
+      fontFamily: "var(--chakra-\fonts-openSans)",
+      margin: "0px",
+    },
+  },
   scrollBar: {
     width: "1px !important",
     "&::-webkit-scrollbar": {

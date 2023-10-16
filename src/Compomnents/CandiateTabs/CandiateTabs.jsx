@@ -13,18 +13,19 @@ import {
 import React, { useState } from "react";
 
 import globalStyles from "@/styles/globalStyles";
-import ActiveJobs from "./ActiveJobs";
 
-import InActiveJobs from "./InActive";
 import { useRouter } from "next/router";
+import DropDown from "../DropDown/DropDown";
+import Application from "./Application";
+import blue_arrow_down from "@/assets/Images/blue-arrow-down.svg";
 
-const JobPostTabs = ({ company }) => {
-  const router = useRouter()
+const CandiateTabs = ({ company }) => {
+  const router = useRouter();
   let [tabIndex, setTabIndex] = useState(0);
   return (
     <>
       <Tabs
-      // px={ {xl:"0px",   base: "10px"}}
+        // px={ {xl:"0px",   base: "10px"}}
         onChange={(index) => {
           setTabIndex(index);
         }}
@@ -40,7 +41,7 @@ const JobPostTabs = ({ company }) => {
             sx={{
               ...globalStyles.fullTab,
               ...globalStyles.scrollBar,
-              ml: { md: "0px" , base:'0px'},
+              ml: { md: "0px", base: "0px" },
               whiteSpace: "nowrap",
 
               overflowX: "scroll",
@@ -54,48 +55,48 @@ const JobPostTabs = ({ company }) => {
               _selected={globalStyles.selectTab}
             >
               {" "}
-              Active
+              Applications
             </Tab>
             <Tab
               fontSize={{ md: "16px", base: "14px" }}
               _selected={globalStyles.selectTab}
               sx={globalStyles.tabelinkStyle}
             >
-              Inactive
+              Matched Candidates
             </Tab>
 
-            <Button
-            onClick={()=>router.push("/company/create-job-post")}
+            <Box
               display={{ md: "block", base: "none" }}
               position={"absolute"}
               right={"12px"}
               bottom={"0px"}
-              variant={"blue-btn"}
             >
-              Create a Job Post
-            </Button>
+              <DropDown
+                icon={<Image src={blue_arrow_down.src} />}
+                placeholder={"Systems Engineer"}
+                variant={"bg-dropdown"}
+              />
+            </Box>
           </TabList>
         </Box>
 
         <TabPanels>
-          <TabPanel  px={"0px"}>
+          <TabPanel px={"0px"}>
             <Box
               width={"100%"}
               // border={"1px solid red"}
               display={{ md: "none", base: "flex" }}
               justifyContent={"flex-end !important"}
               mb={"12px"}
-            onClick={()=>router.push("/company/create-job-post")}
-
+              onClick={() => router.push("/company/create-job-post")}
             >
               <Button variant={"blue-btn"}>Create a Job Post</Button>
             </Box>
-            <ActiveJobs />
+            <Application />
           </TabPanel>
           <TabPanel px={"0px"}>
             <Box
-            onClick={()=>router.push("/company/create-job-post")}
-
+              onClick={() => router.push("/company/create-job-post")}
               width={"100%"}
               // border={"1px solid red"}
               display={{ md: "none", base: "flex" }}
@@ -104,7 +105,7 @@ const JobPostTabs = ({ company }) => {
             >
               <Button variant={"blue-btn"}>Create a Job Post</Button>
             </Box>
-            <InActiveJobs />
+            {/* <InActiveJobs /> */}
           </TabPanel>
         </TabPanels>
       </Tabs>
@@ -112,4 +113,4 @@ const JobPostTabs = ({ company }) => {
   );
 };
 
-export default JobPostTabs;
+export default CandiateTabs;
