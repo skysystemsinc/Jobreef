@@ -208,7 +208,7 @@ const components = {
         field: {
           height: { "2xl": "58px", base: "40px" },
           borderRadius: "8px",
-
+          color:'black.200',
           bg: "gray.200 !important",
           border: "none ",
           // borderColor: "red",
@@ -222,7 +222,7 @@ const components = {
           },
         },
 
-        color: "brand.100",
+        // color: "brand.100",
       },
     },
   },
