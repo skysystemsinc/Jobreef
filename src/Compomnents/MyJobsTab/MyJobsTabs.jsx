@@ -16,6 +16,7 @@ import globalStyles from "@/styles/globalStyles";
 import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
 import AboutYouTabs from "../ProfileSettingTabs/AboutYouTabs";
 import AppliedJobs from "./AppliedJobs";
+import SavedJobs from "./SavedJobs";
 // import Overview from "./Overview";
 // import WorkExperiance from "./WorkExperiance";
 // import Education from "./Education";
@@ -78,14 +79,11 @@ const MyJobsTabs = () => {
           <TabPanel>
             <AppliedJobs/>
           </TabPanel>
+          <TabPanel>
+            <SavedJobs />
+          </TabPanel>
           {/* <TabPanel>
-            <Education />
-          </TabPanel>
-          <TabPanel>
             <Certification />
-          </TabPanel>
-          <TabPanel>
-            <Skills />
           </TabPanel> */}
         </TabPanels>
       </Tabs>
