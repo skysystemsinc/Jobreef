@@ -104,7 +104,7 @@ const AppliedJobs = () => {
         <Box display={"flex"} justifyContent={"space-between"}>
           <Box display={"flex"} mt={"20px"} alignItems={"center"} flexWrap={"wrap"}>
             <Box mr={"20px"} mb={"10px"}>
-                <ComponentMyChip label={"Technical knowledge"}/>
+                <ComponentMyChip  label={"Technical knowledge"}/>
             </Box>
             
             <Box mr={"20px"} mb={"10px"}>
