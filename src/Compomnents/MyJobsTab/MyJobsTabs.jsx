@@ -56,7 +56,7 @@ const MyJobsTabs = () => {
             width: { md: "70%", base: "100%" },
           }}
         >
-          {tabList.map((item, index) => {
+          {tabList.map((item, index) => { 
             return (
               <Tab
                 key={index}
@@ -68,14 +68,8 @@ const MyJobsTabs = () => {
               </Tab>
             );
           })}
-        </TabList>
-
+        </TabList>  
         <TabPanels>
-          {/* <TabPanel>
-            <Box display={"flex"} justifyContent={"center"}>
-              <Overview setTabIndex={setTabIndex} tabIndex={tabIndex} />
-            </Box>
-          </TabPanel> */}
           <TabPanel>
             <AppliedJobs/>
           </TabPanel>
