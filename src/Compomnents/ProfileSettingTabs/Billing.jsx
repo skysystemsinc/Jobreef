@@ -34,6 +34,15 @@ const Billing = () => {
       >
         {isEdit ? (
           <>
+                  <Button
+              onClick={() => {
+                setisEdit(false);
+                setreadOnly(true);
+              }}
+              variant="outline-blue"
+            >
+              Cancel
+            </Button>
             <Button
               onClick={() => {
                 setisEdit(false);
@@ -43,15 +52,7 @@ const Billing = () => {
             >
               Save
             </Button>
-            <Button
-              onClick={() => {
-                setisEdit(false);
-                setreadOnly(true);
-              }}
-              variant="outline-blue"
-            >
-              Cancel
-            </Button>
+    
           </>
         ) : (
           <Button

@@ -21,8 +21,13 @@ const Preferences = () => {
   const [readOnly, setreadOnly] = useState(true);
   const router = useRouter();
   return (
-    <Box minH={"52vh"} display={"flex"} alignItems={"flex-end"} justifyContent={"center"} mt={{ md: "91px", lg: "60px", base: "40px" }}>
-
+    <Box
+      minH={"52vh"}
+      display={"flex"}
+      alignItems={"flex-end"}
+      justifyContent={"center"}
+      mt={{ md: "91px", lg: "60px", base: "40px" }}
+    >
       <Box
         display={"flex"}
         justifyContent={"center"}
@@ -39,18 +44,18 @@ const Preferences = () => {
                 setisEdit(false);
                 setreadOnly(true);
               }}
-              variant={"blue-btn"}
+              variant="outline-blue"
             >
-              Save
+              Cancel
             </Button>
             <Button
               onClick={() => {
                 setisEdit(false);
                 setreadOnly(true);
               }}
-              variant="outline-blue"
+              variant={"blue-btn"}
             >
-              Cancel
+              Save
             </Button>
           </>
         ) : (

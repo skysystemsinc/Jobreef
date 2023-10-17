@@ -35,7 +35,7 @@ const ProfileSettingTabs = ({ company }) => {
         index={tabIndex}
         isFitted
       >
-        <TabList sx={{ ...globalStyles.fullTab, width: "100%" }}>
+        <TabList sx={{ ...globalStyles.fullTab, width: "100%"  }}  flexDirection={{sm:"row" , base:"column"}}>
           <Tab
             fontSize={{ md: "16px", base: "14px" }}
             sx={globalStyles.tabelinkStyle}

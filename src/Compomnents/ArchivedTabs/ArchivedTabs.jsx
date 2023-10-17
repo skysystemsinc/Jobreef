@@ -73,6 +73,11 @@ const ArchivedTabs = ({ company }) => {
           <TabPanel px={"0px"}>
             <All />
           </TabPanel>
+          
+          <TabPanel px={"0px"}>
+            <All />
+          </TabPanel>
+
         </TabPanels>
       </Tabs>
     </>

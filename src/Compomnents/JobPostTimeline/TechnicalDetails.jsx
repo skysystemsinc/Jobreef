@@ -63,6 +63,7 @@ import {
             labelVariant={"label"}
             type="date"
             variant={"bg-input"}
+            imoptnatIcon
             dropdown
             placeholder="Select salary type for this job"
             label={"Salary Type"}

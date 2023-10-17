@@ -380,7 +380,7 @@ const components = {
         color: "black.200 ",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontSize: ["13px", "14px", "16px"],
-
+        lineHeight:'24px',
         // fontSize: "20px",
       },
       p5: {

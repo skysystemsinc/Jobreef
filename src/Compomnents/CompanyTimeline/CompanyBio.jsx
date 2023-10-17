@@ -26,8 +26,8 @@ const CompanyBio = () => {
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
-          placeholder="Enter Company Website url"
-          label={"Company Website"}
+          placeholder="Enter Company Name"
+          label={"Company Name"}
         />
         <LabelInput
           dropdown

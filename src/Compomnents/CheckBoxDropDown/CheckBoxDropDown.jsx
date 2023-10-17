@@ -15,7 +15,7 @@ const CheckBoxDropDown = ({ label, listItme }) => {
   return (
     <Menu closeOnSelect={false}>
       <MenuButton
-        bg="blue.500 "
+        bg="blue.500"
         px={"20px"}
         borderRadius={"100px"}
         height={"35px"}
@@ -40,8 +40,11 @@ const CheckBoxDropDown = ({ label, listItme }) => {
         <MenuOptionGroup title="" type="checkbox">
           {listItme?.map((item) => {
             return (
-              < MenuItemOption sx={{"& .chakra-menu__icon-wrapper": { svg:{ fill:'black.100'}}}}  value="email">
-                <Heading fontWeight={400}  variant={"p10"}>
+              <MenuItemOption
+                sx={{ "& .chakra-menu__icon":{color:"#000"} }}
+                value={item}
+              >
+                <Heading fontWeight={400} variant={"p10"}>
                   {" "}
                   {item}{" "}
                 </Heading>

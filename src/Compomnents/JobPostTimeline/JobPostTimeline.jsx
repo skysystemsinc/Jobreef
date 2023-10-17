@@ -78,8 +78,15 @@ export const JobPostTimeline = ({ candidate, variant }) => {
         mt={"12px"}
       >
         <Heading
-          // color={"blue.500"}
-          color={textColor}
+          color={"blue.500"}
+          // color={
+          //   activeStep == 0 ||
+          //   activeStep == 1 ||
+          //   activeStep == 2 ||
+          //   activeStep == 3
+          //     ? "blue.500"
+          //     : "gray.light"
+          // }
           as={"h6"}
           variant={"p1"}
           position={"relative"}
@@ -88,7 +95,15 @@ export const JobPostTimeline = ({ candidate, variant }) => {
           Job Bio
         </Heading>
         <Heading
-          color={textColor}
+          // color={textColor}
+          color={
+            // activeStep == 0 ||
+            activeStep == 1 
+            // activeStep == 2 ||
+            // activeStep == 3
+              ? "blue.500"
+              : "gray.light"
+          }
           as={"h6"}
           variant={"p1"}
           position={"relative"}
@@ -97,7 +112,15 @@ export const JobPostTimeline = ({ candidate, variant }) => {
           Technical Details
         </Heading>
         <Heading
-          color={textColor}
+          color={
+            // activeStep == 0 ||
+            activeStep == 1 ||
+            activeStep == 2 ||
+            activeStep == 3
+              ? "blue.500"
+              : "gray.light"
+          }
+          // color={textColor}
           as={"h6"}
           variant={"p1"}
           position={"relative"}
@@ -107,7 +130,15 @@ export const JobPostTimeline = ({ candidate, variant }) => {
         </Heading>
 
         <Heading
-          color={textColor}
+          // color={textColor}
+          color={
+            // activeStep == 0 ||
+            activeStep == 1 ||
+            activeStep == 2 ||
+            activeStep == 3
+              ? "blue.500"
+              : "gray.light"
+          }
           as={"h6"}
           variant={"p1"}
           position={"relative"}
