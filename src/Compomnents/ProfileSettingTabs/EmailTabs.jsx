@@ -64,6 +64,8 @@ const EmailTabs = () => {
             type="text"
             inputRef={inputRef}
             variant={"shadow-input"}
+            iconStyle={{ marginTop: "7px" }}
+
             placeholder="jacobjones9@gmail.com"
             label={"Email"}
             state={email}

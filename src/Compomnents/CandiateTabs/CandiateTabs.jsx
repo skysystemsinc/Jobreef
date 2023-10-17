@@ -90,7 +90,11 @@ const CandiateTabs = ({ company }) => {
               mb={"12px"}
               onClick={() => router.push("/company/create-job-post")}
             >
-              <Button variant={"blue-btn"}>Create a Job Post</Button>
+              <DropDown
+                icon={<Image src={blue_arrow_down.src} />}
+                placeholder={"Systems Engineer"}
+                variant={"bg-dropdown"}
+              />
             </Box>
             <Application />
           </TabPanel>
@@ -103,7 +107,11 @@ const CandiateTabs = ({ company }) => {
               justifyContent={"flex-end !important"}
               mb={"12px"}
             >
-              <Button variant={"blue-btn"}>Create a Job Post</Button>
+              <DropDown
+                icon={<Image src={blue_arrow_down.src} />}
+                placeholder={"Systems Engineer"}
+                variant={"bg-dropdown"}
+              />
             </Box>
             {/* <InActiveJobs /> */}
           </TabPanel>

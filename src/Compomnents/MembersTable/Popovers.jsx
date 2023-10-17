@@ -14,7 +14,7 @@ import {
 import React from "react";
 import menu from "@/assets/Images/menu.svg";
 
-const Popovers = ({ actionList }) => {
+const Popovers = ({ width, actionList }) => {
   return (
     <Popover size={"sm"} placement="bottom-end">
       <PopoverTrigger>
@@ -25,15 +25,14 @@ const Popovers = ({ actionList }) => {
       <PopoverContent
         outline={"none"}
         bg={"white.100"}
-        width={"145px"}
+        width={width ? width : "145px"}
         boxShadow="0px 2px 15px 0px rgba(0, 0, 0, 0.06)"
       >
-        
         <PopoverBody p={"0px"}>
-          {actionList.map((item , index) => {
+          {actionList.map((item, index) => {
             return (
               <Box
-              key={index}
+                key={index}
                 padding={"12px  20px"}
                 borderBottom={"1px solid"}
                 borderColor={"gray.500"}

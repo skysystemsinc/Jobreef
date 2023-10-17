@@ -82,7 +82,7 @@ const Overview = ({setTabIndex , tabIndex}) => {
             // width={{ md: "160px", lg: "200px", sm: "140px", base: "120px" }}
             variant="outline-blue"
           >
-            Cencel
+            Cancel
           </Button>
 
           <Button

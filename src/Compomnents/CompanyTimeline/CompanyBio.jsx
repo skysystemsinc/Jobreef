@@ -68,8 +68,9 @@ const CompanyBio = () => {
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
-          placeholder="Select Tags"
-          label={"Tags"}
+          placeholder="Enter Email"
+          // dropdown
+          label={"Email"}
         />
       </InputWrapper>
       <InputWrapper>

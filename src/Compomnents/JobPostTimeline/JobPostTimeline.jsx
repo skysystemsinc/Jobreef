@@ -41,7 +41,7 @@ export const JobPostTimeline = ({ candidate, variant }) => {
     initialStep: 0,
   });
   const [completedSteps, setcompletedSteps] = useState([0]);
-  console.log("completedSteps", completedSteps , activeStep)
+  console.log("activeStep", activeStep);
   const isLastStep = activeStep === steps.length - 1;
   const hasCompletedAllSteps = activeStep === steps.length;
 
@@ -67,7 +67,7 @@ export const JobPostTimeline = ({ candidate, variant }) => {
   };
 
   const TimelineSubtitle = ({ isCompleted }) => {
-    console.log("isCompleted",isCompleted)
+    console.log("isCompleted", isCompleted);
     const textColor = isCompleted ? "blue.500" : "gray.light";
     return (
       <Box
@@ -150,9 +150,9 @@ export const JobPostTimeline = ({ candidate, variant }) => {
           activeStep={activeStep}
         >
           {steps.map(({ label }, index) => {
-            console.log("index", index)
+            console.log("index", index);
             const isCompleted = completedSteps.includes(index);
-            console.log("activeStep",activeStep)
+            console.log("activeStep", activeStep);
             return (
               <Step
                 // border={"1px solid red"}
@@ -206,7 +206,9 @@ export const JobPostTimeline = ({ candidate, variant }) => {
           >
             <>
               <IconButton
-                handleEvent={prevStep}
+                handleEvent={() => {
+                  activeStep == 0 ? null : prevStep();
+                }}
                 iconSize={"21px"}
                 icon={grayArrow}
                 btnLabel={"Previous"}

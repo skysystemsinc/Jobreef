@@ -61,10 +61,14 @@ export const SignUpTimeline = ({ candidate, variant }) => {
         sx={globalStyles.stepperContainter}
         variant={variant}
         colorScheme="blue"
+        // border={"1px solid red"}
+
         activeStep={activeStep}
       >
         {steps.map(({ label }, index) => (
-          <Step  flexDirection={"column"} key={label}>
+          <Step  
+          
+          flexDirection={"column"} key={label}>
             <Box
               width={"415px"}
               display={{ md: "flex", base: "none" }}
@@ -102,7 +106,7 @@ export const SignUpTimeline = ({ candidate, variant }) => {
               sx={{
                 p: { md: 8, base: "20px 0px 20px 0px" },
                 mt: "13px",
-                width: "100%",
+                width: "90%",
               }}
             >
               {/* <Otp /> */}

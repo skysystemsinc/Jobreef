@@ -5,15 +5,21 @@ import {
   Heading,
   Image,
   Input,
+  InputGroup,
+  InputRightElement,
   Textarea,
+  css,
 } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
 import PasswordInput from "../PasswordInput/PasswordInput";
 import edit_outline from "@/assets/Images/edit_outline.svg";
 import { AiOutlineCheck } from "react-icons/ai";
 import calendar from "@/assets/Images/calendar.svg";
+import DatePicker from "../DatePicker/DatePicker";
+
 const LabelInput = ({
   textarea,
+  iconStyle,
   icon,
   state,
   setState,
@@ -47,10 +53,9 @@ const LabelInput = ({
             gap={{ md: "15px", base: "10px" }}
           >
             {readOnly ? (
-              <>
+              <Box  cursor={"pointer"} display={"flex"} alignItems={"center"} gap={"12px"} onClick={handleEdit}>
                 {/* {icon} */}
                 <Image
-                  onClick={handleEdit}
                   width={{ md: "17px", base: "15px" }}
                   cursor={"pointer"}
                   src={edit_outline.src}
@@ -58,7 +63,7 @@ const LabelInput = ({
                 <Heading className="nintoFont" variant={"p5"}>
                   Edit
                 </Heading>
-              </>
+              </Box>
             ) : null}
           </Box>
         ) : null}
@@ -75,13 +80,15 @@ const LabelInput = ({
         <DropDown placeholder={placeholder} />
       ) : passworInput ? (
         <PasswordInput
+          iconStyle={iconStyle}
           readOnly={readOnly}
           placeholder={placeholder}
           variant={variant}
         />
+      ) : type == "date" ? (
+        <DatePicker />
       ) : (
         <Input
-        
           ref={inputRef}
           readOnly={readOnly}
           variant={variant}

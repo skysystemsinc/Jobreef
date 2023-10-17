@@ -44,8 +44,14 @@ const SocialLink = () => {
               dropdown
               label={"Social Links"}
             />
-
-            <Box width={"100%"} position={"relative"}>
+             <LabelInput
+                  labelVariant={"label"}
+                  type="text"
+                  variant={"bg-input"}
+                  placeholder="Paste link to company social network page"
+                  label={"Link"}
+                />
+            {/* <Box width={"100%"} position={"relative"}>
               {isSmallerThe500 ? (
                 <Input
                   variant={"bg-input"}
@@ -71,7 +77,7 @@ const SocialLink = () => {
                   color: "#2CA5C3",
                 }}
               />
-            </Box>
+            </Box> */}
           </InputWrapper>
         );
       })}

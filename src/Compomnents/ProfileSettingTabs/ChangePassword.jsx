@@ -85,6 +85,8 @@ const ChangePassword = () => {
             type="text"
             inputRef={inputRef}
             variant={"shadow-input"}
+            iconStyle={{ marginTop: "7px" }}
+
             placeholder="***************"
             label={"Password"}
             passworInput

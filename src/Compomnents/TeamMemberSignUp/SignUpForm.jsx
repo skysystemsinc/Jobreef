@@ -23,7 +23,7 @@ import EditProifle from "../EditProifle/EditProifle";
 import ConfirmationBox from "../ConfirmationBox/ConfirmationBox";
 const SignUpForm = () => {
   const [isEdit, setisEdit] = useState(false);
-  const [readOnly, setreadOnly] = useState(true);
+  const [readOnly, setreadOnly] = useState(false);
   const [isCountinue, setisCountinue] = useState(false);
   const router = useRouter();
   const profileStyle = {
@@ -129,7 +129,7 @@ const SignUpForm = () => {
               <LabelInput
                 labelVariant={"label"}
                 type="text"
-                passworInput
+                
                 readOnly={readOnly}
                 setreadOnly={setreadOnly}
                 variant={"bg-input"}

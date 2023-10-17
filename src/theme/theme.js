@@ -29,8 +29,8 @@ const colors = {
     400: "#79797966",
     500: "#EBEBEB",
     600: "#494949",
-    700:'#AFAFAF',
-    800:"#FEFEFE",
+    700: "#AFAFAF",
+    800: "#FEFEFE",
     light: "#797979",
     text: "#4A4A4A",
   },
@@ -38,6 +38,9 @@ const colors = {
     500: "#2CA5C3",
     400: "#DFF1F6",
     100: "#F4F9FF",
+  },
+  orange: {
+    100: "#FB784B",
   },
 };
 const fonts = {
@@ -60,7 +63,7 @@ const components = {
   Button: {
     variants: {
       "blue-btn": {
-        textAlign:"center",
+        textAlign: "center",
         bg: "blue.500",
         height: { "2xl": "50px", sm: "38px", base: "36px" },
         // width: { md: "200px", sm: "180px", base: "168px" },
@@ -109,25 +112,24 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 500,
         width: { md: "34px", base: "15px" },
-        minWidth:'12px',
+        minWidth: "12px",
         height: { md: "34px", base: "30px" },
-        fontSize: { md: "16px" , base:"14px"},
+        fontSize: { md: "16px", base: "14px" },
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         boxShadow: "none",
       },
-      "unstyled": {
+      unstyled: {
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 400,
-        
-        
-        fontSize: { md: "16px" , base:"14px"},
+        color: "black.100",
+
+        fontSize: { md: "16px", base: "14px" },
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         boxShadow: "none",
-
       },
     },
   },
@@ -186,9 +188,9 @@ const components = {
     variants: {
       "shadow-input": {
         field: {
-          height: { "2xl": "58px", base: "50px" },
+          height: { "2xl": "58px", base: "46px" },
           borderRadius: "8px",
-
+          color: "black.100",
           // bg: "text.gray !important",
           border: "none ",
           // borderColor: "red",
@@ -208,7 +210,7 @@ const components = {
         field: {
           height: { "2xl": "58px", base: "40px" },
           borderRadius: "8px",
-          color:'black.200',
+          color: "black.200",
           bg: "gray.200 !important",
           border: "none ",
           // borderColor: "red",
@@ -229,6 +231,8 @@ const components = {
   Select: {
     variants: {
       "outline-dropdown": {
+        color: "red !important",
+
         field: {
           height: { "2xl": "58px", base: "40px" },
 
@@ -248,20 +252,20 @@ const components = {
         },
       },
       "bg-dropdown": {
-        px:"30px",
-        
+        px: "30px",
+
         // color:"blue.500",
         field: {
-          width:"200px",
-          px:"30px",
-          height: { "2xl": "58px", base: "40px" },
-          border:"2px solid ",
-          borderColor:"blue.500",
-          color:"blue.500",
-        
-          borderRadius: "8px"   ,
-          bg:'gray.200',
-          
+          width: "230px",
+          px: "30px",
+          height: { base: "40px" },
+          border: "2px solid ",
+          borderColor: "blue.500",
+          color: "blue.500",
+
+          borderRadius: "8px",
+          bg: "gray.200",
+
           fontWeight: 600,
           fontSize: { "2xl": "18px", base: "14px" },
           textTransform: " capitalize",
@@ -271,8 +275,6 @@ const components = {
           //   fontWeight: 400,
           //   fontSize: { md: "18px", base: "16px" },
           // },
-
-          
         },
       },
     },
@@ -418,9 +420,8 @@ const components = {
         color: "gray.text",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
-        
-        fontSize: ["14px", "14px", "16px", "16px", "16px", "18px"],
 
+        fontSize: ["14px", "14px", "16px", "16px", "16px", "18px"],
       },
       // Add more variants for other heading levels as needed
     },
@@ -434,6 +435,8 @@ const components = {
         width: { md: "58px", base: "50px" },
         height: { md: "58px", base: "50px" },
         bg: "gray.200",
+        color: "black.100",
+
         _placeholder: {
           color: "gray.100",
           fontWeight: 400,

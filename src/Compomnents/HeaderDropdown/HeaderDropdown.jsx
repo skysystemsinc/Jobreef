@@ -105,7 +105,7 @@ const HeaderDropdown = () => {
           />
         </Box>
       </MenuButton>
-      <MenuList _active={{ bg: "transparent" }}>
+      <MenuList _active={{ bg: "transparent" }} py="0px">
         {router.pathname.includes("candidate")
           ? candidatedropdown.map((item, index) => {
               return (
@@ -114,8 +114,10 @@ const HeaderDropdown = () => {
                   bg="transparent"
                   _hover={{ bg: "transparent" }}
                   borderBottom={"1px solid #0000001a"}
-                  p={{ md: "10px 20px 16px 20px", base: "7px 16px 14px 16px" }}
-                  mb={"6px"}
+                  // p={{ md: "14px 20px 16px 20px", base: "7px 16px 14px 16px" }}
+                  p={{ md: "14px 20px 16px 20px", base: "13px 16px 13px 16px" }}
+
+                  // mb={"6px"}
                 >
                   <Link
                     _hover={{ textDecoration: "none" }}
@@ -147,8 +149,8 @@ const HeaderDropdown = () => {
                   bg="transparent"
                   _hover={{ bg: "transparent" }}
                   borderBottom={"1px solid #0000001a"}
-                  p={{ md: "10px 20px 16px 20px", base: "7px 16px 14px 16px" }}
-                  mb={"6px"}
+                  p={{ md: "14px 20px 16px 20px", base: "13px 16px 13px 16px" }}
+                  // mb={"6px"}
                 >
                   <Link
                     _hover={{ textDecoration: "none" }}

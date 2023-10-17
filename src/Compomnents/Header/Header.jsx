@@ -70,12 +70,13 @@ export default function Header() {
           display={{ base: "flex", xl: "none" }}
         >
           <IconButton
+          color={"black.100"}
             onClick={onToggle}
             icon={
               isOpen ? (
-                <AiOutlineClose fontSize={isSmallerThe500 ? "24px" : "30px"} />
+                <AiOutlineClose color="black.100" fontSize={isSmallerThe500 ? "24px" : "30px"} />
               ) : (
-                <RxHamburgerMenu fontSize={isSmallerThe500 ? "24px" : "30px"} />
+                <RxHamburgerMenu color="black.100" fontSize={isSmallerThe500 ? "24px" : "30px"} />
               )
             }
             variant={"ghost"}

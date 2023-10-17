@@ -94,6 +94,7 @@ export default function Home() {
           </Box>
           <Box>
             <LabelInput
+              iconStyle={{ marginTop: "7px" }}
               labelVariant={"label"}
               type="password"
               passworInput

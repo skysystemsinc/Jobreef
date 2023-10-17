@@ -13,18 +13,20 @@ const CandidateCard = () => {
 
   return (
     <Box
-      p={{ sm: "20px", base: "12px" }}
-      mb={{ md: "33px", base: "20px" }}
+      height={"max-content"}
+      p={{ md: "17px 36px  ", base: "7px 16px 14px 16px" }}
+      mb={{ md: "32px", base: "20px" }}
       width={"100%"}
       borderRadius={"8px"}
       bg={"white.100"}
       border={"1px solid"}
       borderColor={"gray.light"}
-      box-shadow="0px 4px 20px 0px rgba(0, 0, 0, 0.05)"
+      boxShadow="0px 4px 20px 0px rgba(0, 0, 0, 0.05)"
     >
       <Box
         display={"flex"}
         alignItems={"flex-start"}
+        mt={"12px"}
         justifyContent={"space-between"}
         borderBottom={"1px solid "}
         flexWrap={{ xl: "nowrap", base: "wrap" }}
@@ -56,29 +58,29 @@ const CandidateCard = () => {
         <Box
           display={"flex"}
           alignItems={"center"}
-          mt={{ xl: "0px", base: "10px" }}
           justifyContent={"flex-end"}
-          width={{ xl: "auto", base: "100%" }}
+          mt={{ xl: "0px", base: "10px" }}
           gap={"5px"}
         >
           <Box display={"flex"} gap={"3px"} alignItems={"center"}>
-            <Image width={"22px"} src={Star.src} />
-            <Image width={"22px"} src={Star.src} />
-            <Image width={"22px"} src={Star.src} />
-            <Image width={"22px"} src={Star.src} />
-            <Image width={"22px"} src={Star.src} />
+            <Image width={{ md: "22px" , base:'17px' }} src={Star.src} />
+            <Image width={{ md: "22px" , base:'17px' }} src={Star.src} />
+            <Image width={{ md: "22px" , base:'17px' }} src={Star.src} />
+            <Image width={{ md: "22px" , base:'17px' }} src={Star.src} />
+            <Image width={{ md: "22px" , base:'17px' }} src={Star.src} />
           </Box>
 
-          <Popovers actionList={actionList} />
+          <Popovers width="100%" actionList={actionList} />
         </Box>
       </Box>
 
-      <Box>
-        <Box display={"flex"} gap={"40px"} mt={"12px"} alignItems={"center"}>
+      <Box position={"relative"}>
+
+        <Box display={"flex"} justifyContent={"flex-start"} gap={{ md: "40px" , base:"14px"}} flexDirection={{md:"row", base:"column"}} mt={"12px"} alignItems={{ md:"center" , base:'flex-start'}} flexWrap={"wrap"}>
           <Box>
             <Heading variant={"p10"}>Recent Experience</Heading>
             <Box
-              mt={"10px"}
+              mt={{ md: "10px" , base:"6px"}}
               display={"flex"}
               alignItems={"center"}
               gap={"10px"}
@@ -97,7 +99,9 @@ const CandidateCard = () => {
           <Box>
             <Heading variant={"p10"}>Education</Heading>
             <Box
-              mt={"10px"}
+              // mt={"10px"}
+              mt={{ md: "10px" , base:"6px"}}
+
               display={"flex"}
               alignItems={"center"}
               gap={"10px"}
@@ -115,29 +119,57 @@ const CandidateCard = () => {
           </Box>
         </Box>
         <Box>
-          <Heading mt={"22px"} variant={"p10"}>
+          <Heading mt={{ md:"16px" , base:'10px' }} variant={"p10"}>
             Relevant Skills
           </Heading>
         </Box>
 
-        <Box display={"flex"} mt={"20px"} alignItems={"center"} flexWrap={"wrap"}>
-          <Box mr={"20px"} mb={"10px"}>
+        <Box
+          display={"flex"}
+          mt={"12px"}
+          alignItems={"center"}
+          flexWrap={"wrap"}
+        >
+          <Box mr={{ md: "38px" , base:"14px"}} mb={"10px"}>
             <Chip label={"Technical Knowledge"} />
           </Box>
-          
-          <Box mr={"20px"} mb={"10px"}>
-            <Chip label={"Technical Knowledge"} />
+
+          <Box mr={{ md: "38px" , base:"14px"}} mb={"10px"}>
+            <Chip label={"System Architecture"} />
           </Box>
-          
-          <Box mr={"20px"} mb={"10px"}>
-            <Chip label={"Technical Knowledge"} />
+
+          <Box mr={{ md: "38px" , base:"14px"}} mb={"10px"}>
+            <Chip label={"Risk Management"} />
           </Box>
-          
-          <Box mr={"20px"} mb={"10px"}>
-            <Chip label={"Technical Knowledge"} />
+
+          <Box mr={{ md: "38px" , base:"14px"}} mb={"10px"}>
+            <Chip label={"Q/A Testing"} />
           </Box>
-          
+          <Box mr={{ md: "38px" , base:"14px"}} mb={"10px"}>
+            <Chip label={"Leadership"} />
+          </Box>
+          <Box mr={{ md: "38px" , base:"14px"}} mb={"10px"}>
+            <Chip label={"Product Design"} />
+          </Box>
         </Box>
+
+        <Heading
+          variant={"p10"}
+          textAlign={"end"}
+          // position={"absolute"}
+          // bottom={"0px"}
+          // right={"0px"}
+          // // mt="10px"
+
+          // padding={"10px"}
+        >
+          {" "}
+          Status:{" "}
+          <Box as="span" color={"orange.100"}>
+            {" "}
+            Interviewing{" "}
+          </Box>
+        </Heading>
       </Box>
     </Box>
   );

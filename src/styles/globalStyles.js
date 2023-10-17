@@ -37,7 +37,7 @@ const globalStyles = {
     backgroundColor: "transparent",
     // mx: "auto",
     alignItems: "flex-end",
-    paddingLeft:'56px',
+    paddingLeft:{ md: '56px' , base:'10px'},
     // border:"1px solid red",
     // width:'60% !important',
     
@@ -166,5 +166,11 @@ const globalStyles = {
     //   },
     // },
   },
+  checkBoxStyle :{
+    "& .chakra-checkbox__control": {
+      // Add your custom styles here
+      borderRadius: "5px", // Make the checkbox round
+    },
+  }
 };
 export default globalStyles;

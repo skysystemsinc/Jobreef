@@ -64,8 +64,15 @@ const SocialLink = () => {
               dropdown={readOnly ? false : true}
               label={"Social Links"}
             />
-
-            <Box width={isSmallerThe500 ? "96%" : "100%"} position={"relative"}>
+            <LabelInput
+              labelVariant={"label"}
+              type="text"
+              variant={"bg-input"}
+              readOnly={readOnly}
+              placeholder="Paste link to company social network page"
+              label={"Link"}
+            />
+            {/* <Box width={isSmallerThe500 ? "96%" : "100%"} position={"relative"}>
               {isSmallerThe500 ? (
                 <Input
                   variant={"bg-input"}
@@ -94,7 +101,7 @@ const SocialLink = () => {
                   }}
                 />
               ) : null}
-            </Box>
+            </Box> */}
           </InputWrapper>
         );
       })}
@@ -130,8 +137,8 @@ const SocialLink = () => {
           justifyContent={"center"}
         >
           <IconButton
-          variant={"blue-btn"}
-          iconSize="18px"
+            variant={"blue-btn"}
+            iconSize="18px"
             btnLabel={"Edit"}
             handleEvent={handleEdit}
             icon={white_edit}

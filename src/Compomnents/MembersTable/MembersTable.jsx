@@ -105,7 +105,7 @@ const PaginatedTable = ({
         // color={"blue.500"}
       >
         <Heading color={"blue.500"} variant={"p4"}>
-          {`Showing 1 to ${pageSize} of ${totalPages} Pages`}
+          {`Showing 1 to ${pageSize} of ${totalPages} Entries`}
         </Heading>
         <Box display={"flex"} alignItems={"center"} gap={{ md: "10px" , base:"3px"}}>
           <Image

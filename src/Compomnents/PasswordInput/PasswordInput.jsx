@@ -8,7 +8,7 @@ import {
 import { useState } from "react";
 import { HiOutlineEye } from "react-icons/hi";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
-function PasswordInput({ variant, placeholder, readOnly }) {
+function PasswordInput({ iconStyle, variant, placeholder, readOnly }) {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
@@ -21,13 +21,14 @@ function PasswordInput({ variant, placeholder, readOnly }) {
         placeholder={placeholder}
         variant={variant}
       />
-      <InputRightElement width="4.5rem">
+      <InputRightElement  width="3.5rem">
         <Icon
           fontSize={{ "2xl": "25px", sm: "20px", base: "16px" }}
           onClick={handleClick}
           // marginTop={{ md: "0px", base: "8px" }}
           cursor={"pointer"}
           color={"gray.100"}
+          sx={iconStyle}
           as={show ? HiOutlineEye : AiOutlineEyeInvisible}
         />
       </InputRightElement>
