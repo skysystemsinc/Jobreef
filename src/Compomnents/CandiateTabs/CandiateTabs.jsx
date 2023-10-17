@@ -57,7 +57,7 @@ const CandiateTabs = ({ company }) => {
               {" "}
               Applications
             </Tab>
-            <Tab
+            <Tab  
               fontSize={{ md: "16px", base: "14px" }}
               _selected={globalStyles.selectTab}
               sx={globalStyles.tabelinkStyle}

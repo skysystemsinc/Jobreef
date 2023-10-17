@@ -7,7 +7,6 @@ import SignIn from '@/Compomnents/SignIn/SignIn'
 const Login = () => {
     return (
         <Box height={{ base: "100vh", }}>
-
             <SignIn candidate />
         </Box>
     )
