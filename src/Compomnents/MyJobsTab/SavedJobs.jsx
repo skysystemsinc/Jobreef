@@ -3,13 +3,14 @@ import React from "react";
 import microsoft from "@/assets/Images/microsoft.svg";
 import { GoDotFill } from "react-icons/go";
 import { HiLocationMarker } from "react-icons/hi";
+import Group from "@/assets/Images/Group.svg";
 
 import { MdOutlineStarOutline } from "react-icons/md";
 import Star from "@/assets/Images/Star.svg";
 import Popovers from "../MembersTable/Popovers";
 import Chip from "../Chip/Chip";
 import ComponentMyChip from "./ComponentMyChip";
-const AppliedJobs = () => {
+const SavedJobs = () => {
   const actionList = ["Download Attachments", "Archive"];
 
   return (
@@ -37,26 +38,29 @@ const AppliedJobs = () => {
           display={"flex"}
           alignItems={"flex-start"}
           gap={{ md: "18px", base: "12px" }}
+          width={"100%"}
         >
-          <Box display={"flex"} mt={"0px"} alignItems={"center"} flexWrap={"wrap"}>
-          <Image width={{ md: "53px", base: "35px" }} src={microsoft.src} marginRight={2}/>
-            <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
-              Senior System's Designer Engineer
-              <Box display={"flex"} alignItems={"center"}>
-                <Heading
-                variant={"p4"}
-                color={"gray.text"}
-                marginRight={1}
-                >
-                Microsoft       
-                </Heading>
-              <Box mr={"20px"} mt={"0px"}>
-                    <ComponentMyChip label={"Urgently Hiring"} />
+            <Box display={"flex"} mt={"0px"} alignItems={"center"} width={"100%"}>
+                <Image width={{ md: "53px", base: "35px" }} src={microsoft.src} marginRight={2} />
+                  <Box flex={1}>
+                    <Box flex={1} display={"flex"} flexDirection={"row"} justifyContent={"space-between"}>
+                        <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
+                            Senior System's Designer Engineer
+                        </Heading>
+                        <Image width={{ md: "20px", base: "20px" }} src={Group.src}/>
+                    </Box>
+
+                    <Box display={"flex"} alignItems={"center"}>
+                        <Heading variant={"p4"} color={"gray.text"} marginRight={1}>
+                            Microsoft       
+                        </Heading>
+                        <Box mr={"20px"} mt={"0px"}>
+                            <ComponentMyChip label={"Urgently Hiring"} />
+                        </Box>
+                    </Box>
                 </Box>
             </Box>
-            </Heading>
-            
-          </Box>
+
         </Box>
       </Box>
 
@@ -121,12 +125,6 @@ const AppliedJobs = () => {
             <ComponentMyChip label={"Technical knowledge"}/>
             </Box>
           </Box>
-          <Box display={"flex"} flexDirection="column" justifyContent="flex-end">
-            <Heading display="flex" mb={"10px"} mr={5} variant={"p10"}>
-            Status: <span style={{color:'green'}}>New</span>
-            </Heading>
-          </Box>
-
         </Box>
       </Box>
     </Box>
@@ -137,12 +135,6 @@ const AppliedJobs = () => {
 
 
 
-
-
-
-
-
-          
     <Box
       p={{ sm: "20px", base: "12px" }}
       mb={{ md: "33px", base: "20px" }}
@@ -166,26 +158,29 @@ const AppliedJobs = () => {
           display={"flex"}
           alignItems={"flex-start"}
           gap={{ md: "18px", base: "12px" }}
+          width={"100%"}
         >
-          <Box display={"flex"} mt={"0px"} alignItems={"center"} flexWrap={"wrap"}>
-          <Image width={{ md: "53px", base: "35px" }} src={microsoft.src} marginRight={2}/>
-            <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
-              Senior System's Designer Engineer
-              <Box display={"flex"} alignItems={"center"}>
-                <Heading
-                variant={"p4"}
-                color={"gray.text"}
-                marginRight={1}
-                >
-                Microsoft       
-                </Heading>
-              <Box mr={"20px"} mt={"0px"}>
-                    <ComponentMyChip label={"Urgently Hiring"} />
+            <Box display={"flex"} mt={"0px"} alignItems={"center"} width={"100%"}>
+                <Image width={{ md: "53px", base: "35px" }} src={microsoft.src} marginRight={2} />
+                  <Box flex={1}>
+                    <Box flex={1} display={"flex"} flexDirection={"row"} justifyContent={"space-between"}>
+                        <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
+                            Senior System's Designer Engineer
+                        </Heading>
+                        <Image width={{ md: "20px", base: "20px" }} src={Group.src}/>
+                    </Box>
+
+                    <Box display={"flex"} alignItems={"center"}>
+                        <Heading variant={"p4"} color={"gray.text"} marginRight={1}>
+                            Microsoft       
+                        </Heading>
+                        <Box mr={"20px"} mt={"0px"}>
+                            <ComponentMyChip label={"Urgently Hiring"} />
+                        </Box>
+                    </Box>
                 </Box>
             </Box>
-            </Heading>
-            
-          </Box>
+
         </Box>
       </Box>
 
@@ -250,17 +245,17 @@ const AppliedJobs = () => {
             <ComponentMyChip label={"Technical knowledge"}/>
             </Box>
           </Box>
-          <Box display={"flex"} flexDirection="column" justifyContent="flex-end">
-            <Heading display="flex" mb={"10px"} mr={5} variant={"p10"}>
-            Status: <span style={{color:'green'}}>New</span>
-            </Heading>
-          </Box>
-
         </Box>
       </Box>
     </Box>
+
+
+
+
+
+
     </Box>
   );
 };
 
-export default AppliedJobs;
+export default SavedJobs;
