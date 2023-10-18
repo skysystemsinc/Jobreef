@@ -7,7 +7,7 @@ import { Box, Button, Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
 
-const index = () => {
+const JobPost = () => {
   const router = useRouter();
   return (
     <>
@@ -20,4 +20,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default JobPost;

@@ -6,7 +6,7 @@ function Context({ children }) {
 
   useEffect(() => {
     const role = localStorage.getItem("company");
-    console.log("role",role)
+    
     if (role) {
       setCompany(role);
     }

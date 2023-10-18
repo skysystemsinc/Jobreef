@@ -21,6 +21,7 @@ import SignUpLayout from "../Layout/SignUpLayout";
 import cartoon from "@/assets/Images/cartoon.svg";
 import leftblue_2 from "@/assets/Images/leftblue_2.png";
 import whitetick from "@/assets/Images/white-tick.svg";
+import { useState } from "react";
 
 const steps = [
   { label: "Company Bio" },
@@ -29,6 +30,15 @@ const steps = [
 ];
 
 export const CompanyTimeline = ({ variant }) => {
+  const [State, setState] = useState({
+    companyName: "",
+    industry: "",
+    directory: "",
+    noOfEmployees: "",
+    yearEstablished: "",
+    email: "",
+    otp: "",
+  });
   const router = useRouter();
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,

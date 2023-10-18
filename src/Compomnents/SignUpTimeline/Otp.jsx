@@ -9,7 +9,8 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-const Otp = ({State ,setState}) => {
+const Otp = ({ State, setState }) => {
+  console.log("State", State);
   return (
     <Box textAlign={"center"}>
       <Heading
@@ -27,7 +28,18 @@ const Otp = ({State ,setState}) => {
         Please enter the 4 digit code sent to your email
       </Heading>
       <HStack gap={"15px"} display={"flex"} justifyContent={"center"}>
-        <PinInput   variant={"otp"} placeholder="0" size={"xl"}>
+        <PinInput
+          value={State?.otp}
+          onChange={(e) => {
+            console.log("target", e);
+            setState((prev) => {
+              return { ...prev, otp: e };
+            });
+          }}
+          variant={"otp"}
+          placeholder="0"
+          size={"xl"}
+        >
           <PinInputField className="nintoFont" />
           <PinInputField className="nintoFont" />
           <PinInputField className="nintoFont" />
