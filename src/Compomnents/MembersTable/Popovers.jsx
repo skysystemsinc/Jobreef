@@ -10,17 +10,32 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverTrigger,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
 import menu from "@/assets/Images/menu.svg";
 
 const Popovers = ({ width, actionList }) => {
+  const { isOpen, onToggle, onClose } = useDisclosure();
   return (
-    <Popover size={"sm"} placement="bottom-end">
-      <PopoverTrigger  >
+    <Popover
+      isOpen={isOpen}
+      onClose={onClose}
+      // placement="right"
+      closeOnBlur={false}
+      size={"sm"}
+      placement="bottom-end"
+    >
+      <PopoverTrigger>
         {/* <Button>Trigger</Button>
          */}
-        <Image src={menu.src} width={"24px"} />
+        <Image
+          onClick={(e) => {
+            e.stopPropagation(), onToggle();
+          }}
+          src={menu.src}
+          width={"24px"}
+        />
       </PopoverTrigger>
       <PopoverContent
         outline={"none"}

@@ -18,11 +18,17 @@ import { Link } from "@chakra-ui/next-js";
 import { BsDot } from "react-icons/bs";
 import upload from "@/assets/Images/upload.svg";
 
-const CompanyBio = () => {
+const CompanyBio = ({ State, setState }) => {
   return (
     <Box>
       <InputWrapper>
         <LabelInput
+          state={State.companyName}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, companyName: e.target.value };
+            });
+          }}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -31,6 +37,12 @@ const CompanyBio = () => {
         />
         <LabelInput
           dropdown
+          state={State.industry}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, industry: e.target.value };
+            });
+          }}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -41,6 +53,12 @@ const CompanyBio = () => {
 
       <InputWrapper>
         <LabelInput
+          state={State.directory}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, directory: e.target.value };
+            });
+          }}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -49,8 +67,14 @@ const CompanyBio = () => {
           label={"Listed in Directory*"}
         />
         <LabelInput
+          state={State.noOfEmployees}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, noOfEmployees: e.target.value };
+            });
+          }}
           labelVariant={"label"}
-          type="text"
+          type="number"
           variant={"bg-input"}
           placeholder="Enter Number of Employees"
           label={"Number of Employees"}
@@ -58,15 +82,27 @@ const CompanyBio = () => {
       </InputWrapper>
       <InputWrapper>
         <LabelInput
+          state={State.yearEstablished}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, yearEstablished: e.target.value };
+            });
+          }}
           labelVariant={"label"}
-          type="text"
+          type="number"
           variant={"bg-input"}
           placeholder="Enter Year in Numbers"
           label={"Year Established*"}
         />
         <LabelInput
+          state={State.email}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, email: e.target.value };
+            });
+          }}
           labelVariant={"label"}
-          type="text"
+          type="email"
           variant={"bg-input"}
           placeholder="Enter Email"
           // dropdown
@@ -75,6 +111,12 @@ const CompanyBio = () => {
       </InputWrapper>
       <InputWrapper>
         <LabelInput
+          state={State.decsription}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, decsription: e.target.value };
+            });
+          }}
           labelVariant={"label"}
           textarea
           variant={"bg-teaxtarea"}

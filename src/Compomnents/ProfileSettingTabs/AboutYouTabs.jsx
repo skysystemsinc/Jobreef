@@ -110,6 +110,15 @@ const AboutYouTabs = () => {
       >
         {isEdit ? (
           <>
+                      <Button
+              onClick={() => {
+                setisEdit(false);
+                setreadOnly(true);
+              }}
+              variant="outline-blue"
+            >
+              Cancel
+            </Button>
             <Button
               onClick={() => {
                 setisEdit(false);
@@ -119,15 +128,7 @@ const AboutYouTabs = () => {
             >
               Save
             </Button>
-            <Button
-              onClick={() => {
-                setisEdit(false);
-                setreadOnly(true);
-              }}
-              variant="outline-blue"
-            >
-              Cancel
-            </Button>
+
           </>
         ) : (
           <Button

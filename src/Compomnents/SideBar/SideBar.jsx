@@ -27,8 +27,8 @@ const SideBar = () => {
     },
     {
       title: "Candidates",
-      icon: router.pathname == "/company/candidate" ? white_candidate :  candidate,
-      pathname: "/company/candidate",
+      icon: router.pathname == "/company/candidates" ? white_candidate :  candidate,
+      pathname: "/company/candidates",
     },
     {
       title: "Team Members",

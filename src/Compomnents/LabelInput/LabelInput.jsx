@@ -82,13 +82,15 @@ const LabelInput = ({
 
       {textarea ? (
         <Textarea
+          value={state}
+          onChange={setState}
           placeholder={placeholder}
           size="sm"
           variant={variant}
           resize={"none"}
         />
       ) : dropdown ? (
-        <DropDown placeholder={placeholder} />
+        <DropDown state={state} setState={setState} placeholder={placeholder} />
       ) : passworInput ? (
         <PasswordInput
           setState={setState}

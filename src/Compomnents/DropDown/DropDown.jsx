@@ -2,10 +2,12 @@ import { Box, Image, Select } from "@chakra-ui/react";
 import React from "react";
 import { HiOutlineChevronDown } from "react-icons/hi";
 import black_arrow_down from "@/assets/Images/black-arrow-down.svg";
-const DropDown = ({ icon, variant, placeholder }) => {
+const DropDown = ({ setState, state, icon, variant, placeholder }) => {
   return (
     <Box>
       <Select
+        value={state}
+        onChange={setState}
         // sx={{ color: "blue.500" }}
         variant={variant ? variant : "outline-dropdown"}
         // variant={"filled"}

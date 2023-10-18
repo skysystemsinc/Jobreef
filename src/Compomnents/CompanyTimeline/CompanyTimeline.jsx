@@ -37,12 +37,14 @@ export const CompanyTimeline = ({ variant }) => {
     noOfEmployees: "",
     yearEstablished: "",
     email: "",
-    otp: "",
+    decsription:"",
+    
   });
   const router = useRouter();
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
+  console.log("State",State)
 
   const isLastStep = activeStep === steps.length - 1;
   const hasCompletedAllSteps = activeStep === steps.length;
@@ -131,11 +133,11 @@ export const CompanyTimeline = ({ variant }) => {
               >
                 {
                   index == 0 ? (
-                    <CompanyBio />
+                    <CompanyBio  State={State} setState={setState} />
                   ) : index == 1 ? (
-                    <CompanyLocation />
+                    <CompanyLocation State={State} setState={setState}/>
                   ) : index == 2 ? (
-                    <SocialLink />
+                    <SocialLink State={State} setState={setState}/>
                   ) : null
                   // <PersonalInfo />
                 }

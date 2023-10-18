@@ -82,6 +82,8 @@ export const JobPostTimeline = ({ candidate, variant }) => {
         width="100%"
       >
         <Steps
+        trackColor="blue.500"
+      
           responsive={false}
           checkIcon={CustomeSteps}
           sx={{
@@ -100,9 +102,9 @@ export const JobPostTimeline = ({ candidate, variant }) => {
           {steps.map(({ label }, index) => {
             return (
               <Step
-                border={"1px solid red"}
+                
                 flexDirection={"column"}
-                sx={{ span: { border: "1px solid red" } }}
+                
                 key={label}
                 label={label}
               >

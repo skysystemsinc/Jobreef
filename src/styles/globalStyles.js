@@ -133,6 +133,7 @@ const globalStyles = {
         border: "4px solid blue.500 !important",
         borderColor: "blue.500 !important",
         bg: "blue.500",
+        color:"blue.500 !important",
 
         // "& .cui-steps__step-icon-container": {
         //   span: {
