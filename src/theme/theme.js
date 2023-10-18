@@ -256,7 +256,7 @@ const components = {
 
         // color:"blue.500",
         field: {
-          width: "230px",
+          width: { md: "230px" , base:"100%"},
           px: "30px",
           height: { base: "40px" },
           border: "2px solid ",
@@ -380,7 +380,8 @@ const components = {
         color: "black.200 ",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontSize: ["13px", "14px", "16px"],
-        lineHeight:'24px',
+        // lineHeight:{ md: '24px' , base:"20px"},
+        lineHeight:["20px", "24px", "24px", "24px", "24px", "24px"]
         // fontSize: "20px",
       },
       p5: {

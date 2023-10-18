@@ -8,20 +8,29 @@ import {
 import { useState } from "react";
 import { HiOutlineEye } from "react-icons/hi";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
-function PasswordInput({ iconStyle, variant, placeholder, readOnly }) {
+function PasswordInput({
+  state,
+  setState,
+  iconStyle,
+  variant,
+  placeholder,
+  readOnly,
+}) {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
   return (
     <InputGroup size="md">
       <Input
+        onChange={setState}
+        value={state}
         pr="4.5rem"
         readOnly={readOnly}
         type={show ? "text" : "password"}
         placeholder={placeholder}
         variant={variant}
       />
-      <InputRightElement  width="3.5rem">
+      <InputRightElement width="3.5rem">
         <Icon
           fontSize={{ "2xl": "25px", sm: "20px", base: "16px" }}
           onClick={handleClick}

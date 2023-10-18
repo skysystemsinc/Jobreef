@@ -10,8 +10,8 @@ const globalStyles = {
       top: { md: "50px", base: "46px" },
       bg: "blue.500",
       borderRadius: "12px 12px 0px 0px",
-      left: "10%",
-      width: "80%",
+      left: {md: "10%" , base:"0%"},
+      width:  { md: "80%" , base:"100%"},
       height: "6px",
     },
   },
@@ -37,10 +37,8 @@ const globalStyles = {
     backgroundColor: "transparent",
     // mx: "auto",
     alignItems: "flex-end",
-    paddingLeft:{ md: '56px' , base:'10px'},
-    // border:"1px solid red",
-    // width:'60% !important',
-    
+    paddingLeft: { md: "56px", base: "10px" },
+
     selectTab: {
       position: "relative",
       fontWeight: 600,
@@ -97,21 +95,33 @@ const globalStyles = {
 
   stepperContainter: {
     width: {
-      md: "404px",
+      md: "450px",
       base: "70%",
     },
     flexDir: "row !important",
-    // border: "1px solid red",
-    // width: "404px",
+
+    "& .cui-steps__horizontal-step-container ": {
+      span: {
+        fontFamily: "open Sans !important",
+        fontSize: { "2xl": "16px", base: "13px" },
+        fontFamily: "open Sans !important",
+        fontWeight: " 500 !important",
+        // marginTop:'4px'
+      },
+    },
 
     "& .cui-steps__step-icon-container": {
       bg: "transparent",
+      marginBottom: "11px",
       border: "4px solid ",
       borderColor: "gray.light ",
       width: { "2xl": "36px !important", base: "32px" },
       height: { "2xl": "36px !important", base: "32px" },
       span: {
         color: "gray.light",
+        _active: {
+          color: "blue.500",
+        },
 
         fontFamily: "open Sans !important",
         fontWeight: " 700 !important",
@@ -122,9 +132,12 @@ const globalStyles = {
         border: "4px solid blue.500 !important",
         borderColor: "blue.500 !important",
         bg: "blue.500",
-        span: {
-          color: "blue.500 !important",
-        },
+
+        // "& .cui-steps__step-icon-container": {
+        //   span: {
+        //     color: "blue.500 !important",
+        //   },
+        // },
         "& .cui-steps__horizontal-step": {
           "&::after": {
             bg: "blue.500 !important",
@@ -142,7 +155,8 @@ const globalStyles = {
       "&::after": {
         bg: "gray.light !important",
         height: "3px !important",
-
+        width: "81% !important",
+        top: "17px   !important",
         marginInlineEnd: "0px !important",
         marginInlineStart: "0px !important",
       },
@@ -154,23 +168,15 @@ const globalStyles = {
       },
       span: {
         color: "blue.500",
+        // fontSize:"100px"
       },
     },
-    // "& .cui-steps__horizontal-step:nth-child(1)": {
-    //   _active: {
-    //     border: "1px solid red",
-    //     span: {
-    //       color: "blue.500 !important",
-    //     },
-
-    //   },
-    // },
   },
-  checkBoxStyle :{
+  checkBoxStyle: {
     "& .chakra-checkbox__control": {
       // Add your custom styles here
       borderRadius: "5px", // Make the checkbox round
     },
-  }
+  },
 };
 export default globalStyles;

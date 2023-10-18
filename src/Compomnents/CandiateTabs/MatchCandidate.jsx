@@ -5,32 +5,33 @@ import All from "../ArchivedTabs/All";
 import Archived from "../ArchivedTabs/Archived";
 import SelectedCandidate from "../ArchivedTabs/SelectedCandidate";
 
-const Application = () => {
-  const tablist = ["All (19)", "Archived (3)"];
+const MatchCandidate = () => {
+  const tablist = ["All (19)", "Not Interested (2)"];
   const [showSelectCandidate, setshowSelectCandidate] = useState(false);
-  const popOverListAll = ["Download Attachments", "Delete"];
-  const popOverListArchived = ["Restore", "Archive"];
+  const popOverListAll = ["Invite to Apply", "Not Interested"];
+  const popOverListArchived = ["Delete", "Restore"];
   const componentList = [
     <All
+    matchCandidate
       cardStatus={"Interviewing"}
       popOverList={popOverListAll}
       handleEvent={(e) => {
         setshowSelectCandidate(true);
       }}
     />,
-    <Archived cardStatus={"Archived"} popOverList={popOverListArchived} />,
+    <Archived matchCandidate cardStatus={"Archived"} popOverList={popOverListArchived} />,
   ];
   return (
     <Box>
       {showSelectCandidate ? (
         <Box mt={{ md: "31px", base: "15px" }}>
-          <SelectedCandidate />
+          <SelectedCandidate matchCandidate />
         </Box>
       ) : (
-        <ArchivedTabs componentList={componentList} tablist={tablist} />
+        <ArchivedTabs   componentList={componentList} tablist={tablist} />
       )}
     </Box>
   );
 };
 
-export default Application;
+export default MatchCandidate;

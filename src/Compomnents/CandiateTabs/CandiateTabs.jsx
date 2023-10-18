@@ -18,6 +18,7 @@ import { useRouter } from "next/router";
 import DropDown from "../DropDown/DropDown";
 import Application from "./Application";
 import blue_arrow_down from "@/assets/Images/blue-arrow-down.svg";
+import MatchCandidate from "./MatchCandidate";
 
 const CandiateTabs = ({ company }) => {
   const router = useRouter();
@@ -42,9 +43,7 @@ const CandiateTabs = ({ company }) => {
               ...globalStyles.fullTab,
               ...globalStyles.scrollBar,
               ml: { md: "0px", base: "0px" },
-              whiteSpace: "nowrap",
-
-              overflowX: "scroll",
+              flexDirection: { sm: "row", base: "column" },
               width: { md: "40%", base: "99%" },
               // border: "1px solid red",
             }}
@@ -57,7 +56,7 @@ const CandiateTabs = ({ company }) => {
               {" "}
               Applications
             </Tab>
-            <Tab  
+            <Tab
               fontSize={{ md: "16px", base: "14px" }}
               _selected={globalStyles.selectTab}
               sx={globalStyles.tabelinkStyle}
@@ -113,7 +112,7 @@ const CandiateTabs = ({ company }) => {
                 variant={"bg-dropdown"}
               />
             </Box>
-            {/* <InActiveJobs /> */}
+            <MatchCandidate />
           </TabPanel>
         </TabPanels>
       </Tabs>

@@ -11,7 +11,7 @@ import blue_building from "@/assets/Images/blue_building.svg";
 import white_team from "@/assets/Images/white_team.svg";
 import white_job_post from "@/assets/Images/white-job-post.svg";
 import { useRouter } from "next/router";
-
+import white_candidate from "@/assets/Images/white_candidate.svg";
 const SideBar = () => {
   const router = useRouter();
   const navLinks = [
@@ -27,8 +27,8 @@ const SideBar = () => {
     },
     {
       title: "Candidates",
-      icon: candidate,
-      pathname: "/",
+      icon: router.pathname == "/company/candidate" ? white_candidate :  candidate,
+      pathname: "/company/candidate",
     },
     {
       title: "Team Members",
@@ -53,7 +53,7 @@ const SideBar = () => {
     justifyContent: { xl: "flex-start", base: "center" },
     // mx:"auto",
     padding: "12px 10px",
-    
+
     img: {
       width: { xl: "22px", sm: "17px", base: "15px" },
     },
@@ -63,7 +63,7 @@ const SideBar = () => {
   };
   return (
     <Box
-      width={{ xl: "280px", base: "55px" }}
+      width={{ xl: "240px", base: "55px" }}
       position={"fixed"}
       top={"0px"}
       bg={"#fff"}
@@ -79,7 +79,7 @@ const SideBar = () => {
             <Box
               sx={item.pathname == router.pathname ? activeStyle : null}
               // pl={{ md: "10px", base: "11px" }}
-              
+
               padding={{ xl: "12px 10px", base: "10px 8px 10px 9px" }}
               gap={"15px"}
               key={ind}

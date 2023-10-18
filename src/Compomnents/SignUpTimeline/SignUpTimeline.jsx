@@ -17,11 +17,25 @@ import Otp from "./Otp";
 import { useRouter } from "next/router";
 import { role, roles } from "@/Utils/role";
 import globalStyles from "@/styles/globalStyles";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Role_context } from "@/context/context";
-const steps = [{ label: "Step 1" }, { label: "Step 2" }, { label: "Step 3" }];
+const steps = [
+  { label: "Personal Info" },
+  { label: "Password" },
+  { label: "Verification" },
+];
 
 export const SignUpTimeline = ({ candidate, variant }) => {
+  const [State, setState] = useState({
+    name: "",
+    lastName: "",
+    email: "",
+    role: "",
+    password: "",
+    confirmPassword: "",
+    otp: "",
+  });
+  console.log("State", State);
   const { company, setCompany } = useContext(Role_context);
 
   const { nextStep, prevStep, reset, activeStep } = useSteps({
@@ -33,7 +47,6 @@ export const SignUpTimeline = ({ candidate, variant }) => {
   const router = useRouter();
 
   const CustomeSteps = (props) => {
-    
     return (
       <Heading
         color={"white.100"}
@@ -59,49 +72,14 @@ export const SignUpTimeline = ({ candidate, variant }) => {
         responsive={false}
         checkIcon={CustomeSteps}
         sx={globalStyles.stepperContainter}
-        variant={variant}
+        variant={"circles-alt"}
         colorScheme="blue"
         // border={"1px solid red"}
 
         activeStep={activeStep}
       >
         {steps.map(({ label }, index) => (
-          <Step  
-          
-          flexDirection={"column"} key={label}>
-            <Box
-              width={"415px"}
-              display={{ md: "flex", base: "none" }}
-              justifyContent={"space-between"}
-              textAlign={"center"}
-              mt={"12px"}
-            >
-              <Heading
-                color={"blue.500"}
-                as={"h6"}
-                variant={"p1"}
-                position={"relative"}
-                left={"-20px"}
-              >
-                Personal info
-              </Heading>
-              <Heading
-                as={"h6"}
-                variant={"p1"}
-                position={"relative"}
-                left={"-5px"}
-              >
-                Password
-              </Heading>
-              <Heading
-                as={"h6"}
-                variant={"p1"}
-                position={"relative"}
-                right={"-20px"}
-              >
-                Verification
-              </Heading>
-            </Box>
+          <Step label={label} flexDirection={"column"} key={label}>
             <Box
               sx={{
                 p: { md: 8, base: "20px 0px 20px 0px" },
@@ -109,14 +87,12 @@ export const SignUpTimeline = ({ candidate, variant }) => {
                 width: "90%",
               }}
             >
-              {/* <Otp /> */}
-
               {index == 0 ? (
-                <PersonalInfo />
+                <PersonalInfo State={State} setState={setState} />
               ) : index == 1 ? (
-                <Password />
+                <Password State={State} setState={setState} />
               ) : index == 2 ? (
-                <Otp />
+                <Otp State={State} setState={setState} />
               ) : (
                 <PersonalInfo />
               )}

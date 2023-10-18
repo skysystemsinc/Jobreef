@@ -18,8 +18,10 @@ import { useRouter } from "next/router";
 
 import blue_arrow_down from "@/assets/Images/blue-arrow-down.svg";
 import All from "./All";
+import SelectedCandidate from "./SelectedCandidate";
+import Archived from "./Archived";
 
-const ArchivedTabs = ({ company }) => {
+const ArchivedTabs = ({ matchCandidate, company, tablist, componentList }) => {
   const router = useRouter();
   let [tabIndex, setTabIndex] = useState(0);
   return (
@@ -34,50 +36,38 @@ const ArchivedTabs = ({ company }) => {
         justifyContent={"flex-start"}
         // mx={"auto"}
         index={tabIndex}
-        
       >
-        <Box position={"relative"} width={"100%"}>
-          <TabList
-            sx={{
-              ...globalStyles.outlineTab,
-              ...globalStyles.scrollBar,
+        {/* <Box position={"relative"} width={"100%"}> */}
+        <TabList
+          sx={{
+            ...globalStyles.outlineTab,
+            ...globalStyles.scrollBar,
 
-              whiteSpace: "nowrap",
-                mt:"11px",
-              
-              width: { md: "60%", base: "99%" },
-            
-            }}
-          >
-            <Tab
-              fontSize={{ md: "16px", base: "14px" }}
-              sx={globalStyles.outlineTab.tabelinkStyle}
-              _selected={globalStyles.outlineTab.selectTab}
+            whiteSpace: "nowrap",
+            mt: "11px",
 
-            >
-              {" "}
-              All (19)
-            </Tab>
-            <Tab
-              fontSize={{ md: "16px", base: "14px" }}
-              sx={globalStyles.outlineTab.tabelinkStyle}
-              _selected={globalStyles.outlineTab.selectTab}
-              
-            >
-              Archived (3)
-            </Tab>
-          </TabList>
-        </Box>
+            width: { md: "60%", base: "99%" },
+          }}
+        >
+          {tablist?.map((item) => {
+              return (
+                <Tab
+                  fontSize={{ md: "16px", base: "14px" }}
+                  sx={globalStyles.outlineTab.tabelinkStyle}
+                  _selected={globalStyles.outlineTab.selectTab}
+                >
+                  {item}
+                </Tab>
+              );
+            })}
+
+        </TabList>
+        {/* </Box> */}
 
         <TabPanels>
-          <TabPanel px={"0px"}>
-            <All />
-          </TabPanel>
-          
-          <TabPanel px={"0px"}>
-            <All />
-          </TabPanel>
-
+          {componentList?.map((item) => {
+            return <TabPanel px={"0px"}>{item}</TabPanel>;
+          })}
         </TabPanels>
       </Tabs>
     </>

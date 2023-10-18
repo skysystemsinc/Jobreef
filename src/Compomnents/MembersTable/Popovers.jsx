@@ -17,7 +17,7 @@ import menu from "@/assets/Images/menu.svg";
 const Popovers = ({ width, actionList }) => {
   return (
     <Popover size={"sm"} placement="bottom-end">
-      <PopoverTrigger>
+      <PopoverTrigger  >
         {/* <Button>Trigger</Button>
          */}
         <Image src={menu.src} width={"24px"} />
@@ -29,7 +29,7 @@ const Popovers = ({ width, actionList }) => {
         boxShadow="0px 2px 15px 0px rgba(0, 0, 0, 0.06)"
       >
         <PopoverBody p={"0px"}>
-          {actionList.map((item, index) => {
+          {actionList?.map((item, index) => {
             return (
               <Box
                 key={index}

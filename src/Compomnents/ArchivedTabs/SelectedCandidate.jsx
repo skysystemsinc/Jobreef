@@ -3,14 +3,14 @@ import SelectedCandidateCard from "../SelectedCandidateCard/SelectedCandidateCar
 import { Box } from "@chakra-ui/react";
 import NotePad from "../NotePad/NotePad";
 
-const SelectedCandidate = () => {
+const SelectedCandidate = ({ matchCandidate }) => {
   return (
     <Box display={"flex"} gap="20px">
       <Box width={"100%"}>
-        <SelectedCandidateCard />
+        <SelectedCandidateCard matchCandidate={matchCandidate}/>
       </Box>
-      <Box width={"520px"}>
-        <NotePad />
+      <Box width={"45%"} display={{ lg: "block", base: "none" }}>
+        {matchCandidate ? null : <NotePad />}
       </Box>
     </Box>
   );

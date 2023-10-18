@@ -3,10 +3,9 @@ import React, { useContext } from "react";
 import LabelInput from "../LabelInput/LabelInput";
 import { Role_context } from "@/context/context";
 
-const PersonalInfo = () => {
+const PersonalInfo = ({ State, setState }) => {
   const { company, setCompany } = useContext(Role_context);
   const handleSelectCompany = (e) => {
-    console.log("e.target.value", e.target.checked);
     setCompany(e.target.checked);
     localStorage.setItem("company", e.target.checked);
   };
@@ -15,6 +14,12 @@ const PersonalInfo = () => {
     <Box>
       <Box marginBottom={{ sm: "40px", base: "26px" }}>
         <LabelInput
+          state={State.name}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, name: e.target.value };
+            });
+          }}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -25,6 +30,12 @@ const PersonalInfo = () => {
 
       <Box marginBottom={{ sm: "40px", base: "26px" }}>
         <LabelInput
+          state={State.lastName}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, lastName: e.target.value };
+            });
+          }}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -35,6 +46,12 @@ const PersonalInfo = () => {
 
       <Box marginBottom={{ sm: "10px", base: "10px" }}>
         <LabelInput
+          state={State.email}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, email: e.target.value };
+            });
+          }}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}

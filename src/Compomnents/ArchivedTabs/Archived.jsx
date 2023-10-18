@@ -5,10 +5,10 @@ import SortBy from "../SortBy/SortBy";
 import MobileSortBy from "../MobileSortBy/MobileSortBy";
 import SelectedCandidate from "./SelectedCandidate";
 
-const All = ({ matchCandidate, cardStatus,handleEvent, popOverList }) => {
-  console.log("All",cardStatus)
+const Archived = ({ matchCandidate, cardStatus, handleEvent, popOverList }) => {
+    console.log("archivesd" ,cardStatus)
   return (
-    <Box mt={{ md: "31px", base: "15px" }}>
+    <Box mt={{ md: "31px", base: "15px" }} >
       {/* <SelectedCandidate/> */}
       <Box display={{ lg: "none", base: "block" }}>
         <MobileSortBy />
@@ -20,11 +20,11 @@ const All = ({ matchCandidate, cardStatus,handleEvent, popOverList }) => {
           <CandidateCard cardStatus={cardStatus} popOverList={popOverList} handleEvent={handleEvent} />
         </Box>
         <Box display={{ lg: "block", base: "none" }}>
-          <SortBy matchCandidate={matchCandidate} />
+          <SortBy matchCandidate={matchCandidate}/>
         </Box>
       </Box>
     </Box>
   );
 };
 
-export default All;
+export default Archived;

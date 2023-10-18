@@ -6,6 +6,7 @@ const SignUpLayout = ({
   tittle,
   subtitle,
   icon,
+  subtitleIcon,
   leftPic,
   personVectorW,
 }) => {
@@ -13,7 +14,7 @@ const SignUpLayout = ({
     <Box>
       <Image
         // width={isSmallerThe500 ? "200px" : "250px"}
-        width={{ "2xl": "710px", xl: "39%", sm:"33%",  base: "40%" }}
+        width={{ "2xl": "710px", xl: "40%", sm: "33%", base: "40%" }}
         src={leftPic}
         position={"absolute"}
         top={"0px"}
@@ -48,7 +49,15 @@ const SignUpLayout = ({
         >
           {tittle} {icon ? icon : ""}{" "}
         </Heading>
-        <Heading variant={"h1"}>{subtitle}</Heading>
+        <Heading
+          display={"flex"}
+          alignItems={"center"}
+          gap={"13px"}
+          variant={"h1"}
+        >
+          {subtitle}
+          {subtitleIcon ?subtitleIcon : ""}
+        </Heading>
       </Box>
     </Box>
   );

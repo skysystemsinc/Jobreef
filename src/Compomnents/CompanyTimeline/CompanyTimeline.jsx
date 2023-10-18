@@ -17,17 +17,23 @@ import SocialLink from "./SocialLink";
 import { useRouter } from "next/router";
 import globalStyles from "@/styles/globalStyles";
 import blueclick from "@/assets/Images/blueclick.svg";
-// import PersonalInfo from "./PersonalInfo";
-// import Password from "./Password";
-// import Otp from "./Otp";
-const steps = [{ label: "Step 1" }, { label: "Step 2" }, { label: "Step 3" }];
+import SignUpLayout from "../Layout/SignUpLayout";
+import cartoon from "@/assets/Images/cartoon.svg";
+import leftblue_2 from "@/assets/Images/leftblue_2.png";
+import whitetick from "@/assets/Images/white-tick.svg";
+
+const steps = [
+  { label: "Company Bio" },
+  { label: "Company Location" },
+  { label: "Social Links" },
+];
 
 export const CompanyTimeline = ({ variant }) => {
   const router = useRouter();
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
-  
+
   const isLastStep = activeStep === steps.length - 1;
   const hasCompletedAllSteps = activeStep === steps.length;
   const CustomeSteps = () => {
@@ -51,6 +57,21 @@ export const CompanyTimeline = ({ variant }) => {
       alignItems={"center"}
       width="100%"
     >
+      <SignUpLayout
+        icon={<Image width={"26px"} src={whitetick.src} />}
+        subtitleIcon={
+          hasCompletedAllSteps ? (
+            <Image width={"26px"} src={whitetick.src} />
+          ) : (
+            false
+          )
+        }
+        personVectorW={{ "2xl": "450px", base: "350px" }}
+        bottomCartoon={cartoon.src}
+        leftPic={leftblue_2.src}
+        tittle={"1. About You"}
+        subtitle={"2. About Your Company"}
+      />
       {hasCompletedAllSteps ? (
         <Box
           display={"flex"}
@@ -85,51 +106,12 @@ export const CompanyTimeline = ({ variant }) => {
           responsive={false}
           checkIcon={CustomeSteps}
           sx={globalStyles.stepperContainter}
-          variant={variant}
+          variant={"circles-alt"}
           colorScheme="blue"
           activeStep={activeStep}
         >
           {steps.map(({ label }, index) => (
-            <Step flexDirection={"column"} key={label}>
-              <Box
-                width={"415px"}
-                display={{ md: "flex", base: "none" }}
-                justifyContent={"space-between"}
-                textAlign={"center"}
-                mt={"12px"}
-              >
-                <Heading
-                  color={"blue.500"}
-                  as={"h6"}
-                  variant={"p1"}
-                  position={"relative"}
-                  left={"-20px"}
-                >
-                  Company Bio
-                </Heading>
-                <Heading
-                  color={
-                    activeStep == 1 || activeStep == 2
-                      ? "blue.500"
-                      : "gray.light"
-                  }
-                  as={"h6"}
-                  variant={"p1"}
-                  position={"relative"}
-                  left={"-5px"}
-                >
-                  Company Location
-                </Heading>
-                <Heading
-                  color={activeStep == 2 ? "blue.500" : "gray.light"}
-                  as={"h6"}
-                  variant={"p1"}
-                  position={"relative"}
-                  right={"-20px"}
-                >
-                  Social Links
-                </Heading>
-              </Box>
+            <Step label={label} flexDirection={"column"} key={label}>
               <Box
                 sx={{
                   p: { md: 8, base: "20px 0px 20px 0px" },

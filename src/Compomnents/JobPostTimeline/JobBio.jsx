@@ -43,10 +43,11 @@ import {
           <LabelInput
             labelVariant={"label"}
             type="date"
+            imoptnatIcon
             variant={"bg-input"}
             
             placeholder="MM/DD/YYYY"
-            label={"Application Deadline*"}
+            label={"Application Deadline"}
           />
           <LabelInput
             labelVariant={"label"}

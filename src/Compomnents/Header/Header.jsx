@@ -34,6 +34,7 @@ import { Link } from "@chakra-ui/next-js";
 import { BsHeart } from "react-icons/bs";
 import heart from "@/assets/Images/heart.svg";
 import dynamic from "next/dynamic";
+import { MdArrowDropDown } from "react-icons/md";
 const HeaderDropdown = dynamic(
   () => import("../HeaderDropdown/HeaderDropdown"),
   {
@@ -150,7 +151,7 @@ const DesktopNav = () => {
                 color={"gray.light"}
                 _hover={{
                   textDecoration: "none",
-                  color: linkHoverColor,
+                  color: "gray.light",
                 }}
               >
                 {navItem.label} {navItem.icon ?? ""}
@@ -307,7 +308,9 @@ const NAV_ITEMS = [
   },
   {
     label: "For Employers",
-    icon: <Image src={heart.src} />,
+    icon: 
+    // <MdArrowDropDown/>,
+    <Image src={heart.src} />,
 
     href: "#",
   },

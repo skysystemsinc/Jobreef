@@ -27,10 +27,10 @@ import JobLocation from "./JobLocation";
 import DesiredSkills from "./DesiredSkills";
 import Preview from "./Preview";
 const steps = [
-  { label: "Step 1" },
-  { label: "Step 2" },
-  { label: "Step 3" },
-  { label: "Step 4" },
+  { label: "Job Bio" },
+  { label: "Technical Details" },
+  { label: "Job Location" },
+  { label: "Desired Skills" },
   // { label: "Step 5" },
 ];
 
@@ -66,89 +66,6 @@ export const JobPostTimeline = ({ candidate, variant }) => {
     );
   };
 
-  const TimelineSubtitle = ({ isCompleted }) => {
-    console.log("isCompleted", isCompleted);
-    const textColor = isCompleted ? "blue.500" : "gray.light";
-    return (
-      <Box
-        width={"415px"}
-        display={{ md: "flex", base: "none" }}
-        justifyContent={"space-between"}
-        textAlign={"center"}
-        mt={"12px"}
-      >
-        <Heading
-          color={"blue.500"}
-          // color={
-          //   activeStep == 0 ||
-          //   activeStep == 1 ||
-          //   activeStep == 2 ||
-          //   activeStep == 3
-          //     ? "blue.500"
-          //     : "gray.light"
-          // }
-          as={"h6"}
-          variant={"p1"}
-          position={"relative"}
-          left={"-20px"}
-        >
-          Job Bio
-        </Heading>
-        <Heading
-          // color={textColor}
-          color={
-            // activeStep == 0 ||
-            activeStep == 1 
-            // activeStep == 2 ||
-            // activeStep == 3
-              ? "blue.500"
-              : "gray.light"
-          }
-          as={"h6"}
-          variant={"p1"}
-          position={"relative"}
-          left={"-5px"}
-        >
-          Technical Details
-        </Heading>
-        <Heading
-          color={
-            // activeStep == 0 ||
-            activeStep == 1 ||
-            activeStep == 2 ||
-            activeStep == 3
-              ? "blue.500"
-              : "gray.light"
-          }
-          // color={textColor}
-          as={"h6"}
-          variant={"p1"}
-          position={"relative"}
-          right={"-20px"}
-        >
-          Job Location
-        </Heading>
-
-        <Heading
-          // color={textColor}
-          color={
-            // activeStep == 0 ||
-            activeStep == 1 ||
-            activeStep == 2 ||
-            activeStep == 3
-              ? "blue.500"
-              : "gray.light"
-          }
-          as={"h6"}
-          variant={"p1"}
-          position={"relative"}
-          right={"-20px"}
-        >
-          Desired Skills
-        </Heading>
-      </Box>
-    );
-  };
   return (
     <Box>
       <Heading
@@ -169,28 +86,26 @@ export const JobPostTimeline = ({ candidate, variant }) => {
           checkIcon={CustomeSteps}
           sx={{
             ...globalStyles.stepperContainter,
-
+     
             width: {
-              md: "404px",
+              md: "630px",
               base: "90%",
             },
           }}
           // border={"1px solid red"}
-          variant={variant}
+          variant={"circles-alt"}
           colorScheme="blue"
           activeStep={activeStep}
         >
           {steps.map(({ label }, index) => {
-            console.log("index", index);
-            const isCompleted = completedSteps.includes(index);
-            console.log("activeStep", activeStep);
             return (
               <Step
-                // border={"1px solid red"}
+                border={"1px solid red"}
                 flexDirection={"column"}
+                sx={{ span: { border: "1px solid red" } }}
                 key={label}
+                label={label}
               >
-                <TimelineSubtitle isCompleted={isCompleted} />
                 <Box
                   sx={{
                     // p: { md: 8, base: "20px 0px 20px 0px" },
@@ -214,7 +129,7 @@ export const JobPostTimeline = ({ candidate, variant }) => {
             );
           })}
         </Steps>
-        {hasCompletedAllSteps ? <TimelineSubtitle /> : null}
+        {/* {hasCompletedAllSteps ? <TimelineSubtitle /> : null} */}
         {hasCompletedAllSteps ? (
           <Box
             sx={{

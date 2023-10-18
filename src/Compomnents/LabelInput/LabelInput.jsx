@@ -91,6 +91,8 @@ const LabelInput = ({
         <DropDown placeholder={placeholder} />
       ) : passworInput ? (
         <PasswordInput
+          setState={setState}
+          state={state}
           iconStyle={iconStyle}
           readOnly={readOnly}
           placeholder={placeholder}
@@ -102,6 +104,8 @@ const LabelInput = ({
         <Input
           ref={inputRef}
           readOnly={readOnly}
+          value={state}
+          onChange={setState}
           variant={variant}
           placeholder={placeholder}
           type={type}

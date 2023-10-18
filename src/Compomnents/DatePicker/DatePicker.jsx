@@ -47,6 +47,9 @@ const DatePicker = ({
       borderRadius: "4px",
       border: selectRange ? `1px solid red` : "none",
     },
+    "& .react-calendar__tile--active": {
+      border: "1px solid red !important",
+    },
     "& .react-daterange-picker__inputGroup": {
       display: selectRange ? "block" : "none",
     },
@@ -75,15 +78,16 @@ const DatePicker = ({
       color: "black",
     },
     "& .react-calendar__tile--now": {
-      backgroundColor: "gray.200",
-      color: "black.100",
+      backgroundColor: "blue.500",
+      color: "#fff",
+
       borderRadius: "6px",
 
-      //   hover: {
-      //     backgroundColor: theme.palette.background.lightBlue,
-      //     color: theme.palette.background.black,
-      //     borderRadius: "6px",
-      //   },
+        hover: {
+          backgroundColor:"blue.400",
+          color: "black.100",
+          borderRadius: "6px",
+        },
     },
 
     "& .react-calendar_tile react-calendar_tile--active": {
@@ -171,7 +175,13 @@ const DatePicker = ({
         />
         <InputRightElement>
           <DateRangePicker
-            calendarIcon={<Image src={canlenderIcon.src} width={"25px"} />}
+            calendarIcon={
+              <Image
+                src={canlenderIcon.src}
+                width={{ md: "25px", base: "20px" }}
+                mt={{ md: "0px", base: "6px" }}
+              />
+            }
             selectRange={false}
             onChange={setdate}
             value={date}

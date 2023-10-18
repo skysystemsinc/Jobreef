@@ -1,15 +1,15 @@
-import React from 'react'
+import React from "react";
 
-import { Box, Heading, Image } from '@chakra-ui/react'
+import { Box, Heading, Image } from "@chakra-ui/react";
 
-import SignIn from '@/Compomnents/SignIn/SignIn'
+import SignUp from "@/Compomnents/SignUp/SignUp";
 
-const Login = () => {
-    return (
-        <Box height={{ base: "100vh", }}>
-            <SignIn candidate />
-        </Box>
-    )
-}
+const index = () => {
+  return (
+    <Box height={{ base: "100vh" }}>
+      <SignUp  />
+    </Box>
+  );
+};
 
-export default Login
+export default index;
