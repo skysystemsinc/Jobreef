@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import profile_icon from "@/assets/Images/profile_icon.svg";
 import { Box, Heading, Image, useDisclosure } from "@chakra-ui/react";
-import star from "@/assets/Images/star.svg";
 import Star from "../Stars/Star";
 import black_email from "@/assets/Images/black_email.svg";
 import black_arrow_left from "@/assets/Images/black_arrow_left.svg";
