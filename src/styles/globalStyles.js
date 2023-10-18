@@ -44,6 +44,7 @@ const globalStyles = {
       fontWeight: 600,
       height: "34px",
       padding: "0px !important",
+      margin:" 0px  20px ",
 
       color: "blue.500",
       "&::after": {
@@ -52,8 +53,8 @@ const globalStyles = {
         top: "31px",
         bg: "blue.500",
         // borderRadius: "12px 12px 0px 0px",
-        left: "6%",
-        width: "87%",
+        left: "0%",
+        width: "100%",
         height: "3px",
       },
     },
@@ -62,13 +63,13 @@ const globalStyles = {
       color: "gray.text",
       height: "34px",
       // border: "1px solid red",
-      width: "100px !important",
-
+      width: "max-content !important",
       // lineHeight: "28px",
       // border:"1px solid red",
       padding: "0px !important",
+      margin:" 0px  20px ",
       fontFamily: "var(--chakra-\fonts-openSans)",
-      margin: "0px",
+      // margin: "0px",
     },
   },
   scrollBar: {
