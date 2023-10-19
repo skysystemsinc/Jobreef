@@ -231,13 +231,11 @@ const components = {
   Select: {
     variants: {
       "outline-dropdown": {
-        color: "red !important",
-
         field: {
           height: { "2xl": "58px", base: "40px" },
 
           borderRadius: "8px",
-          color: "gray.light !important",
+          color: "gray.100 !important",
           fontWeight: 400,
           fontSize: { "2xl": "18px", base: "14px" },
           textTransform: " capitalize",
@@ -256,7 +254,7 @@ const components = {
 
         // color:"blue.500",
         field: {
-          width: { md: "230px" , base:"100%"},
+          width: { md: "230px", base: "100%" },
           px: "30px",
           height: { base: "40px" },
           border: "2px solid ",
@@ -299,7 +297,7 @@ const components = {
           fontFamily: "var(--chakra-\fonts-openSans)",
           // p: "20px 20px 20px 20px",
           textTransform: " capitalize",
-
+          lineHeight: "20px",
           fontWeight: 400,
           fontSize: { sm: "15px", base: "14px" },
           //   },
@@ -381,7 +379,7 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontSize: ["13px", "14px", "16px"],
         // lineHeight:{ md: '24px' , base:"20px"},
-        lineHeight:["20px", "24px", "24px", "24px", "24px", "24px"]
+        lineHeight: ["20px", "24px", "24px", "24px", "24px", "24px"],
         // fontSize: "20px",
       },
       p5: {
@@ -422,7 +420,13 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
 
-        fontSize: ["14px", "14px", "16px", "16px", "16px", "18px"],
+        fontSize: ["13px", "14px", "16px", "16px", "16px", "18px"],
+      },
+      p11: {
+        // color: "gray.text",
+        fontFamily: "var(--chakra-\fonts-openSans)",
+        fontWeight: 700,
+        fontSize: ["13px", "16px", "16px", "16px", "16px", "16px"],
       },
       // Add more variants for other heading levels as needed
     },

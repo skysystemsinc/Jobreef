@@ -35,7 +35,11 @@ const SocialLink = () => {
     <Box pr={"20px"}>
       {linkArray.map((item, index) => {
         return (
-          <InputWrapper key={index} gap={"15px"}>
+          <InputWrapper
+            style={{ marginBottom: "15px" }}
+            key={index}
+            gap={"15px"}
+          >
             <LabelInput
               labelVariant={"label"}
               type="text"
@@ -44,13 +48,13 @@ const SocialLink = () => {
               dropdown
               label={"Social Links"}
             />
-             <LabelInput
-                  labelVariant={"label"}
-                  type="text"
-                  variant={"bg-input"}
-                  placeholder="Paste link to company social network page"
-                  label={"Link"}
-                />
+            <LabelInput
+              labelVariant={"label"}
+              type="text"
+              variant={"bg-input"}
+              placeholder="Paste link to company social network page"
+              label={"Link"}
+            />
             {/* <Box width={"100%"} position={"relative"}>
               {isSmallerThe500 ? (
                 <Input
@@ -83,12 +87,15 @@ const SocialLink = () => {
       })}
 
       {/* <Flex justifyContent={"center"}> */}
-        <Button
-          onClick={() => setlinkArray([...linkArray, 2])}
-          variant={"blue-btn"}
-        >
-          Add more
-        </Button>
+      <Button
+        onClick={() => setlinkArray([...linkArray, 2])}
+        variant={"blue-btn"}
+        width={"max-content"}
+        px={{ md: "30px" , base:"20px"}}
+
+      >
+        Add More
+      </Button>
       {/* </Flex> */}
     </Box>
   );

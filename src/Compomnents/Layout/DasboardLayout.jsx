@@ -17,7 +17,7 @@ const DasboardLayout = ({ children  }) => {
         // justifyContent={placement?placement:"center"}
 
 
-        ml={{ xl: "240px", base: "55px" }}
+        ml={{ xl: "250px", base: "55px" }}
         // mr={{ md: "0px", base: "9px" }}
         mt={"40px"}
       >

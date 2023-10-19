@@ -16,7 +16,7 @@ import grayArrow from "@/assets/Images/gray-arrow-down.svg";
 import { useRouter } from "next/router";
 import { role, roles } from "@/Utils/role";
 import globalStyles from "@/styles/globalStyles";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Role_context } from "@/context/context";
 import IconButton from "../IconButton/IconButton";
 import JobBio from "./JobBio";
@@ -35,21 +35,25 @@ const steps = [
 ];
 
 export const JobPostTimeline = ({ candidate, variant }) => {
-  const { company, setCompany } = useContext(Role_context);
-
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
   const [completedSteps, setcompletedSteps] = useState([0]);
-  console.log("activeStep", activeStep);
   const isLastStep = activeStep === steps.length - 1;
   const hasCompletedAllSteps = activeStep === steps.length;
-
+  const [compeletedStep, setcompeletedStep] = useState([]);
+  const initialRender = useRef(true);
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+      return;
+    }
+    setcompeletedStep([...compeletedStep, activeStep]);
+  }, [activeStep]);
   const boxstyle = {
     minH: "55vh",
     marginTop: { md: "60px", base: "10px" },
   };
-  const router = useRouter();
 
   const CustomeSteps = (props) => {
     return (
@@ -82,13 +86,12 @@ export const JobPostTimeline = ({ candidate, variant }) => {
         width="100%"
       >
         <Steps
-        trackColor="blue.500"
-      
+          trackColor="blue.500"
           responsive={false}
-          checkIcon={CustomeSteps}
+          checkIcon={  CustomeSteps}
           sx={{
             ...globalStyles.stepperContainter,
-     
+
             width: {
               md: "630px",
               base: "90%",
@@ -100,13 +103,42 @@ export const JobPostTimeline = ({ candidate, variant }) => {
           activeStep={activeStep}
         >
           {steps.map(({ label }, index) => {
+            const CostomeIcon = () => {
+              return (
+                <Heading
+                  variant={"p1"}
+                  fontWeight={700}
+                  sx={{
+                    color: compeletedStep.includes(index)
+                      ? "blue.500"
+                      : "gray.light",
+                  }}
+                >
+                  {" "}
+                  {index + 1}
+                </Heading>
+              );
+            };
+            console.log("index", hasCompletedAllSteps? false:CostomeIcon);
             return (
               <Step
-                
                 flexDirection={"column"}
-                
                 key={label}
-                label={label}
+                // icon={index == 3 ? false : CostomeIcon}
+                // icon={ hasCompletedAllSteps? false:CostomeIcon}
+                label={
+                  <Heading
+                    variant={"p1"}
+                    sx={{
+                      color: compeletedStep.includes(index)
+                        ? "blue.500"
+                        : "gray.light",
+                    }}
+                  >
+                    {" "}
+                    {label}
+                  </Heading>
+                }
               >
                 <Box
                   sx={{
@@ -155,7 +187,17 @@ export const JobPostTimeline = ({ candidate, variant }) => {
             <>
               <IconButton
                 handleEvent={() => {
-                  activeStep == 0 ? null : prevStep();
+                  if (activeStep != 0) {
+                    if (compeletedStep.includes(activeStep)) {
+                      const updatedCompletedSteps = compeletedStep.filter(
+                        (step) => step != activeStep
+                      );
+
+                      setcompeletedStep(updatedCompletedSteps);
+                    }
+                    prevStep();
+                  }
+                  // activeStep == 0 ? null : prevStep();
                 }}
                 iconSize={"21px"}
                 icon={grayArrow}

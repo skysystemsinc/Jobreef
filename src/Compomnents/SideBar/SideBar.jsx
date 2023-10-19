@@ -22,18 +22,33 @@ const SideBar = () => {
     },
     {
       title: "Job Posts",
-      icon: router.pathname == "/company/job-post" ? white_job_post : job_post,
-      pathname: "/company/job-post",
+      icon:
+        router.pathname == "/company/job-post" ||
+        router.pathname == "/company/create-job-post"
+          ? white_job_post
+          : job_post,
+      pathname:
+        router.pathname == "/company/create-job-post"
+          ? "/company/create-job-post"
+          : "/company/job-post",
     },
     {
       title: "Candidates",
-      icon: router.pathname == "/company/candidates" ? white_candidate :  candidate,
+      icon:
+        router.pathname == "/company/candidates" ? white_candidate : candidate,
       pathname: "/company/candidates",
     },
     {
       title: "Team Members",
-      icon: router.pathname == "/company/team-members" ? white_team : team,
-      pathname: "/company/team-members",
+      icon:
+        router.pathname == "/company/team-members" ||
+        router.pathname == "/company/add-members"
+          ? white_team
+          : team,
+      pathname:
+        router.pathname == "/company/add-members"
+          ? "/company/add-members"
+          : "/company/team-members",
     },
     {
       title: "Company Details",
@@ -63,7 +78,7 @@ const SideBar = () => {
   };
   return (
     <Box
-      width={{ xl: "240px", base: "55px" }}
+      width={{ xl: "250px", base: "55px" }}
       position={"fixed"}
       top={"0px"}
       bg={"#fff"}
@@ -78,8 +93,6 @@ const SideBar = () => {
           <Link key={ind} _hover={{ textDecor: "none" }} href={item.pathname}>
             <Box
               sx={item.pathname == router.pathname ? activeStyle : null}
-              // pl={{ md: "10px", base: "11px" }}
-
               padding={{ xl: "12px 10px", base: "10px 8px 10px 9px" }}
               gap={"15px"}
               key={ind}

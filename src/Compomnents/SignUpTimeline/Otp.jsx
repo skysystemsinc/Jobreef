@@ -25,7 +25,8 @@ const Otp = ({ State, setState }) => {
         whiteSpace={{ lg: "nowrap", base: "wrap" }}
         variant={"p2"}
       >
-        Please enter the 4 digit code sent to your email
+        {/* Please enter the 4 digit code sent to your email */}
+        Please enter the 4 digit code send to example@email.com
       </Heading>
       <HStack gap={"15px"} display={"flex"} justifyContent={"center"}>
         <PinInput

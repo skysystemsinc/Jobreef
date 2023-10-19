@@ -8,7 +8,7 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext } from "react";
 import { HiOutlineChevronDown } from "react-icons/hi";
 import profile from "@/assets/Images/headerProfile.svg";
 import { Link } from "@chakra-ui/next-js";
@@ -19,8 +19,11 @@ import header_profile from "@/assets/Images/profile.svg";
 import logout from "@/assets/Images/logout.svg";
 import { role, roles } from "@/Utils/role";
 import { useRouter } from "next/router";
+import { Role_context } from "@/context/context";
 const HeaderDropdown = () => {
   const router = useRouter();
+  const { company, setCompany } = useContext(Role_context);
+
   const companydropdown = [
     {
       title: "Dashboard",
@@ -106,7 +109,7 @@ const HeaderDropdown = () => {
         </Box>
       </MenuButton>
       <MenuList _active={{ bg: "transparent" }} py="0px">
-        {router.pathname.includes("candidate")
+        {!company
           ? candidatedropdown.map((item, index) => {
               return (
                 <MenuItem

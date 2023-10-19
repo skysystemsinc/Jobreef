@@ -12,7 +12,9 @@ import { BiNotepad } from "react-icons/bi";
 
 const SelectedCandidateCard = ({ matchCandidate }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const iconWidth = {
+    width: { md: "16px", base: "13px" },
+  };
   return (
     <>
       <NotePadModal open={isOpen} onClose={onClose} />
@@ -97,11 +99,18 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
             width={{ "2xl": "max-content", base: "100%" }}
             // whiteSpace={"nowrap"}
           >
-            <Box display={"flex"} alignItems={"center"} gap={"10px"} flexWrap={"wrap"}>
+            <Box
+              display={"flex"}
+              alignItems={"center"}
+              gap={"10px"}
+              flexWrap={"wrap"}
+              justifyContent={"flex-end"}
+            >
               <Box display={"flex"} alignItems={"center"} gap={"3px"}>
                 <Image
                   src={black_arrow_left.src}
                   width={{ md: "24px", base: "20px" }}
+                  sx={iconWidth}
                 />
                 <Heading color={"black.100"} variant={"p10"}>
                   Return
@@ -109,14 +118,14 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               </Box>
               {matchCandidate ? (
                 <Box display={"flex"} alignItems={"center"} gap={"7px"}>
-                  <Image src={black_email.src} />
+                  <Image sx={iconWidth} src={black_email.src} />
                   <Heading color={"black.100"} variant={"p10"}>
                     Invite to Apply
                   </Heading>
                 </Box>
               ) : (
                 <Box display={"flex"} alignItems={"center"} gap={"7px"}>
-                  <Image src={black_email.src} />
+                  <Image sx={iconWidth} src={black_email.src} />
                   <Heading color={"black.100"} variant={"p10"}>
                     Send Message
                   </Heading>
@@ -125,7 +134,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
 
               {matchCandidate ? null : (
                 <Box display={"flex"} alignItems={"center"} gap={"7px"}>
-                  <Image src={download.src} />
+                  <Image sx={iconWidth} src={download.src} />
                   <Heading color={"black.100"} variant={"p10"}>
                     Download Attachments
                   </Heading>
@@ -154,7 +163,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
                       Read
                     </Box>
                   </Heading>
-                  <Image width={"20px"} src={black_arrow_down.src} />
+                  <Image  width={"20px"} sx={iconWidth} src={black_arrow_down.src} />
                 </Box>
                 <Box
                   display={{ lg: "none", base: "flex" }}
@@ -168,7 +177,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
                     Note{" "}
                   </Heading>
                   {/* <Image width={"20px"} src={black_arrow_down.src} /> */}
-                  <BiNotepad fontSize={"22px"} fill="black.100" />
+                  <BiNotepad fontSize={{ md: "22px" , base:'17px'}} fill="black.100" />
                 </Box>
               </Box>
             )}

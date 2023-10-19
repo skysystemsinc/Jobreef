@@ -17,8 +17,13 @@ import InputWrapper from "../InputWrapper/InputWrapper";
 import { Link } from "@chakra-ui/next-js";
 import { BsDot } from "react-icons/bs";
 import upload from "@/assets/Images/upload.svg";
+import UploadBox from "../UploadBox/UploadBox";
 
 const CompanyBio = ({ State, setState }) => {
+  const list = [
+    "Please upload logo in minimum 200x200 resolution",
+    "The acceptable formats of the copy are .PDF, .JPEG or .PNG",
+  ];
   return (
     <Box>
       <InputWrapper>
@@ -33,7 +38,7 @@ const CompanyBio = ({ State, setState }) => {
           type="text"
           variant={"bg-input"}
           placeholder="Enter Company Name"
-          label={"Company Name"}
+          label={"Company Name*"}
         />
         <LabelInput
           dropdown
@@ -92,7 +97,7 @@ const CompanyBio = ({ State, setState }) => {
           type="number"
           variant={"bg-input"}
           placeholder="Enter Year in Numbers"
-          label={"Year Established*"}
+          label={"Year Established"}
         />
         <LabelInput
           state={State.email}
@@ -104,9 +109,9 @@ const CompanyBio = ({ State, setState }) => {
           labelVariant={"label"}
           type="email"
           variant={"bg-input"}
-          placeholder="Enter Email"
+          placeholder="Enter Company Website URL"
           // dropdown
-          label={"Email"}
+          label={"Website"}
         />
       </InputWrapper>
       <InputWrapper>
@@ -124,7 +129,14 @@ const CompanyBio = ({ State, setState }) => {
           label={"Description*"}
         />
       </InputWrapper>
-      <Box
+
+      <UploadBox
+        style={{width:"100%",  p: { md: "15px 10px 6px 5px", base: "15px 10px 6px 5px" } }}
+        titie={"Upload Company Logo"}
+        list={list}
+      />
+
+      {/* <Box
         border={"lpx solid red !important"}
         sx={{ border: "1px solid red" }}
         borderColor={"gray.500 !important"}
@@ -196,7 +208,7 @@ const CompanyBio = ({ State, setState }) => {
             <Input type="file" hidden />
           </FormLabel>
         </Box>
-      </Box>
+      </Box> */}
     </Box>
   );
 };

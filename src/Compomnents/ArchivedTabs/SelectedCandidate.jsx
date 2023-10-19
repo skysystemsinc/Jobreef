@@ -9,7 +9,7 @@ const SelectedCandidate = ({ matchCandidate }) => {
       <Box width={"100%"}>
         <SelectedCandidateCard matchCandidate={matchCandidate}/>
       </Box>
-      <Box width={"45%"} display={{ lg: "block", base: "none" }}>
+      <Box width={{ "2xl": "700px" , base:"520px"}} display={{ lg: "block", base: "none" }}>
         {matchCandidate ? null : <NotePad />}
       </Box>
     </Box>

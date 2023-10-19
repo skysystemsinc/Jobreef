@@ -21,7 +21,7 @@ import SignUpLayout from "../Layout/SignUpLayout";
 import cartoon from "@/assets/Images/cartoon.svg";
 import leftblue_2 from "@/assets/Images/leftblue_2.png";
 import whitetick from "@/assets/Images/white-tick.svg";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const steps = [
   { label: "Company Bio" },
@@ -37,17 +37,23 @@ export const CompanyTimeline = ({ variant }) => {
     noOfEmployees: "",
     yearEstablished: "",
     email: "",
-    decsription:"",
-    
+    decsription: "",
   });
   const router = useRouter();
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
-  console.log("State",State)
-
-  const isLastStep = activeStep === steps.length - 1;
   const hasCompletedAllSteps = activeStep === steps.length;
+  const [compeletedStep, setcompeletedStep] = useState([]);
+  const initialRender = useRef(true);
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+      return;
+    }
+    setcompeletedStep([...compeletedStep, activeStep]);
+  }, [activeStep]);
+
   const CustomeSteps = () => {
     return (
       <Heading
@@ -117,33 +123,80 @@ export const CompanyTimeline = ({ variant }) => {
         <Steps
           responsive={false}
           checkIcon={CustomeSteps}
-          sx={globalStyles.stepperContainter}
+          sx={{
+            // span: {
+            //   color:
+            //   // compeletedStep.includes(0) ||
+            //   compeletedStep.includes(1) ||
+            //   compeletedStep.includes(2)?
+            //   "blue.500 ":"gray.light ",
+            // },
+            ...globalStyles.stepperContainter,
+          }}
           variant={"circles-alt"}
+          trackColor="blue.500"
           colorScheme="blue"
           activeStep={activeStep}
         >
-          {steps.map(({ label }, index) => (
-            <Step label={label} flexDirection={"column"} key={label}>
-              <Box
-                sx={{
-                  p: { md: 8, base: "20px 0px 20px 0px" },
-                  mt: "13px",
-                  width: "100%",
-                }}
-              >
-                {
-                  index == 0 ? (
-                    <CompanyBio  State={State} setState={setState} />
-                  ) : index == 1 ? (
-                    <CompanyLocation State={State} setState={setState}/>
-                  ) : index == 2 ? (
-                    <SocialLink State={State} setState={setState}/>
-                  ) : null
-                  // <PersonalInfo />
+          {/* {console.log(" compeletedStep.includes(0)", compeletedStep.includes(0),compeletedStep)} */}
+          {steps.map(({ label }, index) => {
+            const CostomeIcon = () => {
+              return (
+                <Heading
+                  variant={"p1"}
+                  fontWeight={700}
+                  sx={{
+                    color: compeletedStep.includes(index)
+                      ? "blue.500"
+                      : "gray.light",
+                  }}
+                >
+                  {" "}
+                  {index + 1}
+                </Heading>
+              );
+            };
+            return (
+              <Step
+                label={
+                  <Heading
+                    variant={"p1"}
+                    sx={{
+                      color: compeletedStep.includes(index)
+                        ? "blue.500"
+                        : "gray.light",
+                    }}
+                  >
+                    {" "}
+                    {label}
+                  </Heading>
                 }
-              </Box>
-            </Step>
-          ))}
+                // icon={CostomeIcon}
+                flexDirection={"column"}
+                key={label}
+              >
+                <Box
+                  sx={{
+                    p: { md: 8, base: "20px 0px 20px 0px" },
+                    paddingBottom:"20px !important",
+                    mt: "13px",
+                    width: "100%",
+                  }}
+                >
+                  {
+                    index == 0 ? (
+                      <CompanyBio State={State} setState={setState} />
+                    ) : index == 1 ? (
+                      <CompanyLocation State={State} setState={setState} />
+                    ) : index == 2 ? (
+                      <SocialLink State={State} setState={setState} />
+                    ) : null
+                    // <PersonalInfo />
+                  }
+                </Box>
+              </Step>
+            );
+          })}
         </Steps>
       )}
 
@@ -153,29 +206,50 @@ export const CompanyTimeline = ({ variant }) => {
         mt={{ md: "17px", base: "14px" }}
         gap={4}
       >
-        <>
+        {hasCompletedAllSteps ? (
           <Button
             isDisabled={activeStep === 0}
-            onClick={prevStep}
-            // width={{ "2xl": "200px ", md: "140px", sm: "120px", base: "100px" }}
-            variant="outline-blue"
+            // onClick={prevStep}
+            variant="blue-btn"
           >
-            {"Go Back"}
+            {" Logout"}
           </Button>
-          <Button
-            // width={{ "2xl": "200px", md: "140px", sm: "120px", base: "100px" }}
-            variant={"blue-btn"}
-            onClick={() => {
-              if (!hasCompletedAllSteps) {
-                nextStep();
-              } else {
-                router.push("/company/profile-setting");
-              }
-            }}
-          >
-            {"Next"}
-          </Button>
-        </>
+        ) : (
+          <>
+            {" "}
+            {activeStep == 0 ? null : (
+              <Button
+                isDisabled={activeStep === 0}
+                onClick={() => {
+                  prevStep();
+                  if (compeletedStep.includes(activeStep)) {
+                    const updatedCompletedSteps = compeletedStep.filter(
+                      (step) => step != activeStep
+                    );
+
+                    setcompeletedStep(updatedCompletedSteps);
+                  }
+                }}
+                variant="outline-blue"
+              >
+                {" Back"}
+              </Button>
+            )}
+            <Button
+              // width={{ "2xl": "200px", md: "140px", sm: "120px", base: "100px" }}
+              variant={"blue-btn"}
+              onClick={() => {
+                if (!hasCompletedAllSteps) {
+                  nextStep();
+                } else {
+                  router.push("/company/profile-setting");
+                }
+              }}
+            >
+              {"Next"}
+            </Button>
+          </>
+        )}
       </Flex>
     </Flex>
   );

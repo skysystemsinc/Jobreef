@@ -8,7 +8,7 @@ import { MdOutlineStarOutline } from "react-icons/md";
 import Star from "@/assets/Images/Star.svg";
 import Popovers from "../MembersTable/Popovers";
 import Chip from "../Chip/Chip";
-const CandidateCard = ({ cardStatus, handleEvent , popOverList }) => {
+const CandidateCard = ({ cardStatus, handleEvent, popOverList }) => {
   const actionList = ["Download Attachments", "Archive"];
 
   return (
@@ -132,52 +132,45 @@ const CandidateCard = ({ cardStatus, handleEvent , popOverList }) => {
           </Heading>
         </Box>
 
-        <Box
-          display={"flex"}
-          mt={"12px"}
-          alignItems={"center"}
-          flexWrap={"wrap"}
-        >
-          <Box mr={{ md: "38px", base: "14px" }} mb={"10px"}>
-            <Chip label={"Technical Knowledge"} />
+        <Box border={"1px solid red red"}  display={"flex"} justifyContent={"space-between"} alignItems={"flex-end"}  >
+          <Box
+            display={"flex"}
+            mt={"12px"}
+            alignItems={"center"}
+            flexWrap={"wrap"}
+          >
+            <Box mr={{ md: "38px", base: "14px" }} mb={"10px"}>
+              <Chip label={"Technical Knowledge"} />
+            </Box>
+
+            <Box mr={{ md: "38px", base: "14px" }} mb={"10px"}>
+              <Chip label={"System Architecture"} />
+            </Box>
+
+            <Box mr={{ md: "38px", base: "14px" }} mb={"10px"}>
+              <Chip label={"Risk Management"} />
+            </Box>
+
+            <Box mr={{ md: "38px", base: "14px" }} mb={"10px"}>
+              <Chip label={"Q/A Testing"} />
+            </Box>
+            <Box mr={{ md: "38px", base: "14px" }} mb={"10px"}>
+              <Chip label={"Leadership"} />
+            </Box>
+            <Box mr={{ md: "38px", base: "14px" }} mb={"10px"}>
+              <Chip label={"Product Design"} />
+            </Box>
           </Box>
 
-          <Box mr={{ md: "38px", base: "14px" }} mb={"10px"}>
-            <Chip label={"System Architecture"} />
-          </Box>
-
-          <Box mr={{ md: "38px", base: "14px" }} mb={"10px"}>
-            <Chip label={"Risk Management"} />
-          </Box>
-
-          <Box mr={{ md: "38px", base: "14px" }} mb={"10px"}>
-            <Chip label={"Q/A Testing"} />
-          </Box>
-          <Box mr={{ md: "38px", base: "14px" }} mb={"10px"}>
-            <Chip label={"Leadership"} />
-          </Box>
-          <Box mr={{ md: "38px", base: "14px" }} mb={"10px"}>
-            <Chip label={"Product Design"} />
-          </Box>
-        </Box>
-
-        <Heading
-          variant={"p10"}
-          textAlign={"end"}
-          // position={"absolute"}
-          // bottom={"0px"}
-          // right={"0px"}
-          // // mt="10px"
-
-          // padding={"10px"}
-        >
-          {" "}
-          Status:{" "}
-          <Box as="span" color={"orange.100"}>
+          <Heading whiteSpace={"nowrap"} variant={"p10"} textAlign={"end"}>
             {" "}
-            {cardStatus}
-          </Box>
-        </Heading>
+            Status:{" "}
+            <Box as="span" color={"orange.100"}>
+              {" "}
+              {cardStatus}
+            </Box>
+          </Heading>
+        </Box>
       </Box>
     </Box>
   );

@@ -10,8 +10,8 @@ const globalStyles = {
       top: { md: "50px", base: "46px" },
       bg: "blue.500",
       borderRadius: "12px 12px 0px 0px",
-      left: {md: "10%" , base:"0%"},
-      width:  { md: "80%" , base:"100%"},
+      left: { md: "10%", base: "0%" },
+      width: { md: "80%", base: "100%" },
       height: "6px",
     },
   },
@@ -44,7 +44,7 @@ const globalStyles = {
       fontWeight: 600,
       height: "34px",
       padding: "0px !important",
-      margin:" 0px  20px ",
+      margin: " 0px  20px ",
 
       color: "blue.500",
       "&::after": {
@@ -67,7 +67,7 @@ const globalStyles = {
       // lineHeight: "28px",
       // border:"1px solid red",
       padding: "0px !important",
-      margin:" 0px  20px ",
+      margin: " 0px  20px ",
       fontFamily: "var(--chakra-\fonts-openSans)",
       // margin: "0px",
     },
@@ -114,7 +114,7 @@ const globalStyles = {
     "& .cui-steps__step-icon-container": {
       bg: "transparent",
       marginBottom: "11px",
-      border: "4px solid ",
+      border: "3px solid ",
       borderColor: "gray.light ",
       width: { "2xl": "36px !important", base: "32px" },
       height: { "2xl": "36px !important", base: "32px" },
@@ -130,10 +130,10 @@ const globalStyles = {
       },
 
       _active: {
-        border: "4px solid blue.500 !important",
+        border: "3px solid blue.500 !important",
         borderColor: "blue.500 !important",
         bg: "blue.500",
-        color:"blue.500 !important",
+        color: "blue.500 !important",
 
         // "& .cui-steps__step-icon-container": {
         //   span: {
@@ -163,6 +163,18 @@ const globalStyles = {
         marginInlineStart: "0px !important",
       },
     },
+
+    // _completed: {
+    //   "& .cui-steps__horizontal-step": {
+    //     border: '1px solid red !important',
+    //     span: {
+    //       color: "blue.500 ",
+    //       // fontSize:"100px"
+    //     },
+    //   },
+    // },
+    // _active: {
+    // },
     "& .cui-steps__horizontal-step:first-of-type": {
       // border: '1px solid ',
       "& .cui-steps__step-icon-container": {
