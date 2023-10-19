@@ -11,7 +11,10 @@ import {
   import React from "react";
   import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
   
-  const JobSearchData = () => {
+  
+  const JobSearchData = ({searchEntryForCompany,SearchEntryForLocation,SearchNow}) => {
+
+    
     return (
       <>
         <Box
@@ -33,6 +36,7 @@ import {
                 variant="filled"
                 placeholder="Search for Jobs Companies and Keywords"
                 marginRight="2"
+                onChange={(e)=>(searchEntryForCompany(e.target.value))}
               />
             </InputGroup>
   
@@ -42,19 +46,19 @@ import {
                 children={<FiMapPin color="gray.100" />}
               />
               <Input
-                type="number"
+                type="text"
                 variant="filled"
                 placeholder="Search By Location e.g remote"
                 marginRight="2"
                 bg={"gray.100"}
+                onChange={(e)=>(SearchEntryForLocation(e.target.value))}
               />
             </InputGroup>
   
             <Button
-              onClick={() => {
-                // Handle the button click event
-                // router.push("/");
-              }}
+              onClick={
+                SearchNow
+              }
               style={{padding:"20px 40px 20px 40px"}}
               variant="blue-btn"
               marginLeft="2"  // Add margin to the button for space
@@ -63,30 +67,6 @@ import {
             </Button>
           </Flex>
         </Box>
-        <Box style={{ marginTop: 100}}>
-            <Heading
-            variant={"h1"}
-            textAlign={"end"}
-            gap={"23px"}
-            mb={{ "2xl": "30px", base: "16px" }}
-            color={"gray.400"}
-            fontSize={40}
-            >
-                Inspire Careers
-            </Heading>
-            <Heading
-            variant={"h1"}
-            textAlign={"end"}
-            gap={"23px"}
-            mb={{ "2xl": "30px", base: "16px" }}
-            color={"gray.700"}
-            letterSpacing={-1}
-            fontSize={50}
-            >
-                Unite Opportunities
-            </Heading>
-        </Box>      
-        <BottomWaveImage />
       </>
     );
   };
