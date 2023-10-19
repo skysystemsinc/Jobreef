@@ -11,7 +11,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-
+  
 import globalStyles from "@/styles/globalStyles";
 import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
 import AboutYouTabs from "../ProfileSettingTabs/AboutYouTabs";
@@ -20,6 +20,7 @@ import WorkExperiance from "./WorkExperiance";
 import Education from "./Education";
 import Certification from "./Certification";
 import Skills from "./Skills";
+import Achievements from "./Achievements";
 const MyResumeTabs = () => {
   let [tabIndex, setTabIndex] = useState(0);
   const tabList = [
@@ -37,6 +38,9 @@ const MyResumeTabs = () => {
     },
     {
       title: "Skills",
+    },
+    {
+      title: "Achievements",
     },
   ];
   return (
@@ -91,6 +95,11 @@ const MyResumeTabs = () => {
           </TabPanel>
           <TabPanel>
             <Skills />
+          </TabPanel>
+          <TabPanel>
+          <Box display={"flex"} justifyContent={"center"}>
+            <Achievements/>
+          </Box> 
           </TabPanel>
         </TabPanels>
       </Tabs>

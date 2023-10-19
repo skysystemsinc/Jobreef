@@ -25,7 +25,7 @@ const SignUpLayout = ({
       <Image
         // width={isSmallerThe500 ? "200px" : "250px"}
         // width={"600px"}
-        width={personVectorW}
+        width={personVectorW} 
         zIndex={2}
         display={{ xl: "block", base: "none" }}
         position={"absolute"}
