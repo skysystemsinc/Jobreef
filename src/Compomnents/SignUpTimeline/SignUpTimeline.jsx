@@ -41,7 +41,7 @@ export const SignUpTimeline = ({ candidate, variant }) => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
-  
+
   const isLastStep = activeStep === steps.length - 1;
   const [compeletedStep, setcompeletedStep] = useState([]);
   const initialRender = useRef(true);
@@ -53,20 +53,7 @@ export const SignUpTimeline = ({ candidate, variant }) => {
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
 
-  const CustomeSteps = (props) => {
-    return (
-      <Heading
-        color={"white.100"}
-        as={"p"}
-        margin={"0px"}
-        fontWeight={"700"}
-        variant={"p1"}
-      >
-        {/* {props+1} */}
-        {activeStep}
-      </Heading>
-    );
-  };
+  
 
   return (
     <Flex
@@ -77,7 +64,7 @@ export const SignUpTimeline = ({ candidate, variant }) => {
     >
       <Steps
         responsive={false}
-        checkIcon={CustomeSteps}
+        
         sx={globalStyles.stepperContainter}
         variant={"circles-alt"}
         colorScheme="blue"
@@ -86,12 +73,27 @@ export const SignUpTimeline = ({ candidate, variant }) => {
         activeStep={activeStep}
       >
         {steps.map(({ label }, index) => {
+          const CostomeCheckIcon = () => {
+            return (
+              <Heading
+                variant={"p1"}
+                fontWeight={700}
+                sx={{
+                  color: "white.100",
+                }}
+              >
+                {" "}
+                {index + 1}
+              </Heading>
+            );
+          };
           const CostomeIcon = () => {
             return (
               <Heading
                 variant={"p1"}
                 fontWeight={700}
                 sx={{
+                  // color:'#fff'
                   color: compeletedStep.includes(index)
                     ? "blue.500"
                     : "gray.light",
@@ -104,7 +106,8 @@ export const SignUpTimeline = ({ candidate, variant }) => {
           };
           return (
             <Step
-              // icon={CostomeIcon}
+              icon={CostomeIcon}
+              checkIcon={CostomeCheckIcon}
               label={
                 <Heading
                   variant={"p1"}

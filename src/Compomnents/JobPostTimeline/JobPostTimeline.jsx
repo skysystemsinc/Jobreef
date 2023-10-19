@@ -55,21 +55,6 @@ export const JobPostTimeline = ({ candidate, variant }) => {
     marginTop: { md: "60px", base: "10px" },
   };
 
-  const CustomeSteps = (props) => {
-    return (
-      <Heading
-        color={"white.100"}
-        as={"p"}
-        margin={"0px"}
-        fontWeight={"700"}
-        variant={"p1"}
-      >
-        {/* {props+1} */}
-        {activeStep}
-      </Heading>
-    );
-  };
-
   return (
     <Box>
       <Heading
@@ -88,7 +73,6 @@ export const JobPostTimeline = ({ candidate, variant }) => {
         <Steps
           trackColor="blue.500"
           responsive={false}
-          checkIcon={  CustomeSteps}
           sx={{
             ...globalStyles.stepperContainter,
 
@@ -103,12 +87,27 @@ export const JobPostTimeline = ({ candidate, variant }) => {
           activeStep={activeStep}
         >
           {steps.map(({ label }, index) => {
+            const CostomeCheckIcon = () => {
+              return (
+                <Heading
+                  variant={"p1"}
+                  fontWeight={700}
+                  sx={{
+                    color: "white.100",
+                  }}
+                >
+                  {" "}
+                  {index + 1}
+                </Heading>
+              );
+            };
             const CostomeIcon = () => {
               return (
                 <Heading
                   variant={"p1"}
                   fontWeight={700}
                   sx={{
+                    // color:'#fff'
                     color: compeletedStep.includes(index)
                       ? "blue.500"
                       : "gray.light",
@@ -119,12 +118,13 @@ export const JobPostTimeline = ({ candidate, variant }) => {
                 </Heading>
               );
             };
-            console.log("index", hasCompletedAllSteps? false:CostomeIcon);
+
             return (
               <Step
+                checkIcon={CostomeCheckIcon}
                 flexDirection={"column"}
+                icon={CostomeIcon}
                 key={label}
-                // icon={index == 3 ? false : CostomeIcon}
                 // icon={ hasCompletedAllSteps? false:CostomeIcon}
                 label={
                   <Heading

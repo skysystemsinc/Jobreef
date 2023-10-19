@@ -22,7 +22,7 @@ import { BsDot, BsPlusLg } from "react-icons/bs";
 import upload from "@/assets/Images/upload.svg";
 import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
 
-const SocialLink = () => {
+const SocialLink = ({ State, setState }) => {
   const [isSmallerThe500] = useMediaQuery("(max-width: 787px)");
 
   const [linkArray, setlinkArray] = useState([1]);
@@ -30,6 +30,17 @@ const SocialLink = () => {
     const deleteArray = [...linkArray];
     deleteArray.splice(index, 1);
     setlinkArray(deleteArray);
+  };
+  const handleAdd = () => {
+    setlinkArray([...linkArray, 2]);
+    setState((prev) => {
+      return {
+        ...prev,
+        links: [...prev.links, { platform: State.platform, link: State.link }],
+        platform:"",
+        link:"",
+      };
+    });
   };
   return (
     <Box pr={"20px"}>
@@ -41,6 +52,12 @@ const SocialLink = () => {
             gap={"15px"}
           >
             <LabelInput
+              state={State.platform}
+              setState={(e) => {
+                setState((prev) => {
+                  return { ...prev, platform: e.target.value };
+                });
+              }}
               labelVariant={"label"}
               type="text"
               variant={"bg-input"}
@@ -49,50 +66,28 @@ const SocialLink = () => {
               label={"Social Links"}
             />
             <LabelInput
+              state={State.link}
+              setState={(e) => {
+                setState((prev) => {
+                  return { ...prev, link: e.target.value };
+                });
+              }}
               labelVariant={"label"}
               type="text"
               variant={"bg-input"}
               placeholder="Paste link to company social network page"
               label={"Link"}
             />
-            {/* <Box width={"100%"} position={"relative"}>
-              {isSmallerThe500 ? (
-                <Input
-                  variant={"bg-input"}
-                  placeholder="Paste link to company social network page"
-                />
-              ) : (
-                <LabelInput
-                  labelVariant={"label"}
-                  type="text"
-                  variant={"bg-input"}
-                  placeholder="Paste link to company social network page"
-                  label={"Link"}
-                />
-              )}
-              <AiOutlineDelete
-                onClick={() => handleDelete(index)}
-                style={{
-                  cursor: "pointer",
-                  position: "absolute",
-                  top: isSmallerThe500 ? "10px" : "44px",
-                  right: "-30px",
-                  fontSize: "23px",
-                  color: "#2CA5C3",
-                }}
-              />
-            </Box> */}
           </InputWrapper>
         );
       })}
 
       {/* <Flex justifyContent={"center"}> */}
       <Button
-        onClick={() => setlinkArray([...linkArray, 2])}
+        onClick={handleAdd}
         variant={"blue-btn"}
         width={"max-content"}
-        px={{ md: "30px" , base:"20px"}}
-
+        px={{ md: "30px", base: "20px" }}
       >
         Add More
       </Button>

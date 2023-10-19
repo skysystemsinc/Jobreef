@@ -1,8 +1,24 @@
 import globalStyles from "@/styles/globalStyles";
 import { Box, Checkbox, Heading } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 
 const SortBy = ({ matchCandidate }) => {
+  // const [relevance, setRelevance] = useState(false);
+  const [checkBoxs, setcheckBoxs] = useState({
+    dateApplied: true,
+    relevance: false,
+    new: false,
+    read: false,
+    inerviewing: false,
+    closed: false,
+    master: false,
+    bachelor: false,
+    associated: false,
+    pom: false,
+    sa: false,
+    pd: false,
+    leadership: false,
+  });
   return (
     <Box
       height={"max-content"}
@@ -25,6 +41,12 @@ const SortBy = ({ matchCandidate }) => {
           {matchCandidate ? null : (
             <Box mt={"16px"}>
               <Checkbox
+                checked={checkBoxs.dateApplied}
+                onChange={(e) => {
+                  setcheckBoxs((prev) => {
+                    return { ...prev, dateApplied: e.target.checked };
+                  });
+                }}
                 borderColor={"black.200"}
                 borderRadius={"8px"}
                 defaultChecked
@@ -33,7 +55,10 @@ const SortBy = ({ matchCandidate }) => {
                 rounded={"sm"}
                 colorScheme="blue"
               >
-                <Heading color={"blue.500"} variant={"p4"}>
+                <Heading
+                  color={checkBoxs.dateApplied ? "blue.500" : "black.200"}
+                  variant={"p4"}
+                >
                   Date Applied
                 </Heading>
               </Checkbox>
@@ -50,9 +75,20 @@ const SortBy = ({ matchCandidate }) => {
               borderColor={"black.200"}
               size="md"
               rounded={"md"}
+              checked={checkBoxs.relevance}
+              onChange={(e) => {
+                setcheckBoxs((prev) => {
+                  return { ...prev, relevance: e.target.checked };
+                });
+              }}
               colorScheme="blue"
             >
-              <Heading variant={"p4"}>Relevance</Heading>
+              <Heading
+                color={checkBoxs.relevance ? "blue.500" : "black.200"}
+                variant={"p4"}
+              >
+                Relevance
+              </Heading>
             </Checkbox>
           </Box>
         </Box>
@@ -73,44 +109,88 @@ const SortBy = ({ matchCandidate }) => {
                 borderColor={"black.200"}
                 borderRadius={"8px"}
                 sx={globalStyles.checkBoxStyle}
+                checked={checkBoxs.new}
+                onChange={(e) => {
+                  setcheckBoxs((prev) => {
+                    return { ...prev, new: e.target.checked };
+                  });
+                }}
                 size="md"
                 rounded={"sm"}
                 colorScheme="blue"
               >
-                <Heading variant={"p4"}>New</Heading>
+                <Heading
+                  color={checkBoxs.new ? "blue.500" : "black.200"}
+                  variant={"p4"}
+                >
+                  New
+                </Heading>
               </Checkbox>
             </Box>
             <Box mt={"10px"}>
               <Checkbox
+                checked={checkBoxs.read}
+                onChange={(e) => {
+                  setcheckBoxs((prev) => {
+                    return { ...prev, read: e.target.checked };
+                  });
+                }}
                 sx={globalStyles.checkBoxStyle}
                 borderColor={"black.200"}
                 size="md"
                 rounded={"md"}
                 colorScheme="blue"
               >
-                <Heading variant={"p4"}>Read</Heading>
+                <Heading
+                  color={checkBoxs.read ? "blue.500" : "black.200"}
+                  variant={"p4"}
+                >
+                  Read
+                </Heading>
               </Checkbox>
             </Box>
             <Box mt={"10px"}>
               <Checkbox
+                checked={checkBoxs.inerviewing}
+                onChange={(e) => {
+                  setcheckBoxs((prev) => {
+                    return { ...prev, inerviewing: e.target.checked };
+                  });
+                }}
                 sx={globalStyles.checkBoxStyle}
                 borderColor={"black.200"}
                 size="md"
                 rounded={"md"}
                 colorScheme="blue"
               >
-                <Heading variant={"p4"}>Interviewing</Heading>
+                <Heading
+                  color={checkBoxs.inerviewing ? "blue.500" : "black.200"}
+                  variant={"p4"}
+                >
+                  Interviewing
+                </Heading>
               </Checkbox>
             </Box>
             <Box mt={"10px"}>
               <Checkbox
+                checked={checkBoxs.closed}
+                onChange={(e) => {
+                  setcheckBoxs((prev) => {
+                    return { ...prev, closed: e.target.checked };
+                  });
+                }}
                 sx={globalStyles.checkBoxStyle}
                 borderColor={"black.200"}
                 size="md"
                 rounded={"md"}
                 colorScheme="blue"
               >
-                <Heading variant={"p4"}>Closed</Heading>
+                <Heading
+                  color={checkBoxs.closed ? "blue.500" : "black.200"}
+                  variant={"p4"}
+                >
+                  Closed
+                </Heading>
               </Checkbox>
             </Box>
           </Box>
@@ -127,6 +207,12 @@ const SortBy = ({ matchCandidate }) => {
         <Box>
           <Box mt={"16px"}>
             <Checkbox
+              checked={checkBoxs.master}
+              onChange={(e) => {
+                setcheckBoxs((prev) => {
+                  return { ...prev, master: e.target.checked };
+                });
+              }}
               borderColor={"black.200"}
               borderRadius={"8px"}
               sx={globalStyles.checkBoxStyle}
@@ -134,29 +220,56 @@ const SortBy = ({ matchCandidate }) => {
               rounded={"sm"}
               colorScheme="blue"
             >
-              <Heading variant={"p4"}>Masters Degree or Higher</Heading>
+              <Heading
+                color={checkBoxs.master ? "blue.500" : "black.200"}
+                variant={"p4"}
+              >
+                Masters Degree or Higher
+              </Heading>
             </Checkbox>
           </Box>
           <Box mt={"10px"}>
             <Checkbox
+              checked={checkBoxs.bachelor}
+              onChange={(e) => {
+                setcheckBoxs((prev) => {
+                  return { ...prev, bachelor: e.target.checked };
+                });
+              }}
               sx={globalStyles.checkBoxStyle}
               borderColor={"black.200"}
               size="md"
               rounded={"md"}
               colorScheme="blue"
             >
-              <Heading variant={"p4"}>Bachelor’s Degree or Higher</Heading>
+              <Heading
+                color={checkBoxs.bachelor ? "blue.500" : "black.200"}
+                variant={"p4"}
+              >
+                Bachelor’s Degree or Higher
+              </Heading>
             </Checkbox>
           </Box>
           <Box mt={"10px"}>
             <Checkbox
+              checked={checkBoxs.associated}
+              onChange={(e) => {
+                setcheckBoxs((prev) => {
+                  return { ...prev, associated: e.target.checked };
+                });
+              }}
               sx={globalStyles.checkBoxStyle}
               borderColor={"black.200"}
               size="md"
               rounded={"md"}
               colorScheme="blue"
             >
-              <Heading variant={"p4"}>Associate Degree or Higher</Heading>
+              <Heading
+                color={checkBoxs.associated ? "blue.500" : "black.200"}
+                variant={"p4"}
+              >
+                Associate Degree or Higher
+              </Heading>
             </Checkbox>
           </Box>
         </Box>
@@ -173,6 +286,12 @@ const SortBy = ({ matchCandidate }) => {
         <Box>
           <Box mt={"16px"}>
             <Checkbox
+              checked={checkBoxs.pom}
+              onChange={(e) => {
+                setcheckBoxs((prev) => {
+                  return { ...prev, pom: e.target.checked };
+                });
+              }}
               borderColor={"black.200"}
               borderRadius={"8px"}
               sx={globalStyles.checkBoxStyle}
@@ -180,41 +299,79 @@ const SortBy = ({ matchCandidate }) => {
               rounded={"sm"}
               colorScheme="blue"
             >
-              <Heading variant={"p4"}>Project Management</Heading>
+              <Heading
+                color={checkBoxs.pom ? "blue.500" : "black.200"}
+                variant={"p4"}
+              >
+                Project Management
+              </Heading>
             </Checkbox>
           </Box>
           <Box mt={"10px"}>
             <Checkbox
+              checked={checkBoxs.sa}
+              onChange={(e) => {
+                setcheckBoxs((prev) => {
+                  return { ...prev, sa: e.target.checked };
+                });
+              }}
               sx={globalStyles.checkBoxStyle}
               borderColor={"black.200"}
               size="md"
               rounded={"md"}
               colorScheme="blue"
             >
-              <Heading variant={"p4"}>System Architecture</Heading>
+              <Heading
+                color={checkBoxs.sa ? "blue.500" : "black.200"}
+                variant={"p4"}
+              >
+                System Architecture
+              </Heading>
             </Checkbox>
           </Box>
           <Box mt={"10px"}>
             <Checkbox
+              checked={checkBoxs.pd}
+              onChange={(e) => {
+                setcheckBoxs((prev) => {
+                  return { ...prev, pd: e.target.checked };
+                });
+              }}
               sx={globalStyles.checkBoxStyle}
               borderColor={"black.200"}
               size="md"
               rounded={"md"}
               colorScheme="blue"
             >
-              <Heading variant={"p4"}>Product Design</Heading>
+              <Heading
+                color={checkBoxs.pd ? "blue.500" : "black.200"}
+                variant={"p4"}
+              >
+                Product Design
+              </Heading>
             </Checkbox>
           </Box>
 
           <Box mt={"10px"}>
             <Checkbox
+              checked={checkBoxs.leadership}
+              onChange={(e) => {
+                setcheckBoxs((prev) => {
+                  return { ...prev, leadership: e.target.checked };
+                });
+              }}
               sx={globalStyles.checkBoxStyle}
               borderColor={"black.200"}
               size="md"
               rounded={"md"}
               colorScheme="blue"
             >
-              <Heading variant={"p4"}>Leadership</Heading>
+              <Heading
+                color={checkBoxs.leadership ? "blue.500" : "black.200"}
+                variant={"p4"}
+              >
+                Leadership
+              </Heading>
             </Checkbox>
           </Box>
         </Box>

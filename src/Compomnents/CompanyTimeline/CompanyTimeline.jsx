@@ -38,7 +38,15 @@ export const CompanyTimeline = ({ variant }) => {
     yearEstablished: "",
     email: "",
     decsription: "",
+    country: "",
+    province: "",
+    city: "",
+    address: "",
+    platform: "",
+    link: "",
+    links: [],
   });
+
   const router = useRouter();
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
@@ -54,19 +62,7 @@ export const CompanyTimeline = ({ variant }) => {
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
 
-  const CustomeSteps = () => {
-    return (
-      <Heading
-        color={"white.100"}
-        as={"p"}
-        margin={"0px"}
-        fontWeight={"700"}
-        variant={"p1"}
-      >
-        {activeStep}
-      </Heading>
-    );
-  };
+
 
   return (
     <Flex
@@ -122,15 +118,9 @@ export const CompanyTimeline = ({ variant }) => {
       ) : (
         <Steps
           responsive={false}
-          checkIcon={CustomeSteps}
+          checkIcon={false}
           sx={{
-            // span: {
-            //   color:
-            //   // compeletedStep.includes(0) ||
-            //   compeletedStep.includes(1) ||
-            //   compeletedStep.includes(2)?
-            //   "blue.500 ":"gray.light ",
-            // },
+
             ...globalStyles.stepperContainter,
           }}
           variant={"circles-alt"}
@@ -140,12 +130,28 @@ export const CompanyTimeline = ({ variant }) => {
         >
           {/* {console.log(" compeletedStep.includes(0)", compeletedStep.includes(0),compeletedStep)} */}
           {steps.map(({ label }, index) => {
+            const CostomeCheckIcon = () => {
+              return (
+                <Heading
+                  variant={"p1"}
+                  fontWeight={700}
+                  sx={{
+                    color: "white.100",
+
+                  }}
+                >
+                  {" "}
+                  {index + 1}
+                </Heading>
+              );
+            };
             const CostomeIcon = () => {
               return (
                 <Heading
                   variant={"p1"}
                   fontWeight={700}
                   sx={{
+                    // color:'#fff'
                     color: compeletedStep.includes(index)
                       ? "blue.500"
                       : "gray.light",
@@ -158,6 +164,7 @@ export const CompanyTimeline = ({ variant }) => {
             };
             return (
               <Step
+                checkIcon={CostomeCheckIcon}
                 label={
                   <Heading
                     variant={"p1"}
@@ -171,14 +178,14 @@ export const CompanyTimeline = ({ variant }) => {
                     {label}
                   </Heading>
                 }
-                // icon={CostomeIcon}
+                icon={CostomeIcon}
                 flexDirection={"column"}
                 key={label}
               >
                 <Box
                   sx={{
                     p: { md: 8, base: "20px 0px 20px 0px" },
-                    paddingBottom:"20px !important",
+                    paddingBottom: "20px !important",
                     mt: "13px",
                     width: "100%",
                   }}
