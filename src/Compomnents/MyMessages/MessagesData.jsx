@@ -46,9 +46,19 @@ import {
   return (
     <>
       <BottomWaveImage />
-        <Box gap={10} display={"flex"} justifyContent={"center"} alignItems={"center"}>
-            <textarea style={{ border: "0.5px solid gray", borderWidth: "0.25px", borderColor: "black" }} name="" id="" cols="30" rows="20"></textarea>
-            <textarea style={{ border: "0.5px solid gray", borderWidth: "0.25px", borderColor: "black" }} name="" id="" cols="80" rows="20"></textarea>
+        <Box gap={10} display={"flex"} justifyContent={"center"} alignItems={"center"} flexWrap={"wrap"}>
+            <textarea style={{ border: "0.5px solid gray", borderWidth: "0.25px", borderColor: "black",
+            borderRadius: "8px",
+            border: "0.5px solid #AFAFAF",
+            backgroundColor: '#FEFEFE',
+            boxShadow: '0px 4px 20px 0px rgba(0, 0, 0, 0.15)' }}
+             name="" id="" cols="30" rows="20"></textarea>
+            <textarea style={{ border: "0.5px solid gray", borderWidth: "0.25px", borderColor: "black",
+            borderRadius: "8px",
+            border: "0.5px solid #AFAFAF",
+            backgroundColor: '#FEFEFE',
+            boxShadow: '0px 4px 20px 0px rgba(0, 0, 0, 0.15)'
+             }} name="" id="" cols="80" rows="20"></textarea>
         </Box>
 
       <Tabs

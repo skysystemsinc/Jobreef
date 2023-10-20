@@ -37,6 +37,7 @@ const colors = {
   blue: {
     500: "#2CA5C3",
     400: "#DFF1F6",
+
     100: "#F4F9FF",
   },
   orange: {
