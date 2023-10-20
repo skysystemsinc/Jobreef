@@ -25,7 +25,7 @@ import Instagram from "../../assets/Images/Instagram.svg"
 const JobSearchCompanyPage = () => {
   const actionList = ["Download Attachments", "Archive"];
 
- 
+ //TODO
   return (
     <div style={{margin:"0px 50px 0px 50px", width:'70%'}}>
         <Box display={"flex"} mt={"0px"} ml={5} alignItems={"center"} flexWrap={"wrap"}>
@@ -102,7 +102,7 @@ const JobSearchCompanyPage = () => {
             <Box mt={10}>
             <Button
               style={{padding:"20px 40px 20px 40px"}}
-            //   variant="blue-btn"
+              variant="outline-blue"
               marginLeft="2"  // Add margin to the button for space
             >
               Search Now
