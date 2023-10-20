@@ -1,11 +1,12 @@
 import { Avatar, AvatarBadge, FormLabel, Image, Input } from "@chakra-ui/react";
 import React from "react";
 import edit from "@/assets/Images/edit.svg";
-
-const EditProifle = ({ profile , profileStyle }) => {
+import profile_icon from "@/assets/Images/profile_icon.svg";
+const EditProifle = ({ readOnly, handleEvent, profile, profileStyle }) => {
   return (
     <Avatar
-      src={profile.src}
+      src={profile ? profile : profile_icon.src}
+      // src={false}
       width={{ md: "120px", base: "90px" }}
       height={{ md: "120px", base: "90px" }}
       sx={profileStyle}
@@ -18,7 +19,7 @@ const EditProifle = ({ profile , profileStyle }) => {
         >
           <Image src={edit.src} width={{ md: "30px", base: "20px" }} />
         </AvatarBadge>
-        <Input type="file" hidden />
+        <Input disabled={readOnly} onChange={handleEvent} type="file" hidden />
       </FormLabel>
     </Avatar>
   );

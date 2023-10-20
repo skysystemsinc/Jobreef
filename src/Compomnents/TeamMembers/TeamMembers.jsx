@@ -1,10 +1,15 @@
 import { Box, Button, Flex, Image } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PaginatedTable from "../MembersTable/MembersTable";
 import menu from "@/assets/Images/menu.svg";
 import { useRouter } from "next/router";
 import Popovers from "../MembersTable/Popovers";
+import { getTeamMembers } from "@/Reudx/slices/teamMembers";
+import { useSelector } from "react-redux";
 const TeamMembers = () => {
+  const teamMemebers = useSelector((state) => state.teamMembers.value);
+  console.log("teamMemebers", teamMemebers);
+
   const router = useRouter();
   const columns = ["Name", "Email", "Job Title", "Role", "Status", "Actions"];
   const actionList = ["Edit", "Disable"];
@@ -41,6 +46,21 @@ const TeamMembers = () => {
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
+
+  const getData = async () => {
+    try {
+      const teamMembers = await axios({
+        method: "GET",
+        url: "/api/company/teamMembers",
+      });
+      dispatch(getTeamMembers(teamMembers.data));
+    } catch (err) {}
+  };
+
+  useEffect(() => {
+    getData();
+    return () => {};
+  }, []);
   return (
     <>
       <Box

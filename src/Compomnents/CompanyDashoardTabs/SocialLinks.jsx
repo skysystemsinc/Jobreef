@@ -23,17 +23,22 @@ import upload from "@/assets/Images/upload.svg";
 import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
 import IconButton from "../IconButton/IconButton";
 import white_edit from "@/assets/Images/white-edit.svg";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 
 const SocialLink = () => {
-  const [isSmallerThe500] = useMediaQuery("(max-width: 787px)");
+  const companyProfile = useSelector((state) => state.companyProfile.value);
 
-  const [linkArray, setlinkArray] = useState([1]);
-  const handleDelete = (index) => {
-    const deleteArray = [...linkArray];
-    deleteArray.splice(index, 1);
-    setlinkArray(deleteArray);
-  };
-
+  const [State, setState] = useState({
+    links: [
+      {
+        platform: "",
+        link: "",
+      },
+    ],
+  });
+  
   const [isEdit, setisEdit] = useState(false);
   const [readOnly, setreadOnly] = useState(true);
 
@@ -41,7 +46,15 @@ const SocialLink = () => {
     setreadOnly(false);
     setisEdit(true);
   };
-  const handleSave = () => {
+  const handleSave = async () => {
+    const response = await axios("/api/company/companyProfile", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: { ...State },
+    });
+    console.log("response", response);
     setreadOnly(true);
     setisEdit(false);
   };
@@ -50,12 +63,53 @@ const SocialLink = () => {
     setisEdit(false);
   };
 
+  const handlePlatformChange = (event, index) => {
+    let updatedLinks = [...State.links];
+    updatedLinks[index].platform = event.target.value;
+    setState((prev) => {
+      return {
+        ...prev,
+        links: updatedLinks,
+      };
+    });
+  };
+
+  const handleLinkChange = (event, index) => {
+    let updatedLinks = [...State.links];
+    updatedLinks[index].link = event.target.value;
+    setState((prev) => {
+      return {
+        ...prev,
+        links: updatedLinks,
+      };
+    });
+  };
+
+  const handleaddMore = () => {
+    const updatedLinks = [...State.links];
+    updatedLinks.push({ platform: "", link: "" });
+    setState((prev) => {
+      return {
+        ...prev,
+        links: updatedLinks,
+      };
+    });
+    // setFormData(updatedFormData);
+  };
+  useSkipInitialEffect(() => {
+    setState({
+      links: companyProfile.links,
+    });
+  }, [companyProfile]);
+
   return (
     <Box minH={"55vh"} mt={{ md: "60px", base: "10px" }}>
-      {linkArray.map((item, index) => {
+      {State?.links?.map((item, index) => {
         return (
           <InputWrapper key={index} gap={"15px"}>
             <LabelInput
+              state={item.platform}
+              setState={(e) => handlePlatformChange(e, index)}
               readOnly={readOnly}
               labelVariant={"label"}
               type="text"
@@ -65,6 +119,8 @@ const SocialLink = () => {
               label={"Social Links"}
             />
             <LabelInput
+              state={item.link}
+              setState={(e) => handleLinkChange(e, index)}
               labelVariant={"label"}
               type="text"
               variant={"bg-input"}
@@ -107,11 +163,8 @@ const SocialLink = () => {
       })}
 
       {isEdit ? (
-        <Button
-          onClick={() => setlinkArray([...linkArray, 2])}
-          variant={"blue-btn"}
-        >
-          Add more
+        <Button onClick={handleaddMore} variant={"blue-btn"}>
+          Add More
         </Button>
       ) : null}
 

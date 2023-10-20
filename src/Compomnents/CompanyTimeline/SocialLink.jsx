@@ -25,26 +25,44 @@ import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
 const SocialLink = ({ State, setState }) => {
   const [isSmallerThe500] = useMediaQuery("(max-width: 787px)");
 
-  const [linkArray, setlinkArray] = useState([1]);
-  const handleDelete = (index) => {
-    const deleteArray = [...linkArray];
-    deleteArray.splice(index, 1);
-    setlinkArray(deleteArray);
-  };
-  const handleAdd = () => {
-    setlinkArray([...linkArray, 2]);
+  
+  const handlePlatformChange = (event, index) => {
+    let updatedLinks = [...State.links];
+    updatedLinks[index].platform = event.target.value;
     setState((prev) => {
       return {
         ...prev,
-        links: [...prev.links, { platform: State.platform, link: State.link }],
-        platform:"",
-        link:"",
+        links: updatedLinks,
       };
     });
   };
+
+  const handleLinkChange = (event, index) => {
+    let updatedLinks = [...State.links];
+    updatedLinks[index].link = event.target.value;
+    setState((prev) => {
+      return {
+        ...prev,
+        links: updatedLinks,
+      };
+    });
+  };
+
+  const handleaddMore = () => {
+    const updatedLinks = [...State.links];
+    updatedLinks.push({ platform: "", link: "" });
+    setState((prev) => {
+      return {
+        ...prev,
+        links: updatedLinks,
+      };
+    });
+    // setFormData(updatedFormData);
+  };
+
   return (
     <Box pr={"20px"}>
-      {linkArray.map((item, index) => {
+      {State?.links.map((item, index) => {
         return (
           <InputWrapper
             style={{ marginBottom: "15px" }}
@@ -52,12 +70,8 @@ const SocialLink = ({ State, setState }) => {
             gap={"15px"}
           >
             <LabelInput
-              state={State.platform}
-              setState={(e) => {
-                setState((prev) => {
-                  return { ...prev, platform: e.target.value };
-                });
-              }}
+              state={item.platform}
+              setState={(e)=>handlePlatformChange(e, index)}
               labelVariant={"label"}
               type="text"
               variant={"bg-input"}
@@ -66,12 +80,8 @@ const SocialLink = ({ State, setState }) => {
               label={"Social Links"}
             />
             <LabelInput
-              state={State.link}
-              setState={(e) => {
-                setState((prev) => {
-                  return { ...prev, link: e.target.value };
-                });
-              }}
+              state={item.link}
+              setState={ (e)=> handleLinkChange(e, index)}
               labelVariant={"label"}
               type="text"
               variant={"bg-input"}
@@ -84,7 +94,7 @@ const SocialLink = ({ State, setState }) => {
 
       {/* <Flex justifyContent={"center"}> */}
       <Button
-        onClick={handleAdd}
+        onClick={handleaddMore}
         variant={"blue-btn"}
         width={"max-content"}
         px={{ md: "30px", base: "20px" }}

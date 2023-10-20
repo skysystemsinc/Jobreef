@@ -14,7 +14,7 @@ import React from "react";
 import upload from "@/assets/Images/upload.svg";
 import { BsDot } from "react-icons/bs";
 
-const UploadBox = ({ titie, list ,style }) => {
+const UploadBox = ({  handleEvent, titie, list ,style }) => {
   return (
     <Flex justifyContent={"center"}>
       <Box
@@ -62,6 +62,7 @@ const UploadBox = ({ titie, list ,style }) => {
           justifyContent={"center"}
         >
           <FormLabel
+
             variant={"lightblue"}
             border={"1px dashed"}
             borderColor={"#BBBBC7"}
@@ -72,7 +73,7 @@ const UploadBox = ({ titie, list ,style }) => {
             
           >
             <Image src={upload.src} width={{ md: "20px", base: "17px" }} /> Upload
-            <Input type="file" hidden />
+            <Input onChange={handleEvent} type="file" hidden />
           </FormLabel>
         </Box>
       </Box>

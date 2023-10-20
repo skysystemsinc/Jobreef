@@ -22,6 +22,7 @@ import cartoon from "@/assets/Images/cartoon.svg";
 import leftblue_2 from "@/assets/Images/leftblue_2.png";
 import whitetick from "@/assets/Images/white-tick.svg";
 import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 
 const steps = [
   { label: "Company Bio" },
@@ -36,7 +37,7 @@ export const CompanyTimeline = ({ variant }) => {
     directory: "",
     noOfEmployees: "",
     yearEstablished: "",
-    email: "",
+    webLink: "",
     decsription: "",
     country: "",
     province: "",
@@ -44,7 +45,13 @@ export const CompanyTimeline = ({ variant }) => {
     address: "",
     platform: "",
     link: "",
-    links: [],
+    logo: false,
+    links: [
+      {
+        platform: "",
+        link: "",
+      },
+    ],
   });
 
   const router = useRouter();
@@ -52,6 +59,7 @@ export const CompanyTimeline = ({ variant }) => {
     initialStep: 0,
   });
   const hasCompletedAllSteps = activeStep === steps.length;
+  const isLastStep = activeStep === steps.length - 1;
   const [compeletedStep, setcompeletedStep] = useState([]);
   const initialRender = useRef(true);
   useEffect(() => {
@@ -62,8 +70,28 @@ export const CompanyTimeline = ({ variant }) => {
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
 
+  const handleNext = async () => {
+    if (isLastStep) {
+      console.log("isLastStep", isLastStep);
+      const response = await axios("/api/company/companyProfile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: State,
+      });
+      if (response) {
+        nextStep();
+      }
 
-
+      return;
+    }
+    if (!hasCompletedAllSteps) {
+      nextStep();
+    } else {
+      router.push("/company/profile-setting");
+    }
+  };
   return (
     <Flex
       flexDir="column"
@@ -120,7 +148,6 @@ export const CompanyTimeline = ({ variant }) => {
           responsive={false}
           checkIcon={false}
           sx={{
-
             ...globalStyles.stepperContainter,
           }}
           variant={"circles-alt"}
@@ -137,7 +164,6 @@ export const CompanyTimeline = ({ variant }) => {
                   fontWeight={700}
                   sx={{
                     color: "white.100",
-
                   }}
                 >
                   {" "}
@@ -245,13 +271,7 @@ export const CompanyTimeline = ({ variant }) => {
             <Button
               // width={{ "2xl": "200px", md: "140px", sm: "120px", base: "100px" }}
               variant={"blue-btn"}
-              onClick={() => {
-                if (!hasCompletedAllSteps) {
-                  nextStep();
-                } else {
-                  router.push("/company/profile-setting");
-                }
-              }}
+              onClick={handleNext}
             >
               {"Next"}
             </Button>

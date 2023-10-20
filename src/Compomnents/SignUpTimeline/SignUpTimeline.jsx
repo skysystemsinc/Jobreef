@@ -27,17 +27,17 @@ const steps = [
 
 export const SignUpTimeline = ({ candidate, variant }) => {
   const router = useRouter();
+  const { company, setCompany } = useContext(Role_context);
   const [State, setState] = useState({
-    name: "",
-    lastName: "",
-    email: "",
-    role: "",
-    password: "",
-    confirmPassword: "",
-    otp: "",
+    name: "test",
+    lastName: "test",
+    email: "test@gmail.com",
+    role: company,
+    password: "123",
+    confirmPassword: "123",
+    otp: "123",
   });
 
-  const { company, setCompany } = useContext(Role_context);
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
@@ -53,7 +53,28 @@ export const SignUpTimeline = ({ candidate, variant }) => {
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
 
-  
+  const handeNext = async () => {
+    if (activeStep == 2) {
+      if (!company) {
+        router.push("/candidate/profile-setting");
+      } else {
+        const response = await fetch("/api/company/userProfile", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...State,
+          }),
+        });
+        const data = await response.json();
+        console.log(data);
+        router.push("/registeraion");
+      }
+    } else {
+      nextStep();
+    }
+  };
 
   return (
     <Flex
@@ -64,7 +85,6 @@ export const SignUpTimeline = ({ candidate, variant }) => {
     >
       <Steps
         responsive={false}
-        
         sx={globalStyles.stepperContainter}
         variant={"circles-alt"}
         colorScheme="blue"
@@ -173,17 +193,7 @@ export const SignUpTimeline = ({ candidate, variant }) => {
           <Button
             // width={{ md: "200px", sm: "180px", base: "130px" }}
             variant={"blue-btn"}
-            onClick={() => {
-              if (activeStep == 2) {
-                if (!company) {
-                  router.push("/candidate/profile-setting");
-                } else {
-                  router.push("/registeraion");
-                }
-              } else {
-                nextStep();
-              }
-            }}
+            onClick={handeNext}
           >
             {isLastStep ? "Verify" : "Next"}
           </Button>

@@ -106,7 +106,7 @@ const LabelInput = ({
         <Input
           ref={inputRef}
           readOnly={readOnly}
-          value={state}
+          value={state ??""}
           onChange={setState}
           variant={variant}
           placeholder={placeholder}
