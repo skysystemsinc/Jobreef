@@ -8,8 +8,8 @@ import SelectedCandidate from "../ArchivedTabs/SelectedCandidate";
 const Application = () => {
   const tablist = ["All (19)", "Archived (3)"];
   const [showSelectCandidate, setshowSelectCandidate] = useState(false);
-  const popOverListAll = ["Download Attachments", "Delete"];
-  const popOverListArchived = ["Restore", "Archive"];
+  const popOverListAll = ["Download Attachments", "Archived"];
+  const popOverListArchived = ["Restore", "Delete"];
   const componentList = [
     <All
       cardStatus={"Interviewing"}

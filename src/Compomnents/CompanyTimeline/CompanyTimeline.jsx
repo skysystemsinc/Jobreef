@@ -161,9 +161,10 @@ export const CompanyTimeline = ({ variant }) => {
               return (
                 <Heading
                   variant={"p1"}
-                  fontWeight={700}
+                  // fontWeight={700}
                   sx={{
                     color: "white.100",
+                    fontWeight: 700,
                   }}
                 >
                   {" "}
@@ -181,6 +182,7 @@ export const CompanyTimeline = ({ variant }) => {
                     color: compeletedStep.includes(index)
                       ? "blue.500"
                       : "gray.light",
+                    fontWeight: 700,
                   }}
                 >
                   {" "}

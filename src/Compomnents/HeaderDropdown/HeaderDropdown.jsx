@@ -118,7 +118,7 @@ const HeaderDropdown = () => {
                   _hover={{ bg: "transparent" }}
                   borderBottom={"1px solid #0000001a"}
                   // p={{ md: "14px 20px 16px 20px", base: "7px 16px 14px 16px" }}
-                  p={{ md: "14px 20px 16px 20px", base: "13px 16px 13px 16px" }}
+                  p={{ md: "17px 20px 17px 20px", base: "16px 16px 16px 16px" }}
 
                   // mb={"6px"}
                 >

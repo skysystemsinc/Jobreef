@@ -65,7 +65,7 @@ const CompanyLocation = ({ State, setState }) => {
           variant={"bg-input"}
           placeholder="Enter City"
           label={"City"}
-          dropdown
+          
         />
         <LabelInput
           state={State.address}

@@ -28,6 +28,8 @@ import { useSelector } from "react-redux";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 
 const SocialLink = () => {
+  const [isSmallerThe500] = useMediaQuery("(max-width: 787px)");
+
   const companyProfile = useSelector((state) => state.companyProfile.value);
 
   const [State, setState] = useState({
@@ -38,10 +40,20 @@ const SocialLink = () => {
       },
     ],
   });
-  
+
   const [isEdit, setisEdit] = useState(false);
   const [readOnly, setreadOnly] = useState(true);
+  const handleDelete = (index) => {
+    const updatedLinks = [...State.links];
+    updatedLinks.splice(index, 1);
 
+    setState((prev) => {
+      return {
+        ...prev,
+        links: updatedLinks,
+      };
+    });
+  };
   const handleEdit = () => {
     setreadOnly(false);
     setisEdit(true);
@@ -118,7 +130,7 @@ const SocialLink = () => {
               dropdown={readOnly ? false : true}
               label={"Social Links"}
             />
-            <LabelInput
+            {/* <LabelInput
               state={item.link}
               setState={(e) => handleLinkChange(e, index)}
               labelVariant={"label"}
@@ -127,15 +139,19 @@ const SocialLink = () => {
               readOnly={readOnly}
               placeholder="Paste link to company social network page"
               label={"Link"}
-            />
-            {/* <Box width={isSmallerThe500 ? "96%" : "100%"} position={"relative"}>
+            /> */}
+            <Box width={isSmallerThe500 ? "96%" : "100%"} position={"relative"}>
               {isSmallerThe500 ? (
                 <Input
+                  value={item.link}
+                  onChange={(e) => handleLinkChange(e, index)}
                   variant={"bg-input"}
                   placeholder="Paste link to company social network page"
                 />
               ) : (
                 <LabelInput
+                  state={item.link}
+                  setState={(e) => handleLinkChange(e, index)}
                   labelVariant={"label"}
                   type="text"
                   variant={"bg-input"}
@@ -145,19 +161,27 @@ const SocialLink = () => {
                 />
               )}
               {isEdit ? (
-                <AiOutlineDelete
-                  onClick={() => handleDelete(index)}
-                  style={{
+                <Box
+                  sx={{
                     cursor: "pointer",
                     position: "absolute",
-                    top: isSmallerThe500 ? "7px" : "61px",
+
                     right: isSmallerThe500 ? "-30px" : "-30px",
                     fontSize: "23px",
                     color: "#2CA5C3",
+                    top: {
+                      "2xl": "65px ",
+                      xl: "41px",
+                      lg: "40px",
+                      sm: "9px",
+                      base: "9px",
+                    },
                   }}
-                />
+                >
+                  <AiOutlineDelete onClick={() => handleDelete(index)} />
+                </Box>
               ) : null}
-            </Box> */}
+            </Box>
           </InputWrapper>
         );
       })}

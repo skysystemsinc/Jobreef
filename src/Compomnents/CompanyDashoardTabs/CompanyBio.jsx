@@ -196,7 +196,7 @@ const CompanyBio = () => {
           type="text"
           variant={"bg-input"}
           placeholder="Enter Year in Numbers"
-          label={"Year Established*"}
+          label={"Year Established"}
         />
         <LabelInput
           state={State.webLink}

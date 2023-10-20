@@ -78,7 +78,7 @@ import {
           />
         </InputWrapper>
         
-        <InputWrapper>
+        {/* <InputWrapper>
           <LabelInput
             labelVariant={"label"}
             textarea
@@ -86,7 +86,7 @@ import {
             placeholder="Enter the benefits associated with this job in detail for candidates"
             label={"Benefits"}
           />
-        </InputWrapper>
+        </InputWrapper> */}
         
       </Box>
     );

@@ -34,7 +34,7 @@ const steps = [
   // { label: "Step 5" },
 ];
 
-export const JobPostTimeline = ({ candidate, variant }) => {
+ const JobPostTimeline = ({ candidate, variant }) => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
@@ -229,3 +229,4 @@ export const JobPostTimeline = ({ candidate, variant }) => {
     </Box>
   );
 };
+export default JobPostTimeline

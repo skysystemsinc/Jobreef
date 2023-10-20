@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
-// import "@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css";
+import "@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css";
 import "react-calendar/dist/Calendar.css";
 import {
   Box,
@@ -23,6 +23,7 @@ const DatePicker = ({
   isopen,
 }) => {
   const [date, setdate] = useState(new Date());
+  const [isOpen, setisopen] = useState(false);
   const calenderStle = {
     // "& .react-daterange-picker__calendar-button": {
     //   border: "1px solid red !important",
@@ -83,11 +84,11 @@ const DatePicker = ({
 
       borderRadius: "6px",
 
-        hover: {
-          backgroundColor:"blue.400",
-          color: "black.100",
-          borderRadius: "6px",
-        },
+      hover: {
+        backgroundColor: "blue.400",
+        color: "black.100",
+        borderRadius: "6px",
+      },
     },
 
     "& .react-calendar_tile react-calendar_tile--active": {
@@ -164,32 +165,35 @@ const DatePicker = ({
   };
 
   return (
-    <Box sx={calenderStle}>
-      <InputGroup>
-        <Input
-          value={moment(date).format("MM/DD/YYYY")}
-          placeContent={"MM/DD/YYYY"}
-          variant={"bg-input"}
-          placeholder="MM/DD/YYYY"
-          readOnly={true}
-        />
-        <InputRightElement>
-          <DateRangePicker
-            calendarIcon={
-              <Image
-                src={canlenderIcon.src}
-                width={{ md: "25px", base: "20px" }}
-                mt={{ md: "0px", base: "6px" }}
-              />
-            }
-            selectRange={false}
-            onChange={setdate}
-            value={date}
-            dayPlaceholder="DD"
+    <>
+      <Box sx={calenderStle}>
+        <InputGroup>
+          <Input
+            value={moment(date).format("MM/DD/YYYY")}
+            placeContent={"MM/DD/YYYY"}
+            variant={"bg-input"}
+            placeholder="MM/DD/YYYY"
+            readOnly={true}
           />
-        </InputRightElement>
-      </InputGroup>
-    </Box>
+          <InputRightElement>
+            <DateRangePicker
+              calendarIcon={
+                <Image
+                  src={canlenderIcon.src}
+                  width={{ md: "25px", base: "20px" }}
+                  mt={{ md: "0px", base: "6px" }}
+                />
+              }
+              selectRange={false}
+              // isOpen={false}
+              onChange={setdate}
+              // shou
+              value={date}
+            />
+          </InputRightElement>
+        </InputGroup>
+      </Box>
+    </>
   );
 };
 

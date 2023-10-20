@@ -47,7 +47,7 @@ import {
             variant={"bg-input"}
             placeholder="Enter City"
             label={"City"}
-            dropdown
+            
           />
           <LabelInput
             labelVariant={"label"}

@@ -353,7 +353,7 @@ const components = {
         color: "gray.light",
         lineHeight: "28px",
         fontFamily: "var(--chakra-\fonts-openSans)",
-        fontSize: "14px",
+        fontSize: ["12px", "14px", "14px", "14px", "14px", "14px"],
         margin: "0px",
       },
 

@@ -24,8 +24,17 @@ import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
 
 const SocialLink = ({ State, setState }) => {
   const [isSmallerThe500] = useMediaQuery("(max-width: 787px)");
-
-  
+  const handleDelete = (index) => {
+    const updatedLinks = [...State.links];
+    updatedLinks.splice(index, 1);
+    // setlinkArray(deleteArray);
+    setState((prev) => {
+      return {
+        ...prev,
+        links: updatedLinks,
+      };
+    });
+  };
   const handlePlatformChange = (event, index) => {
     let updatedLinks = [...State.links];
     updatedLinks[index].platform = event.target.value;
@@ -71,7 +80,7 @@ const SocialLink = ({ State, setState }) => {
           >
             <LabelInput
               state={item.platform}
-              setState={(e)=>handlePlatformChange(e, index)}
+              setState={(e) => handlePlatformChange(e, index)}
               labelVariant={"label"}
               type="text"
               variant={"bg-input"}
@@ -79,7 +88,7 @@ const SocialLink = ({ State, setState }) => {
               dropdown
               label={"Social Links"}
             />
-            <LabelInput
+            {/* <LabelInput
               state={item.link}
               setState={ (e)=> handleLinkChange(e, index)}
               labelVariant={"label"}
@@ -87,7 +96,47 @@ const SocialLink = ({ State, setState }) => {
               variant={"bg-input"}
               placeholder="Paste link to company social network page"
               label={"Link"}
-            />
+            /> */}
+            <Box width={isSmallerThe500 ? "96%" : "100%"} position={"relative"}>
+              {isSmallerThe500 ? (
+                <Input
+                  value={item.link}
+                  onChange={(e) => handleLinkChange(e, index)}
+                  variant={"bg-input"}
+                  placeholder="Paste link to company social network page"
+                />
+              ) : (
+                <LabelInput
+                  state={item.link}
+                  setState={(e) => handleLinkChange(e, index)}
+                  labelVariant={"label"}
+                  type="text"
+                  variant={"bg-input"}
+                  // readOnly={readOnly}
+                  placeholder="Paste link to company social network page"
+                  label={"Link"}
+                />
+              )}
+
+              <Box
+                sx={{
+                  cursor: "pointer",
+                  position: "absolute",
+                  top: {
+                    "2xl": "65px ",
+                    xl: "41px",
+                    lg: "40px",
+                    sm: "9px",
+                    base: "9px",
+                  },
+                  right: isSmallerThe500 ? "-30px" : "-30px",
+                  fontSize: "23px",
+                  color: "#2CA5C3",
+                }}
+              >
+                <AiOutlineDelete onClick={() => handleDelete(index)} />
+              </Box>
+            </Box>
           </InputWrapper>
         );
       })}

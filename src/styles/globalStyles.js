@@ -97,7 +97,7 @@ const globalStyles = {
   stepperContainter: {
     width: {
       md: "450px",
-      base: "70%",
+      base: "90%",
     },
     flexDir: "row !important",
 
@@ -113,11 +113,11 @@ const globalStyles = {
 
     "& .cui-steps__step-icon-container": {
       bg: "transparent",
-      marginBottom: "11px",
+      marginBottom: { md: "11px", base: "2px" },
       border: "3px solid ",
       borderColor: "gray.light ",
-      width: { "2xl": "36px !important", base: "32px" },
-      height: { "2xl": "36px !important", base: "32px" },
+      width: { "2xl": "36px !important", sm: "32px", base: "30px" },
+      height: { "2xl": "36px !important", sm: "32px", base: "30px" },
       span: {
         color: "gray.light",
         _active: {
@@ -157,7 +157,7 @@ const globalStyles = {
       "&::after": {
         bg: "gray.light !important",
         height: "3px !important",
-        width: "81% !important",
+        width: { md: "81% !important", sm: "85% !important",base: "78% !important" },
         top: "17px   !important",
         marginInlineEnd: "0px !important",
         marginInlineStart: "0px !important",

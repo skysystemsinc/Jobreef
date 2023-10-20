@@ -33,8 +33,8 @@ import { IoNotificationsOutline } from "react-icons/io5";
 import { Link } from "@chakra-ui/next-js";
 import { BsHeart } from "react-icons/bs";
 import heart from "@/assets/Images/heart.svg";
-import dynamic from "next/dynamic";
 import { MdArrowDropDown } from "react-icons/md";
+import dynamic from "next/dynamic";
 const HeaderDropdown = dynamic(
   () => import("../HeaderDropdown/HeaderDropdown"),
   {
