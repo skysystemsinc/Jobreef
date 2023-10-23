@@ -68,7 +68,7 @@ const text2=[
 const JobSearchCompanyPage = () => {
   const actionList = ["Download Attachments", "Archive"];
 
- 
+ //TODO
   return (
     <Box margin="0px 50px 0px 50px" width='100%' display="flex">
         <Box flex={2}>
