@@ -247,7 +247,7 @@ const JobSearchCompanyPage = () => {
           </Box>
         ))}
         <Box display={"flex"} gap={6} mt={10}>
-          <Button style={{ padding: "20px 40px 20px 40px" }}>Sa ve Job</Button>
+          <Button style={{ padding: "20px 40px 20px 40px" }}>Save Job</Button>
           <Button style={{ padding: "20px 40px 20px 40px" }} variant="blue-btn">
             Apply Now
           </Button>
@@ -269,24 +269,28 @@ const JobSearchCompanyPage = () => {
             Responsibilities
           </Heading>
           {text.map((data, index) => (
-            <Heading color={"gray.text"} variant={"p4"} display={"flex"}>
-              {index + 1}.{" "}
+            <Box display={"flex"}>
+              <Heading color={"gray.text"} variant={"p4"} >
+                {index + 1}.{" "}
+              </Heading>
               <Heading ml={2} color={"gray.text"} variant={"p4"}>
                 {data.value}
               </Heading>
-            </Heading>
+            </Box>
           ))}
 
           <Heading color={"gray.text"} variant={"p4"} mt={3}>
             Qualification and requirements
           </Heading>
           {text2.map((data, index) => (
-            <Heading color={"gray.text"} variant={"p4"} display={"flex"}>
-              {index + 1}.{" "}
+            <Box display={"flex"}>
+              <Heading color={"gray.text"} variant={"p4"} >
+                {index + 1}.{" "}
+              </Heading>
               <Heading ml={2} color={"gray.text"} variant={"p4"}>
                 {data.value}
               </Heading>
-            </Heading>
+            </Box>
           ))}
         </Box>
 

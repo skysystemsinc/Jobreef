@@ -233,7 +233,7 @@ const JobSearchResults = ({ company, location }) => {
 
       <Box display={"flex"} flexWrap={"wrap"} margin={10} gap={5}>
         <Box display={{ lg: "block", base: "none" }}>
-          <Box width="100%" flex={1} display={"flex"} flexDirection={"column"}>
+          <Box width="100%" flex={1} display={"flex"} flexDirection={"column"} flexWrap={"wrap"}>
             {checkboxes.map((object, index) => {
               return (
                 <Box
