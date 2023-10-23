@@ -6,10 +6,12 @@ import {
     Input,
     InputGroup,
     InputLeftElement,
+    Image,
   } from "@chakra-ui/react";
   import { FiSearch, FiMapPin } from "react-icons/fi";
   import React from "react";
   import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
+  import location from "../../assets/Images/location.svg"
   
   
   const JobSearchData = ({searchEntryForCompany,SearchEntryForLocation,SearchNow}) => {
@@ -29,28 +31,34 @@ import {
             <InputGroup>
               <InputLeftElement
                 pointerEvents="none"
-                children={<FiSearch color="gray.100" />}
+                children={<FiSearch color="black" />}
               />
               <Input
+                color={"black"}
                 type="text"
                 variant="filled"
                 placeholder="Search for Jobs Companies and Keywords"
                 marginRight="2"
                 onChange={(e)=>(searchEntryForCompany(e.target.value))}
+                bg={"gray.200"}
               />
             </InputGroup>
   
             <InputGroup>
               <InputLeftElement
                 pointerEvents="none"
-                children={<FiMapPin color="gray.100" />}
+                children={
+                <Image width={{ md: "20px", base: "20px" }} src={location.src} />
+              }
+                
               />
               <Input
+                color={"black"}
                 type="text"
                 variant="filled"
                 placeholder="Search By Location e.g remote"
                 marginRight="2"
-                bg={"gray.100"}
+                bg={"gray.200"}
                 onChange={(e)=>(SearchEntryForLocation(e.target.value))}
               />
             </InputGroup>

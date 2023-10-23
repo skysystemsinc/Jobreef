@@ -14,14 +14,8 @@ import React, { useState } from "react";
 
 import globalStyles from "@/styles/globalStyles";
 import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
-import AboutYouTabs from "../ProfileSettingTabs/AboutYouTabs";
 import AppliedJobs from "./AppliedJobs";
 import SavedJobs from "./SavedJobs";
-// import Overview from "./Overview";
-// import WorkExperiance from "./WorkExperiance";
-// import Education from "./Education";
-// import Certification from "./Certification";
-// import Skills from "./Skills";
 const MyJobsTabs = () => {
   let [tabIndex, setTabIndex] = useState(0);
   const tabList = [
@@ -37,7 +31,7 @@ const MyJobsTabs = () => {
   ];
   return (
     <>
-      <BottomWaveImage />
+      <BottomWaveImage /> 
 
       <Tabs
         onChange={(index) => {
@@ -76,9 +70,6 @@ const MyJobsTabs = () => {
           <TabPanel>
             <SavedJobs />
           </TabPanel>
-          {/* <TabPanel>
-            <Certification />
-          </TabPanel> */}
         </TabPanels>
       </Tabs>
     </>
