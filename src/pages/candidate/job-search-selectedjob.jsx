@@ -2,7 +2,7 @@ import Header from "@/Compomnents/Header/Header";
 import MyJobsTabs from "@/Compomnents/MyJobsTab/MyJobsTabs";
 import { Box, Heading } from "@chakra-ui/react";
 import React from "react";
-import JobSearchCompanyPage from "./jobSearchCompanyPage";
+import JobSearchCompanyPage from "../../Compomnents/JobSearchData/jobSearchCompanyPage";
 
 
 const jobSearchSelected = () => {
