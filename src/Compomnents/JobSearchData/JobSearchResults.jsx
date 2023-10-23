@@ -573,7 +573,8 @@ const JobSearchResults = ({ company, location }) => {
 
         {toggle ? (
           <Box
-            display={"flex"}
+            display={{lg: 'flex' , base: 'none'}}
+            // display={"flex"}
             flexDirection={"column"}
             flexWrap={"wrap"}
             width="100%"
