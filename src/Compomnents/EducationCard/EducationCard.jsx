@@ -5,7 +5,7 @@ import { GoDotFill } from "react-icons/go";
 import { HiLocationMarker } from "react-icons/hi";
 import edit_outline from "@/assets/Images/edit_outline.svg";
 import trash from "@/assets/Images/trash.svg";
-const EducationCard = () => {
+const EducationCard = ({dispableBlueCard}) => {
   return (
     <Box
       p={{ sm: "20px", base: "12px" }}

@@ -113,7 +113,7 @@ const globalStyles = {
 
     "& .cui-steps__step-icon-container": {
       bg: "transparent",
-      marginBottom: { md: "11px", base: "2px" },
+      marginBottom: { md: "11px",sm:"10px", base: "2px" },
       border: "3px solid ",
       borderColor: "gray.light ",
       width: { "2xl": "36px !important", sm: "32px", base: "30px" },
@@ -134,12 +134,6 @@ const globalStyles = {
         borderColor: "blue.500 !important",
         bg: "blue.500",
         color: "blue.500 !important",
-
-        // "& .cui-steps__step-icon-container": {
-        //   span: {
-        //     color: "blue.500 !important",
-        //   },
-        // },
         "& .cui-steps__horizontal-step": {
           "&::after": {
             bg: "blue.500 !important",
@@ -157,24 +151,17 @@ const globalStyles = {
       "&::after": {
         bg: "gray.light !important",
         height: "3px !important",
-        width: { md: "81% !important", sm: "85% !important",base: "78% !important" },
+        width: {
+          md: "81% !important",
+          sm: "85% !important",
+          base: "78% !important",
+        },
         top: "17px   !important",
         marginInlineEnd: "0px !important",
         marginInlineStart: "0px !important",
       },
     },
 
-    // _completed: {
-    //   "& .cui-steps__horizontal-step": {
-    //     border: '1px solid red !important',
-    //     span: {
-    //       color: "blue.500 ",
-    //       // fontSize:"100px"
-    //     },
-    //   },
-    // },
-    // _active: {
-    // },
     "& .cui-steps__horizontal-step:first-of-type": {
       // border: '1px solid ',
       "& .cui-steps__step-icon-container": {

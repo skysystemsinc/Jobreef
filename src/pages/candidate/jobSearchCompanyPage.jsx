@@ -173,25 +173,6 @@ const JobSearchCompanyPage = () => {
         </Box>
         
             
-<<<<<<< HEAD
-            <Box mt={10}>
-            <Button
-              style={{padding:"20px 40px 20px 40px"}}
-              variant="outline-blue"
-              marginLeft="2"  // Add margin to the button for space
-            >
-              Search Now
-            </Button>
-            <Button
-              style={{padding:"20px 40px 20px 40px"}}
-              variant="blue-btn"
-              marginLeft="2"  // Add margin to the button for space
-            >
-              Apply Now
-            </Button>
-            </Box>
-=======
->>>>>>> ea278611a49270238cd23908d4187c5f1be2eda7
         <Box mt={5}>
             <Heading color={"gray.text"} variant={"p4"}>
                 Job Description

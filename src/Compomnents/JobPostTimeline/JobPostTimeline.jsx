@@ -98,7 +98,26 @@ const JobPostTimeline = ({ candidate, variant }) => {
 
             width: {
               md: "630px",
-              base: "90%",
+              base: "100%",
+            },
+            "& .cui-steps__horizontal-step": {
+              _active: {
+                "&::after": {
+                  bg: "blue.500 !important",
+                },
+              },
+              "&::after": {
+                bg: "gray.light !important",
+                height: "3px !important",
+                width: {
+                  md: "81% !important",
+                  sm: "82% !important",
+                  base: "66% !important",
+                },
+                top: "17px   !important",
+                marginInlineEnd: "0px !important",
+                marginInlineStart: "0px !important",
+              },
             },
           }}
           // border={"1px solid red"}

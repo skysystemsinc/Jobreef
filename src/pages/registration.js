@@ -2,7 +2,7 @@ import CompanyRegiteration from "@/Compomnents/CompanyRegiteration/CompanyRegite
 import { Box } from "@chakra-ui/react";
 import React from "react";
 
-const Registeraion = () => {
+const Registration = () => {
   return (
     <Box height={"100vh"}>
       <CompanyRegiteration />
@@ -10,4 +10,4 @@ const Registeraion = () => {
   );
 };
 
-export default Registeraion;
+export default Registration;

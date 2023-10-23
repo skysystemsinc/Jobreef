@@ -56,7 +56,7 @@ export const SignUpTimeline = ({ candidate, variant }) => {
   const handeNext = async () => {
     if (activeStep == 2) {
       if (!company) {
-        router.push("/candidate/profile-setting");
+        router.push("/candidate/registration");
       } else {
         const response = await fetch("/api/company/userProfile", {
           method: "POST",

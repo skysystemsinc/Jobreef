@@ -352,9 +352,9 @@ const components = {
       p1: {
         fontWeight: 400,
         color: "gray.light",
-        lineHeight: "28px",
+        lineHeight: [   "19px", "19px", "28px", "28px", "28px", "28px",],
         fontFamily: "var(--chakra-\fonts-openSans)",
-        fontSize: ["12px", "14px", "14px", "14px", "14px", "14px"],
+        fontSize: ["12px", "13px", "14px", "14px", "14px", "14px"],
         margin: "0px",
       },
 
