@@ -49,9 +49,10 @@ const ArchivedTabs = ({ matchCandidate, company, tablist, componentList }) => {
             width: { md: "60%", base: "99%" },
           }}
         >
-          {tablist?.map((item) => {
+          {tablist?.map((item  , index) => {
               return (
                 <Tab
+                key={index}
                   fontSize={{ md: "16px", base: "14px" }}
                   sx={globalStyles.outlineTab.tabelinkStyle}
                   _selected={globalStyles.outlineTab.selectTab}
@@ -65,8 +66,8 @@ const ArchivedTabs = ({ matchCandidate, company, tablist, componentList }) => {
         {/* </Box> */}
 
         <TabPanels>
-          {componentList?.map((item) => {
-            return <TabPanel px={"0px"}>{item}</TabPanel>;
+          {componentList?.map((item , index)  => {
+            return <TabPanel key={index} px={"0px"}>{item}</TabPanel>;
           })}
         </TabPanels>
       </Tabs>

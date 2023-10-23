@@ -8,33 +8,105 @@ import { getTeamMembers } from "@/Reudx/slices/teamMembers";
 import { useSelector } from "react-redux";
 const TeamMembers = () => {
   const teamMemebers = useSelector((state) => state.teamMembers.value);
-  console.log("teamMemebers", teamMemebers);
 
   const router = useRouter();
   const columns = ["Name", "Email", "Job Title", "Role", "Status", "Actions"];
+  const keys = ["Name", "email", "Job Title", "role", "Status", "Actions"];
   const actionList = ["Edit", "Disable"];
   const data = [
     {
       Name: "Michael Scott",
-      Email: "mscott@example.org",
+      email: "mscott@example.org",
       "Job Title": "Director, Talent Acquisition",
-      Role: "Owner",
+      role: "Owner",
       Status: "Active",
       Actions: <Popovers actionList={actionList} />,
     },
     {
       Name: "Michael Scott",
-      Email: "mscott@example.org",
+      email: "mscott@example.org",
       "Job Title": "Director, Talent Acquisition",
-      Role: "Owner",
+      role: "Owner",
       Status: "Active",
       Actions: <Popovers actionList={actionList} />,
     },
     {
       Name: "Michael Scott",
-      Email: "mscott@example.org",
+      email: "mscott@example.org",
       "Job Title": "Director, Talent Acquisition",
-      Role: "Owner",
+      role: "Owner",
+      Status: "Active",
+      Actions: <Popovers actionList={actionList} />,
+    },
+    {
+      Name: "Michael Scott",
+      email: "mscott@example.org",
+      "Job Title": "Director, Talent Acquisition",
+      role: "Owner",
+      Status: "Active",
+      Actions: <Popovers actionList={actionList} />,
+    },
+    {
+      Name: "Michael Scott",
+      email: "mscott@example.org",
+      "Job Title": "Director, Talent Acquisition",
+      role: "Owner",
+      Status: "Active",
+      Actions: <Popovers actionList={actionList} />,
+    },
+    {
+      Name: "Uzma",
+      email: "mscott@example.org",
+      "Job Title": "Director, Talent Acquisition",
+      role: "Owner",
+      Status: "Active",
+      Actions: <Popovers actionList={actionList} />,
+    },
+    {
+      Name: "Michael Scott",
+      email: "mscott@example.org",
+      "Job Title": "Director, Talent Acquisition",
+      role: "Owner",
+      Status: "Active",
+      Actions: <Popovers actionList={actionList} />,
+    },
+    {
+      Name: "Michael Scott",
+      email: "mscott@example.org",
+      "Job Title": "Director, Talent Acquisition",
+      role: "Owner",
+      Status: "Active",
+      Actions: <Popovers actionList={actionList} />,
+    },
+    {
+      Name: "Michael Scott",
+      email: "mscott@example.org",
+      "Job Title": "Director, Talent Acquisition",
+      role: "Owner",
+      Status: "Active",
+      Actions: <Popovers actionList={actionList} />,
+    },
+    {
+      Name: "Michael Scott",
+      email: "mscott@example.org",
+      "Job Title": "Director, Talent Acquisition",
+      role: "Owner",
+      Status: "Active",
+      Actions: <Popovers actionList={actionList} />,
+    },
+    {
+      Name: "Michael",
+      email: "mscott@example.org",
+      "Job Title": "Director, Talent Acquisition",
+      role: "Owner",
+      Status: "Active",
+      Actions: <Popovers actionList={actionList} />,
+    },
+    {
+      Name: "Michael Scott",
+      email: "mscott@example.org",
+      "Job Title": "Director, Talent Acquisition",
+      role: "Owner",
       Status: "Active",
       Actions: <Popovers actionList={actionList} />,
     },
@@ -42,9 +114,12 @@ const TeamMembers = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 5; // Number of rows per page
+  const totalPages = Math.ceil(data.length / pageSize);
 
   const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
   };
 
   const getData = async () => {
@@ -82,6 +157,8 @@ const TeamMembers = () => {
           </Button>
         </Flex>
         <PaginatedTable
+        keys={keys}
+          totalPages={totalPages}
           pageSize={pageSize}
           currentPage={currentPage}
           onPageChange={handlePageChange}

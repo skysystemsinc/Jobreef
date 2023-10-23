@@ -101,12 +101,12 @@ const LabelInput = ({
           variant={variant}
         />
       ) : type == "date" ? (
-        <DatePicker />
+        <DatePicker setState={setState} state={state} />
       ) : (
         <Input
           ref={inputRef}
           readOnly={readOnly}
-          value={state ??""}
+          value={state ?? ""}
           onChange={setState}
           variant={variant}
           placeholder={placeholder}

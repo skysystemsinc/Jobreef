@@ -9,8 +9,14 @@ import download from "@/assets/Images/download.svg";
 import { GoDotFill } from "react-icons/go";
 import NotePadModal from "../NotePadModal/NotePadModal";
 import { BiNotepad } from "react-icons/bi";
+import { useSelector } from "react-redux";
+import moment from "moment";
 
 const SelectedCandidateCard = ({ matchCandidate }) => {
+  const selectedCandidates = useSelector(
+    (state) => state.candidates.value.selected
+  );
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const iconWidth = {
     width: { md: "16px", base: "13px" },
@@ -50,7 +56,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
             />
             <Box>
               <Heading color={"gray.text"} as={"p"} variant={"p7"}>
-                Erin James
+                {selectedCandidates?.name}
               </Heading>
 
               <Heading
@@ -60,7 +66,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
                 as={"p"}
                 variant={"p4"}
               >
-                Nassau, The Bahamas
+                {selectedCandidates?.country}, {selectedCandidates?.state}
               </Heading>
               <Box>
                 <Box
@@ -82,7 +88,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
                     as={"p"}
                     variant={"p4"}
                   >
-                    Applied On: 17/09/2023
+                   Applied On: {moment(selectedCandidates?.createAt).format("DD/MM/YYYY")}
                   </Heading>
                 </Box>
               </Box>
@@ -163,7 +169,11 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
                       Read
                     </Box>
                   </Heading>
-                  <Image  width={"20px"} sx={iconWidth} src={black_arrow_down.src} />
+                  <Image
+                    width={"20px"}
+                    sx={iconWidth}
+                    src={black_arrow_down.src}
+                  />
                 </Box>
                 <Box
                   display={{ lg: "none", base: "flex" }}
@@ -177,7 +187,10 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
                     Note{" "}
                   </Heading>
                   {/* <Image width={"20px"} src={black_arrow_down.src} /> */}
-                  <BiNotepad fontSize={{ md: "22px" , base:'17px'}} fill="black.100" />
+                  <BiNotepad
+                    fontSize={{ md: "22px", base: "17px" }}
+                    fill="black.100"
+                  />
                 </Box>
               </Box>
             )}
@@ -195,14 +208,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               as={"p"}
               variant={"p4"}
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum
-              dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit
-              amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua.
+              {selectedCandidates?.canididateSummary}
             </Heading>
             <Heading color={"gray.text"} variant={"p7"}>
               Work Experience
@@ -217,14 +223,14 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               gap={{ md: "10px", sm: "6px", base: "5px" }}
             >
               <Heading fontWeight={600} color={"gray.text"} variant={"p4"}>
-                Systems Engineer
+                {selectedCandidates?.desiginatation}
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
               </Box>
 
               <Heading fontWeight={600} color={"gray.text"} variant={"p4"}>
-                ABC Insurance
+                {selectedCandidates?.companyName}
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
@@ -240,14 +246,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               as={"p"}
               variant={"p4"}
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum
-              dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit
-              amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua.
+              {selectedCandidates?.jobSummary}
             </Heading>
             <Box
               mt={{ md: "19px", base: "10px" }}
@@ -259,14 +258,14 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               gap={{ md: "10px", sm: "6px", base: "5px" }}
             >
               <Heading fontWeight={600} color={"gray.text"} variant={"p4"}>
-                Systems Engineer
+                {selectedCandidates?.desiginatation}
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
               </Box>
 
               <Heading fontWeight={600} color={"gray.text"} variant={"p4"}>
-                ABC Insurance
+                {selectedCandidates?.companyName}
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
@@ -282,14 +281,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               as={"p"}
               variant={"p4"}
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum
-              dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit
-              amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua.
+              {selectedCandidates?.jobSummary}
             </Heading>
 
             <Heading
@@ -309,14 +301,14 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               gap={{ md: "10px", sm: "6px", base: "5px" }}
             >
               <Heading fontWeight={600} color={"gray.text"} variant={"p4"}>
-                Bachelor’s Degree, Information Security
+                {selectedCandidates?.diploma}
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
               </Box>
 
               <Heading fontWeight={600} color={"gray.text"} variant={"p4"}>
-                University of The Bahamas
+                {selectedCandidates?.schoolName}
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
@@ -332,14 +324,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               as={"p"}
               variant={"p4"}
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum
-              dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit
-              amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua.
+              {selectedCandidates?.educationSummary}
             </Heading>
           </Box>
         </Box>

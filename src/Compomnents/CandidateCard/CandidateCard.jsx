@@ -8,8 +8,14 @@ import { MdOutlineStarOutline } from "react-icons/md";
 import Star from "@/assets/Images/Star.svg";
 import Popovers from "../MembersTable/Popovers";
 import Chip from "../Chip/Chip";
-const CandidateCard = ({ cardStatus, handleEvent, popOverList }) => {
-  const actionList = ["Download Attachments", "Archive"];
+const CandidateCard = ({
+  matchCandidate,
+  cardStatus,
+  data,
+  handleEvent,
+  popOverList,
+}) => {
+  
 
   return (
     <Box
@@ -45,14 +51,14 @@ const CandidateCard = ({ cardStatus, handleEvent, popOverList }) => {
           </Box> */}
           <Box>
             <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
-              Diploma Name
+              {data?.name}
             </Heading>
             <Heading
               mt={{ md: "8px", base: "3px" }}
               variant={"p4"}
               color={"gray.text"}
             >
-              Nassau, The Bahamas
+              {data?.country} ,{data?.state}
             </Heading>
           </Box>
         </Box>
@@ -95,13 +101,13 @@ const CandidateCard = ({ cardStatus, handleEvent, popOverList }) => {
               gap={"10px"}
             >
               <Heading color={"gray.text"} variant={"p4"}>
-                Systems Analyst
+                {data?.desiginatation}
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
               </Box>
               <Heading color={"gray.text"} variant={"p4"}>
-                ABC Company
+                {data?.companyName}
               </Heading>
             </Box>
           </Box>
@@ -115,13 +121,14 @@ const CandidateCard = ({ cardStatus, handleEvent, popOverList }) => {
               gap={"10px"}
             >
               <Heading color={"gray.text"} variant={"p4"}>
-                Bachelor’s Degree
+                {data?.schoolName}
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
               </Box>
               <Heading color={"gray.text"} variant={"p4"}>
-                University of The Bahamas
+                {/* University of The Bahamas */}
+                {data?.diploma}
               </Heading>
             </Box>
           </Box>
@@ -132,44 +139,37 @@ const CandidateCard = ({ cardStatus, handleEvent, popOverList }) => {
           </Heading>
         </Box>
 
-        <Box border={"1px solid red red"}  display={"flex"} justifyContent={"space-between"} alignItems={"flex-end"}  >
+        <Box
+          border={"1px solid red red"}
+          display={"flex"}
+          justifyContent={"space-between"}
+          alignItems={"flex-end"}
+        >
           <Box
             display={"flex"}
             mt={"12px"}
             alignItems={"center"}
             flexWrap={"wrap"}
           >
-            <Box mr={{ md: "38px", base: "14px" }} mb={"10px"}>
-              <Chip label={"Technical Knowledge"} />
-            </Box>
-
-            <Box mr={{ md: "38px", base: "14px" }} mb={"10px"}>
-              <Chip label={"System Architecture"} />
-            </Box>
-
-            <Box mr={{ md: "38px", base: "14px" }} mb={"10px"}>
-              <Chip label={"Risk Management"} />
-            </Box>
-
-            <Box mr={{ md: "38px", base: "14px" }} mb={"10px"}>
-              <Chip label={"Q/A Testing"} />
-            </Box>
-            <Box mr={{ md: "38px", base: "14px" }} mb={"10px"}>
-              <Chip label={"Leadership"} />
-            </Box>
-            <Box mr={{ md: "38px", base: "14px" }} mb={"10px"}>
-              <Chip label={"Product Design"} />
-            </Box>
+            {data?.skills?.map((item) => {
+              return (
+                <Box mr={{ md: "38px", base: "14px" }} mb={"10px"}>
+                  <Chip label={item.name} />
+                </Box>
+              );
+            })}
           </Box>
 
-          <Heading whiteSpace={"nowrap"} variant={"p10"} textAlign={"end"}>
-            {" "}
-            Status:{" "}
-            <Box as="span" color={"orange.100"}>
+          {matchCandidate ? null : (
+            <Heading whiteSpace={"nowrap"} variant={"p10"} textAlign={"end"}>
               {" "}
-              {cardStatus}
-            </Box>
-          </Heading>
+              Status:{" "}
+              <Box as="span" color={"orange.100"}>
+                {" "}
+                {data?.status}
+              </Box>
+            </Heading>
+          )}
         </Box>
       </Box>
     </Box>

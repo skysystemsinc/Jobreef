@@ -8,32 +8,32 @@ import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
 
-const Preview = () => {
+const Preview = ({ state, setState }) => {
   const router = useRouter();
   const boxStyle = {
     // border:'1px solid red',
-    padding:{ md: "36px 36px 5px 36px",base: "15px 15px 5px 15px"},
+    padding: { md: "36px 36px 5px 36px", base: "15px 15px 5px 15px" },
     backgroundColor: "#fff",
     borderRadius: "8px",
     boxShadow: " 0px 4px 20px 0px rgba(0, 0, 0, 0.05)",
     // box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
 
-    marginBottom: { md: "60px", base:"36px"},
+    marginBottom: { md: "60px", base: "36px" },
   };
-  
+
   return (
     <Box>
       <Box sx={boxStyle}>
-        <JobBio />
+        <JobBio state={state} setState={setState} />
       </Box>
       <Box sx={boxStyle}>
-        <TechnicalDetails />
+        <TechnicalDetails state={state} setState={setState} />
       </Box>
       <Box sx={boxStyle}>
-        <JobLocation />
+        <JobLocation state={state} setState={setState} />
       </Box>
       <Box sx={boxStyle}>
-        <DesiredSkills  />
+        <DesiredSkills state={state} setState={setState} />
         {/* <InputWrapper >
           <LabelInput
             // readOnly={readOnly}
@@ -64,10 +64,16 @@ const Preview = () => {
         mb={"30px"}
         gap={4}
       >
-        <Button onClick={() => router.push("/company/job-post")} variant="outline-blue">
+        <Button
+          onClick={() => router.push("/company/job-post")}
+          variant="outline-blue"
+        >
           {"Cancel"}
         </Button>
-        <Button onClick={() => router.push("/company/job-post")} variant={"blue-btn"}>
+        <Button
+          onClick={() => router.push("/company/job-post")}
+          variant={"blue-btn"}
+        >
           {"Post job"}
         </Button>
       </Flex>

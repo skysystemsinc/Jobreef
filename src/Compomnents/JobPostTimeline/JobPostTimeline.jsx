@@ -34,7 +34,27 @@ const steps = [
   // { label: "Step 5" },
 ];
 
- const JobPostTimeline = ({ candidate, variant }) => {
+const JobPostTimeline = ({ candidate, variant }) => {
+  const [state, setState] = useState({
+    jobTitle: "",
+    employeeType: "",
+    applicationDeadline: new Date(),
+    locationType: "",
+    description: "",
+    noOfOpening: "",
+    minimumEducation: "",
+    yearsOfExperiance: "",
+    jobFamily: "",
+    salaryType: "",
+    salaryRange: "",
+    country: "",
+    state: "",
+    city: "",
+    streetAddress: "",
+    desiredSkill: "",
+    tags: "",
+  });
+  console.log("state", state);
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
@@ -150,13 +170,17 @@ const steps = [
                   {/* <JobBio /> */}
 
                   {index == 0 ? (
-                    <JobBio />
+                    <JobBio state={state} setState={setState} />
                   ) : index == 1 ? (
-                    <TechnicalDetails />
+                    <TechnicalDetails state={state} setState={setState} />
                   ) : index == 2 ? (
-                    <JobLocation />
+                    <JobLocation state={state} setState={setState} />
                   ) : index == 3 ? (
-                    <DesiredSkills style={boxstyle} />
+                    <DesiredSkills
+                      style={boxstyle}
+                      state={state}
+                      setState={setState}
+                    />
                   ) : null}
                 </Box>
               </Step>
@@ -171,7 +195,7 @@ const steps = [
               width: { md: "85%", base: "95%" },
             }}
           >
-            <Preview />
+            <Preview state={state} setState={setState} />
           </Box>
         ) : null}
 
@@ -229,4 +253,4 @@ const steps = [
     </Box>
   );
 };
-export default JobPostTimeline
+export default JobPostTimeline;

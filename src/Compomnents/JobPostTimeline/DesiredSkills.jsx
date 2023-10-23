@@ -24,7 +24,7 @@ import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
 import IconButton from "../IconButton/IconButton";
 import white_edit from "@/assets/Images/white-edit.svg";
 
-const DesiredSkills = ({ style }) => {
+const DesiredSkills = ({ style, state, setState }) => {
   const [isSmallerThe500] = useMediaQuery("(max-width: 787px)");
 
   const [linkArray, setlinkArray] = useState([1]);
@@ -34,25 +34,37 @@ const DesiredSkills = ({ style }) => {
     setlinkArray(deleteArray);
   };
 
-  const [isEdit, setisEdit] = useState(true);
-  const [readOnly, setreadOnly] = useState(true);
+  
+  const [readOnly, setreadOnly] = useState(false);
 
   return (
-    <Box  sx={style}>
+    <Box sx={style}>
       {linkArray.map((item, index) => {
         return (
           <InputWrapper key={index} gap={"15px"}>
             <LabelInput
+              state={state.desiredSkill}
+              setState={(e) => {
+                setState((prev) => {
+                  return { ...prev, desiredSkill: e.target.value };
+                });
+              }}
               readOnly={readOnly}
               labelVariant={"label"}
               type="text"
               variant={"bg-input"}
               placeholder="Enter Desired Skills"
-              dropdown={readOnly ? false : true}
+              
               label={"Desired Skills"}
             />
 
             <LabelInput
+              state={state.tags}
+              setState={(e) => {
+                setState((prev) => {
+                  return { ...prev, tags: e.target.value };
+                });
+              }}
               labelVariant={"label"}
               type="text"
               dropdown

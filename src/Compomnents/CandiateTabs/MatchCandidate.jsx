@@ -4,22 +4,41 @@ import ArchivedTabs from "../ArchivedTabs/ArchivedTabs";
 import All from "../ArchivedTabs/All";
 import Archived from "../ArchivedTabs/Archived";
 import SelectedCandidate from "../ArchivedTabs/SelectedCandidate";
+import { useSelector } from "react-redux";
 
-const MatchCandidate = () => {
-  const tablist = ["All (19)", "Not Interested (2)"];
+const MatchCandidate = ({ filterKey }) => {
+  const candidates = useSelector((state) => state.candidates.value.filter);
+
+  const allData =
+    candidates && candidates?.filter((item) => item[filterKey] == false);
+  const archivedData =
+    candidates && candidates?.filter((item) => item[filterKey] == true);
+  console.log("allData", allData, archivedData, filterKey);
+  const tablist = [
+    `All (${allData?.length ?? "0"})`,
+    `Not Interested (${archivedData?.length ?? "0"})`,
+  ];
   const [showSelectCandidate, setshowSelectCandidate] = useState(false);
   const popOverListAll = ["Invite to Apply", "Not Interested"];
   const popOverListArchived = ["Delete", "Restore"];
   const componentList = [
     <All
-    matchCandidate
+      data={allData}
+      matchCandidate
+      filterKey={filterKey}
       cardStatus={"Interviewing"}
       popOverList={popOverListAll}
       handleEvent={(e) => {
         setshowSelectCandidate(true);
       }}
     />,
-    <Archived matchCandidate cardStatus={"Archived"} popOverList={popOverListArchived} />,
+    <Archived
+      data={archivedData}
+      filterKey={filterKey}
+      matchCandidate
+      cardStatus={"Archived"}
+      popOverList={popOverListArchived}
+    />,
   ];
   return (
     <Box>
@@ -28,7 +47,7 @@ const MatchCandidate = () => {
           <SelectedCandidate matchCandidate />
         </Box>
       ) : (
-        <ArchivedTabs   componentList={componentList} tablist={tablist} />
+        <ArchivedTabs componentList={componentList} tablist={tablist} />
       )}
     </Box>
   );

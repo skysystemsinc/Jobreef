@@ -14,15 +14,12 @@ import {
 import canlenderIcon from "@/assets/Images/calendar.svg";
 import moment from "moment/moment";
 const DatePicker = ({
-  setsingleDate,
-  setValue,
-  value,
-  handleRangeByReport,
+  setState,
+  state,
+
   selectRange,
-  calendarIcon,
-  isopen,
 }) => {
-  const [date, setdate] = useState(new Date());
+  // const [date, setdate] = useState(new Date());
   const [isOpen, setisopen] = useState(false);
   const calenderStle = {
     // "& .react-daterange-picker__calendar-button": {
@@ -169,7 +166,7 @@ const DatePicker = ({
       <Box sx={calenderStle}>
         <InputGroup>
           <Input
-            value={moment(date).format("MM/DD/YYYY")}
+            value={moment(state).format("MM/DD/YYYY")}
             placeContent={"MM/DD/YYYY"}
             variant={"bg-input"}
             placeholder="MM/DD/YYYY"
@@ -186,9 +183,9 @@ const DatePicker = ({
               }
               selectRange={false}
               // isOpen={false}
-              onChange={setdate}
+              onChange={setState}
               // shou
-              value={date}
+              value={state}
             />
           </InputRightElement>
         </InputGroup>
