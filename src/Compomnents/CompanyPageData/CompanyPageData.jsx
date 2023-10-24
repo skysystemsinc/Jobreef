@@ -65,7 +65,7 @@ const CompanyPageData = () => {
                         </Box>
                     </Heading> 
             </Box>
-            <Box display={"flex"} alignItems={"center"} flexWrap={"wrap"} ml={5} gap={"10px"} mt={2}>
+            <Box display={"flex"} alignItems={"center"} flexWrap={"wrap"} ml={5} gap={6} mt={2}>
                 <Heading display={"flex"} alignItems={"center"} color={"gray.text"} variant={"p4"}>
                     <Image width={{ md: "20px", base: "35px" }} src={location.src} marginRight={2}/>
                      Redmond, Washington State
@@ -99,16 +99,16 @@ const CompanyPageData = () => {
                 </Box>
             </Box>
             
-            <Box mt={5}>
+            <Box mt={5} ml={2}>
                 <Heading color={"gray.text"} variant={"p7"} mb={2}>
-                    Company OverView
+                    Company OverView  
                 </Heading>
                 <Heading color={"gray.text"} variant={"p4"}>
                     Microsoft Corporation is an American multinational technology corporation headquartered in Redmond, Washington. Microsoft's best-known software products are the Windows line of operating systems, the Microsoft 365 suite of productivity applications, and the Edge web browser. Its flagship hardware products are the Xbox video game consoles and the Microsoft Surface lineup of touchscreen personal computers. Microsoft ranked No. 14 in the 2022 Fortune 500 rankings of the largest United States corporations by total revenue; it was the world's largest software maker by revenue as of 2022.
                 </Heading>
             </Box>
         </Box>
-        {DataArray?(<Box mt={10}>
+        {DataArray?(<Box mt={10} ml={2}>
             <Heading color={"gray.text"} variant={"p7"}>
                 Current Openings
             </Heading>
@@ -126,7 +126,7 @@ const CompanyPageData = () => {
             borderRadius={"8px"}
             bg={"white.100"}
             border={"1px solid"}
-            borderColor={"gray.light"}
+            borderColor={"blue.500"}
             box-shadow="0px 4px 20px 0px rgba(0, 0, 0, 0.05)"
           >
             <Box
@@ -200,7 +200,7 @@ const CompanyPageData = () => {
               </Box>
               <Box>
                 <Heading mt={"22px"} variant={"p10"}>
-                  Relevant Skills
+                   Desired Skills
                 </Heading>
               </Box>
 
