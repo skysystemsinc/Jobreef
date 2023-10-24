@@ -3,6 +3,7 @@ import {
   AvatarBadge,
   Box,
   Button,
+  Flex,
   FormLabel,
   Image,
   Input,
@@ -79,41 +80,56 @@ const Overview = ({ setTabIndex, tabIndex }) => {
         />
         {/* </InputWrapper> */}
 
-        {/* {isEdit ? (
-          <>
+        <Flex justifyContent={"center"} gap={"30px"}>
+          {state.isEdit ? (
+            <>
+              <Button
+                onClick={() => {
+                  setstate((pre) => {
+                    return {
+                      isEdit: false,
+                      readOnly: true,
+                    };
+                  });
+                }}
+                variant="outline-blue"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={() => {
+                  setstate((pre) => {
+                    return {
+                      isEdit: false,
+                      readOnly: true,
+                    };
+                  });
+                }}
+                variant={"blue-btn"}
+              >
+                Save
+              </Button>
+            </>
+          ) : (
             <Button
               onClick={() => {
-                setisEdit(false);
-                setreadOnly(true);
+                setstate((pre) => {
+                  return {
+                    isEdit: true,
+                    readOnly: false,
+                  };
+                });
               }}
-              variant="outline-blue"
+              variant={"blue-btn"}
+              display={"flex"}
+              alignItems={"center"}
+              gap={"7px"}
             >
-              Cancel
+              <Image mt={"3px"} src={white_edit.src} width={"18px"} />
+              Edit
             </Button>
-            <Button onClick={handleSave} variant={"blue-btn"}>
-              Save
-            </Button>
-          </>
-        ) : (
-          <Button
-            onClick={() => {
-              setstate((pre)=>{
-                return{
-
-                }
-              })
-              setisEdit(true);
-              setreadOnly(false);
-            }}
-            variant={"blue-btn"}
-            display={"flex"}
-            alignItems={"center"}
-            gap={"7px"}
-          >
-            <Image mt={"3px"} src={white_edit.src} width={"18px"} />
-            Edit
-          </Button>
-        )} */}
+          )}
+        </Flex>
 
         {/* <Box
           display={"flex"}

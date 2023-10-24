@@ -18,7 +18,7 @@ const SideBar = () => {
     {
       title: "Home",
       icon: home,
-      pathname: "/",
+      pathname: router.pathname,
     },
     {
       title: "Job Posts",

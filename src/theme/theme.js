@@ -83,7 +83,7 @@ const components = {
         fontSize: { "2xl": "18px", sm: "13px", base: "12px" },
       },
       "outline-blue": {
-        bg: "transparent",
+        bg: "white.100",
         // height: "50px",
         // width: '200px',
         // height: { md: "50px", base: "36px" },

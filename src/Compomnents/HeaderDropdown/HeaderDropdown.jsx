@@ -20,9 +20,10 @@ import logout from "@/assets/Images/logout.svg";
 import { role, roles } from "@/Utils/role";
 import { useRouter } from "next/router";
 import { Role_context } from "@/context/context";
-const HeaderDropdown = () => {
+const HeaderDropdown = ({candidate}) => {
   const router = useRouter();
   const { company, setCompany } = useContext(Role_context);
+  console.log("company", company);
 
   const companydropdown = [
     {
@@ -108,7 +109,7 @@ const HeaderDropdown = () => {
         </Box>
       </MenuButton>
       <MenuList _active={{ bg: "transparent" }} py="0px">
-        {!company
+        {candidate
           ? candidatedropdown.map((item, index) => {
               return (
                 <MenuItem

@@ -42,7 +42,7 @@ const HeaderDropdown = dynamic(
     ssr: false,
   }
 );
-export default function Header() {
+export default function Header({candidate}) {
   const { isOpen, onToggle } = useDisclosure();
   const [isSmallerThe500] = useMediaQuery("(max-width: 500px)");
 
@@ -96,7 +96,7 @@ export default function Header() {
           </Link>
 
           <Flex display={{ base: "none", xl: "flex" }} mx={"auto"}>
-            <DesktopNav />
+            <DesktopNav candidate={candidate}/>
           </Flex>
         </Flex>
 
@@ -120,7 +120,7 @@ export default function Header() {
             icon={<IoNotificationsOutline />}
           />
           <Box display={{ xl: "block", base: "none" }}>
-            <HeaderDropdown />
+            <HeaderDropdown candidate={candidate}/>
           </Box>
         </Stack>
       </Flex>
@@ -237,7 +237,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
   );
 };
 
-const MobileNav = () => {
+const MobileNav = ({candidate}) => {
   return (
     <Stack
       bg={useColorModeValue("white", "gray.800")}
@@ -248,7 +248,7 @@ const MobileNav = () => {
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
       <Box mt={"10px"}>
-        <HeaderDropdown />
+        <HeaderDropdown  candidate={candidate} />
       </Box>
     </Stack>
   );
