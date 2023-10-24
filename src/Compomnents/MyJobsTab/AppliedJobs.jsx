@@ -128,7 +128,7 @@ const AppliedJobs = () => {
                     </Box>
                     <Box display={"flex"} flexDirection="column" textAlign={"end"} justifyContent="flex-end" >
                       <Heading color={"gray.text"} variant={"p4"}>
-                        {object.ApplicationDeadline}
+                        Applied On: {object.ApplicationDeadline}
                       </Heading>
                     </Box>
                   </Box>
@@ -152,7 +152,7 @@ const AppliedJobs = () => {
                 </Box>
                 <Box display={"flex"} flexDirection="column" justifyContent="flex-end">
                   <Heading display="flex" mb={"10px"} variant={"p10"}>
-                  Status: <span style={{color:'green'}}>New</span>
+                  Status:<span style={{marginLeft:'4%', color:'green'}}> New</span>
                   </Heading>
                 </Box>
               </Box>
