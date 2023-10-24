@@ -111,7 +111,7 @@ const SavedJobs = () => {
                     justifyContent={"space-between"}
                     width={"100%"}
                   >
-                    <Box display={"flex"} flexWrap={"wrap"} gap={"10px"} alignItems={"center"}>
+                    <Box display={"flex"} flexWrap={"wrap"} gap={"9px"} alignItems={"center"}>
                       <Heading color={"gray.text"} variant={"p4"}>
                         {object.Salary}
                       </Heading>
@@ -125,13 +125,12 @@ const SavedJobs = () => {
                         <GoDotFill style={{ color: "#D9D9D9" }} />
                       </Box>
                       <Heading color={"gray.text"} variant={"p4"}>
-                        {object.Experience} years
-                        
+                        Experience: {object.Experience} years
                       </Heading>
                     </Box>
                     <Box display={"flex"} flexDirection="column" textAlign={"end"} justifyContent="flex-end" >
                       <Heading color={"gray.text"} variant={"p4"}>
-                        {object.ApplicationDeadline}
+                        Application Deadline: {object.ApplicationDeadline}
                       </Heading>
                     </Box>
                   </Box>
@@ -139,21 +138,20 @@ const SavedJobs = () => {
               </Box>
               <Box>
                 <Heading mt={"22px"} variant={"p10"}>
-                  Relevant Skills
+                    Desired Skills
                 </Heading>
               </Box>
 
-              <Box display={"flex"} justifyContent={"space-between"} >
-                <Box display={"flex"} mt={"20px"} alignItems={"center"} flexWrap={"wrap"}>
-                    {object.DesiredSkills.map((skill)=>{
-                        return(
-                            <Box key={Math.random()} mr={"20px"} mb={"10px"}>
-                                <ComponentMyChip label={skill} />
-                            </Box>
-                        )
-                    })}
-                </Box>
+              <Box display={"flex"} mt={"20px"} alignItems={"center"} flexWrap={"wrap"}>
+                  {object.DesiredSkills.map((skill)=>{
+                      return(
+                          <Box key={Math.random()} mr={"20px"} mb={"10px"}>
+                              <ComponentMyChip label={skill} />
+                          </Box>
+                      )
+                  })}
               </Box>
+              
             </Box>
           </Box>
       )}
