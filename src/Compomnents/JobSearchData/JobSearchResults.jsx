@@ -27,7 +27,7 @@ const checkboxes = [
   {
     heading: "Sort Jobs By",
     values: [
-      { key: "Date Posted", value: "DatePosted" },
+      { key: "Date Posted", value: "Date Posted" },
       { key: "Relevance", value: "Relevance" },
     ],
   },
@@ -36,7 +36,7 @@ const checkboxes = [
     values: [
       { key: "Hybrid", value: "Hybrid" },
       { key: "Remote", value: "Remote" },
-      { key: "On-Site", value: "Onsite" },
+      { key: "On-Site", value: "On-Site" },
     ],
   },
   {
@@ -51,10 +51,10 @@ const checkboxes = [
   {
     heading: "Experience",
     values: [
-      { key: "EntryLevel", value: "Entry-Level" },
-      { key: "1 - 3 Years", value: 1 },
-      { key: "3 - 5 Years", value: 3 },
-      { key: "5 - 10 Years", value: 5 },
+      { key: "EntryLevel", value: "EntryLevel" },
+      { key: "1 - 3 Years", value: 1, value2: 3 },
+      { key: "3 - 5 Years", value: 3, value2: 5 },
+      { key: "5 - 10 Years", value: 5, value2: 10 },
       { key: "10+ Years", value: 10 },
     ],
   },
@@ -78,7 +78,7 @@ const DataArray = [
     location: "Redmond, Washington State",
     Salary: "150,000$",
     EmploymentType: "Full-Time",
-    Experience: "3",
+    Experience: 3,
     ApplicationDeadline: "07/31/2023",
     DesiredSkills: [
       "Technical knowledge",
@@ -99,7 +99,7 @@ const DataArray = [
     location: "Redmond, Washington State",
     Salary: "150,000$",
     EmploymentType: "Full-Time",
-    Experience: "3",
+    Experience: 3,
     ApplicationDeadline: "07/31/2023",
     DesiredSkills: [
       "Technical knowledge",
@@ -138,7 +138,7 @@ const tempDataArray = [
     location: "Redmond, Washington State",
     Salary: "150,000$",
     EmploymentType: "Full-Time",
-    Experience: "3",
+    Experience: 3,
     ApplicationDeadline: "07/31/2023",
     DesiredSkills: [
       "Technical knowledge",
@@ -179,11 +179,11 @@ const text2 = [
     value: "Bachelor's or Master's degree in Engineering or a related field.",
   },
 ];
-const JobSearchResults = ({ company, location }) => {
+const JobSearchResults = () => {
   const pValue = useBreakpointValue({ base: 0, lg: 10 });
   const [selectedValues, setSelectedValues] = useState([]);
-  const [companySearch, setCompany] = useState(company);
-  const [locationSearch, setLocation] = useState(location);
+  const [companySearch, setCompany] = useState('temp need to be deleted whole useState');
+  const [locationSearch, setLocation] = useState('temp need to be deleted whole useState');
 
   //Temporary Button Later on need to be deleted
   const [toggle, settoggle] = useState("false");
@@ -206,39 +206,31 @@ const JobSearchResults = ({ company, location }) => {
   return (
     <Box>
       <Box display={"flex"} gap={10}>
-        <Button
-          onClick={() => {
-            toggle ? settoggle(false) : settoggle(true);
-          }}
-          style={{ padding: "20px 40px 20px 40px" }}
-          variant="blue-btn"
-          marginLeft="35%" // Add margin to the button for space
-          mt={5}
-        >
-          Toggle
-        </Button>
         {toggle ? (
           <Button
             onClick={() => {
               toggle2 ? settoggle2(false) : settoggle2(true);
             }}
-            style={{ padding: "20px 40px 20px 40px" }}
+            style={{ padding: "20px 300px 20px 300px" }}
             variant="blue-btn"
             mt={5}
+            ml={"300px"}
           >
-            Toggle
+            See the Display if there are no results Note This button will be remove in the final production
           </Button>
         ) : null}
       </Box>
 
       <Box display={"flex"} flexWrap={"wrap"} margin={10} gap={5}>
         <Box  display={{ lg: "flex", base: "none" }} width="100%" flex={1.25} flexDirection={"column"} flexWrap={"wrap"}>
-          <Box width="100%"  display={"flex"} flexDirection={"column"} flexWrap={"wrap"}>
+          <Box width="100%" borderRadius={'8px'} borderWidth={1}
+                  borderColor="gray.100" display={"flex"} flexDirection={"column"} flexWrap={"wrap"}>
             {checkboxes.map((object, index) => {
               return (
                 <Box
                   borderWidth={1}
-                  borderColor="gray.100"
+                  // borderColor="gray.100"
+                  borderTopColor={index > 0 ? "gray.100" : "transparent"}
                   width="100%"
                   p={4}
                   key={Math.random()}
@@ -335,6 +327,8 @@ const JobSearchResults = ({ company, location }) => {
                   mr={"20px"}
                   mb={"10px"}
                   key={Math.random()}
+                  border="1px solid #2CA5C3"
+                  borderRadius={"5px"}
                 >
                   <ComponentMyChip label={val}>
                     <Image
@@ -350,7 +344,7 @@ const JobSearchResults = ({ company, location }) => {
             })}
           </Box>
           {toggle2 ? (
-            <Box p={pValue}>
+            <Box p={pValue} >
               <Heading letterSpacing={-1} color={"gray.text"} variant={"p3"}>
                 We didn’t find any job listings that match your search criteria
                 and filters
@@ -398,9 +392,43 @@ const JobSearchResults = ({ company, location }) => {
               </Box>
             </Box>
           ) : (
-            DataArray.map((object) => {
+            DataArray.map((object,index) => {
               //logical Part need to be done
-
+              
+              // console.log(selectedValues, "Hey Boro" )
+              const foundEmploymentType = selectedValues.length === 0 || selectedValues.includes(object.EmploymentType);
+              console.log("runn")
+              const foundExpType = selectedValues.some((Experience) => {
+                const match = Experience.match(/(\d+) - (\d+) Years/);
+                if (match) {
+                  const startYear = parseInt(match[1], 10);
+                  const endYear = parseInt(match[2], 10);
+                  return startYear <= object.Experience && object.Experience <= endYear;
+                }
+              });
+              
+              //need to do work from here 
+              const foundSalType = selectedValues.some((selectedValue) => {
+                const match = selectedValue.match(/\$(\d+) - \$(\d+)/);
+                if (!match) {
+                  return false;
+                }
+                const minValue = parseInt(match[1], 10);
+                const maxValue = parseInt(match[2], 10);
+              
+                // Extract the numeric value from the value to compare
+                const valueMatch = valueToCompare.match(/\$(\d+)/);
+                if (!valueMatch) {
+                  return false;
+                }
+                const value = parseInt(valueMatch[1], 10); 
+                return value >= minValue && value <= maxValue;
+              });
+              console.log(foundSalType, "I am found Type")
+              
+              if(foundEmploymentType || foundExpType)
+              {}
+              else return null;
               // const check = () => {
               // return DataArray.some((item) =>
               //     Object.values(item).some((value) => {
@@ -429,10 +457,17 @@ const JobSearchResults = ({ company, location }) => {
                   borderRadius={"8px"}
                   bg={"white.100"}
                   border={"1px solid"}
-                  box-shadow="0px 4px 20px 0px rgba(0, 0, 0, 0.05)"
+                  // boxShadow="0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.15)"
                   mb={10}
                   borderWidth={1}
                   borderColor="gray.100"
+                  // onClick={()=>{toggle ? settoggle(false) : settoggle(true)}}
+                  onClick={()=>settoggle(false)}
+                  _hover={{
+                    cursor: "pointer",
+                    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)",
+                    border: '1px solid #2CA5C3'
+                  }}
                 >
                   <Box
                     display={"flex"}
@@ -539,7 +574,7 @@ const JobSearchResults = ({ company, location }) => {
                             justifyContent="flex-end"
                           >
                             <Heading color={"gray.text"} variant={"p4"}>
-                              Applcaition Deadline: {object.ApplicationDeadline}
+                              Application Deadline: {object.ApplicationDeadline}
                             </Heading>
                           </Box>
                         </Box>
@@ -584,7 +619,9 @@ const JobSearchResults = ({ company, location }) => {
             flex={1.25}
           >
             <Box borderWidth={1}
-                borderColor="gray.100">
+                borderColor="gray.100"
+                borderRadius={'8px'}
+                >
                 <Heading mt={"22px"} ml={2} mb={2} variant={"p10"}>
                 Previous Searches
                 </Heading>
@@ -704,6 +741,7 @@ const JobSearchResults = ({ company, location }) => {
                             width={{ md: "10px", base: "20px" }}
                             src={cross.src}
                             marginRight={2}
+                            onClick={()=>settoggle(true)}
                           />
                         </Box>
                         <Button

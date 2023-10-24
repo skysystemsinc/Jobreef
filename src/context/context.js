@@ -6,6 +6,35 @@ function Context({ children }) {
   const [company, setCompany] = useState(true);
   const [searchEntryLocation,setSearchEntryLocation] = useState('');
   const [searchEntryCompany,setSearchEntryCompany] = useState('');
+  const [toggle,setToggle] = useState(true);
+
+
+  const setHandleLocationEntry = (e) => {
+    setSearchEntryLocation(e);
+  };
+
+  const getHandleLocationEntry = () => {
+    return searchEntryLocation
+  };
+
+  const setHandleCompanyEntry = (e) => {
+    setSearchEntryCompany(e);
+    
+  };
+
+  const getHandleCompanyEntry = () => {
+    return searchEntryCompany
+  };
+
+  const searchNow = () => {
+    // setToggle(true)
+    setToggle(false); 
+  }
+
+
+  const getToggle = ()=>{
+    return toggle;
+  }
 
   useEffect(() => {
     const role = localStorage.getItem("company");
@@ -17,7 +46,12 @@ function Context({ children }) {
 
   return (
     <Role_context.Provider value={{ company, setCompany,
-     searchEntryLocation, searchEntryCompany,setSearchEntryLocation, setSearchEntryCompany }}>
+      getToggle,
+      searchNow,
+      setHandleCompanyEntry,
+      getHandleCompanyEntry,
+      setHandleLocationEntry,
+      getHandleLocationEntry, }}>
       {children}
     </Role_context.Provider>
   );

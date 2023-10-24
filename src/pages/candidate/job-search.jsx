@@ -6,32 +6,17 @@ import React from "react";
 import BottomWaveImage from "../../Compomnents/BottomWaveImage/BottomWaveImage";
 import JobSearchEntry from "@/Compomnents/JobSearchData/JobSearchEntry";
 import { useState } from "react";
+import { Role_context } from "../../context/context";
+import {useContext} from "react";
 
 const JobSearch = () => {
 
-  const [company,setCompany] = useState('');
-  const [location,setLocation] = useState('');
 
   //need to be deleted temporarily useState
   const[load,setload] = useState(true)
+  const {getToggle} = useContext(Role_context); 
 
 
-  var companykeyword = ''
-  var locationkeyword = ''
-
-  const searchEntryForCompany = (e) => {
-    companykeyword = e
-  }
-
-  const SearchEntryForLocation = (e) => {
-    locationkeyword = e
-  }
-
-  const SearchNow = (e) => {
-      setCompany(companykeyword)
-      setLocation(locationkeyword)  
-      console.log("Search Now Clicked")
-  }  
 
   return (
     <>
@@ -42,22 +27,13 @@ const JobSearch = () => {
           width={"100%"}    
           px={{ md: "20px", base: "10px" }}
         >
-          <JobSearchData searchEntryForCompany={searchEntryForCompany} SearchEntryForLocation={SearchEntryForLocation} SearchNow={SearchNow}/>
-          {load?
+          <JobSearchData/>
+          {getToggle()?
             // (<JobSearchEntry/>):
             (null):
-            (<JobSearchResults company={company} location={location}/>)}
+            (<JobSearchResults />)}
         </Box>
       </Box>
-      <Button
-        onClick={()=>{load?setload(false):setload(true)}}
-        style={{padding:"20px 40px 20px 40px"}}
-        variant="blue-btn"
-        marginLeft="43%"  // Add margin to the button for space
-        
-      >
-        Toggle
-      </Button>
       <BottomWaveImage />
     </>
     
