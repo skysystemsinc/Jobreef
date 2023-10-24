@@ -581,7 +581,7 @@ const JobSearchResults = ({ company, location }) => {
             flexDirection={"column"}
             flexWrap={"wrap"}
             width="100%"
-            flex={1}
+            flex={1.25}
           >
             <Box borderWidth={1}
                 borderColor="gray.100">
