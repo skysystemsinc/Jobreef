@@ -108,7 +108,7 @@ const AppliedJobs = () => {
                     justifyContent={"space-between"}
                     width={"100%"}
                   >
-                    <Box display={"flex"} flexWrap={"wrap"} gap={"10px"} alignItems={"center"}>
+                    <Box display={"flex"} flexWrap={"wrap"} gap={"9px"} alignItems={"center"}>
                       <Heading color={"gray.text"} variant={"p4"}>
                         {object.Salary}
                       </Heading>
@@ -122,8 +122,7 @@ const AppliedJobs = () => {
                         <GoDotFill style={{ color: "#D9D9D9" }} />
                       </Box>
                       <Heading color={"gray.text"} variant={"p4"}>
-                        {object.Experience} years
-                        
+                        Experience: {object.Experience} years
                       </Heading>
                     </Box>
                     <Box display={"flex"} flexDirection="column" textAlign={"end"} justifyContent="flex-end" >
@@ -136,7 +135,7 @@ const AppliedJobs = () => {
               </Box>
               <Box>
                 <Heading mt={"22px"} variant={"p10"}>
-                  Relevant Skills
+                  Desired Skills
                 </Heading>
               </Box>
 
