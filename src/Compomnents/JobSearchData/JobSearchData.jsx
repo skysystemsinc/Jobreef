@@ -9,15 +9,17 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { FiSearch, FiMapPin } from "react-icons/fi";
-import React from "react";
+import React,{useContext,useState} from "react";
 import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
 import location from "../../assets/Images/location.svg";
+import { RoleContext } from "../../context/context"; // Import the context
+import { Role_context } from "../../context/context";
 
 const JobSearchData = ({
-  searchEntryForCompany,
-  SearchEntryForLocation,
   SearchNow,
 }) => {
+  const { searchEntryLocation,searchEntryCompany, setSearchEntryLocation, setSearchEntryCompany} = useContext(Role_context);
+
   return (
     <>
       <Box
@@ -41,7 +43,7 @@ const JobSearchData = ({
               variant="filled"
               placeholder="Search for Jobs Companies and Keywords"
               marginRight="2"
-              onChange={(e) => searchEntryForCompany(e.target.value)}
+              onChange={(e) => setSearchEntryCompany(e.target.value)}
               bg={"gray.200"}
             />
           </InputGroup>
@@ -63,7 +65,7 @@ const JobSearchData = ({
               placeholder="Search By Location e.g remote"
               marginRight="2"
               bg={"gray.200"}
-              onChange={(e) => SearchEntryForLocation(e.target.value)}
+              onChange={(e) => setSearchEntryLocation(e.target.value)}
             />
           </InputGroup>
 
