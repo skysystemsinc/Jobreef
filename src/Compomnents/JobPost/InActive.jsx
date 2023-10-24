@@ -11,7 +11,7 @@ const InActiveJobs = () => {
     "Employment Type",
     "Candidates",
     "Openings",
-    "Expires On",
+    "Status",
     "Actions",
   ];
   const keys = [
@@ -19,7 +19,7 @@ const InActiveJobs = () => {
     "employeeType",
     "Candidates",
     "noOfOpening",
-    "Expires On",
+    "status",
     "Actions",
   ];
   const actionList = ["Edit", "Pause", "Close job"];
@@ -29,7 +29,7 @@ const InActiveJobs = () => {
       "employeeType": "mscott@example.org",
       Candidates: "1",
       noOfOpening: "1 Year",
-      "Expires On": "Communications",
+      "status": "Expired",
       Actions: <Popovers actionList={actionList} />,
     },
     {
@@ -37,7 +37,7 @@ const InActiveJobs = () => {
       "employeeType": "mscott@example.org",
       Candidates: "1",
       noOfOpening: "1 Year",
-      "Expires On": "Communications",
+      "status": "Expired",
       Actions: <Popovers actionList={actionList} />,
     },
     {
@@ -45,7 +45,7 @@ const InActiveJobs = () => {
       "employeeType": "mscott@example.org",
       Candidates: "1",
       noOfOpening: "1 Year",
-      "Expires On": "Communications",
+      "status": "Expired",
       Actions: <Popovers actionList={actionList} />,
     },
   ];

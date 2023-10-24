@@ -1,15 +1,19 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 import React from "react";
 import LabelInput from "../LabelInput/LabelInput";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import { Link } from "@chakra-ui/next-js";
 import { BsDot } from "react-icons/bs";
 import upload from "@/assets/Images/upload.svg";
+import DateRangePicker from "@wojtekmaj/react-daterange-picker";
+import TextFormatting from "../TextFormatting/TextFormatting";
 
 const JobBio = ({ state, setState }) => {
   return (
     <Box>
+       
       <InputWrapper>
+      
         <LabelInput
           state={state.jobTitle}
           setState={(e) => {
@@ -79,12 +83,13 @@ const JobBio = ({ state, setState }) => {
             });
           }}
           labelVariant={"label"}
-          textarea
+          textFormattter
           variant={"bg-teaxtarea"}
           placeholder="Enter the job description in detail for candidates"
           label={"Job Description*"}
         />
       </InputWrapper>
+        
     </Box>
   );
 };

@@ -26,6 +26,7 @@ import PersonalInfo from "../SignUpTimeline/PersonalInfo";
 import JobLocation from "./JobLocation";
 import DesiredSkills from "./DesiredSkills";
 import Preview from "./Preview";
+import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 const steps = [
   { label: "Job Bio" },
   { label: "Technical Details" },
@@ -53,6 +54,7 @@ const JobPostTimeline = ({ candidate, variant }) => {
     streetAddress: "",
     desiredSkill: "",
     tags: "",
+    rate:''
   });
   console.log("state", state);
   const { nextStep, prevStep, reset, activeStep } = useSteps({
@@ -83,6 +85,7 @@ const JobPostTimeline = ({ candidate, variant }) => {
         variant={"p6"}
       >
         Create a New Job Post
+
       </Heading>
       <Flex
         flexDir="column"

@@ -41,6 +41,7 @@ const CompanyBio = () => {
     country: "",
     province: "",
     city: "",
+    telephone: "",
     address: "",
     platform: "",
     link: "",
@@ -212,6 +213,24 @@ const CompanyBio = () => {
           placeholder="Enter Company Website URL"
           label={"Website"}
         />
+      </InputWrapper>
+      <InputWrapper>
+        <Box sx={{width:'48%'}}>
+          <LabelInput
+            state={State.telephone}
+            setState={(e) => {
+              setState((prev) => {
+                return { ...prev, telephone: e.target.value };
+              });
+            }}
+            labelVariant={"label"}
+            readOnly={readOnly}
+            type="text"
+            variant={"bg-input"}
+            placeholder="Enter Telephone "
+            label={"Telephone"}
+          />
+        </Box>
       </InputWrapper>
       <InputWrapper>
         <LabelInput

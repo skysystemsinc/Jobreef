@@ -121,7 +121,7 @@ const CompanyLocation = () => {
           type="text"
           readOnly={readOnly}
           variant={"bg-input"}
-          placeholder="Select Option"
+          placeholder="Enter City"
           label={"Enter City"}
         />
         <LabelInput

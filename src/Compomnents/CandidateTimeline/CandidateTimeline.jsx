@@ -22,6 +22,8 @@ import Otp from "../SignUpTimeline/Otp";
 import WorkExperiance from "./WorkExperiance";
 import Education from "./Education";
 import Certification from "./Certitfication";
+import Skills from "./Skills";
+import Attachments from "./Attchement";
 const steps = [
   { label: "Overview" },
   { label: "Work Experience" },
@@ -51,6 +53,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
     initialStep: 0,
   });
 
+  const hasCompletedAllSteps = activeStep == steps.length;
   const isLastStep = activeStep === steps.length - 1;
   const [compeletedStep, setcompeletedStep] = useState([]);
   const initialRender = useRef(true);
@@ -63,28 +66,12 @@ export const CandidateTimeline = ({ candidate, variant }) => {
   }, [activeStep]);
 
   const handeNext = async () => {
-    nextStep();
 
-    // if (activeStep == 2) {
-    //   if (!company) {
-    //     router.push("/candidate/profile-setting");
-    //   } else {
-    //     const response = await fetch("/api/company/userProfile", {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({
-    //         ...State,
-    //       }),
-    //     });
-    //     const data = await response.json();
-    //     console.log(data);
-    //     router.push("/registeraion");
-    //   }
-    // } else {
-    //   nextStep();
-    // }
+    if (activeStep===5) {
+      router.push("/candidate/profile-setting");
+    } else {
+      nextStep();
+    }
   };
 
   return (
@@ -180,7 +167,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
             >
               <Box
                 sx={{
-                  p: { md: 8, base: "20px 0px 20px 0px" },
+                  p: { md: "40px 0px 0px 0px", base: "20px 0px 20px 0px" },
                   mt: "13px",
                   width: "100%",
                 }}
@@ -202,7 +189,14 @@ export const CandidateTimeline = ({ candidate, variant }) => {
                     setState={setState}
                   />
                 ) : index == 3 ? (
-                  <Certification  setCertificate={setCertificate} addCertificate={addCertificate} />
+                  <Certification
+                    setCertificate={setCertificate}
+                    addCertificate={addCertificate}
+                  />
+                ) : index == 4 ? (
+                  <Skills />
+                ) : index == 5 ? (
+                  <Attachments />
                 ) : null}
               </Box>
             </Step>
@@ -240,7 +234,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
               variant={"blue-btn"}
               onClick={handeNext}
             >
-              {isLastStep ? "Verify" : "Next"}
+              { "Next"}
             </Button>
           </>
         </Flex>

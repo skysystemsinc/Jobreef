@@ -32,7 +32,7 @@ const Preview = ({ state, setState }) => {
       <Box sx={boxStyle}>
         <JobLocation state={state} setState={setState} />
       </Box>
-      <Box sx={boxStyle}>
+      <Box sx={{...boxStyle , marginBottom:"40px"}}>
         <DesiredSkills state={state} setState={setState} />
         {/* <InputWrapper >
           <LabelInput
@@ -56,7 +56,12 @@ const Preview = ({ state, setState }) => {
           />
         </InputWrapper> */}
       </Box>
-
+      <Button
+        onClick={() => router.push("/company/job-post")}
+        variant={"blue-btn"}
+      >
+        {"Save as Draft"}
+      </Button>
       <Flex
         width="100%"
         justify="center"

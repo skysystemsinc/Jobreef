@@ -11,16 +11,23 @@ const EditProifle = ({ readOnly, handleEvent, profile, profileStyle }) => {
       height={{ md: "120px", base: "90px" }}
       sx={profileStyle}
     >
-      <FormLabel>
-        <AvatarBadge
-          boxSize={{ md: "5em", base: "4em" }}
-          border={"none"}
-          bg="transparent"
-        >
-          <Image src={edit.src} width={{ md: "30px", base: "20px" }} />
-        </AvatarBadge>
-        <Input disabled={readOnly} onChange={handleEvent} type="file" hidden />
-      </FormLabel>
+      {readOnly ? null : (
+        <FormLabel>
+          <AvatarBadge
+            boxSize={{ md: "5em", base: "4em" }}
+            border={"none"}
+            bg="transparent"
+          >
+            <Image src={edit.src} width={{ md: "30px", base: "20px" }} />
+          </AvatarBadge>
+          <Input
+            disabled={readOnly}
+            onChange={handleEvent}
+            type="file"
+            hidden
+          />
+        </FormLabel>
+      )}
     </Avatar>
   );
 };

@@ -69,7 +69,7 @@ export const SignUpTimeline = ({ candidate, variant }) => {
         });
         const data = await response.json();
         console.log(data);
-        router.push("/registeraion");
+        router.push("/registration");
       }
     } else {
       nextStep();

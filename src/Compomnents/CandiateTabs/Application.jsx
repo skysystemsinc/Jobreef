@@ -20,7 +20,7 @@ const Application = ({ filterKey }) => {
     ` Archived (${archivedData?.length ?? "0"})`,
   ];
   const [showSelectCandidate, setshowSelectCandidate] = useState(false);
-  const popOverListAll = ["Download Attachments", "Archived"];
+  const popOverListAll = ["Download Attachments", "Archive"];
   const popOverListArchived = ["Restore", "Delete"];
   const componentList = [
     <All
@@ -28,9 +28,7 @@ const Application = ({ filterKey }) => {
       filterKey={filterKey}
       cardStatus={"Interviewing"}
       popOverList={popOverListAll}
-      handleEvent={(e) => {
-        setshowSelectCandidate(true);
-      }}
+
     />,
     <Archived
       data={archivedData}
