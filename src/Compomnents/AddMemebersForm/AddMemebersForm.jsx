@@ -13,11 +13,34 @@ import {
   Textarea,
   UnorderedList,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import LabelInput from "../LabelInput/LabelInput";
 import InputWrapper from "../InputWrapper/InputWrapper";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 const AddMemebersForm = () => {
+  const router = useRouter();
+  const [State, setState] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    role: "",
+  });
+  const handleSend = async () => {
+    try {
+      const response = await axios("/api/company/teamMember", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: State,
+      });
+      console.log("team ", response);
+      router.push("/company/team-members")
+    } catch (error) {}
+  };
+
   return (
     <Box minH={"70vh"} width={{ md: "70%", base: "100%" }}>
       <Heading
@@ -29,6 +52,12 @@ const AddMemebersForm = () => {
       </Heading>
       <InputWrapper>
         <LabelInput
+          state={State.firstName}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, firstName: e.target.value };
+            });
+          }}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -36,6 +65,12 @@ const AddMemebersForm = () => {
           label={"First Name*"}
         />
         <LabelInput
+          state={State.lastName}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, lastName: e.target.value };
+            });
+          }}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -46,14 +81,27 @@ const AddMemebersForm = () => {
 
       <InputWrapper>
         <LabelInput
+          state={State.email}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, email: e.target.value };
+            });
+          }}
           labelVariant={"label"}
           type="text"
+
           variant={"bg-input"}
           placeholder="Enter Employee Email Address"
-          label={"Email"}
+          label={"Email*"}
         />
         <LabelInput
           dropdown
+          state={State.role}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, role: e.target.value };
+            });
+          }}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -70,6 +118,7 @@ const AddMemebersForm = () => {
       >
         <Button variant="outline-blue">Cancel</Button>
         <Button
+          onClick={handleSend}
           width={"max-content"}
           px={{ md: "35px", base: "20px" }}
           variant={"blue-btn"}

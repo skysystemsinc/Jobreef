@@ -14,23 +14,24 @@ import React from "react";
 import upload from "@/assets/Images/upload.svg";
 import { BsDot } from "react-icons/bs";
 
-const UploadBox = ({ titie, list }) => {
+const UploadBox = ({ handleEvent, titie, list, style }) => {
   return (
     <Flex justifyContent={"center"}>
       <Box
         // border={"lpx solid!important"}
-        sx={{ border: "1px solid" }}
         maxWidth={"max-content"}
         borderColor={"gray.500 !important"}
         borderRadius={"8px"}
         p={"20px 10px"}
+        bg={"white.100"}
         // mt={{ md: "80px", base: "40px" }}
+        sx={{ border: "1px solid", ...style }}
       >
         <Box textAlign={"center"}>
           <Heading variant={"p7"}>{titie}</Heading>
         </Box>
 
-        <Box display={"flex"} justifyContent={"center"} mb={"23px"} mt={"11px"}>
+        <Box display={"flex"} justifyContent={"center"} mb={"10px"} mt={"11px"}>
           <List>
             {list?.map((item, ind) => {
               return (
@@ -47,12 +48,16 @@ const UploadBox = ({ titie, list }) => {
                     fontSize: { "2xl": "18px", sm: "15px", base: "13px" },
                   }}
                 >
-                  <ListIcon fontSize={"27px"} as={BsDot} color="blue.500" />
+                  <ListIcon
+                    m={"0px"}
+                    fontSize={"32px"}
+                    as={BsDot}
+                    color="blue.500"
+                  />
                   {item}
                 </ListItem>
               );
             })}
-
           </List>
         </Box>
 
@@ -69,10 +74,10 @@ const UploadBox = ({ titie, list }) => {
             justifyContent={"center"}
             alignItems={"center"}
             gap={"10px"}
-            
           >
-            <Image src={upload.src} width={{ md: "20px", base: "17px" }} /> Upload
-            <Input type="file" hidden />
+            <Image src={upload.src} width={{ md: "20px", base: "17px" }} />{" "}
+            Upload
+            <Input onChange={handleEvent} type="file" hidden />
           </FormLabel>
         </Box>
       </Box>

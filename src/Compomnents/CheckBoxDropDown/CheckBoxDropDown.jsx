@@ -38,9 +38,10 @@ const CheckBoxDropDown = ({ label, listItme }) => {
       <MenuList minWidth="max-content">
         {/* <MenuDivider /> */}
         <MenuOptionGroup title="" type="checkbox">
-          {listItme?.map((item) => {
+          {listItme?.map((item , index) => {
             return (
               <MenuItemOption
+              key={index}
                 sx={{ "& .chakra-menu__icon":{color:"#000"} }}
                 value={item}
               >

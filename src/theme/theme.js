@@ -232,13 +232,11 @@ const components = {
   Select: {
     variants: {
       "outline-dropdown": {
-        color: "red !important",
-
         field: {
           height: { "2xl": "58px", base: "40px" },
 
           borderRadius: "8px",
-          color: "gray.light !important",
+          color: "gray.100 !important",
           fontWeight: 400,
           fontSize: { "2xl": "18px", base: "14px" },
           textTransform: " capitalize",
@@ -257,7 +255,7 @@ const components = {
 
         // color:"blue.500",
         field: {
-          width: "230px",
+          width: { md: "230px", base: "100%" },
           px: "30px",
           height: { base: "40px" },
           border: "2px solid ",
@@ -300,7 +298,7 @@ const components = {
           fontFamily: "var(--chakra-\fonts-openSans)",
           // p: "20px 20px 20px 20px",
           textTransform: " capitalize",
-
+          lineHeight: "20px",
           fontWeight: 400,
           fontSize: { sm: "15px", base: "14px" },
           //   },
@@ -354,9 +352,9 @@ const components = {
       p1: {
         fontWeight: 400,
         color: "gray.light",
-        lineHeight: "28px",
+        lineHeight: ["19px", "19px", "28px", "28px", "28px", "28px"],
         fontFamily: "var(--chakra-\fonts-openSans)",
-        fontSize: "14px",
+        fontSize: ["12px", "13px", "14px", "14px", "14px", "14px"],
         margin: "0px",
       },
 
@@ -381,7 +379,8 @@ const components = {
         color: "black.200 ",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontSize: ["13px", "14px", "16px"],
-        lineHeight:'24px',
+        // lineHeight:{ md: '24px' , base:"20px"},
+        lineHeight: ["20px", "24px", "24px", "24px", "24px", "24px"],
         // fontSize: "20px",
       },
       p5: {
@@ -422,7 +421,20 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
 
-        fontSize: ["14px", "14px", "16px", "16px", "16px", "18px"],
+        fontSize: ["13px", "14px", "16px", "16px", "16px", "18px"],
+      },
+      p11: {
+        // color: "gray.text",
+        fontFamily: "var(--chakra-\fonts-openSans)",
+        fontWeight: 700,
+        fontSize: ["13px", "16px", "16px", "16px", "16px", "16px"],
+      },
+      p12: {
+        color: "gray.text",
+        fontFamily: "var(--chakra-\fonts-openSans)",
+        fontWeight: 400,
+        fontSize: "13px",
+        lineHeight:'21px'
       },
       // Add more variants for other heading levels as needed
     },
@@ -459,10 +471,19 @@ const components = {
         backgroundColor: "#fff",
 
         table: {
+          borderCollapse: "separate",
+          borderSpacing: "0px 20px",
+
           backgroundColor: "#fff",
-          padding: "10px 0px",
+          // padding: "10px 0px",
           tbody: {
+            // borderCollapse: "separate",
+            // borderSpacing: "0px 20px",
+
             tr: {
+              position: "relative",
+              top: "-21px",
+              marginBottom: "10px !important",
               verticalAlign: "middle",
               boxShadow: " 0px 2px 15px 0px rgba(0, 0, 0, 0.06)",
               border: "1px solid ",
@@ -483,6 +504,7 @@ const components = {
           },
           thead: {
             bg: "blue.500",
+            tr: { position: "relative", top: "-21px" },
             th: {
               padding: { md: "23px 30px", base: "16px 20px" },
               fontSize: { md: "15px", base: "12px" },

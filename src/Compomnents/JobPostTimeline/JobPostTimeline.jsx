@@ -16,7 +16,7 @@ import grayArrow from "@/assets/Images/gray-arrow-down.svg";
 import { useRouter } from "next/router";
 import { role, roles } from "@/Utils/role";
 import globalStyles from "@/styles/globalStyles";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Role_context } from "@/context/context";
 import IconButton from "../IconButton/IconButton";
 import JobBio from "./JobBio";
@@ -26,129 +26,57 @@ import PersonalInfo from "../SignUpTimeline/PersonalInfo";
 import JobLocation from "./JobLocation";
 import DesiredSkills from "./DesiredSkills";
 import Preview from "./Preview";
+import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 const steps = [
-  { label: "Step 1" },
-  { label: "Step 2" },
-  { label: "Step 3" },
-  { label: "Step 4" },
+  { label: "Job Bio" },
+  { label: "Technical Details" },
+  { label: "Job Location" },
+  { label: "Desired Skills" },
   // { label: "Step 5" },
 ];
 
-export const JobPostTimeline = ({ candidate, variant }) => {
-  const { company, setCompany } = useContext(Role_context);
-
+const JobPostTimeline = ({ candidate, variant }) => {
+  const [state, setState] = useState({
+    jobTitle: "",
+    employeeType: "",
+    applicationDeadline: new Date(),
+    locationType: "",
+    description: "",
+    noOfOpening: "",
+    minimumEducation: "",
+    yearsOfExperiance: "",
+    jobFamily: "",
+    salaryType: "",
+    salaryRange: "",
+    country: "",
+    state: "",
+    city: "",
+    streetAddress: "",
+    desiredSkill: "",
+    tags: "",
+    rate:''
+  });
+  console.log("state", state);
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
   const [completedSteps, setcompletedSteps] = useState([0]);
-  console.log("activeStep", activeStep);
   const isLastStep = activeStep === steps.length - 1;
   const hasCompletedAllSteps = activeStep === steps.length;
-
+  const [compeletedStep, setcompeletedStep] = useState([]);
+  const initialRender = useRef(true);
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+      return;
+    }
+    setcompeletedStep([...compeletedStep, activeStep]);
+  }, [activeStep]);
   const boxstyle = {
     minH: "55vh",
     marginTop: { md: "60px", base: "10px" },
   };
-  const router = useRouter();
 
-  const CustomeSteps = (props) => {
-    return (
-      <Heading
-        color={"white.100"}
-        as={"p"}
-        margin={"0px"}
-        fontWeight={"700"}
-        variant={"p1"}
-      >
-        {/* {props+1} */}
-        {activeStep}
-      </Heading>
-    );
-  };
-
-  const TimelineSubtitle = ({ isCompleted }) => {
-    console.log("isCompleted", isCompleted);
-    const textColor = isCompleted ? "blue.500" : "gray.light";
-    return (
-      <Box
-        width={"415px"}
-        display={{ md: "flex", base: "none" }}
-        justifyContent={"space-between"}
-        textAlign={"center"}
-        mt={"12px"}
-      >
-        <Heading
-          color={"blue.500"}
-          // color={
-          //   activeStep == 0 ||
-          //   activeStep == 1 ||
-          //   activeStep == 2 ||
-          //   activeStep == 3
-          //     ? "blue.500"
-          //     : "gray.light"
-          // }
-          as={"h6"}
-          variant={"p1"}
-          position={"relative"}
-          left={"-20px"}
-        >
-          Job Bio
-        </Heading>
-        <Heading
-          // color={textColor}
-          color={
-            // activeStep == 0 ||
-            activeStep == 1 
-            // activeStep == 2 ||
-            // activeStep == 3
-              ? "blue.500"
-              : "gray.light"
-          }
-          as={"h6"}
-          variant={"p1"}
-          position={"relative"}
-          left={"-5px"}
-        >
-          Technical Details
-        </Heading>
-        <Heading
-          color={
-            // activeStep == 0 ||
-            activeStep == 1 ||
-            activeStep == 2 ||
-            activeStep == 3
-              ? "blue.500"
-              : "gray.light"
-          }
-          // color={textColor}
-          as={"h6"}
-          variant={"p1"}
-          position={"relative"}
-          right={"-20px"}
-        >
-          Job Location
-        </Heading>
-
-        <Heading
-          // color={textColor}
-          color={
-            // activeStep == 0 ||
-            activeStep == 1 ||
-            activeStep == 2 ||
-            activeStep == 3
-              ? "blue.500"
-              : "gray.light"
-          }
-          as={"h6"}
-          variant={"p1"}
-          position={"relative"}
-          right={"-20px"}
-        >
-          Desired Skills
-        </Heading>
-      </Box>
-    );
-  };
   return (
     <Box>
       <Heading
@@ -157,6 +85,7 @@ export const JobPostTimeline = ({ candidate, variant }) => {
         variant={"p6"}
       >
         Create a New Job Post
+
       </Heading>
       <Flex
         flexDir="column"
@@ -165,32 +94,94 @@ export const JobPostTimeline = ({ candidate, variant }) => {
         width="100%"
       >
         <Steps
+          trackColor="blue.500"
           responsive={false}
-          checkIcon={CustomeSteps}
           sx={{
             ...globalStyles.stepperContainter,
 
             width: {
-              md: "404px",
-              base: "90%",
+              md: "630px",
+              base: "100%",
+            },
+            "& .cui-steps__horizontal-step": {
+              _active: {
+                "&::after": {
+                  bg: "blue.500 !important",
+                },
+              },
+              "&::after": {
+                bg: "gray.light !important",
+                height: "3px !important",
+                width: {
+                  md: "81% !important",
+                  sm: "82% !important",
+                  base: "66% !important",
+                },
+                top: "17px   !important",
+                marginInlineEnd: "0px !important",
+                marginInlineStart: "0px !important",
+              },
             },
           }}
           // border={"1px solid red"}
-          variant={variant}
+          variant={"circles-alt"}
           colorScheme="blue"
           activeStep={activeStep}
         >
           {steps.map(({ label }, index) => {
-            console.log("index", index);
-            const isCompleted = completedSteps.includes(index);
-            console.log("activeStep", activeStep);
+            const CostomeCheckIcon = () => {
+              return (
+                <Heading
+                  variant={"p1"}
+                  fontWeight={700}
+                  sx={{
+                    color: "white.100",
+                  }}
+                >
+                  {" "}
+                  {index + 1}
+                </Heading>
+              );
+            };
+            const CostomeIcon = () => {
+              return (
+                <Heading
+                  variant={"p1"}
+                  fontWeight={700}
+                  sx={{
+                    // color:'#fff'
+                    color: compeletedStep.includes(index)
+                      ? "blue.500"
+                      : "gray.light",
+                  }}
+                >
+                  {" "}
+                  {index + 1}
+                </Heading>
+              );
+            };
+
             return (
               <Step
-                // border={"1px solid red"}
+                checkIcon={CostomeCheckIcon}
                 flexDirection={"column"}
+                icon={CostomeIcon}
                 key={label}
+                // icon={ hasCompletedAllSteps? false:CostomeIcon}
+                label={
+                  <Heading
+                    variant={"p1"}
+                    sx={{
+                      color: compeletedStep.includes(index)
+                        ? "blue.500"
+                        : "gray.light",
+                    }}
+                  >
+                    {" "}
+                    {label}
+                  </Heading>
+                }
               >
-                <TimelineSubtitle isCompleted={isCompleted} />
                 <Box
                   sx={{
                     // p: { md: 8, base: "20px 0px 20px 0px" },
@@ -201,20 +192,24 @@ export const JobPostTimeline = ({ candidate, variant }) => {
                   {/* <JobBio /> */}
 
                   {index == 0 ? (
-                    <JobBio />
+                    <JobBio state={state} setState={setState} />
                   ) : index == 1 ? (
-                    <TechnicalDetails />
+                    <TechnicalDetails state={state} setState={setState} />
                   ) : index == 2 ? (
-                    <JobLocation />
+                    <JobLocation state={state} setState={setState} />
                   ) : index == 3 ? (
-                    <DesiredSkills style={boxstyle} />
+                    <DesiredSkills
+                      style={boxstyle}
+                      state={state}
+                      setState={setState}
+                    />
                   ) : null}
                 </Box>
               </Step>
             );
           })}
         </Steps>
-        {hasCompletedAllSteps ? <TimelineSubtitle /> : null}
+        {/* {hasCompletedAllSteps ? <TimelineSubtitle /> : null} */}
         {hasCompletedAllSteps ? (
           <Box
             sx={{
@@ -222,7 +217,7 @@ export const JobPostTimeline = ({ candidate, variant }) => {
               width: { md: "85%", base: "95%" },
             }}
           >
-            <Preview />
+            <Preview state={state} setState={setState} />
           </Box>
         ) : null}
 
@@ -238,7 +233,17 @@ export const JobPostTimeline = ({ candidate, variant }) => {
             <>
               <IconButton
                 handleEvent={() => {
-                  activeStep == 0 ? null : prevStep();
+                  if (activeStep != 0) {
+                    if (compeletedStep.includes(activeStep)) {
+                      const updatedCompletedSteps = compeletedStep.filter(
+                        (step) => step != activeStep
+                      );
+
+                      setcompeletedStep(updatedCompletedSteps);
+                    }
+                    prevStep();
+                  }
+                  // activeStep == 0 ? null : prevStep();
                 }}
                 iconSize={"21px"}
                 icon={grayArrow}
@@ -270,3 +275,4 @@ export const JobPostTimeline = ({ candidate, variant }) => {
     </Box>
   );
 };
+export default JobPostTimeline;

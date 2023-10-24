@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
-// import "@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css";
+import "@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css";
 import "react-calendar/dist/Calendar.css";
 import {
   Box,
@@ -14,19 +14,21 @@ import {
 import canlenderIcon from "@/assets/Images/calendar.svg";
 import moment from "moment/moment";
 const DatePicker = ({
-  setsingleDate,
-  setValue,
-  value,
-  handleRangeByReport,
+  setState,
+  state,
+
   selectRange,
-  calendarIcon,
-  isopen,
 }) => {
-  const [date, setdate] = useState(new Date());
+  // const [date, setdate] = useState(new Date());
+  const currentDate = moment();
+  const defaultDate = currentDate.add(30, 'days');
+  const [isOpen, setisopen] = useState(false);
   const calenderStle = {
     // "& .react-daterange-picker__calendar-button": {
     //   border: "1px solid red !important",
     // },
+    position: "relative",
+    // border: "1px solid red",
     "& .react-calendar": {
       boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
       border: "none",
@@ -46,6 +48,9 @@ const DatePicker = ({
       padding: "0px  !important",
       borderRadius: "4px",
       border: selectRange ? `1px solid red` : "none",
+    },
+    "& .react-calendar__tile--active": {
+      border: "1px solid red !important",
     },
     "& .react-daterange-picker__inputGroup": {
       display: selectRange ? "block" : "none",
@@ -75,15 +80,16 @@ const DatePicker = ({
       color: "black",
     },
     "& .react-calendar__tile--now": {
-      backgroundColor: "gray.200",
-      color: "black.100",
+      backgroundColor: "blue.500",
+      color: "#fff",
+
       borderRadius: "6px",
 
-      //   hover: {
-      //     backgroundColor: theme.palette.background.lightBlue,
-      //     color: theme.palette.background.black,
-      //     borderRadius: "6px",
-      //   },
+      hover: {
+        backgroundColor: "blue.400",
+        color: "black.100",
+        borderRadius: "6px",
+      },
     },
 
     "& .react-calendar_tile react-calendar_tile--active": {
@@ -160,26 +166,53 @@ const DatePicker = ({
   };
 
   return (
-    <Box sx={calenderStle}>
-      <InputGroup>
-        <Input
-          value={moment(date).format("MM/DD/YYYY")}
-          placeContent={"MM/DD/YYYY"}
-          variant={"bg-input"}
-          placeholder="MM/DD/YYYY"
-          readOnly={true}
-        />
-        <InputRightElement>
+    <>
+      <Box   sx={calenderStle} position={"relative"} >
+        <Box  position={"absolute"} right={"0px"}  zIndex={999}  >
           <DateRangePicker
-            calendarIcon={<Image src={canlenderIcon.src} width={"25px"} />}
-            selectRange={false}
-            onChange={setdate}
-            value={date}
-            dayPlaceholder="DD"
+            calendarIcon={
+              <Image
+                src={canlenderIcon.src}
+                width={{ md: "25px", base: "20px" }}
+                mt={{ md: "0px", base: "6px" }}
+              />
+            }
+            defaultValue={defaultDate.toDate()}
+            // selectRange={true}
+            // isOpen={false}
+            onChange={setState}
+            // shou
+            minDate={defaultDate.toDate()}
+            value={state}
           />
-        </InputRightElement>
-      </InputGroup>
-    </Box>
+        </Box>
+        <InputGroup>
+          <Input
+            value={moment(state).format("MM/DD/YYYY")}
+            placeContent={"MM/DD/YYYY"}
+            variant={"bg-input"}
+            placeholder="MM/DD/YYYY"
+            readOnly={true}
+          />
+          {/* <InputRightElement >
+            <DateRangePicker
+              calendarIcon={
+                <Image
+                  src={canlenderIcon.src}
+                  width={{ md: "25px", base: "20px" }}
+                  mt={{ md: "0px", base: "6px" }}
+                />
+              }
+              selectRange={false}
+              // isOpen={false}
+              onChange={setState}
+              // shou
+              value={state}
+            />
+          </InputRightElement> */}
+        </InputGroup>
+      </Box>
+    </>
   );
 };
 

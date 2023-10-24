@@ -1,27 +1,50 @@
 import React from "react";
 import CandidateCard from "../CandidateCard/CandidateCard";
-import { Box, Grid, GridItem } from "@chakra-ui/react";
+import { Box, Grid, GridItem, filter } from "@chakra-ui/react";
 import SortBy from "../SortBy/SortBy";
 import MobileSortBy from "../MobileSortBy/MobileSortBy";
 import SelectedCandidate from "./SelectedCandidate";
+import { useDispatch, useSelector } from "react-redux";
+import { getSelectedCandidates } from "@/Reudx/slices/candidates";
 
-const All = () => {
+const All = ({
+  filterKey,
+  matchCandidate,
+  cardStatus,
+  data,
+  handleEvent,
+  popOverList,
+}) => {
+  const dispatch = useDispatch();
+  const handleSelectedCard = (data) => {
+    console.log("data", data)
+    dispatch(getSelectedCandidates(data));
+  };
   return (
     <Box mt={{ md: "31px", base: "15px" }}>
-      <SelectedCandidate/>
-      {/* <Box display={{ lg: "none", base: "block" }}>
+      {/* <SelectedCandidate/> */}
+      <Box display={{ lg: "none", base: "block" }}>
         <MobileSortBy />
       </Box>
       <Box display={"flex"} gap={"31px"}>
         <Box>
-          <CandidateCard />
-          <CandidateCard />
-          <CandidateCard />
+          {data &&
+            data.map((item) => {
+              return (
+                <CandidateCard
+                  data={item}
+                  matchCandidate={matchCandidate}
+                  cardStatus={cardStatus}
+                  popOverList={popOverList}
+                  handleEvent={() => handleSelectedCard(item)}
+                />
+              );
+            })}
         </Box>
         <Box display={{ lg: "block", base: "none" }}>
-          <SortBy />
+          <SortBy matchCandidate={matchCandidate} />
         </Box>
-      </Box> */}
+      </Box>
     </Box>
   );
 };

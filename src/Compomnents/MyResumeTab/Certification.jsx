@@ -24,10 +24,7 @@ const Certification = () => {
         </Box>
       ) : experianceData.length > 0 ? (
         <Box mt={"30px"} width={{ xl: "73%", base: "100%" }} mx={"auto"}>
-          <Flex flexWrap={{ lg: "nowrap" , base:'wrap'}} justifyContent={"center"} gap={{ sm:"20px" , base:"10px"}}>
-            <CeritifcateCard />
-            <CeritifcateCard />
-          </Flex>
+          <CeritifcateCard />
 
           <Flex justifyContent={"center"}>
             <Button

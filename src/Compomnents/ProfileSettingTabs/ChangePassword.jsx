@@ -3,6 +3,12 @@ import LabelInput from "../LabelInput/LabelInput";
 import edit_outline from "@/assets/Images/edit_outline.svg";
 import { useRef, useState } from "react";
 const ChangePassword = () => {
+  const [state, setstate] = useState({
+    oldPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+  console.log("change password" , state)
   const inputRef = useRef();
   const [isEdit, setisEdit] = useState(false);
 
@@ -42,6 +48,12 @@ const ChangePassword = () => {
           </Heading>
           <Box mb={{ base: "35px" }}>
             <LabelInput
+              state={state.oldPassword}
+              setState={(e) => {
+                setstate((prev) => {
+                  return { ...prev, oldPassword: e.target.value };
+                });
+              }}
               passworInput
               labelVariant={"label"}
               type="text"
@@ -52,6 +64,12 @@ const ChangePassword = () => {
           </Box>
           <Box mb={{ base: "15px" }}>
             <LabelInput
+              state={state.newPassword}
+              setState={(e) => {
+                setstate((prev) => {
+                  return { ...prev, newPassword: e.target.value };
+                });
+              }}
               passworInput
               labelVariant={"label"}
               type="text"
@@ -62,6 +80,12 @@ const ChangePassword = () => {
           </Box>
           <Box>
             <LabelInput
+              state={state.confirmPassword}
+              setState={(e) => {
+                setstate((prev) => {
+                  return { ...prev, confirmPassword: e.target.value };
+                });
+              }}
               passworInput
               labelVariant={"label"}
               type="text"
@@ -86,7 +110,6 @@ const ChangePassword = () => {
             inputRef={inputRef}
             variant={"shadow-input"}
             iconStyle={{ marginTop: "7px" }}
-
             placeholder="***************"
             label={"Password"}
             passworInput

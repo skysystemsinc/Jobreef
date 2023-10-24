@@ -15,7 +15,7 @@ const SignUpLayout = dynamic(() => import("../Layout/SignUpLayout"), {
   ssr: false,
 });
 
-const SignIn = ({ candidate }) => {
+const SignUp = ({ candidate }) => {
   const { company, setCompany } = useContext(Role_context);
   return (
     <Box
@@ -28,7 +28,7 @@ const SignIn = ({ candidate }) => {
         <>
           <SignUpLayout
             personVectorW={{ "2xl": "600px", base: "450px" }}
-            icon={<Image src={whitetick.src} width={"26px"} />}
+            // icon={<Image src={whitetick.src} width={"26px"} />}
             bottomCartoon={cartoon.src}
             leftPic={leftblue_2.src}
             tittle={"1. About You"}
@@ -53,10 +53,10 @@ const SignIn = ({ candidate }) => {
         <Box display={"flex"} justifyContent={"center"} mb={"52px"}>
           <Logo />
         </Box>
-        <SignUpTimeline candidate={candidate} />
+        <SignUpTimeline  />
       </Box>
     </Box>
   );
 };
 
-export default SignIn;
+export default SignUp;

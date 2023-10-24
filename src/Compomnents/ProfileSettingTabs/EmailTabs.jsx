@@ -4,8 +4,13 @@ import edit_outline from "@/assets/Images/edit_outline.svg";
 import { useRef, useState } from "react";
 import white_edit from "@/assets/Images/white-edit.svg";
 import Otp from "../SignUpTimeline/Otp";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 
 const EmailTabs = () => {
+  const userProfile = useSelector((state) => state.userProfileSlice.value);
+
   const [email, setemail] = useState("");
   const inputRef = useRef();
   const [isEdit, setisEdit] = useState(false);
@@ -15,7 +20,16 @@ const EmailTabs = () => {
     setisEdit(true);
     setreadOnly(false);
   };
-  const handleSave = () => {
+  const handleSave = async () => {
+    const response = await axios("/api/company/userProfile", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: { email },
+    });
+
+    console.log(response);
     setisEdit(false);
     setotp(true);
     setreadOnly(true);
@@ -25,7 +39,9 @@ const EmailTabs = () => {
     setotp(false);
     setreadOnly(true);
   };
-
+  useSkipInitialEffect(() => {
+    setemail(userProfile.email);
+  }, [userProfile]);
   return (
     <Box
       display={"flex"}
@@ -47,7 +63,7 @@ const EmailTabs = () => {
       ) : null}
 
       {otp ? (
-        <Box mt={{ md:"20px" , base:'0px'}}>
+        <Box mt={{ md: "20px", base: "0px" }}>
           <Otp />
         </Box>
       ) : (
@@ -65,11 +81,10 @@ const EmailTabs = () => {
             inputRef={inputRef}
             variant={"shadow-input"}
             iconStyle={{ marginTop: "7px" }}
-
             placeholder="jacobjones9@gmail.com"
             label={"Email"}
             state={email}
-            setState={setemail}
+            setState={(e) => setemail(e.target.value)}
             icon={
               <Image
                 width={{ md: "17px", base: "15px" }}

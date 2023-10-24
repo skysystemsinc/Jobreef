@@ -18,11 +18,17 @@ import { Link } from "@chakra-ui/next-js";
 import { BsDot } from "react-icons/bs";
 import upload from "@/assets/Images/upload.svg";
 
-const CompanyLocation = () => {
+const CompanyLocation = ({ State, setState }) => {
   return (
     <Box>
       <InputWrapper>
         <LabelInput
+          state={State.country}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, country: e.target.value };
+            });
+          }}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -31,6 +37,12 @@ const CompanyLocation = () => {
           label={"Country*"}
         />
         <LabelInput
+          state={State.province}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, province: e.target.value };
+            });
+          }}
           dropdown
           labelVariant={"label"}
           type="text"
@@ -42,14 +54,26 @@ const CompanyLocation = () => {
 
       <InputWrapper>
         <LabelInput
+          state={State.city}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, city: e.target.value };
+            });
+          }}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
           placeholder="Enter City"
           label={"City"}
-          dropdown
+          
         />
         <LabelInput
+          state={State.address}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, address: e.target.value };
+            });
+          }}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}

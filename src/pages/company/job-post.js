@@ -4,14 +4,16 @@ import PaginatedTable from "@/Compomnents/MembersTable/MembersTable";
 import TeamMembers from "@/Compomnents/TeamMembers/TeamMembers";
 
 import { Box, Button, Flex } from "@chakra-ui/react";
+import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 
-const index = () => {
+const JobPost = () => {
   const router = useRouter();
   return (
     <>
-      <CompanyDasboard >
+
+      <CompanyDasboard>
         <Box px={"10px"}>
           <JobPostTabs />
         </Box>
@@ -20,4 +22,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default JobPost;

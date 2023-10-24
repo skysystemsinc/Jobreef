@@ -35,7 +35,10 @@ const ProfileSettingTabs = ({ company }) => {
         index={tabIndex}
         isFitted
       >
-        <TabList sx={{ ...globalStyles.fullTab, width: "100%"  }}  flexDirection={{sm:"row" , base:"column"}}>
+        <TabList
+          sx={{ ...globalStyles.fullTab, width: "100%" }}
+          flexDirection={{ sm: "row", base: "column" }}
+        >
           <Tab
             fontSize={{ md: "16px", base: "14px" }}
             sx={globalStyles.tabelinkStyle}
@@ -60,15 +63,15 @@ const ProfileSettingTabs = ({ company }) => {
             Password
           </Tab>
 
+          <Tab
+            fontSize={{ md: "16px", base: "14px" }}
+            _selected={globalStyles.selectTab}
+            sx={globalStyles.tabelinkStyle}
+          >
+            Preferences
+          </Tab>
           {company ? (
             <>
-              <Tab
-                fontSize={{ md: "16px", base: "14px" }}
-                _selected={globalStyles.selectTab}
-                sx={globalStyles.tabelinkStyle}
-              >
-                Preferences
-              </Tab>
               <Tab
                 fontSize={{ md: "16px", base: "14px" }}
                 _selected={globalStyles.selectTab}

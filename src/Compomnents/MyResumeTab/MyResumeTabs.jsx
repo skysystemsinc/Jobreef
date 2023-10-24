@@ -11,7 +11,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-  
+
 import globalStyles from "@/styles/globalStyles";
 import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
 import AboutYouTabs from "../ProfileSettingTabs/AboutYouTabs";
@@ -20,7 +20,8 @@ import WorkExperiance from "./WorkExperiance";
 import Education from "./Education";
 import Certification from "./Certification";
 import Skills from "./Skills";
-import Achievements from "./Achievements";
+import Attachments from "./Attachments";
+
 const MyResumeTabs = () => {
   let [tabIndex, setTabIndex] = useState(0);
   const tabList = [
@@ -58,9 +59,9 @@ const MyResumeTabs = () => {
           sx={{
             ...globalStyles.fullTab,
             ...globalStyles.scrollBar,
-
-            whiteSpace: "nowrap",
-            overflowX: "scroll",
+            // whiteSpace: "nowrap",
+            // overflowX: "scroll",
+            flexDirection: { sm: "row", base: "column" },
             width: { md: "70%", base: "100%" },
           }}
         >
@@ -97,9 +98,9 @@ const MyResumeTabs = () => {
             <Skills />
           </TabPanel>
           <TabPanel>
-          <Box display={"flex"} justifyContent={"center"}>
-            <Achievements/>
-          </Box> 
+            {/* <Box display={"flex"} justifyContent={"center"}> */}
+            <Attachments />
+            {/* </Box>  */}
           </TabPanel>
         </TabPanels>
       </Tabs>

@@ -22,21 +22,65 @@ import { BsDot, BsPlusLg } from "react-icons/bs";
 import upload from "@/assets/Images/upload.svg";
 import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
 
-const SocialLink = () => {
+const SocialLink = ({ State, setState }) => {
   const [isSmallerThe500] = useMediaQuery("(max-width: 787px)");
-
-  const [linkArray, setlinkArray] = useState([1]);
   const handleDelete = (index) => {
-    const deleteArray = [...linkArray];
-    deleteArray.splice(index, 1);
-    setlinkArray(deleteArray);
+    const updatedLinks = [...State.links];
+    updatedLinks.splice(index, 1);
+    // setlinkArray(deleteArray);
+    setState((prev) => {
+      return {
+        ...prev,
+        links: updatedLinks,
+      };
+    });
   };
+  const handlePlatformChange = (event, index) => {
+    let updatedLinks = [...State.links];
+    updatedLinks[index].platform = event.target.value;
+    setState((prev) => {
+      return {
+        ...prev,
+        links: updatedLinks,
+      };
+    });
+  };
+
+  const handleLinkChange = (event, index) => {
+    let updatedLinks = [...State.links];
+    updatedLinks[index].link = event.target.value;
+    setState((prev) => {
+      return {
+        ...prev,
+        links: updatedLinks,
+      };
+    });
+  };
+
+  const handleaddMore = () => {
+    const updatedLinks = [...State.links];
+    updatedLinks.push({ platform: "", link: "" });
+    setState((prev) => {
+      return {
+        ...prev,
+        links: updatedLinks,
+      };
+    });
+    // setFormData(updatedFormData);
+  };
+
   return (
     <Box pr={"20px"}>
-      {linkArray.map((item, index) => {
+      {State?.links.map((item, index) => {
         return (
-          <InputWrapper key={index} gap={"15px"}>
+          <InputWrapper
+            style={{ marginBottom: "15px" }}
+            key={index}
+            gap={"15px"}
+          >
             <LabelInput
+              state={item.platform}
+              setState={(e) => handlePlatformChange(e, index)}
               labelVariant={"label"}
               type="text"
               variant={"bg-input"}
@@ -44,51 +88,68 @@ const SocialLink = () => {
               dropdown
               label={"Social Links"}
             />
-             <LabelInput
-                  labelVariant={"label"}
-                  type="text"
-                  variant={"bg-input"}
-                  placeholder="Paste link to company social network page"
-                  label={"Link"}
-                />
-            {/* <Box width={"100%"} position={"relative"}>
+            {/* <LabelInput
+              state={item.link}
+              setState={ (e)=> handleLinkChange(e, index)}
+              labelVariant={"label"}
+              type="text"
+              variant={"bg-input"}
+              placeholder="Paste link to company social network page"
+              label={"Link"}
+            /> */}
+            <Box width={isSmallerThe500 ? "96%" : "100%"} position={"relative"}>
               {isSmallerThe500 ? (
                 <Input
+                  value={item.link}
+                  onChange={(e) => handleLinkChange(e, index)}
                   variant={"bg-input"}
                   placeholder="Paste link to company social network page"
                 />
               ) : (
                 <LabelInput
+                  state={item.link}
+                  setState={(e) => handleLinkChange(e, index)}
                   labelVariant={"label"}
                   type="text"
                   variant={"bg-input"}
+                  // readOnly={readOnly}
                   placeholder="Paste link to company social network page"
                   label={"Link"}
                 />
               )}
-              <AiOutlineDelete
-                onClick={() => handleDelete(index)}
-                style={{
+
+              <Box
+                sx={{
                   cursor: "pointer",
                   position: "absolute",
-                  top: isSmallerThe500 ? "10px" : "44px",
-                  right: "-30px",
+                  top: {
+                    "2xl": "65px ",
+                    xl: "41px",
+                    lg: "40px",
+                    sm: "9px",
+                    base: "9px",
+                  },
+                  right: isSmallerThe500 ? "-30px" : "-30px",
                   fontSize: "23px",
                   color: "#2CA5C3",
                 }}
-              />
-            </Box> */}
+              >
+                <AiOutlineDelete onClick={() => handleDelete(index)} />
+              </Box>
+            </Box>
           </InputWrapper>
         );
       })}
 
       {/* <Flex justifyContent={"center"}> */}
-        <Button
-          onClick={() => setlinkArray([...linkArray, 2])}
-          variant={"blue-btn"}
-        >
-          Add more
-        </Button>
+      <Button
+        onClick={handleaddMore}
+        variant={"blue-btn"}
+        width={"max-content"}
+        px={{ md: "30px", base: "20px" }}
+      >
+        Add More
+      </Button>
       {/* </Flex> */}
     </Box>
   );

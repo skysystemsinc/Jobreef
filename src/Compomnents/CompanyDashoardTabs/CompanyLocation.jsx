@@ -19,8 +19,26 @@ import InputWrapper from "../InputWrapper/InputWrapper";
 
 import IconButton from "../IconButton/IconButton";
 import white_edit from "@/assets/Images/white-edit.svg";
+import { useSelector } from "react-redux";
+import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
+import axios from "axios";
 
 const CompanyLocation = () => {
+  const companyProfile = useSelector((state) => state.companyProfile.value);
+
+  const [State, setState] = useState({
+    country: "",
+    province: "",
+    city: "",
+    address: "",
+
+    links: [
+      {
+        platform: "",
+        link: "",
+      },
+    ],
+  });
   const [isEdit, setisEdit] = useState(false);
   const [readOnly, setreadOnly] = useState(true);
 
@@ -32,7 +50,15 @@ const CompanyLocation = () => {
     setreadOnly(false);
     setisEdit(true);
   };
-  const handleSave = () => {
+  const handleSave = async () => {
+    const response = await axios("/api/company/companyProfile", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: { ...State },
+    });
+    console.log("response", response);
     setreadOnly(true);
     setisEdit(false);
   };
@@ -40,11 +66,24 @@ const CompanyLocation = () => {
     setreadOnly(true);
     setisEdit(false);
   };
-
+  useSkipInitialEffect(() => {
+    setState({
+      country: companyProfile.country,
+      province: companyProfile.province,
+      city: companyProfile.city,
+      address: companyProfile.address,
+    });
+  }, [companyProfile]);
   return (
     <Box mt={{ md: "60px", base: "10px" }}>
       <InputWrapper>
         <LabelInput
+          state={State.country}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, country: e.target.value };
+            });
+          }}
           readOnly={readOnly}
           dropdown={readOnly ? false : true}
           labelVariant={"label"}
@@ -54,6 +93,12 @@ const CompanyLocation = () => {
           label={"Country*"}
         />
         <LabelInput
+          state={State.province}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, province: e.target.value };
+            });
+          }}
           dropdown={readOnly ? false : true}
           labelVariant={"label"}
           type="text"
@@ -66,14 +111,27 @@ const CompanyLocation = () => {
 
       <InputWrapper>
         <LabelInput
+          state={State.city}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, city: e.target.value };
+            });
+          }}
           labelVariant={"label"}
           type="text"
           readOnly={readOnly}
           variant={"bg-input"}
-          placeholder="Select Option"
+          placeholder="Enter City"
           label={"Enter City"}
         />
         <LabelInput
+          state={State.address}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, address: e.target.value };
+            });
+          }}
+          readOnly={readOnly}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -104,9 +162,8 @@ const CompanyLocation = () => {
           justifyContent={"center"}
         >
           <IconButton
-          variant={"blue-btn"}
-          iconSize="18px"
-
+            variant={"blue-btn"}
+            iconSize="18px"
             btnLabel={"Edit"}
             handleEvent={handleEdit}
             icon={white_edit}

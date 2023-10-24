@@ -14,29 +14,69 @@ const ActiveJobs = () => {
     "Expires On",
     "Actions",
   ];
-  const actionList = ["Edit", "Pause" , "Close job"];
+  const keys = [
+    "jobTitle",
+    "employeeType",
+    "Candidates",
+    "noOfOpening",
+    "Expires On",
+    "Actions",
+  ];
+  const actionList = ["Edit", "Pause", "Close job"];
   const data = [
     {
-      "Job Title": "Social Media Manager",
-      "Employment Type": "mscott@example.org",
+      "jobTitle": "Social Media Manager",
+      "employeeType": "mscott@example.org",
       Candidates: "1",
-      Openings: "1 Year",
+      noOfOpening: "1 Year",
       "Expires On": "Communications",
       Actions: <Popovers actionList={actionList} />,
     },
     {
-      "Job Title": "Social Media Manager",
-      "Employment Type": "mscott@example.org",
+      "jobTitle": "Social Media Manager",
+      "employeeType": "mscott@example.org",
       Candidates: "1",
-      Openings: "1 Year",
+      noOfOpening: "1 Year",
       "Expires On": "Communications",
       Actions: <Popovers actionList={actionList} />,
     },
     {
-      "Job Title": "Social Media Manager",
-      "Employment Type": "mscott@example.org",
+      "jobTitle": "Social Media Manager",
+      "employeeType": "mscott@example.org",
       Candidates: "1",
-      Openings: "1 Year",
+      noOfOpening: "1 Year",
+      "Expires On": "Communications",
+      Actions: <Popovers actionList={actionList} />,
+    },
+    {
+      "jobTitle": "Social Media Manager",
+      "employeeType": "mscott@example.org",
+      Candidates: "1",
+      noOfOpening: "1 Year",
+      "Expires On": "Communications",
+      Actions: <Popovers actionList={actionList} />,
+    },
+    {
+      "jobTitle": "Social Media Manager",
+      "employeeType": "mscott@example.org",
+      Candidates: "1",
+      noOfOpening: "1 Year",
+      "Expires On": "Communications",
+      Actions: <Popovers actionList={actionList} />,
+    },
+    {
+      "jobTitle": "Social Media Manager",
+      "employeeType": "mscott@example.org",
+      Candidates: "1",
+      noOfOpening: "1 Year",
+      "Expires On": "Communications",
+      Actions: <Popovers actionList={actionList} />,
+    },
+    {
+      "jobTitle": "Social Media Manager",
+      "employeeType": "mscott@example.org",
+      Candidates: "1",
+      noOfOpening: "1 Year",
       "Expires On": "Communications",
       Actions: <Popovers actionList={actionList} />,
     },
@@ -44,15 +84,19 @@ const ActiveJobs = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 5; // Number of rows per page
+  const totalPages = Math.ceil(data.length / pageSize);
 
   const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
   };
   return (
     <>
-      <Box minH={"78vh"} pb={"20px"}  > 
-
+      <Box minH={"78vh"} pb={"20px"}>
         <PaginatedTable
+          keys={keys}
+          totalPages={totalPages}
           pageSize={pageSize}
           currentPage={currentPage}
           onPageChange={handlePageChange}

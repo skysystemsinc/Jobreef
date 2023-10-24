@@ -5,7 +5,7 @@ import { GoDotFill } from "react-icons/go";
 import { HiLocationMarker } from "react-icons/hi";
 import edit_outline from "@/assets/Images/edit_outline.svg";
 import trash from "@/assets/Images/trash.svg";
-const EducationCard = () => {
+const EducationCard = ({ headingStyle, dispableBlueCard }) => {
   return (
     <Box
       p={{ sm: "20px", base: "12px" }}
@@ -42,17 +42,17 @@ const EducationCard = () => {
               mt={{ md: "8px", base: "3px" }}
               display={"flex"}
               alignItems={"center"}
-              flexWrap={"wrap"}
+              flexWrap={{ md: "nowrap", base: "wrap" }}
               gap={{ md: "13px", sm: "6px", base: "5px" }}
             >
-              <Heading color={"gray.text"} variant={"p4"}>
+              <Heading color={"gray.text"} sx={headingStyle} variant={"p4"}>
                 Walter Payton College Preparatory High School
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
               </Box>
 
-              <Heading color={"gray.text"} variant={"p4"}>
+              <Heading color={"gray.text"} sx={headingStyle} variant={"p4"}>
                 September 2017 - July 2023
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
@@ -64,6 +64,7 @@ const EducationCard = () => {
                 gap={"6px"}
                 alignItems={"center"}
                 variant={"p4"}
+                sx={headingStyle}
               >
                 {" "}
                 <HiLocationMarker style={{ color: "#4A4A4A" }} /> Chicago,

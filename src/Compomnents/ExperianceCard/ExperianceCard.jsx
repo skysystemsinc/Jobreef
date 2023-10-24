@@ -105,11 +105,7 @@ const ExperianceCard = () => {
           meet the project requirements, performance criteria, and scalability.
           Requirements Analysis: Collaborate with stakeholders, customers, and
           cross-functional teams to gather and analyze system requirements,
-          ensuring clear and unambiguous specifications. Oversee the integration
-          of hardware and software components into cohesive systems, addressing
-          compatibility, functionality, and performance. Did Risk Assessment and
-          Mitigation to Identify potential risks in the system design and
-          develop ...
+       
         </Heading>
       </Box>
     </Box>

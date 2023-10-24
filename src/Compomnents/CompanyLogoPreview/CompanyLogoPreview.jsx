@@ -1,7 +1,7 @@
 import { Box, Heading, Image } from "@chakra-ui/react";
 import React from "react";
 import companyLogo from "@/assets/Images/companyLogo.svg";
-const CompanyLogoPreview = () => {
+const CompanyLogoPreview = ({logo}) => {
   return (
     <Box
       sx={{ border: "1px solid" }}
@@ -16,7 +16,7 @@ const CompanyLogoPreview = () => {
       p={"24px 10px"}
     >
       <Heading  mb={"20px"}  variant={"p7"}>Company Logo</Heading>
-      <Image width={{ md:"80px" , base:"50px"}} src={companyLogo.src} />
+      <Image width={{ md:"80px" , base:"50px"}} src={logo} />
     </Box>
   );
 };

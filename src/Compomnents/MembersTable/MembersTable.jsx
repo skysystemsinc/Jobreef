@@ -22,16 +22,24 @@ import arrow_left from "@/assets/Images/arrow-left.svg";
 
 const PaginatedTable = ({
   columns,
+  totalPages,
   data,
+  keys,
   pageSize,
   currentPage,
   onPageChange,
 }) => {
   const startIndex = (currentPage - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
+  const endIndex = currentPage * pageSize;
 
   const paginatedData = data.slice(startIndex, endIndex);
-  const totalPages = Math.ceil(data.length / pageSize);
+
+  const activeStyle = {
+    backgroundColor: "transparent",
+    border: "1px solid",
+    borderColor: "blue.500",
+    color: "blue.500",
+  };
 
   return (
     <Box
@@ -80,11 +88,13 @@ const PaginatedTable = ({
             </Tr>
           </Thead>
           <Tbody>
-            {paginatedData.map((item , ind) => {
+            {paginatedData.map((item, ind) => {
               return (
                 <Tr key={ind}>
-                  {columns.map((key, ind) => (
-                    <Td key={ind} className="nintoFont">{item[key]}</Td>
+                  {keys.map((key, ind) => (
+                    <Td key={ind} className="nintoFont">
+                      {item[key]}
+                    </Td>
                   ))}
                 </Tr>
               );
@@ -97,7 +107,7 @@ const PaginatedTable = ({
         display={"flex"}
         justifyContent={"space-between"}
         alignItems={"center"}
-        mt={"40px"}
+        mt={"20px"}
         mb={"17px"}
         pt={"15px"}
         borderTop={"1px solid "}
@@ -105,15 +115,43 @@ const PaginatedTable = ({
         // color={"blue.500"}
       >
         <Heading color={"blue.500"} variant={"p4"}>
-          {`Showing 1 to ${pageSize} of ${totalPages} Entries`}
+          {`Showing ${currentPage} to ${pageSize} of ${totalPages} Entries`}
         </Heading>
-        <Box display={"flex"} alignItems={"center"} gap={{ md: "10px" , base:"3px"}}>
+        <Box
+          display={"flex"}
+          alignItems={"center"}
+          gap={{ md: "10px", base: "3px" }}
+        >
           <Image
+            _disabled={currentPage == totalPages}
+            onClick={() => onPageChange(currentPage - 1)}
             cursor={"progress"}
             width={{ md: "22px", base: "16px" }}
             src={arrow_right.src}
           />
-          <Button
+
+          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+            (page, index) => {
+              console.log("page === index ",  currentPage , index+1 , currentPage === index);
+              return (
+                <Button
+                  key={index}
+                  disabled={currentPage == totalPages}
+                  onClick={() => onPageChange(page)}
+                  variant={"square-btn"}
+                  border={"2px solid "}
+                  borderColor={"blue.500"}
+                  color={page === index ? "red" : "#fff"}
+                  bg="blue.500"
+                  sx={currentPage === index+1 ? activeStyle : {}}
+                >
+                  {page}
+                </Button>
+              );
+            }
+          )}
+
+          {/* <Button
             variant={"square-btn"}
             border={"2px solid "}
             borderColor={"blue.500"}
@@ -129,8 +167,9 @@ const PaginatedTable = ({
             color={"blue.500"}
           >
             2
-          </Button>
+          </Button> */}
           <Image
+            _disabled={currentPage == totalPages}
             onClick={() => onPageChange(currentPage + 1)}
             cursor={"pointer"}
             width={{ md: "22px", base: "16px" }}
