@@ -49,22 +49,19 @@ const CompanyPageData = () => {
 
   return (
     <div style={{margin:"0px 50px 0px 50px", width:'100%'}}>
-        <Box width='70%' >
+        <Box width='70%'>
             <Box display={"flex"} mt={"0px"} ml={5} alignItems={"center"} flexWrap={"wrap"}>
                 <Image width={{ md: "53px", base: "35px" }} src={microsoft.src} marginRight={2}/>
                     <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
-                    Senior System's Designer Engineer
+                        Microsoft
                         <Box display={"flex"} alignItems={"center"}>
                             <Heading
                             variant={"p4"}
                             color={"gray.text"}
                             marginRight={1}
                             >
-                            Microsoft       
+                            www.microsoft.com       
                             </Heading>
-                            <Box mr={"20px"} mt={"0px"}>
-                                <ComponentMyChip label={"Urgently Hiring"} />
-                            </Box>
                         </Box>
                     </Heading> 
             </Box>
@@ -88,7 +85,7 @@ const CompanyPageData = () => {
                     Technology
                 </Heading>
             </Box>
-            <Box display={"flex"} justifyContent={"space-between"} ml={5} alignItems={'center'}>
+            <Box borderBottom="1px solid gray" pb={4} pr={4} mt={4} display={"flex"} justifyContent={"space-between"} ml={5} alignItems={'center'}>
                 <Heading color={"gray.text"} variant={"p4"} display="flex" alignItems={'center'}>
                     <Image style={{ display: "inline-block" }} width={{ md: "20px", base: "20px" }} mr={2} src={calendar.src}  /> 
                     Founded 1975
