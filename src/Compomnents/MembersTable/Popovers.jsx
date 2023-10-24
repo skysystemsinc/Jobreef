@@ -51,6 +51,9 @@ const Popovers = ({ width, actionList }) => {
                 padding={"12px  20px"}
                 borderBottom={"1px solid"}
                 borderColor={"gray.500"}
+                transition={".5s"}
+                _hover={{  borderColor:"blue.500"}}
+
               >
                 <Heading as={"p"} variant={"p4"}>
                   {item}

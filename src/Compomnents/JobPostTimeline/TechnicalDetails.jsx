@@ -11,7 +11,7 @@ import {
   Textarea,
   UnorderedList,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import LabelInput from "../LabelInput/LabelInput";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import { Link } from "@chakra-ui/next-js";
@@ -19,6 +19,29 @@ import { BsDot } from "react-icons/bs";
 import upload from "@/assets/Images/upload.svg";
 
 const TechnicalDetails = ({ state, setState }) => {
+  const [salaryRange, setsalaryRange] = useState({
+    type: "text",
+  });
+  
+  const salaryRangeOption = ["Range Salary", "Starting Salary"];
+  const rateOptions = [
+    "Monthly",
+    "Annual",
+    "Weekly",
+    "Bi-weekly",
+    "Hourly",
+    "Daily",
+  ];
+  const handleSelectSalary = (e) => {
+    if (e.target.value == salaryRangeOption[0]) {
+      setsalaryRange({ type: "text" });
+    } else {
+      setsalaryRange({ type: "number" });
+    }
+    setState((prev) => {
+      return { ...prev, salaryType: e.target.value };
+    });
+  };
   return (
     <Box>
       <InputWrapper>
@@ -43,9 +66,10 @@ const TechnicalDetails = ({ state, setState }) => {
             });
           }}
           labelVariant={"label"}
+          dropdown
           type="text"
           variant={"bg-input"}
-          placeholder="Enter the education level desired for this job"
+          placeholder="Select Education Level for this job"
           label={"Minimum Education"}
         />
       </InputWrapper>
@@ -84,17 +108,19 @@ const TechnicalDetails = ({ state, setState }) => {
         <LabelInput
           state={state.salaryType}
           setState={(e) => {
-            setState((prev) => {
-              return { ...prev, salaryType: e.target.value };
-            });
+            handleSelectSalary(e);
+            // setState((prev) => {
+            //   return { ...prev, salaryType: e.target.value };
+            // });
           }}
           labelVariant={"label"}
           type="date"
           variant={"bg-input"}
+          dropdownOption={salaryRangeOption}
           imoptnatIcon
           dropdown
           placeholder="Select salary type for this job"
-          label={"Salary Type"}
+          label={"Display Salary As"}
         />
         <LabelInput
           state={state.salaryRange}
@@ -104,10 +130,41 @@ const TechnicalDetails = ({ state, setState }) => {
             });
           }}
           labelVariant={"label"}
-          type="text"
+          type={salaryRange.type}
           variant={"bg-input"}
-          placeholder="Enter the salary range for this job"
+          placeholder={"Enter the salary range for this job"}
           label={"Salary Range"}
+        />
+      </InputWrapper>
+      <InputWrapper>
+        <LabelInput
+          state={state.rate}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, rate: e.target.value };
+            });
+          }}
+          labelVariant={"label"}
+          type="date"
+          variant={"bg-input"}
+          dropdownOption={rateOptions}
+          dropdown
+          placeholder="Select Rate"
+          label={"Rate"}
+        />
+        <LabelInput
+          state={state.tags}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, tags: e.target.value };
+            });
+          }}
+          labelVariant={"label"}
+          type="text"
+          dropdown
+          variant={"bg-input"}
+          placeholder="Select Tags for Job Post"
+          label={"Tags"}
         />
       </InputWrapper>
 

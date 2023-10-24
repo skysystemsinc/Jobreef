@@ -13,7 +13,10 @@ const Certification = ({ addCertificate, setCertificate }) => {
   // const [addCertificate, setCertificate] = useState(false);
   const [experianceData, setexperianceData] = useState([]);
   // const experianceData = [];
-
+  const style = {
+    maxWidth: "240px",
+    // border:'1px solid red'
+  };
   return (
     <Box>
       {addCertificate ? (
@@ -24,8 +27,8 @@ const Certification = ({ addCertificate, setCertificate }) => {
           />
         </Box>
       ) : (
-        <Box mt={"30px"} width={"100%"} mx={"auto"}>
-          <CeritifcateCard />
+        <Box  width={"100%"} mx={"auto"}>
+          <CeritifcateCard   headingStyle={style}/>
 
           <Flex justifyContent={"center"}>
             <Button
@@ -34,7 +37,7 @@ const Certification = ({ addCertificate, setCertificate }) => {
               }}
               width="max-content"
               px={"10px"}
-              mt={{ md: "61px", base: "20px" }}
+              mt={{ md: "17px", base: "15px" }}
               mb={"40px"}
               variant={"blue-btn"}
             >

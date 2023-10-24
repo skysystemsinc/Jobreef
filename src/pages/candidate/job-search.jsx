@@ -37,14 +37,15 @@ const JobSearch = () => {
     <>
       <Header />
       
-      <Box display={"flex"} justifyContent={"center"} mt={"0px"}>
+      <Box display={"flex"} justifyContent={"center"} mt={"0px"} minHeight={"70vh"}>
         <Box
           width={"100%"}    
           px={{ md: "20px", base: "10px" }}
         >
           <JobSearchData searchEntryForCompany={searchEntryForCompany} SearchEntryForLocation={SearchEntryForLocation} SearchNow={SearchNow}/>
           {load?
-            (<JobSearchEntry/>):
+            // (<JobSearchEntry/>):
+            (null):
             (<JobSearchResults company={company} location={location}/>)}
         </Box>
       </Box>
@@ -53,6 +54,7 @@ const JobSearch = () => {
         style={{padding:"20px 40px 20px 40px"}}
         variant="blue-btn"
         marginLeft="43%"  // Add margin to the button for space
+        
       >
         Toggle
       </Button>

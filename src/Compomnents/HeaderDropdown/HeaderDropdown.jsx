@@ -28,8 +28,7 @@ const HeaderDropdown = () => {
     {
       title: "Dashboard",
       icon: <Image width={{ md: "22px", base: "19px" }} src={dasboadrd.src} />,
-      pathname:"/company/comapany-details" 
-      ,
+      pathname: "/company/comapany-details",
     },
     {
       title: "Messages",
@@ -38,7 +37,7 @@ const HeaderDropdown = () => {
     },
     {
       title: "Profile Settings",
-      icon: <Image width={{ md: "22px", base: "19px" }} src={profile .src} />,
+      icon: <Image width={{ md: "22px", base: "19px" }} src={profile.src} />,
       pathname: "/company/profile-setting",
     },
     {
@@ -150,7 +149,11 @@ const HeaderDropdown = () => {
                 <MenuItem
                   key={index}
                   bg="transparent"
-                  _hover={{ bg: "transparent" }}
+                  transition={".5s"}
+                  _hover={{
+                    bg: "gray.200",
+                    "& .hoverText": { color: "blue.500" },
+                  }}
                   borderBottom={"1px solid #0000001a"}
                   p={{ md: "14px 20px 16px 20px", base: "13px 16px 13px 16px" }}
                   // mb={"6px"}
@@ -169,7 +172,13 @@ const HeaderDropdown = () => {
                       {/* <Image src={dasboadrd.src} /> */}
                       {item.icon}
 
-                      <Heading mb="1px" as={"p"} variant={"p4"}>
+                      <Heading
+                        transition={".5s"}
+                        className="hoverText"
+                        mb="1px"
+                        as={"p"}
+                        variant={"p4"}
+                      >
                         {" "}
                         {item.title}
                       </Heading>

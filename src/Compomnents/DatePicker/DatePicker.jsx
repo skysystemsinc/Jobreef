@@ -20,11 +20,15 @@ const DatePicker = ({
   selectRange,
 }) => {
   // const [date, setdate] = useState(new Date());
+  const currentDate = moment();
+  const defaultDate = currentDate.add(30, 'days');
   const [isOpen, setisopen] = useState(false);
   const calenderStle = {
     // "& .react-daterange-picker__calendar-button": {
     //   border: "1px solid red !important",
     // },
+    position: "relative",
+    // border: "1px solid red",
     "& .react-calendar": {
       boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
       border: "none",
@@ -163,7 +167,25 @@ const DatePicker = ({
 
   return (
     <>
-      <Box sx={calenderStle}>
+      <Box   sx={calenderStle} position={"relative"} >
+        <Box  position={"absolute"} right={"0px"}  zIndex={999}  >
+          <DateRangePicker
+            calendarIcon={
+              <Image
+                src={canlenderIcon.src}
+                width={{ md: "25px", base: "20px" }}
+                mt={{ md: "0px", base: "6px" }}
+              />
+            }
+            defaultValue={defaultDate.toDate()}
+            // selectRange={true}
+            // isOpen={false}
+            onChange={setState}
+            // shou
+            minDate={defaultDate.toDate()}
+            value={state}
+          />
+        </Box>
         <InputGroup>
           <Input
             value={moment(state).format("MM/DD/YYYY")}
@@ -172,7 +194,7 @@ const DatePicker = ({
             placeholder="MM/DD/YYYY"
             readOnly={true}
           />
-          <InputRightElement>
+          {/* <InputRightElement >
             <DateRangePicker
               calendarIcon={
                 <Image
@@ -187,7 +209,7 @@ const DatePicker = ({
               // shou
               value={state}
             />
-          </InputRightElement>
+          </InputRightElement> */}
         </InputGroup>
       </Box>
     </>

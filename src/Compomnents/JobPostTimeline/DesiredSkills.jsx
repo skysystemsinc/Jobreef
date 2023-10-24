@@ -58,7 +58,7 @@ const DesiredSkills = ({ style, state, setState }) => {
               label={"Desired Skills"}
             />
 
-            <LabelInput
+            {/* <LabelInput
               state={state.tags}
               setState={(e) => {
                 setState((prev) => {
@@ -72,7 +72,7 @@ const DesiredSkills = ({ style, state, setState }) => {
               readOnly={readOnly}
               placeholder="Select Tags for Job Post"
               label={"Tags"}
-            />
+            /> */}
           </InputWrapper>
         );
       })}

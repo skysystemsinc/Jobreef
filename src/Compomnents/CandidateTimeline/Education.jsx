@@ -7,11 +7,13 @@ import TextCard from "../TextCard/TextCard";
 import EducationForm from "./EducationForm";
 import EducationCard from "../EducationCard/EducationCard";
 
-const Education = ({addEducation , setaddEducation}) => {
-//   const [addEducation, setaddEducation] = useState(false);
+const Education = ({ addEducation, setaddEducation }) => {
+  //   const [addEducation, setaddEducation] = useState(false);
   const [experianceData, setexperianceData] = useState([]);
   // const experianceData = [];
-
+  const style = {
+    maxWidth: "200px",
+  };
   return (
     <Box>
       {addEducation ? (
@@ -22,8 +24,11 @@ const Education = ({addEducation , setaddEducation}) => {
           />
         </Box>
       ) : (
-        <Box mt={"15px"} width={"100%"} mx={"auto"}>
-          <EducationCard dispableBlueCard />
+        <Box  width={"100%"} mx={"auto"}>
+          <EducationCard
+            headingStyle={style}
+            dispableBlueCard
+          />
           <Flex justifyContent={"center"}>
             <Button
               onClick={() => {
@@ -31,7 +36,7 @@ const Education = ({addEducation , setaddEducation}) => {
               }}
               width="max-content"
               px={{ md: "40px", base: "20px" }}
-            //   mt={{ md: "px", base: "20px" }}
+              //   mt={{ md: "px", base: "20px" }}
               mb={"40px"}
               variant={"blue-btn"}
             >

@@ -19,7 +19,7 @@ const WorkExperiance = ({addExperiance , setaddExperiance}) => {
           />
         </Box>
       ) : (
-        <Box mt={"30px"} width={"100%"} mx={"auto"}>
+        <Box  width={"100%"} mx={"auto"}>
           <ExperianceCard />
 
           <Flex justifyContent={"center"}>

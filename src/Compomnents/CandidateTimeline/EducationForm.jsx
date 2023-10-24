@@ -23,7 +23,7 @@ const EducationForm = ({
 }) => {
   const router = useRouter();
   return (
-    <Box mt={{ md: "50px", lg: "60px", base: "20px" }} width={"100%"}>
+    <Box width={"100%"}>
       {/* <Image src={profile.src} /> */}
 
       <Box mt={"0px"}>

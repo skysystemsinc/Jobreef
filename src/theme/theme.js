@@ -352,7 +352,7 @@ const components = {
       p1: {
         fontWeight: 400,
         color: "gray.light",
-        lineHeight: [   "19px", "19px", "28px", "28px", "28px", "28px",],
+        lineHeight: ["19px", "19px", "28px", "28px", "28px", "28px"],
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontSize: ["12px", "13px", "14px", "14px", "14px", "14px"],
         margin: "0px",
@@ -429,6 +429,13 @@ const components = {
         fontWeight: 700,
         fontSize: ["13px", "16px", "16px", "16px", "16px", "16px"],
       },
+      p12: {
+        color: "gray.text",
+        fontFamily: "var(--chakra-\fonts-openSans)",
+        fontWeight: 400,
+        fontSize: "13px",
+        lineHeight:'21px'
+      },
       // Add more variants for other heading levels as needed
     },
   },
@@ -464,10 +471,19 @@ const components = {
         backgroundColor: "#fff",
 
         table: {
+          borderCollapse: "separate",
+          borderSpacing: "0px 20px",
+
           backgroundColor: "#fff",
-          padding: "10px 0px",
+          // padding: "10px 0px",
           tbody: {
+            // borderCollapse: "separate",
+            // borderSpacing: "0px 20px",
+
             tr: {
+              position: "relative",
+              top: "-21px",
+              marginBottom: "10px !important",
               verticalAlign: "middle",
               boxShadow: " 0px 2px 15px 0px rgba(0, 0, 0, 0.06)",
               border: "1px solid ",
@@ -488,6 +504,7 @@ const components = {
           },
           thead: {
             bg: "blue.500",
+            tr: { position: "relative", top: "-21px" },
             th: {
               padding: { md: "23px 30px", base: "16px 20px" },
               fontSize: { md: "15px", base: "12px" },

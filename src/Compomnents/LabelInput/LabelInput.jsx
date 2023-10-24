@@ -17,13 +17,16 @@ import { AiOutlineCheck } from "react-icons/ai";
 import calendar from "@/assets/Images/calendar.svg";
 import DatePicker from "../DatePicker/DatePicker";
 import info from "@/assets/Images/info.svg";
+import TextFormatting from "../TextFormatting/TextFormatting";
 
 const LabelInput = ({
+  dropdownOption,
   textarea,
   iconStyle,
   icon,
   state,
   setState,
+  textFormattter,
   handleEdit,
   type,
   showEndLable,
@@ -89,8 +92,14 @@ const LabelInput = ({
           variant={variant}
           resize={"none"}
         />
+      ) : textFormattter ? (
+        <TextFormatting
+          value={state}
+          onChange={setState}
+          placeholder={placeholder}
+        />
       ) : dropdown ? (
-        <DropDown state={state} setState={setState} placeholder={placeholder} />
+        <DropDown dropdownOption={dropdownOption} state={state} setState={setState} placeholder={placeholder} />
       ) : passworInput ? (
         <PasswordInput
           setState={setState}

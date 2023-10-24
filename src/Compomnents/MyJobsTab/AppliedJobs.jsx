@@ -108,7 +108,7 @@ const AppliedJobs = () => {
                     justifyContent={"space-between"}
                     width={"100%"}
                   >
-                    <Box display={"flex"} flexWrap={"wrap"} gap={"10px"} alignItems={"center"}>
+                    <Box display={"flex"} flexWrap={"wrap"} gap={"9px"} alignItems={"center"}>
                       <Heading color={"gray.text"} variant={"p4"}>
                         {object.Salary}
                       </Heading>
@@ -122,13 +122,12 @@ const AppliedJobs = () => {
                         <GoDotFill style={{ color: "#D9D9D9" }} />
                       </Box>
                       <Heading color={"gray.text"} variant={"p4"}>
-                        {object.Experience} years
-                        
+                        Experience: {object.Experience} years
                       </Heading>
                     </Box>
                     <Box display={"flex"} flexDirection="column" textAlign={"end"} justifyContent="flex-end" >
                       <Heading color={"gray.text"} variant={"p4"}>
-                        {object.ApplicationDeadline}
+                        Applied On: {object.ApplicationDeadline}
                       </Heading>
                     </Box>
                   </Box>
@@ -136,7 +135,7 @@ const AppliedJobs = () => {
               </Box>
               <Box>
                 <Heading mt={"22px"} variant={"p10"}>
-                  Relevant Skills
+                  Desired Skills
                 </Heading>
               </Box>
 
@@ -152,7 +151,7 @@ const AppliedJobs = () => {
                 </Box>
                 <Box display={"flex"} flexDirection="column" justifyContent="flex-end">
                   <Heading display="flex" mb={"10px"} variant={"p10"}>
-                  Status: <span style={{color:'green'}}>New</span>
+                  Status:<span style={{marginLeft:'4%', color:'green'}}> New</span>
                   </Heading>
                 </Box>
               </Box>

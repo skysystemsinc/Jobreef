@@ -35,6 +35,7 @@ import { BsHeart } from "react-icons/bs";
 import heart from "@/assets/Images/heart.svg";
 import { MdArrowDropDown } from "react-icons/md";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 const HeaderDropdown = dynamic(
   () => import("../HeaderDropdown/HeaderDropdown"),
   {
@@ -57,7 +58,6 @@ export default function Header() {
         // position={"relative"}
         // top={"0px"}
 
-        
         // pr={{base:20}}
         borderBottom={1}
         boxShadow={" 0px 4px 4px 0px rgba(0, 0, 0, 0.25)"}
@@ -71,13 +71,19 @@ export default function Header() {
           display={{ base: "flex", xl: "none" }}
         >
           <IconButton
-          color={"black.100"}
+            color={"black.100"}
             onClick={onToggle}
             icon={
               isOpen ? (
-                <AiOutlineClose color="black.100" fontSize={isSmallerThe500 ? "24px" : "30px"} />
+                <AiOutlineClose
+                  color="black.100"
+                  fontSize={isSmallerThe500 ? "24px" : "30px"}
+                />
               ) : (
-                <RxHamburgerMenu color="black.100" fontSize={isSmallerThe500 ? "24px" : "30px"} />
+                <RxHamburgerMenu
+                  color="black.100"
+                  fontSize={isSmallerThe500 ? "24px" : "30px"}
+                />
               )
             }
             variant={"ghost"}
@@ -99,7 +105,6 @@ export default function Header() {
           justify={"flex-end"}
           direction={"row"}
           alignItems={"center"}
-          
           spacing={6}
         >
           <IconButton
@@ -131,6 +136,7 @@ const DesktopNav = () => {
   const linkColor = useColorModeValue("gray.600", "gray.200");
   const linkHoverColor = useColorModeValue("gray.800", "white");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
+  const router = useRouter();
 
   return (
     <Stack direction={"row"} spacing={4}>
@@ -142,16 +148,25 @@ const DesktopNav = () => {
                 variant={"blue-link"}
                 fontSize={{ "2xl": "20px", base: "15px" }}
                 p={2}
+                transition={".5s"}
                 href={navItem.href ?? "#"}
                 // fontSize={"sm"}
                 // fontWeight={500}
                 display={"flex"}
                 alignItems={"center"}
                 gap={"2px"}
-                color={"gray.light"}
+                color={
+                  navItem.pathName == router.pathname
+                    ? "blue.500"
+                    : "gray.light"
+                }
+                fontWeight={navItem.pathName == router.pathname ? 400 : 500}
                 _hover={{
                   textDecoration: "none",
                   color: "gray.light",
+
+                  fontWeight: 400,
+                  color: "blue.500",
                 }}
               >
                 {navItem.label} {navItem.icon ?? ""}
@@ -295,6 +310,7 @@ const MobileNavItem = ({ label, children, href }) => {
 const NAV_ITEMS = [
   {
     label: "Home",
+    pathName: "/",
     // icon: <Image src={heart.src} />,
   },
   {
@@ -308,9 +324,10 @@ const NAV_ITEMS = [
   },
   {
     label: "For Employers",
-    icon: 
-    // <MdArrowDropDown/>,
-    <Image src={heart.src} />,
+    icon: (
+      // <MdArrowDropDown/>,
+      <Image src={heart.src} />
+    ),
 
     href: "#",
   },

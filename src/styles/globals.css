@@ -1,6 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800&display=swap");
+.nintoFont {
+  font-family: "Nunito", sans-serif;
+}
 
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800&display=swap');
-  .nintoFont{
-    
-    font-family: 'Nunito', sans-serif;
-  }
+.ql-snow {
+  /* border-top: none !important; */
+  border-color: #bbbbc7 !important;
+  /* border-radius: 10px; */
+}
+.ql-toolbar {
+  border: none !important;
+  border-bottom: 1px solid #bbbbc7;
+  border-top-right-radius: 10px !important;
+  border-top-left-radius: 10px !important;
+}
+.ql-container {
+  border: none !important;
+  padding: 4px 20px 60px 10px !important;
+  /* margin: 20px 0px !important; */
+  border-bottom-right-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+  border-top: 1px solid #bbbbc7 !important;
+}
+.ql-editor.ql-blank::before {
+  font-style: normal !important;
+  color: #bbbbc7 !important;
+  font-family: "Open Sans";
+}
+
+body {
+  color: black !important;
+}

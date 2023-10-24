@@ -89,9 +89,10 @@ const AddMemebersForm = () => {
           }}
           labelVariant={"label"}
           type="text"
+
           variant={"bg-input"}
           placeholder="Enter Employee Email Address"
-          label={"Email"}
+          label={"Email*"}
         />
         <LabelInput
           dropdown

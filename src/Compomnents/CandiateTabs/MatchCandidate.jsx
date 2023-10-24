@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 const MatchCandidate = ({ filterKey }) => {
   const candidates = useSelector((state) => state.candidates.value.filter);
+  const selectedCandidates = useSelector((state) => state.candidates.value.selected);
 
   const allData =
     candidates && candidates?.filter((item) => item[filterKey] == false);
@@ -28,9 +29,7 @@ const MatchCandidate = ({ filterKey }) => {
       filterKey={filterKey}
       cardStatus={"Interviewing"}
       popOverList={popOverListAll}
-      handleEvent={(e) => {
-        setshowSelectCandidate(true);
-      }}
+
     />,
     <Archived
       data={archivedData}
@@ -42,7 +41,7 @@ const MatchCandidate = ({ filterKey }) => {
   ];
   return (
     <Box>
-      {showSelectCandidate ? (
+      {selectedCandidates ? (
         <Box mt={{ md: "31px", base: "15px" }}>
           <SelectedCandidate matchCandidate />
         </Box>

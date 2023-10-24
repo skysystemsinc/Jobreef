@@ -94,17 +94,19 @@
 // };
 
 // export default CeritifcateCard;
-import { Box, Circle, Heading, Image } from "@chakra-ui/react";
+import { Box, Circle, Heading, Image, useMediaQuery } from "@chakra-ui/react";
 import React from "react";
 import microsoft from "@/assets/Images/microsoft.svg";
 import { GoDotFill } from "react-icons/go";
 import { HiLocationMarker } from "react-icons/hi";
 import edit_outline from "@/assets/Images/edit_outline.svg";
 import trash from "@/assets/Images/trash.svg";
-const CeritifcateCard = ({ dispableBlueCard }) => {
+const CeritifcateCard = ({ headingStyle, dispableBlueCard }) => {
+  const [isSmallerThe500] = useMediaQuery("(max-width: 500px)");
+
   return (
     <Box
-      p={{ sm: "20px", base: "12px" }}
+      p={{ sm: "15px 15px 20px 15px ", base: "12px" }}
       mb={{ md: "33px", base: "20px" }}
       width={"100%"}
       borderRadius={"8px"}
@@ -121,60 +123,10 @@ const CeritifcateCard = ({ dispableBlueCard }) => {
         pr={"15px"}
         // borderColor={"gray.400"}
         flexWrap={{ xl: "nowrap", base: "wrap" }}
-        pb={{ lg: "20px", base: "10px" }}
       >
-        <Box
-          display={"flex"}
-          alignItems={"flex-start"}
-          gap={{ md: "18px", base: "12px" }}
-        >
-          {/* <Box>
-            <Image width={{ md: "53px", base: "35px" }} src={microsoft.src} />
-          </Box> */}
-          <Box>
-            <Heading variant={"p7"} color={"gray.text"}>
-              Diploma Name
-            </Heading>
-            <Box
-              mt={{ md: "8px", base: "3px" }}
-              display={"flex"}
-              alignItems={"center"}
-              flexWrap={"wrap"}
-              gap={{ md: "13px", sm: "6px", base: "5px" }}
-            >
-              <Heading color={"gray.text"} variant={"p4"}>
-                Walter Payton College Preparatory High School
-              </Heading>
-              <Box fontSize={{ sm: "14px", base: "8px" }}>
-                <GoDotFill style={{ color: "#D9D9D9" }} />
-              </Box>
-
-              <Heading color={"gray.text"} variant={"p4"}>
-                September 2017 - July 2023
-              </Heading>
-              <Box fontSize={{ sm: "14px", base: "8px" }}>
-                <GoDotFill style={{ color: "#D9D9D9" }} />
-              </Box>
-
-              <Heading
-                display={"flex"}
-                gap={"6px"}
-                alignItems={"center"}
-                variant={"p4"}
-              >
-                {" "}
-                <HiLocationMarker style={{ color: "#4A4A4A" }} /> Chicago,
-                Illinois, USA
-              </Heading>
-              <Box fontSize={{ sm: "14px", base: "8px" }}>
-                <GoDotFill style={{ color: "#D9D9D9" }} />
-              </Box>
-              <Heading color={"gray.text"} variant={"p4"}>
-                Certificate Verification ID: 2f8ae5bfaa4c46dc3bba77655130f32a
-              </Heading>
-            </Box>
-          </Box>
-        </Box>
+        <Heading variant={"p7"} color={"gray.text"}>
+          Diploma Name
+        </Heading>
 
         <Box
           display={"flex"}
@@ -186,18 +138,62 @@ const CeritifcateCard = ({ dispableBlueCard }) => {
         >
           <Box display={"flex"} alignItems={"center"} gap={"10px"}>
             <Image
-              width={{ md: "19px", base: "16px" }}
+              width={{ md: "17px", base: "16px" }}
               src={edit_outline.src}
             />
             <Heading variant={"p5"}>Edit</Heading>
           </Box>
           <Box display={"flex"} alignItems={"center"} gap={"5px"}>
-            <Image width={{ md: "19px", base: "16px" }} src={trash.src} />
+            <Image width={{ md: "17px", base: "16px" }} src={trash.src} />
             <Heading variant={"p5"}>Delete</Heading>
           </Box>
         </Box>
       </Box>
+      <Box
+        mt={{ md: "14px", base: "3px" }}
+        display={"flex"}
+        // alignItems={"flex-start"}
+        alignItems={{ md: "flex-start", base: "center" }}
+        flexWrap={{ md: "nowrap", base: "wrap" }}
+        gap={{ md: "13px", sm: "6px", base: "5px" }}
+      >
+        <Heading color={"gray.text"} variant={"p12"} sx={headingStyle}>
+          Walter Payton College Preparatory High School
+        </Heading>
+        <Box fontSize={{ sm: "14px", base: "8px" }}>
+          <GoDotFill style={{ color: "#D9D9D9" }} />
+        </Box>
 
+        <Heading color={"gray.text"} variant={"p12"} sx={headingStyle}>
+          September 2017 - July 2023
+        </Heading>
+        <Box fontSize={{ sm: "14px", base: "8px" }}>
+          <GoDotFill style={{ color: "#D9D9D9" }} />
+        </Box>
+
+        <Heading
+          display={"flex"}
+          gap={"6px"}
+          alignItems={{ md: "flex-start", base: "center" }}
+          variant={"p12"}
+          sx={headingStyle}
+        >
+          {" "}
+          <HiLocationMarker
+            style={{
+              color: "#4A4A4A",
+              fontSize: isSmallerThe500 ? "15px" : "20px",
+            }}
+          />{" "}
+          Chicago, Illinois, USA
+        </Heading>
+        <Box fontSize={{ sm: "14px", base: "8px" }}>
+          <GoDotFill style={{ color: "#D9D9D9" }} />
+        </Box>
+        <Heading sx={headingStyle} color={"gray.text"} variant={"p12"}>
+          Certificate Verification ID: 2f8ae5bfaa4c46dc3bba77655130f32a
+        </Heading>
+      </Box>
       {/* <Box>
         <Heading
           lineHeight={"25px"}
