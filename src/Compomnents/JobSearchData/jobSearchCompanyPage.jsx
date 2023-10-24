@@ -247,14 +247,14 @@ const JobSearchCompanyPage = () => {
           </Box>
         ))}
         <Box display={"flex"} gap={6} mt={10}>
-          <Button style={{ padding: "20px 40px 20px 40px" }}>Save Job</Button>
+          <Button style={{ padding: "20px 40px 20px 40px" }} variant={"outline-blue"}>Save Job</Button>
           <Button style={{ padding: "20px 40px 20px 40px" }} variant="blue-btn">
             Apply Now
           </Button>
         </Box>
 
         <Box mt={5}>
-          <Heading color={"gray.text"} variant={"p4"}>
+          <Heading color={"gray.text"} variant={"p7"}>
             Job Description
           </Heading>
           <Heading color={"gray.text"} variant={"p4"}>
@@ -265,7 +265,7 @@ const JobSearchCompanyPage = () => {
             in ensuring the successful delivery of projects within schedule,
             budget, and quality parameters.
           </Heading>
-          <Heading color={"gray.text"} variant={"p4"} mt={3}>
+          <Heading color={"gray.text"} variant={"p7"} mt={3}>
             Responsibilities
           </Heading>
           {text.map((data, index) => (
@@ -279,7 +279,7 @@ const JobSearchCompanyPage = () => {
             </Box>
           ))}
 
-          <Heading color={"gray.text"} variant={"p4"} mt={3}>
+          <Heading color={"gray.text"} variant={"p7"} mt={3}>
             Qualification and requirements
           </Heading>
           {text2.map((data, index) => (
@@ -387,19 +387,7 @@ const JobSearchCompanyPage = () => {
 
             <Box>
               <Heading color={"gray.text"} variant={"p4"}>
-                Lorem ipsum dolor sit amet consectetur a dipisicing elit. Iure
-                quos sint facilis quis repudiandae voluptatem, laborum eligendi
-                deleniti sit necessitatibus enim quisquam non ab in amet eaque
-                quidem, tempore hic dicta ipsum. Neque cum, libero quasi quidem
-                magnam molestiae exercitationem blanditiis a quam rerum
-                aspernatur earum debitis, consequatur hic cupiditate quod. Esse
-                dolor quod asperiores cupiditate perferendis aperiam illo
-                deleniti. Rerum, eius? Tenetur quia numquam, laudantium minus
-                excepturi asperiores laboriosam blanditiis, aliquid quos aliquam
-                obcaecati. Delectus quisquam atque perferendis, harum, quos,
-                ratione non accusamus nobis iste ipsa explicabo? Consequatur
-                ullam eius quis non. Iusto molestias ad, eligendi adipisci vitae
-                consequatur?
+                Microsoft Corporation is an American multinational technology corporation headquartered in Redmond, Washington. Microsoft's best-known software products are the Windows line of operating systems, the Microsoft 365 suite of productivity applications, and the Internet Explorer and Edge web browsers.
               </Heading>
             </Box>
             <Box mt={4} gap={4} display={"flex"}>

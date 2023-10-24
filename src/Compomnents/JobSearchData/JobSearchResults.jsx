@@ -36,14 +36,14 @@ const checkboxes = [
     values: [
       { key: "Hybrid", value: "Hybrid" },
       { key: "Remote", value: "Remote" },
-      { key: "Onsite", value: "Onsite" },
+      { key: "On-Site", value: "Onsite" },
     ],
   },
   {
     heading: "Employment Type",
     values: [
-      { key: "FullTime", value: "Full-Time" },
-      { key: "PartTime", value: "Part-Time" },
+      { key: "Full-Time", value: "Full-Time" },
+      { key: "Part-Time", value: "Part-Time" },
       { key: "Contract", value: "Contract" },
       { key: "Internship", value: "Internship" },
     ],
@@ -52,19 +52,19 @@ const checkboxes = [
     heading: "Experience",
     values: [
       { key: "EntryLevel", value: "Entry-Level" },
-      { key: "1 to 3 Years", value: 1 },
-      { key: "3 to 5 Years", value: 3 },
-      { key: "5 to 10 Years", value: 5 },
+      { key: "1 - 3 Years", value: 1 },
+      { key: "3 - 5 Years", value: 3 },
+      { key: "5 - 10 Years", value: 5 },
       { key: "10+ Years", value: 10 },
     ],
   },
   {
     heading: "Salary Type",
     values: [
-      { key: "fixedSalary", value: "Fixed Salary" },
-      { key: "50kTo70k", value: 50000 },
-      { key: "70kTo100k", value: 70000 },
-      { key: "100kPlus", value: 100000 },
+      { key: "Fixed Salary", value: "Fixed Salary" },
+      { key: "$50000 - $70000 Annual", value: 50000 },
+      { key: "$70000 - $100,000 Annual", value: 70000 },
+      { key: "$100,000 + Annual", value: 100000 },
     ],
   },
 ];
@@ -232,8 +232,8 @@ const JobSearchResults = ({ company, location }) => {
       </Box>
 
       <Box display={"flex"} flexWrap={"wrap"} margin={10} gap={5}>
-        <Box display={{ lg: "block", base: "none" }}>
-          <Box width="100%" flex={1} display={"flex"} flexDirection={"column"} flexWrap={"wrap"}>
+        <Box  display={{ lg: "flex", base: "none" }} width="100%" flex={1.25} flexDirection={"column"} flexWrap={"wrap"}>
+          <Box width="100%"  display={"flex"} flexDirection={"column"} flexWrap={"wrap"}>
             {checkboxes.map((object, index) => {
               return (
                 <Box
@@ -242,6 +242,9 @@ const JobSearchResults = ({ company, location }) => {
                   width="100%"
                   p={4}
                   key={Math.random()}
+                  display={"flex"}
+                  flexDirection={"column"}
+                  gap={1}
                 >
                   <Heading
                     color={"gray"}
