@@ -15,7 +15,13 @@ import edit from "@/assets/Images/edit.svg";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
-const ExperianceForm = ({ setexperianceData, setaddExperiance, setTabIndex, tabIndex }) => {
+import globalStyles from "@/styles/globalStyles";
+const ExperianceForm = ({
+  setexperianceData,
+  setaddExperiance,
+  setTabIndex,
+  tabIndex,
+}) => {
   const router = useRouter();
   return (
     <Box
@@ -65,8 +71,8 @@ const ExperianceForm = ({ setexperianceData, setaddExperiance, setTabIndex, tabI
               <Box
                 display={"flex"}
                 position={"absolute"}
-                bottom={"-40px"}
-                gap={"15px"}
+                bottom={"-30px"}
+                gap={"10px"}
                 alignItems={"center"}
               >
                 <Checkbox
@@ -74,8 +80,8 @@ const ExperianceForm = ({ setexperianceData, setaddExperiance, setTabIndex, tabI
                   // defaultChecked
 
                   borderColor={"black.200"}
-                  border={"2px solid "}
-                  size="sm"
+                  size="md"
+                  sx={globalStyles.checkBoxStyle}
                   rounded={"base"}
                   colorScheme="blue"
                 />
@@ -121,9 +127,8 @@ const ExperianceForm = ({ setexperianceData, setaddExperiance, setTabIndex, tabI
             label={"Street Address"}
           />
         </InputWrapper>
-
-        <Box maxWidth={{ xl: "48%", base: "100%" }}>
-          <LabelInput
+        <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
+        <LabelInput
             labelVariant={"label"}
             type="date"
             variant={"bg-input"}
@@ -131,7 +136,16 @@ const ExperianceForm = ({ setexperianceData, setaddExperiance, setTabIndex, tabI
             dropdown
             label={"Employment Type"}
           />
-        </Box>
+          <LabelInput
+            labelVariant={"label"}
+            type="text"
+            dropdown
+            variant={"bg-input"}
+            placeholder="Select the job family "
+            label={"Job Family"}
+          />
+        </InputWrapper>
+
 
         <Box mb={{ md: "100px", base: "10px" }} mt={"20px"}>
           <LabelInput
@@ -155,7 +169,6 @@ const ExperianceForm = ({ setexperianceData, setaddExperiance, setTabIndex, tabI
               setaddExperiance(false);
               // tabIndex == 0 ? null : setTabIndex(--tabIndex);
             }}
-            
             variant="outline-blue"
           >
             Cancel
@@ -165,7 +178,7 @@ const ExperianceForm = ({ setexperianceData, setaddExperiance, setTabIndex, tabI
             onClick={() => {
               // tabIndex == 2 ? null : setTabIndex(++tabIndex);
               // router.push("/");
-              setexperianceData([1])
+              setexperianceData([1]);
               setaddExperiance(false);
             }}
             // width={{ md: "160px", lg: "200px", sm: "140px", base: "120px" }}

@@ -21,10 +21,7 @@ const Overview = ({ setTabIndex, tabIndex }) => {
   });
   const router = useRouter();
   return (
-    <Box
-      mt={{ md: "50px", lg: "60px", base: "20px" }}
-      width={{ md: "70%", sm: "100%" }}
-    >
+    <Box mt={{ md: "30px", base: "16px" }} width={{ lg: "60%", base: "100%" }}>
       {/* <Image src={profile.src} /> */}
 
       <Box mt={"0px"}>
@@ -80,7 +77,7 @@ const Overview = ({ setTabIndex, tabIndex }) => {
         />
         {/* </InputWrapper> */}
 
-        <Flex justifyContent={"center"} gap={"30px"}>
+        <Flex mt="50px" justifyContent={"center"} gap={"30px"}>
           {state.isEdit ? (
             <>
               <Button

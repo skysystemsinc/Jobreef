@@ -39,9 +39,9 @@ const EducationCard = ({ headingStyle, dispableBlueCard }) => {
               Diploma Name
             </Heading>
             <Box
-              mt={{ md: "8px", base: "3px" }}
+              mt={{ md: "12px", base: "3px" }}
               display={"flex"}
-              alignItems={"center"}
+              alignItems={"flex-start"}
               flexWrap={{ md: "nowrap", base: "wrap" }}
               gap={{ md: "13px", sm: "6px", base: "5px" }}
             >
@@ -62,12 +62,12 @@ const EducationCard = ({ headingStyle, dispableBlueCard }) => {
               <Heading
                 display={"flex"}
                 gap={"6px"}
-                alignItems={"center"}
+                alignItems={"flex-start"}
                 variant={"p4"}
                 sx={headingStyle}
               >
                 {" "}
-                <HiLocationMarker style={{ color: "#4A4A4A" }} /> Chicago,
+                <HiLocationMarker style={{ color: "#4A4A4A" , fontSize:'20px'}} /> Chicago,
                 Illinois, USA
               </Heading>
             </Box>
@@ -84,13 +84,13 @@ const EducationCard = ({ headingStyle, dispableBlueCard }) => {
         >
           <Box display={"flex"} alignItems={"center"} gap={"10px"}>
             <Image
-              width={{ md: "19px", base: "16px" }}
+              width={{ md: "17px", base: "16px" }}
               src={edit_outline.src}
             />
             <Heading variant={"p5"}>Edit</Heading>
           </Box>
           <Box display={"flex"} alignItems={"center"} gap={"5px"}>
-            <Image width={{ md: "19px", base: "16px" }} src={trash.src} />
+            <Image width={{ md: "17px", base: "16px" }} src={trash.src} />
             <Heading variant={"p5"}>Delete</Heading>
           </Box>
         </Box>
@@ -99,7 +99,7 @@ const EducationCard = ({ headingStyle, dispableBlueCard }) => {
       <Box>
         <Heading
           lineHeight={"25px"}
-          pt={"20px"}
+          pt={"14px"}
           color={"gray.text"}
           variant={"p5"}
         >
@@ -108,10 +108,7 @@ const EducationCard = ({ headingStyle, dispableBlueCard }) => {
           Requirements Analysis: Collaborate with stakeholders, customers, and
           cross-functional teams to gather and analyze system requirements,
           ensuring clear and unambiguous specifications. Oversee the integration
-          of hardware and software components into cohesive systems, addressing
-          compatibility, functionality, and performance. Did Risk Assessment and
-          Mitigation to Identify potential risks in the system design and
-          develop ...
+
         </Heading>
       </Box>
     </Box>

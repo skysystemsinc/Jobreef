@@ -58,16 +58,15 @@ export const CandidateTimeline = ({ candidate, variant }) => {
   const [compeletedStep, setcompeletedStep] = useState([]);
   const initialRender = useRef(true);
   useEffect(() => {
-    if (initialRender.current) {
-      initialRender.current = false;
-      return;
-    }
+    // if (initialRender.current) {
+    //   initialRender.current = false;
+    //   return;
+    // }
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
 
   const handeNext = async () => {
-
-    if (activeStep===5) {
+    if (activeStep === 5) {
       router.push("/candidate/profile-setting");
     } else {
       nextStep();
@@ -85,29 +84,35 @@ export const CandidateTimeline = ({ candidate, variant }) => {
         responsive={false}
         sx={{
           ...globalStyles.stepperContainter,
-          width: { lg: "80%", base: "100%" },
+          width: { md: "690px", base: "90%" },
+
           "& .cui-steps__horizontal-step": {
             _active: {
               "&::after": {
                 bg: "blue.500 !important",
               },
             },
+
             "&::after": {
               bg: "gray.light !important",
               height: "3px !important",
               width: {
-                md: "75% !important",
-                sm: "74% !important",
+                md: "87px !important",
+                sm: "75% !important",
                 base: "60% !important",
               },
-              top: "17px   !important",
+        top: { sm: "17px   !important" ,  base: "15px   !important" },
+              
               marginInlineEnd: "0px !important",
               marginInlineStart: "0px !important",
             },
           },
         }}
+        // sx={globalStyles.stepperContainter}
+
         variant={"circles-alt"}
         colorScheme="blue"
+        trackColor="blue.500"
         // border={"1px solid red"}
 
         activeStep={activeStep}
@@ -169,7 +174,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
                 sx={{
                   p: { md: "40px 0px 0px 0px", base: "20px 0px 20px 0px" },
                   mt: "13px",
-                  width: "100%",
+                  width: { md: "88%", base: "100%" },
                 }}
               >
                 {index == 0 ? (
@@ -203,6 +208,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
           );
         })}
       </Steps>
+
       {addExperiance || addEducation || addCertificate ? null : (
         <Flex
           width="100%"
@@ -234,7 +240,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
               variant={"blue-btn"}
               onClick={handeNext}
             >
-              { "Next"}
+              {"Next"}
             </Button>
           </>
         </Flex>

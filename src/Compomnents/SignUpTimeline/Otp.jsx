@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-const Otp = ({ State, setState }) => {
+const Otp = ({ text, State, setState }) => {
   console.log("State", State);
   return (
     <Box textAlign={"center"}>
@@ -26,7 +26,7 @@ const Otp = ({ State, setState }) => {
         variant={"p2"}
       >
         {/* Please enter the 4 digit code sent to your email */}
-        Please enter the 4 digit code send to example@email.com
+        {text}
       </Heading>
       <HStack gap={"15px"} display={"flex"} justifyContent={"center"}>
         <PinInput

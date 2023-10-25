@@ -29,8 +29,8 @@ const CandidateRegistration = ({ candidate }) => {
       <>
         <SignUpLayout
         icon={<Image width={"26px"} src={whitetick.src} />}
-
-          personVectorW={{ "2xl": "450px", base: "330px" }}
+          vectorStyle={{top:'290px', left:'40px'}}
+          personVectorW={{ "2xl": "450px", base: "330px" ,  }}
           bottomCartoon={teamVector.src}
           leftPic={leftblue_2.src}
           tittle={"1. About You"}

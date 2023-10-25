@@ -37,6 +37,7 @@ const colors = {
   blue: {
     500: "#2CA5C3",
     400: "#DFF1F6",
+    600: "#336CB0",
 
     100: "#F4F9FF",
   },
@@ -66,10 +67,10 @@ const components = {
       "blue-btn": {
         textAlign: "center",
         bg: "blue.500",
-        height: { "2xl": "50px", sm: "38px", base: "36px" },
+        height: { sm: "38px", base: "36px" },
         // width: { md: "200px", sm: "180px", base: "168px" },
         width: {
-          "2xl": "200px",
+          
           xl: "150px",
           md: "150px",
           lg: "140px",
@@ -80,34 +81,43 @@ const components = {
         boxShadow: "0px 4px 11px 0px rgba(70, 146, 254, 0.15)",
         color: "white.100",
         fontWeight: 400,
-        fontSize: { "2xl": "18px", sm: "13px", base: "12px" },
+        fontSize: {  sm: "13px", base: "12px" },
+        transition: ".5s",
+        _hover: {
+          bg: "blue.600",
+        },
       },
       "outline-blue": {
         bg: "white.100",
         // height: "50px",
         // width: '200px',
         // height: { md: "50px", base: "36px" },
-        height: { "2xl": "50px", sm: "38px", base: "36px" },
+        height: { sm: "38px", base: "36px" },
 
         // width: { md: "200px", base: "160px" },
         width: {
-          "2xl": "200px",
+        
           xl: "150px",
           md: "150px",
           lg: "140px",
           sm: "130px",
           base: "110px",
         },
-        fontSize: { "2xl": "18px", base: "12px" },
+        fontSize: { base: "12px" },
 
         border: "2px solid",
         // fontSize: { "2xl": "18px", base: "14px" },
         fontFamily: "var(--chakra-\fonts-openSans)",
 
         borderColor: "blue.500",
-        boxShadow: "0px 4px 11px 0px rgba(70, 146, 254, 0.15)",
         color: "blue.500",
         fontWeight: 500,
+        transition: ".5s",
+        _hover: {
+          boxShadow: "0px 4px 11px 0px rgba(70, 146, 254, 0.15)",
+          bg: "blue.500",
+          color: "white.100",
+        },
       },
       "square-btn": {
         fontFamily: "var(--chakra-\fonts-openSans)",
@@ -163,23 +173,17 @@ const components = {
         width: "max-content",
 
         fontFamily: "var(--chakra-\fonts-Nunito)",
-        padding: { md: "0px 25px", base: "0px 15px" },
-        fontSize: ["14px", "14px", "16px", "16px", "16px", "16px"],
+        padding: { md: "0px 29px", base: "0px 20px" },
+        fontSize: { md: "14px" , base:"13px"},
         fontWeight: 400,
         // fontSize: "16px",
         color: "gray.100",
 
-        height: { md: "48px", base: "40px" },
+        height: { md: "46px", base: "40px" },
       },
       label: {
         color: "gray.text",
-        fontSize: {
-          "2xl": "20px",
-          xl: "16px",
-          // md: "20px",
-          // sm: "15px",
-          base: "14px",
-        },
+        fontSize:"14px",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 400,
       },
@@ -189,7 +193,7 @@ const components = {
     variants: {
       "shadow-input": {
         field: {
-          height: { "2xl": "58px", base: "46px" },
+          height:"46px",
           borderRadius: "8px",
           color: "black.100",
           // bg: "text.gray !important",
@@ -199,7 +203,7 @@ const components = {
           _placeholder: {
             color: "gray.light",
             fontWeight: 400,
-            textTransform: " capitalize",
+            // textTransform: " capitalize",
             fontSize: { "2xl": "18px", base: "14px" },
           },
         },
@@ -209,7 +213,7 @@ const components = {
       },
       "bg-input": {
         field: {
-          height: { "2xl": "58px", base: "40px" },
+          height:"40px",
           borderRadius: "8px",
           color: "black.200",
           bg: "gray.200 !important",
@@ -217,11 +221,11 @@ const components = {
           // borderColor: "red",
           // boxShadow: " 0px 4px 20px 0px #0000000D !important",
           _placeholder: {
-            textTransform: " capitalize",
+            // textTransform: " capitalize",
 
             color: "gray.100",
             fontWeight: 400,
-            fontSize: { "2xl": "18px", base: "14px" },
+            fontSize: "13px",
           },
         },
 
@@ -238,8 +242,8 @@ const components = {
           borderRadius: "8px",
           color: "gray.100 !important",
           fontWeight: 400,
-          fontSize: { "2xl": "18px", base: "14px" },
-          textTransform: " capitalize",
+          fontSize: "13px",
+          // textTransform: " capitalize",
 
           // _placeholder: {
           //   color: "red !important",
@@ -267,7 +271,7 @@ const components = {
 
           fontWeight: 600,
           fontSize: { "2xl": "18px", base: "14px" },
-          textTransform: " capitalize",
+          // textTransform: " capitalize",
 
           // _placeholder: {
           //   color: "red !important",
@@ -283,7 +287,7 @@ const components = {
       "bg-teaxtarea": {
         //   border: "1px solid red ",
         // field: {
-        minHeight: { sm: " 174px", base: "174px" },
+        minHeight:"140px",
         borderRadius: "8px",
         bg: "gray.200 !important",
         fontFamily: "var(--chakra-\fonts-openSans)",
@@ -297,10 +301,10 @@ const components = {
           color: "gray.100    ",
           fontFamily: "var(--chakra-\fonts-openSans)",
           // p: "20px 20px 20px 20px",
-          textTransform: " capitalize",
+          // textTransform: " capitalize",
           lineHeight: "20px",
           fontWeight: 400,
-          fontSize: { sm: "15px", base: "14px" },
+          fontSize: "13px",
           //   },
         },
 
@@ -308,7 +312,7 @@ const components = {
       },
       "bg-input": {
         field: {
-          height: { sm: "58px", base: "53PX" },
+          height: { sm: "55px", base: "53PX" },
           borderRadius: "8px",
 
           bg: "gray.200 !important",
@@ -316,10 +320,10 @@ const components = {
 
           _placeholder: {
             color: "gray.100",
-            textTransform: " capitalize",
+            // textTransform: " capitalize",
 
             fontWeight: 400,
-            fontSize: { md: "18px", base: "16px" },
+            fontSize: "13px",
           },
         },
 
@@ -352,9 +356,9 @@ const components = {
       p1: {
         fontWeight: 400,
         color: "gray.light",
-        lineHeight: ["19px", "19px", "28px", "28px", "28px", "28px"],
+        lineHeight: ["17px", "17px", "18px", "18px", "18px", "18px"],
         fontFamily: "var(--chakra-\fonts-openSans)",
-        fontSize: ["12px", "13px", "14px", "14px", "14px", "14px"],
+        fontSize: ["12px", "13px", "13px", "13px", "13px", "13px"],
         margin: "0px",
       },
 
@@ -378,17 +382,17 @@ const components = {
         fontWeight: 400,
         color: "black.200 ",
         fontFamily: "var(--chakra-\fonts-openSans)",
-        fontSize: ["13px", "14px", "16px"],
+        fontSize: ["13px", "14px", "14px"],
         // lineHeight:{ md: '24px' , base:"20px"},
-        lineHeight: ["20px", "24px", "24px", "24px", "24px", "24px"],
+        lineHeight:"20px",
         // fontSize: "20px",
       },
       p5: {
         fontWeight: 400,
         color: "black.200 ",
         fontFamily: "var(--chakra-\fonts-openSans)",
-        lineHeight: ["24px"],
-        fontSize: ["14px", "15px", "17px"],
+        lineHeight: "23px",
+        fontSize: ["14px", "15px", "15px"],
       },
       p6: {
         fontWeight: 400,
@@ -401,7 +405,7 @@ const components = {
         color: "blue.500",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
-        fontSize: ["14px", "14px", "17px", "17px", "17px", "20px"],
+        fontSize: ["13px", "13px", "16px", "16px", "16px", "17px"],
       },
       p8: {
         color: "gray.text",
@@ -434,7 +438,7 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 400,
         fontSize: "13px",
-        lineHeight:'21px'
+        lineHeight: "21px",
       },
       // Add more variants for other heading levels as needed
     },

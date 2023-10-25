@@ -8,7 +8,7 @@ import trash from "@/assets/Images/trash.svg";
 const ExperianceCard = () => {
   return (
     <Box
-      p={{ sm: "20px", base: "12px" }}
+      p={{ sm: "16px", base: "12px" }}
       mb={{ md: "33px", base: "20px" }}
       width={"100%"}
       borderRadius={"8px"}
@@ -29,21 +29,21 @@ const ExperianceCard = () => {
         <Box
           display={"flex"}
           alignItems={"flex-start"}
-          gap={{ md: "18px", base: "12px" }}
+          gap={{ md: "13px", base: "12px" }}
         >
           <Box>
-            <Image width={{ md: "53px", base: "35px" }} src={microsoft.src} />
+            <Image width={{ md: "50px", base: "35px" }} src={microsoft.src} />
           </Box>
           <Box>
             <Heading variant={"p7"} color={"gray.text"}>
               Senior System’s Design Engineer
             </Heading>
             <Box
-              mt={{ md: "8px", base: "3px" }}
+              mt={{ md: "6px", base: "3px" }}
               display={"flex"}
               alignItems={"center"}
               flexWrap={"wrap"}
-              gap={{ md: "18px", sm: "6px", base: "5px" }}
+              gap={{ md: "12px", sm: "6px", base: "5px" }}
             >
               <Heading color={"gray.text"} variant={"p4"}>
                 Microsoft
@@ -78,17 +78,17 @@ const ExperianceCard = () => {
           mt={{ md: "0px", base: "10px" }}
           justifyContent={"flex-end"}
           width={{ xl: "auto", base: "100%" }}
-          gap={"20px"}
+          gap={"18px"}
         >
           <Box display={"flex"} alignItems={"center"} gap={"10px"}>
             <Image
-              width={{ md: "19px", base: "16px" }}
+              width={{ md: "17px", base: "15px" }}
               src={edit_outline.src}
             />
             <Heading variant={"p5"}>Edit</Heading>
           </Box>
           <Box display={"flex"} alignItems={"center"} gap={"5px"}>
-            <Image width={{ md: "19px", base: "16px" }} src={trash.src} />
+            <Image width={{ md: "17px", base: "15px" }} src={trash.src} />
             <Heading variant={"p5"}>Delete</Heading>
           </Box>
         </Box>
@@ -97,7 +97,7 @@ const ExperianceCard = () => {
       <Box>
         <Heading
           lineHeight={"25px"}
-          pt={"20px"}
+          pt={"14px"}
           color={"gray.text"}
           variant={"p5"}
         >

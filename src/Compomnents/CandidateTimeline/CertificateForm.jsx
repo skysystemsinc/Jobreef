@@ -16,6 +16,7 @@ import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
 import UploadBox from "../UploadBox/UploadBox";
+import globalStyles from "@/styles/globalStyles";
 const CertificationForm = ({
   setexperianceData,
   setaddExperiance,
@@ -50,7 +51,7 @@ const CertificationForm = ({
           />
         </InputWrapper>
 
-        <Box border={"1px solid white"} mb={{ md: "30px", base: "0px" }}>
+        <Box border={"1px solid white"} >
           <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
             <LabelInput
               labelVariant={"label"}
@@ -93,7 +94,7 @@ const CertificationForm = ({
             display={"flex"}
             position={"absolute"}
             bottom={"-40px"}
-            gap={"15px"}
+            gap={"10px"}
             alignItems={"center"}
           >
             <Checkbox
@@ -101,10 +102,11 @@ const CertificationForm = ({
               // defaultChecked
 
               borderColor={"black.200"}
-              border={"2px solid "}
-              size="sm"
+
+              size="md"
               rounded={"base"}
               colorScheme="blue"
+              sx={globalStyles.checkBoxStyle}
             />
             <Heading variant={"p1"} color={"black.100"}>
               This certification has no expiry
@@ -114,6 +116,8 @@ const CertificationForm = ({
 
         <Box mt={{ md: "95px", base: "80px" }}>
           <UploadBox
+          btnLabelStyle={{padding:"0px 10px"}}
+          butLabel={"Drag & Drop"}
             list={uploadList}
             titie={"Upload Certificate in Digital Format"}
           />
