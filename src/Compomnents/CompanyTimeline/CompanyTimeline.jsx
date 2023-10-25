@@ -69,8 +69,8 @@ export const CompanyTimeline = ({ variant }) => {
     // }
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
-
   const handleNext = async () => {
+    console.log("activeStep",activeStep)
     if (isLastStep) {
       console.log("isLastStep", isLastStep);
       const response = await axios("/api/company/companyProfile", {

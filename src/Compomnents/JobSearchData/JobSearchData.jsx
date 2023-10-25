@@ -13,7 +13,6 @@ import React,{useContext,useState} from "react";
 import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
 import location from "../../assets/Images/location.svg";
 import { Role_context } from "../../context/context";
-// import { Role_context } from "@/context/context";
 
 const JobSearchData = () => {
   

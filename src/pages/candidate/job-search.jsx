@@ -29,7 +29,6 @@ const JobSearch = () => {
         >
           <JobSearchData/>
           {getToggle()?
-            // (<JobSearchEntry/>):
             (null):
             (<JobSearchResults />)}
         </Box>
