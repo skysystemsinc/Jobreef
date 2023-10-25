@@ -57,7 +57,7 @@ const PaginatedTable = ({
         // overflowX={"scroll"}
         // boxShadow="0px 2px 15px 0px rgba(0, 0, 0, 0.06)"
         borderRadius={"6px"}
-        // bg={"white.100"}
+        bg={"white.100"}
         // mb={"30px"}
       >
         <Table variant="custome-table">
@@ -111,11 +111,15 @@ const PaginatedTable = ({
         mb={"17px"}
         pt={"15px"}
         borderTop={"1px solid "}
+        bg={"white.100"}
+        
         borderColor={"gray.500"}
         // color={"blue.500"}
       >
         <Heading color={"blue.500"} variant={"p4"}>
-          {`Showing ${currentPage} to ${pageSize} of ${totalPages} Entries`}
+          {`Showing ${currentPage} to ${endIndex} of ${
+            data?.length ?? "0"
+          } Entries`}
         </Heading>
         <Box
           display={"flex"}
@@ -132,7 +136,12 @@ const PaginatedTable = ({
 
           {Array.from({ length: totalPages }, (_, index) => index + 1).map(
             (page, index) => {
-              console.log("page === index ",  currentPage , index+1 , currentPage === index);
+              console.log(
+                "page === index ",
+                currentPage,
+                index + 1,
+                currentPage === index
+              );
               return (
                 <Button
                   key={index}
@@ -143,7 +152,7 @@ const PaginatedTable = ({
                   borderColor={"blue.500"}
                   color={page === index ? "red" : "#fff"}
                   bg="blue.500"
-                  sx={currentPage === index+1 ? activeStyle : {}}
+                  sx={currentPage === index + 1 ? activeStyle : {}}
                 >
                   {page}
                 </Button>

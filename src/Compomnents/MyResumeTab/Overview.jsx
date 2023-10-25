@@ -14,10 +14,12 @@ import edit from "@/assets/Images/edit.svg";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
+import white_edit from "@/assets/Images/white-edit.svg";
+
 const Overview = ({ setTabIndex, tabIndex }) => {
   const [state, setstate] = useState({
     readOnly: true,
-    isEdit: true,
+    isEdit: false,
   });
   const router = useRouter();
   return (

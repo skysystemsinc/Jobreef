@@ -105,6 +105,7 @@ const SideBar = () => {
                 display={{ xl: "block", base: "none" }}
                 color={"gray.light"}
                 variant={"p7"}
+                fontWeight={400}
                 as={"p"}
               >
                 {item.title}

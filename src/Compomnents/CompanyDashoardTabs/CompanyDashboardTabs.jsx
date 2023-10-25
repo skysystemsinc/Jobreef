@@ -24,8 +24,6 @@ const CompanyTabs = ({ company }) => {
   let [tabIndex, setTabIndex] = useState(0);
   return (
     <>
-      
-
       <Tabs
         onChange={(index) => {
           setTabIndex(index);
@@ -43,8 +41,7 @@ const CompanyTabs = ({ company }) => {
             whiteSpace: "nowrap",
             overflowX: "scroll",
             width: { lg: "70%", base: "95%" },
-            // mx:{lg:"0px", base:"10px"},
-            border: "1px solid red",
+            flexDirection: { sm: "row", base: "column" },
           }}
         >
           <Tab

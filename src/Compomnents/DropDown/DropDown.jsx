@@ -18,7 +18,7 @@ const DropDown = ({
         // sx={{ color: "blue.500" }}
         variant={variant ? variant : "outline-dropdown"}
         // variant={"filled"}
-        icon={icon ? icon : <Image src={black_arrow_down.src} />}
+        icon={icon ? icon : <Image width={"16px !important"}  src={black_arrow_down.src} />}
         placeholder={placeholder}
       >
         {dropdownOption ? (

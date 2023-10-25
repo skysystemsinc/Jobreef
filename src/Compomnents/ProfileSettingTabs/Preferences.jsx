@@ -22,7 +22,7 @@ const Preferences = () => {
   const router = useRouter();
   return (
     <Box
-      minH={"52vh"}
+      minH={"59vh"}
       display={"flex"}
       alignItems={"flex-end"}
       justifyContent={"center"}

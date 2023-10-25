@@ -70,7 +70,6 @@ const components = {
         height: { sm: "38px", base: "36px" },
         // width: { md: "200px", sm: "180px", base: "168px" },
         width: {
-          
           xl: "150px",
           md: "150px",
           lg: "140px",
@@ -81,7 +80,7 @@ const components = {
         boxShadow: "0px 4px 11px 0px rgba(70, 146, 254, 0.15)",
         color: "white.100",
         fontWeight: 400,
-        fontSize: {  sm: "13px", base: "12px" },
+        fontSize: { sm: "13px", base: "12px" },
         transition: ".5s",
         _hover: {
           bg: "blue.600",
@@ -96,7 +95,6 @@ const components = {
 
         // width: { md: "200px", base: "160px" },
         width: {
-        
           xl: "150px",
           md: "150px",
           lg: "140px",
@@ -117,6 +115,12 @@ const components = {
           boxShadow: "0px 4px 11px 0px rgba(70, 146, 254, 0.15)",
           bg: "blue.500",
           color: "white.100",
+        },
+
+        _disabled: {
+          _hover: {
+            color: "blue.500",
+          },
         },
       },
       "square-btn": {
@@ -151,14 +155,7 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
         // fontSize: "20px",
-        fontSize: {
-          "2xl": "20px",
-          xl: "18px",
-          lg: "18px",
-          md: "17px",
-
-          base: "14px",
-        },
+        fontSize: "14px",
       },
     },
   },
@@ -174,7 +171,7 @@ const components = {
 
         fontFamily: "var(--chakra-\fonts-Nunito)",
         padding: { md: "0px 29px", base: "0px 20px" },
-        fontSize: { md: "14px" , base:"13px"},
+        fontSize: { md: "14px", base: "13px" },
         fontWeight: 400,
         // fontSize: "16px",
         color: "gray.100",
@@ -183,7 +180,7 @@ const components = {
       },
       label: {
         color: "gray.text",
-        fontSize:"14px",
+        fontSize: "14px",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 400,
       },
@@ -193,7 +190,7 @@ const components = {
     variants: {
       "shadow-input": {
         field: {
-          height:"46px",
+          height: "46px",
           borderRadius: "8px",
           color: "black.100",
           // bg: "text.gray !important",
@@ -213,7 +210,7 @@ const components = {
       },
       "bg-input": {
         field: {
-          height:"40px",
+          height: "40px",
           borderRadius: "8px",
           color: "black.200",
           bg: "gray.200 !important",
@@ -287,7 +284,7 @@ const components = {
       "bg-teaxtarea": {
         //   border: "1px solid red ",
         // field: {
-        minHeight:"140px",
+        minHeight: "140px",
         borderRadius: "8px",
         bg: "gray.200 !important",
         fontFamily: "var(--chakra-\fonts-openSans)",
@@ -342,7 +339,7 @@ const components = {
       // Variant for h1
       h1: {
         // fontSize: { "2xl": "40px" , base:"20px" },
-        fontSize: ["28px", "28px", "28px", "28px", "28px", "28px", "48px"],
+        fontSize: "25px",
         color: "white.100",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
@@ -384,7 +381,7 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontSize: ["13px", "14px", "14px"],
         // lineHeight:{ md: '24px' , base:"20px"},
-        lineHeight:"20px",
+        lineHeight: "20px",
         // fontSize: "20px",
       },
       p5: {
@@ -399,7 +396,7 @@ const components = {
         color: "gray.text ",
         fontFamily: "var(--chakra-\fonts-openSans)",
 
-        fontSize: ["18px", "20px", "25px", "25px"],
+        fontSize: ["18px", "20px", "22px", "22px"],
       },
       p7: {
         color: "blue.500",

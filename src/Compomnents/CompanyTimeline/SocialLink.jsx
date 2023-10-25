@@ -123,10 +123,10 @@ const SocialLink = ({ State, setState }) => {
                   cursor: "pointer",
                   position: "absolute",
                   top: {
-                    "2xl": "65px ",
-                    xl: "41px",
-                    lg: "40px",
-                    sm: "9px",
+                 
+                    md: "37px",
+                
+                    // sm: "9px",
                     base: "9px",
                   },
                   right: isSmallerThe500 ? "-30px" : "-30px",
