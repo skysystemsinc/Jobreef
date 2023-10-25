@@ -14,7 +14,7 @@ import React from "react";
 import upload from "@/assets/Images/upload.svg";
 import { BsDot } from "react-icons/bs";
 
-const UploadBox = ({ handleEvent, titie, list, style }) => {
+const UploadBox = ({btnLabelStyle, butLabel, handleEvent, titie, list, style }) => {
   return (
     <Flex justifyContent={"center"}>
       <Box
@@ -45,7 +45,7 @@ const UploadBox = ({ handleEvent, titie, list, style }) => {
                     alignItems: "center",
                     // lineHeight: "28px",
                     fontFamily: "var(--chakra-\fonts-Nunito)",
-                    fontSize: { "2xl": "18px", sm: "15px", base: "13px" },
+                    fontSize: { md: "15px", base: "12px" },
                   }}
                 >
                   <ListIcon
@@ -73,10 +73,11 @@ const UploadBox = ({ handleEvent, titie, list, style }) => {
             display={"flex"}
             justifyContent={"center"}
             alignItems={"center"}
-            gap={"10px"}
+            gap={{ md: "10px", base: "8px" }}
+            sx={btnLabelStyle}
           >
-            <Image src={upload.src} width={{ md: "20px", base: "17px" }} />{" "}
-            Upload
+            <Image src={upload.src} width={{ md: "17px", base: "15px" }} />{" "}
+            {butLabel ? butLabel : "Upload"}
             <Input onChange={handleEvent} type="file" hidden />
           </FormLabel>
         </Box>

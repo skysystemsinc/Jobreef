@@ -7,7 +7,7 @@ import React from "react";
 const myResume = () => {
   return (
     <>
-      <Header />
+      <Header candidate/>
 
       <Box display={"flex"} justifyContent={"center"} mt={"43px"}>
         <Box

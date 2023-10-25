@@ -15,14 +15,19 @@ import { Link } from "@chakra-ui/next-js";
 import dasboadrd from "@/assets/Images/dashboard.svg";
 import square from "@/assets/Images/square.svg";
 import chat from "@/assets/Images/chat.svg";
+import resume from "@/assets/Images/resume.svg";
+
+import my_job from "@/assets/Images/job-post.svg";
+
 import header_profile from "@/assets/Images/profile.svg";
 import logout from "@/assets/Images/logout.svg";
 import { role, roles } from "@/Utils/role";
 import { useRouter } from "next/router";
 import { Role_context } from "@/context/context";
-const HeaderDropdown = () => {
+const HeaderDropdown = ({ candidate }) => {
   const router = useRouter();
   const { company, setCompany } = useContext(Role_context);
+  console.log("company", company);
 
   const companydropdown = [
     {
@@ -47,25 +52,26 @@ const HeaderDropdown = () => {
     },
   ];
   const candidatedropdown = [
-    {
-      title: "Dashboard",
-      icon: <Image width={{ md: "22px", base: "19px" }} src={dasboadrd.src} />,
-      pathname: "/candidate/my-resume",
-    },
+
     {
       title: "My Resume",
-      icon: <Image width={{ md: "22px", base: "19px" }} src={square.src} />,
+      icon: <Image width={{ md: "22px", base: "19px" }} src={resume.src} />,
       pathname: "/candidate/my-resume",
     },
     {
       title: "My Jobs",
-      icon: <Image width={{ md: "22px", base: "19px" }} src={square.src} />,
+      icon: <Image width={{ md: "22px", base: "19px" }} src={my_job.src} />,
       pathname: "/candidate/my-jobs",
     },
     {
       title: "Profile Settings",
-      icon: <Image width={{ md: "22px", base: "19px" }} src={square.src} />,
+      icon: <Image width={{ md: "22px", base: "19px" }} src={profile.src} />,
       pathname: "/candidate/profile-setting",
+    },
+    {
+      title: "Log Out",
+      icon: <Image width={{ md: "22px", base: "19px" }} src={logout.src} />,
+      pathname: "/",
     },
   ];
   return (
@@ -86,8 +92,8 @@ const HeaderDropdown = () => {
           position={"relative"}
         >
           <Image
-            width={{ "2xl": "58px", base: "50px" }}
-            height={{ "2xl": "58px", base: "50px" }}
+            width={{ md: "40px",  base: "30px" }}
+            height={{ md: "40px",  base: "30px" }}
             borderRadius={"100px"}
             objectFit={"cover"}
             src={header_profile.src}
@@ -108,7 +114,7 @@ const HeaderDropdown = () => {
         </Box>
       </MenuButton>
       <MenuList _active={{ bg: "transparent" }} py="0px">
-        {!company
+        {candidate
           ? candidatedropdown.map((item, index) => {
               return (
                 <MenuItem

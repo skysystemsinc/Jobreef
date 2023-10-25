@@ -44,7 +44,7 @@ const LabelInput = ({
   return (
     <Box width={"100%"}>
       <FormLabel
-        marginBottom={{ xl: "10px", "2xl": "15px", base: "10px" }}
+        marginBottom={"9px"}
         variant={labelVariant}
         display={"flex"}
         justifyContent={"space-between"}

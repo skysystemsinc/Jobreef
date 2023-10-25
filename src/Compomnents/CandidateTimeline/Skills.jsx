@@ -127,8 +127,8 @@ const Skills = () => {
                   position: "absolute",
                   top: {
                     "2xl": "65px ",
-                    xl: "41px",
-                    lg: "40px",
+                    xl: "37px",
+                    lg: "37px",
                     sm: "9px",
                     base: "9px",
                   },
@@ -149,7 +149,7 @@ const Skills = () => {
         onClick={handleaddMore}
         variant={"blue-btn"}
         width={"max-content"}
-        px={{ md: "23px", base: "20px" }}
+        px={{ md: "33px", base: "20px" }}
       >
         Add Skill
       </Button>

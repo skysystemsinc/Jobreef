@@ -5,10 +5,10 @@ const InputWrapper = ({ style, gap, children }) => {
     <Box
     display={"flex"}
     alignItems={"center"}
-    gap={gap ? gap : { "2xl": "53px", base: "30px" }}
+    gap={gap ? gap : { md:"20px", base: "20px" }}
     width={"100%"}
       flexWrap={{ md: "nowrap", base: "wrap" }}
-      marginBottom={{ md: "40px", base: "26px" }} // Spread any additional props passed to the component
+      marginBottom={{ md: "25px", base: "15px" }} // Spread any additional props passed to the component
       sx={style}
     >
       {children}
