@@ -21,7 +21,7 @@ const Overview = ({ state, setState }) => {
           type="text"
           variant={"bg-input"}
           placeholder="Select your home country"
-          label={"Country*"}
+          label={"Country"}
         />
         <LabelInput
           state={state.state}
@@ -49,9 +49,9 @@ const Overview = ({ state, setState }) => {
           }}
           labelVariant={"label"}
           type="text"
-          
+          dropdow
           variant={"bg-input"}
-          placeholder="Enter City"
+          placeholder="Select your City"
           label={"City"}
         />
         <LabelInput

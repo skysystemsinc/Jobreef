@@ -63,10 +63,10 @@ export const CompanyTimeline = ({ variant }) => {
   const [compeletedStep, setcompeletedStep] = useState([]);
   const initialRender = useRef(true);
   useEffect(() => {
-    if (initialRender.current) {
-      initialRender.current = false;
-      return;
-    }
+    // if (initialRender.current) {
+    //   initialRender.current = false;
+    //   return;
+    // }
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
 
@@ -100,10 +100,10 @@ export const CompanyTimeline = ({ variant }) => {
       width="100%"
     >
       <SignUpLayout
-        icon={<Image width={"26px"} src={whitetick.src} />}
+        icon={<Image width={"22px"} src={whitetick.src} />}
         subtitleIcon={
           hasCompletedAllSteps ? (
-            <Image width={"26px"} src={whitetick.src} />
+            <Image width={"22px"} src={whitetick.src} />
           ) : (
             false
           )
@@ -244,7 +244,9 @@ export const CompanyTimeline = ({ variant }) => {
         {hasCompletedAllSteps ? (
           <Button
             isDisabled={activeStep === 0}
-            // onClick={prevStep}
+            onClick={() => {
+              router.push("/company/profile-setting");
+            }}
             variant="blue-btn"
           >
             {" Logout"}

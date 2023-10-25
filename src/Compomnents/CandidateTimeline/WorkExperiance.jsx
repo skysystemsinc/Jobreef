@@ -29,7 +29,8 @@ const WorkExperiance = ({addExperiance , setaddExperiance}) => {
               }}
               width="max-content"
               px={"10px"}
-              mt={{ md: "41px", base: "20px" }}
+              mb={{ md: "38px", base: "20px" }}
+              
               variant={"blue-btn"}
             >
               Add New Experience

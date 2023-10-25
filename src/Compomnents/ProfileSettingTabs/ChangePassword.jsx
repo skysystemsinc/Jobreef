@@ -31,7 +31,7 @@ const ChangePassword = () => {
     <Box
       display={"flex"}
       justifyContent={"center"}
-      minH={"50vh"}
+   
       flexDirection={"column"}
       alignItems={"center"}
       //   mt={{ md: "140px", base: "70px" }}
@@ -97,6 +97,9 @@ const ChangePassword = () => {
         </Box>
       ) : (
         <Box
+        minHeight={"44vh"}
+          mt={{ md: "50px", base: "40px" }}
+          
           // mt={{ md: "0px", base: "40px" }}
           width={{ md: "564px", base: "100%" }}
         >

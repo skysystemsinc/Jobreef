@@ -2,6 +2,7 @@ import { Box, Checkbox, FormLabel, Heading, Input } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import LabelInput from "../LabelInput/LabelInput";
 import { Role_context } from "@/context/context";
+import globalStyles from "@/styles/globalStyles";
 
 const PersonalInfo = ({ State, setState }) => {
   const { company, setCompany } = useContext(Role_context);
@@ -70,6 +71,7 @@ const PersonalInfo = ({ State, setState }) => {
           // border={"1px solid "}
           borderColor={company ? "blue.500" : "gray.text"}
           rounded={"sm"}
+          sx={globalStyles.checkBoxStyle}
         />
         <Heading
           variant={"p1"}

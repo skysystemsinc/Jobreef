@@ -26,7 +26,7 @@ const CompanyRegiteration = () => {
         width={{ md: "100%", base: "100%" }}
         ml={{ xl: "600px", base: "0px" }}
       >
-        <Box display={"flex"} justifyContent={"center"} mb={{ md:"52px", base:"30px"}}>
+        <Box display={"flex"} justifyContent={"center"} mb={{ md:"42px", base:"30px"}}>
           <Logo />
         </Box>
         <CompanyTimeline />

@@ -7,7 +7,7 @@ const globalStyles = {
     "&::after": {
       content: `""`,
       position: "absolute",
-      top: { md: "50px", base: "46px" },
+      top: { md: "44px", base: "44px" },
       bg: "blue.500",
       borderRadius: "12px 12px 0px 0px",
       left: { md: "10%", base: "0%" },
@@ -21,6 +21,9 @@ const globalStyles = {
     lineHeight: "28px",
     fontFamily: "var(--chakra-\fonts-openSans)",
     margin: "0px",
+    
+    fontSize:"14px"
+
   },
   fullTab: {
     border: "1px solid ",
@@ -28,7 +31,8 @@ const globalStyles = {
     backgroundColor: "gray.200",
     mx: "auto",
     borderRadius: "5px",
-    py: { md: "10px", base: "6px" },
+    py: "4px",
+    
     width: { xl: "60%", md: "70%", sm: "80%", base: "100%" },
   },
   outlineTab: {
@@ -97,9 +101,9 @@ const globalStyles = {
   stepperContainter: {
     width: {
       md: "450px",
-      base: "90%",
+      base: "100%",
     },
-    flexDir: "row !important",
+    // flexDir: "row !important",
 
     "& .cui-steps__horizontal-step-container ": {
       span: {
@@ -113,11 +117,11 @@ const globalStyles = {
 
     "& .cui-steps__step-icon-container": {
       bg: "transparent",
-      marginBottom: { md: "11px",sm:"10px", base: "2px" },
+      marginBottom: { md: "11px", sm: "10px", base: "2px" },
       border: "3px solid ",
       borderColor: "gray.light ",
-      width: { "2xl": "36px !important", sm: "32px", base: "30px" },
-      height: { "2xl": "36px !important", sm: "32px", base: "30px" },
+      width: { sm: "30px", base: "28px" },
+      height: { sm: "30px", base: "28px" },
       span: {
         color: "gray.light",
         _active: {
@@ -148,6 +152,7 @@ const globalStyles = {
           bg: "blue.500 !important",
         },
       },
+
       "&::after": {
         bg: "gray.light !important",
         height: "3px !important",
@@ -156,7 +161,7 @@ const globalStyles = {
           sm: "85% !important",
           base: "78% !important",
         },
-        top: "17px   !important",
+        top: { sm: "17px   !important" ,  base: "15px   !important" },
         marginInlineEnd: "0px !important",
         marginInlineStart: "0px !important",
       },
@@ -176,7 +181,9 @@ const globalStyles = {
   checkBoxStyle: {
     "& .chakra-checkbox__control": {
       // Add your custom styles here
-      borderRadius: "5px", // Make the checkbox round
+      borderRadius: "5px",
+      boxShadow: "none",
+      // Make the checkbox round
     },
   },
 };

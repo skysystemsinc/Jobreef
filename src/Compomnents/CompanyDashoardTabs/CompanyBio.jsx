@@ -121,7 +121,7 @@ const CompanyBio = () => {
     });
   }, [companyProfile]);
   return (
-    <Box mt={{ md: "60px", base: "10px" }}>
+    <Box mt={{ md: "50px", base: "10px" }}>
       <InputWrapper>
         <LabelInput
           state={State.companyName}
