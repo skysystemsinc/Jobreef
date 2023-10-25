@@ -113,7 +113,7 @@ const CeritifcateCard = ({ headingStyle, dispableBlueCard }) => {
       bg={"white.100"}
       border={"1px solid"}
       borderColor={"gray.light"}
-      box-shadow="0px 4px 20px 0px rgba(0, 0, 0, 0.05)"
+      filter="drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.05))"
     >
       <Box
         display={"flex"}

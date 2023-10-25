@@ -9,7 +9,7 @@ import {
   Image,
   Input,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import profile from "@/assets/Images/profile.svg";
 import edit from "@/assets/Images/edit.svg";
 import InputWrapper from "../InputWrapper/InputWrapper";
@@ -22,6 +22,9 @@ const ExperianceForm = ({
   setTabIndex,
   tabIndex,
 }) => {
+  const [state, setstate] = useState({
+    currentlyWorking: false,
+  });
   const router = useRouter();
   return (
     <Box mt={{ md: "13px" }} width={"100%"}>
@@ -74,14 +77,21 @@ const ExperianceForm = ({
               >
                 <Checkbox
                   // borderRadius={"10px"}
-                  defaultChecked
+                  checked={state.currentlyWorking}
+                  onChange={(e) => {
+                    setstate((prev) => {
+                      return { ...prev, currentlyWorking: e.target.checked };
+                    });
+                  }}
                   sx={globalStyles.checkBoxStyle}
-                  borderColor={"black.200"}
+
+                  borderColor={
+                    state.currentlyWorking ? "blue.500" : "black.200"
+                  }
                   size="md"
                   rounded={"md"}
                   colorScheme="blue"
                   // borderColor={"black.200"}
-                  border={"2px solid "}
                 />
                 <Heading variant={"p1"} color={"black.100"}>
                   Currently Working Here

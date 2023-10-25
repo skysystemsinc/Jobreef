@@ -23,10 +23,7 @@ const EducationForm = ({
 }) => {
   const router = useRouter();
   return (
-    <Box
-      mt={{ md: "50px", lg: "60px", base: "20px" }}
-      width={{ xl: "70%", sm: "100%" }}
-    >
+    <Box mt={{ md: "30px", base: "16px" }} width={{ lg: "60%", base: "100%" }}>
       {/* <Image src={profile.src} /> */}
 
       <Box mt={"0px"}>
@@ -133,7 +130,6 @@ const EducationForm = ({
             type="text"
             variant={"bg-input"}
             placeholder="Enter your GPA"
-            
             label={"GPA"}
           />
         </Box>

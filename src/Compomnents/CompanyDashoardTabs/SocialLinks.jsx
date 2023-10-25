@@ -115,7 +115,7 @@ const SocialLink = () => {
   }, [companyProfile]);
 
   return (
-    <Box minH={"55vh"} mt={{ md: "60px", base: "10px" }}>
+    <Box minH={"55vh"} mt={{ md: "50px", base: "10px" }}>
       {State?.links?.map((item, index) => {
         return (
           <InputWrapper key={index} gap={"15px"}>

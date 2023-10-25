@@ -29,13 +29,13 @@ export const SignUpTimeline = ({ candidate, variant }) => {
   const router = useRouter();
   const { company, setCompany } = useContext(Role_context);
   const [State, setState] = useState({
-    name: "test",
-    lastName: "test",
-    email: "test@gmail.com",
+    name: "",
+    lastName: "",
+    email: "",
     role: company,
-    password: "123",
-    confirmPassword: "123",
-    otp: "123",
+    password: "",
+    confirmPassword: "",
+    otp: "",
   });
 
   const { nextStep, prevStep, reset, activeStep } = useSteps({
@@ -46,10 +46,11 @@ export const SignUpTimeline = ({ candidate, variant }) => {
   const [compeletedStep, setcompeletedStep] = useState([]);
   const initialRender = useRef(true);
   useEffect(() => {
-    if (initialRender.current) {
-      initialRender.current = false;
-      return;
-    }
+    // if (initialRender.current) {
+    //   initialRender.current = false;
+    //   return;
+    // }
+    // console.log("activeStep", activeStep)
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
 
@@ -93,6 +94,10 @@ export const SignUpTimeline = ({ candidate, variant }) => {
         activeStep={activeStep}
       >
         {steps.map(({ label }, index) => {
+          console.log(
+            " compeletedStep.includes(index)",
+            compeletedStep.includes(index)
+          );
           const CostomeCheckIcon = () => {
             return (
               <Heading
@@ -156,7 +161,15 @@ export const SignUpTimeline = ({ candidate, variant }) => {
                 ) : index == 1 ? (
                   <Password State={State} setState={setState} />
                 ) : index == 2 ? (
-                  <Otp State={State} setState={setState} />
+                  <Otp
+                    text={
+                      company
+                        ? "Please enter the 4 digit code send to example@email.com"
+                        : "Please enter the 4 digit code sent to your email"
+                    }
+                    State={State}
+                    setState={setState}
+                  />
                 ) : (
                   <PersonalInfo />
                 )}

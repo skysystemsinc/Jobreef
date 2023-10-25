@@ -5,6 +5,7 @@ const SignUpLayout = ({
   bottomCartoon,
   tittle,
   subtitle,
+  vectorStyle,
   icon,
   subtitleIcon,
   leftPic,
@@ -14,7 +15,7 @@ const SignUpLayout = ({
     <Box>
       <Image
         // width={isSmallerThe500 ? "200px" : "250px"}
-        width={{ "2xl": "710px", xl: "40%", sm: "33%", base: "40%" }}
+        width={{ md: "36%", base: "29%" }}
         src={leftPic}
         position={"absolute"}
         top={"0px"}
@@ -25,12 +26,13 @@ const SignUpLayout = ({
       <Image
         // width={isSmallerThe500 ? "200px" : "250px"}
         // width={"600px"}
-        width={personVectorW} 
+        width={personVectorW}
         zIndex={2}
         display={{ xl: "block", base: "none" }}
         position={"absolute"}
         bottom={"0px"}
         left={"50px"}
+        sx={vectorStyle}
         src={bottomCartoon}
         alt="Dan Abramov"
       />
@@ -44,7 +46,7 @@ const SignUpLayout = ({
           variant={"h1"}
           display={"flex"}
           alignItems={"center"}
-          gap={"23px"}
+          gap={"19px"}
           mb={{ "2xl": "30px", base: "16px" }}
         >
           {tittle} {icon ? icon : ""}{" "}
@@ -52,11 +54,11 @@ const SignUpLayout = ({
         <Heading
           display={"flex"}
           alignItems={"center"}
-          gap={"13px"}
+          gap={"10px"}
           variant={"h1"}
         >
           {subtitle}
-          {subtitleIcon ?subtitleIcon : ""}
+          {subtitleIcon ? subtitleIcon : ""}
         </Heading>
       </Box>
     </Box>

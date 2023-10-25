@@ -5,18 +5,17 @@ import { Box } from "@chakra-ui/react";
 import CompanyTabs from "../CompanyDashoardTabs/CompanyDashboardTabs";
 import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
 
-const DasboardLayout = ({ children  }) => {
+const DasboardLayout = ({ children }) => {
   return (
     <>
       <Header />
 
-      <BottomWaveImage/>
+      <BottomWaveImage />
       <SideBar />
       <Box
         // display={"flex"}
         // justifyContent={placement?placement:"center"}
-
-
+        bg={"white.100"}
         ml={{ xl: "250px", base: "55px" }}
         // mr={{ md: "0px", base: "9px" }}
         mt={"40px"}

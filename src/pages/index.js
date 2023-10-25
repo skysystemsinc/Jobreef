@@ -21,10 +21,14 @@ import { Link } from "@chakra-ui/next-js";
 import LabelInput from "@/Compomnents/LabelInput/LabelInput";
 import { FcGoogle } from "react-icons/fc";
 import { color } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [isSmallerThe500] = useMediaQuery("(max-width: 500px)");
+  const [state, setstate] = useState({
+    email: "",
+    password: "",
+  });
   useEffect(() => {
     localStorage.clear();
   }, []);
@@ -32,7 +36,7 @@ export default function Home() {
   return (
     <>
       <Image
-        width={{ "2xl": "40%", base: "30%" }}
+        width={"40%"}
         position={"absolute"}
         top={"0px"}
         right={"0px"}
@@ -42,7 +46,7 @@ export default function Home() {
       />
       <Image
         zIndex={"-1"}
-        width={{ "2xl": "40%", base: "30%" }}
+        width={"40%"}
         position={"absolute"}
         bottom={"0px"}
         // zIndex={2}
@@ -54,37 +58,39 @@ export default function Home() {
         minH={"100vh"}
         // border={"1px solid red"}
         display={"flex"}
-        padding={{ "2xl": "70px 0px 50px 0px", base: "30px 0px 30px 0px" }}
+        padding={"30px 0px 30px 0px"}
         justifyContent={"center"}
         alignItems={"center"}
       >
         <Box
           mx={"20px"}
           width={{
-            "2xl": "564px",
-            xl: "420px",
-            lg: "420px",
-            md: "420px",
+            md: "402px",
 
             sm: "80%",
             base: "100%",
           }}
           textAlign={"center"}
         >
-          <Box display={"flex"} justifyContent={"center"} mb={"41px"}>
+          <Box display={"flex"} justifyContent={"center"} mb={"25px"}>
             <Image
               width={{
-                "2xl": "250px",
-                md: "190px",
-                sm: "160px",
+                md: "170px",
+
                 base: "140px",
               }}
               src={logo.src}
               alt="Dan Abramov"
             />
           </Box>
-          <Box marginBottom={{ "2xl": "50px", base: "30px" }}>
+          <Box marginBottom={"20px"}>
             <LabelInput
+              state={state.email}
+              setState={(e) => {
+                setstate((prev) => {
+                  return { ...prev, email: e.target.value };
+                });
+              }}
               labelVariant={"label"}
               type="email"
               variant={"shadow-input"}
@@ -94,6 +100,12 @@ export default function Home() {
           </Box>
           <Box>
             <LabelInput
+              state={state.password}
+              setState={(e) => {
+                setstate((prev) => {
+                  return { ...prev, password: e.target.value };
+                });
+              }}
               iconStyle={{ marginTop: "7px" }}
               labelVariant={"label"}
               type="password"
@@ -113,11 +125,10 @@ export default function Home() {
               Forgot Password
             </Link>
           </Box>
-          <Box
-            margin={{ "2xl": "41px 0px 69px 0px", base: "31px 0px 49px 0px" }}
-          >
+          <Box margin={"25px 0px 42px 0px"}>
             <Heading
               variant="p7"
+              fontSize={"14px"}
               // variant={"blue-link"}
               as={"p"}
               // size={"sm"}
@@ -146,7 +157,7 @@ export default function Home() {
               marginBottom={"15px"}
               className="nintoFont"
               variant={"blue-btn"}
-              width={{ "2xl": "200px", sm: "175px", base: "140px" }}
+              width={{ md: "162px", base: "140px" }}
             >
               Login
             </Button>

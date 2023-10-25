@@ -168,13 +168,14 @@ const DatePicker = ({
   return (
     <>
       <Box   sx={calenderStle} position={"relative"} >
-        <Box  position={"absolute"} right={"0px"}  zIndex={999}  >
+        <Box  position={"absolute"} right={"0px"}  zIndex={4}  >
           <DateRangePicker
             calendarIcon={
               <Image
                 src={canlenderIcon.src}
-                width={{ md: "25px", base: "20px" }}
-                mt={{ md: "0px", base: "6px" }}
+                width={{ base: "18px" }}
+                mt={{ base: "7px" }}
+                marginRight={"6px"}
               />
             }
             defaultValue={defaultDate.toDate()}

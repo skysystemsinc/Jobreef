@@ -15,6 +15,7 @@ import edit from "@/assets/Images/edit.svg";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
+import globalStyles from "@/styles/globalStyles";
 const EducationForm = ({
   setexperianceData,
   setaddExperiance,
@@ -67,8 +68,8 @@ const EducationForm = ({
               <Box
                 display={"flex"}
                 position={"absolute"}
-                bottom={"-40px"}
-                gap={"15px"}
+                bottom={"-25px"}
+                gap={"10px"}
                 alignItems={"center"}
               >
                 <Checkbox
@@ -76,10 +77,12 @@ const EducationForm = ({
                   // defaultChecked
 
                   borderColor={"black.200"}
-                  border={"2px solid "}
-                  size="sm"
+                  // border={"2px solid "}
+
+                  size="md"
                   rounded={"base"}
                   colorScheme="blue"
+                  sx={globalStyles.checkBoxStyle}
                 />
                 <Heading variant={"p1"} color={"black.100"}>
                   Currently Enrolled
@@ -111,7 +114,7 @@ const EducationForm = ({
             labelVariant={"label"}
             type="date"
             variant={"bg-input"}
-            placeholder="Select your home country"
+            placeholder="Select Country"
             dropdown
             label={"City"}
           />
@@ -119,7 +122,7 @@ const EducationForm = ({
             labelVariant={"label"}
             type="text"
             variant={"bg-input"}
-            placeholder="Enter your Address "
+            placeholder="Enter Street Address "
             label={"Street Address"}
           />
         </InputWrapper>

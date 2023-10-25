@@ -3,6 +3,7 @@ import {
   AvatarBadge,
   Box,
   Button,
+  Flex,
   FormLabel,
   Image,
   Input,
@@ -13,17 +14,16 @@ import edit from "@/assets/Images/edit.svg";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
+import white_edit from "@/assets/Images/white-edit.svg";
+
 const Overview = ({ setTabIndex, tabIndex }) => {
   const [state, setstate] = useState({
     readOnly: true,
-    isEdit: true,
+    isEdit: false,
   });
   const router = useRouter();
   return (
-    <Box
-      mt={{ md: "50px", lg: "60px", base: "20px" }}
-      width={{ md: "70%", sm: "100%" }}
-    >
+    <Box mt={{ md: "30px", base: "16px" }} width={{ lg: "60%", base: "100%" }}>
       {/* <Image src={profile.src} /> */}
 
       <Box mt={"0px"}>
@@ -79,41 +79,56 @@ const Overview = ({ setTabIndex, tabIndex }) => {
         />
         {/* </InputWrapper> */}
 
-        {/* {isEdit ? (
-          <>
+        <Flex mt="50px" justifyContent={"center"} gap={"30px"}>
+          {state.isEdit ? (
+            <>
+              <Button
+                onClick={() => {
+                  setstate((pre) => {
+                    return {
+                      isEdit: false,
+                      readOnly: true,
+                    };
+                  });
+                }}
+                variant="outline-blue"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={() => {
+                  setstate((pre) => {
+                    return {
+                      isEdit: false,
+                      readOnly: true,
+                    };
+                  });
+                }}
+                variant={"blue-btn"}
+              >
+                Save
+              </Button>
+            </>
+          ) : (
             <Button
               onClick={() => {
-                setisEdit(false);
-                setreadOnly(true);
+                setstate((pre) => {
+                  return {
+                    isEdit: true,
+                    readOnly: false,
+                  };
+                });
               }}
-              variant="outline-blue"
+              variant={"blue-btn"}
+              display={"flex"}
+              alignItems={"center"}
+              gap={"7px"}
             >
-              Cancel
+              <Image mt={"3px"} src={white_edit.src} width={"18px"} />
+              Edit
             </Button>
-            <Button onClick={handleSave} variant={"blue-btn"}>
-              Save
-            </Button>
-          </>
-        ) : (
-          <Button
-            onClick={() => {
-              setstate((pre)=>{
-                return{
-
-                }
-              })
-              setisEdit(true);
-              setreadOnly(false);
-            }}
-            variant={"blue-btn"}
-            display={"flex"}
-            alignItems={"center"}
-            gap={"7px"}
-          >
-            <Image mt={"3px"} src={white_edit.src} width={"18px"} />
-            Edit
-          </Button>
-        )} */}
+          )}
+        </Flex>
 
         {/* <Box
           display={"flex"}

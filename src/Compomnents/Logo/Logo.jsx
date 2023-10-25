@@ -10,7 +10,7 @@ const Logo = ({ width }) => {
       // width={isSmallerThe500 ? "200px" : "250px"}
     //   TODO remove width object
     cursor={"pointer"}
-      width={width ? width : { "2xl": "250px", sm: "200px" , base:"150px" }}
+      width={width ? width : {  md: "180px" , base:"150px" }}
       src={logo.src}
       alt="logo"
     />

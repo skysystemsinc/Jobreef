@@ -12,7 +12,7 @@ import React from "react";
 const CompanyPage = () => {
   return (
     <>
-      <Header />
+      <Header candidate />
 
       <Box display={"flex"} justifyContent={"center"} mt={"43px"}>
         <Box
