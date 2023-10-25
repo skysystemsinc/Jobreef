@@ -31,8 +31,8 @@ function Context({ children }) {
   const searchNow = () => {
     // setToggle(true) 
     
-    setSearchEntryLocation(tempSearchEntryLocation)
-    setSearchEntryCompany(tempSearchEntryCompany)
+    setSearchEntryLocation(tempSearchEntryLocation.trim())
+    setSearchEntryCompany(tempSearchEntryCompany.trim())
     setToggle(false);
   } 
 
