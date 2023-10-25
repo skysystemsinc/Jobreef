@@ -29,6 +29,7 @@ const Certification = ({ addCertificate, setCertificate }) => {
       ) : (
         <Box  width={"100%"} mx={"auto"}>
           <CeritifcateCard   headingStyle={style}/>
+          <CeritifcateCard   headingStyle={style}/>
 
           <Flex justifyContent={"center"}>
             <Button
@@ -36,7 +37,7 @@ const Certification = ({ addCertificate, setCertificate }) => {
                 setCertificate(true);
               }}
               width="max-content"
-              px={"10px"}
+              px={"20px"}
               mt={{ md: "17px", base: "15px" }}
               mb={"40px"}
               variant={"blue-btn"}

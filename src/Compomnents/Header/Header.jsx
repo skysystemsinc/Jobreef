@@ -42,18 +42,18 @@ const HeaderDropdown = dynamic(
     ssr: false,
   }
 );
-export default function Header() {
+export default function Header({candidate}) {
   const { isOpen, onToggle } = useDisclosure();
   const [isSmallerThe500] = useMediaQuery("(max-width: 500px)");
 
   return (
-    <Box zIndex={3} position={"sticky"} top={"0px"}>
+    <Box zIndex={5} position={"sticky"} top={"0px"}>
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
         minH={"60px"}
-        py={{ base: 4, "2xl": 6 }}
-        pb={{ base: 4, "2xl": 7 }}
+        py={3}
+        // pb={{ base: 4, "2xl": 7 }}
         px={{ "2xl": 8, base: 3 }}
         // position={"relative"}
         // top={"0px"}
@@ -92,11 +92,11 @@ export default function Header() {
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", xl: "start" }}>
           <Link href={"/"}>
-            <Logo width={{ "2xl": "180px", base: "150px" }} />
+            <Logo width={{ md: "130px", base:"120px" }} />
           </Link>
 
           <Flex display={{ base: "none", xl: "flex" }} mx={"auto"}>
-            <DesktopNav />
+            <DesktopNav candidate={candidate}/>
           </Flex>
         </Flex>
 
@@ -112,15 +112,16 @@ export default function Header() {
             variant="solid"
             colorScheme="blue"
             aria-label="Done"
-            fontSize={{ base: "18px", sm: "20px" }}
-            width={{ "2xl": "50px", base: "40px" }}
-            height={{ "2xl": "50px", base: "40px" }}
+            // fontSize={"15px"}
+            size={"sm"}
+            // width={{ base: "35px" }}
+            // height={{ base: "35px" }}
             // size={"lg"}
             // size={["md", "md", "lg", "lg"]}
             icon={<IoNotificationsOutline />}
           />
           <Box display={{ xl: "block", base: "none" }}>
-            <HeaderDropdown />
+            <HeaderDropdown candidate={candidate}/>
           </Box>
         </Stack>
       </Flex>
@@ -139,15 +140,16 @@ const DesktopNav = () => {
   const router = useRouter();
 
   return (
-    <Stack direction={"row"} spacing={4}>
+    <Stack direction={"row"} spacing={1}>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
               <Link
                 variant={"blue-link"}
-                fontSize={{ "2xl": "20px", base: "15px" }}
+                fontSize={"14px"}
                 p={2}
+                py={1}
                 transition={".5s"}
                 href={navItem.href ?? "#"}
                 // fontSize={"sm"}
@@ -160,7 +162,7 @@ const DesktopNav = () => {
                     ? "blue.500"
                     : "gray.light"
                 }
-                fontWeight={navItem.pathName == router.pathname ? 400 : 500}
+                fontWeight={navItem.pathName == router.pathname ? 400 : 400}
                 _hover={{
                   textDecoration: "none",
                   color: "gray.light",
@@ -237,7 +239,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
   );
 };
 
-const MobileNav = () => {
+const MobileNav = ({candidate}) => {
   return (
     <Stack
       bg={useColorModeValue("white", "gray.800")}
@@ -248,7 +250,7 @@ const MobileNav = () => {
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
       <Box mt={"10px"}>
-        <HeaderDropdown />
+        <HeaderDropdown  candidate={candidate} />
       </Box>
     </Stack>
   );

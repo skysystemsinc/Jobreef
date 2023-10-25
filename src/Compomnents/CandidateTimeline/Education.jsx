@@ -12,7 +12,7 @@ const Education = ({ addEducation, setaddEducation }) => {
   const [experianceData, setexperianceData] = useState([]);
   // const experianceData = [];
   const style = {
-    maxWidth: "200px",
+    maxWidth: "216px",
   };
   return (
     <Box>
@@ -34,13 +34,14 @@ const Education = ({ addEducation, setaddEducation }) => {
               onClick={() => {
                 setaddEducation(true);
               }}
+              px={"10px"}
               width="max-content"
-              px={{ md: "40px", base: "20px" }}
+              
               //   mt={{ md: "px", base: "20px" }}
               mb={"40px"}
               variant={"blue-btn"}
             >
-              Add Education
+              Add New Education
             </Button>
           </Flex>
         </Box>

@@ -61,8 +61,8 @@ const MyResumeTabs = () => {
             ...globalStyles.scrollBar,
             // whiteSpace: "nowrap",
             // overflowX: "scroll",
-            flexDirection: { sm: "row", base: "column" },
-            width: { md: "70%", base: "100%" },
+            flexDirection: { md: "row", base: "column" },
+            width: { lg: "70%",md:"100%", base: "100%" },
           }}
         >
           {tabList.map((item, index) => {
@@ -71,6 +71,7 @@ const MyResumeTabs = () => {
                 key={index}
                 fontSize={{ md: "16px", base: "14px" }}
                 sx={globalStyles.tabelinkStyle}
+                whiteSpace={"nowrap"}
                 _selected={globalStyles.selectTab}
               >
                 {item.title}

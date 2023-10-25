@@ -21,10 +21,14 @@ import { Link } from "@chakra-ui/next-js";
 import LabelInput from "@/Compomnents/LabelInput/LabelInput";
 import { FcGoogle } from "react-icons/fc";
 import { color } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [isSmallerThe500] = useMediaQuery("(max-width: 500px)");
+  const [state, setstate] = useState({
+    email: "",
+    password: "",
+  });
   useEffect(() => {
     localStorage.clear();
   }, []);
@@ -85,6 +89,12 @@ export default function Home() {
           </Box>
           <Box marginBottom={{ "2xl": "50px", base: "30px" }}>
             <LabelInput
+              state={state.email}
+              setState={(e) => {
+                setstate((prev) => {
+                  return { ...prev, email: e.target.value };
+                });
+              }}
               labelVariant={"label"}
               type="email"
               variant={"shadow-input"}
@@ -94,6 +104,12 @@ export default function Home() {
           </Box>
           <Box>
             <LabelInput
+              state={state.password}
+              setState={(e) => {
+                setstate((prev) => {
+                  return { ...prev, password: e.target.value };
+                });
+              }}
               iconStyle={{ marginTop: "7px" }}
               labelVariant={"label"}
               type="password"

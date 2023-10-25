@@ -18,7 +18,7 @@ const SideBar = () => {
     {
       title: "Home",
       icon: home,
-      pathname: "/",
+      pathname:"#",
     },
     {
       title: "Job Posts",
