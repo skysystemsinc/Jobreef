@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       // Convert the object back to a JSON string
       const updatedData = JSON.stringify(newData);
       // Save data in data.json
-      await fsPromises.writeFile(dataFilePath, updatedData);
+      // await fsPromises.writeFile(dataFilePath, updatedData);
       // Send a success response
       res.status(200).json({ message: "Data Create successfully" });
     } catch (error) {
@@ -44,7 +44,7 @@ export default async function handler(req, res) {
       // Convert the object back to a JSON string
       const updatedData = JSON.stringify(newData);
       // Save data in data.json
-      await fsPromises.writeFile(dataFilePath, updatedData);
+      // await fsPromises.writeFile(dataFilePath, updatedData);
       // Send a success response
       res.status(200).json({ message: "data updated successfully" });
     } catch (error) {
