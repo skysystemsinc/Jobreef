@@ -1,9 +1,11 @@
-import React from 'react'
+import React,{useContext,useState} from "react";
 import { GoDotFill } from "react-icons/go";
 import ComponentMyChip from "../../Compomnents/ComponentMyChip/ComponentMyChip";
 import microsoft from "@/assets/Images/microsoft.svg";
 import EmptyVector from "../../assets/Images/EmptyVector.svg";
-import { DataArray } from './tempSchema';
+import { DataArray } from './tempSchema.js';
+import ShowEmptyResult from "./ShowEmptyResult";
+import { Role_context } from "../../context/context";
 import {
     Box,
     Button,
@@ -20,47 +22,83 @@ import {
 
 const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject }) => {
 
-    <>
+  const {
+      company,
+      setCompany,
+      searchEntryLocation,
+      searchEntryCompany,
+      searchNow,
+      setHandleCompanyEntry, 
+      getHandleCompanyEntry,
+      setHandleLocationEntry,
+      getHandleLocationEntry,
+  } = useContext(Role_context); 
+
+    var length = 0;
+    return(
+      <>
     {DataArray.map((object,index) => {  
 
-    // const foundEmploymentType = selectedValues.length === 0 || selectedValues.includes(object.EmploymentType);
-    // console.log("runn")
-    // const foundExpType = selectedValues.some((Experience) => {
-    //   const match = Experience.match(/(\d+) - (\d+) Years/);
-    //   if (match) {
-    //     const startYear = parseInt(match[1], 10);
-    //     const endYear = parseInt(match[2], 10);
-    //     return startYear <= object.Experience && object.Experience <= endYear;
-    //   }
-    // });
+    //Search by Company Name
+    const foundCompanyName = searchEntryCompany === '' ? true : object.name.toLowerCase().includes(searchEntryCompany.toLowerCase())
+    //Search by Location
+    const foundLocationName = searchEntryLocation === '' ? true : object.location.toLowerCase().includes(searchEntryLocation.toLowerCase());
+
+
+    const foundEmploymentType = selectedValues.length === 0 || selectedValues.includes(object.EmploymentType);
+    const foundExpType = selectedValues.some((Experience) => {
+      const match = Experience.match(/(\d+) - (\d+) Years/);
+      if (match) {
+        const startYear = parseInt(match[1], 10);
+        const endYear = parseInt(match[2], 10);
+        return startYear <= object.Experience && object.Experience <= endYear;
+      }
+    });
     
-    // //need to do work from here 
-    // const foundSalType = selectedValues.some((selectedValue) => {
-    //   const match = selectedValue.match(/\$(\d+) - \$(\d+)/);
-    //   if (!match) {
-    //     return false;
-    //   }
-    //   const minValue = parseInt(match[1], 10);
-    //   const maxValue = parseInt(match[2], 10);
+    //need to do work from here 
+    const foundSalType = selectedValues.some((selectedValue) => {
+      const salary = object.Salary;
+      const numericSalary = parseFloat(salary.replace(/[^0-9.]+/g, ''));
     
-    //   // Extract the numeric value from the value to compare
-    //   const valueMatch = valueToCompare.match(/\$(\d+)/);
-    //   if (!valueMatch) {
-    //     return false;
-    //   }
-    //   const value = parseInt(valueMatch[1], 10); 
-    //   return value >= minValue && value <= maxValue;
-    // });
-    // console.log(foundSalType, "I am found Type")
+      if (selectedValue === "Fixed Salary") {
+        return true;
+      }
+      if (selectedValue === "$50000 - $70000 Annual") {
+        const minValue = 50000;
+        const maxValue = 70000;
+        return numericSalary >= minValue && numericSalary <= maxValue;
+      }
+      if (selectedValue === "$70000 - $100,000 Annual") {
+        const minValue = 70000;
+        const maxValue = 100000;
+        return numericSalary >= minValue && numericSalary <= maxValue;
+      }
+      if (selectedValue === "$100,000 + Annual") {
+        const minValue = 100000;
+        return numericSalary >= minValue;
+      }
     
-    // if(foundEmploymentType || foundExpType)
-    // {
-    // }
-    // else
-    //     return null;
+      return false;
+    });
     
-        return (
-          <Box
+    if(foundCompanyName)
+    {
+    }
+    else return null
+    if(foundLocationName)
+    {
+    }
+    else return null
+    
+    if(foundEmploymentType || foundExpType || foundSalType)
+    {
+        length+=1
+    }
+    else 
+        return null
+    
+    return(
+    <Box
             p={{ sm: "20px", base: "12px" }}
             width={"100%"}
             borderRadius={"8px"}
@@ -76,7 +114,7 @@ const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject }) => {
               border: '1px solid #2CA5C3'
             }}
           >
-            {/* <Box
+            <Box
               display={"flex"}
               alignItems={"flex-start"}
               justifyContent={"space-between"}
@@ -209,12 +247,15 @@ const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject }) => {
                   })}
                 </Box>
               </Box>
-            </Box> */}
-          </Box>
-        );
+            </Box>
+          </Box>)
+      })
       }
+      {length === 0 ?  <ShowEmptyResult/> : null}
+        </>
+    )
+  }
       
-      </>
 
 
 export default NewJobSearchBox

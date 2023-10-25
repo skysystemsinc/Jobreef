@@ -6,11 +6,13 @@ function Context({ children }) {
   const [company, setCompany] = useState(true);
   const [searchEntryLocation,setSearchEntryLocation] = useState('');
   const [searchEntryCompany,setSearchEntryCompany] = useState('');
+  const [tempSearchEntryLocation,setTempSearchEntryLocation] = useState('');
+  const [tempSearchEntryCompany,setTempSearchEntryCompany] = useState('');
   const [toggle,setToggle] = useState(true);
 
 
   const setHandleLocationEntry = (e) => {
-    setSearchEntryLocation(e);
+    setTempSearchEntryLocation(e)
   };
 
   const getHandleLocationEntry = () => {
@@ -18,7 +20,7 @@ function Context({ children }) {
   };
 
   const setHandleCompanyEntry = (e) => {
-    setSearchEntryCompany(e);
+    setTempSearchEntryCompany(e)
     
   };
 
@@ -27,9 +29,12 @@ function Context({ children }) {
   };
 
   const searchNow = () => {
-    // setToggle(true)
-    setToggle(false); 
-  }
+    // setToggle(true) 
+    
+    setSearchEntryLocation(tempSearchEntryLocation)
+    setSearchEntryCompany(tempSearchEntryCompany)
+    setToggle(false);
+  } 
 
 
   const getToggle = ()=>{
@@ -46,6 +51,8 @@ function Context({ children }) {
 
   return (
     <Role_context.Provider value={{ company, setCompany,
+      searchEntryLocation,
+      searchEntryCompany,
       getToggle,
       searchNow,
       setHandleCompanyEntry,
