@@ -11,6 +11,8 @@ import cross from "../../assets/Images/cross.svg";
 import NewJobSearchBox from "./NewJobSearchBox";
 import ShowPreviousSearches from "./ShowPreviousSearches";
 import { checkboxes, DataArray } from "./tempSchema";
+
+import { parse, compareAsc, compareDesc } from 'date-fns';
 import {
   Box,
   Button,
@@ -30,11 +32,13 @@ import ShowCheckBoxes from "./ShowCheckBoxes";
 
 
 const JobSearchResults = () => {
+  const originalArray = DataArray
   const [selectedValues, setSelectedValues] = useState([]);
   const [temp,settemp] = useState([]);
   const [tempObject, setTempObject] = useState();
   //Temporary Button Later on need to be deleted
   const [toggle, settoggle] = useState("false");
+  const [Data,setData] = useState(DataArray)
 
   const handleCheckboxChange = (value) => {
     if (selectedValues.includes(value)) {
@@ -51,6 +55,29 @@ const JobSearchResults = () => {
     }
   };
 
+  const DataSort = (e) => {
+    if (e)
+    { 
+      Data.sort((a, b) => {
+        const dateA = parse(a.ApplicationDeadline, 'MM/dd/yyyy', new Date());
+        const dateB = parse(b.ApplicationDeadline, 'MM/dd/yyyy', new Date()); 
+        // return compareAsc(dateA, dateB);
+        return compareDesc(dateA, dateB);
+      });  
+    }
+    else
+    {
+      //need to do work here
+        // setData(originalArray)
+        Data.sort((a, b) => {
+          const dateA = parse(a.ApplicationDeadline, 'MM/dd/yyyy', new Date());
+          const dateB = parse(b.ApplicationDeadline, 'MM/dd/yyyy', new Date()); 
+          // return compareAsc(dateA, dateB);
+          return compareAsc(dateA, dateB);
+        });
+    }
+  }
+
   return (
     <Box>
       <Box
@@ -64,6 +91,7 @@ const JobSearchResults = () => {
           handleCheckboxChange={handleCheckboxChange}
           temp={temp}
           settemp={settemp}
+          DataSort={DataSort}
         />
 
         <Box flex={3} flexWrap={"wrap"}>
@@ -97,6 +125,7 @@ const JobSearchResults = () => {
               selectedValues={selectedValues}
               toggle={toggle}
               settoggle={settoggle}
+              Data={Data}
             />) : (
               <Box display={{lg:"block",sm:"none"}}>
                 <NewJobSearchBox
@@ -104,6 +133,7 @@ const JobSearchResults = () => {
                   selectedValues={selectedValues}
                   toggle={toggle}
                   settoggle={settoggle}
+                  Data={Data}
                 />
               </Box> 
             )

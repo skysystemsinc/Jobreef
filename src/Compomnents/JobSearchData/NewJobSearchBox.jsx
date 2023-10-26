@@ -6,7 +6,6 @@ import EmptyVector from "../../assets/Images/EmptyVector.svg";
 import { DataArray } from './tempSchema.js';
 import ShowEmptyResult from "./ShowEmptyResult";
 import { Role_context } from "../../context/context";
-import { parse, compareAsc, compareDesc } from 'date-fns';
 import {
     Box,
     Button,
@@ -24,31 +23,30 @@ import {
   var Data = DataArray;
   const originalData = [...DataArray];
 
-const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject }) => {
+const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject,Data }) => {
   
-  const [dataToDisplay, setDataToDisplay] = useState([]);
+  const [dataToDisplay, setDataToDisplay] = useState(Data);
 
-  useEffect(()=>{
-    setTimeout(()=>{
-      if (selectedValues.includes("Date Posted"))
-      { 
-        Data.sort((a, b) => {
-          const dateA = parse(a.ApplicationDeadline, 'MM/dd/yyyy', new Date());
-          const dateB = parse(b.ApplicationDeadline, 'MM/dd/yyyy', new Date()); 
-          // return compareAsc(dateA, dateB);
-          return compareDesc(dateA, dateB);
-        });  
-        setDataToDisplay(Data)
-      }
-      else
-      {
-          Data = [...originalData]
-          setDataToDisplay(Data)
-          console.log(Data) 
-      }
-    },1000)
+
+  // useEffect(()=>{
+  //     if (selectedValues.includes("Date Posted"))
+  //     { 
+  //       Data.sort((a, b) => {
+  //         const dateA = parse(a.ApplicationDeadline, 'MM/dd/yyyy', new Date());
+  //         const dateB = parse(b.ApplicationDeadline, 'MM/dd/yyyy', new Date()); 
+  //         // return compareAsc(dateA, dateB);
+  //         return compareDesc(dateA, dateB);
+  //       });  
+  //       setDataToDisplay(Data)
+  //     }
+  //     else
+  //     {
+  //         Data = [...originalData]
+  //         setDataToDisplay(Data)
+  //         console.log(Data) 
+  //     }
     
-  },[selectedValues])
+  // },[selectedValues])
 
   const {
       company,

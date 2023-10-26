@@ -21,7 +21,7 @@ import {
 import globalStyles from "@/styles/globalStyles";
 import CheckBoxDropDown from "../CheckBoxDropDown/CheckBoxDropDown";
 
-const ShowCheckBoxes = ({ selectedValues, handleCheckboxChange,temp,settemp }) => {
+const ShowCheckBoxes = ({ selectedValues, handleCheckboxChange,temp,settemp,DataSort }) => {
   const listItme = ["Date Applied", "Relevance"];
   const listItme2 = ["New", "Read", "Interviewing", "Closed"];
   const listItme3 = ["Masters Degree or Higher", "Bachelor’s Degree or Higher", "Associate Degree or Higher", "Closed"];
@@ -71,6 +71,34 @@ const ShowCheckBoxes = ({ selectedValues, handleCheckboxChange,temp,settemp }) =
                 </Heading>
                 {object.values &&
                   object.values.map((value) => {
+                    if(object.heading == "Sort Jobs By")
+                    {
+                      return (
+                        <Checkbox
+                          mb={"8px"}
+                          borderRadius={"10px"}
+                          size="md"
+                          borderColor={"gray.text"}
+                          colorScheme="blue"
+                          rounded={"sm"}
+                          type="checkbox"
+                          sx={globalStyles.checkBoxStyle}
+                          isChecked={selectedValues.includes(value.key)}
+                          onChange={(e) => 
+                            {
+                              handleCheckboxChange(value.key,e.target.value)
+                              DataSort(e.target.checked)
+                            }
+                          }
+                        >
+                          <Heading
+                            variant={"p4"}
+                          >
+                            {value.key}
+                          </Heading>
+                        </Checkbox>
+                      );        
+                    }
                     return (
                       <Checkbox
                         mb={"8px"}
