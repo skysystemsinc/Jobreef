@@ -10,16 +10,27 @@ import EmptyVector from "../../assets/Images/EmptyVector.svg";
 import cross from "../../assets/Images/cross.svg";
 import NewJobSearchBox from "./NewJobSearchBox";
 import ShowPreviousSearches from "./ShowPreviousSearches";
-import { checkboxes,DataArray } from './tempSchema';
-import {Box,Button,Flex,Heading,Input,InputGroup,InputLeftElement,Label,Image,Select,useBreakpointValue,} from "@chakra-ui/react";
+import { checkboxes, DataArray } from "./tempSchema";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Label,
+  Image,
+  Select,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import ShowClickJobSearchBox from "./ShowClickJobSearchBox";
 
 import ShowCheckBoxes from "./ShowCheckBoxes";
 
 const JobSearchResults = () => {
-  
   const [selectedValues, setSelectedValues] = useState([]);
-  const [tempObject,setTempObject] = useState()
+  const [tempObject, setTempObject] = useState();
   //Temporary Button Later on need to be deleted
   const [toggle, settoggle] = useState("false");
 
@@ -39,9 +50,16 @@ const JobSearchResults = () => {
 
   return (
     <Box>
-  
-      <Box display={"flex"} flexWrap={"wrap"} margin={10} gap={5}>
-            <ShowCheckBoxes selectedValues={selectedValues} handleCheckboxChange={handleCheckboxChange}/>
+      <Box
+        display={"flex"}
+        flexWrap={"wrap"}
+        margin={{ md: 10, base: "0px" }}
+        gap={5}
+      >
+        <ShowCheckBoxes
+          selectedValues={selectedValues}
+          handleCheckboxChange={handleCheckboxChange}
+        />
 
         <Box flex={3} flexWrap={"wrap"}>
           <Box display={"flex"} alignItems={"center"} flexWrap={"wrap"}>
@@ -57,7 +75,7 @@ const JobSearchResults = () => {
                 >
                   <ComponentMyChip label={val}>
                     <Image
-                      width={{ md: "10px", base: "20px" }}
+                      width={"10px"}
                       src={cross.src}
                       marginRight={2}
                       onClick={() => deleteSelectedOptions(val)}
@@ -69,12 +87,23 @@ const JobSearchResults = () => {
             })}
           </Box>
           <Box>
-            <NewJobSearchBox setTempObject={setTempObject} selectedValues={selectedValues} toggle={toggle} settoggle={settoggle}/>
+            <NewJobSearchBox
+              setTempObject={setTempObject}
+              selectedValues={selectedValues}
+              toggle={toggle}
+              settoggle={settoggle}
+            />
           </Box>
         </Box>
-        {
-            toggle ? (<ShowPreviousSearches/>) : (<ShowClickJobSearchBox toggle={toggle} settoggle={settoggle} object={tempObject}/>)
-        } 
+        {toggle ? (
+          <ShowPreviousSearches />
+        ) : (
+          <ShowClickJobSearchBox
+            toggle={toggle}
+            settoggle={settoggle}
+            object={tempObject}
+          />
+        )}
       </Box>
     </Box>
   );

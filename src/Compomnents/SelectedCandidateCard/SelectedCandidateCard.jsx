@@ -12,6 +12,7 @@ import { BiNotepad } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import moment from "moment";
 import Chip from "../Chip/Chip";
+import { HiOutlineMail } from "react-icons/hi";
 
 const SelectedCandidateCard = ({ matchCandidate }) => {
   const selectedCandidates = useSelector(
@@ -21,6 +22,12 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const iconWidth = {
     width: { md: "14px", base: "13px" },
+  };
+  const hoverStyle = {
+    cursor: "pointer",
+    "&:hover": {
+      color: "blue.500F",
+    },
   };
   return (
     <>
@@ -61,7 +68,6 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               </Heading>
 
               <Heading
-                
                 fontWeight={400}
                 color={"gray.text"}
                 as={"p"}
@@ -126,8 +132,9 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               </Box>
               {matchCandidate ? (
                 <Box display={"flex"} alignItems={"center"} gap={"7px"}>
-                  <Image sx={iconWidth} src={black_email.src} />
-                  <Heading color={"black.100"} variant={"p10"}>
+                  {/* <Image sx={iconWidth} src={black_email.src} /> */}
+                  <HiOutlineMail />
+                  <Heading  color={"black.100"} variant={"p10"} sx={hoverStyle}>
                     Invite to Apply
                   </Heading>
                 </Box>
@@ -345,8 +352,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               {selectedCandidates?.skills?.map((item) => {
                 return (
                   <Box mr={{ md: "18px", base: "14px" }} mb={"10px"}>
-                    <Chip
-                     label={item.name} />
+                    <Chip label={item.name} />
                   </Box>
                 );
               })}
@@ -357,9 +363,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               color={"blue.500"}
               variant={"p7"}
             >
-              
               Certification
-
             </Heading>
             <Box
               mt={{ md: "21px", base: "5px" }}
@@ -371,25 +375,28 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               gap={{ md: "10px", sm: "6px", base: "5px" }}
             >
               <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-              Walter Payton College Preparatory High School
+                Walter Payton College Preparatory High School
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
               </Box>
 
               <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-              September 2017 - July 2023
+                September 2017 - July 2023
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
               </Box>
 
-              <Heading  whiteSpace={"pre-wrap"} fontWeight={600} color={"gray.text"} variant={"p12"}>
-              Certificate Verification ID: 
-              2f8ae5bfaa4c46dc3bba77655130f32a
+              <Heading
+                whiteSpace={"pre-wrap"}
+                fontWeight={600}
+                color={"gray.text"}
+                variant={"p12"}
+              >
+                Certificate Verification ID: 2f8ae5bfaa4c46dc3bba77655130f32a
               </Heading>
             </Box>
-     
           </Box>
         </Box>
       </Box>

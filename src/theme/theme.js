@@ -407,6 +407,7 @@ const components = {
         fontSize: ["13px", "13px", "15px", "15px", "15px", "15px"],
       },
       p8: {
+
         color: "gray.text",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 400,

@@ -167,7 +167,7 @@ const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject }) => {
                   </Heading>
                 </Box>
                 <Image
-                  width={{ md: "10px", base: "20px" }}
+                  width={"10px"}
                   src={EmptyVector.src}
                   mt={1.5}
                   marginRight={2}

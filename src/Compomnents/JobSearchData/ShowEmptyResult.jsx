@@ -1,33 +1,40 @@
-import React from 'react'
+import React from "react";
 import { GoDotFill } from "react-icons/go";
 import ComponentMyChip from "../../Compomnents/ComponentMyChip/ComponentMyChip";
 import microsoft from "@/assets/Images/microsoft.svg";
 import EmptyVector from "../../assets/Images/EmptyVector.svg";
 
 import {
-    Box,
-    Button,
-    Flex,
-    Heading,
-    Input,
-    InputGroup,
-    InputLeftElement,
-    Label,
-    Image,
-    Select,
-    useBreakpointValue,
-  } from "@chakra-ui/react";
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Label,
+  Image,
+  Select,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 const ShowEmptyResult = () => {
-    const pValue = useBreakpointValue({ base: 0, lg: 10 });
+  const pValue = useBreakpointValue({ base: 0, lg: 5 });
   return (
     <Box p={pValue}>
-      <Heading letterSpacing={-1} color={"gray.text"} variant={"p3"}>
+      <Heading
+        letterSpacing={-1}
+        color={"gray.text"}
+        fontSize={{ md: "32px", lg:'29px', base: "23px" }}
+        fontWeight={600}
+        lineHeight={{ md: "42px" , base:'35px'}}
+        variant={"p3"}
+      >
         We didn’t find any job listings that match your search criteria and
         filters
       </Heading>
       <Box>
         <Heading
-          mt={16}
+          mt={{ md:16 , base:5}}
           mb={5}
           display={"flex"}
           color={"gray.text"}

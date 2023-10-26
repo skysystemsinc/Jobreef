@@ -22,7 +22,7 @@ const JobSearch = () => {
     <>
       <Header />
       
-      <Box display={"flex"} justifyContent={"center"} mt={"0px"} minHeight={"70vh"}>
+      <Box display={"flex"} justifyContent={"center"} mt={"0px"}  minHeight={"89vh"}>
         <Box
           width={"100%"}    
           px={{ md: "20px", base: "10px" }}

@@ -35,16 +35,7 @@ export default function Login() {
 
   return (
     <>
-      <Box
-        mx={"20px"}
-        width={{
-          md: "402px",
-
-          sm: "80%",
-          base: "100%",
-        }}
-        textAlign={"center"}
-      >
+      <Box  width={"100%"} textAlign={"center"}>
         <Box display={"flex"} justifyContent={"center"} mb={"25px"}>
           <Image
             width={{
@@ -66,7 +57,7 @@ export default function Login() {
             }}
             labelVariant={"label"}
             type="email"
-            variant={"shadow-input"}
+            variant={"bg-input"}
             placeholder="Enter Email"
             label={"Email"}
           />
@@ -83,7 +74,7 @@ export default function Login() {
             labelVariant={"label"}
             type="password"
             passworInput
-            variant={"shadow-input"}
+            variant={"bg-input"}
             placeholder="Enter your Password"
             label={"Password"}
           />
