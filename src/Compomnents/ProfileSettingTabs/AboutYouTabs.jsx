@@ -170,7 +170,7 @@ const AboutYouTabs = () => {
             labelVariant={"label"}
             type="text"
             variant={"bg-input"}
-            placeholder="+92 XXX XXXXXXX"
+            placeholder="+XX XXX XXXXXXX"
             label={"Phone Number"}
           />
         </InputWrapper>
