@@ -195,20 +195,22 @@ const Attachments = () => {
     "This will be included in submitted job applications",
   ];
   return (
-    <Flex
-      mt={{ md: "50px", base: "20px" }}
-      alignItems={"center"}
-      gap={{ md: "30px", base: "10px" }}
-      flexWrap={"wrap"}
-      justifyContent={"center"}
-    >
-      <UploadBox titie={"Upload Resume File"} list={list} />
+    <Box minHeight={"59vh"}>
+      <Flex
+        mt={{ md: "50px", base: "20px" }}
+        alignItems={"center"}
+        gap={{ md: "30px", base: "10px" }}
+        flexWrap={"wrap"}
+        justifyContent={"center"}
+      >
+        <UploadBox titie={"Upload Resume File"} list={list} />
 
-      <UploadBox
-        list={list}
-        titie={"Upload Additional Files (e.g. Cover Letter or ID)"}
-      />
-    </Flex>
+        <UploadBox
+          list={list}
+          titie={"Upload Additional Files (e.g. Cover Letter or ID)"}
+        />
+      </Flex>
+    </Box>
   );
 };
 

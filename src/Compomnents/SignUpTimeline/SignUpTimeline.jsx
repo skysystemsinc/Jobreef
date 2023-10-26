@@ -29,13 +29,13 @@ export const SignUpTimeline = ({ candidate, variant }) => {
   const router = useRouter();
   const { company, setCompany } = useContext(Role_context);
   const [State, setState] = useState({
-    name: "test",
-    lastName: "test",
-    email: "test@gmail.com",
+    name: "",
+    lastName: "",
+    email: "",
     role: company,
-    password: "123",
-    confirmPassword: "123",
-    otp: "123",
+    password: "",
+    confirmPassword: "",
+    otp: "",
   });
 
   const { nextStep, prevStep, reset, activeStep } = useSteps({
@@ -59,17 +59,17 @@ export const SignUpTimeline = ({ candidate, variant }) => {
       if (!company) {
         router.push("/candidate/registration");
       } else {
-        const response = await fetch("/api/company/userProfile", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ...State,
-          }),
-        });
-        const data = await response.json();
-        console.log(data);
+        // const response = await fetch("/api/company/userProfile", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify({
+        //     ...State,
+        //   }),
+        // });
+        // const data = await response.json();
+        // console.log(data);
         router.push("/registration");
       }
     } else {

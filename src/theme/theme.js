@@ -31,7 +31,9 @@ const colors = {
     600: "#494949",
     700: "#AFAFAF",
     800: "#FEFEFE",
+    lightBorder:"#cdcdcd",
     light: "#797979",
+
     text: "#4A4A4A",
   },
   blue: {
@@ -70,7 +72,6 @@ const components = {
         height: { sm: "38px", base: "36px" },
         // width: { md: "200px", sm: "180px", base: "168px" },
         width: {
-          
           xl: "150px",
           md: "150px",
           lg: "140px",
@@ -81,7 +82,7 @@ const components = {
         boxShadow: "0px 4px 11px 0px rgba(70, 146, 254, 0.15)",
         color: "white.100",
         fontWeight: 400,
-        fontSize: {  sm: "13px", base: "12px" },
+        fontSize: { sm: "13px", base: "12px" },
         transition: ".5s",
         _hover: {
           bg: "blue.600",
@@ -96,7 +97,6 @@ const components = {
 
         // width: { md: "200px", base: "160px" },
         width: {
-        
           xl: "150px",
           md: "150px",
           lg: "140px",
@@ -117,6 +117,12 @@ const components = {
           boxShadow: "0px 4px 11px 0px rgba(70, 146, 254, 0.15)",
           bg: "blue.500",
           color: "white.100",
+        },
+
+        _disabled: {
+          _hover: {
+            color: "blue.500",
+          },
         },
       },
       "square-btn": {
@@ -151,14 +157,7 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
         // fontSize: "20px",
-        fontSize: {
-          "2xl": "20px",
-          xl: "18px",
-          lg: "18px",
-          md: "17px",
-
-          base: "14px",
-        },
+        fontSize: "14px",
       },
     },
   },
@@ -174,7 +173,7 @@ const components = {
 
         fontFamily: "var(--chakra-\fonts-Nunito)",
         padding: { md: "0px 29px", base: "0px 20px" },
-        fontSize: { md: "14px" , base:"13px"},
+        fontSize: { md: "14px", base: "13px" },
         fontWeight: 400,
         // fontSize: "16px",
         color: "gray.100",
@@ -183,7 +182,7 @@ const components = {
       },
       label: {
         color: "gray.text",
-        fontSize:"14px",
+        fontSize: "14px",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 400,
       },
@@ -193,7 +192,7 @@ const components = {
     variants: {
       "shadow-input": {
         field: {
-          height:"46px",
+          height: "46px",
           borderRadius: "8px",
           color: "black.100",
           // bg: "text.gray !important",
@@ -213,7 +212,7 @@ const components = {
       },
       "bg-input": {
         field: {
-          height:"40px",
+          height: "40px",
           borderRadius: "8px",
           color: "black.200",
           bg: "gray.200 !important",
@@ -287,7 +286,7 @@ const components = {
       "bg-teaxtarea": {
         //   border: "1px solid red ",
         // field: {
-        minHeight:"140px",
+        minHeight: "140px",
         borderRadius: "8px",
         bg: "gray.200 !important",
         fontFamily: "var(--chakra-\fonts-openSans)",
@@ -342,7 +341,7 @@ const components = {
       // Variant for h1
       h1: {
         // fontSize: { "2xl": "40px" , base:"20px" },
-        fontSize: ["28px", "28px", "28px", "28px", "28px", "28px", "48px"],
+        fontSize: "25px",
         color: "white.100",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
@@ -384,7 +383,7 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontSize: ["13px", "14px", "14px"],
         // lineHeight:{ md: '24px' , base:"20px"},
-        lineHeight:"20px",
+        lineHeight: "20px",
         // fontSize: "20px",
       },
       p5: {
@@ -399,20 +398,20 @@ const components = {
         color: "gray.text ",
         fontFamily: "var(--chakra-\fonts-openSans)",
 
-        fontSize: ["18px", "20px", "25px", "25px"],
+        fontSize: ["18px", "20px", "22px", "22px"],
       },
       p7: {
         color: "blue.500",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
-        fontSize: ["13px", "13px", "16px", "16px", "16px", "17px"],
+        fontSize: ["13px", "13px", "15px", "15px", "15px", "15px"],
       },
       p8: {
         color: "gray.text",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 400,
-        lineHeight: ["26px", "33px", "40px", "40px", "40px", "54px"],
-        fontSize: ["18px", "23px", "27px", "27px", "30px", "36px"],
+        lineHeight: ["22px", "33px", "36px", "36px", "36px", "36px"],
+        fontSize: ["17px", "23px", "27px", "27px", "27px", "30px"],
       },
       p9: {
         color: "black.100",
@@ -425,7 +424,7 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
 
-        fontSize: ["13px", "14px", "16px", "16px", "16px", "18px"],
+        fontSize: ["13px", "14px", "14px", "14px", "14px", "14px"],
       },
       p11: {
         // color: "gray.text",
@@ -499,7 +498,7 @@ const components = {
                 margin: "10px 0px",
                 padding: { md: "20px 20px", base: "17px 10px" },
                 // fontSize: "15px",
-                fontSize: { md: "15px", base: "13px" },
+                fontSize: { md: "14px", base: "13px" },
 
                 fontWeight: 400,
                 color: "black.200",
@@ -510,6 +509,7 @@ const components = {
             bg: "blue.500",
             tr: { position: "relative", top: "-21px" },
             th: {
+              
               padding: { md: "23px 30px", base: "16px 20px" },
               fontSize: { md: "15px", base: "12px" },
               position: "relative",
@@ -528,7 +528,7 @@ const components = {
               },
               textTransform: "capitalize",
 
-              fontWeight: 500,
+              fontWeight: 400,
               color: "white.100",
             },
           },

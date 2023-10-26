@@ -11,13 +11,60 @@ const All = ({
   filterKey,
   matchCandidate,
   cardStatus,
-  data,
+  // data,
   handleEvent,
   popOverList,
 }) => {
+  const data = [
+    {
+      status: "new",
+      archived: false,
+      name: "Aaron Brown",
+      country: "Nassau ",
+      matchCandidate: false,
+      notInterested: true,
+      state: "The Bahamas",
+      companyName: "ABC Company",
+      desiginatation: "Systems Analyst",
+      schoolName: "University of The Bahamas",
+      diploma: "Bachelor’s Degree",
+      skills: [
+        {
+          name: "Technical Knowledge",
+          level: "",
+        },
+        {
+          name: "System Architecture",
+          level: "",
+        },
+        {
+          name: "Risk Management",
+          level: "",
+        },
+        {
+          name: "Product Design",
+          level: "",
+        },
+        {
+          name: "Leadership",
+          level: "",
+        },
+        {
+          name: "Q/A Testing ",
+          level: "",
+        },
+      ],
+      canididateSummary:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      jobSummary:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      educationSummary:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
+    },
+  ];
   const dispatch = useDispatch();
   const handleSelectedCard = (data) => {
-    console.log("data", data)
+    console.log("data", data);
     dispatch(getSelectedCandidates(data));
   };
   return (
@@ -29,15 +76,17 @@ const All = ({
       <Box display={"flex"} gap={"31px"}>
         <Box>
           {data &&
-            data.map((item) => {
+            data.map((item, ind) => {
               return (
-                <CandidateCard
-                  data={item}
-                  matchCandidate={matchCandidate}
-                  cardStatus={cardStatus}
-                  popOverList={popOverList}
-                  handleEvent={() => handleSelectedCard(item)}
-                />
+                <Box key={ind}>
+                  <CandidateCard
+                    data={item}
+                    matchCandidate={matchCandidate}
+                    cardStatus={cardStatus}
+                    popOverList={popOverList}
+                    handleEvent={() => handleSelectedCard(item)}
+                  />
+                </Box>
               );
             })}
         </Box>

@@ -1,113 +1,82 @@
 import { Box, Button, Flex, Image } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import PaginatedTable from "../MembersTable/MembersTable";
+import PaginatedTable from "../PaginatedTable/PaginatedTable";
 import menu from "@/assets/Images/menu.svg";
 import { useRouter } from "next/router";
-import Popovers from "../MembersTable/Popovers";
+import Popovers from "../PaginatedTable/Popovers";
 import { getTeamMembers } from "@/Reudx/slices/teamMembers";
 import { useSelector } from "react-redux";
 const TeamMembers = () => {
   const teamMemebers = useSelector((state) => state.teamMembers.value);
 
   const router = useRouter();
-  const columns = ["Name", "Email", "Job Title", "Role", "Status", "Actions"];
-  const keys = ["Name", "email", "Job Title", "role", "Status", "Actions"];
+  const columns = [
+    {
+      name: "Name",
+      email: "Email",
+      JobTitle: "Job Title",
+      role: "Role",
+      status: "Status",
+      Actions: "Actions",
+    },
+  ];
+  const keys = ["name", "email", "JobTitle", "role", "status", "Actions"];
   const actionList = ["Edit", "Disable"];
   const data = [
     {
-      Name: "Michael Scott",
+      name: "Michael Scott",
       email: "mscott@example.org",
-      "Job Title": "Director, Talent Acquisition",
+      JobTitle: "Director, Talent Acquisition",
       role: "Owner",
-      Status: "Active",
+      status: "Active",
       Actions: <Popovers actionList={actionList} />,
     },
     {
-      Name: "Michael Scott",
+      name: "Michael Scott",
       email: "mscott@example.org",
-      "Job Title": "Director, Talent Acquisition",
+      JobTitle: "Director, Talent Acquisition",
       role: "Owner",
-      Status: "Active",
+      status: "Active",
       Actions: <Popovers actionList={actionList} />,
     },
     {
-      Name: "Michael Scott",
+      name: "Michael Scott",
       email: "mscott@example.org",
-      "Job Title": "Director, Talent Acquisition",
+      JobTitle: "Director, Talent Acquisition",
       role: "Owner",
-      Status: "Active",
+      status: "Active",
       Actions: <Popovers actionList={actionList} />,
     },
     {
-      Name: "Michael Scott",
+      name: "Michael Scott",
       email: "mscott@example.org",
-      "Job Title": "Director, Talent Acquisition",
+      JobTitle: "Director, Talent Acquisition",
       role: "Owner",
-      Status: "Active",
+      status: "Active",
       Actions: <Popovers actionList={actionList} />,
     },
     {
-      Name: "Michael Scott",
+      name: "Michael Scott",
       email: "mscott@example.org",
-      "Job Title": "Director, Talent Acquisition",
+      JobTitle: "Director, Talent Acquisition",
       role: "Owner",
-      Status: "Active",
+      status: "Active",
       Actions: <Popovers actionList={actionList} />,
     },
     {
-      Name: "Uzma",
+      name: "Michael Scott",
       email: "mscott@example.org",
-      "Job Title": "Director, Talent Acquisition",
+      JobTitle: "Director, Talent Acquisition",
       role: "Owner",
-      Status: "Active",
+      status: "Active",
       Actions: <Popovers actionList={actionList} />,
     },
     {
-      Name: "Michael Scott",
+      name: "Michael Scott",
       email: "mscott@example.org",
-      "Job Title": "Director, Talent Acquisition",
+      JobTitle: "Director, Talent Acquisition",
       role: "Owner",
-      Status: "Active",
-      Actions: <Popovers actionList={actionList} />,
-    },
-    {
-      Name: "Michael Scott",
-      email: "mscott@example.org",
-      "Job Title": "Director, Talent Acquisition",
-      role: "Owner",
-      Status: "Active",
-      Actions: <Popovers actionList={actionList} />,
-    },
-    {
-      Name: "Michael Scott",
-      email: "mscott@example.org",
-      "Job Title": "Director, Talent Acquisition",
-      role: "Owner",
-      Status: "Active",
-      Actions: <Popovers actionList={actionList} />,
-    },
-    {
-      Name: "Michael Scott",
-      email: "mscott@example.org",
-      "Job Title": "Director, Talent Acquisition",
-      role: "Owner",
-      Status: "Active",
-      Actions: <Popovers actionList={actionList} />,
-    },
-    {
-      Name: "Michael",
-      email: "mscott@example.org",
-      "Job Title": "Director, Talent Acquisition",
-      role: "Owner",
-      Status: "Active",
-      Actions: <Popovers actionList={actionList} />,
-    },
-    {
-      Name: "Michael Scott",
-      email: "mscott@example.org",
-      "Job Title": "Director, Talent Acquisition",
-      role: "Owner",
-      Status: "Active",
+      status: "Active",
       Actions: <Popovers actionList={actionList} />,
     },
   ];
@@ -143,6 +112,7 @@ const TeamMembers = () => {
         width={"99%"}
         // border={"1px solid red"}
         pb={"20px"}
+        bg={"white.100"}
         // mr={{ md: "20px", base: "5px" }}
       >
         <Flex justifyContent={"flex-end"} mb={"17px"}>
@@ -153,11 +123,11 @@ const TeamMembers = () => {
             px={" 20px"}
           >
             {" "}
-            Add Team Member{" "}
+            Add Team Members{" "}
           </Button>
         </Flex>
         <PaginatedTable
-        keys={keys}
+          keys={keys}
           totalPages={totalPages}
           pageSize={pageSize}
           currentPage={currentPage}

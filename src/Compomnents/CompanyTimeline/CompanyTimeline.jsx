@@ -72,17 +72,17 @@ export const CompanyTimeline = ({ variant }) => {
   const handleNext = async () => {
     console.log("activeStep",activeStep)
     if (isLastStep) {
-      console.log("isLastStep", isLastStep);
-      const response = await axios("/api/company/companyProfile", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: State,
-      });
-      if (response) {
+      // console.log("isLastStep", isLastStep);
+      // const response = await axios("/api/company/companyProfile", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   data: State,
+      // });
+      // if (response) {
         nextStep();
-      }
+      // }
 
       return;
     }
@@ -100,10 +100,10 @@ export const CompanyTimeline = ({ variant }) => {
       width="100%"
     >
       <SignUpLayout
-        icon={<Image width={"26px"} src={whitetick.src} />}
+        icon={<Image width={"22px"} src={whitetick.src} />}
         subtitleIcon={
           hasCompletedAllSteps ? (
-            <Image width={"26px"} src={whitetick.src} />
+            <Image width={"22px"} src={whitetick.src} />
           ) : (
             false
           )
@@ -244,10 +244,12 @@ export const CompanyTimeline = ({ variant }) => {
         {hasCompletedAllSteps ? (
           <Button
             isDisabled={activeStep === 0}
-            // onClick={prevStep}
+            onClick={() => {
+              router.push("/");
+            }}
             variant="blue-btn"
           >
-            {" Logout"}
+            {"Login"}
           </Button>
         ) : (
           <>

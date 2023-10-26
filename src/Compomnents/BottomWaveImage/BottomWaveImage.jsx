@@ -1,4 +1,4 @@
-import { Image } from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 import React from "react";
 import waves from "@/assets/Images/waves.svg";
 
@@ -11,8 +11,6 @@ const BottomWaveImage = () => {
       left={"0px"}
       width={"100%"}
       zIndex={-1}
-
-      // zIndex={"-1 !important"}
     />
   );
 };

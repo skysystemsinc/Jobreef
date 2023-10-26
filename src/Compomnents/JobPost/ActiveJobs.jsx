@@ -1,25 +1,27 @@
 import { Box, Button, Flex, Image } from "@chakra-ui/react";
 import React, { useState } from "react";
-import PaginatedTable from "../MembersTable/MembersTable";
+import PaginatedTable from "../PaginatedTable/PaginatedTable";
 import menu from "@/assets/Images/menu.svg";
 import { useRouter } from "next/router";
-import Popovers from "../MembersTable/Popovers";
+import Popovers from "../PaginatedTable/Popovers";
 const ActiveJobs = () => {
   const router = useRouter();
   const columns = [
-    "Job Title",
-    "Employment Type",
-    "Candidates",
-    "Openings",
-    "Expires On",
-    "Actions",
+    {
+      jobTitle: "Job Title",
+      employeeType: "Employment Type",
+      Candidates: "Candidates",
+      noOfOpening: "Openings",
+      ExpiresOn: "Expires On",
+      Actions: "Actions",
+    },
   ];
   const keys = [
     "jobTitle",
     "employeeType",
     "Candidates",
     "noOfOpening",
-    "Expires On",
+    "ExpiresOn",
     "Actions",
   ];
   const actionList = ["Edit", "Pause", "Close job"];
@@ -29,7 +31,7 @@ const ActiveJobs = () => {
       "employeeType": "mscott@example.org",
       Candidates: "1",
       noOfOpening: "1 Year",
-      "Expires On": "Communications",
+      "ExpiresOn": "Communications",
       Actions: <Popovers actionList={actionList} />,
     },
     {
@@ -37,7 +39,7 @@ const ActiveJobs = () => {
       "employeeType": "mscott@example.org",
       Candidates: "1",
       noOfOpening: "1 Year",
-      "Expires On": "Communications",
+      "ExpiresOn": "Communications",
       Actions: <Popovers actionList={actionList} />,
     },
     {
@@ -45,7 +47,7 @@ const ActiveJobs = () => {
       "employeeType": "mscott@example.org",
       Candidates: "1",
       noOfOpening: "1 Year",
-      "Expires On": "Communications",
+      "ExpiresOn": "Communications",
       Actions: <Popovers actionList={actionList} />,
     },
     {
@@ -53,7 +55,15 @@ const ActiveJobs = () => {
       "employeeType": "mscott@example.org",
       Candidates: "1",
       noOfOpening: "1 Year",
-      "Expires On": "Communications",
+      "ExpiresOn": "Communications",
+      Actions: <Popovers actionList={actionList} />,
+    },
+    {
+      "jobTitle": "Front end developer",
+      "employeeType": "mscott@example.org",
+      Candidates: "3",
+      noOfOpening: "1 Year",
+      "ExpiresOn": "Communications",
       Actions: <Popovers actionList={actionList} />,
     },
     {
@@ -61,7 +71,7 @@ const ActiveJobs = () => {
       "employeeType": "mscott@example.org",
       Candidates: "1",
       noOfOpening: "1 Year",
-      "Expires On": "Communications",
+      "ExpiresOn": "Communications",
       Actions: <Popovers actionList={actionList} />,
     },
     {
@@ -69,15 +79,7 @@ const ActiveJobs = () => {
       "employeeType": "mscott@example.org",
       Candidates: "1",
       noOfOpening: "1 Year",
-      "Expires On": "Communications",
-      Actions: <Popovers actionList={actionList} />,
-    },
-    {
-      "jobTitle": "Social Media Manager",
-      "employeeType": "mscott@example.org",
-      Candidates: "1",
-      noOfOpening: "1 Year",
-      "Expires On": "Communications",
+      "ExpiresOn": "Communications",
       Actions: <Popovers actionList={actionList} />,
     },
   ];

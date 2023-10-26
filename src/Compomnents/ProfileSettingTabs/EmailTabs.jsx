@@ -48,6 +48,8 @@ const EmailTabs = () => {
       justifyContent={"center"}
       flexDirection={"column"}
       alignItems={"center"}
+    
+
       // mt={{ md: "60px", base: "40px" }}
       // pb={{ md: "20px", base: "0px" }}
     >
@@ -64,11 +66,14 @@ const EmailTabs = () => {
 
       {otp ? (
         <Box mt={{ md: "20px", base: "0px" }}>
-          <Otp />
+          <Otp  text={"Please enter the 4 digit code sent to your email"}/>
         </Box>
       ) : (
         <Box
+          minHeight={isEdit || otp ? "27vh" : "44vh"}
           mt={{ md: "50px", base: "40px" }}
+          // pb={"190px"}
+          // border={"1px solid red"}
           width={{ md: "564px", base: "100%" }}
         >
           <LabelInput
@@ -95,14 +100,14 @@ const EmailTabs = () => {
         </Box>
       )}
 
-      <Box
-        display={"flex"}
-        justifyContent={"center"}
-        gap={{ md: "20px", base: "10px" }}
-        // my={{ md: "96px", base: "20px" }}
-        mt={{ md: "80px", base: "60px" }}
-      >
-        {isEdit || otp ? (
+      {isEdit || otp ? (
+        <Box
+          display={"flex"}
+          justifyContent={"center"}
+          gap={{ md: "20px", base: "10px" }}
+          // my={{ md: "96px", base: "20px" }}
+          mt={otp ? "60px" : ""}
+        >
           <>
             <Button onClick={handleCancel} variant="outline-blue">
               Cancel
@@ -111,8 +116,8 @@ const EmailTabs = () => {
               {otp ? "Verify" : "Save"}
             </Button>
           </>
-        ) : null}
-      </Box>
+        </Box>
+      ) : null}
     </Box>
   );
 };

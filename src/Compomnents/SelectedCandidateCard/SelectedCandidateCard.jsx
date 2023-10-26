@@ -11,6 +11,7 @@ import NotePadModal from "../NotePadModal/NotePadModal";
 import { BiNotepad } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import moment from "moment";
+import Chip from "../Chip/Chip";
 
 const SelectedCandidateCard = ({ matchCandidate }) => {
   const selectedCandidates = useSelector(
@@ -19,15 +20,15 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const iconWidth = {
-    width: { md: "16px", base: "13px" },
+    width: { md: "14px", base: "13px" },
   };
   return (
     <>
       <NotePadModal open={isOpen} onClose={onClose} />
       <Box
-        bg={"white.100"}
+        bg={"gray.200"}
         borderRadius={"8px"}
-        border={"1px solid "}
+        border={"none "}
         borderColor={"gray.light"}
         p={{ md: "20px 30px", base: "20px 5px 20px 15px" }}
       >
@@ -38,7 +39,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
           alignItems={"flex-start"}
           // flexWrap={"wrap"}
           flexDirection={{ "2xl": "row", base: "column" }}
-          borderColor={"gray.light"}
+          borderColor={"gray.lightBorder"}
           pb={"7px"}
         >
           <Box
@@ -49,8 +50,8 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
             // width={"50%"}
           >
             <Image
-              width={"65px"}
-              height={"65px"}
+              width={"62px"}
+              height={"62px"}
               objectFit={"cover"}
               src={profile_icon.src}
             />
@@ -60,7 +61,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               </Heading>
 
               <Heading
-                margin={{ md: "4px 0px", base: "0px 0px" }}
+                
                 fontWeight={400}
                 color={"gray.text"}
                 as={"p"}
@@ -78,7 +79,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
                   <Star star={[1, 2, 3, 4, 5]} />
                   <Box
                     width={"2px"}
-                    height={{ md: "24px", base: "17px" }}
+                    height={{ md: "15px", base: "13px" }}
                     mt={{ md: "0px", base: "2px" }}
                     bg={"gray.light"}
                   />
@@ -88,7 +89,8 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
                     as={"p"}
                     variant={"p4"}
                   >
-                   Applied On: {moment(selectedCandidates?.createAt).format("DD/MM/YYYY")}
+                    Applied On:{" "}
+                    {moment(selectedCandidates?.createAt).format("DD/MM/YYYY")}
                   </Heading>
                 </Box>
               </Box>
@@ -155,7 +157,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
                 // border={"1px solid red"}
                 width={"100%"}
                 gap={"10px"}
-                mt={{ md: "10px", base: "6px" }}
+                mt={"7px"}
               >
                 <Box
                   display={"flex"}
@@ -198,7 +200,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
         </Box>
         <Box mt={"20px"}>
           <Box>
-            <Heading mb="13px" color={"gray.text"} variant={"p7"}>
+            <Heading mb="13px" color={"blue.500"} variant={"p7"}>
               Candidate Summary
             </Heading>
             <Heading
@@ -210,7 +212,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
             >
               {selectedCandidates?.canididateSummary}
             </Heading>
-            <Heading color={"gray.text"} variant={"p7"}>
+            <Heading color={"blue.500"} variant={"p7"}>
               Work Experience
             </Heading>
             <Box
@@ -222,21 +224,21 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               flexWrap={"wrap"}
               gap={{ md: "10px", sm: "6px", base: "5px" }}
             >
-              <Heading fontWeight={600} color={"gray.text"} variant={"p4"}>
+              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
                 {selectedCandidates?.desiginatation}
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
               </Box>
 
-              <Heading fontWeight={600} color={"gray.text"} variant={"p4"}>
+              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
                 {selectedCandidates?.companyName}
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
               </Box>
 
-              <Heading fontWeight={600} color={"gray.text"} variant={"p4"}>
+              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
                 {"04/2017 - Present"}
               </Heading>
             </Box>
@@ -244,7 +246,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               fontWeight={400}
               color={"gray.text"}
               as={"p"}
-              variant={"p4"}
+              variant={"p12"}
             >
               {selectedCandidates?.jobSummary}
             </Heading>
@@ -257,21 +259,21 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               flexWrap={"wrap"}
               gap={{ md: "10px", sm: "6px", base: "5px" }}
             >
-              <Heading fontWeight={600} color={"gray.text"} variant={"p4"}>
+              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
                 {selectedCandidates?.desiginatation}
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
               </Box>
 
-              <Heading fontWeight={600} color={"gray.text"} variant={"p4"}>
+              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
                 {selectedCandidates?.companyName}
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
               </Box>
 
-              <Heading fontWeight={600} color={"gray.text"} variant={"p4"}>
+              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
                 {"04/2017 - Present"}
               </Heading>
             </Box>
@@ -279,14 +281,14 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               fontWeight={400}
               color={"gray.text"}
               as={"p"}
-              variant={"p4"}
+              variant={"p12"}
             >
               {selectedCandidates?.jobSummary}
             </Heading>
 
             <Heading
               mt={{ md: "25px", base: "10px" }}
-              color={"gray.text"}
+              color={"blue.500"}
               variant={"p7"}
             >
               Education History
@@ -300,21 +302,21 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               flexWrap={"wrap"}
               gap={{ md: "10px", sm: "6px", base: "5px" }}
             >
-              <Heading fontWeight={600} color={"gray.text"} variant={"p4"}>
+              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
                 {selectedCandidates?.diploma}
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
               </Box>
 
-              <Heading fontWeight={600} color={"gray.text"} variant={"p4"}>
+              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
                 {selectedCandidates?.schoolName}
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
               </Box>
 
-              <Heading fontWeight={600} color={"gray.text"} variant={"p4"}>
+              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
                 Currently Enrolled
               </Heading>
             </Box>
@@ -322,10 +324,72 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               fontWeight={400}
               color={"gray.text"}
               as={"p"}
-              variant={"p4"}
+              variant={"p12"}
             >
               {selectedCandidates?.educationSummary}
             </Heading>
+            <Heading
+              mt={{ md: "25px", base: "10px" }}
+              color={"blue.500"}
+              variant={"p7"}
+            >
+              Skills
+            </Heading>
+
+            <Box
+              display={"flex"}
+              mt={"12px"}
+              alignItems={"center"}
+              flexWrap={"wrap"}
+            >
+              {selectedCandidates?.skills?.map((item) => {
+                return (
+                  <Box mr={{ md: "18px", base: "14px" }} mb={"10px"}>
+                    <Chip
+                     label={item.name} />
+                  </Box>
+                );
+              })}
+            </Box>
+
+            <Heading
+              mt={{ md: "25px", base: "10px" }}
+              color={"blue.500"}
+              variant={"p7"}
+            >
+              
+              Certification
+
+            </Heading>
+            <Box
+              mt={{ md: "21px", base: "5px" }}
+              // mb={{ md: "10px", base: "3px" }}
+              mb={"10px"}
+              display={"flex"}
+              alignItems={"center"}
+              flexWrap={"wrap"}
+              gap={{ md: "10px", sm: "6px", base: "5px" }}
+            >
+              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+              Walter Payton College Preparatory High School
+              </Heading>
+              <Box fontSize={{ sm: "14px", base: "8px" }}>
+                <GoDotFill style={{ color: "#D9D9D9" }} />
+              </Box>
+
+              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+              September 2017 - July 2023
+              </Heading>
+              <Box fontSize={{ sm: "14px", base: "8px" }}>
+                <GoDotFill style={{ color: "#D9D9D9" }} />
+              </Box>
+
+              <Heading  whiteSpace={"pre-wrap"} fontWeight={600} color={"gray.text"} variant={"p12"}>
+              Certificate Verification ID: 
+              2f8ae5bfaa4c46dc3bba77655130f32a
+              </Heading>
+            </Box>
+     
           </Box>
         </Box>
       </Box>

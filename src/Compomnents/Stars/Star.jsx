@@ -8,13 +8,12 @@ const Star = ({ star, width }) => {
       display={"flex"}
       gap={{ md: "3px", base: "1px" }}
       alignItems={"center"}
-      
     >
       {star?.map((item, index) => {
         return (
           <Image
             key={index}
-            width={width ? width : { md: "22px", base: "17px" }}
+            width={width ? width : "15px"}
             src={startIcon.src}
           />
         );

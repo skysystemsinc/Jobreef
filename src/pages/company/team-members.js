@@ -1,5 +1,4 @@
 import CompanyDasboard from "@/Compomnents/Layout/DasboardLayout";
-import PaginatedTable from "@/Compomnents/MembersTable/MembersTable";
 import TeamMembers from "@/Compomnents/TeamMembers/TeamMembers";
 
 import { Box, Button, Flex } from "@chakra-ui/react";
@@ -11,7 +10,9 @@ const TeamMemeber = () => {
   return (
     <>
       <CompanyDasboard>
-        <Box display={"flex"} px={{md:"4px" , base:"5px"}}  justifyContent={"center"}>
+        <Box 
+        // position={"relative"} top={"0px"} zIndex={2}
+          display={"flex"} px={{md:"21px" , base:"5px"}}  justifyContent={"center"}>
           <TeamMembers />
         </Box>
       </CompanyDasboard>

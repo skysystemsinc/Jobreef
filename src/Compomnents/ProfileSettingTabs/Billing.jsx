@@ -21,8 +21,13 @@ const Billing = () => {
   const [readOnly, setreadOnly] = useState(true);
   const router = useRouter();
   return (
-    <Box minH={"52vh"} display={"flex"} alignItems={"flex-end"} justifyContent={"center"} mt={{ md: "91px", lg: "60px", base: "40px" }}>
-
+    <Box
+      minH={"58vh"}
+      display={"flex"}
+      alignItems={"flex-end"}
+      justifyContent={"center"}
+      mt={{ md: "91px", lg: "60px", base: "40px" }}
+    >
       <Box
         display={"flex"}
         justifyContent={"center"}
@@ -34,7 +39,7 @@ const Billing = () => {
       >
         {isEdit ? (
           <>
-                  <Button
+            <Button
               onClick={() => {
                 setisEdit(false);
                 setreadOnly(true);
@@ -52,7 +57,6 @@ const Billing = () => {
             >
               Save
             </Button>
-    
           </>
         ) : (
           <Button

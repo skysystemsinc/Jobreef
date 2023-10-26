@@ -15,7 +15,7 @@ const SignUpLayout = ({
     <Box>
       <Image
         // width={isSmallerThe500 ? "200px" : "250px"}
-        width={{ md: "35%", base: "29%" }}
+        width={{ md: "36%", base: "29%" }}
         src={leftPic}
         position={"absolute"}
         top={"0px"}
@@ -46,7 +46,7 @@ const SignUpLayout = ({
           variant={"h1"}
           display={"flex"}
           alignItems={"center"}
-          gap={"23px"}
+          gap={"19px"}
           mb={{ "2xl": "30px", base: "16px" }}
         >
           {tittle} {icon ? icon : ""}{" "}
@@ -54,7 +54,7 @@ const SignUpLayout = ({
         <Heading
           display={"flex"}
           alignItems={"center"}
-          gap={"13px"}
+          gap={"10px"}
           variant={"h1"}
         >
           {subtitle}

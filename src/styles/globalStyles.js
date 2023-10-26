@@ -101,7 +101,7 @@ const globalStyles = {
   stepperContainter: {
     width: {
       md: "450px",
-      base: "90%",
+      base: "100%",
     },
     // flexDir: "row !important",
 

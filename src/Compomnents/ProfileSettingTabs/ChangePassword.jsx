@@ -8,7 +8,7 @@ const ChangePassword = () => {
     newPassword: "",
     confirmPassword: "",
   });
-  console.log("change password" , state)
+  console.log("change password", state);
   const inputRef = useRef();
   const [isEdit, setisEdit] = useState(false);
 
@@ -31,11 +31,8 @@ const ChangePassword = () => {
     <Box
       display={"flex"}
       justifyContent={"center"}
-      minH={"50vh"}
       flexDirection={"column"}
       alignItems={"center"}
-      //   mt={{ md: "140px", base: "70px" }}
-      mb={{ md: "50px", base: "30px" }}
     >
       {isEdit ? (
         <Box width={{ md: "564px", base: "100%" }}>
@@ -97,6 +94,9 @@ const ChangePassword = () => {
         </Box>
       ) : (
         <Box
+          minHeight={"58vh"}
+          // border={"1px solid red"}
+          mt={{ md: "50px", base: "40px" }}
           // mt={{ md: "0px", base: "40px" }}
           width={{ md: "564px", base: "100%" }}
         >
@@ -123,14 +123,14 @@ const ChangePassword = () => {
         </Box>
       )}
 
-      <Box
-        display={"flex"}
-        justifyContent={"center"}
-        gap={{ md: "20px", base: "10px" }}
-        // my={{ md: "96px", base: "20px" }}
-        mt={{ md: "80px", base: "60px" }}
-      >
-        {isEdit ? (
+      {isEdit ? (
+        <Box
+          display={"flex"}
+          justifyContent={"center"}
+          gap={{ md: "20px", base: "10px" }}
+          // my={{ md: "96px", base: "20px" }}
+          mt={{ md: "80px", base: "60px" }}
+        >
           <>
             <Button onClick={handleCancel} variant="outline-blue">
               Cancel
@@ -139,8 +139,8 @@ const ChangePassword = () => {
               Save
             </Button>
           </>
-        ) : null}
-      </Box>
+        </Box>
+      ) : null}
     </Box>
   );
 };

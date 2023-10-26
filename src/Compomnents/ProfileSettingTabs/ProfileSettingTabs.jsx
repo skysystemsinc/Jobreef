@@ -26,7 +26,7 @@ const ProfileSettingTabs = ({ company }) => {
   let [tabIndex, setTabIndex] = useState(0);
   return (
     <>
-      <BottomWaveImage />
+    
 
       <Tabs
         onChange={(index) => {

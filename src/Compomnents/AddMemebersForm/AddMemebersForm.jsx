@@ -28,21 +28,22 @@ const AddMemebersForm = () => {
     role: "",
   });
   const handleSend = async () => {
+    console.log("runn send")
     try {
-      const response = await axios("/api/company/teamMember", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: State,
-      });
-      console.log("team ", response);
+      // const response = await axios("/api/company/teamMember", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   data: State,
+      // });
+      // console.log("team ", response);
       router.push("/company/team-members")
     } catch (error) {}
   };
 
   return (
-    <Box minH={"70vh"} width={{ md: "70%", base: "100%" }}>
+    <Box minHeight={"82vh"} width={{ md: "70%", base: "100%" }} px={"10px"}>
       <Heading
         textAlign={"center"}
         m={{ md: "42px 0px 40px 0px", base: "0px 0px 30px 0px" }}

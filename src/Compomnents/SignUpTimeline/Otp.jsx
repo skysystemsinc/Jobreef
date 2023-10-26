@@ -48,7 +48,7 @@ const Otp = ({ text, State, setState }) => {
         </PinInput>
       </HStack>
 
-      <Box mt={"49px"}>
+      <Box mt={"26px"}>
         <Link
           _hover={{ textDecoration: "none" }}
           variant={"blue-link"}

@@ -30,8 +30,7 @@ const CertificationForm = ({
   ];
   return (
     <Box
-      mt={{ md: "50px", lg: "60px", base: "20px" }}
-      width={{ xl: "70%", sm: "100%" }}
+    mt={{ md: "30px", base: "16px" }} width={{ lg: "60%", base: "100%" }}
     >
       {/* <Image src={profile.src} /> */}
 
