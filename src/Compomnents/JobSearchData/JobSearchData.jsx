@@ -47,7 +47,8 @@ const JobSearchData = () => {
               color={"black"}
               type="text"
               variant="bg-input"
-              placeholder="Search for Jobs Companies and Keywords"
+              placeholder="Search for Jobs, Companies, and Keywords"
+              _placeholder={{ color: "rgba(0, 0, 0, 0.6)" }}
               marginRight="2"
               onChange={(e) => setHandleCompanyEntry(e.target.value)}
               bg={"gray.200"}
@@ -69,8 +70,8 @@ const JobSearchData = () => {
               color={"black"}
               type="text"
               variant="bg-input"
-
-              placeholder="Search By Location e.g remote"
+              placeholder="Search by Location e.g. “remote”"
+              _placeholder={{ color: "rgba(0, 0, 0, 0.6)" }}
               marginRight="2"
               bg={"gray.200"}
               onChange={(e) => setHandleLocationEntry(e.target.value)}

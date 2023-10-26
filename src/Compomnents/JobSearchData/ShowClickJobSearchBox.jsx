@@ -4,6 +4,7 @@ import ComponentMyChip from "../../Compomnents/ComponentMyChip/ComponentMyChip";
 import microsoft from "@/assets/Images/microsoft.svg";
 import EmptyVector from "../../assets/Images/EmptyVector.svg";
 import cross from "../../assets/Images/cross.svg";
+// import "./scrollbar.css"; 
 import {
   Box,
   Button,
@@ -20,29 +21,29 @@ import {
 } from "@chakra-ui/react";
 import LoginModal from "../LoginModal/LoginModal";
 
-const tempDataArray = [
-  {
-    imageurl: "",
-    title: "Senior System's Design Engineer",
-    name: "Microsoft",
-    tags: "Urgently Hiring",
-    location: "Redmond, Washington State",
-    Salary: "150,000$",
-    EmploymentType: "Full-Time",
-    Experience: 3,
-    ApplicationDeadline: "07/31/2023",
-    DesiredSkills: [
-      "Technical knowledge",
-      "System Architecture",
-      "Risk Management",
-      "Project Management",
-      "Quality Focus",
-      "Q/A Testing",
-      "LeaderShip",
-      "Product Design",
-    ],
-  },
-];
+// const tempDataArray = [
+//   {
+//     imageurl: "",
+//     title: "Senior System's Design Engineer",
+//     name: "Microsoft",
+//     tags: "Urgently Hiring",
+//     location: "Redmond, Washington State",
+//     Salary: "150,000$",
+//     EmploymentType: "Full-Time",
+//     Experience: 3,
+//     ApplicationDeadline: "07/31/2023",
+//     DesiredSkills: [
+//       "Technical knowledge",
+//       "System Architecture",
+//       "Risk Management",
+//       "Project Management",
+//       "Quality Focus",
+//       "Q/A Testing",
+//       "LeaderShip",
+//       "Product Design",
+//     ],
+//   },
+// ];
 
 const text = [
   {
@@ -57,27 +58,40 @@ const text = [
     value:
       "System Design and Architecture: Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability.",
   },
+  {
+    value:
+      "System Design and Architecture: Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability.",
+  },
+  {
+    value:
+      "System Design and Architecture: Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability.",
+  },
+  {
+    value:
+      "System Design and Architecture: Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability.",
+  },
+  {
+    value:
+      "System Design and Architecture: Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability.",
+  },
+  {
+    value:
+      "System Design and Architecture: Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability.",
+  },
+  {
+    value:
+      "System Design and Architecture: Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability.",
+  },
 ];
 
-const text2 = [
-  {
-    value: "Bachelor's or Master's degree in Engineering or a related field.",
-  },
-  {
-    value: "Bachelor's or Master's degree in Engineering or a related field.",
-  },
-  {
-    value: "Bachelor's or Master's degree in Engineering or a related field.",
-  },
-];
 
 const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box flex={4}>
+    <Box flex={4} >
       <LoginModal open={isOpen} onClose={onClose} />
-      <Box
+      <Box  
         p={{ sm: "20px", base: "12px" }}
         width={"100%"}
         borderRadius={"8px"}
@@ -87,6 +101,19 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
         mb={10}
         borderWidth={1}
         borderColor="gray.100"
+        height={'100vh'}
+        className="scrollableBox"
+        overflowY= "scroll"
+        sx={{
+          '&::-webkit-scrollbar': {
+            width: '5px',
+            borderRadius: '8px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: "#797979",
+            borderRadius: '30px',
+          },
+        }}   
       >
         <Box
           display={"flex"}
@@ -96,6 +123,7 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
           flexWrap={{ xl: "nowrap", base: "wrap" }}
           borderColor={"gray.400"}
           pb={{ lg: "20px", base: "10px" }}
+          
         >
           <Box
             display={"flex"}

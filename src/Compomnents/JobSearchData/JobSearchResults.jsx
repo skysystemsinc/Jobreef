@@ -28,8 +28,10 @@ import ShowClickJobSearchBox from "./ShowClickJobSearchBox";
 
 import ShowCheckBoxes from "./ShowCheckBoxes";
 
+
 const JobSearchResults = () => {
   const [selectedValues, setSelectedValues] = useState([]);
+  const [temp,settemp] = useState([]);
   const [tempObject, setTempObject] = useState();
   //Temporary Button Later on need to be deleted
   const [toggle, settoggle] = useState("false");
@@ -37,7 +39,8 @@ const JobSearchResults = () => {
   const handleCheckboxChange = (value) => {
     if (selectedValues.includes(value)) {
       setSelectedValues(selectedValues.filter((v) => v !== value));
-    } else {
+    } 
+    else {
       setSelectedValues([...selectedValues, value]);
     }
   };
@@ -57,8 +60,10 @@ const JobSearchResults = () => {
         gap={5}
       >
         <ShowCheckBoxes
-          selectedValues={selectedValues}
+          selectedValues={selectedValues} 
           handleCheckboxChange={handleCheckboxChange}
+          temp={temp}
+          settemp={settemp}
         />
 
         <Box flex={3} flexWrap={"wrap"}>
@@ -86,13 +91,23 @@ const JobSearchResults = () => {
               );
             })}
           </Box>
-          <Box>
-            <NewJobSearchBox
+          <Box display={{lg:"block",sm:"block"}}>
+            {toggle ? (<NewJobSearchBox
               setTempObject={setTempObject}
               selectedValues={selectedValues}
               toggle={toggle}
               settoggle={settoggle}
-            />
+            />) : (
+              <Box display={{lg:"block",sm:"none"}}>
+                <NewJobSearchBox
+                  setTempObject={setTempObject}
+                  selectedValues={selectedValues}
+                  toggle={toggle}
+                  settoggle={settoggle}
+                />
+              </Box> 
+            )
+            }
           </Box>
         </Box>
         {toggle ? (

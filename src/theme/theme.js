@@ -2,6 +2,28 @@ import { extendTheme } from "@chakra-ui/react";
 
 import { StepsTheme as Steps } from "chakra-ui-steps";
 import { Nunito } from "next/font/google";
+
+// theme.js
+
+const customStyles = {
+  scrollableBox: {
+    overflowY: "scroll",
+    scrollbarWidth: "none",
+    "&::-webkit-scrollbar": {
+      width: "6px", // You can adjust the width
+    },
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: "#2CA5C3", // Customize the thumb color
+      borderRadius: "6px", // You can adjust the border radius
+    },
+    "&::-webkit-scrollbar-track": {
+      backgroundColor: "#ffffff", // Customize the track color
+    },
+  },
+};
+
+
+
 const nunito = Nunito({
   weight: ["200", "300", "400", "500", "600", "700", "900"],
   display: "swap",
@@ -26,7 +48,7 @@ const colors = {
     100: "#BBBBC7",
     200: "#F7F9FB",
     300: "#D9D9D9",
-    400: "#79797966",
+    400: "#797979",
     500: "#EBEBEB",
     600: "#494949",
     700: "#AFAFAF",
