@@ -38,12 +38,20 @@ export default function Home() {
   const handleLogin = () => {
     if (state.email == "company@jobreef.com" || state.password == "123456789") {
       router.push("/company/profile-setting");
-    } else if (
-      state.email == "employee@jobreef.com" ||
-      state.password == "123456789"
-    ) {
+    }
+    // if (state.email == "company@jobreef.com" || state.password == "123456789") {
+    //   router.push("/candidate/profile-setting");
+    // } 
+    
+    else {
       router.push("/candidate/profile-setting");
     }
+    // else if (
+    //   state.email == "employee@jobreef.com" ||
+    //   state.password == "123456789"
+    // ) {
+    //   router.push("/candidate/profile-setting");
+    // }
   };
   return (
     <>
