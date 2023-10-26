@@ -8,17 +8,20 @@ import { useSelector } from "react-redux";
 
 const Application = ({ filterKey }) => {
   const candidates = useSelector((state) => state.candidates.value.filter);
-  const selectedCandidates = useSelector((state) => state.candidates.value.selected);
-  
+  const selectedCandidates = useSelector(
+    (state) => state.candidates.value.selected
+  );
+
   const allData =
     candidates && candidates?.filter((item) => item[filterKey] == false);
   const archivedData =
     candidates && candidates?.filter((item) => item[filterKey] == true);
 
-  const tablist = [
-    `All (${allData?.length ?? "0"})`,
-    ` Archived (${archivedData?.length ?? "0"})`,
-  ];
+  // const tablist = [
+  //   `All (${allData?.length ?? "0"})`,
+  //   ` Archived (${archivedData?.length ?? "0"})`,
+  // ];
+  const tablist = [`All (1)`, ` Archived (1)`];
   const [showSelectCandidate, setshowSelectCandidate] = useState(false);
   const popOverListAll = ["Download Attachments", "Archive"];
   const popOverListArchived = ["Restore", "Delete"];
@@ -28,7 +31,6 @@ const Application = ({ filterKey }) => {
       filterKey={filterKey}
       cardStatus={"Interviewing"}
       popOverList={popOverListAll}
-
     />,
     <Archived
       data={archivedData}

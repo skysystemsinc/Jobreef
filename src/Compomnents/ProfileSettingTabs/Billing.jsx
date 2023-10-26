@@ -22,7 +22,7 @@ const Billing = () => {
   const router = useRouter();
   return (
     <Box
-      minH={"59vh"}
+      minH={"58vh"}
       display={"flex"}
       alignItems={"flex-end"}
       justifyContent={"center"}

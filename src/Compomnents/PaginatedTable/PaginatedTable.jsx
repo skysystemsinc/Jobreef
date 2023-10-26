@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import bottomTringle from "@/assets/Images/bottomTringle.svg";
 import topTringle from "@/assets/Images/topTringle.svg";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import globalStyles from "@/styles/globalStyles";
 import arrow_right from "@/assets/Images/arrow-right.svg";
 import arrow_left from "@/assets/Images/arrow-left.svg";
@@ -30,17 +30,33 @@ const PaginatedTable = ({
   onPageChange,
 }) => {
   const startIndex = (currentPage - 1) * pageSize;
-  const endIndex = currentPage * pageSize;
+  // const endIndex = currentPage * pageSize;
+  const [sorting, setSorting] = useState({ key: "name", ascending: true });
+  const endIndex = Math.min(currentPage * pageSize, data.length);
 
   const paginatedData = data.slice(startIndex, endIndex);
-
+  const [tableData, settableData] = useState(paginatedData);
   const activeStyle = {
     backgroundColor: "transparent",
     border: "1px solid",
     borderColor: "blue.500",
     color: "blue.500",
   };
+  useEffect(() => {
+    const tableCopy = [...tableData];
 
+    const sortedTable = tableCopy.sort((a, b) => {
+      return a[sorting.key]?.localeCompare(b[sorting.key]);
+    });
+
+    settableData(
+      sorting.ascending ? sortedTable : sortedTable.reverse()
+    );
+  }, [ sorting]);
+
+  function applySorting(key, ascending) {
+    setSorting({ key: key, ascending: ascending });
+  }
   return (
     <Box
       boxShadow="0px 2px 15px 0px rgba(0, 0, 0, 0.06)"
@@ -62,33 +78,48 @@ const PaginatedTable = ({
       >
         <Table variant="custome-table">
           <Thead>
-            <Tr>
-              {columns.map((item, ind) => {
-                return (
-                  <Th key={ind} className="nintoFont">
-                    <Box display={"flex"} alignItems={"center"} gap={"10px"}>
-                      {item}
-                      <Box className="vertical-divider"></Box>
-                      {ind == 0 ? (
-                        <>
-                          <Box
-                            display={"flex"}
-                            alignItems={"center"}
-                            gap={"7px"}
-                          >
-                            <Image src={bottomTringle.src} width={"13px"} />
-                            <Image src={topTringle.src} width={"13px"} />
-                          </Box>
-                        </>
-                      ) : null}
-                    </Box>
-                  </Th>
-                );
-              })}
-            </Tr>
+            {columns.map((item, ind) => {
+              return (
+                <Tr key={ind}>
+                  {keys.map((key, ind) => (
+                    <Th key={ind} className="nintoFont">
+                      <Box display={"flex"} alignItems={"center"} gap={"10px"}>
+                        {item[key]}
+                        <Box className="vertical-divider"></Box>
+                        {item[key] == "Candidates" ? (
+                          <>
+                            <Box
+                              display={"flex"}
+                              alignItems={"center"}
+                              gap={"7px"}
+                            >
+                              {sorting.ascending ? (
+                                <Image
+                                  onClick={() => applySorting(key, false)}
+                                  cursor={"pointer"}
+                                  src={bottomTringle.src}
+                                  width={"13px"}
+                                />
+                              ) : (
+                                <Image
+                                  onClick={() => applySorting(key, true)}
+                                  cursor={"pointer"}
+                                  src={topTringle.src}
+                                  width={"13px"}
+                                />
+                              )}
+                            </Box>
+                          </>
+                        ) : null}
+                      </Box>
+                    </Th>
+                  ))}
+                </Tr>
+              );
+            })}
           </Thead>
           <Tbody>
-            {paginatedData.map((item, ind) => {
+            {tableData.map((item, ind) => {
               return (
                 <Tr key={ind}>
                   {keys.map((key, ind) => (
@@ -110,9 +141,10 @@ const PaginatedTable = ({
         mt={"20px"}
         mb={"17px"}
         pt={"15px"}
+        flexWrap={"wrap"}
+        gap={{ sm: "0px", base: "20px" }}
         borderTop={"1px solid "}
         bg={"white.100"}
-        
         borderColor={"gray.500"}
         // color={"blue.500"}
       >
@@ -122,26 +154,23 @@ const PaginatedTable = ({
           } Entries`}
         </Heading>
         <Box
+          flexWrap={"wrap"}
           display={"flex"}
           alignItems={"center"}
+          justifyContent={"flex-end"}
+          width={{ md: "max-content", base: "100%" }}
           gap={{ md: "10px", base: "3px" }}
         >
           <Image
             _disabled={currentPage == totalPages}
             onClick={() => onPageChange(currentPage - 1)}
-            cursor={"progress"}
+            cursor={"pointer"}
             width={{ md: "22px", base: "16px" }}
             src={arrow_right.src}
           />
 
           {Array.from({ length: totalPages }, (_, index) => index + 1).map(
             (page, index) => {
-              console.log(
-                "page === index ",
-                currentPage,
-                index + 1,
-                currentPage === index
-              );
               return (
                 <Button
                   key={index}
@@ -160,23 +189,6 @@ const PaginatedTable = ({
             }
           )}
 
-          {/* <Button
-            variant={"square-btn"}
-            border={"2px solid "}
-            borderColor={"blue.500"}
-            color={"#fff"}
-            bg="blue.500"
-          >
-            1
-          </Button>
-          <Button
-            variant={"square-btn"}
-            border={"2px solid "}
-            borderColor={"blue.500"}
-            color={"blue.500"}
-          >
-            2
-          </Button> */}
           <Image
             _disabled={currentPage == totalPages}
             onClick={() => onPageChange(currentPage + 1)}

@@ -59,17 +59,17 @@ export const SignUpTimeline = ({ candidate, variant }) => {
       if (!company) {
         router.push("/candidate/registration");
       } else {
-        const response = await fetch("/api/company/userProfile", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ...State,
-          }),
-        });
-        const data = await response.json();
-        console.log(data);
+        // const response = await fetch("/api/company/userProfile", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify({
+        //     ...State,
+        //   }),
+        // });
+        // const data = await response.json();
+        // console.log(data);
         router.push("/registration");
       }
     } else {

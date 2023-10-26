@@ -31,7 +31,9 @@ const colors = {
     600: "#494949",
     700: "#AFAFAF",
     800: "#FEFEFE",
+    lightBorder:"#cdcdcd",
     light: "#797979",
+
     text: "#4A4A4A",
   },
   blue: {
@@ -402,7 +404,7 @@ const components = {
         color: "blue.500",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
-        fontSize: ["13px", "13px", "16px", "16px", "16px", "17px"],
+        fontSize: ["13px", "13px", "15px", "15px", "15px", "15px"],
       },
       p8: {
         color: "gray.text",
@@ -422,7 +424,7 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
 
-        fontSize: ["13px", "14px", "16px", "16px", "16px", "18px"],
+        fontSize: ["13px", "14px", "14px", "14px", "14px", "14px"],
       },
       p11: {
         // color: "gray.text",
@@ -496,7 +498,7 @@ const components = {
                 margin: "10px 0px",
                 padding: { md: "20px 20px", base: "17px 10px" },
                 // fontSize: "15px",
-                fontSize: { md: "15px", base: "13px" },
+                fontSize: { md: "14px", base: "13px" },
 
                 fontWeight: 400,
                 color: "black.200",
@@ -507,6 +509,7 @@ const components = {
             bg: "blue.500",
             tr: { position: "relative", top: "-21px" },
             th: {
+              
               padding: { md: "23px 30px", base: "16px 20px" },
               fontSize: { md: "15px", base: "12px" },
               position: "relative",
@@ -525,7 +528,7 @@ const components = {
               },
               textTransform: "capitalize",
 
-              fontWeight: 500,
+              fontWeight: 400,
               color: "white.100",
             },
           },
