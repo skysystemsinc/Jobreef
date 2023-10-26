@@ -13,6 +13,10 @@ import { useSelector } from "react-redux";
 import moment from "moment";
 import Chip from "../Chip/Chip";
 import { HiOutlineMail } from "react-icons/hi";
+import { MdKeyboardArrowLeft } from "react-icons/md";
+
+import { HiArrowDownTray, HiMiniArrowDownTray } from "react-icons/hi2";
+import { FiChevronDown } from "react-icons/fi";
 
 const SelectedCandidateCard = ({ matchCandidate }) => {
   const selectedCandidates = useSelector(
@@ -25,8 +29,9 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
   };
   const hoverStyle = {
     cursor: "pointer",
-    "&:hover": {
-      color: "blue.500F",
+    _hover: {
+      color: "blue.500",
+      cursor: "pointer",
     },
   };
   return (
@@ -120,37 +125,70 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               flexWrap={"wrap"}
               justifyContent={"flex-end"}
             >
-              <Box display={"flex"} alignItems={"center"} gap={"3px"}>
-                <Image
+              <Box
+                className="hoverStyle"
+                display={"flex"}
+                alignItems={"center"}
+                gap={"3px"}
+              >
+                <MdKeyboardArrowLeft fontSize={"20px"} />
+                {/* <Image
                   src={black_arrow_left.src}
                   width={{ md: "24px", base: "20px" }}
                   sx={iconWidth}
-                />
-                <Heading color={"black.100"} variant={"p10"}>
+                /> */}
+                <Heading color={"black.100"} sx={hoverStyle} variant={"p10"}>
                   Return
                 </Heading>
               </Box>
               {matchCandidate ? (
-                <Box display={"flex"} alignItems={"center"} gap={"7px"}>
+                <Box
+                  className="hoverStyle"
+                  display={"flex"}
+                  alignItems={"center"}
+                  gap={"7px"}
+                >
                   {/* <Image sx={iconWidth} src={black_email.src} /> */}
-                  <HiOutlineMail />
-                  <Heading  color={"black.100"} variant={"p10"} sx={hoverStyle}>
+                  <HiOutlineMail className="hoverStyle" />
+                  <Heading
+                    color={"black.100"}
+                    variant={"p10"}
+                    sx={{
+                      _hover: {
+                        color: "blue.500",
+                        cursor: "pointer",
+                      },
+                    }}
+                  >
                     Invite to Apply
                   </Heading>
                 </Box>
               ) : (
-                <Box display={"flex"} alignItems={"center"} gap={"7px"}>
-                  <Image sx={iconWidth} src={black_email.src} />
-                  <Heading color={"black.100"} variant={"p10"}>
+                <Box
+                  className="hoverStyle"
+                  display={"flex"}
+                  alignItems={"center"}
+                  gap={"7px"}
+                >
+                  {/* <Image sx={iconWidth} src={black_email.src} /> */}
+                  <HiArrowDownTray className="hoverStyle" />
+
+                  <Heading color={"black.100"} sx={hoverStyle} variant={"p10"}>
                     Send Message
                   </Heading>
                 </Box>
               )}
 
               {matchCandidate ? null : (
-                <Box display={"flex"} alignItems={"center"} gap={"7px"}>
-                  <Image sx={iconWidth} src={download.src} />
-                  <Heading color={"black.100"} variant={"p10"}>
+                <Box
+                  className="hoverStyle"
+                  display={"flex"}
+                  alignItems={"center"}
+                  gap={"7px"}
+                >
+                  {/* <Image sx={iconWidth} src={download.src} /> */}
+                  <HiMiniArrowDownTray />
+                  <Heading color={"black.100"} sx={hoverStyle} variant={"p10"}>
                     Download Attachments
                   </Heading>
                 </Box>
@@ -167,22 +205,24 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
                 mt={"7px"}
               >
                 <Box
+                  className="hoverStyle"
                   display={"flex"}
                   alignItems={"center"}
                   justifyContent={"flex-end"}
                   gap={"3px"}
                 >
-                  <Heading color={"black.100"} variant={"p10"}>
+                  <Heading sx={hoverStyle} color={"black.100"} variant={"p10"}>
                     Status:{" "}
                     <Box as="span" fontWeight={700}>
                       Read
                     </Box>
                   </Heading>
-                  <Image
+                  <FiChevronDown/>
+                  {/* <Image
                     width={"20px"}
                     sx={iconWidth}
                     src={black_arrow_down.src}
-                  />
+                  /> */}
                 </Box>
                 <Box
                   display={{ lg: "none", base: "flex" }}

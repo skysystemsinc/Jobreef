@@ -31,3 +31,6 @@
 body {
   color: black !important;
 }
+.hoverStyle:hover {
+  color: #2ca5c3;
+}

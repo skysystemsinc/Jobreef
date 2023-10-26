@@ -22,8 +22,10 @@ import LabelInput from "@/Compomnents/LabelInput/LabelInput";
 import { FcGoogle } from "react-icons/fc";
 import { color } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const router = useRouter();
   const [isSmallerThe500] = useMediaQuery("(max-width: 500px)");
   const [state, setstate] = useState({
     email: "",
@@ -33,6 +35,16 @@ export default function Home() {
     localStorage.clear();
   }, []);
 
+  const handleLogin = () => {
+    if (state.email == "company@jobreef.com" || state.password == "123456789") {
+      router.push("/company/profile-setting");
+    } else if (
+      state.email == "employee@jobreef.com" ||
+      state.password == "123456789"
+    ) {
+      router.push("/candidate/profile-setting");
+    }
+  };
   return (
     <>
       <Image
@@ -154,6 +166,7 @@ export default function Home() {
             alignItems={"center"}
           >
             <Button
+              onClick={handleLogin}
               marginBottom={"15px"}
               className="nintoFont"
               variant={"blue-btn"}
