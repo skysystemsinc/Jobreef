@@ -20,6 +20,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import LoginModal from "../LoginModal/LoginModal";
+import ApplyForThisJobModal from "./ApplyForThisJobModal";
 
 // const tempDataArray = [
 //   {
@@ -90,7 +91,8 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
 
   return (
     <Box flex={4} >
-      <LoginModal open={isOpen} onClose={onClose} />
+      {/* <LoginModal open={isOpen} onClose={onClose} /> */}
+      <ApplyForThisJobModal open={isOpen} onClose={onclose} object={object}/>
       <Box  
         p={{ sm: "20px", base: "12px" }}
         width={"100%"}

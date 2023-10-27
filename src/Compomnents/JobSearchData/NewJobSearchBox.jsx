@@ -227,7 +227,6 @@ const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject,Data }) 
                       flexWrap={"wrap"}
                       gap={"10px"}
                       alignItems={"center"}
-                      // backgroundColor={"green"}
                     >
                       <Heading color={"gray.text"} variant={"p4"}>
                         {object.Salary}
