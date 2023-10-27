@@ -1,4 +1,4 @@
-import React,{useContext,useState} from "react";
+import React,{useContext,useEffect,useState} from "react";
 import { GoDotFill } from "react-icons/go";
 import ComponentMyChip from "../../Compomnents/ComponentMyChip/ComponentMyChip";
 import microsoft from "@/assets/Images/microsoft.svg";
@@ -20,7 +20,33 @@ import {
     useBreakpointValue,
   } from "@chakra-ui/react";
 
-const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject }) => {
+  var Data = DataArray;
+  const originalData = [...DataArray];
+
+const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject,Data }) => {
+  
+  const [dataToDisplay, setDataToDisplay] = useState(Data);
+
+
+  // useEffect(()=>{
+  //     if (selectedValues.includes("Date Posted"))
+  //     { 
+  //       Data.sort((a, b) => {
+  //         const dateA = parse(a.ApplicationDeadline, 'MM/dd/yyyy', new Date());
+  //         const dateB = parse(b.ApplicationDeadline, 'MM/dd/yyyy', new Date()); 
+  //         // return compareAsc(dateA, dateB);
+  //         return compareDesc(dateA, dateB);
+  //       });  
+  //       setDataToDisplay(Data)
+  //     }
+  //     else
+  //     {
+  //         Data = [...originalData]
+  //         setDataToDisplay(Data)
+  //         console.log(Data) 
+  //     }
+    
+  // },[selectedValues])
 
   const {
       company,
@@ -37,21 +63,20 @@ const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject }) => {
     var length = 0;
     return(
       <>
-    {DataArray.map((object,index) => {  
-
+    {dataToDisplay.map((object,index) => {  
     //Search by Company Name
     const foundCompanyName = searchEntryCompany === '' ? true : object.name.toLowerCase().includes(searchEntryCompany.toLowerCase())
     //Search by Location
     const foundLocationName = searchEntryLocation === '' ? true : object.location.toLowerCase().includes(searchEntryLocation.toLowerCase());
 
-
+    const foundJobModel = selectedValues.includes(object.JobModel)
     const foundEmploymentType = selectedValues.length === 0 || selectedValues.includes(object.EmploymentType);
     const foundExpType = selectedValues.some((Experience) => {
       const match = Experience.match(/(\d+) - (\d+) Years/);
       if (match) {
         const startYear = parseInt(match[1], 10);
         const endYear = parseInt(match[2], 10);
-        return startYear <= object.Experience && object.Experience <= endYear;
+        return startYear <= object.Experience && object.Experience < endYear;
       }
     });
     
@@ -81,6 +106,14 @@ const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject }) => {
       return false;
     });
     
+    
+    if(selectedValues.includes("Date Posted") || foundEmploymentType || foundExpType || foundSalType || foundJobModel  )
+    {
+        length+=1
+    }
+    else 
+        return null
+
     if(foundCompanyName)
     {
     }
@@ -89,13 +122,6 @@ const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject }) => {
     {
     }
     else return null
-    
-    if(foundEmploymentType || foundExpType || foundSalType)
-    {
-        length+=1
-    }
-    else 
-        return null
     
     return(
     <Box
@@ -106,12 +132,18 @@ const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject }) => {
             border={"1px solid"}
             mb={10}
             borderWidth={1}
-            borderColor="gray.100"
-            onClick={()=>{settoggle(false);setTempObject(object)}}
+            borderColor="gray.400"
+            onClick={()=>{
+              settoggle(false);
+              setTempObject(object)
+            }}
+            style={{transition: "all 0.4s ease"}}
             _hover={{
               cursor: "pointer",
               boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)",
-              border: '1px solid #2CA5C3'
+              border: '1px solid #2CA5C3',
+              transition: "all 0.4s ease",
+              transform: "scale(1.01)"
             }}
           >
             <Box
@@ -205,7 +237,7 @@ const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject }) => {
                       <Heading color={"gray.text"} variant={"p4"}>
                         {object.EmploymentType}
                       </Heading>
-                      <Box fontSize={{ sm: "14px", base: "8px" }}>
+                      <Box fontSize={{ sm: "14px", base: "8px" }} whiteSpace="nowrap">
                         <GoDotFill style={{ color: "#D9D9D9" }} />
                       </Box>
                       <Heading color={"gray.text"} variant={"p4"}>

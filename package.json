@@ -17,6 +17,7 @@
     "@wojtekmaj/react-daterange-picker": "^5.4.3",
     "axios": "^1.5.1",
     "chakra-ui-steps": "^2.1.0",
+    "date-fns": "^2.30.0",
     "framer-motion": "^10.16.4",
     "moment": "^2.29.4",
     "next": "13.5.4",

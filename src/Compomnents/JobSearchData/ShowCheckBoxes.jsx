@@ -21,11 +21,12 @@ import {
 import globalStyles from "@/styles/globalStyles";
 import CheckBoxDropDown from "../CheckBoxDropDown/CheckBoxDropDown";
 
-const ShowCheckBoxes = ({ selectedValues, handleCheckboxChange }) => {
+const ShowCheckBoxes = ({ selectedValues, handleCheckboxChange,temp,settemp,DataSort }) => {
   const listItme = ["Date Applied", "Relevance"];
   const listItme2 = ["New", "Read", "Interviewing", "Closed"];
   const listItme3 = ["Masters Degree or Higher", "Bachelor’s Degree or Higher", "Associate Degree or Higher", "Closed"];
   const listItme4 = ["Associate Degree or Higher", "System Architecture", "Product Design", "Leadership"];
+  
   return (
     <>
       <Box
@@ -35,12 +36,14 @@ const ShowCheckBoxes = ({ selectedValues, handleCheckboxChange }) => {
         flexDirection={"column"}
         flexWrap={"wrap"}
         bg={"white.100"}
+        borderRadius={50}
+        // backgroundColor={"green"}
       >
         <Box
           width="100%"
-          borderRadius={"8px"}
+          borderRadius={'8px'}
           borderWidth={1}
-          borderColor="gray.100"
+          borderColor="gray.400"
           display={"flex"}
           flexDirection={"column"}
           flexWrap={"wrap"}
@@ -48,8 +51,8 @@ const ShowCheckBoxes = ({ selectedValues, handleCheckboxChange }) => {
           {checkboxes.map((object, index) => {
             return (
               <Box
-                borderWidth={1}
-                borderTopColor={index > 0 ? "gray.100" : "transparent"}
+                borderTopWidth={1}
+                borderTopColor={index > 0 ? "gray.400" : "transparent"}
                 width="100%"
                 p={4}
                 key={Math.random()}
@@ -68,6 +71,34 @@ const ShowCheckBoxes = ({ selectedValues, handleCheckboxChange }) => {
                 </Heading>
                 {object.values &&
                   object.values.map((value) => {
+                    if(object.heading == "Sort Jobs By")
+                    {
+                      return (
+                        <Checkbox
+                          mb={"8px"}
+                          borderRadius={"10px"}
+                          size="md"
+                          borderColor={"gray.text"}
+                          colorScheme="blue"
+                          rounded={"sm"}
+                          type="checkbox"
+                          sx={globalStyles.checkBoxStyle}
+                          isChecked={selectedValues.includes(value.key)}
+                          onChange={(e) => 
+                            {
+                              handleCheckboxChange(value.key,e.target.value)
+                              DataSort(e.target.checked)
+                            }
+                          }
+                        >
+                          <Heading
+                            variant={"p4"}
+                          >
+                            {value.key}
+                          </Heading>
+                        </Checkbox>
+                      );        
+                    }
                     return (
                       <Checkbox
                         mb={"8px"}
@@ -76,33 +107,17 @@ const ShowCheckBoxes = ({ selectedValues, handleCheckboxChange }) => {
                         borderColor={"gray.text"}
                         colorScheme="blue"
                         rounded={"sm"}
+                        type="checkbox"
                         sx={globalStyles.checkBoxStyle}
-                        checked={selectedValues.includes(value.key)}
-                        onChange={() => handleCheckboxChange(value.key)}
+                        isChecked={selectedValues.includes(value.key)}
+                        onChange={(e) => handleCheckboxChange(value.key,e.target.value)}
                       >
                         <Heading
-                          // color={checkBoxs.relevance ? "blue.500" : "black.200"}
                           variant={"p4"}
                         >
                           {value.key}
-
-                          {/* Relevance */}
                         </Heading>
                       </Checkbox>
-                      // <Box display={"flex"} gap={"3px"} alignItems={"center"} key={Math.random()}>
-                      //   <input
-                      //     type="checkbox"
-                      //     name=""
-                      //     id={value.key}
-                      //     style={{ marginRight: 10 }}
-                      //     checked={selectedValues.includes(value.key)}
-                      //     onChange={() => handleCheckboxChange(value.key)}
-                      //   />
-
-                      //   <label htmlFor={value.key} style={{ color: "black" }}>
-                      //       {value.key}
-                      //     </label>
-                      // </Box>
                     );
                   })}
               </Box>

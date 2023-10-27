@@ -7,7 +7,7 @@ const BottomWaveImage = () => {
     <Image
       src={waves.src}
       position={"absolute"}
-      bottom={"0px"}
+      bottom={"0px"} 
       left={"0px"}
       width={"100%"}
       zIndex={-1}

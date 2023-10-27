@@ -42,7 +42,7 @@ const ShowPreviousSearches = () => {
       width="100%"
       flex={1.25}
     >
-      <Box borderWidth={1} borderColor="gray.100" borderRadius={"8px"}>
+      <Box borderWidth={1} borderColor="gray.400" borderRadius={"8px"}>
         <Heading mt={"22px"} ml={2} mb={2} variant={"p10"}>
           Previous Searches
         </Heading>
