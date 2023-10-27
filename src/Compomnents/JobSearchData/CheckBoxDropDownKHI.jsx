@@ -11,7 +11,7 @@ import {
   import React from "react";
   import { BiFilter, BiSortDown } from "react-icons/bi";
   import { TiTick } from "react-icons/ti";
-  const CheckBoxDropDownKHI = ({ label, listItme }) => {
+  const CheckBoxDropDownKHI = ({ object, label  }) => {
     
     return (
       <Menu closeOnSelect={false}>
@@ -31,23 +31,23 @@ import {
             <BiFilter fontSize={"20px"} />{" "}
             <Heading fontWeight={400} color={"white.100"} variant={"p10"}>
               {" "}
-              {label}{" "}
+              {object.heading }{" "}
             </Heading>
           </Box>
         </MenuButton>
         <MenuList minWidth="max-content">
           {/* <MenuDivider /> */}
           <MenuOptionGroup title="" type="checkbox">
-            {listItme?.map((item , index) => {
+            {object.values?.map((item , index) => {
               return (
                 <MenuItemOption
                 key={index}
                   sx={{ "& .chakra-menu__icon":{color:"#000"} }}
-                  value={item}
+                  value={item.key}
                 >
                   <Heading fontWeight={400} variant={"p10"}>
                     {" "}
-                    {item}{" "}
+                    {item.key}{" "}
                   </Heading>
                 </MenuItemOption>
               );

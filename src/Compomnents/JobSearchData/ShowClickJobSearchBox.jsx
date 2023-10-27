@@ -89,7 +89,7 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
         borderColor="gray.400"
         height={'100vh'}
         className="scrollableBox"
-        overflowY= "scroll"
+        overflowY= "auto"
         sx={{
           '&::-webkit-scrollbar': {
             width: '5px',

@@ -85,6 +85,7 @@ const JobSearchResults = () => {
         flexWrap={"wrap"}
         margin={{ md: 10, base: "0px" }}
         gap={5}
+        
       >
         <ShowCheckBoxes
           selectedValues={selectedValues} 
@@ -94,7 +95,7 @@ const JobSearchResults = () => {
           DataSort={DataSort}
         />
 
-        <Box flex={3} flexWrap={"wrap"}>
+        <Box flex={{base:3, lg:3, md:3}} flexWrap={"wrap"} >
           <Box display={"flex"} alignItems={"center"} flexWrap={"wrap"}>
             {selectedValues.map((val) => {
               return (
@@ -119,7 +120,7 @@ const JobSearchResults = () => {
               );
             })}
           </Box>
-          <Box display={{lg:"block",sm:"block"}}>
+          <Box display={{lg:"block",sm:"block",base:"block"}} >
             {toggle ? (<NewJobSearchBox
               setTempObject={setTempObject}
               selectedValues={selectedValues}
@@ -127,7 +128,7 @@ const JobSearchResults = () => {
               settoggle={settoggle}
               Data={Data}
             />) : (
-              <Box display={{lg:"block",sm:"none"}}>
+              <Box display={{lg:"block",sm:"none",base:"none"}}>
                 <NewJobSearchBox
                   setTempObject={setTempObject}
                   selectedValues={selectedValues}
@@ -140,15 +141,19 @@ const JobSearchResults = () => {
             }
           </Box>
         </Box>
-        {toggle ? (
-          <ShowPreviousSearches />
-        ) : (
-          <ShowClickJobSearchBox
-            toggle={toggle}
-            settoggle={settoggle}
-            object={tempObject}
-          />
-        )}
+        {/* <Box flex={{base:0, sm:0, md:0,lg:0}}> */}
+          {toggle ? (
+            <ShowPreviousSearches />
+          ) : (
+            <Box display="flex" flex={4} >
+              <ShowClickJobSearchBox
+                toggle={toggle}
+                settoggle={settoggle}
+                object={tempObject}
+              />
+            </Box>
+          )}
+        {/* </Box> */}
       </Box>
     </Box>
   );
