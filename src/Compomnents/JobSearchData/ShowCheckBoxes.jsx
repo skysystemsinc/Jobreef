@@ -83,10 +83,11 @@ const ShowCheckBoxes = ({ selectedValues, handleCheckboxChange,temp,settemp,Data
                           rounded={"sm"}
                           type="checkbox"
                           sx={globalStyles.checkBoxStyle}
-                          isChecked={selectedValues.includes(value.key)}
+                          checked={selectedValues.includes(value.key)}
+                          // isChecked={selectedValues.includes(value.key)}
                           onChange={(e) => 
                             {
-                              handleCheckboxChange(value.key,e.target.value)
+                              // handleCheckboxChange(value.key,e.target.value)
                               DataSort(e.target.checked)
                             }
                           }
@@ -109,8 +110,8 @@ const ShowCheckBoxes = ({ selectedValues, handleCheckboxChange,temp,settemp,Data
                         rounded={"sm"}
                         type="checkbox"
                         sx={globalStyles.checkBoxStyle}
-                        isChecked={selectedValues.includes(value.key)}
-                        onChange={(e) => handleCheckboxChange(value.key,e.target.value)}
+                        // isChecked={selectedValues.includes(value.key)}
+                        // onChange={(e) => handleCheckboxChange(value.key,e.target.value)}
                       >
                         <Heading
                           variant={"p4"}

@@ -2,24 +2,24 @@ export const checkboxes = [
     {
       heading: "Sort Jobs By",
       values: [
-        { key: "Date Posted", value: "Date Posted" },
-        { key: "Relevance", value: "Relevance" },
+        { key: "Date Posted", value: "Date Posted" , checked:false },
+        { key: "Relevance", value: "Relevance" ,  checked:false},
       ],
     },
     {
       heading: "Job Model",
       values: [
-        { key: "Hybrid", value: "Hybrid" },
-        { key: "Remote", value: "Remote" },
-        { key: "On-Site", value: "On-Site" },
+        { key: "Hybrid", value: "Hybrid" , checked:false },
+        { key: "Remote", value: "Remote"  ,  checked:false},
+        { key: "On-Site", value: "On-Site" ,  checked:false},
       ],
     },
     {
       heading: "Employment Type",
       values: [
-        { key: "Full-Time", value: "Full-Time" },
-        { key: "Part-Time", value: "Part-Time" },
-        { key: "Contract", value: "Contract" },
+        { key: "Full-Time", value: "Full-Time" ,  checked:false},
+        { key: "Part-Time", value: "Part-Time" ,  checked:false},
+        { key: "Contract", value: "Contract" ,  checked:false},
         { key: "Internship", value: "Internship" },
       ],
     },

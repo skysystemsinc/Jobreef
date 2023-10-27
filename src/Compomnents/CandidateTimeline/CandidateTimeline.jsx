@@ -92,7 +92,13 @@ export const CandidateTimeline = ({ candidate, variant }) => {
   };
   const stepTyle = {
     // flexDir: "row !important",
-    width: { md: "80%", base: "96%" },
+    width: {
+      md: "90%",
+      base: "100%",
+    },
+    // width: { md: "440px", base: "96%" },
+
+    // flexDir: "row !important",
 
     "& .cui-steps__horizontal-step-container ": {
       span: {
@@ -134,24 +140,23 @@ export const CandidateTimeline = ({ candidate, variant }) => {
         },
       },
     },
+
     "& .cui-steps__horizontal-step": {
       _active: {
         "&::after": {
           bg: "blue.500 !important",
         },
       },
+
       "&::after": {
         bg: "gray.light !important",
         height: "3px !important",
-        // border: { "2xl": "1px solid red" },
         width: {
-          "2xl": "83% !important",
-          md: "80% !important",
-          sm: "77% !important",
-          base: "60% !important",
+          md: "81% !important",
+          sm: "85% !important",
+          base: "78% !important",
         },
         top: { sm: "17px   !important", base: "15px   !important" },
-
         marginInlineEnd: "0px !important",
         marginInlineStart: "0px !important",
       },
@@ -190,9 +195,9 @@ export const CandidateTimeline = ({ candidate, variant }) => {
       />
       <Steps
         responsive={false}
-        sx={stepTyle}
-        // sx={globalStyles.stepperContainter}
-
+        // sx={stepTyle}
+        // sx={stepTyle}
+        sx={globalStyles.stepperContainter2}
         variant={"circles-alt"}
         colorScheme="blue"
         trackColor="blue.500"

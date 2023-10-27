@@ -61,6 +61,7 @@ const PersonalInfo = ({ State, setState }) => {
         />
       </Box>
       <Box display={"flex"} alignItems={"center"} gap={"10px"}>
+  
         <Checkbox
           borderRadius={"10px"}
           onChange={handleSelectCompany}

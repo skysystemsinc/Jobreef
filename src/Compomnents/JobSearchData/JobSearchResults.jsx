@@ -33,7 +33,9 @@ import ShowCheckBoxes from "./ShowCheckBoxes";
 
 const JobSearchResults = () => {
   const originalArray = DataArray
-  const [selectedValues, setSelectedValues] = useState([]);
+  const [selectedValues, setSelectedValues] = useState([
+    "Date Posted"
+  ]);
   const [temp,settemp] = useState([]);
   const [tempObject, setTempObject] = useState();
   //Temporary Button Later on need to be deleted
@@ -41,6 +43,7 @@ const JobSearchResults = () => {
   const [Data,setData] = useState(DataArray)
 
   const handleCheckboxChange = (value) => {
+    console.log("value", value , selectedValues)
     if (selectedValues.includes(value)) {
       setSelectedValues(selectedValues.filter((v) => v !== value));
     } 
