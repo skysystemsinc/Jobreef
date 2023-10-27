@@ -52,9 +52,9 @@ export default function Header({ candidate }) {
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
         minH={"60px"}
-        py={3}
+        py={{ md: 3 , base:0}}
         // pb={{ base: 4, "2xl": 7 }}
-        px={{ "2xl": 8, base: 3 }}
+        px={{ "2xl": 8, base: 2 }}
         // position={"relative"}
         // top={"0px"}
 

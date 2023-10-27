@@ -31,7 +31,7 @@ const colors = {
     600: "#494949",
     700: "#AFAFAF",
     800: "#FEFEFE",
-    lightBorder:"#cdcdcd",
+    lightBorder: "#cdcdcd",
     light: "#797979",
 
     text: "#4A4A4A",
@@ -72,9 +72,9 @@ const components = {
         height: { sm: "38px", base: "36px" },
         // width: { md: "200px", sm: "180px", base: "168px" },
         width: {
-          xl: "150px",
-          md: "150px",
-          lg: "140px",
+          
+          md: "139px",
+          
           sm: "130px",
           base: "110px",
         },
@@ -97,9 +97,9 @@ const components = {
 
         // width: { md: "200px", base: "160px" },
         width: {
-          xl: "150px",
-          md: "150px",
-          lg: "140px",
+          
+          md: "139px",
+          
           sm: "130px",
           base: "110px",
         },
@@ -236,7 +236,7 @@ const components = {
     variants: {
       "outline-dropdown": {
         field: {
-          height: { "2xl": "58px", base: "40px" },
+          height: "40px",
 
           borderRadius: "8px",
           color: "gray.100 !important",
@@ -407,7 +407,6 @@ const components = {
         fontSize: ["13px", "13px", "15px", "15px", "15px", "15px"],
       },
       p8: {
-
         color: "gray.text",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 400,
@@ -510,7 +509,6 @@ const components = {
             bg: "blue.500",
             tr: { position: "relative", top: "-21px" },
             th: {
-              
               padding: { md: "23px 30px", base: "16px 20px" },
               fontSize: { md: "15px", base: "12px" },
               position: "relative",

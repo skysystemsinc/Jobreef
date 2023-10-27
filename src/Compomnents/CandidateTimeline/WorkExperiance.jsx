@@ -5,32 +5,36 @@ import TextCard from "../TextCard/TextCard";
 import ExperianceForm from "./ExperianceForm";
 import ExperianceCard from "../ExperianceCard/ExperianceCard";
 
-const WorkExperiance = ({addExperiance , setaddExperiance}) => {
-  const [experianceData, setexperianceData] = useState([]);
+const WorkExperiance = ({ state, setState }) => {
+  // const [experianceData, setexperianceData] = useState([]);
+
   // const experianceData = [];
 
   return (
     <Box>
-      {addExperiance ? (
+      {state.addExperience || state.edit ? (
         <Box display={"flex"} justifyContent={"center"}>
           <ExperianceForm
-            setexperianceData={setexperianceData}
-            setaddExperiance={setaddExperiance}
+            state={state}
+            setState={setState}
+            // setaddExperiance={setaddExperiance}
           />
         </Box>
       ) : (
-        <Box  width={"100%"} mx={"auto"}>
-          <ExperianceCard />
+        <Box width={"100%"} mx={"auto"}>
+          <ExperianceCard state={state} setState={setState} />
 
           <Flex justifyContent={"center"}>
             <Button
               onClick={() => {
-                setaddExperiance(true);
+                // setaddExperiance(true);
+                setState((prev) => {
+                  return { ...prev, addExperience: true };
+                });
               }}
               width="max-content"
               px={"10px"}
               mb={{ md: "38px", base: "20px" }}
-              
               variant={"blue-btn"}
             >
               Add New Experience

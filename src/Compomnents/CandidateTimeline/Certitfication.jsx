@@ -9,7 +9,7 @@ import EducationCard from "../EducationCard/EducationCard";
 import CertificationForm from "./CertificateForm";
 import CeritifcateCard from "../CeritifcateCard/CeritifcateCard";
 
-const Certification = ({ addCertificate, setCertificate }) => {
+const Certification = ({ state, setState }) => {
   // const [addCertificate, setCertificate] = useState(false);
   const [experianceData, setexperianceData] = useState([]);
   // const experianceData = [];
@@ -19,22 +19,22 @@ const Certification = ({ addCertificate, setCertificate }) => {
   };
   return (
     <Box>
-      {addCertificate ? (
+      {state.addCertificate || state.edit ? (
         <Box display={"flex"} justifyContent={"center"}>
-          <CertificationForm
-            setexperianceData={setexperianceData}
-            setaddExperiance={setCertificate}
-          />
+          <CertificationForm state={state} setState={setState} />
         </Box>
       ) : (
-        <Box  width={"100%"} mx={"auto"}>
-          <CeritifcateCard   headingStyle={style}/>
-          <CeritifcateCard   headingStyle={style}/>
+        <Box width={"100%"} mx={"auto"}>
+          <CeritifcateCard  state={state} setState={setState} headingStyle={style} />
+          <CeritifcateCard  state={state} setState={setState} headingStyle={style} />
+          
 
           <Flex justifyContent={"center"}>
             <Button
               onClick={() => {
-                setCertificate(true);
+                setState((prev) => {
+                  return { ...prev, addCertificate: true };
+                });
               }}
               width="max-content"
               px={"20px"}

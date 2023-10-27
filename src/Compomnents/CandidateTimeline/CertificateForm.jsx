@@ -9,7 +9,7 @@ import {
   Image,
   Input,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import profile from "@/assets/Images/profile.svg";
 import edit from "@/assets/Images/edit.svg";
 import InputWrapper from "../InputWrapper/InputWrapper";
@@ -17,13 +17,19 @@ import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
 import UploadBox from "../UploadBox/UploadBox";
 import globalStyles from "@/styles/globalStyles";
-const CertificationForm = ({
-  setexperianceData,
-  setaddExperiance,
-  setTabIndex,
-  tabIndex,
-}) => {
+const CertificationForm = ({ state, setState }) => {
+  const [certification, setCertification] = useState({
+    certificateName: "",
+    organizationName: "",
+    certificateId: "",
+    issuedOn: new Date(),
+    validUntil: new Date(),
+  });
   const router = useRouter();
+  console.log("certification", certification)
+
+  const [readOnly, setReadOnly] = useState(false);
+
   const uploadList = [
     "Please upload in minimum 1000x1000 resolution, if in image format",
     "The acceptable formats of the copy are .PDF, .JPEG or .PNG",
@@ -36,6 +42,12 @@ const CertificationForm = ({
       <Box mt={"0px"}>
         <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
           <LabelInput
+            state={certification.certificateName}
+            setState={(e) => {
+              setCertification((prev) => {
+                return { ...prev, certificateName: e.target.value };
+              });
+            }}
             labelVariant={"label"}
             type="text"
             variant={"bg-input"}
@@ -43,17 +55,29 @@ const CertificationForm = ({
             label={"Name of Certificate"}
           />
           <LabelInput
+            state={certification.organizationName}
+            setState={(e) => {
+              setCertification((prev) => {
+                return { ...prev, organizationName: e.target.value };
+              });
+            }}
             labelVariant={"label"}
             type="text"
             variant={"bg-input"}
-            placeholder="Enter the name of issuing organisation"
-            label={"Issuing Organisation"}
+            placeholder="Enter the name of issuing organization"
+            label={"Issuing Organization"}
           />
         </InputWrapper>
 
-        <Box border={"1px solid white"} >
+        <Box border={"1px solid white"}>
           <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
             <LabelInput
+              state={certification.certificateId}
+              setState={(e) => {
+                setCertification((prev) => {
+                  return { ...prev, certificateId: e.target.value };
+                });
+              }}
               labelVariant={"label"}
               type="text"
               variant={"bg-input"}
@@ -62,6 +86,12 @@ const CertificationForm = ({
             />
 
             <LabelInput
+              state={certification.issuedOn}
+              setState={(e) => {
+                setCertification((prev) => {
+                  return { ...prev, issuedOn: e };
+                });
+              }}
               labelVariant={"label"}
               type="date"
               variant={"bg-input"}
@@ -83,10 +113,17 @@ const CertificationForm = ({
         <Box width={{ xl: "48%", base: "100%" }} position={"relative"}>
           <Box>
             <LabelInput
+              state={certification.validUntil}
+              setState={(e) => {
+                setCertification((prev) => {
+                  return { ...prev, validUntil: e };
+                });
+              }}
               labelVariant={"label"}
               type="date"
               variant={"bg-input"}
               placeholder="MM/DD/YYYY"
+              readOnly={readOnly}
               label={"Valid Until"}
             />
           </Box>
@@ -100,9 +137,16 @@ const CertificationForm = ({
             <Checkbox
               // borderRadius={"10px"}
               // defaultChecked
-
+              checked={state.currentlyWorking}
+              onChange={(e) => {
+                e.target.checked == true
+                  ? setReadOnly(true)
+                  : setReadOnly(false);
+                setState((prev) => {
+                  return { ...prev, currentlyWorking: e.target.checked };
+                });
+              }}
               borderColor={"black.200"}
-
               size="md"
               rounded={"base"}
               colorScheme="blue"
@@ -116,8 +160,8 @@ const CertificationForm = ({
 
         <Box mt={{ md: "95px", base: "80px" }}>
           <UploadBox
-          btnLabelStyle={{padding:"0px 10px"}}
-          butLabel={"Drag & Drop"}
+            btnLabelStyle={{ padding: "0px 10px" }}
+            butLabel={"Drag & Drop"}
             list={uploadList}
             titie={"Upload Certificate in Digital Format"}
           />
@@ -132,8 +176,9 @@ const CertificationForm = ({
         >
           <Button
             onClick={() => {
-              setaddExperiance(false);
-              // tabIndex == 0 ? null : setTabIndex(--tabIndex);
+              setState((prev) => {
+                return { ...prev, addCertificate: false, edit: false };
+              });
             }}
             variant="outline-blue"
           >
@@ -142,17 +187,16 @@ const CertificationForm = ({
 
           <Button
             onClick={() => {
-              // tabIndex == 2 ? null : setTabIndex(++tabIndex);
-              // router.push("/");
-              setexperianceData([1]);
-              setaddExperiance(false);
+              setState((prev) => {
+                return { ...prev, addCertificate: false, edit: false };
+              });
             }}
             // width={{ md: "160px", lg: "200px", sm: "140px", base: "120px" }}
             width={"max-content"}
             px={{ md: "30px", base: "20px" }}
             variant={"blue-btn"}
           >
-            Save Certification
+            {state.edit ? "Update Certification" : " Save Certification"}
           </Button>
         </Box>
       </Box>

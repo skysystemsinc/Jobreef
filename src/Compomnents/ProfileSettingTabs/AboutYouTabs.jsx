@@ -136,7 +136,7 @@ const AboutYouTabs = () => {
               variant={"bg-input"}
               readOnly={readOnly}
               setreadOnly={setreadOnly}
-              dropdown={isEdit ? true : false}
+              dropdown
               placeholder="Yes"
               label={"Visible to Employers"}
             />
@@ -168,9 +168,9 @@ const AboutYouTabs = () => {
             readOnly={readOnly}
             setreadOnly={setreadOnly}
             labelVariant={"label"}
-            type="text"
+            type="number"
             variant={"bg-input"}
-            placeholder="+XX XXX XXXXXXX"
+            placeholder="Enter your phone number"
             label={"Phone Number"}
           />
         </InputWrapper>

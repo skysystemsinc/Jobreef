@@ -14,14 +14,15 @@ import {
 import canlenderIcon from "@/assets/Images/calendar.svg";
 import moment from "moment/moment";
 const DatePicker = ({
+  readOnly,
   setState,
+  defaultValue,
   state,
-
   selectRange,
 }) => {
   // const [date, setdate] = useState(new Date());
   const currentDate = moment();
-  const defaultDate = currentDate.add(30, 'days');
+  const defaultDate = currentDate.add(30, "days");
   const [isOpen, setisopen] = useState(false);
   const calenderStle = {
     // "& .react-daterange-picker__calendar-button": {
@@ -167,26 +168,26 @@ const DatePicker = ({
 
   return (
     <>
-      <Box   sx={calenderStle} position={"relative"} >
-        <Box  position={"absolute"} right={"0px"}  zIndex={4}  >
-          <DateRangePicker
-            calendarIcon={
-              <Image
-                src={canlenderIcon.src}
-                width={{ base: "18px" }}
-                mt={{ base: "7px" }}
-                marginRight={"6px"}
-              />
-            }
-            defaultValue={defaultDate.toDate()}
-            // selectRange={true}
-            // isOpen={false}
-            onChange={setState}
-            // shou
-            minDate={defaultDate.toDate()}
-            value={state}
-          />
-        </Box>
+      <Box sx={calenderStle} position={"relative"}>
+        {readOnly ? null : (
+          <Box position={"absolute"} right={"0px"} zIndex={4}>
+            <DateRangePicker
+              calendarIcon={
+                <Image
+                  src={canlenderIcon.src}
+                  width={{ base: "18px" }}
+                  mt={{ base: "7px" }}
+                  marginRight={"6px"}
+                />
+              }
+              selectRange={false}
+              defaultValue={defaultValue ? defaultDate.toDate() : false}
+              onChange={setState}
+              minDate={defaultValue ? defaultDate.toDate() : false}
+              value={state}
+            />
+          </Box>
+        )}
         <InputGroup>
           <Input
             value={moment(state).format("MM/DD/YYYY")}

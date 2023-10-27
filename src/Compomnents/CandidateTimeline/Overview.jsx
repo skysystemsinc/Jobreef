@@ -51,7 +51,7 @@ const Overview = ({ state, setState }) => {
           type="text"
           dropdow
           variant={"bg-input"}
-          placeholder="Select your City"
+          placeholder="Enter City"
           label={"City"}
         />
         <LabelInput
@@ -62,7 +62,7 @@ const Overview = ({ state, setState }) => {
             });
           }}
           labelVariant={"label"}
-          type="text"
+          type="number"
           variant={"bg-input"}
           placeholder="Enter your phone number"
           label={"Phone Number"}

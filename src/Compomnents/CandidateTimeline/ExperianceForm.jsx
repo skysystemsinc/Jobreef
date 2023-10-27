@@ -16,15 +16,22 @@ import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
 import globalStyles from "@/styles/globalStyles";
-const ExperianceForm = ({
-  setexperianceData,
-  setaddExperiance,
-  setTabIndex,
-  tabIndex,
-}) => {
-  const [state, setstate] = useState({
-    currentlyWorking: false,
+const ExperianceForm = ({ state, setState }) => {
+  const [readOnly, setReadOnly] = useState(false);
+  const [Experience, setExperience] = useState({
+    companyName: "",
+    designation: "",
+    stateDate: new Date(),
+    endDate: new Date(),
+    country: "",
+    state: "",
+    city: "",
+    streetAddress: "",
+    employmentType: "",
+    jobFamily: "",
+    jobSummary: "",
   });
+  
   const router = useRouter();
   return (
     <Box mt={{ md: "13px" }} width={"100%"}>
@@ -33,6 +40,12 @@ const ExperianceForm = ({
       <Box mt={"0px"}>
         <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
           <LabelInput
+            state={Experience.companyName}
+            setState={(e) => {
+              setExperience((prev) => {
+                return { ...prev, companyName: e.target.value };
+              });
+            }}
             labelVariant={"label"}
             type="text"
             variant={"bg-input"}
@@ -41,6 +54,12 @@ const ExperianceForm = ({
           />
           <LabelInput
             labelVariant={"label"}
+            state={Experience.designation}
+            setState={(e) => {
+              setExperience((prev) => {
+                return { ...prev, designation: e.target.value };
+              });
+            }}
             type="text"
             variant={"bg-input"}
             placeholder="Enter your designation "
@@ -51,6 +70,13 @@ const ExperianceForm = ({
         <Box border={"1px solid white"} mb={"30px"}>
           <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
             <LabelInput
+              state={Experience.stateDate}
+              setState={(e) => {
+                setExperience((prev) => {
+                  return { ...prev, stateDate: e };
+                });
+              }}
+              defaultValue={false}
               labelVariant={"label"}
               type="date"
               variant={"bg-input"}
@@ -61,9 +87,17 @@ const ExperianceForm = ({
             <Box width={"100%"} position={"relative"}>
               <Box>
                 <LabelInput
+                  state={Experience.endDate}
+                  setState={(e) => {
+                    setExperience((prev) => {
+                      return { ...prev, endDate: e };
+                    });
+                  }}
+                  defaultValue={false}
                   labelVariant={"label"}
                   type="date"
                   variant={"bg-input"}
+                  readOnly={readOnly}
                   placeholder="MM/DD/YYYY"
                   label={"Ending Date"}
                 />
@@ -71,7 +105,7 @@ const ExperianceForm = ({
               <Box
                 display={"flex"}
                 position={"absolute"}
-                bottom={"-40px"}
+                bottom={"-30px"}
                 gap={"8px"}
                 alignItems={"center"}
               >
@@ -79,12 +113,14 @@ const ExperianceForm = ({
                   // borderRadius={"10px"}
                   checked={state.currentlyWorking}
                   onChange={(e) => {
-                    setstate((prev) => {
+                    e.target.checked == true
+                      ? setReadOnly(true)
+                      : setReadOnly(false);
+                    setState((prev) => {
                       return { ...prev, currentlyWorking: e.target.checked };
                     });
                   }}
                   sx={globalStyles.checkBoxStyle}
-
                   borderColor={
                     state.currentlyWorking ? "blue.500" : "black.200"
                   }
@@ -102,6 +138,12 @@ const ExperianceForm = ({
         </Box>
         <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
           <LabelInput
+            state={Experience.country}
+            setState={(e) => {
+              setExperience((prev) => {
+                return { ...prev, country: e.target.value };
+              });
+            }}
             labelVariant={"label"}
             type="date"
             variant={"bg-input"}
@@ -110,6 +152,12 @@ const ExperianceForm = ({
             label={"Country"}
           />
           <LabelInput
+            state={Experience.state}
+            setState={(e) => {
+              setExperience((prev) => {
+                return { ...prev, state: e.target.value };
+              });
+            }}
             labelVariant={"label"}
             type="date"
             dropdown
@@ -120,14 +168,25 @@ const ExperianceForm = ({
         </InputWrapper>
         <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
           <LabelInput
+            state={Experience.city}
+            setState={(e) => {
+              setExperience((prev) => {
+                return { ...prev, city: e.target.value };
+              });
+            }}
             labelVariant={"label"}
-            type="date"
+            type="text"
             variant={"bg-input"}
-            placeholder="Select your home country"
-            dropdown
+            placeholder="Enter City"
             label={"City"}
           />
           <LabelInput
+            state={Experience.streetAddress}
+            setState={(e) => {
+              setExperience((prev) => {
+                return { ...prev, streetAddress: e.target.value };
+              });
+            }}
             labelVariant={"label"}
             type="text"
             variant={"bg-input"}
@@ -140,13 +199,25 @@ const ExperianceForm = ({
             labelVariant={"label"}
             type="date"
             variant={"bg-input"}
-            placeholder="Select the type of employement"
+            placeholder="Select the type of employment"
             dropdown
             label={"Employment Type"}
+            state={Experience.employmentType}
+            setState={(e) => {
+              setExperience((prev) => {
+                return { ...prev, employmentType: e.target.value };
+              });
+            }}
           />
           <LabelInput
             labelVariant={"label"}
             type="date"
+            state={Experience.jobFamily}
+            setState={(e) => {
+              setExperience((prev) => {
+                return { ...prev, jobFamily: e.target.value };
+              });
+            }}
             variant={"bg-input"}
             placeholder="Select the job family"
             dropdown
@@ -158,6 +229,12 @@ const ExperianceForm = ({
           <LabelInput
             labelVariant={"label"}
             type="text"
+            state={Experience.jobSummary}
+            setState={(e) => {
+              setExperience((prev) => {
+                return { ...prev, jobSummary: e.target.value };
+              });
+            }}
             textarea
             variant={"bg-teaxtarea"}
             placeholder="Describe what you did during this job "
@@ -173,7 +250,9 @@ const ExperianceForm = ({
         >
           <Button
             onClick={() => {
-              setaddExperiance(false);
+              setState((prev) => {
+                return { ...prev, addExperience: false, edit: false };
+              });
               // tabIndex == 0 ? null : setTabIndex(--tabIndex);
             }}
             variant="outline-blue"
@@ -183,17 +262,17 @@ const ExperianceForm = ({
 
           <Button
             onClick={() => {
-              // tabIndex == 2 ? null : setTabIndex(++tabIndex);
-              // router.push("/");
-              setexperianceData([1]);
-              setaddExperiance(false);
+              // setaddExperiance(false);
+              setState((prev) => {
+                return { ...prev, addExperience: false, edit: false };
+              });
             }}
             // width={{ md: "160px", lg: "200px", sm: "140px", base: "120px" }}
             width={"max-content"}
             px={{ md: "30px", base: "20px" }}
             variant={"blue-btn"}
           >
-            Save Eexperiance
+            {state.edit ? "Update Experience" : "Save Experience"}
           </Button>
         </Box>
       </Box>

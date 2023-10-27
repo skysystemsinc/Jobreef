@@ -1,5 +1,5 @@
 import { Box, Image } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import LabelInput from "../LabelInput/LabelInput";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import { Link } from "@chakra-ui/next-js";
@@ -9,11 +9,11 @@ import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import TextFormatting from "../TextFormatting/TextFormatting";
 
 const JobBio = ({ state, setState }) => {
+  const applicationType = ["External", "Internal"];
+  const [urlPlaceholder, seturlPlaceholder] = useState("External");
   return (
     <Box>
-       
       <InputWrapper>
-      
         <LabelInput
           state={state.jobTitle}
           setState={(e) => {
@@ -48,7 +48,7 @@ const JobBio = ({ state, setState }) => {
           state={state.applicationDeadline}
           setState={(e) => {
             setState((prev) => {
-              return { ...prev, applicationDeadline: e};
+              return { ...prev, applicationDeadline: e };
             });
           }}
           labelVariant={"label"}
@@ -73,6 +73,53 @@ const JobBio = ({ state, setState }) => {
           label={"Location Type"}
         />
       </InputWrapper>
+      <InputWrapper>
+        <LabelInput
+          state={state.applicationType.type}
+          setState={(e) => {
+            e.target.value == applicationType[0]
+              ? seturlPlaceholder("External URL")
+              : seturlPlaceholder("Internal URL");
+            setState((prev) => {
+              return {
+                ...prev,
+                applicationType: {
+                  ...prev.applicationType,
+                  type: e.target.value,
+                },
+              };
+            });
+          }}
+          labelVariant={"label"}
+          dropdownOption={applicationType}
+          type="date"
+          dropdown
+          imoptnatIcon
+          variant={"bg-input"}
+          placeholder="Select application type"
+          label={"Application Type"}
+        />
+        <LabelInput
+          state={state.applicationType.url}
+          setState={(e) => {
+            setState((prev) => {
+              return {
+                ...prev,
+                applicationType: {
+                  ...prev.applicationType,
+                  url: e.target.value,
+                },
+              };
+            });
+          }}
+          labelVariant={"label"}
+          type="text"
+          variant={"bg-input"}
+          
+          placeholder="Enter URL to Redirect Candidates"
+          label={urlPlaceholder}
+        />
+      </InputWrapper>
 
       <InputWrapper>
         <LabelInput
@@ -89,7 +136,6 @@ const JobBio = ({ state, setState }) => {
           label={"Job Description*"}
         />
       </InputWrapper>
-        
     </Box>
   );
 };

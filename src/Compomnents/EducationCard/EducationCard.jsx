@@ -5,7 +5,7 @@ import { GoDotFill } from "react-icons/go";
 import { HiLocationMarker } from "react-icons/hi";
 import edit_outline from "@/assets/Images/edit_outline.svg";
 import trash from "@/assets/Images/trash.svg";
-const EducationCard = ({ headingStyle, dispableBlueCard }) => {
+const EducationCard = ({ setState, headingStyle, dispableBlueCard }) => {
   return (
     <Box
       p={{ sm: "20px", base: "12px" }}
@@ -67,8 +67,10 @@ const EducationCard = ({ headingStyle, dispableBlueCard }) => {
                 sx={headingStyle}
               >
                 {" "}
-                <HiLocationMarker style={{ color: "#4A4A4A" , fontSize:'20px'}} /> Chicago,
-                Illinois, USA
+                <HiLocationMarker
+                  style={{ color: "#4A4A4A", fontSize: "20px" }}
+                />{" "}
+                Chicago, Illinois, USA
               </Heading>
             </Box>
           </Box>
@@ -82,14 +84,40 @@ const EducationCard = ({ headingStyle, dispableBlueCard }) => {
           width={{ xl: "auto", base: "100%" }}
           gap={"20px"}
         >
-          <Box display={"flex"} alignItems={"center"} gap={"10px"}>
+          <Box
+            cursor={"pointer"}
+            onClick={() =>
+              setState((prev) => {
+                return {
+                  ...prev,
+                  edit: true,
+                };
+              })
+            }
+            display={"flex"}
+            alignItems={"center"}
+            gap={"10px"}
+          >
             <Image
               width={{ md: "17px", base: "16px" }}
               src={edit_outline.src}
             />
             <Heading variant={"p5"}>Edit</Heading>
           </Box>
-          <Box display={"flex"} alignItems={"center"} gap={"5px"}>
+          <Box
+            onClick={() =>
+              setState((prev) => {
+                return {
+                  ...prev,
+                  delete: true,
+                };
+              })
+            }
+            cursor={"pointer"}
+            display={"flex"}
+            alignItems={"center"}
+            gap={"5px"}
+          >
             <Image width={{ md: "17px", base: "16px" }} src={trash.src} />
             <Heading variant={"p5"}>Delete</Heading>
           </Box>
@@ -108,7 +136,6 @@ const EducationCard = ({ headingStyle, dispableBlueCard }) => {
           Requirements Analysis: Collaborate with stakeholders, customers, and
           cross-functional teams to gather and analyze system requirements,
           ensuring clear and unambiguous specifications. Oversee the integration
-
         </Heading>
       </Box>
     </Box>

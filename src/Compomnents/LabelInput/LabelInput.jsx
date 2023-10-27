@@ -23,6 +23,7 @@ const LabelInput = ({
   dropdownOption,
   textarea,
   iconStyle,
+  defaultValue,
   icon,
   state,
   setState,
@@ -100,7 +101,12 @@ const LabelInput = ({
           placeholder={placeholder}
         />
       ) : dropdown ? (
-        <DropDown dropdownOption={dropdownOption} state={state} setState={setState} placeholder={placeholder} />
+        <DropDown
+          dropdownOption={dropdownOption}
+          state={state}
+          setState={setState}
+          placeholder={placeholder}
+        />
       ) : passworInput ? (
         <PasswordInput
           setState={setState}
@@ -111,7 +117,12 @@ const LabelInput = ({
           variant={variant}
         />
       ) : type == "date" ? (
-        <DatePicker setState={setState} state={state} />
+        <DatePicker
+          defaultValue={defaultValue}
+          setState={setState}
+          state={state}
+          readOnly={readOnly}
+        />
       ) : (
         <Input
           ref={inputRef}

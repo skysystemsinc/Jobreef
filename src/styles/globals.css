@@ -24,6 +24,7 @@
 }
 .ql-editor.ql-blank::before {
   font-style: normal !important;
+
   color: #bbbbc7 !important;
   font-family: "Open Sans";
 }
@@ -33,4 +34,7 @@ body {
 }
 .hoverStyle:hover {
   color: #2ca5c3;
+}
+.cui-steps__step-icon-container{
+  border-color:  #2CA5C3 !important;
 }

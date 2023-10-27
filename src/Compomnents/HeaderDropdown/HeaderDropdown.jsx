@@ -64,6 +64,11 @@ const HeaderDropdown = ({ candidate }) => {
       pathname: "/candidate/my-jobs",
     },
     {
+      title: "Messages",
+      icon: <Image width={{ md: "22px", base: "19px" }} src={chat.src} />,
+      pathname: "#",
+    },
+    {
       title: "Profile Settings",
       icon: <Image width={{ md: "22px", base: "19px" }} src={profile.src} />,
       pathname: "/candidate/profile-setting",

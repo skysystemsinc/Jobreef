@@ -5,7 +5,7 @@ import { GoDotFill } from "react-icons/go";
 import { HiLocationMarker } from "react-icons/hi";
 import edit_outline from "@/assets/Images/edit_outline.svg";
 import trash from "@/assets/Images/trash.svg";
-const ExperianceCard = () => {
+const ExperianceCard = ({ state, setState }) => {
   return (
     <Box
       p={{ sm: "16px", base: "12px" }}
@@ -80,14 +80,40 @@ const ExperianceCard = () => {
           width={{ xl: "auto", base: "100%" }}
           gap={"18px"}
         >
-          <Box display={"flex"} alignItems={"center"} gap={"10px"}>
+          <Box
+            onClick={() =>
+              setState((prev) => {
+                return {
+                  ...prev,
+                  edit: true,
+                };
+              })
+            }
+            cursor={"pointer"}
+            display={"flex"}
+            alignItems={"center"}
+            gap={"10px"}
+          >
             <Image
               width={{ md: "17px", base: "15px" }}
               src={edit_outline.src}
             />
             <Heading variant={"p5"}>Edit</Heading>
           </Box>
-          <Box display={"flex"} alignItems={"center"} gap={"5px"}>
+          <Box
+            onClick={() =>
+              setState((prev) => {
+                return {
+                  ...prev,
+                  delete: true,
+                };
+              })
+            }
+            cursor={"pointer"}
+            display={"flex"}
+            alignItems={"center"}
+            gap={"5px"}
+          >
             <Image width={{ md: "17px", base: "15px" }} src={trash.src} />
             <Heading variant={"p5"}>Delete</Heading>
           </Box>
@@ -105,7 +131,6 @@ const ExperianceCard = () => {
           meet the project requirements, performance criteria, and scalability.
           Requirements Analysis: Collaborate with stakeholders, customers, and
           cross-functional teams to gather and analyze system requirements,
-       
         </Heading>
       </Box>
     </Box>

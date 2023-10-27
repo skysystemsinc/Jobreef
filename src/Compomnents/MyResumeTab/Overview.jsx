@@ -17,9 +17,14 @@ import { useRouter } from "next/router";
 import white_edit from "@/assets/Images/white-edit.svg";
 
 const Overview = ({ setTabIndex, tabIndex }) => {
-  const [state, setstate] = useState({
+  const [state, setState] = useState({
     readOnly: true,
     isEdit: false,
+    country: "",
+    state: "",
+    city: "",
+    number: "",
+    description: "",
   });
   const router = useRouter();
   return (
@@ -29,6 +34,12 @@ const Overview = ({ setTabIndex, tabIndex }) => {
       <Box mt={"0px"}>
         <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
           <LabelInput
+            state={state.country}
+            setState={(e) => {
+              setState((prev) => {
+                return { ...prev, country: e.target.value };
+              });
+            }}
             readOnly={state.readOnly}
             labelVariant={"label"}
             type="text"
@@ -38,6 +49,12 @@ const Overview = ({ setTabIndex, tabIndex }) => {
             label={"Country"}
           />
           <LabelInput
+            state={state.state}
+            setState={(e) => {
+              setState((prev) => {
+                return { ...prev, state: e.target.value };
+              });
+            }}
             readOnly={state.readOnly}
             labelVariant={"label"}
             type="text"
@@ -50,6 +67,12 @@ const Overview = ({ setTabIndex, tabIndex }) => {
 
         <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
           <LabelInput
+            state={state.city}
+            setState={(e) => {
+              setState((prev) => {
+                return { ...prev, city: e.target.value };
+              });
+            }}
             labelVariant={"label"}
             type="text"
             readOnly={state.readOnly}
@@ -60,6 +83,12 @@ const Overview = ({ setTabIndex, tabIndex }) => {
           <LabelInput
             readOnly={state.readOnly}
             labelVariant={"label"}
+            state={state.number}
+            setState={(e) => {
+              setState((prev) => {
+                return { ...prev, number: e.target.value };
+              });
+            }}
             type="number"
             variant={"bg-input"}
             placeholder="Enter your phone number"
@@ -68,6 +97,12 @@ const Overview = ({ setTabIndex, tabIndex }) => {
         </InputWrapper>
         {/* <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}> */}
         <LabelInput
+          state={state.description}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, description: e.target.value };
+            });
+          }}
           labelVariant={"label"}
           readOnly={state.readOnly}
           type="text"
@@ -83,7 +118,7 @@ const Overview = ({ setTabIndex, tabIndex }) => {
             <>
               <Button
                 onClick={() => {
-                  setstate((pre) => {
+                  setState((pre) => {
                     return {
                       isEdit: false,
                       readOnly: true,
@@ -96,7 +131,7 @@ const Overview = ({ setTabIndex, tabIndex }) => {
               </Button>
               <Button
                 onClick={() => {
-                  setstate((pre) => {
+                  setState((pre) => {
                     return {
                       isEdit: false,
                       readOnly: true,
@@ -111,7 +146,7 @@ const Overview = ({ setTabIndex, tabIndex }) => {
           ) : (
             <Button
               onClick={() => {
-                setstate((pre) => {
+                setState((pre) => {
                   return {
                     isEdit: true,
                     readOnly: false,

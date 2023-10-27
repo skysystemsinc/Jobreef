@@ -24,8 +24,8 @@ const DropDown = ({
         sx={style}
       >
         {dropdownOption ? (
-          dropdownOption?.map((item) => {
-            return <option value={item}>{item}</option>;
+          dropdownOption?.map((item , ind) => {
+            return <option key={ind} value={item}>{item}</option>;
           })
         ) : (
           <>

@@ -20,7 +20,7 @@ const TextCard = ({ addHandle, title, subittle, btnLable }) => {
       <Button
         onClick={addHandle}
         width="max-content"
-        px={{ md: "40px", base: "20px" }}
+        px={{ md: "25px", base: "14px" }}
         mt={{ md: "25px", base: "20px" }}
         variant={"blue-btn"}
       >

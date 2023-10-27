@@ -55,8 +55,8 @@ const ChangePassword = () => {
               labelVariant={"label"}
               type="text"
               variant={"bg-input"}
-              placeholder="Enter your Old Password"
-              label={"Enter Current Password"}
+              placeholder="Enter Current Password"
+              label={" Current Password"}
             />
           </Box>
           <Box mb={{ base: "15px" }}>
@@ -72,7 +72,7 @@ const ChangePassword = () => {
               type="text"
               variant={"bg-input"}
               placeholder="Enter New Password"
-              label={"Enter New Password"}
+              label={" New Password"}
             />
           </Box>
           <Box>
