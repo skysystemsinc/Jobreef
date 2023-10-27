@@ -9,6 +9,7 @@ function Context({ children }) {
   const [tempSearchEntryLocation,setTempSearchEntryLocation] = useState('');
   const [tempSearchEntryCompany,setTempSearchEntryCompany] = useState('');
   const [toggle,setToggle] = useState(true);
+  const [templogin, setTemplogin] = useState(false);
 
 
   const setHandleLocationEntry = (e) => {
@@ -53,6 +54,8 @@ function Context({ children }) {
     <Role_context.Provider value={{ company, setCompany,
       searchEntryLocation,
       searchEntryCompany,
+      templogin,
+      setTemplogin,
       getToggle,
       searchNow,
       setHandleCompanyEntry,

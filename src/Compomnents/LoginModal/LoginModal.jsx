@@ -13,7 +13,7 @@ const {
   } = require("@chakra-ui/react");
   const { default: NotePad } = require("../NotePad/NotePad");
   
-  function LoginModal({open , onClose}) {
+  function LoginModal({open , onClose,setTemplogin}) {
     return (
       <>
         {/* <Button onClick={onOpen}>Open Modal</Button> */}
@@ -24,15 +24,8 @@ const {
             {/* <ModalHeader>Modal Title</ModalHeader> */}
             <ModalCloseButton color={"black.100"} />
             <ModalBody px={"150px"} py={"40px"} >
-              <Login />
+              <Login setTemplogin={setTemplogin}/>
             </ModalBody>
-  
-            {/* <ModalFooter>
-              <Button colorScheme="blue" mr={3} onClick={onClose}>
-                Close
-              </Button>
-              <Button variant="ghost">Secondary Action</Button>
-            </ModalFooter> */}
           </ModalContent>
         </Modal>
       </>

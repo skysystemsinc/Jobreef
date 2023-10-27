@@ -17,12 +17,12 @@ const {
       <>
         {/* <Button onClick={onOpen}>Open Modal</Button> */}
   
-        <Modal size={"2xl"} isOpen={open} onClose={onClose}>
+        <Modal size={"xl"} isOpen={open} onClose={onClose}>
           <ModalOverlay />
           <ModalContent borderRadius={"8px"} bg={"white.100"}>
             {/* <ModalHeader>Modal Title</ModalHeader> */}
             <ModalCloseButton color={"black.100"} />
-            <ModalBody px={"150px"} py={"40px"} >
+            <ModalBody mx={'auto'}  py={"40px"} >
               <Apply object={object}/>
             </ModalBody>
           </ModalContent>

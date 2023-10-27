@@ -1,4 +1,5 @@
-import React from "react";
+import React,{useState} from "react";
+import { useContext } from "react";
 import { GoDotFill } from "react-icons/go";
 import ComponentMyChip from "../../Compomnents/ComponentMyChip/ComponentMyChip";
 import microsoft from "@/assets/Images/microsoft.svg";
@@ -21,30 +22,8 @@ import {
 } from "@chakra-ui/react";
 import LoginModal from "../LoginModal/LoginModal";
 import ApplyForThisJobModal from "./ApplyForThisJobModal";
+import { Role_context } from "../../context/context";
 
-// const tempDataArray = [
-//   {
-//     imageurl: "",
-//     title: "Senior System's Design Engineer",
-//     name: "Microsoft",
-//     tags: "Urgently Hiring",
-//     location: "Redmond, Washington State",
-//     Salary: "150,000$",
-//     EmploymentType: "Full-Time",
-//     Experience: 3,
-//     ApplicationDeadline: "07/31/2023",
-//     DesiredSkills: [
-//       "Technical knowledge",
-//       "System Architecture",
-//       "Risk Management",
-//       "Project Management",
-//       "Quality Focus",
-//       "Q/A Testing",
-//       "LeaderShip",
-//       "Product Design",
-//     ],
-//   },
-// ];
 
 const text = [
   {
@@ -88,11 +67,16 @@ const text = [
 
 const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    templogin,
+} = useContext(Role_context);
 
   return (
     <Box flex={4} >
-      {/* <LoginModal open={isOpen} onClose={onClose} /> */}
-      <ApplyForThisJobModal open={isOpen} onClose={onclose} object={object}/>
+      {templogin?(
+      <ApplyForThisJobModal open={isOpen} onClose={onClose} object={object}/>
+      ):(<LoginModal open={isOpen} onClose={onClose} />
+      )}
       <Box  
         p={{ sm: "20px", base: "12px" }}
         width={"100%"}
@@ -102,7 +86,7 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
         box-shadow="0px 4px 20px 0px rgba(0, 0, 0, 0.05)"
         mb={10}
         borderWidth={1}
-        borderColor="gray.100"
+        borderColor="gray.400"
         height={'100vh'}
         className="scrollableBox"
         overflowY= "scroll"
@@ -170,7 +154,10 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
                   width={"10px"}
                   src={cross.src}
                   marginRight={2}
-                  onClick={() => settoggle(true)}
+                  onClick={() => {
+                    settoggle(true);
+                    localStorage.setItem('myData',null)
+                  }}
                 />
               </Box>
               <Button
