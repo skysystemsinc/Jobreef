@@ -13,10 +13,13 @@ import { useSelector } from "react-redux";
 import moment from "moment";
 import Chip from "../Chip/Chip";
 import { HiOutlineMail } from "react-icons/hi";
-import { MdKeyboardArrowLeft } from "react-icons/md";
+import { MdKeyboardArrowLeft, MdOutlineKeyboardArrowDown } from "react-icons/md";
 
 import { HiArrowDownTray, HiMiniArrowDownTray } from "react-icons/hi2";
 import { FiChevronDown } from "react-icons/fi";
+import { AiOutlineStar } from "react-icons/ai";
+import { BsStarFill } from "react-icons/bs";
+import { PiDownloadSimpleBold } from "react-icons/pi";
 
 const SelectedCandidateCard = ({ matchCandidate }) => {
   const selectedCandidates = useSelector(
@@ -38,26 +41,34 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
     <>
       <NotePadModal open={isOpen} onClose={onClose} />
       <Box
-        bg={"gray.200"}
-        borderRadius={"8px"}
-        border={"none "}
-        borderColor={"gray.light"}
-        p={{ md: "20px 30px", base: "20px 5px 20px 15px" }}
+        display={"flex"}
+        justifyContent={"space-between"}
+        borderBottom={"1px solid"}
+        alignItems={"flex-start"}
+        // flexWrap={"wrap"}
+        flexDirection={{ xl: "row", base:"column-reverse"}}
+        gap="10px"
+        // flexWrap={"wrap"}
+        // flexDirection={{ "2xl": "row", base: "column" }}
+        borderColor={"gray.lightBorder"}
+        pb={"7px"}
       >
-        <Box
-          display={"flex"}
-          justifyContent={"space-between"}
-          borderBottom={"1px solid"}
-          alignItems={"flex-start"}
-          // flexWrap={"wrap"}
-          flexDirection={{ "2xl": "row", base: "column" }}
-          borderColor={"gray.lightBorder"}
-          pb={"7px"}
-        >
+        <Box>
           <Box
+            width={"250px"}
             display={"flex"}
             alignItems={{ sm: "center", base: "flex-start" }}
             gap={"10px"}
+            flexDirection={"column"}
+            justifyContent={"center"}
+            // border={"1px solid red"}
+            borderRadius={"10px"}
+            textAlign={"center"}
+            padding={"20px"}
+            boxShadow={
+              " 0px 1px 2px 0px rgba(16, 24, 40, 0.10), 0px 1px 3px 0px rgba(16, 24, 40, 0.10)"
+            }
+
             // border={"2px solid red"}
             // width={"50%"}
           >
@@ -84,16 +95,29 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
                 <Box
                   display={"flex"}
                   alignItems={"center"}
+                  flexDirection={"column"}
+                  justifyContent={"center"}
                   gap={{ md: "10px", base: "6px" }}
                   flexWrap={"wrap"}
                 >
-                  <Star star={[1, 2, 3, 4, 5]} />
+                  {/* <Star star={[1, 2, 3, 4, 5]} /> */}
                   <Box
-                    width={"2px"}
-                    height={{ md: "15px", base: "13px" }}
-                    mt={{ md: "0px", base: "2px" }}
-                    bg={"gray.light"}
-                  />
+                    mt={"5px"}
+                    display={"flex"}
+                    gap={{ md: "3px", base: "1px" }}
+                    alignItems={"center"}
+                  >
+                    <BsStarFill color="#f4b024" fontSize={"12px"} />
+                    <BsStarFill color="#f4b024" fontSize={"12px"} />
+                    <BsStarFill color="#f4b024" fontSize={"12px"} />
+                    <BsStarFill color="#f4b024" fontSize={"12px"} />
+                  </Box>
+                  {/* <Box
+                  width={"2px"}
+                  height={{ md: "15px", base: "13px" }}
+                  mt={{ md: "0px", base: "2px" }}
+                  bg={"gray.light"}
+                /> */}
                   <Heading
                     fontWeight={400}
                     color={"gray.text"}
@@ -107,335 +131,264 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
               </Box>
             </Box>
           </Box>
+
           <Box
+            bg={"gray.200"}
+            border={"1px solid"}
+            borderColor={"blue.500"}
             display={"flex"}
+            borderRadius={"10px"}
+            alignItems={"center"}
+            my={"10px"}
+            gap={"10px"}
+            padding={"15px 0px"}
             justifyContent={"center"}
-            flexDirection={"column"}
-            alignItems={"flex-end"}
-            // flexWrap={"wrap"}
-            // border={"1px solid red"}
-            mt={{ "2xl": "0px", base: "10px" }}
-            width={{ "2xl": "max-content", base: "100%" }}
-            // whiteSpace={"nowrap"}
           >
-            <Box
-              display={"flex"}
-              alignItems={"center"}
-              gap={"10px"}
-              flexWrap={"wrap"}
-              justifyContent={"flex-end"}
-            >
-              <Box
-                className="hoverStyle"
-                display={"flex"}
-                alignItems={"center"}
-                gap={"3px"}
-              >
-                <MdKeyboardArrowLeft fontSize={"20px"} />
-                {/* <Image
-                  src={black_arrow_left.src}
-                  width={{ md: "24px", base: "20px" }}
-                  sx={iconWidth}
-                /> */}
-                <Heading color={"black.100"} sx={hoverStyle} variant={"p10"}>
-                  Return
-                </Heading>
-              </Box>
-              {matchCandidate ? (
-                <Box
-                  className="hoverStyle"
-                  display={"flex"}
-                  alignItems={"center"}
-                  gap={"7px"}
-                >
-                  {/* <Image sx={iconWidth} src={black_email.src} /> */}
-                  <HiOutlineMail className="hoverStyle" />
-                  <Heading
-                    color={"black.100"}
-                    variant={"p10"}
-                    sx={{
-                      _hover: {
-                        color: "blue.500",
-                        cursor: "pointer",
-                      },
-                    }}
-                  >
-                    Invite to Apply
-                  </Heading>
-                </Box>
-              ) : (
-                <Box
-                  className="hoverStyle"
-                  display={"flex"}
-                  alignItems={"center"}
-                  gap={"7px"}
-                >
-                  {/* <Image sx={iconWidth} src={black_email.src} /> */}
-                  <HiArrowDownTray className="hoverStyle" />
-
-                  <Heading color={"black.100"} sx={hoverStyle} variant={"p10"}>
-                    Send Message
-                  </Heading>
-                </Box>
-              )}
-
-              {matchCandidate ? null : (
-                <Box
-                  className="hoverStyle"
-                  display={"flex"}
-                  alignItems={"center"}
-                  gap={"7px"}
-                >
-                  {/* <Image sx={iconWidth} src={download.src} /> */}
-                  <HiMiniArrowDownTray />
-                  <Heading color={"black.100"} sx={hoverStyle} variant={"p10"}>
-                    Download Attachments
-                  </Heading>
-                </Box>
-              )}
-            </Box>
-            {matchCandidate ? null : (
-              <Box
-                display={"flex"}
-                alignItems={"center"}
-                justifyContent={"flex-end"}
-                // border={"1px solid red"}
-                width={"100%"}
-                gap={"10px"}
-                mt={"7px"}
-              >
-                <Box
-                  className="hoverStyle"
-                  display={"flex"}
-                  alignItems={"center"}
-                  justifyContent={"flex-end"}
-                  gap={"3px"}
-                >
-                  <Heading sx={hoverStyle} color={"black.100"} variant={"p10"}>
-                    Status:{" "}
-                    <Box as="span" fontWeight={700}>
-                      Read
-                    </Box>
-                  </Heading>
-                  <FiChevronDown/>
-                  {/* <Image
-                    width={"20px"}
-                    sx={iconWidth}
-                    src={black_arrow_down.src}
-                  /> */}
-                </Box>
-                <Box
-                  display={{ lg: "none", base: "flex" }}
-                  alignItems={"center"}
-                  justifyContent={"flex-end"}
-                  gap={"3px"}
-                  cursor={"pointer"}
-                  onClick={onOpen}
-                >
-                  <Heading color={"black.100"} variant={"p10"}>
-                    Note{" "}
-                  </Heading>
-                  {/* <Image width={"20px"} src={black_arrow_down.src} /> */}
-                  <BiNotepad
-                    fontSize={{ md: "22px", base: "17px" }}
-                    fill="black.100"
-                  />
-                </Box>
-              </Box>
-            )}
+            {/* <Image sx={iconWidth} src={download.src} /> */}
+            <Heading color={"blue.500"} variant={"p10"}>
+              Download Attachments
+            </Heading>
+            <PiDownloadSimpleBold color="#2CA5C3" />
+          </Box>
+          <Box
+            bg={"gray.200"}
+            border={"1px solid"}
+            borderColor={"blue.500"}
+            display={"flex"}
+            borderRadius={"10px"}
+            alignItems={"center"}
+            my={"10px"}
+            gap={"10px"}
+            padding={"15px 0px"}
+            justifyContent={"center"}
+          >
+            {/* <Image sx={iconWidth} src={download.src} /> */}
+            <Heading color={"blue.500"} variant={"p10"}>
+              Messages
+            </Heading>
+            <HiOutlineMail color="#2CA5C3" />
+          </Box>
+          <Box
+            bg={"gray.200"}
+            border={"1px solid"}
+            borderColor={"blue.500"}
+            display={"flex"}
+            borderRadius={"10px"}
+            alignItems={"center"}
+            my={"10px"}
+            gap={"10px"}
+            padding={"15px 0px"}
+            justifyContent={"center"}
+          >
+            {/* <Image sx={iconWidth} src={download.src} /> */}
+            <Heading color={"blue.500"} variant={"p10"}>
+              Status
+            </Heading>
+            <MdOutlineKeyboardArrowDown color="#2CA5C3" />
           </Box>
         </Box>
-        <Box mt={"20px"}>
-          <Box>
-            <Heading mb="13px" color={"blue.500"} variant={"p7"}>
-              Candidate Summary
-            </Heading>
-            <Heading
-              mb={"21px"}
-              fontWeight={400}
-              color={"gray.text"}
-              as={"p"}
-              variant={"p4"}
-            >
-              {selectedCandidates?.canididateSummary}
-            </Heading>
-            <Heading color={"blue.500"} variant={"p7"}>
-              Work Experience
-            </Heading>
-            <Box
-              mt={{ md: "31px", base: "10px" }}
-              // mb={{ md: "10px", base: "10px" }}
-              mb={"10px"}
-              display={"flex"}
-              alignItems={"center"}
-              flexWrap={"wrap"}
-              gap={{ md: "10px", sm: "6px", base: "5px" }}
-            >
-              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-                {selectedCandidates?.desiginatation}
+        <Box
+          bg={"white.100"}
+          boxShadow={
+            "0px 1px 2px 0px rgba(16, 24, 40, 0.10), 0px 1px 3px 0px rgba(16, 24, 40, 0.10)"
+          }
+          borderRadius={"8px"}
+          border={"none "}
+          borderColor={"gray.light"}
+          p={{ md: "20px 30px", base: "20px 5px 20px 15px" }}
+        >
+          <Box mt={"20px"}>
+            <Box>
+              <Heading mb="13px" color={"gray.text"} variant={"p7"}>
+                Candidate Summary
               </Heading>
-              <Box fontSize={{ sm: "14px", base: "8px" }}>
-                <GoDotFill style={{ color: "#D9D9D9" }} />
+              <Heading
+                mb={"21px"}
+                fontWeight={400}
+                color={"gray.text"}
+                as={"p"}
+                variant={"p4"}
+              >
+                {selectedCandidates?.canididateSummary}
+              </Heading>
+              <Heading color={"gray.text"} variant={"p7"}>
+                Work Experience
+              </Heading>
+              <Box
+                mt={{ md: "31px", base: "10px" }}
+                // mb={{ md: "10px", base: "10px" }}
+                mb={"10px"}
+                display={"flex"}
+                alignItems={"center"}
+                flexWrap={"wrap"}
+                gap={{ md: "10px", sm: "6px", base: "5px" }}
+              >
+                <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+                  {selectedCandidates?.desiginatation}
+                </Heading>
+                <Box fontSize={{ sm: "14px", base: "8px" }}>
+                  <GoDotFill style={{ color: "#D9D9D9" }} />
+                </Box>
+
+                <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+                  {selectedCandidates?.companyName}
+                </Heading>
+                <Box fontSize={{ sm: "14px", base: "8px" }}>
+                  <GoDotFill style={{ color: "#D9D9D9" }} />
+                </Box>
+
+                <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+                  {"04/2017 - Present"}
+                </Heading>
               </Box>
-
-              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-                {selectedCandidates?.companyName}
+              <Heading
+                fontWeight={400}
+                color={"gray.text"}
+                as={"p"}
+                variant={"p12"}
+              >
+                {selectedCandidates?.jobSummary}
               </Heading>
-              <Box fontSize={{ sm: "14px", base: "8px" }}>
-                <GoDotFill style={{ color: "#D9D9D9" }} />
+              <Box
+                mt={{ md: "19px", base: "10px" }}
+                // mb={{ md: "8px", base: "3px" }}
+                mb={"10px"}
+                display={"flex"}
+                alignItems={"center"}
+                flexWrap={"wrap"}
+                gap={{ md: "10px", sm: "6px", base: "5px" }}
+              >
+                <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+                  {selectedCandidates?.desiginatation}
+                </Heading>
+                <Box fontSize={{ sm: "14px", base: "8px" }}>
+                  <GoDotFill style={{ color: "#D9D9D9" }} />
+                </Box>
+
+                <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+                  {selectedCandidates?.companyName}
+                </Heading>
+                <Box fontSize={{ sm: "14px", base: "8px" }}>
+                  <GoDotFill style={{ color: "#D9D9D9" }} />
+                </Box>
+
+                <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+                  {"04/2017 - Present"}
+                </Heading>
               </Box>
+              <Heading
+                fontWeight={400}
+                color={"gray.text"}
+                as={"p"}
+                variant={"p12"}
+              >
+                {selectedCandidates?.jobSummary}
+              </Heading>
 
-              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-                {"04/2017 - Present"}
+              <Heading
+                mt={{ md: "25px", base: "10px" }}
+                color={"gray.text"}
+                variant={"p7"}
+              >
+                Education History
               </Heading>
-            </Box>
-            <Heading
-              fontWeight={400}
-              color={"gray.text"}
-              as={"p"}
-              variant={"p12"}
-            >
-              {selectedCandidates?.jobSummary}
-            </Heading>
-            <Box
-              mt={{ md: "19px", base: "10px" }}
-              // mb={{ md: "8px", base: "3px" }}
-              mb={"10px"}
-              display={"flex"}
-              alignItems={"center"}
-              flexWrap={"wrap"}
-              gap={{ md: "10px", sm: "6px", base: "5px" }}
-            >
-              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-                {selectedCandidates?.desiginatation}
-              </Heading>
-              <Box fontSize={{ sm: "14px", base: "8px" }}>
-                <GoDotFill style={{ color: "#D9D9D9" }} />
+              <Box
+                mt={{ md: "21px", base: "5px" }}
+                // mb={{ md: "10px", base: "3px" }}
+                mb={"10px"}
+                display={"flex"}
+                alignItems={"center"}
+                flexWrap={"wrap"}
+                gap={{ md: "10px", sm: "6px", base: "5px" }}
+              >
+                <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+                  {selectedCandidates?.diploma}
+                </Heading>
+                <Box fontSize={{ sm: "14px", base: "8px" }}>
+                  <GoDotFill style={{ color: "#D9D9D9" }} />
+                </Box>
+
+                <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+                  {selectedCandidates?.schoolName}
+                </Heading>
+                <Box fontSize={{ sm: "14px", base: "8px" }}>
+                  <GoDotFill style={{ color: "#D9D9D9" }} />
+                </Box>
+
+                <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+                  Currently Enrolled
+                </Heading>
               </Box>
-
-              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-                {selectedCandidates?.companyName}
+              <Heading
+                fontWeight={400}
+                color={"gray.text"}
+                as={"p"}
+                variant={"p12"}
+              >
+                {selectedCandidates?.educationSummary}
               </Heading>
-              <Box fontSize={{ sm: "14px", base: "8px" }}>
-                <GoDotFill style={{ color: "#D9D9D9" }} />
-              </Box>
-
-              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-                {"04/2017 - Present"}
+              <Heading
+                mt={{ md: "25px", base: "10px" }}
+                color={"gray.text"}
+                variant={"p7"}
+              >
+                Skills
               </Heading>
-            </Box>
-            <Heading
-              fontWeight={400}
-              color={"gray.text"}
-              as={"p"}
-              variant={"p12"}
-            >
-              {selectedCandidates?.jobSummary}
-            </Heading>
 
-            <Heading
-              mt={{ md: "25px", base: "10px" }}
-              color={"blue.500"}
-              variant={"p7"}
-            >
-              Education History
-            </Heading>
-            <Box
-              mt={{ md: "21px", base: "5px" }}
-              // mb={{ md: "10px", base: "3px" }}
-              mb={"10px"}
-              display={"flex"}
-              alignItems={"center"}
-              flexWrap={"wrap"}
-              gap={{ md: "10px", sm: "6px", base: "5px" }}
-            >
-              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-                {selectedCandidates?.diploma}
-              </Heading>
-              <Box fontSize={{ sm: "14px", base: "8px" }}>
-                <GoDotFill style={{ color: "#D9D9D9" }} />
-              </Box>
-
-              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-                {selectedCandidates?.schoolName}
-              </Heading>
-              <Box fontSize={{ sm: "14px", base: "8px" }}>
-                <GoDotFill style={{ color: "#D9D9D9" }} />
-              </Box>
-
-              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-                Currently Enrolled
-              </Heading>
-            </Box>
-            <Heading
-              fontWeight={400}
-              color={"gray.text"}
-              as={"p"}
-              variant={"p12"}
-            >
-              {selectedCandidates?.educationSummary}
-            </Heading>
-            <Heading
-              mt={{ md: "25px", base: "10px" }}
-              color={"blue.500"}
-              variant={"p7"}
-            >
-              Skills
-            </Heading>
-
-            <Box
-              display={"flex"}
-              mt={"12px"}
-              alignItems={"center"}
-              flexWrap={"wrap"}
-            >
-              {selectedCandidates?.skills?.map((item) => {
-                return (
-                  <Box mr={{ md: "18px", base: "14px" }} mb={"10px"}>
-                    <Chip label={item.name} />
-                  </Box>
-                );
-              })}
-            </Box>
-
-            <Heading
-              mt={{ md: "25px", base: "10px" }}
-              color={"blue.500"}
-              variant={"p7"}
-            >
-              Certification
-            </Heading>
-            <Box
-              mt={{ md: "21px", base: "5px" }}
-              // mb={{ md: "10px", base: "3px" }}
-              mb={"10px"}
-              display={"flex"}
-              alignItems={"center"}
-              flexWrap={"wrap"}
-              gap={{ md: "10px", sm: "6px", base: "5px" }}
-            >
-              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-                Walter Payton College Preparatory High School
-              </Heading>
-              <Box fontSize={{ sm: "14px", base: "8px" }}>
-                <GoDotFill style={{ color: "#D9D9D9" }} />
-              </Box>
-
-              <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-                September 2017 - July 2023
-              </Heading>
-              <Box fontSize={{ sm: "14px", base: "8px" }}>
-                <GoDotFill style={{ color: "#D9D9D9" }} />
+              <Box
+                display={"flex"}
+                mt={"12px"}
+                alignItems={"center"}
+                flexWrap={"wrap"}
+              >
+                {selectedCandidates?.skills?.map((item) => {
+                  return (
+                    <Box mr={{ md: "18px", base: "14px" }} mb={"10px"}>
+                      <Chip label={item.name} />
+                    </Box>
+                  );
+                })}
               </Box>
 
               <Heading
-                whiteSpace={"pre-wrap"}
-                fontWeight={600}
+                mt={{ md: "25px", base: "10px" }}
                 color={"gray.text"}
-                variant={"p12"}
+                variant={"p7"}
               >
-                Certificate Verification ID: 2f8ae5bfaa4c46dc3bba77655130f32a
+                Certification
               </Heading>
+              <Box
+                mt={{ md: "21px", base: "5px" }}
+                // mb={{ md: "10px", base: "3px" }}
+                mb={"10px"}
+                display={"flex"}
+                alignItems={"center"}
+                flexWrap={"wrap"}
+                gap={{ md: "10px", sm: "6px", base: "5px" }}
+              >
+                <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+                  Walter Payton College Preparatory High School
+                </Heading>
+                <Box fontSize={{ sm: "14px", base: "8px" }}>
+                  <GoDotFill style={{ color: "#D9D9D9" }} />
+                </Box>
+
+                <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+                  September 2017 - July 2023
+                </Heading>
+                <Box fontSize={{ sm: "14px", base: "8px" }}>
+                  <GoDotFill style={{ color: "#D9D9D9" }} />
+                </Box>
+
+                <Heading
+                  whiteSpace={"pre-wrap"}
+                  fontWeight={600}
+                  color={"gray.text"}
+                  variant={"p12"}
+                >
+                  Certificate Verification ID: 2f8ae5bfaa4c46dc3bba77655130f32a
+                </Heading>
+              </Box>
             </Box>
           </Box>
         </Box>
