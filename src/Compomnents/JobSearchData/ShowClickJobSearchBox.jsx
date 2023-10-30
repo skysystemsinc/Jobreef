@@ -24,7 +24,7 @@ import {
   ListIcon,
   OrderedList,
   UnorderedList,
-  
+  Link,
 } from "@chakra-ui/react";
 import LoginModal from "../LoginModal/LoginModal";
 import ApplyForThisJobModal from "./ApplyForThisJobModal";
@@ -132,7 +132,9 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
                 marginRight={2}
               />
               <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
-                {object.title}
+                <Link href="https://jobreef-git-khizer-dev-skysys.vercel.app/candidate/job-search-selectedjob#">
+                    {object.title}
+                </Link>
                 <Box display={"flex"} alignItems={"center"}>
                   <Heading variant={"p4"} color={"gray.text"} marginRight={1}>
                     {object.name}

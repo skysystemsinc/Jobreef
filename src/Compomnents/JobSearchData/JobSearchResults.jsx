@@ -1,30 +1,15 @@
 import React from "react";
-import { GoDotFill } from "react-icons/go";
-import { FiSearch, FiMapPin } from "react-icons/fi";
 import ComponentMyChip from "../../Compomnents/ComponentMyChip/ComponentMyChip";
-import microsoft from "@/assets/Images/microsoft.svg";
-import Group from "@/assets/Images/Group.svg";
-import { FaTimes } from "react-icons/fa";
 import { useState } from "react";
-import EmptyVector from "../../assets/Images/EmptyVector.svg";
 import cross from "../../assets/Images/cross.svg";
 import NewJobSearchBox from "./NewJobSearchBox";
 import ShowPreviousSearches from "./ShowPreviousSearches";
-import { checkboxes, DataArray } from "./tempSchema";
+import {DataArray } from "./tempSchema";
 
 import { parse, compareAsc, compareDesc } from "date-fns";
 import {
   Box,
-  Button,
-  Flex,
-  Heading,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Label,
   Image,
-  Select,
-  useBreakpointValue,
 } from "@chakra-ui/react";
 import ShowClickJobSearchBox from "./ShowClickJobSearchBox";
 
@@ -83,19 +68,14 @@ const JobSearchResults = () => {
         selectedValues={selectedValues}
       />
       <Box
-        // bg={"black.100"}
-        // border={"1px solid red"}
         display={"flex"}
         flexDirection={{ lg: "row", base: "column" }}
-        // flexWrap={"wrap"}
         margin={{ md: 10, base: "0px" }}
         gap={5}
-        // backgroundColor={"yellow"}
       >
         <Box
           flex={2.5}
           display={{ lg: "block", base: "none" }}
-          // border={"1px solid red"}
         >
           <ShowCheckBoxes
             selectedValues={selectedValues}
@@ -121,7 +101,6 @@ const JobSearchResults = () => {
                     style={{ margin: "1px 0px 0px 10px" }}
                   />
                 </ComponentMyChip>
-                // </Box>
               );
             })}
           </Box>
@@ -133,24 +112,6 @@ const JobSearchResults = () => {
               settoggle={settoggle}
               Data={Data}
             />
-            {/* {toggle ? (<NewJobSearchBox
-              setTempObject={setTempObject}
-              selectedValues={selectedValues}
-              toggle={toggle}
-              settoggle={settoggle}
-              Data={Data}
-            />) : (
-              <Box display={{lg:"block",sm:"none",base:"none"}}>
-                <NewJobSearchBox
-                  setTempObject={setTempObject}
-                  selectedValues={selectedValues}
-                  toggle={toggle}
-                  settoggle={settoggle}
-                  Data={Data}
-                />
-              </Box> 
-            )
-            } */}
           </Box>
         </Box>
         {toggle ? (
@@ -168,7 +129,6 @@ const JobSearchResults = () => {
                       style={{ margin: "1px 0px 0px 10px" }}
                     />
                   </ComponentMyChip>
-                  // </Box>
                 );
               })}
             </Box>

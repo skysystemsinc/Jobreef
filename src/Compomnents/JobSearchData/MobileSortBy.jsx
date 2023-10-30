@@ -29,9 +29,6 @@ import {
   useBreakpointValue,
   Checkbox,
 } from "@chakra-ui/react";
-import globalStyles from "@/styles/globalStyles";
-import CheckBoxDropDown from "../CheckBoxDropDown/CheckBoxDropDown";
-import CheckBoxDropDownKHI from "./checkboxdropdownkhi";
 
 const MobileSortBy = ({
   selectedValues,

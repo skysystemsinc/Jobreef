@@ -1,37 +1,13 @@
 import React from "react";
-import { GoDotFill } from "react-icons/go";
-import ComponentMyChip from "../../Compomnents/ComponentMyChip/ComponentMyChip";
-import microsoft from "@/assets/Images/microsoft.svg";
-import EmptyVector from "../../assets/Images/EmptyVector.svg";
 import { checkboxes } from "./tempSchema";
-import { BiFilter, BiSortDown } from "react-icons/bi";
-import { TiTick } from "react-icons/ti";
 
-import {
-  Menu,
-  MenuButton,
-  MenuItemOption,
-  MenuList,
-  MenuOptionGroup,
-} from "@chakra-ui/react";
 
 import {
   Box,
-  Button,
-  Flex,
   Heading,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Label,
-  Image,
-  Select,
-  useBreakpointValue,
   Checkbox,
 } from "@chakra-ui/react";
 import globalStyles from "@/styles/globalStyles";
-import CheckBoxDropDown from "../CheckBoxDropDown/CheckBoxDropDown";
-import CheckBoxDropDownKHI from "./checkboxdropdownkhi";
 
 const ShowCheckBoxes = ({
   selectedValues,
