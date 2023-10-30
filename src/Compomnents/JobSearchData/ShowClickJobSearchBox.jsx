@@ -1,11 +1,11 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useContext } from "react";
 import { GoDotFill } from "react-icons/go";
 import ComponentMyChip from "../../Compomnents/ComponentMyChip/ComponentMyChip";
 import microsoft from "@/assets/Images/microsoft.svg";
 import EmptyVector from "../../assets/Images/EmptyVector.svg";
 import cross from "../../assets/Images/cross.svg";
-// import "./scrollbar.css"; 
+// import "./scrollbar.css";
 import {
   Box,
   Button,
@@ -23,7 +23,6 @@ import {
 import LoginModal from "../LoginModal/LoginModal";
 import ApplyForThisJobModal from "./ApplyForThisJobModal";
 import { Role_context } from "../../context/context";
-
 
 const text = [
   {
@@ -64,20 +63,18 @@ const text = [
   },
 ];
 
-
 const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const {
-    templogin,
-} = useContext(Role_context);
+  const { templogin } = useContext(Role_context);
 
   return (
-    <Box flex={4} >
-      {templogin?(
-      <ApplyForThisJobModal open={isOpen} onClose={onClose} object={object}/>
-      ):(<LoginModal open={isOpen} onClose={onClose} />
+    <Box flex={4}>
+      {templogin ? (
+        <ApplyForThisJobModal open={isOpen} onClose={onClose} object={object} />
+      ) : (
+        <LoginModal open={isOpen} onClose={onClose} />
       )}
-      <Box  
+      <Box
         p={{ sm: "20px", base: "12px" }}
         width={"100%"}
         borderRadius={"8px"}
@@ -87,19 +84,19 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
         mb={10}
         borderWidth={1}
         borderColor="gray.400"
-        height={'100vh'}
+        height={{ lg: "100vh" }}
         className="scrollableBox"
-        overflowY= "auto"
+        overflowY="auto"
         sx={{
-          '&::-webkit-scrollbar': {
-            width: '5px',
-            borderRadius: '8px',
+          "&::-webkit-scrollbar": {
+            width: "5px",
+            borderRadius: "8px",
           },
-          '&::-webkit-scrollbar-thumb': {
+          "&::-webkit-scrollbar-thumb": {
             backgroundColor: "#797979",
-            borderRadius: '30px',
+            borderRadius: "30px",
           },
-        }}   
+        }}
       >
         <Box
           display={"flex"}
@@ -109,7 +106,6 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
           flexWrap={{ xl: "nowrap", base: "wrap" }}
           borderColor={"gray.400"}
           pb={{ lg: "20px", base: "10px" }}
-          
         >
           <Box
             display={"flex"}
@@ -156,13 +152,12 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
                   marginRight={2}
                   onClick={() => {
                     settoggle(true);
-                    localStorage.setItem('myData',null)
+                    localStorage.setItem("myData", null);
                   }}
                 />
               </Box>
               <Button
-              onClick={onOpen}
-
+                onClick={onOpen}
                 sx={{
                   height: { sm: "38px", base: "32px" },
                   // width: { md: "200px", sm: "180px", base: "168px" },
