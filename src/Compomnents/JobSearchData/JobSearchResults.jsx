@@ -111,7 +111,7 @@ const JobSearchResults = () => {
           <Box display={"flex"} gap={"10px"} alignItems={"center"}>
             {selectedValues.map((val) => {
               return (
-                <ComponentMyChip style={{p:"5px 12px" , border:'1px solid ',borderColor:'blue.500'}}  label={val}>
+                <ComponentMyChip style={{marginBottom:"10px", p:"5px 12px" , border:'1px solid ',borderColor:'blue.500'}}  label={val}>
                   <Image
                     width={"10px"}
                     src={cross.src}
@@ -154,10 +154,11 @@ const JobSearchResults = () => {
         </Box>
         {toggle ? (
           <Box flex={"100%"} display={{ lg: "none", base: "block" }}>
-            <Box>
+            <Box gap={2} display={"flex"}>
               {selectedValues.map((val) => {
                 return (
-                  <ComponentMyChip label={val}>
+                  <ComponentMyChip label={val} style={{marginBottom:"10px", p:"5px 12px" , border:'1px solid ',borderColor:'blue.500'}}>
+                    
                     <Image
                       width={"10px"}
                       src={cross.src}
@@ -188,7 +189,7 @@ const JobSearchResults = () => {
             <ShowPreviousSearches />
           </Box>
         ) : (
-          <Box flex={{ lg: 5, base: "100%" }}>
+          <Box flex={{ lg: 5.6, base: "100%" }}>
             <ShowClickJobSearchBox
               toggle={toggle}
               settoggle={settoggle}

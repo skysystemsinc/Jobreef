@@ -8,7 +8,6 @@ const ChangePassword = () => {
     newPassword: "",
     confirmPassword: "",
   });
-  console.log("change password", state);
   const inputRef = useRef();
   const [isEdit, setisEdit] = useState(false);
 

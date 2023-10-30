@@ -19,6 +19,12 @@ import {
   Select,
   useBreakpointValue,
   useDisclosure,
+  List,
+  ListItem,
+  ListIcon,
+  OrderedList,
+  UnorderedList,
+  
 } from "@chakra-ui/react";
 import LoginModal from "../LoginModal/LoginModal";
 import ApplyForThisJobModal from "./ApplyForThisJobModal";
@@ -68,7 +74,7 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
   const { templogin } = useContext(Role_context);
 
   return (
-    <Box flex={4}>
+    <Box flex={4} >
       {templogin ? (
         <ApplyForThisJobModal open={isOpen} onClose={onClose} object={object} />
       ) : (
@@ -271,26 +277,17 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
           >
             Responsibilities
           </Heading>
+          <OrderedList color={"gray.text"} variant={"p4"} fontSize={'15px'}>
           {text.map((data, index) => (
-            <Heading color={"gray.text"} variant={"p4"} display={"flex"}>
-              {index + 1}.{" "}
-              <Heading ml={2} color={"gray.text"} variant={"p4"}>
-                {data.value}
-              </Heading>
-            </Heading>
+            <Box key={index}>             
+                <ListItem>
+                  <Heading  color={"gray.text"} variant={"p4"} display={"flex"}>
+                    {data.value}
+                  </Heading>
+                </ListItem>   
+            </Box>
           ))}
-
-          {/* <Heading color={"gray.text"} variant={"p4"} mt={3}>
-            Qualification and requirements
-          </Heading>
-          {text2.map((data, index) => (
-            <Heading color={"gray.text"} variant={"p4"} display={"flex"}>
-              {index + 1}.{" "}
-              <Heading ml={2} color={"gray.text"} variant={"p4"}>
-                {data.value}
-              </Heading>
-            </Heading>
-          ))} */}
+          </OrderedList>
         </Box>
       </Box>
     </Box>

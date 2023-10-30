@@ -23,7 +23,7 @@ const {
           <ModalContent borderRadius={"8px"} bg={"white.100"}>
             {/* <ModalHeader>Modal Title</ModalHeader> */}
             <ModalCloseButton color={"black.100"} />
-            <ModalBody px={"150px"} py={"40px"} >
+            <ModalBody px={{lg:"150px", base:"10px"}} py={"40px"} >
               <Login setTemplogin={setTemplogin}/>
             </ModalBody>
           </ModalContent>

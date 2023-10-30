@@ -56,7 +56,6 @@ const JobPostTimeline = ({ candidate, variant }) => {
     tags: "",
     rate:''
   });
-  console.log("state", state);
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });

@@ -59,11 +59,11 @@ const ShowCheckBoxes = ({
         {checkboxes.map((object, index) => {
           return (
             <Box
+              key={index}
               borderTopWidth={1}
               borderTopColor={index > 0 ? "gray.400" : "transparent"}
               width="100%"
               p={4}
-              key={Math.random()}
               display={"flex"}
               flexDirection={"column"}
               gap={1}
@@ -82,6 +82,7 @@ const ShowCheckBoxes = ({
                   if (object.heading == "Sort Jobs By") {
                     return (
                       <Checkbox
+                        key={Math.random()}
                         mb={"8px"}
                         borderRadius={"10px"}
                         size="md"
@@ -102,6 +103,7 @@ const ShowCheckBoxes = ({
                   }
                   return (
                     <Checkbox
+                      key={index+Math.random()}
                       mb={"8px"}
                       borderRadius={"10px"}
                       size="md"

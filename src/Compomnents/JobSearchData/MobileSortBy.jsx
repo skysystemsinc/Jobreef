@@ -99,10 +99,7 @@ const MobileSortBy = ({
                               if (item.key === "Date Posted") {
                                 if (sessionStorage.getItem("temp") === null)
                                   sessionStorage.setItem("temp", true);
-                                console.log(
-                                  "I am console",
-                                  sessionStorage.getItem("temp")
-                                );
+                                
                                 if (sessionStorage.getItem("temp")) {
                                   sessionStorage.setItem("temp", false);
                                   DataSort(true);
@@ -127,65 +124,6 @@ const MobileSortBy = ({
             );
           })}
         </Box>
-        {/* <Box
-          mb={"20px"}
-          flexWrap={"wrap"}
-          overflowX={"scroll"}
-          display={"flex"}
-          alignItems={"center"}
-          
-          gap={{ md: "20px", base: "12px" }}  
-        >
-          <CheckBoxDropDown listItme={listItme} label="Sort Jobs Data" />
-          <CheckBoxDropDown listItme={listItme2} label="jobs Model" />
-          <CheckBoxDropDown listItme={listItme3} label="Employment Type" />
-          <CheckBoxDropDown listItme={listItme3} label="Experience" />
-        </Box> */}
-        {/* <Box width="100%" display={"flex"}>
-          {checkboxes.map((object, index) => {
-            return (
-              <Box
-                borderWidth={1}
-                borderColor="gray.100"
-                width="100%"
-                p={4}
-                key={Math.random()}
-              >
-                <Heading
-                  color={"gray"}
-                  fontWeight={"bold"}
-                  fontSize={16}
-                  variant={"p4"}
-                >
-                  {object.heading}
-                </Heading>
-                <Select
-                  color={"gray"}
-                  isMulti
-                  value={selectedValues}
-                  onChange={(event) => {
-                    console.log(
-                      "Selected Values",
-                      event.target.selectedOptions
-                    );
-                    const selectedOptions = event.target.selectedOptions;
-                    const selectedValues = Array.from(selectedOptions).map(
-                      (option) => option.value
-                    );
-                    handleCheckboxChange(selectedValues);
-                  }}
-                >
-                  {object.values &&
-                    object.values.map((value) => (
-                      <option key={value.key} value={value.key}>
-                        {value.key}
-                      </option>
-                    ))}
-                </Select>
-              </Box>
-            );
-          })}
-        </Box> */}
       </Box>
     </>
   );

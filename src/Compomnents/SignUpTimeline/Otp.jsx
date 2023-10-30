@@ -10,7 +10,6 @@ import {
 import React from "react";
 
 const Otp = ({ text, State, setState }) => {
-  console.log("State", State);
   return (
     <Box textAlign={"center"}>
       <Heading
@@ -32,7 +31,6 @@ const Otp = ({ text, State, setState }) => {
         <PinInput
           value={State?.otp}
           onChange={(e) => {
-            console.log("target", e);
             setState((prev) => {
               return { ...prev, otp: e };
             });

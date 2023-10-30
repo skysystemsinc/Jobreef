@@ -6,6 +6,7 @@ import EmptyVector from "../../assets/Images/EmptyVector.svg";
 // import { DataArray } from './tempSchema.js';
 import ShowEmptyResult from "./ShowEmptyResult";
 import { Role_context } from "../../context/context";
+import bookmark from "../../assets/Images/bookmark.svg";
 import {
     Box,
     Button,
@@ -32,6 +33,14 @@ const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject,Data }) 
     updatedClickedStates.fill(false);
     updatedClickedStates[index] = true;
     setClickedStates(updatedClickedStates);
+  };
+
+  const [imageSources, setImageSources] = useState(Array(Data.length).fill(EmptyVector));
+
+  const handleImageClick = (index) => {
+    const newImageSources = [...imageSources];
+    newImageSources[index] = newImageSources[index] === bookmark ? EmptyVector : bookmark;
+    setImageSources(newImageSources);
   };
 
   const {
@@ -109,7 +118,7 @@ const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject,Data }) 
     
     return(
     <Box
-            
+            key={index}
             p={{ sm: "20px", base: "12px" }}
             width={"100%"}
             borderRadius={"8px"}
@@ -204,11 +213,13 @@ const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject,Data }) 
                   </Heading>
                 </Box>
                 <Image
-                  width={"10px"}
-                  src={EmptyVector}
+                  // width={"10px"}
+                  src={imageSources[index].src}
                   mt={1.5}
                   marginRight={2}
-                  // onClick={}
+                  onClick={
+                    () => handleImageClick(index)
+                  }
                 />
               </Box>
             </Box>

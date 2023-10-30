@@ -28,16 +28,7 @@ const AddMemebersForm = () => {
     role: "",
   });
   const handleSend = async () => {
-    console.log("runn send")
     try {
-      // const response = await axios("/api/company/teamMember", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   data: State,
-      // });
-      // console.log("team ", response);
       router.push("/company/team-members")
     } catch (error) {}
   };

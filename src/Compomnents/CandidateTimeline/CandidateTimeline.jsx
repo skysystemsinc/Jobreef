@@ -222,21 +222,12 @@ export const CandidateTimeline = ({ candidate, variant }) => {
               isDisabled={activeStep === 0}
               onClick={() => {
                 prevStep();
-                // if (compeletedStep.includes(activeStep)) {
-                //   const updatedCompletedSteps = compeletedStep.filter(
-                //     (step) => step != activeStep
-                //   );
-                //   console.log("updatedCompletedSteps", updatedCompletedSteps);
-                //   setcompeletedStep(updatedCompletedSteps);
-                // }
               }}
-              // width={{ md: "200px", sm: "180px", base: "130px" }}
               variant="outline-blue"
             >
               {" Back"}
             </Button>
             <Button
-              // width={{ md: "200px", sm: "180px", base: "130px" }}
               variant={"blue-btn"}
               onClick={handeNext}
             >

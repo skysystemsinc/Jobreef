@@ -64,7 +64,6 @@ const All = ({
   ];
   const dispatch = useDispatch();
   const handleSelectedCard = (data) => {
-    console.log("data", data);
     dispatch(getSelectedCandidates(data));
   };
   return (
