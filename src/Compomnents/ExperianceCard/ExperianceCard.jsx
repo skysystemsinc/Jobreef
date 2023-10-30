@@ -5,7 +5,8 @@ import { GoDotFill } from "react-icons/go";
 import { HiLocationMarker } from "react-icons/hi";
 import edit_outline from "@/assets/Images/edit_outline.svg";
 import trash from "@/assets/Images/trash.svg";
-const ExperianceCard = ({ state, setState }) => {
+import moment from "moment";
+const ExperianceCard = ({ data, state, setState }) => {
   return (
     <Box
       p={{ sm: "16px", base: "12px" }}
@@ -36,7 +37,7 @@ const ExperianceCard = ({ state, setState }) => {
           </Box>
           <Box>
             <Heading variant={"p7"} color={"gray.text"}>
-              Senior System’s Design Engineer
+              {data.designation}
             </Heading>
             <Box
               mt={{ md: "6px", base: "3px" }}
@@ -46,14 +47,15 @@ const ExperianceCard = ({ state, setState }) => {
               gap={{ md: "12px", sm: "6px", base: "5px" }}
             >
               <Heading color={"gray.text"} variant={"p4"}>
-                Microsoft
+                {data.companyName}
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
               </Box>
 
               <Heading color={"gray.text"} variant={"p4"}>
-                September 2017 - July 2023
+                {moment(data.stateDate).format("MMMM YYYY")}  {" - "} 
+                { moment(data.endDate).format("MMMM YYYY")}
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
@@ -66,7 +68,7 @@ const ExperianceCard = ({ state, setState }) => {
                 variant={"p4"}
               >
                 {" "}
-                <HiLocationMarker style={{ color: "#4A4A4A" }} /> USA
+                <HiLocationMarker style={{ color: "#4A4A4A" }} /> {data.country}
               </Heading>
             </Box>
           </Box>
@@ -127,10 +129,7 @@ const ExperianceCard = ({ state, setState }) => {
           color={"gray.text"}
           variant={"p5"}
         >
-          Lead the design and development of system architectures, ensuring they
-          meet the project requirements, performance criteria, and scalability.
-          Requirements Analysis: Collaborate with stakeholders, customers, and
-          cross-functional teams to gather and analyze system requirements,
+          {data.jobSummary}
         </Heading>
       </Box>
     </Box>

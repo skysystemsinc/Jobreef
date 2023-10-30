@@ -10,7 +10,38 @@ import DeleteModal from "../DeleteModal/DeleteModal";
 const Education = () => {
   const [state, setState] = useState({
     addEducation: false,
-    educationData: [],
+    educationData: [
+      {
+        schoolName: "Walter Payton College Preparatory High School",
+        diploma: "Diploma Name",
+        readOnly: false,
+        stateDate: new Date(),
+        endDate: new Date(),
+        currentlyEnrolled: false,
+        country: " USA",
+        state: "Chicago",
+        city: " Illinois",
+        streetAddress: "",
+        gpa: "",
+        description:
+          "Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability. Requirements Analysis: Collaborate with stakeholders, customers, and cross-functional teams to gather and analyze system requirements, ensuring clear and unambiguous specifications. Oversee the integration",
+      },
+      {
+        schoolName: "Walter Payton College Preparatory High School",
+        diploma: "Diploma Name",
+        readOnly: false,
+        stateDate: new Date(),
+        endDate: new Date(),
+        country: " USA",
+        currentlyEnrolled: false,
+        state: "Chicago",
+        city: " Illinois",
+        streetAddress: "",
+        gpa: "",
+        description:
+          "Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability. Requirements Analysis: Collaborate with stakeholders, customers, and cross-functional teams to gather and analyze system requirements, ensuring clear and unambiguous specifications. Oversee the integration",
+      },
+    ],
     edit: false,
     delete: false,
   });
@@ -34,7 +65,7 @@ const Education = () => {
       {state.addEducation || state.edit ? (
         <Box display={"flex"} justifyContent={"center"}>
           <EducationForm
-          state={state}
+            state={state}
             saveHandle={() => {
               setState((prev) => {
                 return {
@@ -51,7 +82,11 @@ const Education = () => {
         </Box>
       ) : state.educationData.length > 0 ? (
         <Box mt={"30px"} width={{ xl: "73%", base: "100%" }} mx={"auto"}>
-          <EducationCard state={state} setState={setState} />
+          {state.educationData.map((item) => {
+            return (
+              <EducationCard data={item} state={state} setState={setState} />
+            );
+          })}
 
           <Box
             bg={"blue.400"}

@@ -55,6 +55,7 @@ const colors = {
     800: "#FEFEFE",
     lightBorder: "#cdcdcd",
     light: "#797979",
+    
 
     text: "#4A4A4A",
   },

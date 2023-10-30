@@ -8,9 +8,38 @@ import EducationForm from "./EducationForm";
 import EducationCard from "../EducationCard/EducationCard";
 
 const Education = ({ state, setState }) => {
-  //   const [addEducation, setaddEducation] = useState(false);
-  const [experianceData, setexperianceData] = useState([]);
-  // const experianceData = [];
+  const educationData = [
+    {
+      schoolName: "Walter Payton College Preparatory High School",
+      diploma: "Diploma Name",
+      readOnly: false,
+      stateDate: new Date(),
+      endDate: new Date(),
+      currentlyEnrolled: false,
+      country: " USA",
+      state: "Chicago",
+      city: " Illinois",
+      streetAddress: "",
+      gpa: "",
+      description:
+        "Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability. Requirements Analysis: Collaborate with stakeholders, customers, and cross-functional teams to gather and analyze system requirements, ensuring clear and unambiguous specifications. Oversee the integration",
+    },
+    {
+      schoolName: "Walter Payton College Preparatory High School",
+      diploma: "Diploma Name",
+      readOnly: false,
+      stateDate: new Date(),
+      endDate: new Date(),
+      country: " USA",
+      currentlyEnrolled: false,
+      state: "Chicago",
+      city: " Illinois",
+      streetAddress: "",
+      gpa: "",
+      description:
+        "Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability. Requirements Analysis: Collaborate with stakeholders, customers, and cross-functional teams to gather and analyze system requirements, ensuring clear and unambiguous specifications. Oversee the integration",
+    },
+  ];
   const style = {
     maxWidth: "216px",
   };
@@ -18,14 +47,22 @@ const Education = ({ state, setState }) => {
     <Box>
       {state.addEducation || state.edit ? (
         <Box display={"flex"} justifyContent={"center"}>
-          <EducationForm
-            state={state}
-            setState={setState}
-          />
+          <EducationForm state={state} setState={setState} />
         </Box>
       ) : (
         <Box width={"100%"} mx={"auto"}>
-          <EducationCard setState={setState}   headingStyle={style} dispableBlueCard />
+          {educationData.map((item) => {
+            return (
+              <EducationCard
+                headingStyle={style}
+                dispableBlueCard
+                data={item}
+                state={state}
+                setState={setState}
+              />
+            );
+          })}
+
           <Flex justifyContent={"center"}>
             <Button
               onClick={() => {

@@ -8,7 +8,40 @@ import DeleteModal from "../DeleteModal/DeleteModal";
 const WorkExperiance = () => {
   const [state, setState] = useState({
     addExperience: false,
-    experienceData: [],
+    experienceData: [
+      {
+        companyName: "Microsoft",
+        designation: "Senior System’s Design Engineer",
+        currentlyWorking: false,
+        readOnly: false,
+        stateDate: new Date(),
+        endDate: new Date(),
+        country: "USA",
+        state: "",
+        city: "",
+        streetAddress: "",
+        employmentType: "",
+        jobFamily: "",
+        jobSummary:
+          "Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability. Requirements Analysis: Collaborate with stakeholders, customers, and cross-functional teams to gather and analyze system requirements,",
+      },
+      {
+        companyName: "Microsoft",
+        designation: "Senior System’s Design Engineer",
+        currentlyWorking: false,
+        readOnly: false,
+        stateDate: new Date(),
+        endDate: new Date(),
+        country: "USA",
+        state: "",
+        city: "",
+        streetAddress: "",
+        employmentType: "",
+        jobFamily: "",
+        jobSummary:
+          "Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability. Requirements Analysis: Collaborate with stakeholders, customers, and cross-functional teams to gather and analyze system requirements,",
+      },
+    ],
     edit: false,
     delete: false,
   });
@@ -41,7 +74,7 @@ const WorkExperiance = () => {
                   ...prev,
                   addExperience: false,
                   edit: false,
-                  experienceData: [1],
+                  experienceData: [...state.experienceData, 1],
                 };
               })
             }
@@ -54,7 +87,13 @@ const WorkExperiance = () => {
           width={{ lg: "73%", base: "100%" }}
           mx={"auto"}
         >
-          <ExperianceCard state={state} setState={setState} />
+          {state.experienceData.map((item, ind) => {
+            return (
+              <Box key={ind}>
+                <ExperianceCard data={item} state={state} setState={setState} />
+              </Box>
+            );
+          })}
 
           <Flex justifyContent={"center"}>
             <Button

@@ -18,7 +18,7 @@ const SideBar = () => {
     {
       title: "Home",
       icon: home,
-      pathname:"#",
+      pathname: "#",
     },
     {
       title: "Job Posts",
@@ -66,6 +66,10 @@ const SideBar = () => {
     height: { xl: "auto", base: "40px" },
     display: "flex",
     justifyContent: { xl: "flex-start", base: "center" },
+    trnsition:".5s",
+    _hover: {
+      backgroundColor: "blue.600",
+    },
     // mx:"auto",
     padding: "12px 10px",
 
@@ -96,6 +100,7 @@ const SideBar = () => {
               padding={{ xl: "12px 10px", base: "10px 8px 10px 9px" }}
               gap={"15px"}
               key={ind}
+              transition={".5s"}
               mb={{ xl: "7px", base: "7px" }}
               display={"flex"}
               alignItems={"center"}

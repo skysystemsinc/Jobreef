@@ -10,6 +10,7 @@ import TextFormatting from "../TextFormatting/TextFormatting";
 
 const JobBio = ({ state, setState }) => {
   const applicationType = ["External", "Internal"];
+  const [readOnly, setreadOnly] = useState(false);
   const [urlPlaceholder, seturlPlaceholder] = useState("External");
   return (
     <Box>
@@ -77,9 +78,18 @@ const JobBio = ({ state, setState }) => {
         <LabelInput
           state={state.applicationType.type}
           setState={(e) => {
-            e.target.value == applicationType[0]
-              ? seturlPlaceholder("External URL")
-              : seturlPlaceholder("Internal URL");
+            if(e.target.value == applicationType[0]){
+              seturlPlaceholder("External URL")
+              setreadOnly(false)
+            }else{
+              seturlPlaceholder("Internal URL")
+              setreadOnly(true)
+            }
+            // e.target.value == applicationType[0]
+            //   ? , setreadOnly(true)
+            //   : ,
+            //   setreadOnly(true);
+
             setState((prev) => {
               return {
                 ...prev,
@@ -115,7 +125,7 @@ const JobBio = ({ state, setState }) => {
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
-          
+          readOnly={readOnly}
           placeholder="Enter URL to Redirect Candidates"
           label={urlPlaceholder}
         />

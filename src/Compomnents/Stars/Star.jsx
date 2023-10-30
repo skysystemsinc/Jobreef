@@ -2,7 +2,7 @@ import React from "react";
 import startIcon from "@/assets/Images/Star.svg";
 import { Box, Image } from "@chakra-ui/react";
 
-const Star = ({ star, width }) => {
+const Star = ({ starIcon, star, width }) => {
   return (
     <Box
       display={"flex"}
@@ -10,7 +10,9 @@ const Star = ({ star, width }) => {
       alignItems={"center"}
     >
       {star?.map((item, index) => {
-        return (
+        return starIcon ? (
+          starIcon
+        ) : (
           <Image
             key={index}
             width={width ? width : "15px"}

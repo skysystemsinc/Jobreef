@@ -1,4 +1,3 @@
-
 import { Box, Circle, Heading, Image, useMediaQuery } from "@chakra-ui/react";
 import React from "react";
 import microsoft from "@/assets/Images/microsoft.svg";
@@ -6,7 +5,9 @@ import { GoDotFill } from "react-icons/go";
 import { HiLocationMarker } from "react-icons/hi";
 import edit_outline from "@/assets/Images/edit_outline.svg";
 import trash from "@/assets/Images/trash.svg";
+import moment from "moment";
 const CeritifcateCard = ({
+  data,
   state,
   setState,
   headingStyle,
@@ -35,7 +36,7 @@ const CeritifcateCard = ({
         flexWrap={{ xl: "nowrap", base: "wrap" }}
       >
         <Heading variant={"p7"} color={"gray.text"}>
-          Diploma Name
+          {data.certificateName}
         </Heading>
 
         <Box
@@ -94,14 +95,15 @@ const CeritifcateCard = ({
         gap={{ md: "10px", sm: "6px", base: "5px" }}
       >
         <Heading color={"gray.text"} variant={"p12"} sx={headingStyle}>
-        Jobreef Professional Academy
+          {data.organizationName}
         </Heading>
         <Box fontSize={{ sm: "14px", base: "8px" }}>
           <GoDotFill style={{ color: "#D9D9D9" }} />
         </Box>
 
         <Heading color={"gray.text"} variant={"p12"} sx={headingStyle}>
-          September 2017 - July 2023
+          {moment(data.stateDate).format("MMMM YYYY")} {" - "}
+          {moment(data.endDate).format("MMMM YYYY")}
         </Heading>
         <Box fontSize={{ sm: "14px", base: "8px" }}>
           <GoDotFill style={{ color: "#D9D9D9" }} />
@@ -121,13 +123,13 @@ const CeritifcateCard = ({
               fontSize: isSmallerThe500 ? "15px" : "20px",
             }}
           />{" "}
-          Chicago, Illinois, USA
+          {data.state}, {data.city}, {data.country}
         </Heading>
         <Box fontSize={{ sm: "14px", base: "8px" }}>
           <GoDotFill style={{ color: "#D9D9D9" }} />
         </Box>
         <Heading sx={headingStyle} color={"gray.text"} variant={"p12"}>
-          Certificate Verification ID: 2f8ae5bfaa4c46dc3bba77655
+          Certificate Verification ID: {data.certificateId}
         </Heading>
       </Box>
       {/* <Box>

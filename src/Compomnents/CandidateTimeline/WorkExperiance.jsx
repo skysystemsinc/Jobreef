@@ -9,7 +9,40 @@ const WorkExperiance = ({ state, setState }) => {
   // const [experianceData, setexperianceData] = useState([]);
 
   // const experianceData = [];
-
+  const experienceData = [
+    {
+      companyName: "Microsoft",
+      designation: "Senior System’s Design Engineer",
+      currentlyWorking: false,
+      readOnly: false,
+      stateDate: new Date(),
+      endDate: new Date(),
+      country: "USA",
+      state: "",
+      city: "",
+      streetAddress: "",
+      employmentType: "",
+      jobFamily: "",
+      jobSummary:
+        "Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability. Requirements Analysis: Collaborate with stakeholders, customers, and cross-functional teams to gather and analyze system requirements,",
+    },
+    {
+      companyName: "Microsoft",
+      designation: "Senior System’s Design Engineer",
+      currentlyWorking: false,
+      readOnly: false,
+      stateDate: new Date(),
+      endDate: new Date(),
+      country: "USA",
+      state: "",
+      city: "",
+      streetAddress: "",
+      employmentType: "",
+      jobFamily: "",
+      jobSummary:
+        "Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability. Requirements Analysis: Collaborate with stakeholders, customers, and cross-functional teams to gather and analyze system requirements,",
+    },
+  ];
   return (
     <Box>
       {state.addExperience || state.edit ? (
@@ -22,7 +55,14 @@ const WorkExperiance = ({ state, setState }) => {
         </Box>
       ) : (
         <Box width={"100%"} mx={"auto"}>
-          <ExperianceCard state={state} setState={setState} />
+          {/* <ExperianceCard state={state} setState={setState} /> */}
+          {experienceData.map((item, ind) => {
+            return (
+              <Box key={ind}>
+                <ExperianceCard data={item} state={state} setState={setState} />
+              </Box>
+            );
+          })}
 
           <Flex justifyContent={"center"}>
             <Button

@@ -12,7 +12,32 @@ import DeleteModal from "../DeleteModal/DeleteModal";
 const Certification = () => {
   const [state, setState] = useState({
     addCertification: false,
-    certificationData: [],
+    certificationData: [
+      {
+        certificateName: "Diploma Name",
+        organizationName: "Jobreef Professional Academy",
+        noExpiry: false,
+        readOnly: false,
+        certificateId: "2f8ae5bfaa4c46dc3bba77655",
+        issuedOn: new Date(),
+        country: " USA",
+        state: "Chicago",
+        city: " Illinois",
+        validUntil: new Date(),
+      },
+      {
+        certificateName: "Diploma Name",
+        organizationName: "Jobreef Professional Academy",
+        noExpiry: false,
+        readOnly: false,
+        certificateId: "2f8ae5bfaa4c46dc3bba77655",
+        issuedOn: new Date(),
+        country: " USA",
+        state: "Chicago",
+        city: " Illinois",
+        validUntil: new Date(),
+      },
+    ],
     edit: false,
     delete: false,
   });
@@ -54,7 +79,13 @@ const Certification = () => {
           width={{ xl: "73%", base: "100%" }}
           mx={"auto"}
         >
-          <CeritifcateCard state={state} setState={setState} />
+          {state.certificationData.map((item) => {
+            return (
+              <Box>
+                <CeritifcateCard data={item} state={state} setState={setState} />
+              </Box>
+            );
+          })}
 
           <Flex justifyContent={"center"}>
             <Button
