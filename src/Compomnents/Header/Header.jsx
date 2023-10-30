@@ -317,6 +317,7 @@ const NAV_ITEMS = [
   },
   {
     label: "Search Jobs",
+    href: "/candidate/job-search"
   },
   {
     label: "For Job Seekers",
