@@ -41,7 +41,6 @@ const JobSearchResults = () => {
   const [Data, setData] = useState(DataArray);
 
   const handleCheckboxChange = (value) => {
-    console.log("value", value , selectedValues)
     if (selectedValues.includes(value)) {
       setSelectedValues(selectedValues.filter((v) => v !== value));
     } else {
