@@ -3,13 +3,16 @@ import {
   Box,
   Button,
   Center,
-  FormLabel,
   Heading,
   Image,
   Input,
   Text,
   useMediaQuery,
+  FormLabel,
+  Flex,
+  CloseButton
 } from "@chakra-ui/react";
+import { AttachmentIcon } from "@chakra-ui/icons";
 import { Link } from "@chakra-ui/next-js";
 import LabelInput from "@/Compomnents/LabelInput/LabelInput";
 import { FcGoogle } from "react-icons/fc";
@@ -17,30 +20,37 @@ import ComponentMyChip from "../../Compomnents/ComponentMyChip/ComponentMyChip";
 import { useEffect, useState } from "react";
 import EmptyVector from "../../assets/Images/EmptyVector.svg";
 import microsoft from "@/assets/Images/microsoft.svg";
+import upload from "@/assets/Images/upload.svg";
+
 
 export default function Apply({object}) {
-  const [isSmallerThe500] = useMediaQuery("(max-width: 500px)");
-  const [state, setstate] = useState({
-    email: "",
-    password: "",
-  });
-  useEffect(() => {
-    localStorage.clear();
-  }, []);
+
+
+const [selectedFiles, setSelectedFiles] = useState([]);
+
+const handleFileChange = (event) => {
+  const files = Array.from(event.target.files);
+  setSelectedFiles([...selectedFiles, ...files]);
+};
+
+const handleRemoveFile = (fileIndex) => {
+  const updatedFiles = [...selectedFiles];
+  updatedFiles.splice(fileIndex, 1);
+  setSelectedFiles(updatedFiles);
+};
+
 
   return (
     <>
       <Box  width={"100%"} textAlign={"center"}>
         <Box display={"flex"} justifyContent={"center"} mb={"25px"}>
-            <Heading>Apply for this job</Heading>
+            <Heading variant={"p8"} fontWeight={700} color={"black"}>Apply for this job</Heading>
         </Box>
         <Box
               display={"flex"}
               alignItems={"flex-start"}
               justifyContent={"space-between"}
-              borderBottom={"1px solid "}
               flexWrap={{ xl: "nowrap", base: "wrap" }}
-              borderColor={"gray.400"}
               pb={{ lg: "20px", base: "10px" }}
             >
               <Box
@@ -86,78 +96,70 @@ export default function Apply({object}) {
                     </Box>
                   </Heading>
                 </Box>
-                <Image
-                  width={"10px"}
-                  src={EmptyVector.src}
-                  mt={1.5}
-                  marginRight={2}
-                />
+                
               </Box>
             </Box>
-        <Box marginBottom={"20px"}>
-          <LabelInput
-            state={state.email}
-            setState={(e) => {
-              setstate((prev) => {
-                return { ...prev, email: e.target.value };
-              });
-            }}
-            labelVariant={"label"}
-            type="email"
-            variant={"bg-input"}
-            placeholder="Enter Email"
-            label={"Email"}
-          />
+        <Box marginBottom={"10px"}>
+          
+        <Heading variant={"p11"} fontWeight={700} color={"gray.text"}
+        style={{color: '#000',
+            textalign: 'center',
+            fontfamily: 'Open Sans',
+            fontsize: '20px',
+            fontstyle: 'normal',
+            fontweight: '600',
+            lineheight: 'normal',}}
+        > Included Attachments:</Heading>
         </Box>
-        <Box>
-          <LabelInput
-            state={state.password}
-            setState={(e) => {
-              setstate((prev) => {
-                return { ...prev, password: e.target.value };
-              });
-            }}
-            iconStyle={{ marginTop: "7px" }}
-            labelVariant={"label"}
-            type="password"
-            passworInput
-            variant={"bg-input"}
-            placeholder="Enter your Password"
-            label={"Password"}
-          />
+        <Flex direction="column" alignItems="center" gap={2}>
+            {selectedFiles.map((file, index) => (
+            <Box key={index} fontSize={15} display="flex" alignItems="center">
+                <AttachmentIcon boxSize={4} mr={2} />
+                {file.name}
+                <CloseButton ml={0} mt={1} size="sm"  onClick={() => handleRemoveFile(index)} />
+            </Box>
+            ))}
+        </Flex>
+        <Box mt={6} mb={4}>
+            <Heading variant={"p7"} fontWeight={700} color={"gray.text"}
+            style={{color: '#000',
+            textalign: 'center',
+            fontfamily: 'Open Sans',
+            fontsize: '16px',
+            fontstyle: 'normal',
+            fontweight: '600',
+            lineheight: 'normal'}}>Attach Addtional Files</Heading>
         </Box>
-        <Box display={"flex"} justifyContent={"flex-end"}>
-          <Link
-            variant={"blue-link"}
-            marginTop={{ "2xl": "24px", base: "12px" }}
-            _hover={{ textDecoration: "none" }}
-            href={"/"}
-          >
-            Forgot Password
-          </Link>
-        </Box>
-        <Box margin={"25px 0px 42px 0px"}>
-          <Heading
-            variant="p7"
-            fontSize={"14px"}
-            // variant={"blue-link"}
-            as={"p"}
-            // size={"sm"}
-            color={"black.100 !important"}
-          >
-            Don’t have an account?{" "}
-            <Link
-              href={"/company/sign-up"}
-              display={"inline"}
-              _hover={{ textDecoration: "none" }}
-              color={"blue.500"}
+        <Box
+        mt={{ base: "20px", md: "0px" }}
+        mb={{ base: "20px", md: "40px" }}
+        display={"flex"}
+        justifyContent={"center"}
+        >
+        <label htmlFor="fileInput">
+            <FormLabel
+            variant={"lightblue"}
+            border={"1px dashed"}
+            borderColor={"#BBBBC7"}
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            gap={{ md: "10px", base: "8px" }}
+            margin={0}
             >
-              {" "}
-              Sign up
-            </Link>
-          </Heading>
+            <Image src={upload.src} width={{ md: "17px", base: "15px" }} />
+            Upload
+            <Input
+                type="file"
+                id="fileInput"
+                hidden
+                multiple
+                onChange={handleFileChange}
+            />
+            </FormLabel>
+        </label>
+        
         </Box>
-
         <Box
           display={"flex"}
           justifyContent={"center"}
@@ -170,27 +172,11 @@ export default function Apply({object}) {
             variant={"blue-btn"}
             width={{ md: "162px", base: "140px" }}
           >
-            Login
+            Apply Now
           </Button>
-          <Button
-            width={{ base: "max-content" }}
-            boxShadow="0px 0px 4px 0px rgba(0, 0, 0, 0.25)"
-            variant={"outline"}
-            fontSize={{ "2xl": "16px", sm: "14px", base: "12px" }}
-            leftIcon={<FcGoogle />}
-            px={{ "2xl": "20px", base: "10px" }}
-          >
-            <Center>
-              <Text
-                variant={"p1"}
-                color={"gray.text"}
-                fontSize={{ "2xl": "16px", sm: "13px", base: "11px" }}
-              >
-                Sign in with Google
-              </Text>
-            </Center>
-          </Button>
+          
         </Box>
+        
       </Box>
     </>
   );

@@ -36,11 +36,13 @@ const PreviousSearches = [
 const ShowPreviousSearches = () => {
   return (
     <Box
-      display={{ lg: "flex", base: "none" }}
+
+      display={"flex"}
       flexDirection={"column"}
       flexWrap={"wrap"}
       width="100%"
-      flex={1.25}
+    //  width={"250px"}
+      // flex={1.25}
     >
       <Box borderWidth={1} borderColor="gray.400" borderRadius={"8px"}>
         <Heading mt={"22px"} ml={2} mb={2} variant={"p10"}>

@@ -255,7 +255,6 @@ export const CandidateTimeline = ({ candidate, variant }) => {
               {" Back"}
             </Button>
             <Button
-              // width={{ md: "200px", sm: "180px", base: "130px" }}
               variant={"blue-btn"}
               onClick={handleNext}
             >

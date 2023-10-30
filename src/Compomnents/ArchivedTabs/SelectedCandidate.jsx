@@ -8,7 +8,6 @@ const SelectedCandidate = ({ matchCandidate }) => {
   const selectedCandidates = useSelector(
     (state) => state.candidates.value.selected
   );
-  console.log("selectedCandidates", selectedCandidates);
 
   return (
     <Box display={"flex"} gap="20px">

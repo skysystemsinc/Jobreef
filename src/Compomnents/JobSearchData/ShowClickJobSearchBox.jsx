@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import { useContext } from "react";
 import { GoDotFill } from "react-icons/go";
 import ComponentMyChip from "../../Compomnents/ComponentMyChip/ComponentMyChip";
 import microsoft from "@/assets/Images/microsoft.svg";
 import EmptyVector from "../../assets/Images/EmptyVector.svg";
 import cross from "../../assets/Images/cross.svg";
-// import "./scrollbar.css"; 
+// import "./scrollbar.css";
 import {
   Box,
   Button,
@@ -18,33 +19,16 @@ import {
   Select,
   useBreakpointValue,
   useDisclosure,
+  List,
+  ListItem,
+  ListIcon,
+  OrderedList,
+  UnorderedList,
+  
 } from "@chakra-ui/react";
 import LoginModal from "../LoginModal/LoginModal";
 import ApplyForThisJobModal from "./ApplyForThisJobModal";
-
-// const tempDataArray = [
-//   {
-//     imageurl: "",
-//     title: "Senior System's Design Engineer",
-//     name: "Microsoft",
-//     tags: "Urgently Hiring",
-//     location: "Redmond, Washington State",
-//     Salary: "150,000$",
-//     EmploymentType: "Full-Time",
-//     Experience: 3,
-//     ApplicationDeadline: "07/31/2023",
-//     DesiredSkills: [
-//       "Technical knowledge",
-//       "System Architecture",
-//       "Risk Management",
-//       "Project Management",
-//       "Quality Focus",
-//       "Q/A Testing",
-//       "LeaderShip",
-//       "Product Design",
-//     ],
-//   },
-// ];
+import { Role_context } from "../../context/context";
 
 const text = [
   {
@@ -85,15 +69,18 @@ const text = [
   },
 ];
 
-
 const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { templogin } = useContext(Role_context);
 
   return (
     <Box flex={4} >
-      {/* <LoginModal open={isOpen} onClose={onClose} /> */}
-      <ApplyForThisJobModal open={isOpen} onClose={onclose} object={object}/>
-      <Box  
+      {templogin ? (
+        <ApplyForThisJobModal open={isOpen} onClose={onClose} object={object} />
+      ) : (
+        <LoginModal open={isOpen} onClose={onClose} />
+      )}
+      <Box
         p={{ sm: "20px", base: "12px" }}
         width={"100%"}
         borderRadius={"8px"}
@@ -102,20 +89,20 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
         box-shadow="0px 4px 20px 0px rgba(0, 0, 0, 0.05)"
         mb={10}
         borderWidth={1}
-        borderColor="gray.100"
-        height={'100vh'}
+        borderColor="gray.400"
+        height={{ lg: "100vh" }}
         className="scrollableBox"
-        overflowY= "scroll"
+        overflowY="auto"
         sx={{
-          '&::-webkit-scrollbar': {
-            width: '5px',
-            borderRadius: '8px',
+          "&::-webkit-scrollbar": {
+            width: "5px",
+            borderRadius: "8px",
           },
-          '&::-webkit-scrollbar-thumb': {
+          "&::-webkit-scrollbar-thumb": {
             backgroundColor: "#797979",
-            borderRadius: '30px',
+            borderRadius: "30px",
           },
-        }}   
+        }}
       >
         <Box
           display={"flex"}
@@ -125,7 +112,6 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
           flexWrap={{ xl: "nowrap", base: "wrap" }}
           borderColor={"gray.400"}
           pb={{ lg: "20px", base: "10px" }}
-          
         >
           <Box
             display={"flex"}
@@ -170,12 +156,14 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
                   width={"10px"}
                   src={cross.src}
                   marginRight={2}
-                  onClick={() => settoggle(true)}
+                  onClick={() => {
+                    settoggle(true);
+                    localStorage.setItem("myData", null);
+                  }}
                 />
               </Box>
               <Button
-              onClick={onOpen}
-
+                onClick={onOpen}
                 sx={{
                   height: { sm: "38px", base: "32px" },
                   // width: { md: "200px", sm: "180px", base: "168px" },
@@ -289,26 +277,17 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
           >
             Responsibilities
           </Heading>
+          <OrderedList color={"gray.text"} variant={"p4"} fontSize={'15px'}>
           {text.map((data, index) => (
-            <Heading color={"gray.text"} variant={"p4"} display={"flex"}>
-              {index + 1}.{" "}
-              <Heading ml={2} color={"gray.text"} variant={"p4"}>
-                {data.value}
-              </Heading>
-            </Heading>
+            <Box key={index}>             
+                <ListItem>
+                  <Heading  color={"gray.text"} variant={"p4"} display={"flex"}>
+                    {data.value}
+                  </Heading>
+                </ListItem>   
+            </Box>
           ))}
-
-          {/* <Heading color={"gray.text"} variant={"p4"} mt={3}>
-            Qualification and requirements
-          </Heading>
-          {text2.map((data, index) => (
-            <Heading color={"gray.text"} variant={"p4"} display={"flex"}>
-              {index + 1}.{" "}
-              <Heading ml={2} color={"gray.text"} variant={"p4"}>
-                {data.value}
-              </Heading>
-            </Heading>
-          ))} */}
+          </OrderedList>
         </Box>
       </Box>
     </Box>

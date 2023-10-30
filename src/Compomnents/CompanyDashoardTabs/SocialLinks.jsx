@@ -66,7 +66,6 @@ const SocialLink = () => {
       },
       data: { ...State },
     });
-    console.log("response", response);
     setreadOnly(true);
     setisEdit(false);
   };

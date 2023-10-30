@@ -46,11 +46,6 @@ export const SignUpTimeline = ({ candidate, variant }) => {
   const [compeletedStep, setcompeletedStep] = useState([]);
   const initialRender = useRef(true);
   useEffect(() => {
-    // if (initialRender.current) {
-    //   initialRender.current = false;
-    //   return;
-    // }
-    // console.log("activeStep", activeStep)
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
 
@@ -60,17 +55,6 @@ export const SignUpTimeline = ({ candidate, variant }) => {
         router.push("/candidate/registration");
         // router.reload()
       } else {
-        // const response = await fetch("/api/company/userProfile", {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify({
-        //     ...State,
-        //   }),
-        // });
-        // const data = await response.json();
-        // console.log(data);
         router.push("/registration");
       }
     } else {
@@ -95,10 +79,7 @@ export const SignUpTimeline = ({ candidate, variant }) => {
         activeStep={activeStep}
       >
         {steps.map(({ label }, index) => {
-          console.log(
-            " compeletedStep.includes(index)",
-            compeletedStep.includes(index)
-          );
+          
           const CostomeCheckIcon = () => {
             return (
               <Heading
@@ -195,11 +176,9 @@ export const SignUpTimeline = ({ candidate, variant }) => {
                 const updatedCompletedSteps = compeletedStep.filter(
                   (step) => step != activeStep
                 );
-                console.log("updatedCompletedSteps", updatedCompletedSteps);
                 setcompeletedStep(updatedCompletedSteps);
               }
             }}
-            // width={{ md: "200px", sm: "180px", base: "130px" }}
             variant="outline-blue"
           >
             {" Back"}

@@ -3,9 +3,10 @@ import { GoDotFill } from "react-icons/go";
 import ComponentMyChip from "../../Compomnents/ComponentMyChip/ComponentMyChip";
 import microsoft from "@/assets/Images/microsoft.svg";
 import EmptyVector from "../../assets/Images/EmptyVector.svg";
-import { DataArray } from './tempSchema.js';
+// import { DataArray } from './tempSchema.js';
 import ShowEmptyResult from "./ShowEmptyResult";
 import { Role_context } from "../../context/context";
+import bookmark from "../../assets/Images/bookmark.svg";
 import {
     Box,
     Button,
@@ -20,33 +21,27 @@ import {
     useBreakpointValue,
   } from "@chakra-ui/react";
 
-  var Data = DataArray;
-  const originalData = [...DataArray];
 
 const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject,Data }) => {
   
   const [dataToDisplay, setDataToDisplay] = useState(Data);
+  const [clickedStates, setClickedStates] = useState(Array(Data.length).fill(false));
+  const [load,setLoad] = useState();
 
+  const handleBoxClick = (index) => {
+    const updatedClickedStates = [...clickedStates];
+    updatedClickedStates.fill(false);
+    updatedClickedStates[index] = true;
+    setClickedStates(updatedClickedStates);
+  };
 
-  // useEffect(()=>{
-  //     if (selectedValues.includes("Date Posted"))
-  //     { 
-  //       Data.sort((a, b) => {
-  //         const dateA = parse(a.ApplicationDeadline, 'MM/dd/yyyy', new Date());
-  //         const dateB = parse(b.ApplicationDeadline, 'MM/dd/yyyy', new Date()); 
-  //         // return compareAsc(dateA, dateB);
-  //         return compareDesc(dateA, dateB);
-  //       });  
-  //       setDataToDisplay(Data)
-  //     }
-  //     else
-  //     {
-  //         Data = [...originalData]
-  //         setDataToDisplay(Data)
-  //         console.log(Data) 
-  //     }
-    
-  // },[selectedValues])
+  const [imageSources, setImageSources] = useState(Array(Data.length).fill(EmptyVector));
+
+  const handleImageClick = (index) => {
+    const newImageSources = [...imageSources];
+    newImageSources[index] = newImageSources[index] === bookmark ? EmptyVector : bookmark;
+    setImageSources(newImageSources);
+  };
 
   const {
       company,
@@ -107,10 +102,8 @@ const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject,Data }) 
     });
     
     
-    if(selectedValues.includes("Date Posted") || foundEmploymentType || foundExpType || foundSalType || foundJobModel  )
-    {
+    if(foundEmploymentType || foundExpType || foundSalType || foundJobModel || (selectedValues.length === 1 && selectedValues[0] === "Date Posted") )
         length+=1
-    }
     else 
         return null
 
@@ -125,6 +118,7 @@ const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject,Data }) 
     
     return(
     <Box
+            key={index}
             p={{ sm: "20px", base: "12px" }}
             width={"100%"}
             borderRadius={"8px"}
@@ -134,17 +128,37 @@ const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject,Data }) 
             borderWidth={1}
             borderColor="gray.400"
             onClick={()=>{
+              handleBoxClick(index)
               settoggle(false);
               setTempObject(object)
+              setLoad(index)
+              // Storing data in local storage
+              localStorage.setItem('myData', index);
             }}
-            style={{transition: "all 0.4s ease"}}
+            style={{
+              // transition: clickedStates[index] ? "all 0.4s ease" : "",
+              // cursor: clickedStates[index] ? "pointer" : "",
+              // boxShadow: clickedStates[index]
+              //   ? "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)"
+              //   : "",
+              // border: clickedStates[index] ? '1px solid #2CA5C3' : "",
+              // transform: clickedStates[index] ? "scale(1.01)" : "",
+              transition: localStorage.getItem('myData') == index ? "all 0.4s ease" : "",
+              cursor: localStorage.getItem('myData') == index ? "pointer" : "",
+              boxShadow: localStorage.getItem('myData') == index
+                ? "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)"
+                : "",
+              border: localStorage.getItem('myData') == index ? '1px solid #2CA5C3' : "",
+              transform: localStorage.getItem('myData') == index ? "scale(1.01)" : "",
+            }}
             _hover={{
               cursor: "pointer",
               boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)",
               border: '1px solid #2CA5C3',
               transition: "all 0.4s ease",
-              transform: "scale(1.01)"
+              transform: "scale(1.01)",
             }}
+            
           >
             <Box
               display={"flex"}
@@ -199,10 +213,13 @@ const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject,Data }) 
                   </Heading>
                 </Box>
                 <Image
-                  width={"10px"}
-                  src={EmptyVector.src}
+                  // width={"10px"}
+                  src={imageSources[index].src}
                   mt={1.5}
                   marginRight={2}
+                  onClick={
+                    () => handleImageClick(index)
+                  }
                 />
               </Box>
             </Box>

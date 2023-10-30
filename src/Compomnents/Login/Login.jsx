@@ -22,8 +22,15 @@ import LabelInput from "@/Compomnents/LabelInput/LabelInput";
 import { FcGoogle } from "react-icons/fc";
 import { color } from "framer-motion";
 import { useEffect, useState } from "react";
+import { Role_context } from "../../context/context";
+import { useContext } from "react";
 
 export default function Login() {
+   const {
+    templogin,
+    setTemplogin,
+} = useContext(Role_context); 
+
   const [isSmallerThe500] = useMediaQuery("(max-width: 500px)");
   const [state, setstate] = useState({
     email: "",
@@ -122,6 +129,7 @@ export default function Login() {
             className="nintoFont"
             variant={"blue-btn"}
             width={{ md: "162px", base: "140px" }}
+            onClick={()=>{setTemplogin(true)}}
           >
             Login
           </Button>

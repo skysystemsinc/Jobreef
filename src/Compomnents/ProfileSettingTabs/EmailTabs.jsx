@@ -29,7 +29,6 @@ const EmailTabs = () => {
       data: { email },
     });
 
-    console.log(response);
     setisEdit(false);
     setotp(true);
     setreadOnly(true);

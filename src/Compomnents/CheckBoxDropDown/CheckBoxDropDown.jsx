@@ -25,7 +25,6 @@ const CheckBoxDropDown = ({ label, listItme }) => {
         display={"flex"}
         whiteSpace={"nowrap"}
         alignItems={"center"}
-        // colorScheme="blue"
       >
         <Box display={"flex"} alignItems={"center"} gap={"7px"}>
           <BiFilter fontSize={"20px"} />{" "}

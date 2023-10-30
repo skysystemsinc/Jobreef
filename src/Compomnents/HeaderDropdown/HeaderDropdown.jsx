@@ -27,7 +27,7 @@ import { Role_context } from "@/context/context";
 const HeaderDropdown = ({ candidate }) => {
   const router = useRouter();
   const { company, setCompany } = useContext(Role_context);
-  console.log("company", company);
+ 
 
   const companydropdown = [
     {

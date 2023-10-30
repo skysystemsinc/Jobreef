@@ -57,7 +57,6 @@ const JobPostTimeline = ({ candidate, variant }) => {
     applicationType: { type: "External", url: "" },
     rate: "",
   });
-  console.log("state", state);
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
