@@ -8,6 +8,7 @@ const DropDown = ({
   state,
   icon,
   variant,
+  style,
   placeholder,
 }) => {
   return (
@@ -20,6 +21,7 @@ const DropDown = ({
         // variant={"filled"}
         icon={icon ? icon : <Image width={"16px !important"}  src={black_arrow_down.src} />}
         placeholder={placeholder}
+        sx={style}
       >
         {dropdownOption ? (
           dropdownOption?.map((item) => {

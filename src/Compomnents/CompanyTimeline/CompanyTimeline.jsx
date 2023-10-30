@@ -69,20 +69,10 @@ export const CompanyTimeline = ({ variant }) => {
     // }
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
-
   const handleNext = async () => {
     if (isLastStep) {
-      console.log("isLastStep", isLastStep);
-      const response = await axios("/api/company/companyProfile", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: State,
-      });
-      if (response) {
         nextStep();
-      }
+    
 
       return;
     }
@@ -155,7 +145,6 @@ export const CompanyTimeline = ({ variant }) => {
           colorScheme="blue"
           activeStep={activeStep}
         >
-          {/* {console.log(" compeletedStep.includes(0)", compeletedStep.includes(0),compeletedStep)} */}
           {steps.map(({ label }, index) => {
             const CostomeCheckIcon = () => {
               return (
@@ -245,11 +234,11 @@ export const CompanyTimeline = ({ variant }) => {
           <Button
             isDisabled={activeStep === 0}
             onClick={() => {
-              router.push("/company/profile-setting");
+              router.push("/");
             }}
             variant="blue-btn"
           >
-            {" Logout"}
+            {"Login"}
           </Button>
         ) : (
           <>

@@ -19,7 +19,7 @@ const WorkExperiance = () => {
           />
         </Box>
       ) : experianceData.length > 0 ? (
-        <Box mt={"30px"} width={{ lg: "73%", base: "100%" }} mx={"auto"}>
+        <Box mt={"30px"} minHeight={"63vh"} width={{ lg: "73%", base: "100%" }} mx={"auto"}>
           <ExperianceCard />
 
           <Flex justifyContent={"center"}>
@@ -37,7 +37,7 @@ const WorkExperiance = () => {
           </Flex>
         </Box>
       ) : (
-        <Box  mb={"80px"} pl={{ md: "30px", base: "0px" }}>
+        <Box  minHeight={"68vh"} pl={{ md: "30px", base: "0px" }}>
           <TextCard
             addHandle={() => setaddExperiance(true)}
             title={"Ready to build an impressive resume?"}

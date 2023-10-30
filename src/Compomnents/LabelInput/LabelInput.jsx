@@ -89,6 +89,7 @@ const LabelInput = ({
           onChange={setState}
           placeholder={placeholder}
           size="sm"
+          readOnly={readOnly}
           variant={variant}
           resize={"none"}
         />

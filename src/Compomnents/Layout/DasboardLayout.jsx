@@ -13,11 +13,11 @@ const DasboardLayout = ({ children }) => {
       <BottomWaveImage />
       <SideBar />
       <Box
-        // display={"flex"}
-        // justifyContent={placement?placement:"center"}
-        bg={"white.100"}
+        position={"relative"}
+        top={"0px"}
+        zIndex={2}
+        
         ml={{ xl: "250px", base: "55px" }}
-        // mr={{ md: "0px", base: "9px" }}
         mt={"40px"}
       >
         {/* <CompanyTabs /> */}

@@ -23,7 +23,9 @@ const Certification = () => {
           />
         </Box>
       ) : experianceData.length > 0 ? (
-        <Box mt={"30px"} width={{ xl: "73%", base: "100%" }} mx={"auto"}>
+        <Box 
+        minHeight={"63vh"}
+        mt={"30px"} width={{ xl: "73%", base: "100%" }} mx={"auto"}>
           <CeritifcateCard />
 
           <Flex justifyContent={"center"}>
@@ -42,7 +44,7 @@ const Certification = () => {
           </Flex>
         </Box>
       ) : (
-        <Box mb={"80px"} pl={{ md: "30px", base: "0px" }}>
+        <Box minHeight={"68vh"} pl={{ md: "30px", base: "0px" }}>
           <TextCard
             addHandle={() => setaddEducation(true)}
             title={"Make Yourself Stand Out:"}

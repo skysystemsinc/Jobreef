@@ -12,20 +12,26 @@ import { FiSearch, FiMapPin } from "react-icons/fi";
 import React,{useContext,useState} from "react";
 import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
 import location from "../../assets/Images/location.svg";
-import { RoleContext } from "../../context/context"; // Import the context
 import { Role_context } from "../../context/context";
 
-const JobSearchData = ({
-  SearchNow,
-}) => {
-  const { searchEntryLocation,searchEntryCompany, setSearchEntryLocation, setSearchEntryCompany} = useContext(Role_context);
+const JobSearchData = () => {
+  
+  const {
+    company,
+    setCompany,
+    searchNow,
+    setHandleCompanyEntry, 
+    getHandleCompanyEntry,
+    setHandleLocationEntry,
+    getHandleLocationEntry,
+} = useContext(Role_context); 
 
   return (
     <>
       <Box
-        mt={{ md: "50px", lg: "60px", base: "20px" }}
         width={{ md: "70%", sm: "100%" }}
         margin="0 auto" // Center the container horizontally
+        mt={{ md: "50px", lg: "60px", base: "20px" }}
       >
         <Flex
           display={{ lg: "flex", base: "none" }}
@@ -40,11 +46,13 @@ const JobSearchData = ({
             <Input
               color={"black"}
               type="text"
-              variant="filled"
-              placeholder="Search for Jobs Companies and Keywords"
+              variant="bg-input"
+              placeholder="Search for Jobs, Companies, and Keywords"
+              _placeholder={{ color: "rgba(0, 0, 0, 0.6)" }}
               marginRight="2"
-              onChange={(e) => setSearchEntryCompany(e.target.value)}
+              onChange={(e) => setHandleCompanyEntry(e.target.value)}
               bg={"gray.200"}
+              
             />
           </InputGroup>
 
@@ -61,21 +69,22 @@ const JobSearchData = ({
             <Input
               color={"black"}
               type="text"
-              variant="filled"
-              placeholder="Search By Location e.g remote"
+              variant="bg-input"
+              placeholder="Search by Location e.g. “remote”"
+              _placeholder={{ color: "rgba(0, 0, 0, 0.6)" }}
               marginRight="2"
               bg={"gray.200"}
-              onChange={(e) => setSearchEntryLocation(e.target.value)}
+              onChange={(e) => setHandleLocationEntry(e.target.value)}
             />
           </InputGroup>
 
           <Button
-            onClick={SearchNow}
-            style={{ padding: "20px 40px 20px 40px" }}
+            onClick={searchNow}
+            sx={{   padding: "20px 60px 20px 60px" }}
             variant="blue-btn"
             marginLeft="2" // Add margin to the button for space
           >
-            Search Now
+            Search Now 
           </Button>
         </Flex>
 
@@ -85,6 +94,7 @@ const JobSearchData = ({
           justifyContent="center" // Center vertically
           alignItems="center" // Center horizontally
           rowGap={1}
+          mb={"20px"}
         >
           <InputGroup>
             <InputLeftElement
@@ -92,15 +102,17 @@ const JobSearchData = ({
               children={<FiSearch color="black" />}
             />
             <Input
-              color="black"
+              color={"black"}
               type="text"
-              variant="filled"
+              variant="bg-input"
               placeholder="Search for Jobs Companies and Keywords"
               marginRight="2"
-              onChange={(e) => searchEntryForCompany(e.target.value)}
-              bg="gray.200"
+              onChange={(e) => setHandleCompanyEntry(e.target.value)}
+              bg={"gray.200"}
+              
             />
           </InputGroup>
+
 
           <InputGroup>
             <InputLeftElement
@@ -113,22 +125,25 @@ const JobSearchData = ({
               }
             />
             <Input
-              color="black"
+              color={"black"}
               type="text"
-              variant="filled"
+              variant="bg-input"
               placeholder="Search By Location e.g remote"
               marginRight="2"
-              bg="gray.200"
-              onChange={(e) => SearchEntryForLocation(e.target.value)}
+              bg={"gray.200"}
+              onChange={(e) => setHandleLocationEntry(e.target.value)}
             />
           </InputGroup>
 
           <Button
-            onClick={SearchNow}
-            style={{ padding: "20px 40px" }}
+            onClick={searchNow}
+            style={{ padding: "20px 40px 20px 40px" }}
             variant="blue-btn"
+            marginLeft="2" // Add margin to the button for space
+            mt={2}
+            
           >
-            Search Now
+            Search Now 
           </Button>
         </Box>
       </Box>

@@ -1,6 +1,6 @@
 import JobPostTabs from "@/Compomnents/JobPost/JobPost";
 import CompanyDasboard from "@/Compomnents/Layout/DasboardLayout";
-import PaginatedTable from "@/Compomnents/MembersTable/MembersTable";
+import PaginatedTable from "@/Compomnents/PaginatedTable/PaginatedTable";
 import TeamMembers from "@/Compomnents/TeamMembers/TeamMembers";
 
 import { Box, Button, Flex } from "@chakra-ui/react";
@@ -14,7 +14,7 @@ const JobPost = () => {
     <>
 
       <CompanyDasboard>
-        <Box px={"10px"}>
+        <Box px={{ md: "20px" , base:'10px' }} position={"relative"} top={"0px"} zIndex={2} >
           <JobPostTabs />
         </Box>
       </CompanyDasboard>

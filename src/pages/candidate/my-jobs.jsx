@@ -8,7 +8,7 @@ import React from "react";
 const myJobs = () => {
   return (
     <>
-      <Header />
+      <Header candidate />
 
       <Box display={"flex"} justifyContent={"center"} mt={"43px"}>
         <Box

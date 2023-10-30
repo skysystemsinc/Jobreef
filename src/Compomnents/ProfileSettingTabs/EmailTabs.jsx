@@ -29,7 +29,6 @@ const EmailTabs = () => {
       data: { email },
     });
 
-    console.log(response);
     setisEdit(false);
     setotp(true);
     setreadOnly(true);
@@ -48,6 +47,8 @@ const EmailTabs = () => {
       justifyContent={"center"}
       flexDirection={"column"}
       alignItems={"center"}
+    
+
       // mt={{ md: "60px", base: "40px" }}
       // pb={{ md: "20px", base: "0px" }}
     >

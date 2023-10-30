@@ -32,8 +32,8 @@ const Overview = ({ setTabIndex, tabIndex }) => {
             readOnly={state.readOnly}
             labelVariant={"label"}
             type="text"
+            dropdown={state.readOnly ? false : true}
             variant={"bg-input"}
-            dropdown
             placeholder="Select your home country"
             label={"Country"}
           />
@@ -44,7 +44,7 @@ const Overview = ({ setTabIndex, tabIndex }) => {
             variant={"bg-input"}
             placeholder="Select your state / province"
             label={"State / Province"}
-            dropdown
+            dropdown={state.readOnly ? false : true}
           />
         </InputWrapper>
 
@@ -54,8 +54,7 @@ const Overview = ({ setTabIndex, tabIndex }) => {
             type="text"
             readOnly={state.readOnly}
             variant={"bg-input"}
-            placeholder="Select your city"
-            dropdown
+            placeholder="Enter City"
             label={"City"}
           />
           <LabelInput
@@ -129,36 +128,6 @@ const Overview = ({ setTabIndex, tabIndex }) => {
             </Button>
           )}
         </Flex>
-
-        {/* <Box
-          display={"flex"}
-          justifyContent={"center"}
-          gap={{ md: "40px", base: "10px" }}
-          my={{ md: "56px", base: "20px" }}
-          pb={"39px"}
-        >
-          <Button
-            onClick={() => {
-              // tabIndex == 0 ? null : setTabIndex(--tabIndex);
-              router.push("/");
-            }}
-            // width={{ md: "160px", lg: "200px", sm: "140px", base: "120px" }}
-            variant="outline-blue"
-          >
-            Cancel
-          </Button>
-
-          <Button
-            onClick={() => {
-              // tabIndex == 2 ? null : setTabIndex(++tabIndex);
-              router.push("/");
-            }}
-            // width={{ md: "160px", lg: "200px", sm: "140px", base: "120px" }}
-            variant={"blue-btn"}
-          >
-            Save
-          </Button>
-        </Box> */}
       </Box>
     </Box>
   );

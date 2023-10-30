@@ -6,6 +6,39 @@ function Context({ children }) {
   const [company, setCompany] = useState(true);
   const [searchEntryLocation,setSearchEntryLocation] = useState('');
   const [searchEntryCompany,setSearchEntryCompany] = useState('');
+  const [tempSearchEntryLocation,setTempSearchEntryLocation] = useState('');
+  const [tempSearchEntryCompany,setTempSearchEntryCompany] = useState('');
+  const [toggle,setToggle] = useState(true);
+  const [templogin, setTemplogin] = useState(false);
+
+
+  const setHandleLocationEntry = (e) => {
+    setTempSearchEntryLocation(e)
+  };
+
+  const getHandleLocationEntry = () => {
+    return searchEntryLocation
+  };
+
+  const setHandleCompanyEntry = (e) => {
+    setTempSearchEntryCompany(e)
+    
+  };
+
+  const getHandleCompanyEntry = () => {
+    return searchEntryCompany
+  };
+
+  const searchNow = () => {
+    setSearchEntryLocation(tempSearchEntryLocation.trim())
+    setSearchEntryCompany(tempSearchEntryCompany.trim())
+    setToggle(false);
+  } 
+
+
+  const getToggle = ()=>{
+    return toggle;
+  }
 
   useEffect(() => {
     const role = localStorage.getItem("company");
@@ -17,7 +50,16 @@ function Context({ children }) {
 
   return (
     <Role_context.Provider value={{ company, setCompany,
-     searchEntryLocation, searchEntryCompany,setSearchEntryLocation, setSearchEntryCompany }}>
+      searchEntryLocation,
+      searchEntryCompany,
+      templogin,
+      setTemplogin,
+      getToggle,
+      searchNow,
+      setHandleCompanyEntry,
+      getHandleCompanyEntry,
+      setHandleLocationEntry,
+      getHandleLocationEntry, }}>
       {children}
     </Role_context.Provider>
   );

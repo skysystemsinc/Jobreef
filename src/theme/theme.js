@@ -2,6 +2,28 @@ import { extendTheme } from "@chakra-ui/react";
 
 import { StepsTheme as Steps } from "chakra-ui-steps";
 import { Nunito } from "next/font/google";
+
+// theme.js
+
+const customStyles = {
+  scrollableBox: {
+    overflowY: "scroll",
+    scrollbarWidth: "none",
+    "&::-webkit-scrollbar": {
+      width: "6px", // You can adjust the width
+    },
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: "#2CA5C3", // Customize the thumb color
+      borderRadius: "6px", // You can adjust the border radius
+    },
+    "&::-webkit-scrollbar-track": {
+      backgroundColor: "#ffffff", // Customize the track color
+    },
+  },
+};
+
+
+
 const nunito = Nunito({
   weight: ["200", "300", "400", "500", "600", "700", "900"],
   display: "swap",
@@ -26,12 +48,14 @@ const colors = {
     100: "#BBBBC7",
     200: "#F7F9FB",
     300: "#D9D9D9",
-    400: "#79797966",
+    400: "#797979",
     500: "#EBEBEB",
     600: "#494949",
     700: "#AFAFAF",
     800: "#FEFEFE",
+    lightBorder:"#cdcdcd",
     light: "#797979",
+
     text: "#4A4A4A",
   },
   blue: {
@@ -402,14 +426,15 @@ const components = {
         color: "blue.500",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
-        fontSize: ["13px", "13px", "16px", "16px", "16px", "17px"],
+        fontSize: ["13px", "13px", "15px", "15px", "15px", "15px"],
       },
       p8: {
+
         color: "gray.text",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 400,
-        lineHeight: ["26px", "33px", "40px", "40px", "40px", "54px"],
-        fontSize: ["18px", "23px", "27px", "27px", "30px", "36px"],
+        lineHeight: ["22px", "33px", "36px", "36px", "36px", "36px"],
+        fontSize: ["17px", "23px", "27px", "27px", "27px", "30px"],
       },
       p9: {
         color: "black.100",
@@ -422,7 +447,7 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
 
-        fontSize: ["13px", "14px", "16px", "16px", "16px", "18px"],
+        fontSize: ["13px", "14px", "14px", "14px", "14px", "14px"],
       },
       p11: {
         // color: "gray.text",
@@ -496,7 +521,7 @@ const components = {
                 margin: "10px 0px",
                 padding: { md: "20px 20px", base: "17px 10px" },
                 // fontSize: "15px",
-                fontSize: { md: "15px", base: "13px" },
+                fontSize: { md: "14px", base: "13px" },
 
                 fontWeight: 400,
                 color: "black.200",
@@ -507,6 +532,7 @@ const components = {
             bg: "blue.500",
             tr: { position: "relative", top: "-21px" },
             th: {
+              
               padding: { md: "23px 30px", base: "16px 20px" },
               fontSize: { md: "15px", base: "12px" },
               position: "relative",
@@ -525,7 +551,7 @@ const components = {
               },
               textTransform: "capitalize",
 
-              fontWeight: 500,
+              fontWeight: 400,
               color: "white.100",
             },
           },

@@ -54,7 +54,7 @@ const Education = () => {
           </Flex>
         </Box>
       ) : (
-        <Box mb={"80px"} pl={{ md: "30px", base: "0px" }}>
+        <Box minHeight={"68vh"} pl={{ md: "30px", base: "0px" }}>
           <TextCard
             addHandle={() => setaddEducation(true)}
             title={"Enrich Your Profile:"}

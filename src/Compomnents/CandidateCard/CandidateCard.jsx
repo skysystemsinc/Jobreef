@@ -6,7 +6,7 @@ import { HiLocationMarker } from "react-icons/hi";
 
 import { MdOutlineStarOutline } from "react-icons/md";
 import Star from "@/assets/Images/Star.svg";
-import Popovers from "../MembersTable/Popovers";
+import Popovers from "../PaginatedTable/Popovers";
 import Chip from "../Chip/Chip";
 const CandidateCard = ({
   matchCandidate,
@@ -71,11 +71,11 @@ const CandidateCard = ({
           gap={"5px"}
         >
           <Box display={"flex"} gap={"3px"} alignItems={"center"}>
-            <Image width={{ md: "22px", base: "17px" }} src={Star.src} />
-            <Image width={{ md: "22px", base: "17px" }} src={Star.src} />
-            <Image width={{ md: "22px", base: "17px" }} src={Star.src} />
-            <Image width={{ md: "22px", base: "17px" }} src={Star.src} />
-            <Image width={{ md: "22px", base: "17px" }} src={Star.src} />
+            <Image width={"15px"} src={Star.src} />
+            <Image width={"15px"} src={Star.src} />
+            <Image width={"15px"} src={Star.src} />
+            <Image width={"15px"} src={Star.src} />
+            <Image width={"15px"} src={Star.src} />
           </Box>
 
           <Popovers width="100%" actionList={popOverList} />
@@ -151,9 +151,9 @@ const CandidateCard = ({
             alignItems={"center"}
             flexWrap={"wrap"}
           >
-            {data?.skills?.map((item) => {
+            {data?.skills?.map((item , ind) => {
               return (
-                <Box mr={{ md: "38px", base: "14px" }} mb={"10px"}>
+                <Box key={ind} mr={{ md: "38px", base: "14px" }} mb={"10px"}>
                   <Chip label={item.name} />
                 </Box>
               );

@@ -58,7 +58,6 @@ const AboutYouTabs = () => {
       },
       data: { ...state },
     });
-    console.log("response", response);
   };
 
   const getData = async () => {

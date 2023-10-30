@@ -1,18 +1,20 @@
 import { Box, Button, Flex, Image } from "@chakra-ui/react";
 import React, { useState } from "react";
-import PaginatedTable from "../MembersTable/MembersTable";
+import PaginatedTable from "../PaginatedTable/PaginatedTable";
 import menu from "@/assets/Images/menu.svg";
 import { useRouter } from "next/router";
-import Popovers from "../MembersTable/Popovers";
+import Popovers from "../PaginatedTable/Popovers";
 const InActiveJobs = () => {
   const router = useRouter();
   const columns = [
-    "Job Title",
-    "Employment Type",
-    "Candidates",
-    "Openings",
-    "Status",
-    "Actions",
+    {
+      jobTitle: "Job Title",
+      employeeType: "Employment Type",
+      Candidates: "Candidates",
+      noOfOpening: "Openings",
+      status: "Status",
+      Actions: "Actions",
+    },
   ];
   const keys = [
     "jobTitle",
@@ -25,27 +27,27 @@ const InActiveJobs = () => {
   const actionList = ["Edit", "Pause", "Close job"];
   const data = [
     {
-      "jobTitle": "Social Media Manager",
-      "employeeType": "mscott@example.org",
+      jobTitle: "Social Media Manager",
+      employeeType: "mscott@example.org",
       Candidates: "1",
       noOfOpening: "1 Year",
-      "status": "Expired",
+      status: "Expired",
       Actions: <Popovers actionList={actionList} />,
     },
     {
-      "jobTitle": "Social Media Manager",
-      "employeeType": "mscott@example.org",
+      jobTitle: "Social Media Manager",
+      employeeType: "mscott@example.org",
       Candidates: "1",
       noOfOpening: "1 Year",
-      "status": "Expired",
+      status: "Expired",
       Actions: <Popovers actionList={actionList} />,
     },
     {
-      "jobTitle": "Social Media Manager",
-      "employeeType": "mscott@example.org",
-      Candidates: "1",
+      jobTitle: "Front End Developer",
+      employeeType: "mscott@example.org",
+      Candidates: "5",
       noOfOpening: "1 Year",
-      "status": "Expired",
+      status: "Expired",
       Actions: <Popovers actionList={actionList} />,
     },
   ];

@@ -27,7 +27,7 @@ import { Role_context } from "@/context/context";
 const HeaderDropdown = ({ candidate }) => {
   const router = useRouter();
   const { company, setCompany } = useContext(Role_context);
-  console.log("company", company);
+ 
 
   const companydropdown = [
     {
@@ -38,7 +38,7 @@ const HeaderDropdown = ({ candidate }) => {
     {
       title: "Messages",
       icon: <Image width={{ md: "22px", base: "19px" }} src={chat.src} />,
-      pathname: "/",
+      pathname: "#",
     },
     {
       title: "Profile Settings",
