@@ -205,9 +205,10 @@ const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject,Data }) 
                 </Box>
                 <Image
                   width={"10px"}
-                  src={EmptyVector.src}
+                  src={EmptyVector}
                   mt={1.5}
                   marginRight={2}
+                  // onClick={}
                 />
               </Box>
             </Box>
