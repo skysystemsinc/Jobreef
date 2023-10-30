@@ -13,7 +13,7 @@ const PersonalInfo = ({ State, setState }) => {
 
   return (
     <Box>
-      <Box marginBottom={{ sm: "40px", base: "26px" }}>
+      <Box marginBottom={{ sm: "25px", base: "22px" }}>
         <LabelInput
           state={State.name}
           setState={(e) => {
@@ -29,7 +29,7 @@ const PersonalInfo = ({ State, setState }) => {
         />
       </Box>
 
-      <Box marginBottom={{ sm: "40px", base: "26px" }}>
+      <Box marginBottom={{ sm: "25px", base: "22px" }}>
         <LabelInput
           state={State.lastName}
           setState={(e) => {

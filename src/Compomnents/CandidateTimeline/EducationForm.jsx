@@ -205,8 +205,8 @@ const EducationForm = ({ state, setState }) => {
             }}
             type="text"
             variant={"bg-input"}
-            placeholder="Enter your Gpa"
-            label={"Gpa"}
+            placeholder="Enter your GPA"
+            label={"GPA"}
           />
         </Box>
 
