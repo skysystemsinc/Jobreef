@@ -50,7 +50,16 @@ function Context({ children }) {
 
   return (
     <Role_context.Provider value={{ company, setCompany,
-     searchEntryLocation, searchEntryCompany,setSearchEntryLocation, setSearchEntryCompany }}>
+      searchEntryLocation,
+      searchEntryCompany,
+      templogin,
+      setTemplogin,
+      getToggle,
+      searchNow,
+      setHandleCompanyEntry,
+      getHandleCompanyEntry,
+      setHandleLocationEntry,
+      getHandleLocationEntry, }}>
       {children}
     </Role_context.Provider>
   );
