@@ -363,7 +363,7 @@ const components = {
         borderColor:"gray.900",
         // borderColor: "red",
         borderRadius: "8px",
-        p: "20px 20px 20px 20px",
+        p: "9px 20px 20px 12px",
         // boxShadow: " 0px 4px 20px 0px #0000000D !important",
         _placeholder: {
           color: "gray.100    ",
