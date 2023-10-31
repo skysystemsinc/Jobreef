@@ -36,9 +36,9 @@ const ConversationCard = ({ data }) => {
       <Heading
         overflow={"hidden"}
         mt={"9px"}
-        maxW={"350px"}
+        maxW={"100%"}
         textOverflow={"ellipsis"}
-        whiteSpace={"nowrap"}
+        // whiteSpace={"nowrap"}
         color={"blue.300"}
         variant={"p12"}
       >

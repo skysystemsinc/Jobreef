@@ -108,7 +108,7 @@ const Conversations = () => {
         </InputGroup>
       </Box>
 
-      <Box height={"70vh"} overflowY={"scroll"} sx={globalStyles.scrollBar} mt={"15px"}>
+      <Box height={"73vh"} overflowY={"scroll"} sx={globalStyles.scrollBar} mt={"15px"}>
         {conversation.map((item, ind) => {
           return (
             <Box key={ind}>

@@ -9,10 +9,9 @@ const messages = () => {
     <>
       <Header />
       <BottomWaveImage />
-      <Box p={"40px 70px"}>
+      <Box p={{ lg: "40px 70px", base: "20px 20px" }}>
         <ChatBox />
       </Box>
-      {/* // */}
     </>
   );
 };
