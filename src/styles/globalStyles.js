@@ -76,7 +76,7 @@ const globalStyles = {
     },
   },
   scrollBar: {
-    width: "1px !important",
+    // width: "1px !important",
     "&::-webkit-scrollbar": {
       borderRadius: "8px",
       display: "none",

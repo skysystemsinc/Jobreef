@@ -22,8 +22,6 @@ const customStyles = {
   },
 };
 
-
-
 const nunito = Nunito({
   weight: ["200", "300", "400", "500", "600", "700", "900"],
   display: "swap",
@@ -38,11 +36,13 @@ const colors = {
   },
   white: {
     100: "#fff",
+    200:"#EAECF0"
   },
   black: {
     100: "#000",
     200: "#111",
     300: "#1111114d",
+    400:"#404040"
   },
   gray: {
     100: "#BBBBC7",
@@ -53,16 +53,19 @@ const colors = {
     600: "#494949",
     700: "#AFAFAF",
     800: "#FEFEFE",
+    900:"#D0D5DD",
     lightBorder: "#cdcdcd",
     light: "#797979",
-    
 
     text: "#4A4A4A",
   },
   blue: {
+    800:'#E9F5F8',
+    700:'#667085',
+    600: "#336CB0",
     500: "#2CA5C3",
     400: "#DFF1F6",
-    600: "#336CB0",
+    300: "#344054",
 
     100: "#F4F9FF",
   },
@@ -95,9 +98,8 @@ const components = {
         height: { sm: "38px", base: "36px" },
         // width: { md: "200px", sm: "180px", base: "168px" },
         width: {
-          
           md: "139px",
-          
+
           sm: "130px",
           base: "110px",
         },
@@ -120,9 +122,8 @@ const components = {
 
         // width: { md: "200px", base: "160px" },
         width: {
-          
           md: "139px",
-          
+
           sm: "130px",
           base: "110px",
         },
@@ -202,6 +203,23 @@ const components = {
         color: "gray.100",
 
         height: { md: "46px", base: "40px" },
+      },
+      lightGray: {
+        // border: "1px dashed  gray.100 !important",
+        borderColor: "gray.900",
+        borderRadius: "8px",
+        bg: "gray.200",
+        boxShadow: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
+        width: "100%",
+
+        fontFamily: "var(--chakra-\fonts-Nunito)",
+        margin:'0px',
+        fontSize: { md: "14px", base: "12px" },
+        fontWeight: 700,
+        // fontSize: "16px",
+        color: "gray.text",
+
+        height: { md: "62px", base: "40px" },
       },
       label: {
         color: "gray.text",
@@ -315,6 +333,34 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         color: "black.100 !important",
         // bg: "text.gray !important",
+        // borderColor: "red",
+        borderRadius: "8px",
+        p: "20px 20px 20px 20px",
+        // boxShadow: " 0px 4px 20px 0px #0000000D !important",
+        _placeholder: {
+          color: "gray.100    ",
+          fontFamily: "var(--chakra-\fonts-openSans)",
+          // p: "20px 20px 20px 20px",
+          // textTransform: " capitalize",
+          lineHeight: "20px",
+          fontWeight: 400,
+          fontSize: "13px",
+          //   },
+        },
+
+        "::placeholder": {},
+      },
+      "simple": {
+        //   border: "1px solid red ",
+        // field: {
+        minHeight: "100px",
+        borderRadius: "8px",
+        bg: "D0D5DD !important",
+        fontFamily: "var(--chakra-\fonts-openSans)",
+        color: "black.100 !important",
+        // bg: "text.gray !important",
+        border:"1px solid",
+        borderColor:"gray.900",
         // borderColor: "red",
         borderRadius: "8px",
         p: "20px 20px 20px 20px",

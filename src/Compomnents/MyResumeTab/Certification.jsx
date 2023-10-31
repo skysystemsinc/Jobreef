@@ -79,9 +79,9 @@ const Certification = () => {
           width={{ xl: "73%", base: "100%" }}
           mx={"auto"}
         >
-          {state.certificationData.map((item) => {
+          {state.certificationData.map((item , ind) => {
             return (
-              <Box>
+              <Box key={ind}>
                 <CeritifcateCard data={item} state={state} setState={setState} />
               </Box>
             );

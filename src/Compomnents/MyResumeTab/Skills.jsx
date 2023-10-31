@@ -63,9 +63,9 @@ const Skills = () => {
           width={{ xl: "72%", base: "100%" }}
           mx={"auto"}
         >
-          {state.skills.map((item) => {
+          {state.skills.map((item , ind)  => {
             return (
-              <Box>
+              <Box key={ind}>
                 <SkillsCard
                   handleEdit={() => {
                     setState((prev) => {

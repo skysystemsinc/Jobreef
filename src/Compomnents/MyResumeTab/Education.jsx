@@ -82,9 +82,11 @@ const Education = () => {
         </Box>
       ) : state.educationData.length > 0 ? (
         <Box mt={"30px"} width={{ xl: "73%", base: "100%" }} mx={"auto"}>
-          {state.educationData.map((item) => {
+          {state.educationData.map((item , ind) => {
             return (
-              <EducationCard data={item} state={state} setState={setState} />
+              <Box key={ind}>
+                <EducationCard data={item} state={state} setState={setState} />
+              </Box>
             );
           })}
 
