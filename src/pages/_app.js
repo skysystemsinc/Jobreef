@@ -18,9 +18,11 @@ export default function App({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Role_context.Provider value={{ company: true }}>
+      <Context>
         <Provider store={store}>
           <Component {...pageProps} />
         </Provider>
+      </Context>
       </Role_context.Provider>
     </ChakraProvider>
   );
