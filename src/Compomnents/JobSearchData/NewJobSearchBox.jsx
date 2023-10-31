@@ -3,26 +3,18 @@ import { GoDotFill } from "react-icons/go";
 import ComponentMyChip from "../../Compomnents/ComponentMyChip/ComponentMyChip";
 import microsoft from "@/assets/Images/microsoft.svg";
 import EmptyVector from "../../assets/Images/EmptyVector.svg";
-// import { DataArray } from './tempSchema.js';
 import ShowEmptyResult from "./ShowEmptyResult";
 import { Role_context } from "../../context/context";
 import bookmark from "../../assets/Images/bookmark.svg";
 import {
     Box,
-    Button,
-    Flex,
     Heading,
-    Input,
-    InputGroup,
-    InputLeftElement,
-    Label,
     Image,
-    Select,
-    useBreakpointValue,
+    Link ,
   } from "@chakra-ui/react";
 
 
-const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject,Data }) => {
+const NewJobSearchBox = ({selectedValues,settoggle,setTempObject,Data }) => {
   
   const [dataToDisplay, setDataToDisplay] = useState(Data);
   const [clickedStates, setClickedStates] = useState(Array(Data.length).fill(false));
@@ -107,14 +99,16 @@ const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject,Data }) 
     else 
         return null
 
-    if(foundCompanyName)
+    if(foundCompanyName && foundLocationName)
     {
+        
     }
-    else return null
-    if(foundLocationName)
-    {
+    else{
+      console.log("I am length before",length)
+      length= length-1
+      console.log("I am length after",length)
+      return null
     }
-    else return null
     
     return(
     <Box
@@ -194,17 +188,19 @@ const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject,Data }) 
                   >
                     {object.title}
                     <Box display={"flex"} alignItems={"center"}>
-                      <Heading
-                        variant={"p4"}
-                        color={"gray.text"}
-                        marginRight={1}
-                      >
-                        {object.name}
-                      </Heading>
+                    <Link href="/candidate/company-page" >
+                        <Heading
+                          variant={"p4"}
+                          color={"gray.text"}
+                          marginRight={1}
+                        >
+                          {object.name}
+                        </Heading>
+                      </Link>
                       <Box
                         ml={1}
                         mt={"4px"}
-                        display="flex"
+                        display="flex"  
                         alignItems="center"
                       >
                         <ComponentMyChip label={object.tags} />
@@ -258,12 +254,17 @@ const NewJobSearchBox = ({selectedValues,toggle,settoggle,setTempObject,Data }) 
                         <GoDotFill style={{ color: "#D9D9D9" }} />
                       </Box>
                       <Heading color={"gray.text"} variant={"p4"}>
+                        {object.JobModel}
+                      </Heading>
+                      <Box fontSize={{ sm: "14px", base: "8px" }} whiteSpace="nowrap">
+                        <GoDotFill style={{ color: "#D9D9D9" }} />
+                      </Box>
+                      <Heading color={"gray.text"} variant={"p4"}>
                         Experience: {object.Experience} years
                       </Heading>
                     </Box>
                     <Box
                       display={"flex"}
-                      flexDirection="column"
                       textAlign={"end"}
                       justifyContent="flex-end"
                     >

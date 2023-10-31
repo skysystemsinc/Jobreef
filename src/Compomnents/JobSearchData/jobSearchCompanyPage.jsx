@@ -7,6 +7,7 @@ import {
   InputGroup,
   InputLeftElement,
   Image,
+  Link,
 } from "@chakra-ui/react";
 import React from "react";
 import microsoft from "@/assets/Images/microsoft.svg";
@@ -186,9 +187,11 @@ const JobSearchCompanyPage = () => {
                     src={arrowright.src}
                     marginRight={2}
                   />
-                  <Heading variant={"p4"} color={"gray.text"} marginRight={1}>
-                    Return
-                  </Heading>
+                  <Link href="/candidate/job-search">
+                    <Heading variant={"p4"} color={"gray.text"} marginRight={1}>
+                      Return
+                    </Heading>
+                  </Link>
                 </Box>
               </Box>
             </Box>
