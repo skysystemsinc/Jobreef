@@ -1,13 +1,8 @@
-import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Box } from "@chakra-ui/layout";
 import {
   Button,
-  Checkbox,
   Flex,
-  FormLabel,
   Heading,
-  Input,
-  useMediaQuery,
 } from "@chakra-ui/react";
 import { Step, Steps, useSteps } from "chakra-ui-steps";
 
@@ -15,7 +10,6 @@ import PersonalInfo from "./SignUpTimeLineComponents/PersonalInfo";
 import Password from "./SignUpTimeLineComponents/Password";
 import Otp from "./SignUpTimeLineComponents/Otp";
 import { useRouter } from "next/router";
-import { role, roles } from "@/Utils/role";
 import globalStyles from "@/styles/globalStyles";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Role_context } from "@/context/context";
@@ -26,9 +20,8 @@ const steps = [
   { label: "Create New Password" },
 ];
 
-export const SignUpTimeline = ({ candidate, variant }) => {
+const SignUpTimeline = ({ candidate, variant }) => {
     
-  const [load,setLoad] = useState(true);
   const router = useRouter();
   const { company, setCompany } = useContext(Role_context);
   const [State, setState] = useState({
@@ -41,14 +34,13 @@ export const SignUpTimeline = ({ candidate, variant }) => {
     otp: "",
   });
 
-  const { nextStep, prevStep, reset, activeStep } = useSteps({
+  const { nextStep, prevStep,activeStep } = useSteps({
     initialStep: 0,
   });
   const hasCompletedAllSteps = activeStep === steps.length;
   // console.log(hasCompletedAllSteps,"Has completed all steps")
   const isLastStep = activeStep === steps.length - 1;
   const [compeletedStep, setcompeletedStep] = useState([]);
-  const initialRender = useRef(true);
 
   console.log(activeStep,"Active Steps")
   useEffect(() => {
@@ -186,17 +178,9 @@ export const SignUpTimeline = ({ candidate, variant }) => {
 
             
             <Button
-              // width={{ md: "200px", sm: "180px", base: "130px" }}
               variant={"blue-btn"}
               onClick={()=>{
                 handeNext()
-                // console.log(isLastStep)
-                if(isLastStep)
-                {
-                    // console.log(load,"Load")
-                    setLoad(false)
-                    // console.log(load,"Load")
-                }
             }}
             >
               {activeStep == 1 ? 'Verify' : isLastStep ? "Save" : "Next"}
@@ -208,3 +192,5 @@ export const SignUpTimeline = ({ candidate, variant }) => {
     </Flex>
   );
 };
+
+export default SignUpTimeline;

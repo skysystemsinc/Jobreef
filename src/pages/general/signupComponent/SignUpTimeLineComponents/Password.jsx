@@ -1,6 +1,5 @@
-import { Box, Checkbox, FormLabel, Heading, Input } from "@chakra-ui/react";
+import { Box,Heading} from "@chakra-ui/react";
 import React from "react";
-import PasswordInput from "@/Compomnents/PasswordInput/PasswordInput";
 import LabelInput from "@/Compomnents/LabelInput/LabelInput";
 
 const Password = ({ State, setState }) => {
@@ -32,7 +31,7 @@ const Password = ({ State, setState }) => {
         </Box>
       <Box marginBottom={{ sm: "25px", base: "25px" }}>
         <LabelInput
-          state={State.password}
+          state={State?.password}
           setState={(e) => {
             setState((prev) => {
               return { ...prev, password: e.target.value };
@@ -49,7 +48,7 @@ const Password = ({ State, setState }) => {
 
       <Box marginBottom={{ sm: "22px", base: "22px" }}>
         <LabelInput
-          state={State.confirmPassword}
+          state={State?.confirmPassword}
           setState={(e) => {
             setState((prev) => {
               return { ...prev, confirmPassword: e.target.value };

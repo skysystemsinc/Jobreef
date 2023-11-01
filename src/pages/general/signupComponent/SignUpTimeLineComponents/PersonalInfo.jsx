@@ -1,16 +1,11 @@
-import { Box, Checkbox, FormLabel, Heading, Input } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import LabelInput from "@/Compomnents/LabelInput/LabelInput";
-import { Role_context } from "@/context/context";
-import globalStyles from "@/styles/globalStyles";
+
 
 const PersonalInfo = ({ State, setState }) => {
-  const { company, setCompany } = useContext(Role_context);
-  const handleSelectCompany = (e) => {
-    setCompany(e.target.checked);
-    localStorage.setItem("company", e.target.checked);
-  };
-
+  
+//
   return (
     <Box>
       
@@ -39,13 +34,15 @@ const PersonalInfo = ({ State, setState }) => {
           </Heading>
         </Box>
       <Box mt={10} px={10}>
+        
         <LabelInput
-          state={State.email}
+          state={State?.email}
           setState={(e) => {
             setState((prev) => {
               return { ...prev, email: e.target.value };
             });
           }}
+          
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}

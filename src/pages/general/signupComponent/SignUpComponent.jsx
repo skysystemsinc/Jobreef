@@ -1,6 +1,6 @@
 import { Box, Heading, useMediaQuery, Image } from "@chakra-ui/react";
 import React, { useContext, useEffect } from "react";
-import { SignUpTimeline } from "./SignUpTimeline";
+import SignUpTimeline  from "./SignUpTimeline";
 import logo from "@/assets/Images/logo.svg";
 import cartoon from "@/assets/Images/cartoon.svg";
 import teamVector from "@/assets/Images/teamVector.svg";

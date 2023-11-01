@@ -11,7 +11,6 @@ const {
     ModalFooter,
     useDisclosure,
   } = require("@chakra-ui/react");
-  const { default: NotePad } = require("../NotePad/NotePad");
   
   function LoginModal({open , onClose,setTemplogin}) {
     return (
