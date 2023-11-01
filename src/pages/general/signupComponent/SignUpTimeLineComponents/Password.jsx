@@ -1,6 +1,5 @@
-import { Box, Checkbox, FormLabel, Heading, Input } from "@chakra-ui/react";
+import { Box,Heading} from "@chakra-ui/react";
 import React from "react";
-import PasswordInput from "@/Compomnents/PasswordInput/PasswordInput";
 import LabelInput from "@/Compomnents/LabelInput/LabelInput";
 
 const Password = ({ State, setState }) => {
