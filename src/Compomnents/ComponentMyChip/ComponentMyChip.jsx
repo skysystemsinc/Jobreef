@@ -2,7 +2,7 @@ import { Box, Heading } from "@chakra-ui/react";
 import React from "react";
 import { FaTimes } from 'react-icons/fa';
 
-const ComponentMyChip = ({style, label, children }) => {
+const ComponentMyChip = ({style, label, children,textcolor }) => {
   return (
     <Box
       p={"4px 10px 4px 10px"}
@@ -12,7 +12,7 @@ const ComponentMyChip = ({style, label, children }) => {
       alignItems={"center"}   
       sx={style}
     >
-      <Heading fontSize={"12px"} color={"gray.text"} variant={"p9"}>
+      <Heading fontSize={"12px"} color={textcolor ? textcolor : "gray.text"} variant={"p9"}>
           {label}
       </Heading>
       {children}
