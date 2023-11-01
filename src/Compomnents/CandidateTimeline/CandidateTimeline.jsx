@@ -34,10 +34,10 @@ const steps = [
   { label: "Certifications" },
   { label: "Skills" },
   { label: "Attachments" },
+  { label: "Achievement" },
 ];
 
 export const CandidateTimeline = ({ candidate, variant }) => {
-
   const router = useRouter();
 
   const { company, setCompany } = useContext(Role_context);
@@ -56,7 +56,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
     description: "",
   });
   const { nextStep, prevStep, reset, activeStep } = useSteps({
-    initialStep: 5,
+    initialStep: 0,
   });
 
   const hasCompletedAllSteps = activeStep == steps.length;
@@ -72,7 +72,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
   }, [activeStep]);
 
   const handleNext = async () => {
-    if (activeStep === 5) {
+    if (activeStep === 6) {
       router.push("/candidate/profile-setting");
     } else {
       nextStep();
@@ -212,6 +212,8 @@ export const CandidateTimeline = ({ candidate, variant }) => {
                   <Skills />
                 ) : index == 5 ? (
                   <TimelineAttachments />
+                ) : index == 6 ? (
+                  <TimelineAttachments />
                 ) : null}
               </Box>
             </Step>
@@ -235,23 +237,17 @@ export const CandidateTimeline = ({ candidate, variant }) => {
               isDisabled={activeStep === 0}
               onClick={() => {
                 prevStep();
-  
               }}
-              
               variant="outline-blue"
             >
               {" Back"}
             </Button>
-            <Button
-              variant={"blue-btn"}
-              onClick={handleNext}
-            >
+            <Button variant={"blue-btn"} onClick={handleNext}>
               {"Next"}
             </Button>
           </>
         </Flex>
       )}
-
     </Flex>
   );
 };
