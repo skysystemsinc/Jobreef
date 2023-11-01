@@ -44,27 +44,21 @@ export const SignUpTimeline = ({ candidate, variant }) => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
-
+  const hasCompletedAllSteps = activeStep === steps.length;
+  // console.log(hasCompletedAllSteps,"Has completed all steps")
   const isLastStep = activeStep === steps.length - 1;
   const [compeletedStep, setcompeletedStep] = useState([]);
   const initialRender = useRef(true);
 
-
+  console.log(activeStep,"Active Steps")
   useEffect(() => {
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
 
   const handeNext = async () => {
-    if (activeStep == 2) {
-      if (!company) {
-        // router.push("/candidate/registration");
-        // router.reload()
-      } else {
-        // router.push("/registration");
-      }
-    } else {
+    
       nextStep();
-    }
+    
   };
 
   return (
@@ -155,14 +149,15 @@ export const SignUpTimeline = ({ candidate, variant }) => {
                 ) : index == 2 ? (
                     <Password State={State} setState={setState} />
                   
-                ) : load ? (
+                ) : (
                   <PersonalInfo />
-                ): (<PassChangeSuccessful/>) }
+         ) }
               </Box>
             </Step>
           );
         })}
       </Steps>
+      {hasCompletedAllSteps ? <PassChangeSuccessful/>: null}
       <Flex
         width="100%"
         justify="center"
@@ -171,6 +166,8 @@ export const SignUpTimeline = ({ candidate, variant }) => {
         gap={4}
       >
         <>
+          {!hasCompletedAllSteps?
+          <>
           <Button
             isDisabled={activeStep === 0}
             onClick={() => {
@@ -184,31 +181,28 @@ export const SignUpTimeline = ({ candidate, variant }) => {
             }}
             variant="outline-blue"
           >
-            {" Back"}
+            {activeStep == 2  ? "Cancel" : "Back"}
           </Button>
 
-          {isLastStep && !company ? (
-            <a className="blue-btn" href="/candidate/registration">
-              Verify
-            </a>
-          ) : (
+            
             <Button
               // width={{ md: "200px", sm: "180px", base: "130px" }}
               variant={"blue-btn"}
               onClick={()=>{
                 handeNext()
-                console.log(isLastStep)
+                // console.log(isLastStep)
                 if(isLastStep)
                 {
-                    console.log(load,"Load")
+                    // console.log(load,"Load")
                     setLoad(false)
-                    console.log(load,"Load")
+                    // console.log(load,"Load")
                 }
             }}
             >
-              {isLastStep ? "Verify" : "Next"}
+              {activeStep == 1 ? 'Verify' : isLastStep ? "Save" : "Next"}
             </Button>
-          )}
+            </>:null
+}
         </>
       </Flex>
     </Flex>
