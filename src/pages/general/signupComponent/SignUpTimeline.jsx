@@ -34,7 +34,7 @@ const SignUpTimeline = ({ candidate, variant }) => {
     otp: "",
   });
 
-  const { nextStep, prevStep, reset, activeStep } = useSteps({
+  const { nextStep, prevStep,activeStep } = useSteps({
     initialStep: 0,
   });
   const hasCompletedAllSteps = activeStep === steps.length;
