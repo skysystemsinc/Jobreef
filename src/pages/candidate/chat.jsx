@@ -7,7 +7,7 @@ import React from "react";
 const messages = () => {
   return (
     <>
-      <Header />
+      <Header candidate/>
       <BottomWaveImage />
       <Box p={{ lg: "40px 70px", base: "20px 20px" }}>
         <ChatBox disableEdit />
