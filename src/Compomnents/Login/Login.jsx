@@ -25,7 +25,7 @@ import { useEffect, useState } from "react";
 import { Role_context } from "../../context/context";
 import { useContext } from "react";
 
-export default function Login() {
+export default function Login({disabledGoogleButton}) {
    const {
     templogin,
     setTemplogin,
@@ -133,7 +133,7 @@ export default function Login() {
           >
             Login
           </Button>
-          <Button
+          {disabledGoogleButton?null:<Button
             width={{ base: "max-content" }}
             boxShadow="0px 0px 4px 0px rgba(0, 0, 0, 0.25)"
             variant={"outline"}
@@ -151,6 +151,7 @@ export default function Login() {
               </Text>
             </Center>
           </Button>
+        }
         </Box>
       </Box>
     </>

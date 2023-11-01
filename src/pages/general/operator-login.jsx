@@ -38,8 +38,8 @@ const userLogin = () => {
         
       </Box>
       <Box display="flex" flex={1} justifyContent="center" alignItems="center">
-          <Box >
-            <Login/>
+          <Box width={"70%"}>
+            <Login disabledGoogleButton={true}/>
           </Box>
       </Box>
 

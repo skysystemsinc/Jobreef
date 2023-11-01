@@ -104,9 +104,7 @@ const NewJobSearchBox = ({selectedValues,settoggle,setTempObject,Data }) => {
         
     }
     else{
-      console.log("I am length before",length)
       length= length-1
-      console.log("I am length after",length)
       return null
     }
     

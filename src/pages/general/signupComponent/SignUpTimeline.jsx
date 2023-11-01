@@ -38,11 +38,9 @@ const SignUpTimeline = ({ candidate, variant }) => {
     initialStep: 0,
   });
   const hasCompletedAllSteps = activeStep === steps.length;
-  // console.log(hasCompletedAllSteps,"Has completed all steps")
   const isLastStep = activeStep === steps.length - 1;
   const [compeletedStep, setcompeletedStep] = useState([]);
 
-  console.log(activeStep,"Active Steps")
   useEffect(() => {
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
