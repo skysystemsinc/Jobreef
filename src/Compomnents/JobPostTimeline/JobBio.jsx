@@ -1,4 +1,4 @@
-import { Box, Image } from "@chakra-ui/react";
+import { Box, Image, Input } from "@chakra-ui/react";
 import React, { useState } from "react";
 import LabelInput from "../LabelInput/LabelInput";
 import InputWrapper from "../InputWrapper/InputWrapper";
@@ -78,18 +78,6 @@ const JobBio = ({ state, setState }) => {
         <LabelInput
           state={state.applicationType.type}
           setState={(e) => {
-            if(e.target.value == applicationType[0]){
-              seturlPlaceholder("External URL")
-              setreadOnly(false)
-            }else{
-              seturlPlaceholder("Internal URL")
-              setreadOnly(true)
-            }
-            // e.target.value == applicationType[0]
-            //   ? , setreadOnly(true)
-            //   : ,
-            //   setreadOnly(true);
-
             setState((prev) => {
               return {
                 ...prev,
@@ -109,26 +97,36 @@ const JobBio = ({ state, setState }) => {
           placeholder="Select application type"
           label={"Application Type"}
         />
-        <LabelInput
-          state={state.applicationType.url}
-          setState={(e) => {
-            setState((prev) => {
-              return {
-                ...prev,
-                applicationType: {
-                  ...prev.applicationType,
-                  url: e.target.value,
-                },
-              };
-            });
-          }}
-          labelVariant={"label"}
-          type="text"
-          variant={"bg-input"}
-          readOnly={readOnly}
-          placeholder="Enter URL to Redirect Candidates"
-          label={urlPlaceholder}
-        />
+        {state.applicationType.type === applicationType[1] ? (
+          <Input
+            mt={"30px"}
+            readOnly={true}
+            variant={"bg-input"}
+            placeholder={""}
+            type={"text"}
+          />
+        ) : (
+          <LabelInput
+            state={state.applicationType.url}
+            setState={(e) => {
+              setState((prev) => {
+                return {
+                  ...prev,
+                  applicationType: {
+                    ...prev.applicationType,
+                    url: e.target.value,
+                  },
+                };
+              });
+            }}
+            labelVariant={"label"}
+            type="text"
+            variant={"bg-input"}
+            readOnly={readOnly}
+            placeholder="Enter URL to Redirect Candidates"
+            label={urlPlaceholder}
+          />
+        )}
       </InputWrapper>
 
       <InputWrapper>

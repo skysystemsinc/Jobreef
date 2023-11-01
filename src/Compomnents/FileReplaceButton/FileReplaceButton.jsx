@@ -20,7 +20,7 @@ const FileReplaceButton = ({
     >
       <Image src={uploadIcon.src} width={{ md: "17px", base: "12px" }} />{" "}
       {label}
-      <Input onChange={handleEvent} type="file" hidden />
+      <Input  onChange={handleEvent} type="file" hidden />
     </FormLabel>
   );
 };

@@ -26,6 +26,7 @@ import Certification from "./Certitfication";
 import Skills from "./Skills";
 import Attachments from "./Attchement";
 import DeleteModal from "../DeleteModal/DeleteModal";
+import TimelineAttachments from "./Attchement";
 const steps = [
   { label: "Overview" },
   { label: "Work Experience" },
@@ -36,11 +37,6 @@ const steps = [
 ];
 
 export const CandidateTimeline = ({ candidate, variant }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const [addEducation, setaddEducation] = useState(false);
-  const [addCertificate, setCertificate] = useState(false);
-  const [addExperiance, setaddExperiance] = useState(false);
 
   const router = useRouter();
 
@@ -59,16 +55,8 @@ export const CandidateTimeline = ({ candidate, variant }) => {
     number: "",
     description: "",
   });
-  // const [State, setState] = useState({
-  //   country: "",
-  //   state: "",
-  //   city: "",
-  //   number: "",
-  //   description: "",
-  // });
-
   const { nextStep, prevStep, reset, activeStep } = useSteps({
-    initialStep: 0,
+    initialStep: 5,
   });
 
   const hasCompletedAllSteps = activeStep == steps.length;
@@ -223,7 +211,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
                 ) : index == 4 ? (
                   <Skills />
                 ) : index == 5 ? (
-                  <Attachments />
+                  <TimelineAttachments />
                 ) : null}
               </Box>
             </Step>

@@ -5,8 +5,10 @@ import replace from "@/assets/Images/replace.svg";
 import { Box, Heading, Image, Progress } from "@chakra-ui/react";
 import FileReplaceButton from "../FileReplaceButton/FileReplaceButton";
 import PdfViewer from "../PdfViewer/PdfViewer";
+import { AiOutlineDelete } from "react-icons/ai";
 const UploadedCard = ({
   uploadProgress,
+  handleDelete,
   fileSize,
   fileName,
   handleEvent,
@@ -33,17 +35,25 @@ const UploadedCard = ({
       >
         <Box display={"flex"} alignItems={"center"} gap={"15px"}>
           <Image src={circle_file.src} />
+
           <Box>
             <Heading mb={"2px"} variant={"p11"} color={"blue.300"}>
               {fileName}
             </Heading>
-            <Heading variant={"p4"} color={"blue.300"}>
+            {/* <Heading variant={"p4"} color={"blue.300"}>
               {sizeDisplay}
-            </Heading>
+            </Heading> */}
           </Box>
         </Box>
-        <Box>
-          <Image width={"22px"} src={filled_tick.src} />
+        <Box
+          cursor={"pointer"}
+          onClick={handleDelete}
+          color={"blue.500"}
+          transition={".5s"}
+          _hover={{ color: "blue.600" }}
+          fontSize={"22px"}
+        >
+          <AiOutlineDelete />
         </Box>
       </Box>
 

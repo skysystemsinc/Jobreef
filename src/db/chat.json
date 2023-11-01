@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Eva Bond",
+    "lastMessage": "The press release went out! It’s been picked up by a few people... Here’s the link if you...",
+    "date": "4hr ago",
+    "unreadCount": "23",
+    "profilePic": "/images/profile.svg",
+    "activeStatus": "Active Now",
+    "messages": [
+      {
+        "text": "The press release went out! It’s been picked up by a few people... Here’s the link if you...",
+        "avatar": "/images/profile.svg",
+        "createdAt": "Thursday 10:16am",
+        "sender": true,
+        "name": "Eva Bond"
+      },
+      {
+        "text": "The press release went out! It’s been picked up by a few people... Here’s the link if you...",
+        "avatar": "/images/profile.svg",
+        "createdAt": "Thursday 10:16am",
+        "sender": false,
+        "name": "Eva Bond"
+      }
+    ]
+  },
+  {
+    "name": "Anita Cruz",
+    "lastMessage": "The press release went out! It’s been picked up by a few people... Here’s the link if you...",
+    "date": "4hr ago",
+    "unreadCount": "2",
+    "activeStatus": "Active Now",
+
+    "profilePic": "/images/Avatar.svg",
+    "messages": [
+      {
+        "text": "The press release went out! It’s been picked up by a few people... Here’s the link if you...",
+        "avatar": "/images/Avatar.svg",
+        "lastDate": "Today",
+        "createdAt": "Thursday 10:16am",
+        "name": "Anita Cruz",
+
+        "sender": false
+      },
+      {
+        "text": "The press release went out! It’s been picked up by a few people... Here’s the link if you...",
+        "avatar": "/images/Avatar.svg",
+        "lastDate": "Today",
+        "createdAt": "Thursday 10:16am",
+        "sender": false,
+        "name": "Anita Cruz"
+      },
+      {
+        "text": "The press release went out! It’s been picked up by a few people... Here’s the link if you...",
+        "avatar": "/images/Avatar.svg",
+        "lastDate": "Today",
+        "createdAt": "Thursday 10:16am",
+        "sender": false,
+        "name": "Anita Cruz"
+      },
+      {
+        "text": "The press release went out! It’s been picked up by a few people... Here’s the link if you...",
+        "avatar": "/images/Avatar.svg",
+        "sender": true,
+
+        "createdAt": "Thursday 10:16am",
+        "name": "Anita Cruz"
+      },
+      {
+        "text": "The press release went out! It’s been picked up by a few people... Here’s the link if you...",
+        "avatar": "/images/Avatar.svg",
+        "sender": true,
+
+        "createdAt": "Thursday 10:16am",
+        "name": "Anita Cruz"
+      },
+      {
+        "text": "The press release went out! It’s been picked up by a few people... Here’s the link if you...",
+        "avatar": "/images/Avatar.svg",
+        "sender": true,
+
+        "createdAt": "Thursday 10:16am",
+        "name": "Anita Cruz"
+      }
+    ]
+  }
+]

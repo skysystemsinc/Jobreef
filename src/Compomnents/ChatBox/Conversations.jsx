@@ -5,8 +5,9 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  useMediaQuery,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import UnreadMessage from "./UnreadMessage";
 import { CiSearch } from "react-icons/ci";
 import search from "@/assets/Images/search.svg";
@@ -14,51 +15,30 @@ import search from "@/assets/Images/search.svg";
 import msg_edit from "@/assets/Images/msg_edit.svg";
 import ConversationCard from "../ConversationCard/ConversationCard";
 import globalStyles from "@/styles/globalStyles";
-const Conversations = () => {
-  const conversation = [
-    {
-      name: "Eva Bond",
-      lastMessage:
-        "The press release went out! It’s been picked up by a few people... Here’s the link if you...",
-      date: "4hr ago",
-      unreadCount: "2",
-    },
-    {
-      name: "Eva Bond",
-      lastMessage:
-        "The press release went out! It’s been picked up by a few people... Here’s the link if you...",
-      date: "4hr ago",
-      unreadCount: "2",
-    },
-    {
-      name: "Eva Bond",
-      lastMessage:
-        "The press release went out! It’s been picked up by a few people... Here’s the link if you...",
-      date: "4hr ago",
-      unreadCount: "2",
-    },
-    {
-      name: "Eva Bond",
-      lastMessage:
-        "The press release went out! It’s been picked up by a few people... Here’s the link if you...",
-      date: "4hr ago",
-      unreadCount: "2",
-    },
-    {
-      name: "Eva Bond",
-      lastMessage:
-        "The press release went out! It’s been picked up by a few people... Here’s the link if you...",
-      date: "4hr ago",
-      unreadCount: "2",
-    },
-    {
-      name: "Eva Bond",
-      lastMessage:
-        "The press release went out! It’s been picked up by a few people... Here’s the link if you...",
-      date: "4hr ago",
-      unreadCount: "2",
-    },
-  ];
+import conversation from "@/db/chat.json";
+import { useDispatch } from "react-redux";
+import { getActiveConversation } from "@/Reudx/slices/chat";
+const Conversations = ({ disableEdit }) => {
+  const dispatch = useDispatch();
+  const [isSmallerThe500] = useMediaQuery("(max-width:992px)");
+  console.log("isSmallerThe500",isSmallerThe500)
+
+  const handleActiveConversation = (conversation) => {
+    dispatch(getActiveConversation(conversation));
+    // dispatch(getAllMessages(conversation));
+
+  };
+  useEffect(() => {
+    if(typeof  window != undefined){
+
+      if (window.innerWidth >992) {
+        dispatch(getActiveConversation(conversation[0]));
+      }
+    }
+
+    return () => {};
+  }, []);
+
   return (
     <Box
       borderRadius={"8px"}
@@ -81,7 +61,7 @@ const Conversations = () => {
           <UnreadMessage count={"49"} />
         </Box>
         <Box>
-          <Image src={msg_edit.src} width={"30px"} />
+          {disableEdit ? null : <Image src={msg_edit.src} width={"30px"} />}
         </Box>
       </Box>
       <Box padding={"0px 18px"}>
@@ -108,10 +88,15 @@ const Conversations = () => {
         </InputGroup>
       </Box>
 
-      <Box height={"73vh"} overflowY={"scroll"} sx={globalStyles.scrollBar} mt={"15px"}>
-        {conversation.map((item, ind) => {
+      <Box
+        height={"534px"}
+        overflowY={"scroll"}
+        sx={globalStyles.scrollBar}
+        mt={"15px"}
+      >
+        {conversation?.map((item, ind) => {
           return (
-            <Box key={ind}>
+            <Box key={ind} onClick={() => handleActiveConversation(item)}>
               <ConversationCard data={item} />
             </Box>
           );

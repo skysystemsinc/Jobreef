@@ -5,73 +5,96 @@ import UploadedCard from "../UploadedCard/UploadedCard";
 import dummy_resume from "@/assets/Images/dummy_resume.svg";
 
 // import dummy_resume from "@/assets/pdf/dummy.pdf";
-const Attachments = () => {
+const Attachments = ({ style }) => {
   const [state, setState] = useState({
-    pdfUrl: null,
-    resume: false,
-    additional: false,
+    resume: [],
+    additional: [],
+    allFile: [],
+
     save: false,
-    pdfFile: null,
+
     select: false,
-    uploadProgress: 0,
   });
   const list = [
     "The acceptable file formats are PDF, Word, PNG, and JPEG files",
     "This will be included in submitted job applications",
   ];
   console.log("state", state);
-  const handleUpload = (event, key) => {
+  const handleSingleFile = (event, key, ind) => {
+    console.log("index", ind);
     const selectedFile = event.target.files[0];
-    setState((prev) => {
-      return {
-        ...prev,
-        pdfFile: selectedFile,
-
-        select: true,
-        [key]: {
-          pdfFile: selectedFile,
-        },
-        // save: false,
-      };
-    });
-
     if (selectedFile) {
       const reader = new FileReader();
-
       reader.onload = (e) => {
-        // setPdfUrl(e.target.result);
+        const updatedObject = {
+          pdfUrl: e.target.result,
+          uploadProgress: 100,
+          pdfFile: selectedFile,
+        };
         setState((prev) => {
-          return {
-            ...prev,
-            pdfUrl: e.target.result,
+          const allFile = [...prev.allFile]; // Create a copy of the allFile array
+          const keyAllFile = [...prev[key]]; // Create a copy of the allFile array
+          console.log("ind", allFile);
+          allFile.splice(ind, 1, updatedObject);
+          keyAllFile.splice(ind, 1, updatedObject);
 
-            [key]: {
-              ...prev[key],
-              pdfUrl: e.target.result,
-            },
+          return {
+            select: true,
+            // [key]: true,
+            allFile: allFile,
+            [key]: keyAllFile,
           };
         });
       };
-
-      reader.onprogress = (e) => {
-        if (e.lengthComputable) {
-          const percentUploaded = (e.loaded / e.total) * 100;
-          setState((prev) => {
-            return {
-              ...prev,
-              uploadProgress: percentUploaded,
-
-              [key]: {
-                ...prev[key],
-                // pdfUrl: e.target.result,
-                uploadProgress: percentUploaded,
-              },
-            };
-          });
-        }
-      };
-
       reader.readAsDataURL(selectedFile);
+    }
+    // selectedFile.map((file, index) => {
+    // });
+  };
+
+  const handleUpload = (event, key, index) => {
+    //TODO make dynamic progress barr with axios
+    console.log("runn", key);
+
+    if (index !== undefined) {
+      console.log("handleSingleFile", index);
+      handleSingleFile(event, key, index);
+    } else {
+      console.log("else", index);
+
+      const selectedFile = Array.from(event.target.files);
+      selectedFile.map((file, index) => {
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            setState((prev) => {
+              console.log("...prev[key],",key);
+              return {
+                ...prev,
+                select: true,
+                // [key]: true,
+                allFile: [
+                  ...prev.allFile,
+                  {
+                    pdfUrl: e.target.result,
+                    uploadProgress: 100,
+                    pdfFile: file,
+                  },
+                ],
+                [key]: [
+                  ...prev[key],
+                  {
+                    uploadProgress: 100,
+                    pdfUrl: e.target.result,
+                    pdfFile: file,
+                  },
+                ],
+              };
+            });
+          };
+          reader.readAsDataURL(file);
+        }
+      });
     }
   };
   const handleSave = () => {
@@ -89,27 +112,73 @@ const Attachments = () => {
         ...prev,
         save: false,
         select: false,
+        resume: [],
+        additional: [],
+        allFile: [],
       };
+    });
+  };
+  const handleDelete = (ind, key) => {
+    setState((prev) => {
+      const allFile = [...prev.allFile]; // Create a copy of the allFile array
+      const keyAllFile = [...prev[key]]; // Create a copy of the allFile array
+      console.log("ind",prev);
+      allFile.splice(ind, 1);
+      keyAllFile.splice(ind, 1);
+      if (allFile.length == 0) {
+        return {
+          ...prev,
+          select: false,
+          // [key]: true,
+          save:false,
+          allFile: allFile,
+          [key]: keyAllFile,
+        };
+      } else {
+        return {
+          ...prev,
+          // select: false,
+          allFile: allFile,
+          [key]: keyAllFile,
+        };
+      }
     });
   };
   return (
     <Box minHeight={"59vh"}>
       {state.select ? (
         <Box mt={"60px"}>
-          <Box width={{md: " 60%", base:"100%"}} mx={"auto"}>
-            <UploadedCard
-              // pdfPreview={state.pdfUrl}
-              uploadProgress={state.uploadProgress}
-              fileSize={state.pdfFile.size}
-              fileName={state.pdfFile.name}
-              handleEvent={(e) => {
-                if (state.resume) {
-                  handleUpload(e, "resume");
-                } else {
-                  handleUpload(e, "additional");
-                }
-              }}
-            />
+          <Box width={{ md: " 60%", base: "100%" }} mx={"auto"} sx={style}>
+            {state.allFile.map((item, ind) => {
+              return (
+                <Box mb={"15px"}>
+                  <UploadedCard
+                    handleDelete={
+                      () => {
+                        if (item.resume) {
+                          handleDelete(ind, "resume");
+                        } else {
+                          handleDelete(ind, "additional");
+                        }
+                      }
+
+                      // handleDelete(ind , "additional")
+                    }
+                    // pdfPreview={state.pdfUrl}
+                    uploadProgress={item.uploadProgress}
+                    fileSize={item.pdfFile.size}
+                    fileName={item.pdfFile.name}
+                    handleEvent={(e) => {
+                      if (item.resume) {
+                        handleUpload(e, "resume", ind);
+                      } else {
+                        handleUpload(e, "additional", ind);
+                      }
+                    }}
+                  />
+                </Box>
+              );
+            })}
 
             {/* <UploadedCard pdfPreview={dummy_resume.src} /> */}
           </Box>
@@ -130,16 +199,23 @@ const Attachments = () => {
           flexWrap={"wrap"}
           justifyContent={"center"}
         >
-          {state.resume ? (
-            <Box width={{ lg: "40%" , base:"100%"}}>
-              <UploadedCard
-                pdfPreview={state.resume.pdfUrl}
-                uploadProgress={state.resume.uploadProgress}
-                fileSize={state.resume.pdfFile.size}
-                fileName={state.resume.pdfFile.name}
-                // handleEvent={handleUpload}
-                handleEvent={(e) => handleUpload(e, "resume")}
-              />
+          {state.resume.length > 0 ? (
+            <Box width={{ lg: "40%", base: "100%" }} sx={style}>
+              {state.resume.map((item, ind) => {
+                return (
+                  <Box mb={"10px"}>
+                    <UploadedCard
+                      handleDelete={() => handleDelete(ind, "resume")}
+                      pdfPreview={item.pdfUrl}
+                      uploadProgress={item.uploadProgress}
+                      fileSize={item.pdfFile.size}
+                      fileName={item.pdfFile.name}
+                      // handleEvent={handleUpload}
+                      handleEvent={(e) => handleUpload(e, "resume", ind)}
+                    />
+                  </Box>
+                );
+              })}
             </Box>
           ) : (
             <UploadBox
@@ -148,16 +224,31 @@ const Attachments = () => {
               list={list}
             />
           )}
-          {state.additional ? (
-            <Box width={{ lg: "40%" , base:"100%"}}>
-              <UploadedCard
+          {state.additional.length > 0 ? (
+            <Box width={{ lg: "40%", base: "100%" }} sx={style}>
+              {state.additional.map((item, ind) => {
+                return (
+                  <Box mb={"10px"}>
+                    <UploadedCard
+                      handleDelete={() => handleDelete(ind, "additional")}
+                      pdfPreview={item.pdfUrl}
+                      uploadProgress={item.uploadProgress}
+                      fileSize={item.pdfFile.size}
+                      fileName={item.pdfFile.name}
+                      // handleEvent={handleUpload}
+                      handleEvent={(e) => handleUpload(e, "additional", ind)}
+                    />
+                  </Box>
+                );
+              })}
+              {/* <UploadedCard
                 pdfPreview={state.additional.pdfUrl}
                 uploadProgress={state.additional.uploadProgress}
                 fileSize={state.additional.pdfFile.size}
                 fileName={state.additional.pdfFile.name}
                 // handleEvent={handleUpload}
                 handleEvent={(e) => handleUpload(e, "additional")}
-              />
+              /> */}
             </Box>
           ) : (
             <UploadBox

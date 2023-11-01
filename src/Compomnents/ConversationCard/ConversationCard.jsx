@@ -18,7 +18,7 @@ const ConversationCard = ({ data }) => {
       <Box display={"flex"} justifyContent={"space-between"} width={"100%"}>
         <Box display={"flex"} alignItems={"center"} gap={"10px"}>
           <Image
-            src={profile.src}
+            src={data.profilePic}
             width={"35px"}
             height={"35px"}
             objectFit={"cover"}
