@@ -26,7 +26,7 @@ const steps = [
   { label: "Create New Password" },
 ];
 
-export const SignUpTimeline = ({ candidate, variant }) => {
+const SignUpTimeline = ({ candidate, variant }) => {
     
   const [load,setLoad] = useState(true);
   const router = useRouter();
@@ -208,3 +208,5 @@ export const SignUpTimeline = ({ candidate, variant }) => {
     </Flex>
   );
 };
+
+export default SignUpTimeline;
