@@ -24,13 +24,14 @@ const UploadedCard = ({
     <Box
       border="1px solid "
       borderColor={"blue.500"}
-      padding={"15px 20px"}
+      padding={"15px 20px 0px" }
       borderRadius={"12px"}
       bg={"white.100"}
     >
       <Box
         display={"flex"}
         justifyContent={"space-between"}
+        alignItems={"center"}
         // border={"1px solid red"}
       >
         <Box display={"flex"} alignItems={"center"} gap={"15px"}>
@@ -78,26 +79,27 @@ const UploadedCard = ({
                 /> */}
               </Box>
             ) : (
-              <Progress
-                value={uploadProgress}
-                height={"6px"}
-                size="xs"
-                borderRadius={"8px"}
-                colorScheme="blue"
-              />
+              null
+              // <Progress
+              //   value={uploadProgress}
+              //   height={"6px"}
+              //   size="xs"
+              //   borderRadius={"8px"}
+              //   colorScheme="blue"
+              // />
             )}
-            <FileReplaceButton
+            {/* <FileReplaceButton
               btnLabelStyle={{ mt: "21px" }}
               uploadIcon={replace}
               handleEvent={handleEvent}
               label={"Replace"}
-            />
+            /> */}
           </Box>
-          {pdfPreview ? null : (
+          {/* {pdfPreview ? null : (
             <Heading fontWeight={700} variant={"p4"} color={"blue.300"}>
               {uploadProgress}%
             </Heading>
-          )}
+          )} */}
         </Box>
 
         <Box width={"100%"} display={"flex"} justifyContent={"center"}></Box>

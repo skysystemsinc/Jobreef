@@ -3,14 +3,8 @@ import General_login from "../../assets/Images/General_login.svg"
 import Login from '@/Compomnents/Login/Login';
 import {
   Box,
-  Button,
-  Flex,
   Heading,
-  Input,
-  InputGroup,
-  InputLeftElement,
   Image,
-  Link,
 } from "@chakra-ui/react";
     
 const userLogin = () => {
@@ -38,7 +32,7 @@ const userLogin = () => {
         
       </Box>
       <Box display="flex" flex={1} justifyContent="center" alignItems="center">
-          <Box >
+          <Box width={"70%"}>
             <Login/>
           </Box>
       </Box>

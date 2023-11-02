@@ -26,6 +26,9 @@ const RightTextBox = ({ data }) => {
         padding={"10px 14px"}
         borderRadius={"8px"}
         color={"blue.300"}
+        boxShadow={
+          "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)"
+        }
         variant={"p12"}
       >
         {data.text}

@@ -118,13 +118,13 @@ const HeaderDropdown = ({ candidate }) => {
           />
         </Box>
       </MenuButton>
-      <MenuList _active={{ bg: "transparent" }} py="0px">
+      <MenuList  py="0px">
         {candidate
           ? candidatedropdown.map((item, index) => {
               return (
                 <MenuItem
                   key={index}
-                  bg="transparent"
+                  
                   _hover={{ bg: "transparent" }}
                   borderBottom={"1px solid #0000001a"}
                   // p={{ md: "14px 20px 16px 20px", base: "7px 16px 14px 16px" }}
@@ -142,6 +142,10 @@ const HeaderDropdown = ({ candidate }) => {
                       justifyContent={"center"}
                       alignItems={"center"}
                       gap={"10px"}
+                      transition= {"all 0.4s ease"}
+                      _hover={{
+                        transition: "all 0.4s ease",
+                        transform: "scale(1.1)",}}
                     >
                       {/* <Image src={dasboadrd.src} /> */}
                       {item.icon}

@@ -30,6 +30,7 @@ const CandidateCard = ({
       border={"1px solid "}
       borderColor={"gray.light"}
       boxShadow="0px 4px 20px 0px rgba(0, 0, 0, 0.05)"
+      
     >
       <Box
         display={"flex"}

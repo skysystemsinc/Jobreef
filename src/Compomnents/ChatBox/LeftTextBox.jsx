@@ -30,7 +30,17 @@ const LeftTextBox = ({ data }) => {
         </Heading>
       </Box>
 
-      <Heading margin={"0px 0px 0px 50px"} color={"blue.300"} variant={"p12"}>
+      <Heading
+        margin={"0px 0px 0px 50px"}
+        px={4}
+        pt={2}
+        borderRadius={'8px'}
+        boxShadow={
+          "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)"
+        }
+        color={"blue.300"}
+        variant={"p12"}
+      >
         {data.text}
       </Heading>
     </Box>

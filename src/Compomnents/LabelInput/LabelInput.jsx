@@ -42,7 +42,6 @@ const LabelInput = ({
   setreadOnly,
   label,
 }) => {
-  console.log("state",state )
   return (
     <Box width={"100%"}>
       <FormLabel

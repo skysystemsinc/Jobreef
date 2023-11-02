@@ -15,7 +15,7 @@ const SignUpLayout = ({
     <Box>
       <Image
         // width={isSmallerThe500 ? "200px" : "250px"}
-        width={{ md: "36%", base: "29%" }}
+        width={{ lg:"34%", md: "36%", base: "25%" }}
         src={leftPic}
         position={"absolute"}
         top={"0px"}

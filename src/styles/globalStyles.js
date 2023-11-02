@@ -162,7 +162,7 @@ const globalStyles = {
           sm: "85% !important",
           base: "78% !important",
         },
-        top: { sm: "17px   !important", base: "15px   !important" },
+        top: { sm: "17px !important", base: "15px !important" },
         marginInlineEnd: "0px !important",
         marginInlineStart: "0px !important",
       },
@@ -177,6 +177,12 @@ const globalStyles = {
         color: "blue.500",
         // fontSize:"100px"
       },
+    },
+    "& .cui-steps__horizontal-step:last-of-type": {
+      marginTop:'3px !important'
+    },
+    "& .css-iorgig:not(:last-child):after": {
+      width:'calc(100% - 14px - calc(8px * 2)) !important'
     },
   },
   stepperContainter2: {
