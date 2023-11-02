@@ -7,34 +7,99 @@ import EducationForm from "./EducationForm";
 import EducationCard from "../EducationCard/EducationCard";
 import CertificationForm from "./CertificationForm";
 import CeritifcateCard from "../CeritifcateCard/CeritifcateCard";
+import DeleteModal from "../DeleteModal/DeleteModal";
 
 const Certification = () => {
-  const [addEducation, setaddEducation] = useState(false);
-  const [experianceData, setexperianceData] = useState([]);
-  // const experianceData = [];
-
+  const [state, setState] = useState({
+    addCertification: false,
+    certificationData: [
+      {
+        certificateName: "Diploma Name",
+        organizationName: "Jobreef Professional Academy",
+        noExpiry: false,
+        readOnly: false,
+        certificateId: "2f8ae5bfaa4c46dc3bba77655",
+        issuedOn: new Date(),
+        country: " USA",
+        state: "Chicago",
+        city: " Illinois",
+        validUntil: new Date(),
+      },
+      {
+        certificateName: "Diploma Name",
+        organizationName: "Jobreef Professional Academy",
+        noExpiry: false,
+        readOnly: false,
+        certificateId: "2f8ae5bfaa4c46dc3bba77655",
+        issuedOn: new Date(),
+        country: " USA",
+        state: "Chicago",
+        city: " Illinois",
+        validUntil: new Date(),
+      },
+    ],
+    edit: false,
+    delete: false,
+  });
   return (
     <Box>
-      {addEducation ? (
+      <DeleteModal
+        onOpen={() =>
+          setState((prev) => {
+            return { ...prev, delete: true };
+          })
+        }
+        isOpen={state.delete}
+        onClose={() =>
+          setState((prev) => {
+            return { ...prev, delete: false };
+          })
+        }
+      />
+      {state.addCertification || state.edit ? (
         <Box display={"flex"} justifyContent={"center"}>
           <CertificationForm
-            setexperianceData={setexperianceData}
-            setaddExperiance={setaddEducation}
+            state={state}
+            saveHandle={() => {
+              setState((prev) => {
+                return {
+                  ...prev,
+                  addCertification: false,
+                  edit: false,
+                  certificationData: [1],
+                };
+              });
+            }}
           />
         </Box>
-      ) : experianceData.length > 0 ? (
-        <Box 
-        minHeight={"63vh"}
-        mt={"30px"} width={{ xl: "73%", base: "100%" }} mx={"auto"}>
-          <CeritifcateCard />
+      ) : state.certificationData.length > 0 ? (
+        <Box
+          minHeight={"63vh"}
+          mt={"30px"}
+          width={{ xl: "73%", base: "100%" }}
+          mx={"auto"}
+        >
+          {state.certificationData.map((item , ind) => {
+            return (
+              <Box key={ind}>
+                <CeritifcateCard data={item} state={state} setState={setState} />
+              </Box>
+            );
+          })}
 
           <Flex justifyContent={"center"}>
             <Button
               onClick={() => {
-                setaddEducation(true);
+                setState((prev) => {
+                  return {
+                    ...prev,
+                    addCertification: true,
+                    certificationData: [],
+                  };
+                });
               }}
               width="max-content"
-              px={{ md: "40px", base: "20px" }}
+              px={"12px"}
               mt={{ md: "61px", base: "20px" }}
               mb={"40px"}
               variant={"blue-btn"}
@@ -46,7 +111,15 @@ const Certification = () => {
       ) : (
         <Box minHeight={"68vh"} pl={{ md: "30px", base: "0px" }}>
           <TextCard
-            addHandle={() => setaddEducation(true)}
+            addHandle={() =>
+              setState((prev) => {
+                return {
+                  ...prev,
+                  addCertification: true,
+                  certificationData: [],
+                };
+              })
+            }
             title={"Make Yourself Stand Out:"}
             subittle={"Add Your Industry Certifications and Licenses."}
             btnLable={"Add Certification"}

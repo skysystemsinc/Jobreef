@@ -78,7 +78,7 @@ const UploadBox = ({btnLabelStyle, butLabel, handleEvent, titie, list, style }) 
           >
             <Image src={upload.src} width={{ md: "17px", base: "15px" }} />{" "}
             {butLabel ? butLabel : "Upload"}
-            <Input onChange={handleEvent} type="file" hidden />
+            <Input multiple onChange={handleEvent} type="file" hidden />
           </FormLabel>
         </Box>
       </Box>

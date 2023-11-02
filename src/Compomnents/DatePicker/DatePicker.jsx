@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import "@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css";
@@ -14,14 +14,17 @@ import {
 import canlenderIcon from "@/assets/Images/calendar.svg";
 import moment from "moment/moment";
 const DatePicker = ({
+  readOnly,
   setState,
+  defaultValue,
   state,
-
   selectRange,
 }) => {
-  // const [date, setdate] = useState(new Date());
+  const [date, setdate] = useState();
   const currentDate = moment();
-  const defaultDate = currentDate.add(30, 'days');
+  const defaultDate = currentDate.add(30, "days");
+  const [selectDate, setselectDate] = useState(false);
+  console.log("selectDate", selectDate);
   const [isOpen, setisopen] = useState(false);
   const calenderStle = {
     // "& .react-daterange-picker__calendar-button": {
@@ -164,32 +167,42 @@ const DatePicker = ({
       backgroundColor: "gray.200",
     },
   };
+  // const initialRender = useRef(true);
+  // useEffect(() => {
+  //   if (initialRender.current) {
+  //     initialRender.current = false;
+  //     return;
+  //   }
+  //   setselectDate(true);
+  // }, [state]);
 
   return (
     <>
-      <Box   sx={calenderStle} position={"relative"} >
-        <Box  position={"absolute"} right={"0px"}  zIndex={4}  >
-          <DateRangePicker
-            calendarIcon={
-              <Image
-                src={canlenderIcon.src}
-                width={{ base: "18px" }}
-                mt={{ base: "7px" }}
-                marginRight={"6px"}
-              />
-            }
-            defaultValue={defaultDate.toDate()}
-            // selectRange={true}
-            // isOpen={false}
-            onChange={setState}
-            // shou
-            minDate={defaultDate.toDate()}
-            value={state}
-          />
-        </Box>
+      <Box sx={calenderStle} position={"relative"}>
+        {readOnly ? null : (
+          <Box position={"absolute"} right={"0px"} zIndex={4}>
+            <DateRangePicker
+              calendarIcon={
+                <Image
+                  src={canlenderIcon.src}
+                  width={{ base: "18px" }}
+                  mt={{ base: "7px" }}
+                  marginRight={"6px"}
+                />
+              }
+              selectRange={false}
+              defaultValue={defaultValue ? defaultDate.toDate() : false}
+              // onChange={setState}
+              onChange={setdate}
+              minDate={defaultValue ? defaultDate.toDate() : false}
+              value={state}
+            />
+          </Box>
+        )}
         <InputGroup>
           <Input
-            value={moment(state).format("MM/DD/YYYY")}
+            // value={ selectDate? moment(state).format("MM/DD/YYYY"):""}
+            value={date ? moment(date).format("MM/DD/YYYY") : ""}
             placeContent={"MM/DD/YYYY"}
             variant={"bg-input"}
             placeholder="MM/DD/YYYY"

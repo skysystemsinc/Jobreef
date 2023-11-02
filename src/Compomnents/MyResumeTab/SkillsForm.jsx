@@ -9,29 +9,45 @@ import {
   Image,
   Input,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import profile from "@/assets/Images/profile.svg";
 import edit from "@/assets/Images/edit.svg";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
 const SkillsForm = ({
+  handleSave,
   setexperianceData,
   setaddExperiance,
   setTabIndex,
   tabIndex,
+  state,
 }) => {
   const router = useRouter();
+  const [skills, setskills] = useState({
+    skillName: "",
+    skillLevel: "",
+  });
   return (
     <Box
-    minH={"60vh"}
-    mt={{ md: "30px", base: "16px" }} width={{ lg: "60%", base: "100%" }}
+      minH={"60vh"}
+      mt={{ md: "30px", base: "16px" }}
+      width={{ lg: "60%", base: "100%" }}
     >
       {/* <Image src={profile.src} /> */}
 
       <Box mt={"0px"}>
         <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
           <LabelInput
+            setState={(e) => {
+              setskills((prev) => {
+                return {
+                  ...prev,
+                  skillName: e.target.value,
+                };
+              });
+            }}
+            state={skills.skillName}
             labelVariant={"label"}
             type="text"
             variant={"bg-input"}
@@ -39,6 +55,15 @@ const SkillsForm = ({
             label={" Name"}
           />
           <LabelInput
+            setState={(e) => {
+              setskills((prev) => {
+                return {
+                  ...prev,
+                  skillLevel: e.target.value,
+                };
+              });
+            }}
+            state={skills.skillLevel}
             labelVariant={"label"}
             type="text"
             variant={"bg-input"}
@@ -58,8 +83,7 @@ const SkillsForm = ({
         >
           <Button
             onClick={() => {
-              setaddExperiance(false);
-              // tabIndex == 0 ? null : setTabIndex(--tabIndex);
+              handleSave();
             }}
             variant="outline-blue"
           >
@@ -68,10 +92,7 @@ const SkillsForm = ({
 
           <Button
             onClick={() => {
-              // tabIndex == 2 ? null : setTabIndex(++tabIndex);
-              // router.push("/");
-              setexperianceData([1]);
-              setaddExperiance(false);
+              handleSave();
             }}
             // width={{ md: "160px", lg: "200px", sm: "140px", base: "120px" }}
             // width={"max-content"}
@@ -79,7 +100,7 @@ const SkillsForm = ({
 
             variant={"blue-btn"}
           >
-            Save Skill
+            {state.edit ?"Update Skill" :" Save Skill"}
           </Button>
         </Box>
       </Box>

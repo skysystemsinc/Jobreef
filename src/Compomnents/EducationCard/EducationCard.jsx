@@ -5,7 +5,8 @@ import { GoDotFill } from "react-icons/go";
 import { HiLocationMarker } from "react-icons/hi";
 import edit_outline from "@/assets/Images/edit_outline.svg";
 import trash from "@/assets/Images/trash.svg";
-const EducationCard = ({ headingStyle, dispableBlueCard }) => {
+import moment from "moment";
+const EducationCard = ({ data, setState, headingStyle, dispableBlueCard }) => {
   return (
     <Box
       p={{ sm: "20px", base: "12px" }}
@@ -36,7 +37,7 @@ const EducationCard = ({ headingStyle, dispableBlueCard }) => {
           </Box> */}
           <Box>
             <Heading variant={"p7"} color={"gray.text"}>
-              Diploma Name
+              {data.diploma}
             </Heading>
             <Box
               mt={{ md: "12px", base: "3px" }}
@@ -46,14 +47,15 @@ const EducationCard = ({ headingStyle, dispableBlueCard }) => {
               gap={{ md: "13px", sm: "6px", base: "5px" }}
             >
               <Heading color={"gray.text"} sx={headingStyle} variant={"p4"}>
-                Walter Payton College Preparatory High School
+                {data.schoolName}
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
               </Box>
 
               <Heading color={"gray.text"} sx={headingStyle} variant={"p4"}>
-                September 2017 - July 2023
+                {moment(data.stateDate).format("MMMM YYYY")} {" - "}
+                {moment(data.endDate).format("MMMM YYYY")}
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
@@ -67,8 +69,10 @@ const EducationCard = ({ headingStyle, dispableBlueCard }) => {
                 sx={headingStyle}
               >
                 {" "}
-                <HiLocationMarker style={{ color: "#4A4A4A" , fontSize:'20px'}} /> Chicago,
-                Illinois, USA
+                <HiLocationMarker
+                  style={{ color: "#4A4A4A", fontSize: "20px" }}
+                />{" "}
+                {data.state}, {data.city}, {data.country}
               </Heading>
             </Box>
           </Box>
@@ -82,14 +86,40 @@ const EducationCard = ({ headingStyle, dispableBlueCard }) => {
           width={{ xl: "auto", base: "100%" }}
           gap={"20px"}
         >
-          <Box display={"flex"} alignItems={"center"} gap={"10px"}>
+          <Box
+            cursor={"pointer"}
+            onClick={() =>
+              setState((prev) => {
+                return {
+                  ...prev,
+                  edit: true,
+                };
+              })
+            }
+            display={"flex"}
+            alignItems={"center"}
+            gap={"10px"}
+          >
             <Image
               width={{ md: "17px", base: "16px" }}
               src={edit_outline.src}
             />
             <Heading variant={"p5"}>Edit</Heading>
           </Box>
-          <Box display={"flex"} alignItems={"center"} gap={"5px"}>
+          <Box
+            onClick={() =>
+              setState((prev) => {
+                return {
+                  ...prev,
+                  delete: true,
+                };
+              })
+            }
+            cursor={"pointer"}
+            display={"flex"}
+            alignItems={"center"}
+            gap={"5px"}
+          >
             <Image width={{ md: "17px", base: "16px" }} src={trash.src} />
             <Heading variant={"p5"}>Delete</Heading>
           </Box>
@@ -103,12 +133,7 @@ const EducationCard = ({ headingStyle, dispableBlueCard }) => {
           color={"gray.text"}
           variant={"p5"}
         >
-          Lead the design and development of system architectures, ensuring they
-          meet the project requirements, performance criteria, and scalability.
-          Requirements Analysis: Collaborate with stakeholders, customers, and
-          cross-functional teams to gather and analyze system requirements,
-          ensuring clear and unambiguous specifications. Oversee the integration
-
+          {data.description}
         </Heading>
       </Box>
     </Box>

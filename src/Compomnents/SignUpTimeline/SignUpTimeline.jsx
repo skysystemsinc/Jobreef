@@ -53,6 +53,7 @@ export const SignUpTimeline = ({ candidate, variant }) => {
     if (activeStep == 2) {
       if (!company) {
         router.push("/candidate/registration");
+        // router.reload()
       } else {
         router.push("/registration");
       }
@@ -182,12 +183,20 @@ export const SignUpTimeline = ({ candidate, variant }) => {
           >
             {" Back"}
           </Button>
-          <Button
-            variant={"blue-btn"}
-            onClick={handeNext}
-          >
-            {isLastStep ? "Verify" : "Next"}
-          </Button>
+
+          {isLastStep && !company ? (
+            <a className="blue-btn" href="/candidate/registration">
+              Verify
+            </a>
+          ) : (
+            <Button
+              // width={{ md: "200px", sm: "180px", base: "130px" }}
+              variant={"blue-btn"}
+              onClick={handeNext}
+            >
+              {isLastStep ? "Verify" : "Next"}
+            </Button>
+          )}
         </>
       </Flex>
     </Flex>

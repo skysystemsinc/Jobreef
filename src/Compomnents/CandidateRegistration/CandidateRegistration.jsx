@@ -21,7 +21,7 @@ const CandidateRegistration = ({ candidate }) => {
   const { company, setCompany } = useContext(Role_context);
   return (
     <Box
-      padding={{ md: "75px 30px 0px 30px", base: "75px 10px 0px 10px" }}
+      padding={{ md: "75px 0px 0px 30px", base: "75px 0px 0px 0px" }}
       width={"100%"}
       display={"flex"}
       justifyContent={"center"}
@@ -39,8 +39,8 @@ const CandidateRegistration = ({ candidate }) => {
       </>
 
       <Box
-        width={{ md: "840px", base: "100%" }}
-        ml={{ xl: "400px", base: "0px" }}
+        width={{ xl: "100%",   lg:"90%", base: "100%" }}
+        ml={{ xl: "28%", base: "0px" }}
       >
         <Box display={"flex"} justifyContent={"center"} mb={"52px"}>
           <Logo />

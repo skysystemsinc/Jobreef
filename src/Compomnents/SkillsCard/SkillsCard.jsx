@@ -5,7 +5,7 @@ import { GoDotFill } from "react-icons/go";
 import { HiLocationMarker } from "react-icons/hi";
 import edit_outline from "@/assets/Images/edit_outline.svg";
 import trash from "@/assets/Images/trash.svg";
-const SkillsCard = () => {
+const SkillsCard = ({ data, handleEdit, handleDelete }) => {
   return (
     <Box
       p={{ sm: "20px", base: "12px" }}
@@ -38,7 +38,7 @@ const SkillsCard = () => {
                 Skill Name
               </Heading>
               <Heading variant={"p7"} color={"gray.text"}>
-                Communication
+                {data.skillName}
               </Heading>
             </Box>
             <Box>
@@ -46,7 +46,7 @@ const SkillsCard = () => {
                 Skill Level
               </Heading>
               <Heading variant={"p7"} color={"gray.text"}>
-                Proficient
+                {data.skillLevel}
               </Heading>
             </Box>
           </Box>
@@ -60,14 +60,26 @@ const SkillsCard = () => {
           width={{ xl: "auto", base: "100%" }}
           gap={"20px"}
         >
-          <Box display={"flex"} alignItems={"center"} gap={"10px"}>
+          <Box
+            cursor={"pointer"}
+            onClick={handleEdit}
+            display={"flex"}
+            alignItems={"center"}
+            gap={"10px"}
+          >
             <Image
               width={{ md: "19px", base: "16px" }}
               src={edit_outline.src}
             />
             <Heading variant={"p5"}>Edit</Heading>
           </Box>
-          <Box display={"flex"} alignItems={"center"} gap={"5px"}>
+          <Box
+            cursor={"pointer"}
+            onClick={handleDelete}
+            display={"flex"}
+            alignItems={"center"}
+            gap={"5px"}
+          >
             <Image width={{ md: "19px", base: "16px" }} src={trash.src} />
             <Heading variant={"p5"}>Delete</Heading>
           </Box>

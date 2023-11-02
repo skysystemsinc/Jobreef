@@ -1,215 +1,285 @@
-// import React, { useState } from 'react';
-// import { Box, Button, Heading } from '@chakra-ui/react';
-// import { GoDotFill } from 'react-icons/go';
-// import { FaUpload } from 'react-icons/fa';
-// import Ellipse458 from '../../assets/Images/Ellipse458.svg'
-
-// const Attachments = () => {
-//   const [selectedFile, setSelectedFile] = useState(null);
-
-//   const handleFileChange = (event) => {
-//     const file = event.target.files[0];
-//     setSelectedFile(file);
-//   };
-
-//   return (
-
-//     <Box display={"flex"} flexWrap={"wrap"}>
-//     <Box flex={1} margin={10} padding={10} border="1px solid gray" borderRadius={10} >
-//       <Heading
-//         variant={"h1"}
-//         alignItems={"center"}
-//         alignSelf={"center"}
-//         textAlign={"center"}
-//         gap={"23px"}
-//         mb={{ "2xl": "30px", base: "16px" }}
-//         color={"blue.500"}
-//         fontSize={20}
-//         fontWeight={'normal'}
-//         borderRadius= {'8px'}
-//         border = {'1.5px solid #EBEBEB'}
-//         backgroundColor={'#FFF'}
-//       >
-//         Upload Resume File
-//       </Heading>
-
-//       <Box display={"flex"} alignItems={"center"} gap={2}>
-//         <GoDotFill style={{ color: "#2CA5C3", marginBottom: 10 }} />
-//         <Heading
-//           variant={"h1"}
-//           display={"flex"}
-//           alignItems={"center"}
-//           gap={"23px"}
-//           mb={{ "2xl": "30px", base: "16px" }}
-//           color={"blackAlpha.700"}
-//           fontSize={16}
-//         >
-//           The Acceptable File Formats are PDF and Word Files
-//         </Heading>
-//       </Box>
-
-//       <Box display={"flex"} alignItems={"center"} gap={2}>
-//         <GoDotFill style={{ color: "#2CA5C3", marginBottom: 10 }} />
-//         <Heading
-//           variant={"h1"}
-//           display={"flex"}
-//           alignItems={"center"}
-//           gap={"23px"}
-//           mb={{ "2xl": "30px", base: "16px" }}
-//           color={"blackAlpha.700"}
-//           fontSize={16}
-//         >
-//           This will be included in submitted job applications
-//         </Heading>
-//       </Box>
-
-//       <Box display="flex" justifyContent="center" alignItems="center" mt={4}>
-//         <label htmlFor="fileInput">
-//           <Box
-//             as="span"
-//             variant="bg-input"
-//             display="flex"
-//             alignItems="center"
-//             justifyContent="center"
-//             cursor="pointer"
-//             borderRadius="5px"
-//             color={'#BBBBC7'}
-//             backgroundColor={"#F4F9FF"}
-//             padding={"10px 30px 10px 30px"}
-//           >
-//             <FaUpload style={{ marginRight: '8px', color: '#BBBBC7' }} />
-//             {selectedFile ? 'File Selected' : 'Upload'}
-//           </Box>
-//         </label>
-//         <input
-//           type="file"
-//           id="fileInput"
-//           style={{ display: 'none' }}
-//           accept=".pdf, .doc, .docx"
-//           onChange={handleFileChange}
-//         />
-//       </Box>
-
-//       {selectedFile && (
-//         <Box mt={4}>
-//           <strong>Selected File:</strong> {selectedFile.name}
-//         </Box>
-//       )}
-//     </Box>
-
-//     <Box flex={1} margin={10} padding={10} border="1px solid gray" borderRadius={10} >
-//       <Heading
-//         variant={"h1"}
-//         alignItems={"center"}
-//         alignSelf={"center"}
-//         textAlign={"center"}
-//         gap={"23px"}
-//         mb={{ "2xl": "30px", base: "16px" }}
-//         color={"blue.500"}
-//         fontSize={20}
-//         fontWeight={'normal'}
-//         borderRadius= {'8px'}
-//         border = {'1.5px solid #EBEBEB'}
-//         backgroundColor={'#FFF'}
-//       >
-//         Upload Additional Files (e.g. Cover Letter or ID)
-//       </Heading>
-
-//       <Box display={"flex"} alignItems={"center"} gap={2}>
-//         <GoDotFill style={{ color: "#2CA5C3", marginBottom: 10 }} />
-//         <Heading
-//           variant={"h1"}
-//           display={"flex"}
-//           alignItems={"center"}
-//           gap={"23px"}
-//           mb={{ "2xl": "30px", base: "16px" }}
-//           color={"blackAlpha.700"}
-//           fontSize={16}
-//         >
-//           The acceptable file formats are PDF, Word, PNG, and JPEG files
-//         </Heading>
-//       </Box>
-
-//       <Box display={"flex"} alignItems={"center"} gap={2}>
-//         <GoDotFill style={{ color: "#2CA5C3", marginBottom: 10 }} />
-//         <Heading
-//           variant={"h1"}
-//           display={"flex"}
-//           alignItems={"center"}
-//           gap={"23px"}
-//           mb={{ "2xl": "30px", base: "16px" }}
-//           color={"blackAlpha.700"}
-//           fontSize={16}
-//         >
-//           This will be included in submitted job applications
-//         </Heading>
-//       </Box>
-
-//       <Box display="flex" justifyContent="center" alignItems="center" mt={4}>
-//         <label htmlFor="fileInput">
-//           <Box
-//             as="span"
-//             variant="bg-input"
-//             display="flex"
-//             alignItems="center"
-//             justifyContent="center"
-//             cursor="pointer"
-//             borderRadius="5px"
-//             color={'#BBBBC7'}
-//             backgroundColor={"#F4F9FF"}
-//             padding={"10px 30px 10px 30px"}
-//           >
-//             <FaUpload style={{ marginRight: '8px', color: '#BBBBC7' }} />
-//             {selectedFile ? 'File Selected' : 'Upload'}
-//           </Box>
-//         </label>
-//         <input
-//           type="file"
-//           id="fileInput"
-//           style={{ display: 'none' }}
-//           accept=".pdf, .doc, .docx, .jpg, .jpeg, .png"
-//           onChange={handleFileChange}
-//         />
-//       </Box>
-
-//       {selectedFile && (
-//         <Box mt={4}>
-//           <strong>Selected File:</strong> {selectedFile.name}
-//         </Box>
-//       )}
-//     </Box>
-
-//     </Box>
-//   );
-// };
-
-// export default Attachments;
-
-import React from "react";
+import React, { useState } from "react";
 import UploadBox from "../UploadBox/UploadBox";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
+import UploadedCard from "../UploadedCard/UploadedCard";
+import dummy_resume from "@/assets/Images/dummy_resume.svg";
 
-const Attachments = () => {
+// import dummy_resume from "@/assets/pdf/dummy.pdf";
+const Attachments = ({ style }) => {
+  const [state, setState] = useState({
+    resume: [],
+    additional: [],
+    allFile: [],
+
+    save: false,
+
+    select: false,
+  });
   const list = [
     "The acceptable file formats are PDF, Word, PNG, and JPEG files",
     "This will be included in submitted job applications",
   ];
+  console.log("state", state);
+  const handleSingleFile = (event, key, ind) => {
+    console.log("index", ind);
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const updatedObject = {
+          pdfUrl: e.target.result,
+          uploadProgress: 100,
+          pdfFile: selectedFile,
+        };
+        setState((prev) => {
+          const allFile = [...prev.allFile]; // Create a copy of the allFile array
+          const keyAllFile = [...prev[key]]; // Create a copy of the allFile array
+          console.log("ind", allFile);
+          allFile.splice(ind, 1, updatedObject);
+          keyAllFile.splice(ind, 1, updatedObject);
+
+          return {
+            select: true,
+            // [key]: true,
+            allFile: allFile,
+            [key]: keyAllFile,
+          };
+        });
+      };
+      reader.readAsDataURL(selectedFile);
+    }
+    // selectedFile.map((file, index) => {
+    // });
+  };
+
+  const handleUpload = (event, key, index) => {
+    //TODO make dynamic progress barr with axios
+    console.log("runn", key);
+
+    if (index !== undefined) {
+      console.log("handleSingleFile", index);
+      handleSingleFile(event, key, index);
+    } else {
+      console.log("else", index);
+
+      const selectedFile = Array.from(event.target.files);
+      selectedFile.map((file, index) => {
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            setState((prev) => {
+              console.log("...prev[key],",key);
+              return {
+                ...prev,
+                select: true,
+                // [key]: true,
+                allFile: [
+                  ...prev.allFile,
+                  {
+                    pdfUrl: e.target.result,
+                    uploadProgress: 100,
+                    pdfFile: file,
+                  },
+                ],
+                [key]: [
+                  ...prev[key],
+                  {
+                    uploadProgress: 100,
+                    pdfUrl: e.target.result,
+                    pdfFile: file,
+                  },
+                ],
+              };
+            });
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+  };
+  const handleSave = () => {
+    setState((prev) => {
+      return {
+        ...prev,
+        save: true,
+        select: false,
+      };
+    });
+  };
+  const handleCancel = () => {
+    setState((prev) => {
+      return {
+        ...prev,
+        save: false,
+        select: false,
+        resume: [],
+        additional: [],
+        allFile: [],
+      };
+    });
+  };
+  const handleDelete = (ind, key) => {
+    setState((prev) => {
+      const allFile = [...prev.allFile]; // Create a copy of the allFile array
+      const keyAllFile = [...prev[key]]; // Create a copy of the allFile array
+      console.log("ind",prev);
+      allFile.splice(ind, 1);
+      keyAllFile.splice(ind, 1);
+      if (allFile.length == 0) {
+        return {
+          ...prev,
+          select: false,
+          // [key]: true,
+          save:false,
+          allFile: allFile,
+          [key]: keyAllFile,
+        };
+      } else {
+        return {
+          ...prev,
+          // select: false,
+          allFile: allFile,
+          [key]: keyAllFile,
+        };
+      }
+    });
+  };
   return (
     <Box minHeight={"59vh"}>
-      <Flex
-        mt={{ md: "50px", base: "20px" }}
-        alignItems={"center"}
-        gap={{ md: "30px", base: "10px" }}
-        flexWrap={"wrap"}
-        justifyContent={"center"}
-      >
-        <UploadBox titie={"Upload Resume File"} list={list} />
+      {state.select ? (
+        <Box mt={"60px"}>
+          <Box width={{ md: " 60%", base: "100%" }} mx={"auto"} sx={style}>
+            {state.allFile.map((item, ind) => {
+              return (
+                <Box mb={"15px"}>
+                  <UploadedCard
+                    handleDelete={
+                      () => {
+                        if (item.resume) {
+                          handleDelete(ind, "resume");
+                        } else {
+                          handleDelete(ind, "additional");
+                        }
+                      }
 
-        <UploadBox
-          list={list}
-          titie={"Upload Additional Files (e.g. Cover Letter or ID)"}
-        />
-      </Flex>
+                      // handleDelete(ind , "additional")
+                    }
+                    // pdfPreview={state.pdfUrl}
+                    uploadProgress={item.uploadProgress}
+                    fileSize={item.pdfFile.size}
+                    fileName={item.pdfFile.name}
+                    handleEvent={(e) => {
+                      if (item.resume) {
+                        handleUpload(e, "resume", ind);
+                      } else {
+                        handleUpload(e, "additional", ind);
+                      }
+                    }}
+                  />
+                </Box>
+              );
+            })}
+
+            {/* <UploadedCard pdfPreview={dummy_resume.src} /> */}
+          </Box>
+          <Flex justifyContent={"center"} gap={"20px"} mt={"43px"}>
+            <Button onClick={handleCancel} variant="outline-blue">
+              Cancel
+            </Button>
+            <Button onClick={handleSave} variant={"blue-btn"}>
+              Save
+            </Button>
+          </Flex>
+        </Box>
+      ) : state.save ? (
+        <Flex
+          mt={{ md: "50px", base: "20px" }}
+          alignItems={"flex-start"}
+          gap={{ md: "30px", base: "10px" }}
+          flexWrap={"wrap"}
+          justifyContent={"center"}
+        >
+          {state.resume.length > 0 ? (
+            <Box width={{ lg: "40%", base: "100%" }} sx={style}>
+              {state.resume.map((item, ind) => {
+                return (
+                  <Box mb={"10px"}>
+                    <UploadedCard
+                      handleDelete={() => handleDelete(ind, "resume")}
+                      pdfPreview={item.pdfUrl}
+                      uploadProgress={item.uploadProgress}
+                      fileSize={item.pdfFile.size}
+                      fileName={item.pdfFile.name}
+                      // handleEvent={handleUpload}
+                      handleEvent={(e) => handleUpload(e, "resume", ind)}
+                    />
+                  </Box>
+                );
+              })}
+            </Box>
+          ) : (
+            <UploadBox
+              handleEvent={(e) => handleUpload(e, "resume")}
+              titie={"Upload Resume File"}
+              list={list}
+            />
+          )}
+          {state.additional.length > 0 ? (
+            <Box width={{ lg: "40%", base: "100%" }} sx={style}>
+              {state.additional.map((item, ind) => {
+                return (
+                  <Box mb={"10px"}>
+                    <UploadedCard
+                      handleDelete={() => handleDelete(ind, "additional")}
+                      pdfPreview={item.pdfUrl}
+                      uploadProgress={item.uploadProgress}
+                      fileSize={item.pdfFile.size}
+                      fileName={item.pdfFile.name}
+                      // handleEvent={handleUpload}
+                      handleEvent={(e) => handleUpload(e, "additional", ind)}
+                    />
+                  </Box>
+                );
+              })}
+              {/* <UploadedCard
+                pdfPreview={state.additional.pdfUrl}
+                uploadProgress={state.additional.uploadProgress}
+                fileSize={state.additional.pdfFile.size}
+                fileName={state.additional.pdfFile.name}
+                // handleEvent={handleUpload}
+                handleEvent={(e) => handleUpload(e, "additional")}
+              /> */}
+            </Box>
+          ) : (
+            <UploadBox
+              handleEvent={(e) => handleUpload(e, "additional")}
+              titie={"Upload Additional Files (e.g. Cover Letter or ID)"}
+              list={list}
+            />
+          )}
+        </Flex>
+      ) : (
+        <Flex
+          mt={{ md: "50px", base: "20px" }}
+          alignItems={"center"}
+          gap={{ md: "30px", base: "10px" }}
+          flexWrap={"wrap"}
+          justifyContent={"center"}
+        >
+          <UploadBox
+            // handleEvent={handleUpload}
+            handleEvent={(e) => handleUpload(e, "resume")}
+            titie={"Upload Resume File"}
+            list={list}
+          />
+
+          <UploadBox
+            handleEvent={(e) => handleUpload(e, "additional")}
+            list={list}
+            titie={"Upload Additional Files (e.g. Cover Letter or ID)"}
+          />
+        </Flex>
+      )}
     </Box>
   );
 };

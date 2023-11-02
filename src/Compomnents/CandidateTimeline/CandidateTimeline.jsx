@@ -7,6 +7,7 @@ import {
   FormLabel,
   Heading,
   Input,
+  useDisclosure,
   useMediaQuery,
 } from "@chakra-ui/react";
 import { Step, Steps, useSteps } from "chakra-ui-steps";
@@ -24,6 +25,8 @@ import Education from "./Education";
 import Certification from "./Certitfication";
 import Skills from "./Skills";
 import Attachments from "./Attchement";
+import DeleteModal from "../DeleteModal/DeleteModal";
+import TimelineAttachments from "./Attchement";
 const steps = [
   { label: "Overview" },
   { label: "Work Experience" },
@@ -31,24 +34,27 @@ const steps = [
   { label: "Certifications" },
   { label: "Skills" },
   { label: "Attachments" },
+  { label: "Achievement" },
 ];
 
 export const CandidateTimeline = ({ candidate, variant }) => {
-  const [addEducation, setaddEducation] = useState(false);
-  const [addCertificate, setCertificate] = useState(false);
-
   const router = useRouter();
-  const [addExperiance, setaddExperiance] = useState(false);
 
   const { company, setCompany } = useContext(Role_context);
-  const [State, setState] = useState({
+  const [state, setState] = useState({
+    addExperience: true,
+    addEducation: true,
+    addCertificate: true,
+    overview: true,
+    edit: false,
+    delete: false,
+    currentlyWorking: false,
     country: "",
     state: "",
     city: "",
     number: "",
     description: "",
   });
-
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
@@ -65,8 +71,8 @@ export const CandidateTimeline = ({ candidate, variant }) => {
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
 
-  const handeNext = async () => {
-    if (activeStep === 5) {
+  const handleNext = async () => {
+    if (activeStep === 6) {
       router.push("/candidate/profile-setting");
     } else {
       nextStep();
@@ -80,12 +86,32 @@ export const CandidateTimeline = ({ candidate, variant }) => {
       alignItems={"center"}
       width="100%"
     >
+      <DeleteModal
+        onOpen={() =>
+          setState((prev) => {
+            return { ...prev, delete: true };
+          })
+        }
+        isOpen={state.delete}
+        onClose={() =>
+          setState((prev) => {
+            return { ...prev, delete: false };
+          })
+        }
+      />
       <Steps
         responsive={false}
+        // sx={stepTyle}
+        // sx={stepTyle}
         sx={{
           ...globalStyles.stepperContainter,
-          width: { md: "690px", base: "90%" },
+          width: {
+            xl: "90%",
+            lg: "80%",
+            md: "73%",
 
+            base: "99%",
+          },
           "& .cui-steps__horizontal-step": {
             _active: {
               "&::after": {
@@ -97,19 +123,16 @@ export const CandidateTimeline = ({ candidate, variant }) => {
               bg: "gray.light !important",
               height: "3px !important",
               width: {
-                md: "87px !important",
-                sm: "75% !important",
-                base: "60% !important",
+                md: "82% !important",
+                sm: "80% !important",
+                base: "61% !important",
               },
-        top: { sm: "17px   !important" ,  base: "15px   !important" },
-              
+              top: { sm: "17px   !important", base: "15px   !important" },
               marginInlineEnd: "0px !important",
               marginInlineStart: "0px !important",
             },
           },
         }}
-        // sx={globalStyles.stepperContainter}
-
         variant={"circles-alt"}
         colorScheme="blue"
         trackColor="blue.500"
@@ -172,36 +195,25 @@ export const CandidateTimeline = ({ candidate, variant }) => {
             >
               <Box
                 sx={{
-                  p: { md: "40px 0px 0px 0px", base: "20px 0px 20px 0px" },
+                  p: { md: "40px 0px 0px 0px", base: "20px 7px 20px 7px" },
                   mt: "13px",
                   width: { md: "88%", base: "100%" },
                 }}
               >
                 {index == 0 ? (
-                  <Overview state={State} setState={setState} />
+                  <Overview state={state} setState={setState} />
                 ) : index == 1 ? (
-                  <WorkExperiance
-                    setaddExperiance={setaddExperiance}
-                    addExperiance={addExperiance}
-                    State={State}
-                    setState={setState}
-                  />
+                  <WorkExperiance state={state} setState={setState} />
                 ) : index == 2 ? (
-                  <Education
-                    setaddEducation={setaddEducation}
-                    addEducation={addEducation}
-                    State={State}
-                    setState={setState}
-                  />
+                  <Education state={state} setState={setState} />
                 ) : index == 3 ? (
-                  <Certification
-                    setCertificate={setCertificate}
-                    addCertificate={addCertificate}
-                  />
+                  <Certification state={state} setState={setState} />
                 ) : index == 4 ? (
                   <Skills />
                 ) : index == 5 ? (
-                  <Attachments />
+                  <TimelineAttachments />
+                ) : index == 6 ? (
+                  <TimelineAttachments />
                 ) : null}
               </Box>
             </Step>
@@ -209,7 +221,10 @@ export const CandidateTimeline = ({ candidate, variant }) => {
         })}
       </Steps>
 
-      {addExperiance || addEducation || addCertificate ? null : (
+      {(state.addExperience && activeStep == 1) ||
+      state.edit ||
+      (state.addEducation && activeStep == 2) ||
+      (state.addCertificate && activeStep == 3) ? null : (
         <Flex
           width="100%"
           justify="center"
@@ -227,10 +242,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
             >
               {" Back"}
             </Button>
-            <Button
-              variant={"blue-btn"}
-              onClick={handeNext}
-            >
+            <Button variant={"blue-btn"} onClick={handleNext}>
               {"Next"}
             </Button>
           </>

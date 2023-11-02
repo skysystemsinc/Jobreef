@@ -145,7 +145,7 @@ const JobSearchResults = () => {
         ) : null}
 
         {toggle ? (
-          <Box flex={2.8} display={{ lg: "block", base: "none" }}>
+          <Box flex={1.9} display={{ lg: "block", base: "none" }}>
             <ShowPreviousSearches />
           </Box>
         ) : (

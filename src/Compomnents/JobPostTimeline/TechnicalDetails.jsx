@@ -22,7 +22,7 @@ const TechnicalDetails = ({ state, setState }) => {
   const [salaryRange, setsalaryRange] = useState({
     type: "text",
   });
-  
+
   const salaryRangeOption = ["Range Salary", "Starting Salary"];
   const rateOptions = [
     "Monthly",
@@ -114,13 +114,12 @@ const TechnicalDetails = ({ state, setState }) => {
             // });
           }}
           labelVariant={"label"}
-          type="date"
+          type="text"
           variant={"bg-input"}
           dropdownOption={salaryRangeOption}
           imoptnatIcon
-          dropdown
-          placeholder="Select salary type for this job"
-          label={"Display Salary As"}
+          placeholder="Enter minimum salary"
+          label={"Minimum Salary"}
         />
         <LabelInput
           state={state.salaryRange}
@@ -132,8 +131,8 @@ const TechnicalDetails = ({ state, setState }) => {
           labelVariant={"label"}
           type={salaryRange.type}
           variant={"bg-input"}
-          placeholder={"Enter the salary range for this job"}
-          label={"Salary Range"}
+          placeholder={"Enter Maximum salary"}
+          label={"Maximum Salary "}
         />
       </InputWrapper>
       <InputWrapper>

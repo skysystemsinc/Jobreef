@@ -54,7 +54,8 @@ const JobPostTimeline = ({ candidate, variant }) => {
     streetAddress: "",
     desiredSkill: "",
     tags: "",
-    rate:''
+    applicationType: { type: "External", url: "" },
+    rate: "",
   });
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
@@ -84,7 +85,6 @@ const JobPostTimeline = ({ candidate, variant }) => {
         variant={"p6"}
       >
         Create a New Job Post
-
       </Heading>
       <Flex
         flexDir="column"

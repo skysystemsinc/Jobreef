@@ -9,32 +9,63 @@ import EducationCard from "../EducationCard/EducationCard";
 import CertificationForm from "./CertificateForm";
 import CeritifcateCard from "../CeritifcateCard/CeritifcateCard";
 
-const Certification = ({ addCertificate, setCertificate }) => {
-  // const [addCertificate, setCertificate] = useState(false);
-  const [experianceData, setexperianceData] = useState([]);
-  // const experianceData = [];
+const Certification = ({ state, setState }) => {
   const style = {
     maxWidth: "240px",
-    // border:'1px solid red'
   };
+  const certificationData = [
+    {
+      certificateName: "Diploma Name",
+      organizationName: "Jobreef Professional Academy",
+      noExpiry: false,
+      readOnly: false,
+      certificateId: "2f8ae5bfaa4c46dc3bba77655",
+      issuedOn: new Date(),
+      country: " USA",
+      state: "Chicago",
+      city: " Illinois",
+      validUntil: new Date(),
+    },
+    {
+      certificateName: "Diploma Name",
+      organizationName: "Jobreef Professional Academy",
+      noExpiry: false,
+      readOnly: false,
+      certificateId: "2f8ae5bfaa4c46dc3bba77655",
+      issuedOn: new Date(),
+      country: " USA",
+      state: "Chicago",
+      city: " Illinois",
+      validUntil: new Date(),
+    },
+  ];
   return (
     <Box>
-      {addCertificate ? (
+      {state.addCertificate || state.edit ? (
         <Box display={"flex"} justifyContent={"center"}>
-          <CertificationForm
-            setexperianceData={setexperianceData}
-            setaddExperiance={setCertificate}
-          />
+          <CertificationForm state={state} setState={setState} />
         </Box>
       ) : (
-        <Box  width={"100%"} mx={"auto"}>
-          <CeritifcateCard   headingStyle={style}/>
-          <CeritifcateCard   headingStyle={style}/>
+        <Box width={"100%"} mx={"auto"}>
+          {certificationData.map((item) => {
+            return (
+              <Box>
+                <CeritifcateCard
+                  data={item}
+                  state={state}
+                  headingStyle={style}
+                  setState={setState}
+                />
+              </Box>
+            );
+          })}
 
           <Flex justifyContent={"center"}>
             <Button
               onClick={() => {
-                setCertificate(true);
+                setState((prev) => {
+                  return { ...prev, addCertificate: true };
+                });
               }}
               width="max-content"
               px={"20px"}

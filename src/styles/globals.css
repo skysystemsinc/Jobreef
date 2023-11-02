@@ -24,6 +24,7 @@
 }
 .ql-editor.ql-blank::before {
   font-style: normal !important;
+
   color: #bbbbc7 !important;
   font-family: "Open Sans";
 }
@@ -31,3 +32,37 @@
 body {
   color: black !important;
 }
+.hoverStyle:hover {
+  color: #2ca5c3;
+}
+.blue-btn {
+  border: none;
+  background-color: #2ca5c3;
+  width: 139px;
+  box-shadow: 0px 4px 11px 0px rgba(70, 146, 254, 0.15);
+  font-weight: 400;
+  font-size: 12px;
+  color: #ffff;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: open sans;
+  transition: 0.5s;
+}
+.blue-btn:hover {
+  background-color: #336cb0;
+}
+@media screen and (max-width: 768px) {
+  .blue-btn {
+    width: 130px;
+  }
+  /* CSS rules for screens with a maximum width of 768px */
+}
+@media screen and (max-width: 480px) {
+  .blue-btn {
+    width: 110px;
+  }
+  /* CSS rules for screens with a maximum width of 768px */
+}
+

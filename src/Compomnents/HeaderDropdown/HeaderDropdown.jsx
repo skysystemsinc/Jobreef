@@ -38,7 +38,7 @@ const HeaderDropdown = ({ candidate }) => {
     {
       title: "Messages",
       icon: <Image width={{ md: "22px", base: "19px" }} src={chat.src} />,
-      pathname: "#",
+      pathname: "/company/chat",
     },
     {
       title: "Profile Settings",
@@ -62,6 +62,11 @@ const HeaderDropdown = ({ candidate }) => {
       title: "My Jobs",
       icon: <Image width={{ md: "22px", base: "19px" }} src={my_job.src} />,
       pathname: "/candidate/my-jobs",
+    },
+    {
+      title: "Messages",
+      icon: <Image width={{ md: "22px", base: "19px" }} src={chat.src} />,
+      pathname: "/candidate/chat",
     },
     {
       title: "Profile Settings",

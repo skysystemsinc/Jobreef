@@ -35,10 +35,13 @@ const MyResumeTabs = () => {
       title: "Education",
     },
     {
-      title: "Certifcations",
+      title: "Certifications",
     },
     {
       title: "Skills",
+    },
+    {
+      title: "Attachments",
     },
     {
       title: "Achievements",
@@ -62,7 +65,7 @@ const MyResumeTabs = () => {
             // whiteSpace: "nowrap",
             // overflowX: "scroll",
             flexDirection: { md: "row", base: "column" },
-            width: { lg: "70%",md:"100%", base: "100%" },
+            width: { lg: "70%", md: "100%", base: "100%" },
           }}
         >
           {tabList.map((item, index) => {
@@ -99,9 +102,10 @@ const MyResumeTabs = () => {
             <Skills />
           </TabPanel>
           <TabPanel>
-            {/* <Box display={"flex"} justifyContent={"center"}> */}
             <Attachments />
-            {/* </Box>  */}
+          </TabPanel>
+          <TabPanel>
+            <Attachments />
           </TabPanel>
         </TabPanels>
       </Tabs>

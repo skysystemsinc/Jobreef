@@ -42,7 +42,7 @@ const HeaderDropdown = dynamic(
     ssr: false,
   }
 );
-export default function Header({candidate}) {
+export default function Header({ candidate }) {
   const { isOpen, onToggle } = useDisclosure();
   const [isSmallerThe500] = useMediaQuery("(max-width: 500px)");
 
@@ -52,9 +52,9 @@ export default function Header({candidate}) {
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
         minH={"60px"}
-        py={3}
+        py={{ md: 3 , base:0}}
         // pb={{ base: 4, "2xl": 7 }}
-        px={{ "2xl": 8, base: 3 }}
+        px={{ "2xl": 8, base: 2 }}
         // position={"relative"}
         // top={"0px"}
 
@@ -92,11 +92,11 @@ export default function Header({candidate}) {
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", xl: "start" }}>
           <Link href={"/"}>
-            <Logo width={{ md: "130px", base:"120px" }} />
+            <Logo width={{ md: "130px", base: "120px" }} />
           </Link>
 
           <Flex display={{ base: "none", xl: "flex" }} mx={"auto"}>
-            <DesktopNav candidate={candidate}/>
+            <DesktopNav candidate={candidate} />
           </Flex>
         </Flex>
 
@@ -121,7 +121,7 @@ export default function Header({candidate}) {
             icon={<IoNotificationsOutline />}
           />
           <Box display={{ xl: "block", base: "none" }}>
-            <HeaderDropdown candidate={candidate}/>
+            <HeaderDropdown candidate={candidate} />
           </Box>
         </Stack>
       </Flex>
@@ -151,7 +151,7 @@ const DesktopNav = () => {
                 p={2}
                 py={1}
                 transition={".5s"}
-                href={navItem.href ?? "#"}
+                href={navItem.pathName ?? "#"}
                 // fontSize={"sm"}
                 // fontWeight={500}
                 display={"flex"}
@@ -239,7 +239,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
   );
 };
 
-const MobileNav = ({candidate}) => {
+const MobileNav = ({ candidate }) => {
   return (
     <Stack
       bg={useColorModeValue("white", "gray.800")}
@@ -250,7 +250,7 @@ const MobileNav = ({candidate}) => {
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
       <Box mt={"10px"}>
-        <HeaderDropdown  candidate={candidate} />
+        <HeaderDropdown candidate={candidate} />
       </Box>
     </Stack>
   );

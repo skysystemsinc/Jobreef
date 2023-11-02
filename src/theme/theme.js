@@ -22,8 +22,6 @@ const customStyles = {
   },
 };
 
-
-
 const nunito = Nunito({
   weight: ["200", "300", "400", "500", "600", "700", "900"],
   display: "swap",
@@ -38,11 +36,13 @@ const colors = {
   },
   white: {
     100: "#fff",
+    200:"#EAECF0"
   },
   black: {
     100: "#000",
     200: "#111",
     300: "#1111114d",
+    400:"#404040"
   },
   gray: {
     100: "#BBBBC7",
@@ -53,15 +53,19 @@ const colors = {
     600: "#494949",
     700: "#AFAFAF",
     800: "#FEFEFE",
-    lightBorder:"#cdcdcd",
+    900:"#D0D5DD",
+    lightBorder: "#cdcdcd",
     light: "#797979",
 
     text: "#4A4A4A",
   },
   blue: {
+    800:'#E9F5F8',
+    700:'#667085',
+    600: "#336CB0",
     500: "#2CA5C3",
     400: "#DFF1F6",
-    600: "#336CB0",
+    300: "#344054",
 
     100: "#F4F9FF",
   },
@@ -94,9 +98,8 @@ const components = {
         height: { sm: "38px", base: "36px" },
         // width: { md: "200px", sm: "180px", base: "168px" },
         width: {
-          xl: "150px",
-          md: "150px",
-          lg: "140px",
+          md: "139px",
+
           sm: "130px",
           base: "110px",
         },
@@ -119,9 +122,8 @@ const components = {
 
         // width: { md: "200px", base: "160px" },
         width: {
-          xl: "150px",
-          md: "150px",
-          lg: "140px",
+          md: "139px",
+
           sm: "130px",
           base: "110px",
         },
@@ -202,6 +204,23 @@ const components = {
 
         height: { md: "46px", base: "40px" },
       },
+      lightGray: {
+        // border: "1px dashed  gray.100 !important",
+        borderColor: "gray.900",
+        borderRadius: "8px",
+        bg: "gray.200",
+        boxShadow: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
+        width: "100%",
+
+        fontFamily: "var(--chakra-\fonts-Nunito)",
+        margin:'0px',
+        fontSize: { md: "14px", base: "12px" },
+        fontWeight: 700,
+        // fontSize: "16px",
+        color: "gray.text",
+
+        height: { md: "62px", base: "40px" },
+      },
       label: {
         color: "gray.text",
         fontSize: "14px",
@@ -258,7 +277,7 @@ const components = {
     variants: {
       "outline-dropdown": {
         field: {
-          height: { "2xl": "58px", base: "40px" },
+          height: "40px",
 
           borderRadius: "8px",
           color: "gray.100 !important",
@@ -317,6 +336,34 @@ const components = {
         // borderColor: "red",
         borderRadius: "8px",
         p: "20px 20px 20px 20px",
+        // boxShadow: " 0px 4px 20px 0px #0000000D !important",
+        _placeholder: {
+          color: "gray.100    ",
+          fontFamily: "var(--chakra-\fonts-openSans)",
+          // p: "20px 20px 20px 20px",
+          // textTransform: " capitalize",
+          lineHeight: "20px",
+          fontWeight: 400,
+          fontSize: "13px",
+          //   },
+        },
+
+        "::placeholder": {},
+      },
+      "simple": {
+        //   border: "1px solid red ",
+        // field: {
+        minHeight: "100px",
+        borderRadius: "8px",
+        bg: "D0D5DD !important",
+        fontFamily: "var(--chakra-\fonts-openSans)",
+        color: "black.100 !important",
+        // bg: "text.gray !important",
+        border:"1px solid",
+        borderColor:"gray.900",
+        // borderColor: "red",
+        borderRadius: "8px",
+        p: "9px 20px 20px 12px",
         // boxShadow: " 0px 4px 20px 0px #0000000D !important",
         _placeholder: {
           color: "gray.100    ",
@@ -429,7 +476,6 @@ const components = {
         fontSize: ["13px", "13px", "15px", "15px", "15px", "15px"],
       },
       p8: {
-
         color: "gray.text",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 400,
@@ -532,7 +578,6 @@ const components = {
             bg: "blue.500",
             tr: { position: "relative", top: "-21px" },
             th: {
-              
               padding: { md: "23px 30px", base: "16px 20px" },
               fontSize: { md: "15px", base: "12px" },
               position: "relative",
