@@ -35,6 +35,7 @@ const steps = [
   { label: "Skills" },
   { label: "Attachments" },
   { label: "Achievement" },
+  // { label: "Achievement2" },
 ];
 
 export const CandidateTimeline = ({ candidate, variant }) => {
@@ -85,6 +86,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
       justifyContent={"center"}
       alignItems={"center"}
       width="100%"
+      // ml={{lg:20}}
     >
       <DeleteModal
         onOpen={() =>
@@ -107,7 +109,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
           ...globalStyles.stepperContainter,
           width: {
             xl: "100%",
-            lg: "100%",
+            lg: "80%",
             md: "73%",
 
             base: "99%",
@@ -143,7 +145,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
         activeStep={activeStep}
       >
         {steps.map(({ label }, index) => {
-          const CostomeCheckIcon = () => {
+          const CustomCheckIcon = () => {
             return (
               <Heading
                 variant={"p1"}
@@ -157,7 +159,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
               </Heading>
             );
           };
-          const CostomeIcon = () => {
+          const customIcon = () => {
             return (
               <Heading
                 variant={"p1"}
@@ -175,8 +177,8 @@ export const CandidateTimeline = ({ candidate, variant }) => {
           };
           return (
             <Step
-              icon={CostomeIcon}
-              checkIcon={CostomeCheckIcon}
+              icon={customIcon}
+              checkIcon={CustomCheckIcon}
               label={
                 <Heading
                   variant={"p1"}
