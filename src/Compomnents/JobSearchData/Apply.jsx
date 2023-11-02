@@ -2,25 +2,19 @@
 import {
   Box,
   Button,
-  Center,
   Heading,
   Image,
   Input,
-  Text,
-  useMediaQuery,
   FormLabel,
   Flex,
   CloseButton
 } from "@chakra-ui/react";
 import { AttachmentIcon } from "@chakra-ui/icons";
-import { Link } from "@chakra-ui/next-js";
-import LabelInput from "@/Compomnents/LabelInput/LabelInput";
-import { FcGoogle } from "react-icons/fc";
 import ComponentMyChip from "../../Compomnents/ComponentMyChip/ComponentMyChip";
-import { useEffect, useState } from "react";
-import EmptyVector from "../../assets/Images/EmptyVector.svg";
+import { useState } from "react";
 import microsoft from "@/assets/Images/microsoft.svg";
 import upload from "@/assets/Images/upload.svg";
+
 
 
 export default function Apply({object}) {
@@ -28,10 +22,28 @@ export default function Apply({object}) {
 
 const [selectedFiles, setSelectedFiles] = useState([]);
 
+// const handleFileChange = (event) => {
+//   const files = Array.from(event.target.files);
+//   setSelectedFiles([...selectedFiles, ...files]);
+// };
 const handleFileChange = (event) => {
   const files = Array.from(event.target.files);
-  setSelectedFiles([...selectedFiles, ...files]);
+
+  // Calculate the number of currently selected files and the maximum limit
+  const currentFilesCount = selectedFiles.length;
+  const maxLimit = 3;
+
+  // Check if adding the selected files would exceed the maximum limit
+  if (currentFilesCount + files.length <= maxLimit) {
+    // If it's within the limit, add the selected files
+    setSelectedFiles([...selectedFiles, ...files]);
+  } else {
+    // If it exceeds the limit, show an error or notification
+    alert('Maximum limit of 3 files exceeded');
+    // You can also prevent adding the files or implement other behavior as needed.
+  }
 };
+
 
 const handleRemoveFile = (fileIndex) => {
   const updatedFiles = [...selectedFiles];

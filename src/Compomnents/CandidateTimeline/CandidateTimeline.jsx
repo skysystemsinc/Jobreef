@@ -112,8 +112,9 @@ export const CandidateTimeline = ({ candidate, variant }) => {
 
             base: "99%",
           },
-          ml: {lg:20},
+          // ml: {lg:20},
           "& .cui-steps__horizontal-step": {
+            
             _active: {
               "&::after": {
                 bg: "blue.500 !important",
