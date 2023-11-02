@@ -1,11 +1,12 @@
 import React from 'react'
-import { Box, Circle, Flex, Heading, Image } from "@chakra-ui/react";
+import { Box, Circle, Flex, Heading, Image, Link } from "@chakra-ui/react";
 import microsoft from "@/assets/Images/microsoft.svg";
 import { GoDotFill } from "react-icons/go"; 
 import ComponentMyChip from "./ComponentMyChip";
 
 const NewJobBox = ({key,object}) => {
   return (
+        <Link href="job-search-selectedjob#" style={{ textDecoration: 'none' }}>
         <Box
         p={{ sm: "20px", base: "12px" }}
         width={"100%"}
@@ -14,7 +15,15 @@ const NewJobBox = ({key,object}) => {
         border={"1px solid"}
         borderColor={"gray.light"}
         box-shadow="0px 4px 20px 0px rgba(0, 0, 0, 0.05)"
-      >
+        transition= {"all 0.4s ease"}
+        _hover={{
+          cursor: "pointer",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)",
+          border: '1px solid #2CA5C3',
+          transition: "all 0.4s ease",
+          transform: "scale(1.01)",
+        }} 
+      >  
         <Box
           display={"flex"}
           alignItems={"flex-start"}
@@ -58,7 +67,7 @@ const NewJobBox = ({key,object}) => {
                 justifyContent={"space-between"}
                 width={"100%"}
               >
-                <Box display={"flex"} flexWrap={"wrap"} gap={"9px"} alignItems={"center"}>
+                <Box display={"flex"} flexWrap={"wrap"} gap={"7px"} alignItems={"center"}>
                   <Heading color={"gray.text"} variant={"p4"}>
                     {object.Salary}
                   </Heading>
@@ -67,6 +76,12 @@ const NewJobBox = ({key,object}) => {
                   </Box>
                   <Heading color={"gray.text"} variant={"p4"}>
                     {object.EmploymentType}
+                  </Heading>
+                  <Box fontSize={{ sm: "14px", base: "8px" }}>
+                    <GoDotFill style={{ color: "#D9D9D9" }} />
+                  </Box>
+                  <Heading color={"gray.text"} variant={"p4"}>
+                    {object.JobModel} 
                   </Heading>
                   <Box fontSize={{ sm: "14px", base: "8px" }}>
                     <GoDotFill style={{ color: "#D9D9D9" }} />
@@ -107,7 +122,7 @@ const NewJobBox = ({key,object}) => {
           </Box>
         </Box>
       </Box>
-  
+    </Link>            
   )
 }
 

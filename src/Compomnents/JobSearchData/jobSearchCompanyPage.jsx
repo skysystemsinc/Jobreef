@@ -181,16 +181,18 @@ const JobSearchCompanyPage = () => {
                     </Box>
                   </Heading>
                 </Box>
-                <Box display={"flex"} alignItems={"center"}>
-                  <Image
-                    width={{ md: "20px", base: "20px" }}
-                    src={arrowright.src}
-                    marginRight={2}
-                  />
+                <Box display={"flex"} alignItems={"center"}> 
                   <Link href="/candidate/job-search">
-                    <Heading variant={"p4"} color={"gray.text"} marginRight={1}>
-                      Return
-                    </Heading>
+                    <Box display={"flex"} alignItems={"center"}>
+                      <Image
+                        width={{ md: "20px", base: "20px" }}
+                        src={arrowright.src}
+                        marginRight={2}
+                      />
+                      <Heading variant={"p4"} color={"gray.text"} marginRight={1}>
+                        Return
+                      </Heading>
+                    </Box>
                   </Link>
                 </Box>
               </Box>

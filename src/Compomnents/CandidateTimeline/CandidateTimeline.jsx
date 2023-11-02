@@ -106,12 +106,13 @@ export const CandidateTimeline = ({ candidate, variant }) => {
         sx={{
           ...globalStyles.stepperContainter,
           width: {
-            xl: "90%",
-            lg: "80%",
+            xl: "100%",
+            lg: "100%",
             md: "73%",
 
             base: "99%",
           },
+          ml: {lg:20},
           "& .cui-steps__horizontal-step": {
             _active: {
               "&::after": {
@@ -179,6 +180,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
                 <Heading
                   variant={"p1"}
                   sx={{
+                    // marginTop: 10,
                     display: { sm: "block", base: "none" }, // color:'#fff'
 
                     color: compeletedStep.includes(index)
