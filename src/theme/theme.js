@@ -36,7 +36,8 @@ const colors = {
   },
   white: {
     100: "#fff",
-    200:"#EAECF0"
+    200:"#EAECF0",
+    300:"#BBB"
   },
   black: {
     100: "#000",
@@ -540,26 +541,27 @@ const components = {
   Table: {
     variants: {
       "custome-table": {
-        backgroundColor: "#fff",
 
         table: {
           borderCollapse: "separate",
           borderSpacing: "0px 20px",
 
-          backgroundColor: "#fff",
+          // backgroundColor: "#fff",
           // padding: "10px 0px",
           tbody: {
-            // borderCollapse: "separate",
-            // borderSpacing: "0px 20px",
 
             tr: {
               position: "relative",
               top: "-21px",
-              marginBottom: "10px !important",
+
+              // marginBottom:'20px',
+
+              
               verticalAlign: "middle",
               boxShadow: " 0px 2px 15px 0px rgba(0, 0, 0, 0.06)",
               border: "1px solid ",
               borderColor: "gray.500",
+
               "& td:first-child": {
                 color: "blue.500",
               },
@@ -567,6 +569,7 @@ const components = {
                 margin: "10px 0px",
                 padding: { md: "20px 20px", base: "17px 10px" },
                 // fontSize: "15px",
+                // marginBottom:'20px',
                 fontSize: { md: "14px", base: "13px" },
 
                 fontWeight: 400,
@@ -575,12 +578,14 @@ const components = {
             },
           },
           thead: {
+            
             bg: "blue.500",
             tr: { position: "relative", top: "-21px" },
             th: {
-              padding: { md: "23px 30px", base: "16px 20px" },
+              // padding: { md: "23px 30px", base: "16px 20px" },
+              p:'20px',
               fontSize: { md: "15px", base: "12px" },
-              position: "relative",
+              // position: "relative",
 
               // border: "1px solid red",
               "& .vertical-divider": {

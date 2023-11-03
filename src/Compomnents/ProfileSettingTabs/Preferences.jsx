@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   FormLabel,
+  Heading,
   Image,
   Input,
 } from "@chakra-ui/react";
@@ -20,14 +21,102 @@ const Preferences = () => {
   const [isEdit, setisEdit] = useState(false);
   const [readOnly, setreadOnly] = useState(true);
   const router = useRouter();
+  const dropDownOptions = ["Yes", "No"]
+
+  const [state, setstate] = useState({
+    firstName: "",
+    lastName: "",
+    accountType: "",
+    number: "",
+    profilePic: false,
+  });
+
   return (
-    <Box
-      minH={"58vh"}
-      display={"flex"}
-      alignItems={"flex-end"}
-      justifyContent={"center"}
-      mt={{ md: "91px", lg: "60px", base: "40px" }}
-    >
+    <Box minH={"58vh"} >
+      <Box mt={{ md: "60px" , base:"30px"}}>
+        <Heading mb={ { md: "70px" , base:"40px"}} variant={"p7"}  color={"gray.text"}>Receive Email Communications For:</Heading>
+        <InputWrapper gap={{ xl: "70px", "2xl": "142px", base: "20px" }}>
+          <LabelInput
+            state={state.firstName}
+            setState={(e) => {
+              setstate((prev) => {
+                return { ...prev, firstName: e.target.value };
+              });
+            }}
+            labelVariant={"label"}
+            type="text"
+            readOnly={readOnly}
+            setreadOnly={setreadOnly}
+            dropdownOption={dropDownOptions}
+            variant={"bg-input"}
+            placeholder="Yes/No"
+            dropdown={readOnly ?false:true}
+            label={"New job applications received"}
+          />
+          <LabelInput
+            labelVariant={"label"}
+            readOnly={true}
+            setreadOnly={setreadOnly}
+            dropdownOption={dropDownOptions}
+
+            state={state.accountType}
+            setState={(e) => {
+              setstate((prev) => {
+                return { ...prev, accountType: e.target.value };
+              });
+            }}
+            dropdown={readOnly ?false:true}
+
+            type="text"
+            variant={"bg-input"}
+            placeholder="Yes/No"
+            label={"New messages and replies"}
+          />
+        </InputWrapper>
+
+        <InputWrapper gap={{ xl: "70px", "2xl": "142px", base: "20px" }}>
+          <LabelInput
+            state={state.lastName}
+            dropdownOption={dropDownOptions}
+
+            setState={(e) => {
+              setstate((prev) => {
+                return { ...prev, lastName: e.target.value };
+              });
+            }}
+            dropdown={readOnly ?false:true}
+
+            labelVariant={"label"}
+            type="text"
+            readOnly={readOnly}
+            setreadOnly={setreadOnly}
+            variant={"bg-input"}
+            placeholder=" Yes/No"
+            label={"Recommendations and insights"}
+          />
+
+          <LabelInput
+            state={state.number}
+            dropdownOption={dropDownOptions}
+
+            setState={(e) => {
+              setstate((prev) => {
+                return { ...prev, number: e.target.value };
+              });
+            }}
+            dropdown={readOnly ?false:true}
+
+            readOnly={readOnly}
+            setreadOnly={setreadOnly}
+            labelVariant={"label"}
+            type="number"
+            variant={"bg-input"}
+            placeholder="Yes/No"
+            label={" Newsletter and promotions"}
+          />
+        </InputWrapper>
+      </Box>
+
       <Box
         display={"flex"}
         justifyContent={"center"}

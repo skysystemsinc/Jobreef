@@ -19,15 +19,17 @@ import React, { useEffect, useState } from "react";
 import globalStyles from "@/styles/globalStyles";
 import arrow_right from "@/assets/Images/arrow-right.svg";
 import arrow_left from "@/assets/Images/arrow-left.svg";
-
+import profile from "@/assets/Images/profile.svg";
 const PaginatedTable = ({
   columns,
   totalPages,
   data,
+  trStyle,
   keys,
   pageSize,
   currentPage,
   onPageChange,
+  showExteraHeader,
 }) => {
   const startIndex = (currentPage - 1) * pageSize;
   // const endIndex = currentPage * pageSize;
@@ -49,10 +51,8 @@ const PaginatedTable = ({
       return a[sorting.key]?.localeCompare(b[sorting.key]);
     });
 
-    settableData(
-      sorting.ascending ? sortedTable : sortedTable.reverse()
-    );
-  }, [ sorting]);
+    settableData(sorting.ascending ? sortedTable : sortedTable.reverse());
+  }, [sorting]);
 
   function applySorting(key, ascending) {
     setSorting({ key: key, ascending: ascending });
@@ -78,9 +78,16 @@ const PaginatedTable = ({
       >
         <Table variant="custome-table">
           <Thead>
+            {showExteraHeader ? (
+              <Tr>
+                <Th fontWeight={700} colspan={"100%"}>
+                  Recent Orders
+                </Th>
+              </Tr>
+            ) : null}
             {columns.map((item, ind) => {
               return (
-                <Tr key={ind}>
+                <Tr sx={trStyle} key={ind}>
                   {keys.map((key, ind) => (
                     <Th key={ind} className="nintoFont">
                       <Box display={"flex"} alignItems={"center"} gap={"10px"}>
@@ -124,7 +131,22 @@ const PaginatedTable = ({
                 <Tr key={ind}>
                   {keys.map((key, ind) => (
                     <Td key={ind} className="nintoFont">
-                      {item[key]}
+                      {item[key].image ? (
+                        <Box display={"flex"} alignItems={"center"} gap="10px">
+                          <Image
+                            src={item[key].image}
+                            width={"35px"}
+                            height={"35px"}
+                            objectFit={"cover"}
+                            borderRadius={"100px"}
+                          />
+                          <Heading color={"blue.500"} variant={"p1"}>
+                            {item[key].name}
+                          </Heading>
+                        </Box>
+                      ) : (
+                        item[key]
+                      )}
                     </Td>
                   ))}
                 </Tr>
