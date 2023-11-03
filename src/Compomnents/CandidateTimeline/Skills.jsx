@@ -90,15 +90,6 @@ const Skills = () => {
               placeholder="Name of skill"
               label={"Name"}
             />
-            {/* <LabelInput
-                state={item.link}
-                setState={ (e)=> handleLinkChange(e, index)}
-                labelVariant={"label"}
-                type="text"
-                variant={"bg-input"}
-                placeholder="Paste link to company social network page"
-                label={"Link"}
-              /> */}
             <Box width={isSmallerThe500 ? "96%" : "100%"} position={"relative"}>
               {isSmallerThe500 ? (
                 <Input
@@ -137,7 +128,7 @@ const Skills = () => {
                   color: "#2CA5C3",
                 }}
               >
-                <AiOutlineDelete onClick={() => handleDelete(index)} />
+                <AiOutlineDelete onClick={() => State.links.length>1 ? handleDelete(index) : null} />
               </Box>
             </Box>
           </InputWrapper>
@@ -146,7 +137,7 @@ const Skills = () => {
 
       {/* <Flex justifyContent={"center"}> */}
       <Button
-        onClick={handleaddMore}
+        onClick={ State.links.length < 5 ? handleaddMore : null}
         variant={"blue-btn"}
         width={"max-content"}
         px={{ md: "33px", base: "20px" }}

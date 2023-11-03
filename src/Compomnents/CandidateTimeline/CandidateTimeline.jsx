@@ -35,6 +35,7 @@ const steps = [
   { label: "Skills" },
   { label: "Attachments" },
   { label: "Achievement" },
+  // { label: "Achievement2" },
 ];
 
 export const CandidateTimeline = ({ candidate, variant }) => {
@@ -85,6 +86,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
       justifyContent={"center"}
       alignItems={"center"}
       width="100%"
+      // ml={{lg:20}}
     >
       <DeleteModal
         onOpen={() =>
@@ -106,13 +108,15 @@ export const CandidateTimeline = ({ candidate, variant }) => {
         sx={{
           ...globalStyles.stepperContainter,
           width: {
-            xl: "90%",
+            xl: "100%",
             lg: "80%",
             md: "73%",
 
             base: "99%",
           },
+          // ml: {lg:20},
           "& .cui-steps__horizontal-step": {
+            
             _active: {
               "&::after": {
                 bg: "blue.500 !important",
@@ -141,7 +145,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
         activeStep={activeStep}
       >
         {steps.map(({ label }, index) => {
-          const CostomeCheckIcon = () => {
+          const CustomCheckIcon = () => {
             return (
               <Heading
                 variant={"p1"}
@@ -155,7 +159,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
               </Heading>
             );
           };
-          const CostomeIcon = () => {
+          const customIcon = () => {
             return (
               <Heading
                 variant={"p1"}
@@ -173,12 +177,13 @@ export const CandidateTimeline = ({ candidate, variant }) => {
           };
           return (
             <Step
-              icon={CostomeIcon}
-              checkIcon={CostomeCheckIcon}
+              icon={customIcon}
+              checkIcon={CustomCheckIcon}
               label={
                 <Heading
                   variant={"p1"}
                   sx={{
+                    // marginTop: 10,
                     display: { sm: "block", base: "none" }, // color:'#fff'
 
                     color: compeletedStep.includes(index)

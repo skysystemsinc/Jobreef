@@ -16,13 +16,14 @@ import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
 import globalStyles from "@/styles/globalStyles";
+import { format } from 'date-fns';
 const ExperianceForm = ({ state, setState }) => {
   const [readOnly, setReadOnly] = useState(false);
   const [Experience, setExperience] = useState({
     companyName: "",
     designation: "",
-    stateDate: new Date(),
-    endDate: new Date(),
+    stateDate: new Date().toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' }),
+    endDate: new Date().toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' }),
     country: "",
     state: "",
     city: "",
@@ -86,7 +87,7 @@ const ExperianceForm = ({ state, setState }) => {
 
             <Box width={"100%"} position={"relative"}>
               <Box>
-                <LabelInput
+                {!readOnly ? (<LabelInput
                   state={Experience.endDate}
                   setState={(e) => {
                     setExperience((prev) => {
@@ -98,9 +99,25 @@ const ExperianceForm = ({ state, setState }) => {
                   type="date"
                   variant={"bg-input"}
                   readOnly={readOnly}
-                  placeholder="MM/DD/YYYY"
                   label={"Ending Date"}
-                />
+                />) : (<LabelInput
+                  // state={Experience.endDate}
+                  setState={(e) => {
+                    setExperience((prev) => {
+                      return {
+                        ...prev,
+                        endDate: new Date().toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' })
+                      };
+                    });
+                  }}
+                  defaultValue={false}
+                  labelVariant={"label"}
+                  type="text"
+                  variant={"bg-input"}
+                  readOnly={readOnly}
+                  placeholder= "Present"
+                  label={"Ending Date"}
+                />)}
               </Box>
               <Box
                 display={"flex"}
@@ -129,7 +146,7 @@ const ExperianceForm = ({ state, setState }) => {
                   colorScheme="blue"
                   // borderColor={"black.200"}
                 />
-                <Heading variant={"p1"} color={"black.100"}>
+                <Heading variant={"p1"} color={state.currentlyWorking ? "blue.500" : "black.100"}>
                   Currently Working Here
                 </Heading>
               </Box>

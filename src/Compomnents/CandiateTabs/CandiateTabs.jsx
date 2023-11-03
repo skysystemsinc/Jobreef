@@ -72,8 +72,9 @@ const CandiateTabs = ({ company }) => {
         justifyContent={"flex-start"}
         index={tabIndex}
         isFitted
+        
       >
-        <Box position={"relative"} width={"100%"}>
+        <Box position={"relative"} width={"100%"} >
           <TabList
             sx={{
               ...globalStyles.fullTab,
@@ -118,6 +119,7 @@ const CandiateTabs = ({ company }) => {
         <TabPanels>
           <TabPanel px={"0px"}>
             <Box
+              
               width={"100%"}
               // border={"1px solid red"}
               display={{ md: "none", base: "flex" }}
@@ -135,6 +137,7 @@ const CandiateTabs = ({ company }) => {
           </TabPanel>
           <TabPanel px={"0px"}>
             <Box
+              
               onClick={() => router.push("/company/create-job-post")}
               width={"100%"}
               // border={"1px solid red"}

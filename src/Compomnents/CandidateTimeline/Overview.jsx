@@ -21,8 +21,10 @@ const Overview = ({ state, setState }) => {
           type="text"
           variant={"bg-input"}
           placeholder="Select your home country"
+          dropdown
           label={"Country"}
         />
+        
         <LabelInput
           state={state.state}
           setState={(e) => {

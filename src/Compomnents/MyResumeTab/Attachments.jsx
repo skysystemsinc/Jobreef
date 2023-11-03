@@ -19,7 +19,6 @@ const Attachments = ({ style }) => {
     "The acceptable file formats are PDF, Word, PNG, and JPEG files",
     "This will be included in submitted job applications",
   ];
-  console.log("state", state);
   const handleSingleFile = (event, key, ind) => {
     console.log("index", ind);
     const selectedFile = event.target.files[0];

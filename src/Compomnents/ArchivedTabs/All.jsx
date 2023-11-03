@@ -67,13 +67,13 @@ const All = ({
     dispatch(getSelectedCandidates(data));
   };
   return (
-    <Box mt={{ md: "31px", base: "15px" }}>
+    <Box mt={{ md: "31px", base: "15px" }} >
       {/* <SelectedCandidate/> */}
-      <Box display={{ lg: "none", base: "block" }}>
+      <Box display={{ lg: "none", base: "block" }} >
         <MobileSortBy />
       </Box>
       <Box display={"flex"} gap={"31px"}>
-        <Box>
+        <Box >
           {data &&
             data.map((item, ind) => {
               return (

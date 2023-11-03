@@ -65,6 +65,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
       <NotePadModal open={isOpen} onClose={onClose} />
 
       <Box
+      
         border={"1px  solid"}
         borderRadius={"8px"}
         borderColor={"gray.lightBorder"}
@@ -104,6 +105,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
         </Box>
         <Box
           display={"flex"}
+          
           justifyContent={"space-between"}
           borderBottom={"1px solid"}
           alignItems={"flex-start"}
@@ -114,10 +116,11 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
           // flexDirection={{ "2xl": "row", base: "column" }}
           borderColor={"gray.lightBorder"}
           pb={"7px"}
+          
         >
-          <Box width={"100%"}>
+          <Box width={"100%"} flex={1} >
             <Box
-              width={{ xl: "250px" , base:"100%"}}
+              width={{ base:"100%"}} 
               display={"flex"}
               alignItems={"center"}
               gap={"10px"}
@@ -282,6 +285,8 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
           </Box>
           <Box
             bg={"white.100"}
+            flex={2}
+            // bg={"green"}
             boxShadow={
               "0px 1px 2px 0px rgba(16, 24, 40, 0.10), 0px 1px 3px 0px rgba(16, 24, 40, 0.10)"
             }

@@ -111,7 +111,8 @@ const EmailTabs = () => {
             <Button onClick={handleCancel} variant="outline-blue">
               Cancel
             </Button>
-            <Button onClick={handleSave} variant={"blue-btn"}>
+            <Button onClick={()=>!otp?handleSave():handleCancel()} 
+              variant={"blue-btn"}>
               {otp ? "Verify" : "Save"}
             </Button>
           </>
