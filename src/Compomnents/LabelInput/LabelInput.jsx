@@ -21,6 +21,8 @@ import TextFormatting from "../TextFormatting/TextFormatting";
 
 const LabelInput = ({
   dropdownOption,
+  pattern,
+  name,
   textarea,
   iconStyle,
   defaultValue,
@@ -42,7 +44,7 @@ const LabelInput = ({
   setreadOnly,
   label,
 }) => {
-  console.log("state",state )
+  
   return (
     <Box width={"100%"}>
       <FormLabel
@@ -126,9 +128,11 @@ const LabelInput = ({
         />
       ) : (
         <Input
+          pattern={pattern}
           ref={inputRef}
           readOnly={readOnly}
           value={state ?? ""}
+          name={name}
           onChange={setState}
           variant={variant}
           placeholder={placeholder}

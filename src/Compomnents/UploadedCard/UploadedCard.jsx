@@ -8,6 +8,9 @@ import PdfViewer from "../PdfViewer/PdfViewer";
 import { AiOutlineDelete } from "react-icons/ai";
 const UploadedCard = ({
   uploadProgress,
+  crossIcon,
+  data,
+  boxStyle,
   handleDelete,
   fileSize,
   fileName,
@@ -24,83 +27,49 @@ const UploadedCard = ({
     <Box
       border="1px solid "
       borderColor={"blue.500"}
-      padding={"15px 20px"}
+      padding={"10px 20px"}
       borderRadius={"12px"}
       bg={"white.100"}
+      sx={boxStyle}
     >
       <Box
         display={"flex"}
         justifyContent={"space-between"}
+        // alignItems={"center"}
         // border={"1px solid red"}
       >
         <Box display={"flex"} alignItems={"center"} gap={"15px"}>
-          <Image src={circle_file.src} />
+          <Image width={"32px"} src={circle_file.src} />
 
           <Box>
             <Heading mb={"2px"} variant={"p11"} color={"blue.300"}>
               {fileName}
             </Heading>
-            {/* <Heading variant={"p4"} color={"blue.300"}>
-              {sizeDisplay}
-            </Heading> */}
           </Box>
         </Box>
-        <Box
-          cursor={"pointer"}
-          onClick={handleDelete}
-          color={"blue.500"}
-          transition={".5s"}
-          _hover={{ color: "blue.600" }}
-          fontSize={"22px"}
-        >
-          <AiOutlineDelete />
-        </Box>
-      </Box>
-
-      <Box mt={"10px"}>
-        <Box
-          justifyContent={"center"}
-          display={"flex"}
-          alignItems={"flex-start"}
-          gap={"14px"}
-        >
-          <Box mt={"7px"} width={"92%"}>
-            {pdfPreview ? (
-              <Box>
-                <PdfViewer pdfUrl={pdfPreview} />
-                {/* <Image
-                  // border={"1px solid red"}
-                  borderRadius={"7px"}
-                  width={"90%"}
-                  mx={"auto"}
-                  boxShadow={"0px 1px 2px 0px rgba(16, 24, 40, 0.05)"}
-                  src={pdfPreview}
-                /> */}
-              </Box>
-            ) : (
-              <Progress
-                value={uploadProgress}
-                height={"6px"}
-                size="xs"
-                borderRadius={"8px"}
-                colorScheme="blue"
-              />
-            )}
-            <FileReplaceButton
-              btnLabelStyle={{ mt: "21px" }}
-              uploadIcon={replace}
-              handleEvent={handleEvent}
-              label={"Replace"}
-            />
+        {crossIcon ? (
+          <Box
+            cursor={"pointer"}
+            onClick={handleDelete}
+            color={"gray.text"}
+            transition={".5s"}
+            _hover={{ color: "blue.500" }}
+            fontSize={"18px"}
+          >
+            {crossIcon}
           </Box>
-          {pdfPreview ? null : (
-            <Heading fontWeight={700} variant={"p4"} color={"blue.300"}>
-              {uploadProgress}%
-            </Heading>
-          )}
-        </Box>
-
-        <Box width={"100%"} display={"flex"} justifyContent={"center"}></Box>
+        ) : (
+          <Box
+            cursor={"pointer"}
+            onClick={handleDelete}
+            color={"blue.500"}
+            transition={".5s"}
+            _hover={{ color: "blue.600" }}
+            fontSize={"22px"}
+          >
+            <AiOutlineDelete />
+          </Box>
+        )}
       </Box>
     </Box>
   );

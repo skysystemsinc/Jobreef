@@ -68,7 +68,7 @@ const Attachments = ({ style }) => {
           const reader = new FileReader();
           reader.onload = (e) => {
             setState((prev) => {
-              console.log("...prev[key],",key);
+              console.log("...prev[key],", key);
               return {
                 ...prev,
                 select: true,
@@ -122,7 +122,7 @@ const Attachments = ({ style }) => {
     setState((prev) => {
       const allFile = [...prev.allFile]; // Create a copy of the allFile array
       const keyAllFile = [...prev[key]]; // Create a copy of the allFile array
-      console.log("ind",prev);
+      console.log("ind", prev);
       allFile.splice(ind, 1);
       keyAllFile.splice(ind, 1);
       if (allFile.length == 0) {
@@ -130,7 +130,7 @@ const Attachments = ({ style }) => {
           ...prev,
           select: false,
           // [key]: true,
-          save:false,
+          save: false,
           allFile: allFile,
           [key]: keyAllFile,
         };
@@ -165,8 +165,7 @@ const Attachments = ({ style }) => {
                       // handleDelete(ind , "additional")
                     }
                     // pdfPreview={state.pdfUrl}
-                    uploadProgress={item.uploadProgress}
-                    fileSize={item.pdfFile.size}
+
                     fileName={item.pdfFile.name}
                     handleEvent={(e) => {
                       if (item.resume) {
@@ -200,24 +199,16 @@ const Attachments = ({ style }) => {
           justifyContent={"center"}
         >
           {state.resume.length > 0 ? (
-            <Box width={{ lg: "40%", base: "100%" }} sx={style}>
-              {state.resume.map((item, ind) => {
-                return (
-                  <Box mb={"10px"}>
-                    <UploadedCard
-                      handleDelete={() => handleDelete(ind, "resume")}
-                      pdfPreview={item.pdfUrl}
-                      uploadProgress={item.uploadProgress}
-                      fileSize={item.pdfFile.size}
-                      fileName={item.pdfFile.name}
-                      // handleEvent={handleUpload}
-                      handleEvent={(e) => handleUpload(e, "resume", ind)}
-                    />
-                  </Box>
-                );
-              })}
-            </Box>
+            <UploadBox
+              handleDelete={(e) => handleDelete(e, "resume")}
+              showSelectedImage={state.resume}
+              // handleEvent={handleUpload}
+              handleEvent={(e) => handleUpload(e, "resume")}
+              titie={"Upload Resume File"}
+              list={list}
+            />
           ) : (
+
             <UploadBox
               handleEvent={(e) => handleUpload(e, "resume")}
               titie={"Upload Resume File"}
@@ -225,32 +216,16 @@ const Attachments = ({ style }) => {
             />
           )}
           {state.additional.length > 0 ? (
-            <Box width={{ lg: "40%", base: "100%" }} sx={style}>
-              {state.additional.map((item, ind) => {
-                return (
-                  <Box mb={"10px"}>
-                    <UploadedCard
-                      handleDelete={() => handleDelete(ind, "additional")}
-                      pdfPreview={item.pdfUrl}
-                      uploadProgress={item.uploadProgress}
-                      fileSize={item.pdfFile.size}
-                      fileName={item.pdfFile.name}
-                      // handleEvent={handleUpload}
-                      handleEvent={(e) => handleUpload(e, "additional", ind)}
-                    />
-                  </Box>
-                );
-              })}
-              {/* <UploadedCard
-                pdfPreview={state.additional.pdfUrl}
-                uploadProgress={state.additional.uploadProgress}
-                fileSize={state.additional.pdfFile.size}
-                fileName={state.additional.pdfFile.name}
-                // handleEvent={handleUpload}
-                handleEvent={(e) => handleUpload(e, "additional")}
-              /> */}
-            </Box>
+            <UploadBox
+              handleDelete={(e) => handleDelete(e, "additional")}
+              showSelectedImage={state.additional}
+              // handleEvent={handleUpload}
+              handleEvent={(e) => handleUpload(e, "additional")}
+              titie={"Upload Additional Files (e.g. Cover Letter or ID)"}
+              list={list}
+            />
           ) : (
+
             <UploadBox
               handleEvent={(e) => handleUpload(e, "additional")}
               titie={"Upload Additional Files (e.g. Cover Letter or ID)"}
