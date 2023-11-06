@@ -14,7 +14,7 @@ const Otp = ({ text, State, setState }) => {
     <Box textAlign={"center"}>
       <Heading
         as={"p"}
-        fontSize={{ "2xl": "30px", base: "16px", sm: "17px" }}
+        
         textAlign={"center"}
         m={{
           "2xl": "60px 0px 76px -62px",
@@ -22,7 +22,7 @@ const Otp = ({ text, State, setState }) => {
           base: "30px 0px 46px 0px",
         }}
         whiteSpace={{ lg: "nowrap", base: "wrap" }}
-        variant={"p2"}
+        variant={"p11"}
       >
         {/* Please enter the 4 digit code sent to your email */}
         {text}
