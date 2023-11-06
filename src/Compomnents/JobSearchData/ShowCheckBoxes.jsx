@@ -29,8 +29,20 @@ const ShowCheckBoxes = ({
         borderWidth={1}
         borderColor="gray.400"
         display={"flex"}
-        flexDirection={"column"}
+        // flexDirection={"column"}
         flexWrap={"wrap"}
+        position="sticky" top="100px"
+        height= '500px' overflowY= "auto"
+        sx={{
+          "&::-webkit-scrollbar": {
+            width: "5px",
+            borderRadius: "8px",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            backgroundColor: "#797979",
+            borderRadius: "30px",
+          },
+        }}
       >
         {checkboxes.map((object, index) => {
           return (

@@ -24,6 +24,11 @@ const JobSearchResults = () => {
   //Temporary Button Later on need to be deleted
   const [toggle, settoggle] = useState("false");
   const [Data, setData] = useState(DataArray);
+  const [asideVisible, setAsideVisible] = useState(false);
+
+  const toggleAside = () => {
+    setAsideVisible(!asideVisible);
+  };
 
   const handleCheckboxChange = (value) => {
     if (selectedValues.includes(value)) {
@@ -114,12 +119,29 @@ const JobSearchResults = () => {
           </Box>
         </Box>
         {toggle ? (
-          <Box flex={"100%"} display={{ lg: "none", base: "block" }}>
+          <Box flex={"100%"} display={{ lg: "none", base: "block" }}> 
+          {/* need to do work from here */}
+            {/* <button onClick={toggleAside}>Toggle Aside</button>
+            <Box gap={2} display={"flex"} flexWrap={'wrap'}>    
+            <aside id="yourAside" class="hidden-aside">
+              {selectedValues.map((val) => (
+                  <ComponentMyChip label={val} style={{ marginBottom: "10px", padding: "5px 12px", border: '1px solid ', borderColor: 'blue.500' }}>
+                  <Image
+                    width={"10px"}
+                    src={cross.src}
+                    marginRight={2}
+                    onClick={() => deleteSelectedOptions(val)}
+                    style={{ margin: "1px 0px 0px 10px" }}
+                  />
+                </ComponentMyChip>
+                ))}
+              </aside>
+              </Box> */}
+  
             <Box gap={2} display={"flex"} flexWrap={'wrap'}>
               {selectedValues.map((val) => {
                 return (
                   <ComponentMyChip label={val} style={{marginBottom:"10px", p:"5px 12px" , border:'1px solid ',borderColor:'blue.500'}}>
-                    
                     <Image
                       width={"10px"}
                       src={cross.src}
