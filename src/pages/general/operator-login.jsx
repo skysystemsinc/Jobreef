@@ -16,7 +16,7 @@ import {
 const userLogin = () => {
   return (
     <Box height={"100vh"} display={"flex"} >
-      <Box backgroundColor={"blue.500"} position="relative" flex={1} >
+      <Box backgroundColor={"blue.500"} position="relative" flex={1} display={{lg:'block',base:'none'}} >
         <Box p={"20%"} px={'8%'} >
           <Image
             height="50vh"
