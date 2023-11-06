@@ -73,7 +73,7 @@ const ShowCheckBoxes = ({
                           DataSort(e.target.checked);
                         }}
                       >
-                        <Heading variant={"p4"}>{value.key}</Heading>
+                        <Heading variant={"p4"} color={selectedValues.includes(value.key) ? 'blue.500' : 'gray.text'}>{value.key}</Heading>
                       </Checkbox>
                     );
                   }
@@ -93,7 +93,7 @@ const ShowCheckBoxes = ({
                         handleCheckboxChange(value.key, e.target.value)
                       }
                     >
-                      <Heading variant={"p4"}>{value.key}</Heading>
+                      <Heading variant={"p4"} color={selectedValues.includes(value.key) ? 'blue.500' : 'gray.text'}>{value.key}</Heading>
                     </Checkbox>
                   );
                 })}
