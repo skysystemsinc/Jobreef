@@ -115,7 +115,7 @@ const JobSearchResults = () => {
         </Box>
         {toggle ? (
           <Box flex={"100%"} display={{ lg: "none", base: "block" }}>
-            <Box gap={2} display={"flex"}>
+            <Box gap={2} display={"flex"} flexWrap={'wrap'}>
               {selectedValues.map((val) => {
                 return (
                   <ComponentMyChip label={val} style={{marginBottom:"10px", p:"5px 12px" , border:'1px solid ',borderColor:'blue.500'}}>
