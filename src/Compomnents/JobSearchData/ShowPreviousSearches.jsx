@@ -41,8 +41,7 @@ const ShowPreviousSearches = () => {
       flexDirection={"column"}
       flexWrap={"wrap"}
       width="100%"
-    //  width={"250px"}
-      // flex={1.25}
+      position="sticky" top="100px"
     >
       <Box borderWidth={1} borderColor="gray.400" borderRadius={"8px"}>
         <Heading mt={"22px"} ml={2} mb={2} variant={"p10"}>

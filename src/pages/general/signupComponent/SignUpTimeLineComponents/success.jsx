@@ -1,8 +1,10 @@
 import React from "react";
 import blueclick from "@/assets/Images/blueclick.svg";
 import { Box, Button, Heading, Image } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 const Success = () => {
+  const router = useRouter();
   return (
     <Box
       display={"flex"}
@@ -29,14 +31,15 @@ const Success = () => {
       >
         Password Changed Successfully
       </Heading>
-            <Button 
-                mt={"12%"}
-                variant={"blue-btn"}
-                onClick={()=>{    
-            }}
-            >
-                Login
-            </Button>
+      <Button
+        mt={"12%"}
+        variant={"blue-btn"}
+        onClick={() => {
+          router.push("/");
+        }}
+      >
+        Login
+      </Button>
     </Box>
   );
 };

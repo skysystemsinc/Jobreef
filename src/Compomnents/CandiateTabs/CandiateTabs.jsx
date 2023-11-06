@@ -26,6 +26,7 @@ import {
 } from "@/Reudx/slices/candidates";
 import data from "@/db/candidates.json";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
+import Search from "./Search";
 const CandiateTabs = ({ company }) => {
   const candidates = useSelector((state) => state.candidates.value.all);
 
@@ -60,6 +61,8 @@ const CandiateTabs = ({ company }) => {
     }
     setTabIndex(ind);
   };
+
+  const tabLists = ["Applications", "Matched Candidates", "Search"];
   return (
     <>
       <Tabs
@@ -72,34 +75,37 @@ const CandiateTabs = ({ company }) => {
         justifyContent={"flex-start"}
         index={tabIndex}
         isFitted
-        
       >
-        <Box position={"relative"} width={"100%"} >
+        <Box position={"relative"} width={"100%"}>
           <TabList
             sx={{
               ...globalStyles.fullTab,
               ...globalStyles.scrollBar,
               ml: { md: "0px", base: "0px" },
-              flexDirection: { sm: "row", base: "column" },
-              width: { md: "40%", base: "99%" },
+              flexDirection: { md: "row", base: "column" },
+              width: { md: "60%", base: "99%" },
               // border: "1px solid red",
             }}
           >
-            <Tab
-              fontSize={{ md: "16px", base: "14px" }}
-              sx={globalStyles.tabelinkStyle}
-              _selected={globalStyles.selectTab}
-            >
-              {" "}
-              Applications
-            </Tab>
-            <Tab
+            {tabLists?.map((item) => {
+              return (
+                <Tab
+                  fontSize={{ md: "16px", base: "14px" }}
+                  sx={globalStyles.tabelinkStyle}
+                  _selected={globalStyles.selectTab}
+                >
+                  {" "}
+                  {item}
+                </Tab>
+              );
+            })}
+            {/* <Tab
               fontSize={{ md: "16px", base: "14px" }}
               _selected={globalStyles.selectTab}
               sx={globalStyles.tabelinkStyle}
             >
               Matched Candidates
-            </Tab>
+            </Tab> */}
 
             <Box
               display={{ md: "block", base: "none" }}
@@ -119,7 +125,6 @@ const CandiateTabs = ({ company }) => {
         <TabPanels>
           <TabPanel px={"0px"}>
             <Box
-              
               width={"100%"}
               // border={"1px solid red"}
               display={{ md: "none", base: "flex" }}
@@ -137,7 +142,6 @@ const CandiateTabs = ({ company }) => {
           </TabPanel>
           <TabPanel px={"0px"}>
             <Box
-              
               onClick={() => router.push("/company/create-job-post")}
               width={"100%"}
               // border={"1px solid red"}
@@ -152,6 +156,10 @@ const CandiateTabs = ({ company }) => {
               />
             </Box>
             <MatchCandidate filterKey={"notInterested"} />
+          </TabPanel>
+          <TabPanel px={"0px"}>
+          
+            <Search filterKey={"notInterested"} />
           </TabPanel>
         </TabPanels>
       </Tabs>

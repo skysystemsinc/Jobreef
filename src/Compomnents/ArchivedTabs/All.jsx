@@ -6,12 +6,14 @@ import MobileSortBy from "../MobileSortBy/MobileSortBy";
 import SelectedCandidate from "./SelectedCandidate";
 import { useDispatch, useSelector } from "react-redux";
 import { getSelectedCandidates } from "@/Reudx/slices/candidates";
+import SerarchBox from "./SerarchBox";
 
 const All = ({
   filterKey,
   matchCandidate,
   cardStatus,
   // data,
+  searcBox,
   handleEvent,
   popOverList,
 }) => {
@@ -67,13 +69,13 @@ const All = ({
     dispatch(getSelectedCandidates(data));
   };
   return (
-    <Box mt={{ md: "31px", base: "15px" }} >
-      {/* <SelectedCandidate/> */}
-      <Box display={{ lg: "none", base: "block" }} >
+    <Box mt={{ md: "31px", base: "15px" }}>
+      {searcBox ? <SerarchBox /> : null}
+      <Box display={{ lg: "none", base: "block" }}>
         <MobileSortBy />
       </Box>
       <Box display={"flex"} gap={"31px"}>
-        <Box >
+        <Box>
           {data &&
             data.map((item, ind) => {
               return (

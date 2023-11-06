@@ -74,7 +74,7 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
   const { templogin } = useContext(Role_context);
 
   return (
-    <Box flex={4} >
+    <Box flex={4} position="sticky" top="100px" >
       {templogin ? (
         <ApplyForThisJobModal open={isOpen} onClose={onClose} object={object} />
       ) : (

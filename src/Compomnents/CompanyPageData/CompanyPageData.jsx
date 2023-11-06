@@ -48,57 +48,58 @@ const CompanyPageData = () => {
   const actionList = ["Download Attachments", "Archive"];
 
   return (
-    <div style={{margin:"0px 50px 0px 50px", width:'100%'}}>
-        <Box width='70%'>
-            <Box display={"flex"} mt={"0px"} ml={5} alignItems={"center"} flexWrap={"wrap"}>
-                <Image width={{ md: "53px", base: "35px" }} src={microsoft.src} marginRight={2}/>
-                    <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
-                        Microsoft
-                        <Box display={"flex"} alignItems={"center"}>
-                            <Heading
-                            variant={"p4"}
-                            color={"gray.text"}
-                            marginRight={1}
-                            >
-                            www.microsoft.com       
-                            </Heading>
-                        </Box>
-                    </Heading> 
-            </Box>
-            <Box display={"flex"} alignItems={"center"} flexWrap={"wrap"} ml={5} gap={6} mt={2}>
-                <Heading display={"flex"} alignItems={"center"} color={"gray.text"} variant={"p4"}>
-                    <Image width={{ md: "20px", base: "35px" }} src={location.src} marginRight={2}/>
-                     Redmond, Washington State
-                </Heading>
-                <Box fontSize={{ sm: "14px", base: "8px" }}>
-                    <GoDotFill style={{ color: "#D9D9D9" }} />
-                </Box>
-                <Heading display={"flex"} alignItems={"center"} color={"gray.text"} variant={"p4"}>
-                <Image style={{display:'inline-block'}} width={{ md: "20px", base: "30px" }} src={employeedesignation.src} marginRight={2}/>
-                    1,001 Employees
-                </Heading>
-                <Box fontSize={{ sm: "14px", base: "8px" }}>
-                    <GoDotFill style={{ color: "#D9D9D9" }} />
-                </Box>
-                <Heading display={"flex"} alignItems={"center"} color={"gray.text"} variant={"p4"}>
-                <Image style={{display:'inline-block'}} width={{ md: "20px", base: "10px" }} src={Corporatebuilding.src} marginRight={2}/>
-                    Technology
-                </Heading>
-            </Box>
-            <Box borderBottom="1px solid gray" pb={4} pr={4} mt={4} display={"flex"} justifyContent={"space-between"} ml={5} alignItems={'center'}>
-                <Heading color={"gray.text"} variant={"p4"} display="flex" alignItems={'center'}>
-                    <Image style={{ display: "inline-block" }} width={{ md: "20px", base: "20px" }} mr={2} src={calendar.src}  /> 
-                    Founded 1975
-                </Heading>
+    <Box  margin={{lg:"0px 50px 0px 50px"}}>
+        <Box width={{lg:'80%',md:'100%',sm:"100%"}} >
+            <Box ml={5}>
+              <Box display={"flex"} mt={"0px"} alignItems={"center"} flexWrap={"wrap"}>
+                  <Image width={{ md: "53px", base: "35px" }} src={microsoft.src} marginRight={2}/>
+                      <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
+                          Microsoft
+                          <Box display={"flex"} alignItems={"center"}>
+                              <Heading
+                              variant={"p4"}
+                              color={"gray.text"}
+                              marginRight={1}
+                              >
+                              www.microsoft.com       
+                              </Heading>
+                          </Box>
+                      </Heading> 
+              </Box>
+              <Box display={"flex"} alignItems={"center"} flexWrap={"wrap"}  gap={6} mt={2}>
+                  <Heading display={"flex"} alignItems={"center"} color={"gray.text"} variant={"p4"}>
+                      <Image width={{ md: "20px", base: "16px" }} src={location.src} marginRight={2}/>
+                      Redmond, Washington State
+                  </Heading>
+                  <Box fontSize={{ sm: "14px", base: "8px" }}>
+                      <GoDotFill style={{ color: "#D9D9D9" }} />
+                  </Box>
+                  <Heading display={"flex"} alignItems={"center"} color={"gray.text"} variant={"p4"}>
+                  <Image style={{display:'inline-block'}} width={{ md: "20px", base: "16px" }} src={employeedesignation.src} marginRight={2}/>
+                      1,001 Employees
+                  </Heading>
+                  <Box fontSize={{ sm: "14px", base: "8px" }}>
+                      <GoDotFill style={{ color: "#D9D9D9" }} />
+                  </Box>
+                  <Heading display={"flex"} alignItems={"center"} color={"gray.text"} variant={"p4"}>
+                  <Image style={{display:'inline-block'}} width={{ md: "20px", base: "16px" }} src={Corporatebuilding.src} marginRight={2}/>
+                      Technology
+                  </Heading>
+              </Box>
+              <Box borderBottom="1px solid gray" pb={4} pr={4} mt={4} display={"flex"} justifyContent={"space-between"} alignItems={'center'}>
+                  <Heading color={"gray.text"} variant={"p4"} display="flex" alignItems={'center'}>
+                      <Image style={{ display: "inline-block" }} width={{ md: "20px", base: "16px" }} mr={2} src={calendar.src}  /> 
+                      Founded 1975
+                  </Heading>
 
-                <Box gap={4} display={"flex"} >
-                    <Image style={{ display: "inline-block" }} width={{ md: "20px", base: "20px" }} src={LinkedIn.src}  />
-                    <Image style={{ display: "inline-block" }} width={{ md: "20px", base: "20px" }} src={Instagram.src}  />
-                    <Image style={{ display: "inline-block" }} width={{ md: "20px", base: "20px" }} src={Facebook.src}  />
-                    <Image style={{ display: "inline-block" }} width={{ md: "20px", base: "20px" }} src={Twitter.src}  />
-                </Box>
+                  <Box gap={4} display={"flex"} >
+                      <Image style={{ display: "inline-block" }} width={{ md: "20px", base: "16px" }} src={LinkedIn.src}  />
+                      <Image style={{ display: "inline-block" }} width={{ md: "20px", base: "16px" }} src={Instagram.src}  />
+                      <Image style={{ display: "inline-block" }} width={{ md: "20px", base: "16px" }} src={Facebook.src}  />
+                      <Image style={{ display: "inline-block" }} width={{ md: "20px", base: "16px" }} src={Twitter.src}  />
+                  </Box>
+              </Box>
             </Box>
-            
             <Box mt={5} ml={2}>
                 <Heading color={"gray.text"} variant={"p7"} mb={2}>
                     Company OverView  
@@ -117,7 +118,7 @@ const CompanyPageData = () => {
           gap={10}
           mt={5}
           gridTemplateColumns={{ xl: "repeat(2, 1fr)", base: "1fr" }}
-          width={'80%'}
+          width={{lg:'80%'}}
           >        
       {DataArray.map((object)=>
             <Box
@@ -162,9 +163,8 @@ const CompanyPageData = () => {
             </Box>
       
             <Box>
-              <Box display={"flex"} gap={"40px"} mt={"12px"} alignItems={"center"}>
-                <Box width={"100%"}>
-                  <Heading variant={"p10"}>{object.location}</Heading>
+              <Box display={"flex"} gap={"0px"} mt={"12px"} flexWrap={"wrap"} alignItems={"center"}>
+               <Heading variant={"p10"}>{object.location}</Heading>
                   <Box
                     mt={"10px"}
                     display={"flex"}
@@ -172,7 +172,7 @@ const CompanyPageData = () => {
                     justifyContent={"space-between"}
                     width={"100%"}
                   >
-                    <Box display={"flex"} gap={"2px"} alignItems={"center"}>
+                    <Box flexWrap={"wrap"} display={"flex"} gap={"2px"} alignItems={"center"}>
                       <Heading color={"gray.text"} variant={"p4"}>
                         {object.Salary}
                       </Heading>
@@ -196,8 +196,7 @@ const CompanyPageData = () => {
                       </Heading>
                     </Box>
                   </Box>
-                </Box>
-              </Box>
+                </Box> 
               <Box>
                 <Heading mt={"22px"} variant={"p10"}>
                    Desired Skills
@@ -250,7 +249,7 @@ const CompanyPageData = () => {
         
 
     
-    </div>
+    </Box>
   );
 };
 

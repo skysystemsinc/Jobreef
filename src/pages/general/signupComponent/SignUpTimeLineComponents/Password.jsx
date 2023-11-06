@@ -7,7 +7,7 @@ const Password = ({ State, setState }) => {
     <Box>
         <Heading
             textAlign={"center"}
-            variant={"p8"}
+            variant={"p6"}
             color={"gray.text"}
             margin={"0px"}
           >
@@ -16,7 +16,8 @@ const Password = ({ State, setState }) => {
         <Box my={6}>
           <Heading
             as={"p"}
-            fontSize={{ "2xl": "30px", base: "16px", sm: "17px" }}
+            
+            fontWeight={400}
             textAlign={"center"}
             m={{
               "2xl": "60px 0px 76px -62px",
@@ -24,7 +25,7 @@ const Password = ({ State, setState }) => {
               base: "30px 0px 46px 0px",
             }}
             whiteSpace={{ lg: "nowrap", base: "wrap" }}
-            variant={"p2"}
+            variant={"p11"}
           >
             Please create a new password for your Jobreef account
           </Heading>
@@ -42,7 +43,7 @@ const Password = ({ State, setState }) => {
           type="text"
           variant={"bg-input"}
           placeholder="Enter your New Password"
-          label={"Enter Password"}
+          label={"New Password"}
         />
       </Box>
 

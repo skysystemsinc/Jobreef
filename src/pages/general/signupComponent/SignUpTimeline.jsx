@@ -15,7 +15,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Role_context } from "@/context/context";
 import PassChangeSuccessful from "./SignUpTimeLineComponents/PassChangeSuccessful";
 const steps = [
-  { label: "Enter Email" },
+  { label: " Email" },
   { label: "Verify" },
   { label: "Create New Password" },
 ];
@@ -121,7 +121,7 @@ const SignUpTimeline = ({ candidate, variant }) => {
                 sx={{
                   p: { md: 8, base: "20px 0px 20px 0px" },
                   mt: "13px",
-                  width: "90%",
+                  width: "92%",
                 }}
               >
                 {index == 0 ? (
@@ -129,9 +129,7 @@ const SignUpTimeline = ({ candidate, variant }) => {
                 ) : index == 1 ? (
                     <Otp
                     text={
-                      company
-                        ? "Please enter the 4 digit code send to example@email.com"
-                        : "Please enter the 4 digit code sent to your email"
+                     "Please enter the 4 digit code sent to your email"
                     }
                     State={State}
                     setState={setState}

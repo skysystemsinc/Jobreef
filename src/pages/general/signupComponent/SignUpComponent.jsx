@@ -22,12 +22,12 @@ const SignUp = ({ candidate }) => {
   const { company, setCompany } = useContext(Role_context);
   return (
     <Box
-      padding={{ md: "75px 30px 0px 30px", base: "75px 15px 0px 15px" }}
+      padding={{ md: "75px 30px 0px 30px", base: "75px 0px 0px 0px" }}
       width={"100%"}
       display={"flex"}
       justifyContent={"center"}
     >
-      {company ? (
+      {/* {company ? (
         <>
           <SignUpLayout
             personVectorW={{ "2xl": "600px", base: "450px" }}
@@ -35,15 +35,15 @@ const SignUp = ({ candidate }) => {
             leftPic={leftorange.src}
           />
         </>
-      ) : (
+      ) : ( */}
         <>
           <SignUpLayout
-            personVectorW={{ "2xl": "450px", base: "330px" }}
+            personVectorW={"400px"}
             bottomCartoon={SVG09.src}
             leftPic={leftorange.src}
           />
         </>
-      )}
+      {/* )} */}
       <Box
         width={{ md: "630px", base: "100%" }}
         ml={{ xl: "600px", base: "0px" }}
