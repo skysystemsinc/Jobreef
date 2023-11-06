@@ -36,14 +36,14 @@ const colors = {
   },
   white: {
     100: "#fff",
-    200:"#EAECF0",
-    300:"#BBB"
+    200: "#EAECF0",
+    300: "#BBB",
   },
   black: {
     100: "#000",
     200: "#111",
     300: "#1111114d",
-    400:"#404040"
+    400: "#404040",
   },
   gray: {
     100: "#BBBBC7",
@@ -54,15 +54,15 @@ const colors = {
     600: "#494949",
     700: "#AFAFAF",
     800: "#FEFEFE",
-    900:"#D0D5DD",
+    900: "#D0D5DD",
     lightBorder: "#cdcdcd",
     light: "#797979",
 
     text: "#4A4A4A",
   },
   blue: {
-    800:'#E9F5F8',
-    700:'#667085',
+    800: "#E9F5F8",
+    700: "#667085",
     600: "#336CB0",
     500: "#2CA5C3",
     400: "#DFF1F6",
@@ -214,7 +214,7 @@ const components = {
         width: "100%",
 
         fontFamily: "var(--chakra-\fonts-Nunito)",
-        margin:'0px',
+        margin: "0px",
         fontSize: { md: "14px", base: "12px" },
         fontWeight: 700,
         // fontSize: "16px",
@@ -351,7 +351,7 @@ const components = {
 
         "::placeholder": {},
       },
-      "simple": {
+      simple: {
         //   border: "1px solid red ",
         // field: {
         minHeight: "100px",
@@ -360,8 +360,8 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         color: "black.100 !important",
         // bg: "text.gray !important",
-        border:"1px solid",
-        borderColor:"gray.900",
+        border: "1px solid",
+        borderColor: "gray.900",
         // borderColor: "red",
         borderRadius: "8px",
         p: "9px 20px 20px 12px",
@@ -416,6 +416,17 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
       },
+
+      h2: {
+        fontWeight: 500,
+
+        color: "gray.text",
+        fontSize: ["20px", "20px ", "30px ", "30px ", "35px ", "35px "],
+
+        lineHeight: { md: "28px", base: "20px" },
+        fontFamily: "var(--chakra-\fonts-openSans)",
+        margin: "0px",
+      },
       // Variant for h2
 
       // h2: {
@@ -468,7 +479,7 @@ const components = {
         color: "gray.text ",
         fontFamily: "var(--chakra-\fonts-openSans)",
 
-        fontSize: ["18px", "20px", "22px", "22px"],
+        fontSize: ["16px", "20px", "22px", "22px"],
       },
       p7: {
         color: "blue.500",
@@ -496,10 +507,12 @@ const components = {
 
         fontSize: ["13px", "14px", "14px", "14px", "14px", "14px"],
       },
+
       p11: {
         // color: "gray.text",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 700,
+        lineHeight: "20px",
         fontSize: ["13px", "16px", "16px", "16px", "16px", "16px"],
       },
       p12: {
@@ -518,8 +531,8 @@ const components = {
       otp: {
         // border:"1px solid red",
         borderRadius: "8px",
-        width: { md: "58px", base: "50px" },
-        height: { md: "58px", base: "50px" },
+        width: { md: "53px", base: "50px" },
+        height: { md: "53px", base: "50px" },
         bg: "gray.200",
         color: "black.100",
 
@@ -541,7 +554,6 @@ const components = {
   Table: {
     variants: {
       "custome-table": {
-
         table: {
           borderCollapse: "separate",
           borderSpacing: "0px 20px",
@@ -549,14 +561,12 @@ const components = {
           // backgroundColor: "#fff",
           // padding: "10px 0px",
           tbody: {
-
             tr: {
               position: "relative",
               top: "-21px",
 
               // marginBottom:'20px',
 
-              
               verticalAlign: "middle",
               boxShadow: " 0px 2px 15px 0px rgba(0, 0, 0, 0.06)",
               border: "1px solid ",
@@ -578,12 +588,13 @@ const components = {
             },
           },
           thead: {
-            position: "relative", top: "-21px" ,
+            position: "relative",
+            top: "-21px",
             bg: "blue.500",
             // tr: { position: "relative", top: "-21px" },
             th: {
               // padding: { md: "23px 30px", base: "16px 20px" },
-              p:'20px',
+              p: "20px",
               fontSize: { md: "15px", base: "12px" },
               position: "relative",
 
@@ -605,9 +616,7 @@ const components = {
               color: "white.100",
             },
           },
-
         },
-
       },
     },
   },

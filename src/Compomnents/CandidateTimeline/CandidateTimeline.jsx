@@ -108,7 +108,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
         sx={{
           ...globalStyles.stepperContainter,
           width: {
-            xl: "100%",
+            xl: "90%",
             lg: "80%",
             md: "73%",
 

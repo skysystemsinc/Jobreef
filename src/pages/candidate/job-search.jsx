@@ -17,7 +17,7 @@ const JobSearch = () => {
 
   return (
     <>
-      <Header />
+      <Header candidate/>
       
       <Box display={"flex"} justifyContent={"center"} mt={"0px"}  minHeight={"90vh"}>
         <Box
