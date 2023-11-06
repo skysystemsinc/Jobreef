@@ -30,6 +30,7 @@ const Popovers = ({ width, actionList }) => {
         {/* <Button>Trigger</Button>
          */}
         <Image
+        cursor={"pointer"}
           onClick={(e) => {
             e.stopPropagation(), onToggle();
           }}

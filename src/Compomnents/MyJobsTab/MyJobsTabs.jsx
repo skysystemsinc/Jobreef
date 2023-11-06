@@ -16,6 +16,7 @@ import globalStyles from "@/styles/globalStyles";
 import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
 import AppliedJobs from "./AppliedJobs";
 import SavedJobs from "./SavedJobs";
+import JobAlert from "./JobAlert";
 const MyJobsTabs = () => {
   let [tabIndex, setTabIndex] = useState(0);
   const tabList = [
@@ -26,7 +27,7 @@ const MyJobsTabs = () => {
       title: "Saved Jobs",
     },
     {
-      title: "Jobs Alert",
+      title: "Jobs Alerts",
     },
   ];
   return (
@@ -47,7 +48,7 @@ const MyJobsTabs = () => {
 
             whiteSpace: "nowrap",
             overflowX: "scroll",
-            width: { md: "70%", base: "100%" },
+            width: { md: "55%", base: "100%" },
           }}
         >
           {tabList.map((item, index) => { 
@@ -69,6 +70,9 @@ const MyJobsTabs = () => {
           </TabPanel>
           <TabPanel>
             <SavedJobs />
+          </TabPanel>
+          <TabPanel>
+            <JobAlert />
           </TabPanel>
         </TabPanels>
       </Tabs>

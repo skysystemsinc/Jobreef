@@ -33,7 +33,7 @@ const PaginatedTable = ({
 }) => {
   const startIndex = (currentPage - 1) * pageSize;
   // const endIndex = currentPage * pageSize;
-  const [sorting, setSorting] = useState({ key: "name", ascending: true });
+  const [sorting, setSorting] = useState({ key: "Candidates", ascending: true });
   const endIndex = Math.min(currentPage * pageSize, data.length);
 
   const paginatedData = data.slice(startIndex, endIndex);
@@ -131,7 +131,7 @@ const PaginatedTable = ({
                 <Tr key={ind}>
                   {keys.map((key, ind) => (
                     <Td key={ind} className="nintoFont">
-                      {item[key].image ? (
+                      {item[key]?.image ? (
                         <Box display={"flex"} alignItems={"center"} gap="10px">
                           <Image
                             src={item[key].image}

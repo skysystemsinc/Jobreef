@@ -27,14 +27,13 @@ const OperatorSidebar = () => {
     {
       title: "Job Posts",
       icon:
-        router.pathname == "/operator/job-post" ||
-        router.pathname == "/company/create-job-post"
+        router.pathname == "/operator/job-posts" 
           ? white_job_post
           : job_post,
       pathname:
         router.pathname == "/company/create-job-post"
           ? "/company/create-job-post"
-          : "/operator/job-post",
+          : "/operator/job-posts",
     },
     {
       title: "Users",

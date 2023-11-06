@@ -1,43 +1,36 @@
 import {
-  Box,
-  Button,
-  Heading,
-  Image,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  Text,
-} from "@chakra-ui/react";
-import React, { useState } from "react";
-
-import globalStyles from "@/styles/globalStyles";
-import ActiveJobs from "./ActiveJobs";
-
-import InActiveJobs from "./InActive";
-import { useRouter } from "next/router";
-import Pending from "./Pending";
-
-const CompanyTabs = ({ company }) => {
-  const router = useRouter();
-  let [tabIndex, setTabIndex] = useState(0);
-  const tabLists = ["Active", "Pending", "Inactive"];
-  return (
-    <>
+    Box,
+    Button,
+    Heading,
+    Image,
+    Tab,
+    TabList,
+    TabPanel,
+    TabPanels,
+    Tabs,
+    Text,
+  } from "@chakra-ui/react";
+  import React, { useState } from "react";
+  
+  import globalStyles from "@/styles/globalStyles";
+  
+  import { useRouter } from "next/router";
+import Active from "./Active";
+import InActive from "./InActive";
+  
+  const OperatorsTabs = ({ company }) => {
+    const router = useRouter();
+    let [tabIndex, setTabIndex] = useState(0);
+    const tabLists = ["Active", "Inactive"];
+    return (
       <Tabs
-        // px={ {xl:"0px",   base: "10px"}}
         onChange={(index) => {
           setTabIndex(index);
         }}
-        // border={"1px solid red"}
-        // width={{ lg: "100%", base: "100%" }}
-        // justifyContent={"flex-start"}
-        // mx={"auto"}
         index={tabIndex}
         isFitted
       >
-        <Box position={"relative"} >
+        <Box position={"relative"}>
           <TabList
             sx={{
               ...globalStyles.fullTab,
@@ -48,10 +41,10 @@ const CompanyTabs = ({ company }) => {
             }}
             flexDirection={{ sm: "row", base: "column" }}
           >
-            {tabLists?.map((item , ind) => {
+            {tabLists?.map((item, ind) => {
               return (
                 <Tab
-                key={ind}
+                  key={ind}
                   fontSize={{ md: "16px", base: "14px" }}
                   sx={globalStyles.tabelinkStyle}
                   _selected={globalStyles.selectTab}
@@ -61,7 +54,7 @@ const CompanyTabs = ({ company }) => {
                 </Tab>
               );
             })}
-
+  
             <Button
               // onClick={()=>router.push("/company/create-job-post")}
               display={{ md: "block", base: "none" }}
@@ -70,55 +63,40 @@ const CompanyTabs = ({ company }) => {
               bottom={"0px"}
               variant={"blue-btn"}
             >
-              Create Company
+              Add Operator
             </Button>
           </TabList>
         </Box>
-
+  
         <TabPanels>
           <TabPanel px={"0px"}>
+            <Active />
             <Box
               width={"100%"}
-
               display={{ md: "none", base: "flex" }}
               justifyContent={"flex-end !important"}
               mb={"12px"}
               // onClick={()=>router.push("/company/create-job-post")}
             >
-              <Button variant={"blue-btn"}>Create Company</Button>
+              <Button variant={"blue-btn"}>Add Operator</Button>
             </Box>
-            <ActiveJobs />
           </TabPanel>
           <TabPanel px={"0px"}>
             <Box
               width={"100%"}
-
               display={{ md: "none", base: "flex" }}
               justifyContent={"flex-end !important"}
               mb={"12px"}
               // onClick={()=>router.push("/company/create-job-post")}
             >
-              <Button variant={"blue-btn"}>Create Company</Button>
+              <Button variant={"blue-btn"}>Add Operator</Button>
             </Box>
-            <Pending />
-          </TabPanel>
-          <TabPanel px={"0px"}>
-            <Box
-              // onClick={()=>router.push("/company/create-job-post")}
-
-              width={"100%"}
-              display={{ md: "none", base: "flex" }}
-              justifyContent={"flex-end !important"}
-              mb={"12px"}
-            >
-              <Button variant={"blue-btn"}>Create Company</Button>
-            </Box>
-            <InActiveJobs />
+            <InActive />
           </TabPanel>
         </TabPanels>
       </Tabs>
-    </>
-  );
-};
-
-export default CompanyTabs;
+    );
+  };
+  
+  export default OperatorsTabs;
+  

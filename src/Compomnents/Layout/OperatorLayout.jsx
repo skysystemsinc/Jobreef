@@ -13,13 +13,13 @@ const OperatorLayout = ({ children }) => {
       <BottomWaveImage />
       <OperatorSidebar />
       <Box
-        position={"relative"}
-        top={"0px"}
-        zIndex={2}
+        // position={"relative"}
+        // top={"0px"}
+        // zIndex={2}
         ml={{ xl: "250px", base: "55px" }}
       >
         <OperatorHeader />
-        {/* <CompanyTabs /> */}
+
         {children}
       </Box>
     </>

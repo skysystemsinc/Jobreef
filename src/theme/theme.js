@@ -578,22 +578,22 @@ const components = {
             },
           },
           thead: {
-            
+            position: "relative", top: "-21px" ,
             bg: "blue.500",
-            tr: { position: "relative", top: "-21px" },
+            // tr: { position: "relative", top: "-21px" },
             th: {
               // padding: { md: "23px 30px", base: "16px 20px" },
               p:'20px',
               fontSize: { md: "15px", base: "12px" },
-              // position: "relative",
+              position: "relative",
 
               // border: "1px solid red",
               "& .vertical-divider": {
                 position: "absolute",
                 top: { md: "21px", base: "16px" },
-                left: { md: "20px", base: "10px" },
+                left: { md: "12px", base: "10px" },
                 width: "1px",
-                height: { md: "20px", base: "17px" },
+                height: { md: "16px", base: "17px" },
                 zIndex: 99,
                 backgroundColor: "#fff",
 
@@ -605,15 +605,9 @@ const components = {
               color: "white.100",
             },
           },
-          // border: "1px solid red",
-          // bg: "blue.500",
-          // borderRadius:"6px",
-          // boxShadow: "0px 2px 15px 0px rgba(0, 0, 0, 0.06)",
+
         },
 
-        // tr: {
-        //   border: "1px solid red",
-        // },
       },
     },
   },

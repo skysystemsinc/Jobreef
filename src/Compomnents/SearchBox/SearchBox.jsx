@@ -4,7 +4,7 @@ import search from "@/assets/Images/search.svg";
 import { Image } from "@chakra-ui/react";
 import { InputRightElement } from "@chakra-ui/react";
 
-const SearchBox = () => {
+const SearchBox = ({placeholder}) => {
   return (
     <InputGroup>
       <InputRightElement height={"35px"} pointerEvents="none">
@@ -20,7 +20,7 @@ const SearchBox = () => {
         border={"1px solid "}
         borderColor={"white.300"}
 
-        placeholder="Search companies"
+        placeholder={placeholder}
         sx={{
           height: "35px",
           _placeholder: {
