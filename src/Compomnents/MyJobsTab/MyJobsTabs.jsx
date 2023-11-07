@@ -32,8 +32,7 @@ const MyJobsTabs = () => {
   ];
   return (
     <>
-      <BottomWaveImage /> 
-
+      
       <Tabs
         onChange={(index) => {
           setTabIndex(index);

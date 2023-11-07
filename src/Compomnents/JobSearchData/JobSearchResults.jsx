@@ -4,13 +4,10 @@ import { useState } from "react";
 import cross from "../../assets/Images/cross.svg";
 import NewJobSearchBox from "./NewJobSearchBox";
 import ShowPreviousSearches from "./ShowPreviousSearches";
-import {DataArray } from "./tempSchema";
+import { DataArray } from "./tempSchema";
 
 import { parse, compareAsc, compareDesc } from "date-fns";
-import {
-  Box,
-  Image,
-} from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 import ShowClickJobSearchBox from "./ShowClickJobSearchBox";
 
 import ShowCheckBoxes from "./ShowCheckBoxes";
@@ -79,6 +76,7 @@ const JobSearchResults = () => {
       >
         <Box
           flex={2.5}
+          bg={"white.100"}
           display={{ lg: "block", base: "none" }}
         >
           <ShowCheckBoxes
@@ -93,10 +91,23 @@ const JobSearchResults = () => {
           flex={{ lg: 5, base: "100%" }}
           display={{ lg: "block", base: "none" }}
         >
-          <Box display={"flex"} gap={"10px"} alignItems={"center"} flexWrap={'wrap'}>
+          <Box
+            display={"flex"}
+            gap={"10px"}
+            alignItems={"center"}
+            flexWrap={"wrap"}
+          >
             {selectedValues.map((val) => {
               return (
-                <ComponentMyChip style={{marginBottom:"10px", p:"5px 12px" , border:'1px solid ',borderColor:'blue.500'}}  label={val}>
+                <ComponentMyChip
+                  style={{
+                    marginBottom: "10px",
+                    p: "5px 12px",
+                    border: "1px solid ",
+                    borderColor: "blue.500",
+                  }}
+                  label={val}
+                >
                   <Image
                     width={"10px"}
                     src={cross.src}
@@ -119,8 +130,8 @@ const JobSearchResults = () => {
           </Box>
         </Box>
         {toggle ? (
-          <Box flex={"100%"} display={{ lg: "none", base: "block" }}> 
-          {/* need to do work from here */}
+          <Box flex={"100%"} display={{ lg: "none", base: "block" }}>
+            {/* need to do work from here */}
             {/* <button onClick={toggleAside}>Toggle Aside</button>
             <Box gap={2} display={"flex"} flexWrap={'wrap'}>    
             <aside id="yourAside" class="hidden-aside">
@@ -137,11 +148,19 @@ const JobSearchResults = () => {
                 ))}
               </aside>
               </Box> */}
-  
-            <Box gap={2} display={"flex"} flexWrap={'wrap'}>
+
+            <Box gap={2} display={"flex"} flexWrap={"wrap"}>
               {selectedValues.map((val) => {
                 return (
-                  <ComponentMyChip label={val} style={{marginBottom:"10px", p:"5px 12px" , border:'1px solid ',borderColor:'blue.500'}}>
+                  <ComponentMyChip
+                    label={val}
+                    style={{
+                      marginBottom: "10px",
+                      p: "5px 12px",
+                      border: "1px solid ",
+                      borderColor: "blue.500",
+                    }}
+                  >
                     <Image
                       width={"10px"}
                       src={cross.src}
@@ -161,13 +180,16 @@ const JobSearchResults = () => {
                 settoggle={settoggle}
                 Data={Data}
               />
-        
             </Box>
           </Box>
         ) : null}
 
         {toggle ? (
-          <Box flex={1.9} display={{ lg: "block", base: "none" }}>
+          <Box
+            flex={1.9}
+            display={{ lg: "block", base: "none" }}
+            bg={"white.100"}
+          >
             <ShowPreviousSearches />
           </Box>
         ) : (

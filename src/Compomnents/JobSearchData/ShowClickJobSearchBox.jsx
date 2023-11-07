@@ -132,7 +132,7 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
                 marginRight={2}
               />
               <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
-                <Link href="https://jobreef-git-khizer-dev-skysys.vercel.app/candidate/job-search-selectedjob#">
+                <Link href="/candidate/job-search-selectedjob">
                     {object.title}
                 </Link>
                 <Box display={"flex"} alignItems={"center"}>
