@@ -55,7 +55,7 @@ export const SignUpTimeline = ({ candidate, variant }) => {
         router.push("/candidate/registration");
         // router.reload()
       } else {
-        router.push("/registration");
+        router.push("/company/registration");
       }
     } else {
       nextStep();
