@@ -11,7 +11,7 @@ const jobSearchSelected = () => {
       <Header />
 
       <Box display={"flex"} justifyContent={"center"} mt={"43px"}>
-        <Box width={"100%"} px={{ md: "20px", base: "10px" }}>
+        <Box px={{ md: "20px", base: "10px" }}>
           <JobSearchCompanyPage />
         </Box>
       </Box>

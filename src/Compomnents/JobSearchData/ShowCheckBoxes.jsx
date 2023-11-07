@@ -3,6 +3,7 @@ import { checkboxes } from "./tempSchema";
 
 
 import {
+  Button,
   Box,
   Heading,
   Checkbox,
@@ -24,15 +25,18 @@ const ShowCheckBoxes = ({
   return (
     <>
       <Box
-        width="100%"
+        width={{lg:'100%',base:'95%'}}
+        m={{base:'10px'}}
         borderRadius={"8px"}
         borderWidth={1}
         borderColor="gray.400"
         display={"flex"}
-        // flexDirection={"column"}
         flexWrap={"wrap"}
-        position="sticky" top="100px"
-        height= '500px' overflowY= "auto"
+        position={{lg:'sticky',base:''}}
+        top={{lg:'100px',base:'10px'}}
+        height= {{lg:'500px',md:'500px',base:'75vh'}}
+        mt={{sm:'0px',base:'30px'}}
+        overflowY= "auto"
         sx={{
           "&::-webkit-scrollbar": {
             width: "5px",
@@ -113,7 +117,8 @@ const ShowCheckBoxes = ({
           );
         })}
       </Box>
-
+      
+      
     
     </>
   );

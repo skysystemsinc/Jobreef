@@ -25,6 +25,7 @@ import Facebook from "../../assets/Images/Facebook.svg";
 import Twitter from "../../assets/Images/Twitter.svg";
 import Instagram from "../../assets/Images/Instagram.svg";
 import location from "../../assets/Images/location.svg";
+import { useRouter } from 'next/router';
 
 const DataArray = [
   {
@@ -124,13 +125,19 @@ const text2 = [
 
 const JobSearchCompanyPage = () => {
   const actionList = ["Download Attachments", "Archive"];
+  
+  const router = useRouter();
+  const handleRouteChange = () => {
+    router.push('/candidate/job-search');
+  };
 
   //TODO
   return (
-    <Box margin="0px 50px 0px 50px" width="100%" display="flex">
-      <Box flex={2}>
+    <Box margin="0px 50px 0px 50px"  display={{lg:'flex',base:'block'}}>
+      <Box flex={2} >
         {DataArray.map((object) => (
           <Box
+          
             p={{ sm: "20px", base: "12px" }}
             width={"100%"}
             borderRadius={"8px"}
@@ -182,8 +189,10 @@ const JobSearchCompanyPage = () => {
                   </Heading>
                 </Box>
                 <Box display={"flex"} alignItems={"center"}> 
-                  <Link href="/candidate/job-search">
-                    <Box display={"flex"} alignItems={"center"}>
+                    <Box display={"flex"} alignItems={"center"} 
+                    style={{
+                      cursor: 'pointer',
+                    }} onClick={handleRouteChange}>
                       <Image
                         width={{ md: "20px", base: "20px" }}
                         src={arrowright.src}
@@ -193,7 +202,6 @@ const JobSearchCompanyPage = () => {
                         Return
                       </Heading>
                     </Box>
-                  </Link>
                 </Box>
               </Box>
             </Box>
@@ -242,7 +250,7 @@ const JobSearchCompanyPage = () => {
                       justifyContent="flex-end"
                     >
                       <Heading color={"gray.text"} variant={"p4"}>
-                        Applcaition Deadline: {object.ApplicationDeadline}
+                        Application Deadline: {object.ApplicationDeadline}
                       </Heading>
                     </Box>
                   </Box>
@@ -251,7 +259,7 @@ const JobSearchCompanyPage = () => {
             </Box>
           </Box>
         ))}
-        <Box display={"flex"} gap={6} mt={10}>
+        <Box display={"flex"} gap={6}>
           <Button style={{ padding: "20px 40px 20px 40px" }} variant={"outline-blue"}>Save Job</Button>
           <Button style={{ padding: "20px 40px 20px 40px" }} variant="blue-btn">
             Apply Now
@@ -422,11 +430,12 @@ const JobSearchCompanyPage = () => {
       </Box>
       {/* need to design right side from here */}
       <Box
-        display={"gird"}
+        display={{lg:'block',base:'block'}}
         flex={1}
         gap={10}
-        mt={60}
-        p={10}
+        mt={{lg:60,base:0}}
+        pl={{lg:10,base:0}}
+        pt={10}
         gridTemplateColumns={{ xl: "repeat(2, 1fr)", base: "1fr" }}
       >
         {DataArray2.map((object) => (
