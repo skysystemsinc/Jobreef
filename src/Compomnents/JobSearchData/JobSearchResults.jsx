@@ -7,22 +7,20 @@ import ShowPreviousSearches from "./ShowPreviousSearches";
 import { DataArray } from "./tempSchema";
 
 import { parse, compareAsc, compareDesc } from "date-fns";
-import { Box, Image,Button } from "@chakra-ui/react";
+import { Icon,Box, Image,Button } from "@chakra-ui/react";
 import ShowClickJobSearchBox from "./ShowClickJobSearchBox";
 
 import ShowCheckBoxes from "./ShowCheckBoxes";
 import MobileSortBy from "./MobileSortBy";
+import { FaTimes } from "react-icons/fa";
 
-const JobSearchResults = () => {
+const JobSearchResults = ({isOpen,setIsOpen}) => {
   const originalArray = DataArray;
   const [selectedValues, setSelectedValues] = useState([]);
   const [temp, settemp] = useState([]);
   const [tempObject, setTempObject] = useState();
-  //Temporary Button Later on need to be deleted
   const [toggle, settoggle] = useState("false");
   const [Data, setData] = useState(DataArray);
-  const [asideVisible, setAsideVisible] = useState(false);
-  const [isOpen,setIsOpen] = useState(false);
   const screenWidth = window.screen.width; // Total screen width
   const screenHeight = window.screen.height; // Total screen height
 
@@ -64,21 +62,11 @@ const JobSearchResults = () => {
 
   return (
     <Box>
-      {/* <MobileSortBy
+      <MobileSortBy
         DataSort={DataSort}
         handleCheckboxChange={handleCheckboxChange}
         selectedValues={selectedValues}
-      /> */}
-      <Box display={{sm:'none',base:'flex'}} justifyContent={'center'} mb={'20px'}>
-        <Button
-              onClick={()=>{setIsOpen(true)}}
-              sx={{ padding: "20px 60px 20px 60px" }}
-              variant="blue-btn"
-              marginLeft="2" 
-        >
-          Filters 
-        </Button>
-      </Box>
+      />
       <Box
         display={"flex"}
         flexDirection={{ lg: "row", base: "column" }}
@@ -159,6 +147,7 @@ const JobSearchResults = () => {
                   temp={temp}
                   settemp={settemp}
                   DataSort={DataSort}
+                  setIsOpen = {setIsOpen}
                 />
                 <Button
                       onClick={()=>{setIsOpen(false)}}
@@ -167,7 +156,7 @@ const JobSearchResults = () => {
                       marginLeft="2" // Add margin to the button for space
                       marginTop={'-50px'}
                 >
-                  Apply Now 
+                  Set Filters 
                 </Button>
             </Box>):null}
 

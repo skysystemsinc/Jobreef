@@ -7,36 +7,39 @@ import {
   InputGroup,
   InputLeftElement,
   Image,
+  Icon,
 } from "@chakra-ui/react";
 import { FiSearch, FiMapPin } from "react-icons/fi";
-import React,{useContext,useState} from "react";
+import React, { useContext, useState } from "react";
 import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
 import location from "../../assets/Images/location.svg";
 import { Role_context } from "../../context/context";
+import { FaFilter } from "react-icons/fa";
 
-const JobSearchData = () => {
-  
+const JobSearchData = ({ setIsOpen }) => {
   const {
     company,
     setCompany,
     searchNow,
-    setHandleCompanyEntry, 
+    setHandleCompanyEntry,
     getHandleCompanyEntry,
     setHandleLocationEntry,
     getHandleLocationEntry,
-} = useContext(Role_context); 
+    getToggle,
+  } = useContext(Role_context);
 
   return (
     <>
       <Box
         width={{ md: "70%", sm: "100%" }}
         margin="0 auto" // Center the container horizontally
-        mt={{ md: "50px", lg: "60px", base: "20px" }}
+        pt={{ md: "30px", lg: "40px", base: "20px" }}
       >
         <Flex
           display={{ lg: "flex", base: "none" }}
           mt={"0px"}
           alignItems="center" // Center the items vertically
+          boxShadow={" 0px 4px 0px 0px rgba(0, 0, 0, 0.15)"}
         >
           <InputGroup>
             <InputLeftElement
@@ -52,7 +55,6 @@ const JobSearchData = () => {
               marginRight="2"
               onChange={(e) => setHandleCompanyEntry(e.target.value)}
               bg={"gray.200"}
-              
             />
           </InputGroup>
 
@@ -80,11 +82,11 @@ const JobSearchData = () => {
 
           <Button
             onClick={searchNow}
-            sx={{   padding: "20px 60px 20px 60px" }}
+            sx={{ padding: "20px 60px 20px 60px" }}
             variant="blue-btn"
             marginLeft="2" // Add margin to the button for space
           >
-            Search Now 
+            Search Now
           </Button>
         </Flex>
 
@@ -109,10 +111,8 @@ const JobSearchData = () => {
               marginRight="2"
               onChange={(e) => setHandleCompanyEntry(e.target.value)}
               bg={"gray.200"}
-              
             />
           </InputGroup>
-
 
           <InputGroup>
             <InputLeftElement
@@ -134,17 +134,34 @@ const JobSearchData = () => {
               onChange={(e) => setHandleLocationEntry(e.target.value)}
             />
           </InputGroup>
-
-          <Button
-            onClick={searchNow}
-            style={{ padding: "20px 40px 20px 40px" }}
-            variant="blue-btn"
-            marginLeft="2" // Add margin to the button for space
-            mt={2}
-            
-          >
-            Search Now 
-          </Button>
+          <Flex justifyContent="space-between" alignItems="center" mt={'20px'}>
+            <Button
+              onClick={searchNow}
+              sx={{ padding: "20px 40px" }}
+              variant="blue-btn"
+              margin="2" // Add margin to the button for space
+              marginTop={2}
+            >
+              Search Now
+            </Button>
+            <Box display={{ lg: "none", md: "none", sm: "none" }}>
+              {!getToggle()?(<Button
+                onClick={() => {
+                  setIsOpen(true);
+                }}
+                sx={{
+                  padding: "20px 40px",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+                variant="blue-btn"
+                margin="2"
+              >
+                <Icon as={FaFilter} w={3} h={3} marginRight="2" />
+                Filters
+              </Button>):null}
+            </Box>
+          </Flex>
         </Box>
       </Box>
     </>

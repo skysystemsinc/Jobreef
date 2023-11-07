@@ -13,22 +13,24 @@ const JobSearch = () => {
 
 
   //need to be deleted temporarily useState
-  const[load,setload] = useState(true)
   const {getToggle} = useContext(Role_context); 
+  const [isOpen,setIsOpen] = useState(false);
 
   return (
     <>
       <Header candidate/>
       
-      <Box display={"flex"} justifyContent={"center"} mt={"0px"}  minHeight={"90vh"}>
+      <Box display={"flex"} justifyContent={"center"} mt={"0px"}  minHeight={"90vh"} >
         <Box
           width={"100%"}    
           px={{ md: "20px", base: "10px" }}
         >
-          <JobSearchData/>
+          <Box marginTop={'0px'} pt={'0px'} pb={{md:'20px'}} position={{lg:getToggle() ? null : 'sticky'}} top={'65px'} zIndex={1} bg={"white.100"}>
+            <JobSearchData setIsOpen={setIsOpen}/>
+          </Box>
           {getToggle()?
             (<JobSearchEntry/>):
-            (<JobSearchResults />)}
+            (<JobSearchResults isOpen={isOpen} setIsOpen={setIsOpen} />)}
         </Box>
       </Box>
       {/* <BottomWaveImage /> */}

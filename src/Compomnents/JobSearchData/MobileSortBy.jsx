@@ -45,7 +45,7 @@ const MobileSortBy = ({
 
   return (
     <>
-      <Box display={{ lg: "none", base: "block" }}>
+      <Box display={{ lg: "none", md: "block",sm:'block',base:'none' }}>
         <Box
           mb={"20px"}
           flexWrap={"wrap"}
