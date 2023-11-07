@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Role_context } from "../../context/context";
 import {useContext} from "react";
 import JobSearchEntry from "@/Compomnents/JobSearchData/JobSearchEntry";
+import Footer from "@/Compomnents/Footer/Footer";
 const JobSearch = () => {
 
 
@@ -30,7 +31,9 @@ const JobSearch = () => {
             (<JobSearchResults />)}
         </Box>
       </Box>
-      <BottomWaveImage />
+      {/* <BottomWaveImage /> */}
+      <Footer waveImage />
+
     </>
     
   );

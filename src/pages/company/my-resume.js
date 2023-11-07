@@ -1,3 +1,4 @@
+import Footer from "@/Compomnents/Footer/Footer";
 import Header from "@/Compomnents/Header/Header";
 import MyResumeTabs from "@/Compomnents/MyResumeTab/MyResumeTabs";
 import ProfileSettingTabs from "@/Compomnents/ProfileSettingTabs/ProfileSettingTabs";
@@ -18,6 +19,7 @@ const myResume = () => {
           <MyResumeTabs />
         </Box>
       </Box>
+      <Footer waveImage />
     </>
   );
 };

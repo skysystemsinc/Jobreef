@@ -2,7 +2,8 @@ import { extendTheme } from "@chakra-ui/react";
 
 import { StepsTheme as Steps } from "chakra-ui-steps";
 import { Nunito } from "next/font/google";
-
+import { Sora } from "next/font/google";
+import "@fontsource/sora";
 // theme.js
 
 const customStyles = {
@@ -27,6 +28,12 @@ const nunito = Nunito({
   display: "swap",
   subsets: ["latin"],
   variable: "--Nunito-font",
+});
+const sora = Sora({
+  weight: ["200", "300", "400", "500", "600", "700"],
+  display: "swap",
+  subsets: ["latin"],
+  variable: "--sora-font",
 });
 const colors = {
   test: "#ff000",
@@ -77,6 +84,7 @@ const colors = {
 const fonts = {
   openSans: `'Open Sans'`,
   Nunito: `${nunito.variable}`,
+  sora: `'Sora'`,
 };
 const breakpoints = {
   base: "0em", // 0px
@@ -183,6 +191,18 @@ const components = {
         fontWeight: 600,
         // fontSize: "20px",
         fontSize: "14px",
+      },
+
+      footerLink: {
+        fontWeight: 400,
+        
+        color: "white.100 ",
+        fontFamily: "var(--chakra-\fonts-sora)",
+        // fontFamily:sora.variable,
+        fontSize: ["13px", "14px", "14px"],
+        // lineHeight:{ md: '24px' , base:"20px"},
+        lineHeight: { md: "15px", base:"14px"},
+        // fontSize: "20px",
       },
     },
   },

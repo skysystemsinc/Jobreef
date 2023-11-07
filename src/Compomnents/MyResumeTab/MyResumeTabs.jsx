@@ -49,8 +49,7 @@ const MyResumeTabs = () => {
   ];
   return (
     <>
-      <BottomWaveImage />
-
+      
       <Tabs
         onChange={(index) => {
           setTabIndex(index);

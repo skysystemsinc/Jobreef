@@ -1,4 +1,5 @@
 import CompanyPageData from "@/Compomnents/CompanyPageData/CompanyPageData";
+import Footer from "@/Compomnents/Footer/Footer";
 import Header from "@/Compomnents/Header/Header";
 import JobSearchData from "@/Compomnents/JobSearchData/JobSearchData";
 import MyJobsTabs from "@/Compomnents/MyJobsTab/MyJobsTabs";
@@ -14,16 +15,13 @@ const CompanyPage = () => {
     <>
       <Header candidate />
 
-      <Box display={"flex"} justifyContent={"center"} mt={"43px"}>
-        <Box
-          width={"100%"}    
-          px={{ md: "20px", base: "10px" }}
-        >
-          <CompanyPageData/>
+      <Box display={"flex"} justifyContent={"center"} mt={"43px"} mb={{md: "100px", base:"40px"}}>
+        <Box width={"100%"} px={{ md: "20px", base: "10px" }}>
+          <CompanyPageData />
         </Box>
       </Box>
+      <Footer waveImage />
     </>
-    
   );
 };
 

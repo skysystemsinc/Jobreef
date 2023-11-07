@@ -28,7 +28,7 @@ const Overview = ({ setTabIndex, tabIndex }) => {
   });
   const router = useRouter();
   return (
-    <Box mt={{ md: "30px", base: "16px" }} width={{ lg: "60%", base: "100%" }}>
+    <Box mt={{ md: "30px", base: "16px" }} mb={"40px"} width={{ lg: "60%", base: "100%" }}>
       {/* <Image src={profile.src} /> */}
 
       <Box mt={"0px"}>

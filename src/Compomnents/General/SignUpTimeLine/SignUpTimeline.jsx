@@ -6,14 +6,14 @@ import {
 } from "@chakra-ui/react";
 import { Step, Steps, useSteps } from "chakra-ui-steps";
 
-import PersonalInfo from "./SignUpTimeLineComponents/PersonalInfo";
-import Password from "./SignUpTimeLineComponents/Password";
-import Otp from "./SignUpTimeLineComponents/Otp";
+import PersonalInfo from "./PersonalInfo";
+import Password from "./Password";
+import Otp from "./Otp";
 import { useRouter } from "next/router";
 import globalStyles from "@/styles/globalStyles";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Role_context } from "@/context/context";
-import PassChangeSuccessful from "./SignUpTimeLineComponents/PassChangeSuccessful";
+import PassChangeSuccessful from "./PassChangeSuccessful";
 const steps = [
   { label: " Email" },
   { label: "Verify" },
