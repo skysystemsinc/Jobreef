@@ -37,11 +37,14 @@ const ProfileSettingTabs = ({ company }) => {
       >
         <TabList
           sx={{ ...globalStyles.fullTab, width: "100%" }}
-          flexDirection={{ sm: "row", base: "column" }}
+          whiteSpace={"nowrap"}
+          overflowX={"scroll"}
+          // flexDirection={{ sm: "row", base: "column" }}
         >
           <Tab
             fontSize={{ md: "16px", base: "14px" }}
             sx={globalStyles.tabelinkStyle}
+            
             _selected={globalStyles.selectTab}
           >
             {" "}

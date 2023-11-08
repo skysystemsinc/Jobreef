@@ -10,6 +10,7 @@ import Popovers from "../PaginatedTable/Popovers";
 import Chip from "../Chip/Chip";
 const CandidateCard = ({
   matchCandidate,
+  cardStatusDisable,
   cardStatus,
   data,
   handleEvent,
@@ -161,7 +162,7 @@ const CandidateCard = ({
             })}
           </Box>
 
-          {matchCandidate ? null : (
+          {matchCandidate  || cardStatusDisable? null : (
             <Heading whiteSpace={"nowrap"} variant={"p10"} textAlign={"end"}>
               {" "}
               Status:{" "}

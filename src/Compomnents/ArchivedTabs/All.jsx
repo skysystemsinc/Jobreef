@@ -12,6 +12,7 @@ const All = ({
   filterKey,
   matchCandidate,
   cardStatus,
+  cardStatusDisable,
   // data,
   searcBox,
   handleEvent,
@@ -81,6 +82,7 @@ const All = ({
               return (
                 <Box key={ind}>
                   <CandidateCard
+                  cardStatusDisable
                     data={item}
                     matchCandidate={matchCandidate}
                     cardStatus={cardStatus}

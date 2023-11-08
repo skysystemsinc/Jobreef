@@ -1,4 +1,5 @@
 import CompanyTabs from "@/Compomnents/CompanyDashoardTabs/CompanyDashboardTabs";
+import Footer from "@/Compomnents/Footer/Footer";
 import Header from "@/Compomnents/Header/Header";
 import CompanyDasboard from "@/Compomnents/Layout/DasboardLayout";
 import SideBar from "@/Compomnents/SideBar/SideBar";
@@ -13,6 +14,7 @@ const comapanyDetails = () => {
           <CompanyTabs />
         </Box>
       </CompanyDasboard>
+        {/* <Footer/> */}
     </>
   );
 };

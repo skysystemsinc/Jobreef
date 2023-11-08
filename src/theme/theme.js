@@ -222,7 +222,11 @@ const components = {
         fontWeight: 400,
         // fontSize: "16px",
         color: "gray.100",
-
+        transition:'.5s',
+        cursor:"pointer",
+        _hover:{
+          backgroundColor:'blue.400',
+        },
         height: { md: "46px", base: "40px" },
       },
       lightGray: {
