@@ -39,7 +39,7 @@ const JobSearchData = ({ setIsOpen }) => {
           display={{ lg: "flex", base: "none" }}
           mt={"0px"}
           alignItems="center" // Center the items vertically
-          boxShadow={" 0px 4px 0px 0px rgba(0, 0, 0, 0.15)"}
+          
         >
           <InputGroup>
             <InputLeftElement

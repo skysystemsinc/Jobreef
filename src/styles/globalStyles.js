@@ -31,6 +31,13 @@ const globalStyles = {
     mx: "auto",
     borderRadius: "5px",
     py: "4px",
+    "&::-webkit-scrollbar": {
+      borderRadius: "8px",
+      display: "none",
+      width: "1px !important",
+
+      backgroundColor: `transparent`,
+    },
 
     width: { xl: "60%", md: "70%", sm: "80%", base: "100%" },
   },

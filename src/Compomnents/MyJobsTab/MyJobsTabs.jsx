@@ -27,7 +27,7 @@ const MyJobsTabs = () => {
       title: "Saved Jobs",
     },
     {
-      title: "Jobs Alerts",
+      title: "Job Alerts",
     },
   ];
   return (

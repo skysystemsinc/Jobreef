@@ -24,7 +24,7 @@ import logout from "@/assets/Images/logout.svg";
 import { role, roles } from "@/Utils/role";
 import { useRouter } from "next/router";
 import { Role_context } from "@/context/context";
-const HeaderDropdown = ({ candidate , operatorDropdown }) => {
+const HeaderDropdown = ({ candidate, operatorDropdown }) => {
   const router = useRouter();
   const { company, setCompany } = useContext(Role_context);
 
@@ -123,23 +123,26 @@ const HeaderDropdown = ({ candidate , operatorDropdown }) => {
           />
         </Box>
       </MenuButton>
-      <MenuList  py="0px">
+      <MenuList py="0px">
         {candidate
           ? candidatedropdown.map((item, index) => {
               return (
-                <MenuItem
-                  key={index}
-                  
-                  _hover={{ bg: "transparent" }}
-                  borderBottom={"1px solid #0000001a"}
-                  // p={{ md: "14px 20px 16px 20px", base: "7px 16px 14px 16px" }}
-                  p={{ md: "17px 20px 17px 20px", base: "16px 16px 16px 16px" }}
+                <Link _hover={{ textDecoration: "none" }} href={item.pathname}>
+                  <MenuItem
+                    key={index}
+                    transition={".5s"}
+                    _hover={{
+                      bg: "gray.200",
+                      "& .hoverText": { color: "blue.500" },
+                    }}
+                    borderBottom={"1px solid #0000001a"}
+                    // p={{ md: "14px 20px 16px 20px", base: "7px 16px 14px 16px" }}
+                    p={{
+                      md: "14px 20px 16px 20px",
+                      base: "13px 16px 13px 16px",
+                    }}
 
-                  // mb={"6px"}
-                >
-                  <Link
-                    _hover={{ textDecoration: "none" }}
-                    href={item.pathname}
+                    // mb={"6px"}
                   >
                     <Box
                       border={"1px solid black.100"}
@@ -147,41 +150,44 @@ const HeaderDropdown = ({ candidate , operatorDropdown }) => {
                       justifyContent={"center"}
                       alignItems={"center"}
                       gap={"10px"}
-                      transition= {"all 0.4s ease"}
-                      _hover={{
-                        transition: "all 0.4s ease",
-                        transform: "scale(1.1)",}}
+                      className="hoverText"
                     >
                       {/* <Image src={dasboadrd.src} /> */}
                       {item.icon}
 
-                      <Heading mb="1px" as={"p"} variant={"p4"}>
+                      <Heading
+                        className="hoverText"
+                        transition={".5s"}
+                        mb="1px"
+                        as={"p"}
+                        variant={"p4"}
+                      >
                         {" "}
                         {item.title}
                       </Heading>
                     </Box>
-                  </Link>
-                </MenuItem>
+                  </MenuItem>
+                </Link>
               );
             })
           : operatorDropdown
           ? operator.map((item, index) => {
               return (
-                <MenuItem
-                  key={index}
-                  bg="transparent"
-                  transition={".5s"}
-                  _hover={{
-                    bg: "gray.200",
-                    "& .hoverText": { color: "blue.500" },
-                  }}
-                  borderBottom={"1px solid #0000001a"}
-                  p={{ md: "14px 20px 16px 20px", base: "13px 16px 13px 16px" }}
-                  // mb={"6px"}
-                >
-                  <Link
-                    _hover={{ textDecoration: "none" }}
-                    href={item.pathname}
+                <Link _hover={{ textDecoration: "none" }} href={item.pathname}>
+                  <MenuItem
+                    key={index}
+                    bg="transparent"
+                    transition={".5s"}
+                    _hover={{
+                      bg: "gray.200",
+                      "& .hoverText": { color: "blue.500" },
+                    }}
+                    borderBottom={"1px solid #0000001a"}
+                    p={{
+                      md: "14px 20px 16px 20px",
+                      base: "13px 16px 13px 16px",
+                    }}
+                    // mb={"6px"}
                   >
                     <Box
                       border={"1px solid black.100"}
@@ -204,27 +210,27 @@ const HeaderDropdown = ({ candidate , operatorDropdown }) => {
                         {item.title}
                       </Heading>
                     </Box>
-                  </Link>
-                </MenuItem>
+                  </MenuItem>
+                </Link>
               );
             })
           : companydropdown.map((item, index) => {
               return (
-                <MenuItem
-                  key={index}
-                  bg="transparent"
-                  transition={".5s"}
-                  _hover={{
-                    bg: "gray.200",
-                    "& .hoverText": { color: "blue.500" },
-                  }}
-                  borderBottom={"1px solid #0000001a"}
-                  p={{ md: "14px 20px 16px 20px", base: "13px 16px 13px 16px" }}
-                  // mb={"6px"}
-                >
-                  <Link
-                    _hover={{ textDecoration: "none" }}
-                    href={item.pathname}
+                <Link _hover={{ textDecoration: "none" }} href={item.pathname}>
+                  <MenuItem
+                    key={index}
+                    bg="transparent"
+                    transition={".5s"}
+                    _hover={{
+                      bg: "gray.200",
+                      "& .hoverText": { color: "blue.500" },
+                    }}
+                    borderBottom={"1px solid #0000001a"}
+                    p={{
+                      md: "14px 20px 16px 20px",
+                      base: "13px 16px 13px 16px",
+                    }}
+                    // mb={"6px"}
                   >
                     <Box
                       border={"1px solid black.100"}
@@ -247,8 +253,8 @@ const HeaderDropdown = ({ candidate , operatorDropdown }) => {
                         {item.title}
                       </Heading>
                     </Box>
-                  </Link>
-                </MenuItem>
+                  </MenuItem>
+                </Link>
               );
             })}
 

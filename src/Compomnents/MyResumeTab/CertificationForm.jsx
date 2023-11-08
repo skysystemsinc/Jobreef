@@ -73,7 +73,7 @@ const CertificationForm = ({
           />
         </InputWrapper>
 
-        <Box border={"1px solid white"} >
+        <Box border={"1px solid white"}>
           <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
             <LabelInput
               labelVariant={"label"}
@@ -114,56 +114,71 @@ const CertificationForm = ({
             label={"Issued On"}
           />
         </Box> */}
-        <Box width={{ xl: "48%", base: "100%" }} position={"relative"}>
-          <Box>
-            <LabelInput
-              labelVariant={"label"}
-              state={certification.validUntil}
-              setState={(e) => {
-                setCertification((prev) => {
-                  return { ...prev, validUntil: e };
-                });
-              }}
-              type="date"
-              readOnly={certification.readOnly}
-              variant={"bg-input"}
-              placeholder="MM/DD/YYYY"
-              label={"Valid Until"}
-            />
-          </Box>
-          <Box
-            display={"flex"}
-            position={"absolute"}
-            bottom={"-30px"}
-            gap={"15px"}
-            alignItems={"center"}
-          >
-            <Checkbox
-              checked={certification.noExpiry}
-              onChange={(e) => {
-                setCertification((prev) => {
-                  return {
-                    ...prev,
-                    noExpiry: e.target.checked,
-                    readOnly: e.target.checked == true ? true : false,
-                  };
-                });
-              }}
-              // borderRadius={"10px"}
-              // defaultChecked
 
-              borderColor={"black.200"}
-              border={"2px solid "}
-              size="sm"
-              rounded={"base"}
-              colorScheme="blue"
-            />
-            <Heading variant={"p1"} color={"black.100"}>
-              This certification has no expiry
-            </Heading>
-          </Box>
-        </Box>
+        <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
+          <Box width={"100%"} position={"relative"}>
+            <Box>
+              <LabelInput
+                labelVariant={"label"}
+                state={certification.validUntil}
+                setState={(e) => {
+                  setCertification((prev) => {
+                    return { ...prev, validUntil: e };
+                  });
+                }}
+                type="date"
+                readOnly={certification.readOnly}
+                variant={"bg-input"}
+                placeholder="MM/DD/YYYY"
+                label={"Valid Until"}
+              />
+            </Box>
+            <Box
+              display={"flex"}
+              position={"absolute"}
+              bottom={"-30px"}
+              gap={"15px"}
+              alignItems={"center"}
+            >
+              <Checkbox
+                checked={certification.noExpiry}
+                onChange={(e) => {
+                  setCertification((prev) => {
+                    return {
+                      ...prev,
+                      noExpiry: e.target.checked,
+                      readOnly: e.target.checked == true ? true : false,
+                    };
+                  });
+                }}
+                // borderRadius={"10px"}
+                // defaultChecked
 
+                borderColor={"black.200"}
+                border={"2px solid "}
+                size="sm"
+                rounded={"base"}
+                colorScheme="blue"
+              />
+              <Heading variant={"p1"} color={"black.100"}>
+                This certification has no expiry
+              </Heading>
+            </Box>
+          </Box>
+          <LabelInput
+            labelVariant={"label"}
+            state={certification.organizationName}
+            setState={(e) => {
+              setCertification((prev) => {
+                return { ...prev, organizationName: e.target.value };
+              });
+            }}
+            type="text"
+            variant={"bg-input"}
+            placeholder="Enter certificate url"
+            label={"Certificate Url"}
+          />
+        </InputWrapper>
         <Box mt={{ md: "95px", base: "80px" }}>
           <UploadBox
             list={uploadList}

@@ -21,6 +21,7 @@ import Education from "./Education";
 import Certification from "./Certification";
 import Skills from "./Skills";
 import Attachments from "./Attachments";
+import Achievement from "./Achivement";
 
 const MyResumeTabs = () => {
   let [tabIndex, setTabIndex] = useState(0);
@@ -41,10 +42,10 @@ const MyResumeTabs = () => {
       title: "Skills",
     },
     {
-      title: "Attachments",
+      title: "Achievements",
     },
     {
-      title: "Achievements",
+      title: "Attachments",
     },
   ];
   return (
@@ -101,7 +102,7 @@ const MyResumeTabs = () => {
             <Skills />
           </TabPanel>
           <TabPanel>
-            <Attachments />
+            <Achievement />
           </TabPanel>
           <TabPanel>
             <Attachments />
