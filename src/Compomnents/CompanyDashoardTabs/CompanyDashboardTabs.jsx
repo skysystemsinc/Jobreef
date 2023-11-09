@@ -19,17 +19,30 @@ import AboutYouTabs from "../ProfileSettingTabs/AboutYouTabs";
 import CompanyBio from "./CompanyBio";
 import CompanyLocation from "./CompanyLocation";
 import SocialLink from "./SocialLinks";
+import CustomTabs from "../CustomeTabs/CustomeTabs";
 const CompanyTabs = ({ company }) => {
   const router = useRouter();
   let [tabIndex, setTabIndex] = useState(0);
+  const tabs = [
+    { label: "Company Bio", value: "About You", content: <CompanyBio /> },
+    { label: "Company Location", value: "Email", content: <CompanyLocation /> },
+    { label: "Social Links", value: "Password", content: <SocialLink /> },
+
+    // Add more tabs if needed
+  ];
   return (
     <>
+      <Box display={{ sm: "none", base: "block" }} mx={'10px'}>
+        <CustomTabs tabs={tabs} />
+      </Box>
+
       <Tabs
         onChange={(index) => {
           setTabIndex(index);
         }}
         // border={"1px solid red"}
         width={{ lg: "70%", base: "100%" }}
+        display={{ sm: "block", base: "none" }}
         // mx={"auto"}
         index={tabIndex}
         isFitted

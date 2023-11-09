@@ -1,3 +1,4 @@
+import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
 import CompanyDasboard from "@/Compomnents/Layout/DasboardLayout";
 import TeamMembers from "@/Compomnents/TeamMembers/TeamMembers";
 
@@ -9,12 +10,17 @@ const TeamMemeber = () => {
   const router = useRouter();
   return (
     <>
-      <CompanyDasboard>
-        <Box 
-        // position={"relative"} top={"0px"} zIndex={2}
-          display={"flex"} px={{md:"21px" , base:"5px"}}  justifyContent={"center"}>
+      <CompanyDasboard  >
+        <Box
+          // position={"relative"} top={"0px"} zIndex={2}
+          display={"flex"}
+          px={{ md: "21px", base: "5px" }}
+          justifyContent={"center"}
+          // pb={'30px'}
+        >
           <TeamMembers />
         </Box>
+        <DashboardFooter />
       </CompanyDasboard>
     </>
   );

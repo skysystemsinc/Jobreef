@@ -74,7 +74,7 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
   const { templogin } = useContext(Role_context);
 
   return (
-    <Box flex={4} position="sticky" top="100px" >
+    <Box flex={4} position={{lg:'sticky',md:'sticky',base:''}} top="180px" >
       {templogin ? (
         <ApplyForThisJobModal open={isOpen} onClose={onClose} object={object} />
       ) : (
@@ -87,10 +87,10 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
         bg={"white.100"}
         border={"1px solid"}
         box-shadow="0px 4px 20px 0px rgba(0, 0, 0, 0.05)"
-        mb={10}
+        mb={{lg:10,base:'50px'}}
         borderWidth={1}
         borderColor="gray.400"
-        height={{ lg: "100vh" }}
+        height={{ lg: "70vh" }}
         className="scrollableBox"
         overflowY="auto"
         sx={{
@@ -132,10 +132,10 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
                 marginRight={2}
               />
               <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
-                <Link href="/candidate/job-search-selectedjob">
+                <Link  href="/candidate/job-search-selectedjob">
                     {object.title}
                 </Link>
-                <Box display={"flex"} alignItems={"center"}>
+                <Box mt={"5px"} display={"flex"} alignItems={"center"}>
                   <Heading variant={"p4"} color={"gray.text"} marginRight={1}>
                     {object.name}
                   </Heading>
@@ -146,7 +146,7 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
               </Heading>
             </Box>
             <Box display="flex" flexDirection="column" alignItems="flex-end">
-              <Box display="flex">
+              <Box mb={"10px"} display="flex" gap={"6px"}>
                 <Image
                   mb={2}
                   width={"10px"}

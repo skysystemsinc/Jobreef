@@ -1,13 +1,13 @@
-import React from 'react'
+import React from "react";
 import { Box, Circle, Flex, Heading, Image, Link } from "@chakra-ui/react";
 import microsoft from "@/assets/Images/microsoft.svg";
-import { GoDotFill } from "react-icons/go"; 
+import { GoDotFill } from "react-icons/go";
 import ComponentMyChip from "./ComponentMyChip";
 
-const NewJobBox = ({key,object}) => {
+const NewJobBox = ({ key, object }) => {
   return (
-        <Link href="job-search-selectedjob#" style={{ textDecoration: 'none' }}>
-        <Box
+    <Link href="/job-search-selectedjob" style={{ textDecoration: "none" }}>
+      <Box
         p={{ sm: "20px", base: "12px" }}
         width={"100%"}
         borderRadius={"8px"}
@@ -15,15 +15,16 @@ const NewJobBox = ({key,object}) => {
         border={"1px solid"}
         borderColor={"gray.light"}
         box-shadow="0px 4px 20px 0px rgba(0, 0, 0, 0.05)"
-        transition= {"all 0.4s ease"}
+        transition={"all 0.4s ease"}
         _hover={{
           cursor: "pointer",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)",
-          border: '1px solid #2CA5C3',
+          boxShadow:
+            "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)",
+          border: "1px solid #2CA5C3",
           transition: "all 0.4s ease",
           transform: "scale(1.01)",
-        }} 
-      >  
+        }}
+      >
         <Box
           display={"flex"}
           alignItems={"flex-start"}
@@ -38,8 +39,17 @@ const NewJobBox = ({key,object}) => {
             alignItems={"flex-start"}
             gap={{ md: "18px", base: "12px" }}
           >
-            <Box display={"flex"} mt={"0px"} alignItems={"center"} flexWrap={"wrap"}>
-            <Image width={{ md: "53px", base: "35px" }} src={microsoft.src} marginRight={2}/>
+            <Box
+              display={"flex"}
+              mt={"0px"}
+              alignItems={"center"}
+              flexWrap={"wrap"}
+            >
+              <Image
+                width={{ md: "53px", base: "35px" }}
+                src={microsoft.src}
+                marginRight={2}
+              />
               <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
                 {object.title}
                 <Box display={"flex"} alignItems={"center"}>
@@ -51,11 +61,10 @@ const NewJobBox = ({key,object}) => {
                   </Box>
                 </Box>
               </Heading>
-              
             </Box>
           </Box>
         </Box>
-  
+
         <Box>
           <Box display={"flex"} gap={"40px"} mt={"12px"} alignItems={"center"}>
             <Box width={"100%"}>
@@ -67,7 +76,12 @@ const NewJobBox = ({key,object}) => {
                 justifyContent={"space-between"}
                 width={"100%"}
               >
-                <Box display={"flex"} flexWrap={"wrap"} gap={"7px"} alignItems={"center"}>
+                <Box
+                  display={"flex"}
+                  flexWrap={"wrap"}
+                  gap={"7px"}
+                  alignItems={"center"}
+                >
                   <Heading color={"gray.text"} variant={"p4"}>
                     {object.Salary}
                   </Heading>
@@ -81,7 +95,7 @@ const NewJobBox = ({key,object}) => {
                     <GoDotFill style={{ color: "#D9D9D9" }} />
                   </Box>
                   <Heading color={"gray.text"} variant={"p4"}>
-                    {object.JobModel} 
+                    {object.JobModel}
                   </Heading>
                   <Box fontSize={{ sm: "14px", base: "8px" }}>
                     <GoDotFill style={{ color: "#D9D9D9" }} />
@@ -90,7 +104,12 @@ const NewJobBox = ({key,object}) => {
                     Experience: {object.Experience} years
                   </Heading>
                 </Box>
-                <Box display={"flex"} flexDirection="column" textAlign={"end"} justifyContent="flex-end" >
+                <Box
+                  display={"flex"}
+                  flexDirection="column"
+                  textAlign={"end"}
+                  justifyContent="flex-end"
+                >
                   <Heading color={"gray.text"} variant={"p4"}>
                     Applied On: {object.ApplicationDeadline}
                   </Heading>
@@ -104,26 +123,36 @@ const NewJobBox = ({key,object}) => {
             </Heading>
           </Box>
 
-          <Box display={"flex"} justifyContent={"space-between"} >
-            <Box display={"flex"} mt={"10px"} alignItems={"center"} flexWrap={"wrap"}>
-                {object.DesiredSkills.map((skill)=>{
-                    return(
-                        <Box key={Math.random()} mr={"20px"} mb={"5px"}>
-                            <ComponentMyChip label={skill} />
-                        </Box>
-                    )
-                })}
+          <Box display={"flex"} justifyContent={"space-between"}>
+            <Box
+              display={"flex"}
+              mt={"10px"}
+              alignItems={"center"}
+              flexWrap={"wrap"}
+            >
+              {object.DesiredSkills.map((skill) => {
+                return (
+                  <Box key={Math.random()} mr={"20px"} mb={"5px"}>
+                    <ComponentMyChip label={skill} />
+                  </Box>
+                );
+              })}
             </Box>
-            <Box display={"flex"} flexDirection="column" justifyContent="flex-end">
+            <Box
+              display={"flex"}
+              flexDirection="column"
+              justifyContent="flex-end"
+            >
               <Heading display="flex" mb={"10px"} variant={"p10"}>
-              Status:<span style={{marginLeft:'4%', color:'green'}}> New</span>
+                Status:
+                <span style={{ marginLeft: "4%", color: "green" }}> New</span>
               </Heading>
             </Box>
           </Box>
         </Box>
       </Box>
-    </Link>            
-  )
-}
+    </Link>
+  );
+};
 
-export default NewJobBox
+export default NewJobBox;

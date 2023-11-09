@@ -1,33 +1,47 @@
 import {
-    Box,
-    Button,
-    Heading,
-    Image,
-    Tab,
-    TabList,
-    TabPanel,
-    TabPanels,
-    Tabs,
-    Text,
-  } from "@chakra-ui/react";
-  import React, { useState } from "react";
-  
-  import globalStyles from "@/styles/globalStyles";
-  
-  import { useRouter } from "next/router";
+  Box,
+  Button,
+  Heading,
+  Image,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  Text,
+} from "@chakra-ui/react";
+import React, { useState } from "react";
+
+import globalStyles from "@/styles/globalStyles";
+
+import { useRouter } from "next/router";
 import Active from "./Active";
 import InActive from "./InActive";
-  
-  const OperatorsTabs = ({ company }) => {
-    const router = useRouter();
-    let [tabIndex, setTabIndex] = useState(0);
-    const tabLists = ["Active", "Inactive"];
-    return (
+import CustomTabs from "../CustomeTabs/CustomeTabs";
+
+const OperatorsTabs = ({ company }) => {
+  const router = useRouter();
+  let [tabIndex, setTabIndex] = useState(0);
+  const tabLists = ["Active", "Inactive"];
+  const tabs = [
+    { label: "Active", value: "Active", content: <Active /> },
+
+    { label: "Inactive", value: "Inactive", content: <InActive /> },
+
+    // Add more tabs if needed
+  ];
+  return (
+    <>
+      <Box display={{ sm: "none", base: "block" }}>
+        <CustomTabs tabs={tabs} />
+      </Box>
       <Tabs
         onChange={(index) => {
           setTabIndex(index);
         }}
         index={tabIndex}
+        display={{ sm: "block", base: "none" }}
+
         isFitted
       >
         <Box position={"relative"}>
@@ -54,7 +68,7 @@ import InActive from "./InActive";
                 </Tab>
               );
             })}
-  
+
             <Button
               // onClick={()=>router.push("/company/create-job-post")}
               display={{ md: "block", base: "none" }}
@@ -67,36 +81,18 @@ import InActive from "./InActive";
             </Button>
           </TabList>
         </Box>
-  
+
         <TabPanels>
           <TabPanel px={"0px"}>
             <Active />
-            <Box
-              width={"100%"}
-              display={{ md: "none", base: "flex" }}
-              justifyContent={"flex-end !important"}
-              mb={"12px"}
-              // onClick={()=>router.push("/company/create-job-post")}
-            >
-              <Button variant={"blue-btn"}>Add Operator</Button>
-            </Box>
           </TabPanel>
           <TabPanel px={"0px"}>
-            <Box
-              width={"100%"}
-              display={{ md: "none", base: "flex" }}
-              justifyContent={"flex-end !important"}
-              mb={"12px"}
-              // onClick={()=>router.push("/company/create-job-post")}
-            >
-              <Button variant={"blue-btn"}>Add Operator</Button>
-            </Box>
             <InActive />
           </TabPanel>
         </TabPanels>
       </Tabs>
-    );
-  };
-  
-  export default OperatorsTabs;
-  
+    </>
+  );
+};
+
+export default OperatorsTabs;

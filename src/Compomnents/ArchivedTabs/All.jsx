@@ -12,6 +12,7 @@ const All = ({
   filterKey,
   matchCandidate,
   cardStatus,
+  cardStatusDisable,
   // data,
   searcBox,
   handleEvent,
@@ -22,10 +23,10 @@ const All = ({
       status: "new",
       archived: false,
       name: "Aaron Brown",
-      country: "Nassau ",
+      country: "Nassau",
       matchCandidate: false,
       notInterested: true,
-      state: "The Bahamas",
+      state: "Bahamas",
       companyName: "ABC Company",
       desiginatation: "Systems Analyst",
       schoolName: "University of The Bahamas",
@@ -81,6 +82,7 @@ const All = ({
               return (
                 <Box key={ind}>
                   <CandidateCard
+                  cardStatusDisable
                     data={item}
                     matchCandidate={matchCandidate}
                     cardStatus={cardStatus}

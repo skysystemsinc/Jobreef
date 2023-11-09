@@ -8,7 +8,7 @@ import black_arrow_down from "@/assets/Images/black-arrow-down.svg";
 import download from "@/assets/Images/download.svg";
 import { GoDotFill } from "react-icons/go";
 import NotePadModal from "../NotePadModal/NotePadModal";
-import { BiNotepad } from "react-icons/bi";
+import { BiNotepad, BiSolidNotepad } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import moment from "moment";
 import Chip from "../Chip/Chip";
@@ -26,7 +26,7 @@ import { HiArrowDownTray, HiMiniArrowDownTray } from "react-icons/hi2";
 import { FiChevronDown } from "react-icons/fi";
 import { AiOutlineStar } from "react-icons/ai";
 import { BsChevronDown, BsStarFill } from "react-icons/bs";
-import { PiDownloadSimpleBold } from "react-icons/pi";
+import { PiDownloadSimpleBold, PiNotepadLight } from "react-icons/pi";
 
 const SelectedCandidateCard = ({ matchCandidate }) => {
   const selectedCandidates = useSelector(
@@ -55,9 +55,16 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
       icon: <PiDownloadSimpleBold className="hoverColor" />,
     },
     {
-      name: "Status",
+      name: "Status:",
       span: "read",
       icon: <BsChevronDown className="hoverColor" />,
+    },
+    {
+      disable: matchCandidate ? true : false,
+      name: "Notepad",
+      handleEvent: onOpen,
+      style: { display: { lg: "none", base: "flex" } },
+      icon: <PiNotepadLight className="hoverColor" />,
     },
   ];
   return (
@@ -65,7 +72,6 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
       <NotePadModal open={isOpen} onClose={onClose} />
 
       <Box
-      
         border={"1px  solid"}
         borderRadius={"8px"}
         borderColor={"gray.lightBorder"}
@@ -105,7 +111,6 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
         </Box>
         <Box
           display={"flex"}
-          
           justifyContent={"space-between"}
           borderBottom={"1px solid"}
           alignItems={"flex-start"}
@@ -116,11 +121,10 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
           // flexDirection={{ "2xl": "row", base: "column" }}
           borderColor={"gray.lightBorder"}
           pb={"7px"}
-          
         >
-          <Box width={"100%"} flex={1} >
+          <Box width={"100%"} flex={1}>
             <Box
-              width={{ base:"100%"}} 
+              width={{ base: "100%" }}
               display={"flex"}
               alignItems={"center"}
               gap={"10px"}
@@ -190,8 +194,9 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
             </Box>
 
             {profileBtn.map((item) => {
-              return (
+              return !item.disable ? (
                 <Box
+                  onClick={item.handleEvent}
                   border={"1px solid"}
                   borderColor={"white.100"}
                   display={"flex"}
@@ -216,6 +221,7 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
                     },
                     borderColor: "blue.500",
                   }}
+                  sx={item.style}
                 >
                   <Heading
                     _groupHover={{
@@ -243,45 +249,8 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
 
                   <Box fontSize={"16px"}>{item.icon}</Box>
                 </Box>
-              );
+              ) : null;
             })}
-
-            {/* <Box
-            bg={"gray.200"}
-            border={"1px solid"}
-            borderColor={"blue.500"}
-            display={"flex"}
-            borderRadius={"10px"}
-            alignItems={"center"}
-            my={"10px"}
-            gap={"10px"}
-            padding={"15px 0px"}
-            justifyContent={"center"}
-          >
-            
-            <Heading color={"blue.500"} variant={"p10"}>
-              Messages
-            </Heading>
-            <HiOutlineMail color="#2CA5C3" />
-          </Box>
-          <Box
-            bg={"gray.200"}
-            border={"1px solid"}
-            borderColor={"blue.500"}
-            display={"flex"}
-            borderRadius={"10px"}
-            alignItems={"center"}
-            my={"10px"}
-            gap={"10px"}
-            padding={"15px 0px"}
-            justifyContent={"center"}
-          >
-            
-            <Heading color={"blue.500"} variant={"p10"}>
-              Status
-            </Heading>
-            <MdOutlineKeyboardArrowDown color="#2CA5C3" />
-          </Box> */}
           </Box>
           <Box
             bg={"white.100"}

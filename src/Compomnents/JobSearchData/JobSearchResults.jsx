@@ -7,26 +7,22 @@ import ShowPreviousSearches from "./ShowPreviousSearches";
 import { DataArray } from "./tempSchema";
 
 import { parse, compareAsc, compareDesc } from "date-fns";
-import { Box, Image,Button } from "@chakra-ui/react";
+import { Icon, Box, Image, Button } from "@chakra-ui/react";
 import ShowClickJobSearchBox from "./ShowClickJobSearchBox";
 
 import ShowCheckBoxes from "./ShowCheckBoxes";
 import MobileSortBy from "./MobileSortBy";
+import { FaTimes } from "react-icons/fa";
 
-const JobSearchResults = () => {
+const JobSearchResults = ({ isOpen, setIsOpen }) => {
   const originalArray = DataArray;
   const [selectedValues, setSelectedValues] = useState([]);
   const [temp, settemp] = useState([]);
   const [tempObject, setTempObject] = useState();
-  //Temporary Button Later on need to be deleted
   const [toggle, settoggle] = useState("false");
   const [Data, setData] = useState(DataArray);
-  const [asideVisible, setAsideVisible] = useState(false);
-  const [isOpen,setIsOpen] = useState(false);
   const screenWidth = window.screen.width; // Total screen width
   const screenHeight = window.screen.height; // Total screen height
-
-
 
   const handleCheckboxChange = (value) => {
     if (selectedValues.includes(value)) {
@@ -64,28 +60,18 @@ const JobSearchResults = () => {
 
   return (
     <Box>
-      {/* <MobileSortBy
+      <MobileSortBy
         DataSort={DataSort}
         handleCheckboxChange={handleCheckboxChange}
         selectedValues={selectedValues}
-      /> */}
-      <Box display={{sm:'none',base:'flex'}} justifyContent={'center'} mb={'20px'}>
-        <Button
-              onClick={()=>{setIsOpen(true)}}
-              sx={{ padding: "20px 60px 20px 60px" }}
-              variant="blue-btn"
-              marginLeft="2" 
-        >
-          Filters 
-        </Button>
-      </Box>
+      />
       <Box
         display={"flex"}
         flexDirection={{ lg: "row", base: "column" }}
         margin={{ md: 10, base: "0px" }}
         gap={5}
       >
-        <Box
+        {/* <Box
           flex={2.5}
           // bg={"white.100"}
           display={{ lg: "block", base: "none" }}
@@ -97,7 +83,7 @@ const JobSearchResults = () => {
             settemp={settemp}
             DataSort={DataSort}
           />
-        </Box>
+        </Box> */}
         <Box
           flex={{ lg: 5, base: "100%" }}
           display={{ lg: "block", base: "none" }}
@@ -143,33 +129,41 @@ const JobSearchResults = () => {
         {toggle ? (
           <Box flex={"100%"} display={{ lg: "none", base: "block" }}>
             {/* need to do work from here */}
-            {isOpen ? (<Box gap={2} display={{sm:'none',base:'flex'}} flexWrap={'wrap'}
-             position= 'fixed'
-              top={12}
-              left={0}
-              width = {'100vw'}
-              height= {'100vh'}
-              backgroundColor= 'white'
-              transition= 'right 0.3s'
-              justifyContent={'center'}
+            {isOpen ? (
+              <Box
+                gap={2}
+                display={{ sm: "none", base: "flex" }}
+                flexWrap={"wrap"}
+                position="fixed"
+                top={12}
+                left={0}
+                width={"100vw"}
+                height={"100vh"}
+                backgroundColor="white"
+                transition="right 0.3s"
+                justifyContent={"center"}
               >
-                 <ShowCheckBoxes
+                <ShowCheckBoxes
                   selectedValues={selectedValues}
                   handleCheckboxChange={handleCheckboxChange}
                   temp={temp}
                   settemp={settemp}
                   DataSort={DataSort}
+                  setIsOpen={setIsOpen}
                 />
                 <Button
-                      onClick={()=>{setIsOpen(false)}}
-                      sx={{ padding: "20px 60px 20px 60px" }}
-                      variant="blue-btn"
-                      marginLeft="2" // Add margin to the button for space
-                      marginTop={'-50px'}
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                  sx={{ padding: "20px 60px 20px 60px" }}
+                  variant="blue-btn"
+                  marginLeft="2" // Add margin to the button for space
+                  marginTop={"-50px"}
                 >
-                  Apply Now 
+                  Set Filters
                 </Button>
-            </Box>):null}
+              </Box>
+            ) : null}
 
             <Box gap={2} display={"flex"} flexWrap={"wrap"}>
               {selectedValues.map((val) => {

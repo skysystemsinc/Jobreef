@@ -5,6 +5,7 @@ import menu from "@/assets/Images/menu.svg";
 import { useRouter } from "next/router";
 import Popovers from "../PaginatedTable/Popovers";
 import companyIcon from "@/assets/Images/companyIcon.svg";
+import CompanyButton from "./CompanyButton";
 const ActiveJobs = () => {
   const router = useRouter();
   const columns = [
@@ -56,6 +57,7 @@ const ActiveJobs = () => {
   };
   return (
     <>
+    <CompanyButton/>
       <Box minH={"78vh"} pb={"20px"}>
         <PaginatedTable
           keys={keys}

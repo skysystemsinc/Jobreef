@@ -21,23 +21,39 @@ import { useRouter } from "next/router";
 import { role, roles } from "@/Utils/role";
 import Preferences from "./Preferences";
 import Billing from "./Billing";
+import DropDown from "../DropDown/DropDown";
+import CustomTabs from "../CustomeTabs/CustomeTabs";
 const ProfileSettingTabs = ({ company }) => {
+  console.log("company", company)
   const router = useRouter();
   let [tabIndex, setTabIndex] = useState(0);
+  const tabs = [
+    { label: "About You", value: "About You", content: <AboutYouTabs /> },
+    { label: "Email", value: "Email", content: <EmailTabs /> },
+    { label: "Password", value: "Password", content: <ChangePassword /> },
+    { label: "Preferences", value: "Preferences", content: <Preferences /> },
+    { label: "Billing", value: "Billing", content: <Billing /> , disable:company?false:true },
+    // Add more tabs if needed
+  ];
+
   return (
     <>
-    
-
+      <Box display={{ sm: "none", base: "block" }}>
+        <CustomTabs tabs={tabs} />
+      </Box>
       <Tabs
         onChange={(index) => {
           setTabIndex(index);
         }}
         index={tabIndex}
         isFitted
+        display={{ sm: "block", base: "none" }}
       >
         <TabList
           sx={{ ...globalStyles.fullTab, width: "100%" }}
-          flexDirection={{ sm: "row", base: "column" }}
+          whiteSpace={"nowrap"}
+          overflowX={"scroll"}
+          // flexDirection={{ sm: "row", base: "column" }}
         >
           <Tab
             fontSize={{ md: "16px", base: "14px" }}

@@ -5,6 +5,7 @@ import menu from "@/assets/Images/menu.svg";
 import { useRouter } from "next/router";
 import Popovers from "../PaginatedTable/Popovers";
 import profile_icon from "@/assets/Images/profile_icon.svg";
+import OperatorButton from "./OperatorButton";
 const Active = () => {
   const router = useRouter();
   const columns = [
@@ -42,6 +43,7 @@ const Active = () => {
   };
   return (
     <>
+    <OperatorButton/>
       <Box minH={"62vh"} pb={"20px"}>
         <PaginatedTable
           keys={keys}

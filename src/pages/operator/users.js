@@ -5,6 +5,7 @@ import { Box } from "@chakra-ui/react";
 import SearchBox from "@/Compomnents/SearchBox/SearchBox";
 
 import UsersTab from "@/Compomnents/UsersTab/UsersTab";
+import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
 const users = () => {
   return (
     <OperatorLayout>
@@ -14,6 +15,8 @@ const users = () => {
         </Box>
         <UsersTab />
       </Box>
+      <DashboardFooter />
+
     </OperatorLayout>
   );
 };

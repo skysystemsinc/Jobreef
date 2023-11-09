@@ -95,7 +95,7 @@ const ChangePassword = () => {
         <Box
           minHeight={"58vh"}
           // border={"1px solid red"}
-          mt={{ md: "50px", base: "40px" }}
+          mt={{ md: "50px", base: "10px" }}
           // mt={{ md: "0px", base: "40px" }}
           width={{ md: "564px", base: "100%" }}
         >

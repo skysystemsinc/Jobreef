@@ -6,7 +6,7 @@ import { HiLocationMarker } from "react-icons/hi";
 import edit_outline from "@/assets/Images/edit_outline.svg";
 import trash from "@/assets/Images/trash.svg";
 import moment from "moment";
-const CeritifcateCard = ({
+const AchievementCard = ({
   data,
   state,
   setState,
@@ -36,7 +36,8 @@ const CeritifcateCard = ({
         flexWrap={{ xl: "nowrap", base: "wrap" }}
       >
         <Heading variant={"p7"} color={"gray.text"}>
-          {data.certificateName}
+          {/* {data.certificateName} */}
+          Achievement Name
         </Heading>
 
         <Box
@@ -95,7 +96,8 @@ const CeritifcateCard = ({
         gap={{ md: "10px", sm: "6px", base: "5px" }}
       >
         <Heading color={"gray.text"} variant={"p12"} sx={headingStyle}>
-          {data.organizationName}
+          {/* {data.organizationName} */}
+          Organisation Name
         </Heading>
         <Box fontSize={{ sm: "14px", base: "8px" }}>
           <GoDotFill style={{ color: "#D9D9D9" }} />
@@ -105,53 +107,15 @@ const CeritifcateCard = ({
           {moment(data.stateDate).format("MMMM YYYY")} {" - "}
           {moment(data.endDate).format("MMMM YYYY")}
         </Heading>
-        <Box fontSize={{ sm: "14px", base: "8px" }}>
-          <GoDotFill style={{ color: "#D9D9D9" }} />
-        </Box>
-
-        {/* <Heading
-          display={"flex"}
-          gap={"6px"}
-          alignItems={{ md: "flex-start", base: "center" }}
-          variant={"p12"}
-          sx={headingStyle}
-        >
-          {" "}
-          <HiLocationMarker
-            style={{
-              color: "#4A4A4A",
-              fontSize: isSmallerThe500 ? "15px" : "20px",
-            }}
-          />{" "}
-          {data.state}, {data.city}, {data.country}
-        </Heading> */}
         {/* <Box fontSize={{ sm: "14px", base: "8px" }}>
           <GoDotFill style={{ color: "#D9D9D9" }} />
         </Box> */}
-        <Heading sx={headingStyle} color={"gray.text"} variant={"p12"}>
-          Certificate Verification ID: {data.certificateId}
-        </Heading>
+
+   
       </Box>
-      {/* <Box>
-        <Heading
-          lineHeight={"25px"}
-          pt={"20px"}
-          color={"gray.text"}
-          variant={"p5"}
-        >
-          Lead the design and development of system architectures, ensuring they
-          meet the project requirements, performance criteria, and scalability.
-          Requirements Analysis: Collaborate with stakeholders, customers, and
-          cross-functional teams to gather and analyze system requirements,
-          ensuring clear and unambiguous specifications. Oversee the integration
-          of hardware and software components into cohesive systems, addressing
-          compatibility, functionality, and performance. Did Risk Assessment and
-          Mitigation to Identify potential risks in the system design and
-          develop ...
-        </Heading>
-      </Box> */}
+     
     </Box>
   );
 };
 
-export default CeritifcateCard;
+export default AchievementCard;

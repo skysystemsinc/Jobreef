@@ -84,6 +84,7 @@ const TechnicalDetails = ({ state, setState }) => {
           }}
           labelVariant={"label"}
           type="text"
+          dropdown
           variant={"bg-input"}
           placeholder="Enter the years of experience desired for this job"
           label={"Years of Experience"}
@@ -166,16 +167,26 @@ const TechnicalDetails = ({ state, setState }) => {
           label={"Tags"}
         />
       </InputWrapper>
+      <InputWrapper>
+        <LabelInput
+          state={state.rate}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, rate: e.target.value };
+            });
+          }}
+          labelVariant={"label"}
+          type="date"
+          variant={"bg-input"}
+          // dropdownOption={rateOptions}
+          dropdown
+          placeholder="Select seniority level"
+          label={"Seniority Level"}
+        />
+   
+      </InputWrapper>
 
-      {/* <InputWrapper>
-          <LabelInput
-            labelVariant={"label"}
-            textarea
-            variant={"bg-teaxtarea"}
-            placeholder="Enter the benefits associated with this job in detail for candidates"
-            label={"Benefits"}
-          />
-        </InputWrapper> */}
+      
     </Box>
   );
 };

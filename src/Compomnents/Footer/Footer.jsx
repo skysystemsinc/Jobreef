@@ -105,7 +105,7 @@ function Footer({ waveImage }) {
             </Stack>
             {footerLink.map((item, ind) => {
               return (
-                <Stack align={"flex-start"}>
+                <Stack key={ind} align={"flex-start"}>
                   <Heading
                     className="sora"
                     mb={{ md: "7px", base: "0px" }}
@@ -116,9 +116,10 @@ function Footer({ waveImage }) {
                   >
                     {item.heading}
                   </Heading>
-                  {item.links.map((item) => {
+                  {item.links.map((item , ind) => {
                     return (
                       <Link
+                      key={ind}
                         transition={".5s"}
                         _hover={{ textDecoration: "none", color: "white.300" }}
                         variant={"footerLink"}

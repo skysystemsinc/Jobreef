@@ -4,31 +4,30 @@ import ExperianceForm from "./ExperianceForm";
 import ExperianceCard from "../ExperianceCard/ExperianceCard";
 import TextCard from "../TextCard/TextCard";
 import DeleteModal from "../DeleteModal/DeleteModal";
+import AchievementForm from "./AchievementForm";
+import AchievementCard from "../AchievementCard/AchievementCard";
 
-const WorkExperiance = () => {
+const Achievement = () => {
   const [state, setState] = useState({
     addExperience: false,
     experienceData: [
       {
-        companyName: "Microsoft",
-        designation: "Senior System’s Design Engineer",
-        currentlyWorking: false,
+        certificateName: "Diploma Name",
+        organizationName: "Jobreef Professional Academy",
+        noExpiry: false,
         readOnly: false,
-        stateDate: new Date(),
-        endDate: new Date(),
-        country: "USA",
-        state: "",
-        city: "",
-        streetAddress: "",
-        employmentType: "",
-        jobFamily: "",
-        jobSummary:
-          "Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability. Requirements Analysis: Collaborate with stakeholders, customers, and cross-functional teams to gather and analyze system requirements,",
+        certificateId: "2f8ae5bfaa4c46dc3bba77655",
+        issuedOn: new Date(),
+        country: " USA",
+        state: "Chicago",
+        city: " Illinois",
+        validUntil: new Date(),
       },
     ],
     edit: false,
     delete: false,
   });
+
   return (
     <Box>
       <DeleteModal
@@ -45,10 +44,10 @@ const WorkExperiance = () => {
         }
       />
       {state.addExperience || state.edit ? (
-        <Box display={"flex"} justifyContent={"center"}>
-          <ExperianceForm
+        
+          <AchievementForm
             state={state}
-            handleSave={() =>
+            handleSaveAch={() =>
               setState((prev) => {
                 return {
                   ...prev,
@@ -59,7 +58,7 @@ const WorkExperiance = () => {
               })
             }
           />
-        </Box>
+  
       ) : state.experienceData.length > 0 ? (
         <Box
           mt={"30px"}
@@ -70,7 +69,7 @@ const WorkExperiance = () => {
           {state.experienceData.map((item, ind) => {
             return (
               <Box key={ind}>
-                <ExperianceCard data={item} state={state} setState={setState} />
+                <AchievementCard data={item} state={state} setState={setState} />
               </Box>
             );
           })}
@@ -91,7 +90,7 @@ const WorkExperiance = () => {
               mt={{ md: "41px", base: "20px" }}
               variant={"blue-btn"}
             >
-              Add New Experience
+              Add Achievement
             </Button>
           </Flex>
         </Box>
@@ -107,9 +106,9 @@ const WorkExperiance = () => {
                 };
               })
             }
-            title={"Ready to build an impressive resume?"}
-            subittle={"Start by including your work experiences."}
-            btnLable={"Add  Experience"}
+            title={"Show-off Your Accomplishments"}
+            subittle={"Add Your Notable Achievements."}
+            btnLable={"Add Achievement"}
           />
         </Box>
       )}
@@ -117,4 +116,4 @@ const WorkExperiance = () => {
   );
 };
 
-export default WorkExperiance;
+export default Achievement;

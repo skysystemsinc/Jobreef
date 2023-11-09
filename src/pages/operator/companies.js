@@ -4,6 +4,7 @@ import React from "react";
 import { Box } from "@chakra-ui/react";
 import SearchBox from "@/Compomnents/SearchBox/SearchBox";
 import ActiveJobs from "@/Compomnents/CompanyTabs/ActiveJobs";
+import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
 const companies = () => {
   return (
     <OperatorLayout>
@@ -15,6 +16,8 @@ const companies = () => {
 
         <CompanyTabs />
       </Box>
+      <DashboardFooter />
+
     </OperatorLayout>
   );
 };

@@ -54,7 +54,7 @@ export default function Header({ candidate }) {
         minH={"60px"}
         py={{ md: 3 , base:0}}
         // pb={{ base: 4, "2xl": 7 }}
-        px={{ "2xl": 8, base: 2 }}
+        px={{ "2xl": 8, base: 1 }}
         // position={"relative"}
         // top={"0px"}
 
@@ -105,7 +105,7 @@ export default function Header({ candidate }) {
           justify={"flex-end"}
           direction={"row"}
           alignItems={"center"}
-          spacing={6}
+          spacing={{xl: 6 , base:2}}
         >
           <IconButton
             isRound={true}
@@ -120,9 +120,9 @@ export default function Header({ candidate }) {
             // size={["md", "md", "lg", "lg"]}
             icon={<IoNotificationsOutline />}
           />
-          <Box display={{ xl: "block", base: "none" }}>
+          {/* <Box display={{ xl: "block", base: "none" }}> */}
             <HeaderDropdown candidate={candidate} />
-          </Box>
+          {/* </Box> */}
         </Stack>
       </Flex>
 
@@ -249,9 +249,7 @@ const MobileNav = ({ candidate }) => {
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
-      <Box mt={"10px"}>
-        <HeaderDropdown candidate={candidate} />
-      </Box>
+      
     </Stack>
   );
 };

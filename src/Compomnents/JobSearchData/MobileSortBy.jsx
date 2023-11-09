@@ -45,11 +45,15 @@ const MobileSortBy = ({
 
   return (
     <>
-      <Box display={{ lg: "none", base: "block" }}>
+      <Box>
         <Box
           mb={"20px"}
           flexWrap={"wrap"}
           display={"flex"}
+          // justifyContent={"center"}
+          // border={"1px solid red"}
+          width={{md:"70%", base:"100%"}}
+          mx={"auto"}
           alignItems={"center"}
           gap={{ md: "20px", base: "12px" }}
         >

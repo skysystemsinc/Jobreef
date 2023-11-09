@@ -32,9 +32,9 @@ const ExperianceCard = ({ data, state, setState }) => {
           alignItems={"flex-start"}
           gap={{ md: "13px", base: "12px" }}
         >
-          <Box>
+          {/* <Box>
             <Image width={{ md: "50px", base: "35px" }} src={microsoft.src} />
-          </Box>
+          </Box> */}
           <Box>
             <Heading variant={"p7"} color={"gray.text"}>
               {data.designation}

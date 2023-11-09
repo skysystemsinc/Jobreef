@@ -30,13 +30,16 @@ const Search = ({ filterKey }) => {
       searcBox
       data={allData}
       filterKey={filterKey}
-      cardStatus={"Interviewing"}
+      cardStatusDisable
+      // cardStatus={"Interviewing"}
       popOverList={popOverListAll}
     />,
     <Archived
+      matchCandidate
+      cardStatusDisable
       data={archivedData}
       filterKey={filterKey}
-      cardStatus={"Archived"}
+      // cardStatus={"Archived"}
       popOverList={popOverListArchived}
     />,
   ];

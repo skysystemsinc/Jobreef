@@ -25,7 +25,7 @@ import Facebook from "../../assets/Images/Facebook.svg";
 import Twitter from "../../assets/Images/Twitter.svg";
 import Instagram from "../../assets/Images/Instagram.svg";
 import location from "../../assets/Images/location.svg";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 const DataArray = [
   {
@@ -125,19 +125,18 @@ const text2 = [
 
 const JobSearchCompanyPage = () => {
   const actionList = ["Download Attachments", "Archive"];
-  
+
   const router = useRouter();
   const handleRouteChange = () => {
-    router.push('/candidate/job-search');
+    router.push("/candidate/job-search");
   };
 
   //TODO
   return (
-    <Box margin="0px 50px 0px 50px"  display={{lg:'flex',base:'block'}}>
-      <Box flex={2} >
+    <Box margin="0px 50px 0px 50px" display={{ lg: "flex", base: "block" }}>
+      <Box flex={2}>
         {DataArray.map((object) => (
           <Box
-          
             p={{ sm: "20px", base: "12px" }}
             width={"100%"}
             borderRadius={"8px"}
@@ -188,20 +187,25 @@ const JobSearchCompanyPage = () => {
                     </Box>
                   </Heading>
                 </Box>
-                <Box display={"flex"} alignItems={"center"}> 
-                    <Box display={"flex"} alignItems={"center"} 
+                <Box display={"flex"} alignItems={"center"}>
+                  <Box
+                    
+                    display={"flex"}
+                    alignItems={"center"}
                     style={{
-                      cursor: 'pointer',
-                    }} onClick={handleRouteChange}>
-                      <Image
-                        width={{ md: "20px", base: "20px" }}
-                        src={arrowright.src}
-                        marginRight={2}
-                      />
-                      <Heading variant={"p4"} color={"gray.text"} marginRight={1}>
-                        Return
-                      </Heading>
-                    </Box>
+                      cursor: "pointer",
+                    }}
+                    onClick={handleRouteChange}
+                  >
+                    <Image
+                      width={{ md: "20px", base: "20px" }}
+                      src={arrowright.src}
+                      marginRight={2}
+                    />
+                    <Heading variant={"p4"} color={"gray.text"} marginRight={1}>
+                      Return
+                    </Heading>
+                  </Box>
                 </Box>
               </Box>
             </Box>
@@ -260,7 +264,12 @@ const JobSearchCompanyPage = () => {
           </Box>
         ))}
         <Box display={"flex"} gap={6}>
-          <Button style={{ padding: "20px 40px 20px 40px" }} variant={"outline-blue"}>Save Job</Button>
+          <Button
+            style={{ padding: "20px 40px 20px 40px" }}
+            variant={"outline-blue"}
+          >
+            Save Job
+          </Button>
           <Button style={{ padding: "20px 40px 20px 40px" }} variant="blue-btn">
             Apply Now
           </Button>
@@ -283,7 +292,7 @@ const JobSearchCompanyPage = () => {
           </Heading>
           {text.map((data, index) => (
             <Box display={"flex"}>
-              <Heading color={"gray.text"} variant={"p4"} >
+              <Heading color={"gray.text"} variant={"p4"}>
                 {index + 1}.{" "}
               </Heading>
               <Heading ml={2} color={"gray.text"} variant={"p4"}>
@@ -297,7 +306,7 @@ const JobSearchCompanyPage = () => {
           </Heading>
           {text2.map((data, index) => (
             <Box display={"flex"}>
-              <Heading color={"gray.text"} variant={"p4"} >
+              <Heading color={"gray.text"} variant={"p4"}>
                 {index + 1}.{" "}
               </Heading>
               <Heading ml={2} color={"gray.text"} variant={"p4"}>
@@ -400,7 +409,11 @@ const JobSearchCompanyPage = () => {
 
             <Box>
               <Heading color={"gray.text"} variant={"p4"}>
-                Microsoft Corporation is an American multinational technology corporation headquartered in Redmond, Washington. Microsoft's best-known software products are the Windows line of operating systems, the Microsoft 365 suite of productivity applications, and the Internet Explorer and Edge web browsers.
+                Microsoft Corporation is an American multinational technology
+                corporation headquartered in Redmond, Washington. Microsoft's
+                best-known software products are the Windows line of operating
+                systems, the Microsoft 365 suite of productivity applications,
+                and the Internet Explorer and Edge web browsers.
               </Heading>
             </Box>
             <Box mt={4} gap={4} display={"flex"}>
@@ -430,11 +443,11 @@ const JobSearchCompanyPage = () => {
       </Box>
       {/* need to design right side from here */}
       <Box
-        display={{lg:'block',base:'block'}}
+        display={{ lg: "block", base: "block" }}
         flex={1}
         gap={10}
-        mt={{lg:60,base:0}}
-        pl={{lg:10,base:0}}
+        mt={{ lg: 60, base: 0 }}
+        pl={{ lg: 10, base: 0 }}
         pt={10}
         gridTemplateColumns={{ xl: "repeat(2, 1fr)", base: "1fr" }}
       >
