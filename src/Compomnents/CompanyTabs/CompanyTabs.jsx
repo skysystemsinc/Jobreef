@@ -18,26 +18,37 @@ import ActiveJobs from "./ActiveJobs";
 import InActiveJobs from "./InActive";
 import { useRouter } from "next/router";
 import Pending from "./Pending";
+import CustomTabs from "../CustomeTabs/CustomeTabs";
 
 const CompanyTabs = ({ company }) => {
   const router = useRouter();
   let [tabIndex, setTabIndex] = useState(0);
   const tabLists = ["Active", "Pending", "Inactive"];
+  const tabs = [
+    { label: "Active", value: "Active", content: <ActiveJobs /> },
+    {
+      label: "Pending",
+      value: "Pending",
+      content: <Pending />,
+    },
+    { label: "Inactive", value: "Inactive", content: <InActiveJobs /> },
+
+    // Add more tabs if needed
+  ];
   return (
     <>
+      <Box display={{ sm: "none", base: "block" }}>
+        <CustomTabs tabs={tabs} />
+      </Box>
       <Tabs
-        // px={ {xl:"0px",   base: "10px"}}
         onChange={(index) => {
           setTabIndex(index);
         }}
-        // border={"1px solid red"}
-        // width={{ lg: "100%", base: "100%" }}
-        // justifyContent={"flex-start"}
-        // mx={"auto"}
+        display={{ sm: "block", base: "none" }}
         index={tabIndex}
         isFitted
       >
-        <Box position={"relative"} >
+        <Box position={"relative"}>
           <TabList
             sx={{
               ...globalStyles.fullTab,
@@ -48,10 +59,10 @@ const CompanyTabs = ({ company }) => {
             }}
             flexDirection={{ sm: "row", base: "column" }}
           >
-            {tabLists?.map((item , ind) => {
+            {tabLists?.map((item, ind) => {
               return (
                 <Tab
-                key={ind}
+                  key={ind}
                   fontSize={{ md: "16px", base: "14px" }}
                   sx={globalStyles.tabelinkStyle}
                   _selected={globalStyles.selectTab}
@@ -77,42 +88,12 @@ const CompanyTabs = ({ company }) => {
 
         <TabPanels>
           <TabPanel px={"0px"}>
-            <Box
-              width={"100%"}
-
-              display={{ md: "none", base: "flex" }}
-              justifyContent={"flex-end !important"}
-              mb={"12px"}
-              // onClick={()=>router.push("/company/create-job-post")}
-            >
-              <Button variant={"blue-btn"}>Create Company</Button>
-            </Box>
             <ActiveJobs />
           </TabPanel>
           <TabPanel px={"0px"}>
-            <Box
-              width={"100%"}
-
-              display={{ md: "none", base: "flex" }}
-              justifyContent={"flex-end !important"}
-              mb={"12px"}
-              // onClick={()=>router.push("/company/create-job-post")}
-            >
-              <Button variant={"blue-btn"}>Create Company</Button>
-            </Box>
             <Pending />
           </TabPanel>
           <TabPanel px={"0px"}>
-            <Box
-              // onClick={()=>router.push("/company/create-job-post")}
-
-              width={"100%"}
-              display={{ md: "none", base: "flex" }}
-              justifyContent={"flex-end !important"}
-              mb={"12px"}
-            >
-              <Button variant={"blue-btn"}>Create Company</Button>
-            </Box>
             <InActiveJobs />
           </TabPanel>
         </TabPanels>

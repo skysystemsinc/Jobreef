@@ -3,6 +3,7 @@ import DasboardLayout from "@/Compomnents/Layout/DasboardLayout";
 
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
+import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
 const JobPostTimeline = dynamic(
   () => import("@/Compomnents/JobPostTimeline/JobPostTimeline"),
   {
@@ -11,8 +12,9 @@ const JobPostTimeline = dynamic(
 );
 const crearteJobost = () => {
   return (
-    <DasboardLayout>
+    <DasboardLayout disableWaveImage>
       <JobPostTimeline />
+      <DashboardFooter waveImage/>
     </DasboardLayout>
   );
 };

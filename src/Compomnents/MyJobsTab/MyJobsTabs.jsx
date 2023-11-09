@@ -17,6 +17,7 @@ import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
 import AppliedJobs from "./AppliedJobs";
 import SavedJobs from "./SavedJobs";
 import JobAlert from "./JobAlert";
+import CustomTabs from "../CustomeTabs/CustomeTabs";
 const MyJobsTabs = () => {
   let [tabIndex, setTabIndex] = useState(0);
   const tabList = [
@@ -30,13 +31,27 @@ const MyJobsTabs = () => {
       title: "Job Alerts",
     },
   ];
+  const tabs = [
+    { label: "Applied Jobs", value: "Applied Jobs", content: <AppliedJobs /> },
+    {
+      label: "Saved Jobs",
+      value: "Saved Jobs",
+      content: <SavedJobs />,
+    },
+    { label: "Job Alerts", value: "Job Alerts", content: <JobAlert /> },
+
+    // Add more tabs if needed
+  ];
   return (
     <>
-      
+      <Box display={{ sm: "none", base: "block" }}>
+        <CustomTabs tabs={tabs} />
+      </Box>
       <Tabs
         onChange={(index) => {
           setTabIndex(index);
         }}
+        display={{ md: "block", base: "none" }}
         index={tabIndex}
         isFitted
       >
@@ -50,7 +65,7 @@ const MyJobsTabs = () => {
             width: { md: "55%", base: "100%" },
           }}
         >
-          {tabList.map((item, index) => { 
+          {tabList.map((item, index) => {
             return (
               <Tab
                 key={index}
@@ -62,10 +77,10 @@ const MyJobsTabs = () => {
               </Tab>
             );
           })}
-        </TabList>  
+        </TabList>
         <TabPanels>
           <TabPanel>
-            <AppliedJobs/>
+            <AppliedJobs />
           </TabPanel>
           <TabPanel>
             <SavedJobs />

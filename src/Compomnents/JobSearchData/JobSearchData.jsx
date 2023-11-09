@@ -144,23 +144,7 @@ const JobSearchData = ({ setIsOpen }) => {
             >
               Search Now
             </Button>
-            <Box display={{ lg: "none", md: "none", sm: "none" }}>
-              {!getToggle()?(<Button
-                onClick={() => {
-                  setIsOpen(true);
-                }}
-                sx={{
-                  padding: "20px 40px",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-                variant="blue-btn"
-                margin="2"
-              >
-                <Icon as={FaFilter} w={3} h={3} marginRight="2" />
-                Filters
-              </Button>):null}
-            </Box>
+         
           </Flex>
         </Box>
       </Box>

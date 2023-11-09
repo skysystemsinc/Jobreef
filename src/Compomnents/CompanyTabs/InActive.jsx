@@ -5,6 +5,7 @@ import menu from "@/assets/Images/menu.svg";
 import { useRouter } from "next/router";
 import Popovers from "../PaginatedTable/Popovers";
 import companyIcon from "@/assets/Images/companyIcon.svg";
+import CompanyButton from "./CompanyButton";
 const InActive = () => {
   const router = useRouter();
   const columns = [
@@ -25,7 +26,7 @@ const InActive = () => {
     "createdAt",
     "Actions",
   ];
-  const actionList = ["Restore", "Delete ",];
+  const actionList = ["Restore", "Delete "];
   const data = [
     {
       companyName: { image: companyIcon.src, name: "Company Name" },
@@ -48,6 +49,8 @@ const InActive = () => {
   };
   return (
     <>
+      <CompanyButton />
+
       <Box minH={"78vh"} pb={"20px"}>
         <PaginatedTable
           keys={keys}

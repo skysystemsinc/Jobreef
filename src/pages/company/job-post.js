@@ -1,3 +1,4 @@
+import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
 import JobPostTabs from "@/Compomnents/JobPost/JobPost";
 import CompanyDasboard from "@/Compomnents/Layout/DasboardLayout";
 import PaginatedTable from "@/Compomnents/PaginatedTable/PaginatedTable";
@@ -12,11 +13,16 @@ const JobPost = () => {
   const router = useRouter();
   return (
     <>
-
-      <CompanyDasboard>
-        <Box px={{ md: "20px" , base:'10px' }} position={"relative"} top={"0px"} zIndex={2} >
+      <CompanyDasboard disableWaveImage>
+        <Box
+          px={{ md: "20px", base: "10px" }}
+          position={"relative"}
+          top={"0px"}
+          zIndex={2}
+        >
           <JobPostTabs />
         </Box>
+        <DashboardFooter waveImage />
       </CompanyDasboard>
     </>
   );

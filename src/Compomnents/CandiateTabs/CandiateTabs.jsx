@@ -27,6 +27,7 @@ import {
 import data from "@/db/candidates.json";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import Search from "./Search";
+import CustomTabs from "../CustomeTabs/CustomeTabs";
 const CandiateTabs = ({ company }) => {
   const candidates = useSelector((state) => state.candidates.value.all);
 
@@ -63,13 +64,36 @@ const CandiateTabs = ({ company }) => {
   };
 
   const tabLists = ["Applications", "Matched Candidates", "Search"];
+  const tabs = [
+    {
+      label: "Applications",
+      value: "Applications",
+      content: <Application filterKey={"archived"} />,
+    },
+    {
+      label: "Matched Candidates",
+      value: "Matched Candidates",
+      content: <MatchCandidate filterKey={"notInterested"} />,
+    },
+    {
+      label: "Search",
+      value: "Search",
+      content: <Search filterKey={"notInterested"} />,
+    },
+
+    // Add more tabs if needed
+  ];
   return (
     <>
+      <Box display={{ md: "none", base: "block" }}>
+        <CustomTabs tabs={tabs} />
+      </Box>
       <Tabs
         // px={ {xl:"0px",   base: "10px"}}
         onChange={(index) => {
           handleChange(index);
         }}
+        display={{ md: "block", base: "none" }}
         // border={"1px solid red"}
         width={{ lg: "100%", base: "100%" }}
         justifyContent={"flex-start"}
@@ -99,13 +123,6 @@ const CandiateTabs = ({ company }) => {
                 </Tab>
               );
             })}
-            {/* <Tab
-              fontSize={{ md: "16px", base: "14px" }}
-              _selected={globalStyles.selectTab}
-              sx={globalStyles.tabelinkStyle}
-            >
-              Matched Candidates
-            </Tab> */}
 
             <Box
               display={{ md: "block", base: "none" }}
@@ -124,41 +141,12 @@ const CandiateTabs = ({ company }) => {
 
         <TabPanels>
           <TabPanel px={"0px"}>
-            <Box
-              width={"100%"}
-              // border={"1px solid red"}
-              display={{ md: "none", base: "flex" }}
-              justifyContent={"flex-end !important"}
-              mb={"12px"}
-              onClick={() => router.push("/company/create-job-post")}
-            >
-              <DropDown
-                icon={<Image src={blue_arrow_down.src} />}
-                placeholder={"Systems Engineer"}
-                variant={"bg-dropdown"}
-              />
-            </Box>
             <Application filterKey={"archived"} />
           </TabPanel>
           <TabPanel px={"0px"}>
-            <Box
-              onClick={() => router.push("/company/create-job-post")}
-              width={"100%"}
-              // border={"1px solid red"}
-              display={{ md: "none", base: "flex" }}
-              justifyContent={"flex-end !important"}
-              mb={"12px"}
-            >
-              <DropDown
-                icon={<Image src={blue_arrow_down.src} />}
-                placeholder={"Systems Engineer"}
-                variant={"bg-dropdown"}
-              />
-            </Box>
             <MatchCandidate filterKey={"notInterested"} />
           </TabPanel>
           <TabPanel px={"0px"}>
-          
             <Search filterKey={"notInterested"} />
           </TabPanel>
         </TabPanels>

@@ -132,10 +132,10 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
                 marginRight={2}
               />
               <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
-                <Link href="/candidate/job-search-selectedjob">
+                <Link  href="/candidate/job-search-selectedjob">
                     {object.title}
                 </Link>
-                <Box display={"flex"} alignItems={"center"}>
+                <Box mt={"5px"} display={"flex"} alignItems={"center"}>
                   <Heading variant={"p4"} color={"gray.text"} marginRight={1}>
                     {object.name}
                   </Heading>
@@ -146,7 +146,7 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
               </Heading>
             </Box>
             <Box display="flex" flexDirection="column" alignItems="flex-end">
-              <Box display="flex">
+              <Box mb={"10px"} display="flex" gap={"6px"}>
                 <Image
                   mb={2}
                   width={"10px"}

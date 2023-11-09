@@ -6,6 +6,7 @@ import SearchBox from "@/Compomnents/SearchBox/SearchBox";
 
 
 import JobPostsTabs from "@/Compomnents/JobPostsTabs/JobPostsTabs";
+import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
 const jobposts = () => {
   return (
     <OperatorLayout>
@@ -15,6 +16,8 @@ const jobposts = () => {
         </Box>
         <JobPostsTabs />
       </Box>
+      <DashboardFooter />
+
     </OperatorLayout>
   );
 };

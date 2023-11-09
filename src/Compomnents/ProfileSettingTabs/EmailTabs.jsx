@@ -70,7 +70,7 @@ const EmailTabs = () => {
       ) : (
         <Box
           minHeight={isEdit || otp ? "27vh" : "44vh"}
-          mt={{ md: "50px", base: "40px" }}
+          mt={{ md: "50px", base: "10px" }}
           // pb={"190px"}
           // border={"1px solid red"}
           width={{ md: "564px", base: "100%" }}

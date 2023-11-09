@@ -108,26 +108,33 @@ const HeaderDropdown = ({ candidate, operatorDropdown }) => {
             objectFit={"cover"}
             src={header_profile.src}
           />
-          <Box textAlign={"start"}>
+          <Box display={{ xl: "block", base: "none" }} textAlign={"start"}>
             <Heading as={"p"} variant={"p4"}>
               {" "}
               Jacob Jones
             </Heading>
             <Heading variant={"p1"}>jacobjones9@gmail.com</Heading>
           </Box>
-          <HiOutlineChevronDown
-            style={{ position: "absolute", right: "0px", top: "6px" }}
-            color="black.100"
-            // fontSize={{ "2xl": "27px", base: "240px" }}
-            fontSize={"17px"}
-          />
+
+          <Box display={{ xl: "block", base: "none" }}>
+            <HiOutlineChevronDown
+              style={{ position: "absolute", right: "0px", top: "6px" }}
+              color="black.100"
+              // fontSize={{ "2xl": "27px", base: "240px" }}
+              fontSize={"17px"}
+            />
+          </Box>
         </Box>
       </MenuButton>
       <MenuList py="0px">
         {candidate
           ? candidatedropdown.map((item, index) => {
               return (
-                <Link _hover={{ textDecoration: "none" }} href={item.pathname}>
+                <Link
+                  key={index}
+                  _hover={{ textDecoration: "none" }}
+                  href={item.pathname}
+                >
                   <MenuItem
                     key={index}
                     transition={".5s"}
@@ -173,7 +180,11 @@ const HeaderDropdown = ({ candidate, operatorDropdown }) => {
           : operatorDropdown
           ? operator.map((item, index) => {
               return (
-                <Link _hover={{ textDecoration: "none" }} href={item.pathname}>
+                <Link
+                  key={index}
+                  _hover={{ textDecoration: "none" }}
+                  href={item.pathname}
+                >
                   <MenuItem
                     key={index}
                     bg="transparent"
@@ -216,7 +227,11 @@ const HeaderDropdown = ({ candidate, operatorDropdown }) => {
             })
           : companydropdown.map((item, index) => {
               return (
-                <Link _hover={{ textDecoration: "none" }} href={item.pathname}>
+                <Link
+                  key={index}
+                  _hover={{ textDecoration: "none" }}
+                  href={item.pathname}
+                >
                   <MenuItem
                     key={index}
                     bg="transparent"

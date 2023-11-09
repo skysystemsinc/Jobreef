@@ -25,30 +25,10 @@ const WorkExperiance = () => {
         jobSummary:
           "Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability. Requirements Analysis: Collaborate with stakeholders, customers, and cross-functional teams to gather and analyze system requirements,",
       },
-      // {
-      //   companyName: "Microsoft",
-      //   designation: "Senior System’s Design Engineer",
-      //   currentlyWorking: false,
-      //   readOnly: false,
-      //   stateDate: new Date(),
-      //   endDate: new Date(),
-      //   country: "USA",
-      //   state: "",
-      //   city: "",
-      //   streetAddress: "",
-      //   employmentType: "",
-      //   jobFamily: "",
-      //   jobSummary:
-      //     "Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability. Requirements Analysis: Collaborate with stakeholders, customers, and cross-functional teams to gather and analyze system requirements,",
-      // },
     ],
     edit: false,
     delete: false,
   });
-  // const [addExperiance, setaddExperiance] = useState(false);
-  // const [experianceData, setexperianceData] = useState([]);
-  // const experianceData = [];
-
   return (
     <Box>
       <DeleteModal
@@ -132,33 +112,6 @@ const WorkExperiance = () => {
             btnLable={"Add  Experience"}
           />
         </Box>
-        // <Box
-        //   minH={"40vh"}
-        //   mb={"80px"}
-        //   pl={{ md: "30px", base: "0px" }}
-        //   display={"flex"}
-        //   justifyContent={"center"}
-        //   alignItems={"flex-start"}
-        //   flexDirection={"column"}
-        // >
-        //   <Heading variant={"p8"}>
-        //     Ready to build an impressive resume?
-        //     <Text fontWeight={700}>
-        //       Start by including your work experiences.
-        //     </Text>
-        //   </Heading>
-        //   <Button
-        //     onClick={() => {
-        //       setaddExperiance(true);
-        //     }}
-        //     width="max-content"
-        //     px={{ md: "40px", base: "20px" }}
-        //     mt={{ md: "41px", base: "23px" }}
-        //     variant={"blue-btn"}
-        //   >
-        //     Add Experience
-        //   </Button>
-        // </Box>
       )}
     </Box>
   );

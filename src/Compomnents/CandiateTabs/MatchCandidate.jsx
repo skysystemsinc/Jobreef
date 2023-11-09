@@ -1,10 +1,12 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 import React, { useState } from "react";
 import ArchivedTabs from "../ArchivedTabs/ArchivedTabs";
 import All from "../ArchivedTabs/All";
 import Archived from "../ArchivedTabs/Archived";
 import SelectedCandidate from "../ArchivedTabs/SelectedCandidate";
 import { useSelector } from "react-redux";
+import DropDown from "../DropDown/DropDown";
+import blue_arrow_down from "@/assets/Images/blue-arrow-down.svg";
 
 const MatchCandidate = ({ filterKey }) => {
   const candidates = useSelector((state) => state.candidates.value.filter);
@@ -44,6 +46,14 @@ const MatchCandidate = ({ filterKey }) => {
   ];
   return (
     <Box>
+      <Box display={{ md: "none", base: "flex" }} justifyContent={"flex-end"}>
+        <DropDown
+          style={{ width: "max-content" }}
+          icon={<Image src={blue_arrow_down.src} />}
+          placeholder={"Systems Engineer"}
+          variant={"bg-dropdown"}
+        />
+      </Box>
       {selectedCandidates ? (
         <Box mt={{ md: "31px", base: "15px" }}>
           <SelectedCandidate matchCandidate />

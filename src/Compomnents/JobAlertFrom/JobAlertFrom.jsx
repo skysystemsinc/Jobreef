@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserProfile } from "@/Reudx/slices/userProfileSlice";
 import axios from "axios";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
-const JobAlertFrom = () => {
+const JobAlertFrom = ({handleSave}) => {
   const dispatch = useDispatch();
   const userProfile = useSelector((state) => state.userProfileSlice.value);
 
@@ -35,16 +35,16 @@ const JobAlertFrom = () => {
     location:""
   });
 
-  const [isEdit, setisEdit] = useState(false);
+  const [isEdit, setisEdit] = useState(true);
   const [readOnly, setreadOnly] = useState(true);
   const router = useRouter();
 
 
-  const handleSave = async () => {
-    setisEdit(false);
-    setreadOnly(true);
+  // const handleSave = async () => {
+  //   setisEdit(false);
+  //   setreadOnly(true);
    
-  };
+  // };
 
   const getData = async () => {
     try {
@@ -71,7 +71,7 @@ const JobAlertFrom = () => {
   }, [userProfile]);
   return (
     <Box mt={{ md: "51px", base: "20px" }}>
-      <Box width={{ md: "72%", base:"100%"}} mx={"auto"}>
+      <Box width={{ md: "60%", base:"100%"}} mx={"auto"}>
         <InputWrapper gap={{ xl: "50px", base: "20px" }}>
           <LabelInput
             state={state.alertFrequency}

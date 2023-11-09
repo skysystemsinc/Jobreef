@@ -4,6 +4,7 @@ import React from "react";
 import { Box } from "@chakra-ui/react";
 import SearchBox from "@/Compomnents/SearchBox/SearchBox";
 import OperatorsTabs from "@/Compomnents/OperatorsTabs/OperatorsTabs";
+import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
 const operators = () => {
   return (
     <OperatorLayout>
@@ -13,6 +14,8 @@ const operators = () => {
         </Box>
         <OperatorsTabs />
       </Box>
+      <DashboardFooter />
+
     </OperatorLayout>
   );
 };

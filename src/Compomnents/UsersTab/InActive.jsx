@@ -5,6 +5,7 @@ import menu from "@/assets/Images/menu.svg";
 import { useRouter } from "next/router";
 import Popovers from "../PaginatedTable/Popovers";
 import profile_icon from "@/assets/Images/profile_icon.svg";
+import UserButton from "./UserButton";
 const InActive = () => {
   const router = useRouter();
   const columns = [
@@ -17,7 +18,7 @@ const InActive = () => {
       Actions: "Actions",
     },
   ];
-  const keys = ["name", "email", "userType",  "createdAt", "Actions"];
+  const keys = ["name", "email", "userType", "createdAt", "Actions"];
   const actionList = ["Restore", "Delete"];
   const data = [
     {
@@ -36,7 +37,6 @@ const InActive = () => {
       createdAt: "20/08/23",
       Actions: <Popovers actionList={actionList} />,
     },
-
   ];
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -50,6 +50,7 @@ const InActive = () => {
   };
   return (
     <>
+      <UserButton />
       <Box minH={"62vh"} pb={"20px"}>
         <PaginatedTable
           keys={keys}

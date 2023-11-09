@@ -22,6 +22,7 @@ import Certification from "./Certification";
 import Skills from "./Skills";
 import Attachments from "./Attachments";
 import Achievement from "./Achivement";
+import CustomTabs from "../CustomeTabs/CustomeTabs";
 
 const MyResumeTabs = () => {
   let [tabIndex, setTabIndex] = useState(0);
@@ -42,19 +43,42 @@ const MyResumeTabs = () => {
       title: "Skills",
     },
     {
-      title: "Achievements",
+      title: "Attachments",
     },
     {
       title: "Attachments",
     },
   ];
+  const tabs = [
+    { label: "Overview", value: "Overview", content: <Overview /> },
+    {
+      label: "Work Experience",
+      value: "Work Experience",
+      content: <WorkExperiance />,
+    },
+    { label: "Education", value: "Education", content: <Education /> },
+    {
+      label: "Certifications",
+      value: "Certifications",
+      content: <Certification />,
+    },
+    { label: "Skills", value: "Skills", content: <Skills /> },
+    { label: "Achievements", value: "Achievements", content: <Achievement /> },
+    { label: "Attachments", value: "Attachments", content: <Attachments /> },
+
+    // Add more tabs if needed
+  ];
   return (
     <>
-      
+      <Box display={{ md: "none", base: "block" }}>
+        <CustomTabs tabs={tabs} />
+      </Box>
+
       <Tabs
         onChange={(index) => {
           setTabIndex(index);
         }}
+        display={{ md: "block", base: "none" }}
         index={tabIndex}
         isFitted
       >
