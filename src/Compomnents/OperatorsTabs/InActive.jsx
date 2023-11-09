@@ -5,7 +5,7 @@ import menu from "@/assets/Images/menu.svg";
 import { useRouter } from "next/router";
 import Popovers from "../PaginatedTable/Popovers";
 import profile_icon from "@/assets/Images/profile_icon.svg";
-import OperatorButton from "./OPeratorButton";
+import OperatorButton from "./OperatorButton";
 const InActive = () => {
   const router = useRouter();
   const columns = [
