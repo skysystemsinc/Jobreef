@@ -22,7 +22,6 @@ function Context({ children }) {
 
   const setHandleCompanyEntry = (e) => {
     setTempSearchEntryCompany(e)
-    
   };
 
   const getHandleCompanyEntry = () => {
@@ -30,8 +29,8 @@ function Context({ children }) {
   };
 
   const searchNow = () => {
-    setSearchEntryLocation(tempSearchEntryLocation.trim())
     setSearchEntryCompany(tempSearchEntryCompany.trim())
+    setSearchEntryLocation(tempSearchEntryLocation.trim())
     setToggle(false);
   } 
 

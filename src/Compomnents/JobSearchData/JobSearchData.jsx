@@ -6,6 +6,7 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  InputRightElement,
   Image,
   Icon,
 } from "@chakra-ui/react";
@@ -39,36 +40,39 @@ const JobSearchData = ({ setIsOpen }) => {
           display={{ lg: "flex", base: "none" }}
           mt={"0px"}
           alignItems="center" // Center the items vertically
-          
+          gap={'10px'}
         >
-          <InputGroup>
+          <InputGroup border={'1px solid lightgray'} display={"flex"} justifyContent={"center"} alignItems={"center"} px={"10px"}>
             <InputLeftElement
               pointerEvents="none"
-              children={<FiSearch color="black" />}
+              children={<Heading variant={"p7"} fontWeight={700} color={"gray.text"}>What</Heading>}
+              mx={'10px'}
             />
             <Input
+              ml={"10px"}
               color={"black"}
               type="text"
               variant="bg-input"
-              placeholder="Search for Jobs, Companies, and Keywords"
+              placeholder="Job title, keywords, or company"
               _placeholder={{ color: "rgba(0, 0, 0, 0.6)" }}
               marginRight="2"
               onChange={(e) => setHandleCompanyEntry(e.target.value)}
               bg={"gray.200"}
             />
+            <InputRightElement
+              pointerEvents="none"
+              children={<FiSearch color="black" />}
+            />
           </InputGroup>
 
-          <InputGroup>
+          <InputGroup border={'1px solid lightgray'} display={"flex"} justifyContent={"center"} alignItems={"center"} px={"10px"}>
             <InputLeftElement
               pointerEvents="none"
-              children={
-                <Image
-                  width={{ md: "20px", base: "20px" }}
-                  src={location.src}
-                />
-              }
+              children={<Heading variant={"p7"} fontWeight={700} color={"gray.text"}>Where</Heading>}
+              mx={'10px'}
             />
             <Input
+              ml={"15px"}
               color={"black"}
               type="text"
               variant="bg-input"
@@ -77,6 +81,15 @@ const JobSearchData = ({ setIsOpen }) => {
               marginRight="2"
               bg={"gray.200"}
               onChange={(e) => setHandleLocationEntry(e.target.value)}
+            />
+             <InputRightElement
+                pointerEvents="none"
+                children={
+                  <Image
+                    width={{ md: "20px", base: "20px" }}
+                    src={location.src}
+                  />
+                }
             />
           </InputGroup>
 
@@ -98,42 +111,58 @@ const JobSearchData = ({ setIsOpen }) => {
           rowGap={1}
           mb={"20px"}
         >
-          <InputGroup>
+          
+          <InputGroup border={'1px solid lightgray'} display={"flex"} justifyContent={"center"} alignItems={"center"} px={"10px"}>
             <InputLeftElement
               pointerEvents="none"
-              children={<FiSearch color="black" />}
+              children={<Heading variant={"p7"} fontWeight={700} color={"gray.text"}>What</Heading>}
+              mx={'10px'}
             />
             <Input
+              ml={"10px"}
               color={"black"}
               type="text"
               variant="bg-input"
-              placeholder="Search for Jobs Companies and Keywords"
+              placeholder="Job title, keywords, or company"
+              _placeholder={{ color: "rgba(0, 0, 0, 0.6)" }}
               marginRight="2"
               onChange={(e) => setHandleCompanyEntry(e.target.value)}
               bg={"gray.200"}
             />
+            <InputRightElement
+              pointerEvents="none"
+              children={<FiSearch color="black" />}
+            />
           </InputGroup>
-
-          <InputGroup>
+          <InputGroup border={'1px solid lightgray'} display={"flex"} justifyContent={"center"} alignItems={"center"} px={"10px"}>
             <InputLeftElement
               pointerEvents="none"
-              children={
-                <Image
-                  width={{ md: "20px", base: "20px" }}
-                  src={location.src}
-                />
-              }
+              children={<Heading variant={"p7"} fontWeight={700} color={"gray.text"}>Where</Heading>}
+              mx={'10px'}
             />
             <Input
+              ml={"15px"}
               color={"black"}
               type="text"
               variant="bg-input"
-              placeholder="Search By Location e.g remote"
+              placeholder="Search by Location e.g. “remote”"
+              _placeholder={{ color: "rgba(0, 0, 0, 0.6)" }}
               marginRight="2"
               bg={"gray.200"}
               onChange={(e) => setHandleLocationEntry(e.target.value)}
             />
+             <InputRightElement
+                pointerEvents="none"
+                children={
+                  <Image
+                    width={{ md: "20px", base: "20px" }}
+                    src={location.src}
+                  />
+                }
+            />
           </InputGroup>
+
+          
           <Flex justifyContent="space-between" alignItems="center" mt={'20px'}>
             <Button
               onClick={searchNow}

@@ -446,9 +446,8 @@ const JobSearchCompanyPage = () => {
         display={{ lg: "block", base: "block" }}
         flex={1}
         gap={10}
-        mt={{ lg: 60, base: 0 }}
+        // mt={{ lg: 60, base: 0 }}
         pl={{ lg: 10, base: 0 }}
-        pt={10}
         gridTemplateColumns={{ xl: "repeat(2, 1fr)", base: "1fr" }}
       >
         {DataArray2.map((object) => (

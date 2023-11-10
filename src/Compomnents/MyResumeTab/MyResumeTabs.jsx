@@ -46,7 +46,7 @@ const MyResumeTabs = () => {
       title: "Attachments",
     },
     {
-      title: "Attachments",
+      title: "Achievements",
     },
   ];
   const tabs = [
@@ -126,10 +126,10 @@ const MyResumeTabs = () => {
             <Skills />
           </TabPanel>
           <TabPanel>
-            <Achievement />
+            <Attachments />
           </TabPanel>
           <TabPanel>
-            <Attachments />
+            <Achievement />
           </TabPanel>
         </TabPanels>
       </Tabs>

@@ -1,18 +1,20 @@
 import React from "react";
 import ComponentMyChip from "../../Compomnents/ComponentMyChip/ComponentMyChip";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import cross from "../../assets/Images/cross.svg";
 import NewJobSearchBox from "./NewJobSearchBox";
 import ShowPreviousSearches from "./ShowPreviousSearches";
 import { DataArray } from "./tempSchema";
 
 import { parse, compareAsc, compareDesc } from "date-fns";
-import { Icon, Box, Image, Button } from "@chakra-ui/react";
+import { Icon, Box, Image, Button,Heading } from "@chakra-ui/react";
 import ShowClickJobSearchBox from "./ShowClickJobSearchBox";
 
 import ShowCheckBoxes from "./ShowCheckBoxes";
 import MobileSortBy from "./MobileSortBy";
 import { FaTimes } from "react-icons/fa";
+
+import { Role_context } from "../../context/context";
 
 const JobSearchResults = ({ isOpen, setIsOpen }) => {
   const originalArray = DataArray;
@@ -23,6 +25,66 @@ const JobSearchResults = ({ isOpen, setIsOpen }) => {
   const [Data, setData] = useState(DataArray);
   const screenWidth = window.screen.width; // Total screen width
   const screenHeight = window.screen.height; // Total screen height
+
+  const {
+    searchEntryLocation,
+    searchEntryCompany,
+} = useContext(Role_context);
+
+  const filterData = (object) => {
+
+     //Search by Company Name
+     const foundCompanyName = searchEntryCompany === '' ? true : object.name.toLowerCase().includes(searchEntryCompany.toLowerCase())
+     //Search by Location
+     const foundLocationName = searchEntryLocation === '' ? true : object.location.toLowerCase().includes(searchEntryLocation.toLowerCase());
+     // Search by Job Model
+     const foundJobModel = selectedValues.includes(object.JobModel)
+     // Search by Employement Type
+     const foundEmploymentType = selectedValues.length === 0 || selectedValues.includes(object.EmploymentType);
+     // Search by Experience Type
+     const foundExpType = selectedValues.some((Experience) => {
+       const match = Experience.match(/(\d+) - (\d+) Years/);
+       if (match) {
+         const startYear = parseInt(match[1], 10);
+         const endYear = parseInt(match[2], 10);
+         return startYear <= object.Experience && object.Experience < endYear;
+       }
+     });
+     // Search by Salary Type
+     const foundSalType = selectedValues.some((selectedValue) => {
+       const salary = object.Salary;
+       const numericSalary = parseFloat(salary.replace(/[^0-9.]+/g, ''));
+     
+       if (selectedValue === "Fixed Salary") {
+         return true;
+       }
+       if (selectedValue === "$50000 - $70000 Annual") {
+         const minValue = 50000;
+         const maxValue = 70000;
+         return numericSalary >= minValue && numericSalary <= maxValue;
+       }
+       if (selectedValue === "$70000 - $100,000 Annual") {
+         const minValue = 70000;
+         const maxValue = 100000;
+         return numericSalary >= minValue && numericSalary <= maxValue;
+       }
+       if (selectedValue === "$100,000 + Annual") {
+         const minValue = 100000;
+         return numericSalary >= minValue;
+       }
+     
+       return false;
+     });
+
+    //  console.log(foundEmploymentType,foundExpType, foundSalType,foundJobModel,(selectedValues.length === 1 && selectedValues[0] === "Date Posted"), "I am Job Model")
+    //  console.log(foundCompanyName, foundLocationName,searchEntryCompany,searchEntryLocation,"Company name and location" ) 
+     return (foundCompanyName && foundLocationName) && (foundEmploymentType || foundExpType || foundSalType || foundJobModel || (selectedValues.length === 1 && selectedValues[0] === "Date Posted"));
+
+    }
+
+  useEffect(() => {
+    setData(DataArray.filter((e) => filterData(e)))
+  },[selectedValues,searchEntryCompany,searchEntryLocation])
 
   const handleCheckboxChange = (value) => {
     if (selectedValues.includes(value)) {
@@ -65,25 +127,16 @@ const JobSearchResults = ({ isOpen, setIsOpen }) => {
         handleCheckboxChange={handleCheckboxChange}
         selectedValues={selectedValues}
       />
+      {Data.length &&<Box display={"flex"} gap={'4px'} ml={{lg:"40px",md:'40px',base:'2px'}} mb={{lg:'-30px',md:'-30px',base:'0px'}} >
+        <Heading variant="p5">Shown Results:</Heading>
+        <Heading variant="p5" color={'blue.500'}>{Data.length}</Heading>
+      </Box>}
       <Box
         display={"flex"}
         flexDirection={{ lg: "row", base: "column" }}
         margin={{ md: 10, base: "0px" }}
         gap={5}
       >
-        {/* <Box
-          flex={2.5}
-          // bg={"white.100"}
-          display={{ lg: "block", base: "none" }}
-        >
-          <ShowCheckBoxes
-            selectedValues={selectedValues}
-            handleCheckboxChange={handleCheckboxChange}
-            temp={temp}
-            settemp={settemp}
-            DataSort={DataSort}
-          />
-        </Box> */}
         <Box
           flex={{ lg: 5, base: "100%" }}
           display={{ lg: "block", base: "none" }}
