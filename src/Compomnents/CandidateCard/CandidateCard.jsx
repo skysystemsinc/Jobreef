@@ -60,7 +60,7 @@ const CandidateCard = ({
               variant={"p4"}
               color={"gray.text"}
             >
-              {data?.country} ,{data?.state}
+              {data?.country}, {data?.state}
             </Heading>
           </Box>
         </Box>

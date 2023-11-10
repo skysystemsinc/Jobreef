@@ -19,7 +19,7 @@ const Archived = ({
       status: "new",
       archived: false,
       name: "Aaron Brown",
-      country: "Nassau ",
+      country: "Nassau",
       matchCandidate: false,
       notInterested: true,
       state: "The Bahamas",

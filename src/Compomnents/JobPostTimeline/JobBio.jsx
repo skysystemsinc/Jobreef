@@ -1,4 +1,4 @@
-import { Box, Image, Input } from "@chakra-ui/react";
+import { Box, Image, Input,Button } from "@chakra-ui/react";
 import React, { useState } from "react";
 import LabelInput from "../LabelInput/LabelInput";
 import InputWrapper from "../InputWrapper/InputWrapper";
@@ -129,21 +129,22 @@ const JobBio = ({ state, setState }) => {
         )}
       </InputWrapper>
 
-      <InputWrapper>
+      <Box marginBottom={{ md: "25px", base: "15px" }}>     
         <LabelInput
-          state={state.description}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, description: e.target.value };
-            });
-          }}
-          labelVariant={"label"}
-          textFormattter
-          variant={"bg-teaxtarea"}
-          placeholder="Enter the job description in detail for candidates"
-          label={"Job Description*"}
-        />
-      </InputWrapper>
+            state={state.description}
+            
+            setState={(e) => {
+              setState((prev) => {
+                return { ...prev, description: e.target.value };
+              });
+            }}
+            labelVariant={"label"}
+            textFormattter
+            variant={"bg-teaxtarea"}
+            placeholder="Enter the job description in detail for candidates"
+            label={"Job Description*"}
+          />
+      </Box>
     </Box>
   );
 };

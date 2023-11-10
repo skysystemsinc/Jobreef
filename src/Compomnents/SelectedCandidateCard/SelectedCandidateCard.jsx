@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import profile_icon from "@/assets/Images/profile_icon.svg";
-import { Box, Heading, Image, useDisclosure } from "@chakra-ui/react";
+import { Box, Heading, Image, useDisclosure, Button } from "@chakra-ui/react";
 import Star from "../Stars/Star";
 import black_email from "@/assets/Images/black_email.svg";
 import black_arrow_left from "@/assets/Images/black_arrow_left.svg";
@@ -28,7 +28,7 @@ import { AiOutlineStar } from "react-icons/ai";
 import { BsChevronDown, BsStarFill } from "react-icons/bs";
 import { PiDownloadSimpleBold, PiNotepadLight } from "react-icons/pi";
 
-const SelectedCandidateCard = ({ matchCandidate }) => {
+const SelectedCandidateCard = ({ matchCandidate,toggle,setToggle }) => {
   const selectedCandidates = useSelector(
     (state) => state.candidates.value.selected
   );
@@ -251,7 +251,61 @@ const SelectedCandidateCard = ({ matchCandidate }) => {
                 </Box>
               ) : null;
             })}
+                <Box
+                  onClick={()=>{toggle ? setToggle(false) : setToggle(true)}}
+                  border={"1px solid"}
+                  borderColor={"white.100"}
+                  display={"flex"}
+                  borderRadius={"10px"}
+                  role="group"
+                  alignItems={"center"}
+                  my={"10px"}
+                  gap={"5px"}
+                  padding={"15px 0px"}
+                  justifyContent={"center"}
+                  boxShadow={
+                    " 0px 1px 2px 0px rgba(16, 24, 40, 0.06), 0px 1px 3px 0px rgba(16, 24, 40, 0.10)"
+                  }
+                  transition={".5s"}
+                  cursor={"pointer"}
+                  _hover={{
+                    backgroundColor: "gray.200",
+                    border: "1px solid  ",
+                    "& .hoverColor": {
+                      color: "blue.500",
+                    },
+                    borderColor: "blue.500",
+                  }}
+                  // sx={item.style}
+                >
+                  <Heading
+                    _groupHover={{
+                      color: "blue.500",
+                    }}
+                    color={"black.100"}
+                    variant={"p10"}
+                    transition={".5s"}
+                  >
+                    {toggle ? 'Exit NotePad' : 'Open Notepad'}
+                    <Heading
+                      transition={".5s"}
+                      _groupHover={{
+                        color: "blue.500",
+                      }}
+                      color={"black.100"}
+                      variant={"p10"}
+                      sx={{ fontWeight: 700, ml: "5px" }}
+                      as={"span"}
+                    >
+                      {/* {item.span} */}
+                    </Heading>
+                  </Heading>
+                  {/* <PiDownloadSimpleBold color="#2CA5C3" /> */}
+
+                  <Box fontSize={"16px"}></Box>
+                </Box>
           </Box>
+          
           <Box
             bg={"white.100"}
             flex={2}
