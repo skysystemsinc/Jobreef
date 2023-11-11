@@ -79,7 +79,7 @@ function Footer({ waveImage }) {
               <Box pl={{ md: "50px", base: "10px" }}>
                 <Box color={"white.100"} lineHeight={"10px"}>
                   <Heading variant={"p4"} color={"white.100"}>
-                    Nassau, The Bahamas
+                    Nassau,Bahamas
                   </Heading>
                   <Heading variant={"p4"} color={"white.100"}>
                     {" "}

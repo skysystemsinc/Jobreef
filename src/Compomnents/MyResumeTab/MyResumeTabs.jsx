@@ -43,7 +43,7 @@ const MyResumeTabs = () => {
       title: "Skills",
     },
     {
-      title: "Attachments",
+      title: "Achievements",
     },
     {
       title: "Attachments",

@@ -167,7 +167,7 @@ const TechnicalDetails = ({ state, setState }) => {
           label={"Tags"}
         />
       </InputWrapper>
-      <InputWrapper>
+      <InputWrapper style={{width:"100%"}}>
         <LabelInput
           state={state.rate}
           setState={(e) => {
@@ -182,11 +182,8 @@ const TechnicalDetails = ({ state, setState }) => {
           dropdown
           placeholder="Select seniority level"
           label={"Seniority Level"}
-        />
-   
+        /> 
       </InputWrapper>
-
-      
     </Box>
   );
 };

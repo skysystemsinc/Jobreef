@@ -5,6 +5,7 @@ import ComponentMyChip from "../../Compomnents/ComponentMyChip/ComponentMyChip";
 import microsoft from "@/assets/Images/microsoft.svg";
 import EmptyVector from "../../assets/Images/EmptyVector.svg";
 import cross from "../../assets/Images/cross.svg";
+import { useRouter } from 'next/router';
 // import "./scrollbar.css";
 import {
   Box,
@@ -72,7 +73,7 @@ const text = [
 const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { templogin } = useContext(Role_context);
-
+  const router = useRouter();
   return (
     <Box flex={4} position={{lg:'sticky',md:'sticky',base:''}} top="180px" >
       {templogin ? (
@@ -131,19 +132,26 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
                 src={microsoft.src}
                 marginRight={2}
               />
-              <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
-                <Link  href="/candidate/job-search-selectedjob">
-                    {object.title}
-                </Link>
-                <Box mt={"5px"} display={"flex"} alignItems={"center"}>
-                  <Heading variant={"p4"} color={"gray.text"} marginRight={1}>
-                    {object.name}
+              {/* <button onClick={() => router.push('/candidate/job-search-selectedjob')}>
+    {object.title}
+</button> */}
+              <Box>
+                <Heading variant={"p7"} fontWeight={700} color={"gray.text"}
+                _hover={{ textDecoration: 'underline', color: 'black'}}
+                 onClick={() => router.push('/candidate/job-search-selectedjob')}
+                 style={{ cursor: 'pointer' }}
+                  >
+                      {object.title}
                   </Heading>
-                  <Box ml={1} mt={"4px"} display="flex" alignItems="center">
-                    <ComponentMyChip label={object.tags} />
+                  <Box mt={"5px"} display={"flex"} alignItems={"center"}>
+                    <Heading variant={"p4"} color={"gray.text"} marginRight={1}>
+                      {object.name}
+                    </Heading>
+                    <Box ml={1} mt={"4px"} display="flex" alignItems="center">
+                      <ComponentMyChip label={object.tags} />
+                    </Box>
                   </Box>
                 </Box>
-              </Heading>
             </Box>
             <Box display="flex" flexDirection="column" alignItems="flex-end">
               <Box mb={"10px"} display="flex" gap={"6px"}>

@@ -51,7 +51,7 @@ const Preferences = () => {
             variant={"bg-input"}
             placeholder="Yes/No"
             dropdown={readOnly ?false:true}
-            label={"job applications updates"}
+            label={"Job application updates"}
           />
           <LabelInput
             labelVariant={"label"}

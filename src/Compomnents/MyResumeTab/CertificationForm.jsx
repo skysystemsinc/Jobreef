@@ -175,8 +175,8 @@ const CertificationForm = ({
             }}
             type="text"
             variant={"bg-input"}
-            placeholder="Enter certificate url"
-            label={"Certificate Url"}
+            placeholder="Enter Certificate URL"
+            label={"Certificate URL"}
           />
         </InputWrapper>
         <Box mt={{ md: "95px", base: "80px" }}>
