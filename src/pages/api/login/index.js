@@ -1,4 +1,4 @@
-import dbConnect from "@/lib/dbConnection";
+
 import UserModel from "@/model/user";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
@@ -67,7 +67,7 @@ const Login = async (req, res) => {
   };
 
   export default async function handler(req, res) {
-    await dbConnect();
+    
     switch (req.method) {
 
       case "POST": {

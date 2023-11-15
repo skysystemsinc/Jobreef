@@ -1,0 +1,122 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type Location {
+  country  String
+  province String
+  city     String
+  address  String
+}
+
+model User {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime  @default(now())
+  company     Company?  @relation(fields: [companyId], references: [id])
+  companyId   String?   @db.ObjectId
+  Employee    Employee? @relation(fields: [employeeId], references: [id])
+  employeeId  String?   @unique @db.ObjectId
+  firstName   String
+  lastName    String
+  email       String    @unique
+  phoneNumber Int
+  role        String
+  accountType String
+  password    String
+}
+
+model Company {
+  id              String        @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt       DateTime      @default(now())
+  user            User[]
+  location        Location
+  companyName     String
+  industry        String
+  directory       String
+  noOfEmployees   Int
+  yearEstablished Int
+  description     String
+  webUrl          String
+  companyLogo     String
+  socialLinks     SocialLinks[]
+}
+
+type SocialLinks {
+  platform String
+  link     String
+}
+
+model Employee {
+  createdAt      DateTime         @default(now())
+  id             String           @id @default(auto()) @map("_id") @db.ObjectId
+  user           User?
+  location       Location
+  phoneNumber    Int
+  summary        String
+  workExperience WorkExperience[]
+  education      Education[]
+  certification  Certification[]
+  skills         Skills[]
+  achievement    Achievement
+  attachment     Attachment
+  // user  User?
+}
+
+type WorkExperience {
+  companyName      String
+  desigination     String
+  currentlyWorking Boolean
+  location         Location
+  employeeType     String
+  jobFamily        String
+  jobSummary       String
+  startDate        DateTime @default(now())
+  endDate          DateTime @default(now())
+  createdAt        DateTime @default(now())
+}
+
+type Education {
+  name             String
+  diploma          String
+  currentlyWorking Boolean
+  location         Location
+  gpa              String
+  description      String
+  startDate        DateTime @default(now())
+  endDate          DateTime @default(now())
+  createdAt        DateTime @default(now())
+}
+
+type Certification {
+  name          String
+  organization  String
+  certificateId String
+  noExpiry      Boolean
+  createdAt     DateTime @default(now())
+  issuedOn      DateTime @default(now())
+  validUntil    DateTime @default(now())
+  certificate   String[]
+}
+
+type Skills {
+  name  String
+  level String
+}
+
+type Achievement {
+  resume     String[]
+  additional String[]
+}
+
+type Attachment {
+  resume     String[]
+  additional String[]
+}

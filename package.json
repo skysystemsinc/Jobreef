@@ -15,6 +15,7 @@
     "@emotion/styled": "^11.11.0",
     "@fontsource/open-sans": "^5.0.14",
     "@fontsource/sora": "^5.0.15",
+    "@prisma/client": "^5.6.0",
     "@reduxjs/toolkit": "^1.9.7",
     "@wojtekmaj/react-daterange-picker": "^5.4.3",
     "axios": "^1.5.1",
@@ -37,6 +38,8 @@
     "react-table": "^7.8.0"
   },
   "devDependencies": {
-    "eslint-config-next": "13.5.4"
+    "eslint-config-next": "13.5.4",
+    "prisma": "^5.6.0",
+    "typescript": "5.2.2"
   }
 }

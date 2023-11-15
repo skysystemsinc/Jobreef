@@ -1,12 +1,16 @@
-import dbConnect from "@/lib/dbConnection";
-import dbConnection from "@/lib/dbConnection";
-import companyModel from "@/model/company";
+
+
+import prisma from "@/lib/prisma";
+
 
 const DeleteCompany = async (req, res) => {
   try {
-    const deleteCompany = await companyModel.findOneAndDelete({
-      _id: req.query.id,
+    const deleteCompany = await prisma.Company.delete({
+      where: {
+        id: req.query.id,
+      },
     });
+
     if (!deleteCompany) {
       return res.status(404).json({
         message: `No company with id ${req.query.id}`,
@@ -20,6 +24,7 @@ const DeleteCompany = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       error: err,
+      message: `No company with id ${req.query.id}`,
       success: false,
     });
   }
@@ -27,10 +32,13 @@ const DeleteCompany = async (req, res) => {
 const UpdateCompany = async (req, res) => {
   const newObj = { ...req.body };
   try {
-    const user = await companyModel.findOneAndUpdate(
-      { _id: req.query.id },
-      newObj
-    );
+    const user = await prisma.Company.update({
+      where: {
+        id: req.query.id,
+      },
+      data: newObj,
+    });
+    console.log("user", user);
     if (!user) {
       return res.status(404).json({
         message: `No company with id ${req.query.id}`,
@@ -44,6 +52,7 @@ const UpdateCompany = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       error: err,
+      message: `No company with id ${req.query.id}`,
       success: false,
     });
   }
@@ -51,7 +60,11 @@ const UpdateCompany = async (req, res) => {
 
 const GetSingleCompany = async (req, res) => {
   try {
-    const company = await companyModel.findOne({ _id: req.query.id });
+    const company = await prisma.Company.findUnique({
+      where: {
+        id: req.query.id,
+      },
+    });
 
     if (!company) {
       return res.status(404).json({
@@ -64,7 +77,7 @@ const GetSingleCompany = async (req, res) => {
       success: true,
     });
   } catch (err) {
-    console.log("company err",err)
+    console.log("company err", err);
     res.status(500).json({
       error: err,
       success: false,
@@ -74,7 +87,7 @@ const GetSingleCompany = async (req, res) => {
 
 export default async function handler(req, res) {
   // switch the methods
-  await dbConnect();
+  
 
   switch (req.method) {
     case "GET": {
