@@ -8,7 +8,7 @@ import Footer from "@/Compomnents/Footer/Footer";
 const jobSearchSelected = () => {
   return (
     <>
-      <Header />
+      <Header  candidate/>
 
       <Box display={"flex"} justifyContent={"center"} mt={"43px"}>
         <Box px={{ md: "20px", base: "10px" }}>

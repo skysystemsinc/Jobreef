@@ -26,6 +26,7 @@ import Twitter from "../../assets/Images/Twitter.svg";
 import Instagram from "../../assets/Images/Instagram.svg";
 import location from "../../assets/Images/location.svg";
 import { useRouter } from "next/router";
+import Chip from "../Chip/Chip";
 
 const DataArray = [
   {
@@ -130,7 +131,11 @@ const JobSearchCompanyPage = () => {
   const handleRouteChange = () => {
     router.push("/candidate/job-search");
   };
-
+  const skills = [
+    "Technical Knowledge",
+    "System Architecture",
+    "Risk Management",
+  ];
   //TODO
   return (
     <Box margin="0px 50px 0px 50px" display={{ lg: "flex", base: "block" }}>
@@ -142,7 +147,7 @@ const JobSearchCompanyPage = () => {
             borderRadius={"8px"}
             bg={"white.100"}
             box-shadow="0px 4px 20px 0px rgba(0, 0, 0, 0.05)"
-            mb={10}
+            mb={4}
           >
             <Box
               display={"flex"}
@@ -189,7 +194,6 @@ const JobSearchCompanyPage = () => {
                 </Box>
                 <Box display={"flex"} alignItems={"center"}>
                   <Box
-                    
                     display={"flex"}
                     alignItems={"center"}
                     style={{
@@ -276,7 +280,12 @@ const JobSearchCompanyPage = () => {
         </Box>
 
         <Box mt={5}>
-          <Heading color={"gray.text"} variant={"p7"}>
+          <Heading
+            mb={"10px"}
+            fontWeight={700}
+            color={"gray.text"}
+            variant={"p7"}
+          >
             Job Description
           </Heading>
           <Heading color={"gray.text"} variant={"p4"}>
@@ -287,7 +296,13 @@ const JobSearchCompanyPage = () => {
             in ensuring the successful delivery of projects within schedule,
             budget, and quality parameters.
           </Heading>
-          <Heading color={"gray.text"} variant={"p7"} mt={3}>
+          <Heading
+            fontWeight={700}
+            color={"gray.text"}
+            mb={"14px"}
+            variant={"p7"}
+            mt={3}
+          >
             Responsibilities
           </Heading>
           {text.map((data, index) => (
@@ -301,7 +316,13 @@ const JobSearchCompanyPage = () => {
             </Box>
           ))}
 
-          <Heading color={"gray.text"} variant={"p7"} mt={3}>
+          <Heading
+            mb={"10px"}
+            fontWeight={700}
+            color={"gray.text"}
+            variant={"p7"}
+            mt={3}
+          >
             Qualification and requirements
           </Heading>
           {text2.map((data, index) => (
@@ -314,6 +335,32 @@ const JobSearchCompanyPage = () => {
               </Heading>
             </Box>
           ))}
+
+          <Heading
+            mb={"10px"}
+            fontWeight={700}
+            color={"gray.text"}
+            variant={"p7"}
+            mt={3}
+          >
+            Desired skills
+          </Heading>
+          <Box
+            display={"flex"}
+            mt={"12px"}
+            gap={"10px"}
+            alignItems={"center"}
+            flexWrap={"wrap"}
+          >
+            {skills?.map((item , ind) => {
+              return (
+                <Box key={ind} >
+                  
+                  <Chip label={item} />
+                </Box>
+              );
+            })}
+          </Box>
         </Box>
 
         <Box display={"flex"} gap={10} mt={10} width={"90%"}>
@@ -346,14 +393,15 @@ const JobSearchCompanyPage = () => {
                   alignItems={"center"}
                   flexWrap={"wrap"}
                 >
-                  <Image
-                    width={{ md: "53px", base: "35px" }}
-                    src={microsoft.src}
-                    marginRight={2}
-                  />
+                  <Image width={"40px"} src={microsoft.src} marginRight={2} />
                   <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
                     Microsoft
-                    <Box gap={4} display={"flex"} alignItems={"center"}>
+                    <Box
+                      mt={"6px"}
+                      gap={4}
+                      display={"flex"}
+                      alignItems={"center"}
+                    >
                       <Heading
                         display={"flex"}
                         alignItems={"center"}
@@ -361,7 +409,7 @@ const JobSearchCompanyPage = () => {
                         variant={"p4"}
                       >
                         <Image
-                          width={{ md: "20px", base: "35px" }}
+                          width={"16px"}
                           src={location.src}
                           marginRight={2}
                         />
@@ -408,7 +456,7 @@ const JobSearchCompanyPage = () => {
             </Box>
 
             <Box>
-              <Heading color={"gray.text"} variant={"p4"}>
+              <Heading mt={"10px"} color={"gray.text"} variant={"p4"}>
                 Microsoft Corporation is an American multinational technology
                 corporation headquartered in Redmond, Washington. Microsoft's
                 best-known software products are the Windows line of operating

@@ -8,7 +8,9 @@ import { useSelector } from "react-redux";
 
 const Archived = ({
   filterKey,
+  cardStatusDisable,
   // data,
+  sortArray,
   matchCandidate,
   cardStatus,
   handleEvent,
@@ -64,9 +66,9 @@ const Archived = ({
   return (
     <Box mt={{ md: "31px", base: "15px" }}>
       {/* <SelectedCandidate/> */}
-      <Box display={{ lg: "none", base: "block" }}>
-        <MobileSortBy />
-      </Box>
+
+      <MobileSortBy sortArray={sortArray} />
+
       <Box display={"flex"} gap={"31px"}>
         <Box>
           {data &&
@@ -74,6 +76,7 @@ const Archived = ({
               return (
                 <Box key={ind}>
                   <CandidateCard
+                    cardStatusDisable={cardStatusDisable}
                     data={item}
                     matchCandidate={matchCandidate}
                     cardStatus={cardStatus}
@@ -84,9 +87,9 @@ const Archived = ({
               );
             })}
         </Box>
-        <Box display={{ lg: "block", base: "none" }}>
+        {/* <Box display={{ lg: "block", base: "none" }}>
           <SortBy matchCandidate={matchCandidate} />
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );

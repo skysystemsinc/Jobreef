@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserProfile } from "@/Reudx/slices/userProfileSlice";
 import axios from "axios";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
-const JobAlertFrom = ({handleSave}) => {
+const JobAlertFrom = ({ handleSave }) => {
   const dispatch = useDispatch();
   const userProfile = useSelector((state) => state.userProfileSlice.value);
 
@@ -29,21 +29,20 @@ const JobAlertFrom = ({handleSave}) => {
     alertStatus: "",
     employeeType: "",
     locationtype: "",
-    minimumEdu:"",
-    maxExperiance:'',
-    keyWords:"",
-    location:""
+    minimumEdu: "",
+    maxExperiance: "",
+    keyWords: "",
+    location: "",
   });
 
   const [isEdit, setisEdit] = useState(true);
   const [readOnly, setreadOnly] = useState(true);
   const router = useRouter();
 
-
   // const handleSave = async () => {
   //   setisEdit(false);
   //   setreadOnly(true);
-   
+
   // };
 
   const getData = async () => {
@@ -71,7 +70,7 @@ const JobAlertFrom = ({handleSave}) => {
   }, [userProfile]);
   return (
     <Box mt={{ md: "51px", base: "20px" }}>
-      <Box width={{ md: "60%", base:"100%"}} mx={"auto"}>
+      <Box width={{ md: "60%", base: "100%" }} mx={"auto"}>
         <InputWrapper gap={{ xl: "50px", base: "20px" }}>
           <LabelInput
             state={state.alertFrequency}
@@ -133,7 +132,6 @@ const JobAlertFrom = ({handleSave}) => {
               });
             }}
             dropdown={readOnly ? false : true}
-
             readOnly={readOnly}
             setreadOnly={setreadOnly}
             labelVariant={"label"}
@@ -170,7 +168,6 @@ const JobAlertFrom = ({handleSave}) => {
               });
             }}
             dropdown={readOnly ? false : true}
-
             readOnly={readOnly}
             setreadOnly={setreadOnly}
             labelVariant={"label"}
@@ -183,7 +180,6 @@ const JobAlertFrom = ({handleSave}) => {
         <InputWrapper gap={{ xl: "50px", base: "20px" }}>
           <LabelInput
             labelVariant={"label"}
-            
             readOnly={readOnly}
             setreadOnly={setreadOnly}
             state={state.keyWords}
@@ -227,13 +223,7 @@ const JobAlertFrom = ({handleSave}) => {
       >
         {isEdit ? (
           <>
-            <Button
-              onClick={() => {
-                setisEdit(false);
-                setreadOnly(true);
-              }}
-              variant="outline-blue"
-            >
+            <Button onClick={handleSave} variant="outline-blue">
               Cancel
             </Button>
             <Button onClick={handleSave} variant={"blue-btn"}>

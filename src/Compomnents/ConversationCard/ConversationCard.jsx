@@ -16,7 +16,7 @@ const ConversationCard = ({ data }) => {
       borderColor={"white.200"}
     >
       <Box display={"flex"} justifyContent={"space-between"} width={"100%"}>
-        <Box display={"flex"} alignItems={"center"} gap={"10px"}>
+        <Box display={"flex"} alignItems={"flex-start"} gap={"10px"}>
           <Image
             src={data.profilePic}
             width={"35px"}
@@ -24,11 +24,26 @@ const ConversationCard = ({ data }) => {
             objectFit={"cover"}
             borderRadius={"100px"}
           />
-          <Heading fontWeight={700} color={"blue.300"} variant={"p4"}>
-            {data.name}
-          </Heading>
+
+          <Box>
+            <Heading fontWeight={700} color={"blue.300"} variant={"p4"}>
+              {data.name}
+            </Heading>
+            <Heading
+              overflow={"hidden"}
+              // maxW={"100%"}
+              textOverflow={"ellipsis"}
+              // whiteSpace={"nowrap"}
+              color={"blue.300"}
+              variant={"p12"}
+              fontWeight={600}
+            >
+              Job Title
+            </Heading>
+          </Box>
           <UnreadMessage count={data.unreadCount} />
         </Box>
+
         <Heading color={"blue.300"} variant={"p12"}>
           {data.date}
         </Heading>

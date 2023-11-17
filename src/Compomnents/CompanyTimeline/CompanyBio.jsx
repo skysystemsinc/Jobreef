@@ -130,10 +130,10 @@ const CompanyBio = ({ State, setState }) => {
       </InputWrapper>
       <InputWrapper>
         <LabelInput
-          state={State.decsription}
+          state={State.description}
           setState={(e) => {
             setState((prev) => {
-              return { ...prev, decsription: e.target.value };
+              return { ...prev, description: e.target.value };
             });
           }}
           labelVariant={"label"}

@@ -12,7 +12,7 @@ const DashboardFooter = ({waveImage}) => {
       ) : null}
       <Box bg={"blue.500"}>
         <Container maxW={"4xl"} p={"10px 20px 10px 20px"}>
-          <Heading color={"white.100"} textAlign={"end"} variant={"p4"}>
+          <Heading color={"white.100"} textAlign={"center"} variant={"p4"}>
             {" "}
             &copy; {new Date().getFullYear()} Jobreef Ltd.{" "}
           </Heading>

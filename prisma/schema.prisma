@@ -22,14 +22,14 @@ model User {
   createdAt   DateTime  @default(now())
   company     Company?  @relation(fields: [companyId], references: [id])
   companyId   String?   @db.ObjectId
-  Employee    Employee? @relation(fields: [employeeId], references: [id])
+  employee    Employee? @relation(fields: [employeeId], references: [id])
   employeeId  String?   @unique @db.ObjectId
   firstName   String
   lastName    String
   email       String    @unique
-  phoneNumber Int
+  otp         Int?
   role        String
-  accountType String
+  accountType String?
   password    String
 }
 
@@ -47,11 +47,6 @@ model Company {
   webUrl          String
   companyLogo     String
   socialLinks     SocialLinks[]
-}
-
-type SocialLinks {
-  platform String
-  link     String
 }
 
 model Employee {
@@ -73,37 +68,37 @@ model Employee {
 type WorkExperience {
   companyName      String
   desigination     String
-  currentlyWorking Boolean
+  currentlyWorking Boolean?
   location         Location
   employeeType     String
   jobFamily        String
   jobSummary       String
-  startDate        DateTime @default(now())
-  endDate          DateTime @default(now())
-  createdAt        DateTime @default(now())
+  startDate        DateTime  @default(now())
+  endDate          DateTime? @default(now())
+  createdAt        DateTime  @default(now())
 }
 
 type Education {
-  name             String
-  diploma          String
-  currentlyWorking Boolean
-  location         Location
-  gpa              String
-  description      String
-  startDate        DateTime @default(now())
-  endDate          DateTime @default(now())
-  createdAt        DateTime @default(now())
+  name              String
+  diploma           String
+  currentlyEnrolled Boolean?
+  location          Location
+  gpa               String
+  description       String
+  startDate         DateTime  @default(now())
+  endDate           DateTime? @default(now())
+  createdAt         DateTime  @default(now())
 }
 
 type Certification {
-  name          String
-  organization  String
-  certificateId String
-  noExpiry      Boolean
-  createdAt     DateTime @default(now())
-  issuedOn      DateTime @default(now())
-  validUntil    DateTime @default(now())
-  certificate   String[]
+  name             String
+  organization     String
+  certificateId    String
+  createdAt        DateTime  @default(now())
+  issuedOn         DateTime  @default(now())
+  validUntil       DateTime? @default(now())
+  noExpiry         Boolean?
+  certificateMedia String[]
 }
 
 type Skills {
@@ -119,4 +114,9 @@ type Achievement {
 type Attachment {
   resume     String[]
   additional String[]
+}
+
+type SocialLinks {
+  platform String
+  link     String
 }

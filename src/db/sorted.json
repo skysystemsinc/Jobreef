@@ -1,0 +1,28 @@
+[
+  {
+    "label": "Sort Candidates By",
+    "listItem": ["Date Applied", "Relevance"]
+  },
+  {
+    "label": "Status",
+    "listItem": ["New", "Read", "Interviewing", "Closed"]
+  },
+  {
+    "label": "Education",
+    "listItem": [
+      "Masters Degree or Higher",
+      "Bachelor’s Degree or Higher",
+      "Associate Degree or Higher",
+      "Closed"
+    ]
+  },
+  {
+    "label": "Skills",
+    "listItem": [
+      "Associate Degree or Higher",
+      "System Architecture",
+      "Product Design",
+      "Leadership"
+    ]
+  }
+]

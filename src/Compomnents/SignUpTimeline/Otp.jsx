@@ -21,6 +21,7 @@ const Otp = ({ text, State, setState }) => {
           md: "30px 0px 62px 0px",
           base: "30px 0px 46px 0px",
         }}
+        fontWeight={400}
         whiteSpace={{ lg: "nowrap", base: "wrap" }}
         variant={"p11"}
       >

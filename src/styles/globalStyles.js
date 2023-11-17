@@ -186,10 +186,10 @@ const globalStyles = {
       },
     },
     "& .cui-steps__horizontal-step:last-of-type": {
-      marginTop:'3px !important'
+      marginTop: "3px !important",
     },
     "& .css-iorgig:not(:last-child):after": {
-      width:'calc(100% - 14px - calc(8px * 2)) !important'
+      width: "calc(100% - 14px - calc(8px * 2)) !important",
     },
   },
   stepperContainter2: {
@@ -197,7 +197,7 @@ const globalStyles = {
       xl: "90%",
       lg: "80%",
       md: "73%",
-      
+
       base: "99%",
     },
     // width: { md: "440px", base: "96%" },
@@ -284,6 +284,9 @@ const globalStyles = {
       boxShadow: "none",
       // Make the checkbox round
     },
+  },
+  toastStyle: {
+    position: "bottom-right",
   },
 };
 export default globalStyles;

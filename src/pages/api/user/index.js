@@ -1,38 +1,54 @@
 import prisma from "@/lib/prisma";
-import UserModel from "@/model/user";
+
 import bcrypt from "bcrypt";
 const addUser = async (req, res) => {
   const data = req.body;
+  console.log("data", data);
+  const emailExist = await prisma.User.findUnique({
+    where: {
+      email: data.email,
+    },
+  });
 
-  const hashPass = await bcrypt.hash(data.password, 10);
-
-  try {
-    const userCreated = await prisma.User.create({
-      data: {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        password: hashPass,
-        phoneNumber: data.phoneNumber,
-        role: data.role,
-        accountType: data.accountType,
-        companyId: data.companyId,
-        employeeId: data.employeeId ?? null,
-      },
-    });
-
-    res.status(201).json({
-      message: "user Created successfully",
-      data: userCreated,
-      success: true,
-    });
-  } catch (err) {
-    console.log("err", err);
-    res.status(500).json({
-      error: err,
-      message: "server error",
+  if (emailExist) {
+    res.status(400).json({
+      message: "Email already exists ",
       success: false,
     });
+  } else {
+    const hashPass = await bcrypt.hash(data.password, 10);
+    try {
+      const otp = Math.floor(1000 + Math.random() * 9000);
+      //TODO otp will send on email
+      const userCreated = await prisma.User.create({
+        data: {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          password: hashPass,
+          otp: otp,
+          // phoneNumber: data.phoneNumber,
+          role: data.role,
+          accountType: data.accountType,
+          companyId: data.companyId,
+          // employeeId: data.employeeId ?? null,
+          ...(data.employeeId !== undefined && { employeeId: data.employeeId }),
+        },
+      });
+
+      res.status(201).json({
+        message: "user Created successfully",
+        data: userCreated,
+        success: true,
+      });
+    } catch (err) {
+      console.log("err", err);
+      res.status(500).json({
+        error: err,
+        message: "server error",
+        success: false,
+      });
+    }
   }
 };
 
