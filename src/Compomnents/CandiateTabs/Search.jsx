@@ -17,16 +17,37 @@ const Search = ({ filterKey }) => {
   const archivedData =
     candidates && candidates?.filter((item) => item[filterKey] == true);
 
-  // const tablist = [
-  //   `All (${allData?.length ?? "0"})`,
-  //   `Not Interested (${archivedData?.length ?? "0"})`,
-  // ];
   const tablist = [`Search Results`, `Saved (8)`];
 
   const popOverListAll = ["Invite to Apply", "Save"];
   const popOverListArchived = ["Invite to Apply", "Delete"];
+  const sortArray = [
+    { label: "Sort Candidates By", listItem: ["Date Applied", "Relevance"] },
+    { label: "Status", listItem: ["New", "Read", "Interviewing", "Closed"] },
+    {
+      label: "Education",
+      listItem: [
+        "Masters Degree or Higher",
+        "Bachelor’s Degree or Higher",
+        "Associate Degree or Higher",
+        "Closed",
+      ],
+    },
+
+    {
+      label: "Skills",
+
+      listItem: [
+        "Associate Degree or Higher",
+        "System Architecture",
+        "Product Design",
+        "Leadership",
+      ],
+    },
+  ];
   const componentList = [
     <All
+    sortArray={sortArray}
       searcBox
       data={allData}
       filterKey={filterKey}
@@ -38,6 +59,8 @@ const Search = ({ filterKey }) => {
       matchCandidate
       cardStatusDisable
       data={archivedData}
+    sortArray={sortArray}
+
       filterKey={filterKey}
       // cardStatus={"Archived"}
       popOverList={popOverListArchived}

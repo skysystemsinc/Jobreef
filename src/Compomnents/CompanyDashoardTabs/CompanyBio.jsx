@@ -214,7 +214,7 @@ const CompanyBio = () => {
         />
       </InputWrapper>
       <InputWrapper>
-        <Box sx={{width:'48%'}}>
+        <Box sx={{width:'49%'}}>
           <LabelInput
             state={State.telephone}
             setState={(e) => {

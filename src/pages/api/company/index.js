@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 
-import Company from "@/model/company";
+
 const addCompany = async (req, res) => {
   const data = req.body;
 
@@ -8,10 +8,11 @@ const addCompany = async (req, res) => {
     const companyCreated = await prisma.Company.create({
       data: {
         companyName: data.companyName,
-        country: data.country,
-        city: data.city,
-        address: data.address,
-        province: data.province,
+        location: data.location,
+        // country: data.country,
+        // city: data.city,
+        // address: data.address,
+        // province: data.province,
         industry: data.industry,
         directory: data.directory,
         noOfEmployees: data.noOfEmployees,
@@ -40,6 +41,9 @@ const addCompany = async (req, res) => {
 const GetAllCompany = async (req, res) => {
   try {
     const companies = await prisma.Company.findMany({
+      include: {
+        user: true,
+      },
       // where: {
       //   socialLinks: [
       //     {

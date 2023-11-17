@@ -195,13 +195,13 @@ const components = {
 
       footerLink: {
         fontWeight: 400,
-        
+
         color: "white.100 ",
         fontFamily: "var(--chakra-\fonts-sora)",
         // fontFamily:sora.variable,
         fontSize: ["13px", "14px", "14px"],
         // lineHeight:{ md: '24px' , base:"20px"},
-        lineHeight: { md: "15px", base:"14px"},
+        lineHeight: { md: "15px", base: "14px" },
         // fontSize: "20px",
       },
     },
@@ -222,10 +222,10 @@ const components = {
         fontWeight: 400,
         // fontSize: "16px",
         color: "gray.100",
-        transition:'.5s',
-        cursor:"pointer",
-        _hover:{
-          backgroundColor:'blue.400',
+        transition: ".5s",
+        cursor: "pointer",
+        _hover: {
+          backgroundColor: "blue.400",
         },
         height: { md: "46px", base: "40px" },
       },
@@ -289,6 +289,34 @@ const components = {
             // textTransform: " capitalize",
 
             color: "gray.100",
+            fontWeight: 400,
+            fontSize: "13px",
+          },
+        },
+
+        // color: "brand.100",
+      },
+      simple: {
+        field: {
+          borderRadius: "8px",
+          bg: "D0D5DD !important",
+          fontFamily: "var(--chakra-\fonts-openSans)",
+          color: "black.100 !important",
+          // bg: "text.gray !important",
+          height:'39px',
+          border: "1px solid",
+          borderColor: "gray.900",
+          // borderColor: "red",
+          borderRadius: "8px",
+          // p: "10px 20px 20px 12px",
+          pb:"5px",
+          // boxShadow: " 0px 4px 20px 0px #0000000D !important",
+          _placeholder: {
+            color: "gray.100    ",
+            fontFamily: "var(--chakra-\fonts-openSans)",
+            // p: "20px 20px 20px 20px",
+            // textTransform: " capitalize",
+            lineHeight: "20px",
             fontWeight: 400,
             fontSize: "13px",
           },

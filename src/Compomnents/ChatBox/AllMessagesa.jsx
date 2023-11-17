@@ -11,9 +11,10 @@ const AllMessages = () => {
 
   return (
     <Box
-      my={"20px"}
+    // mt={"px"}
+      mb={"20px"}
       sx={globalStyles.scrollBar}
-      height={"400px"}
+      height={"350px"}
       position={"relative"}
       // border={"1px solid red"}
     >
@@ -21,7 +22,7 @@ const AllMessages = () => {
       overflowY={"scroll"}
       sx={globalStyles.scrollBar}
 
-       maxHeight={"400px"} position={"absolute"} width={"100%"} bottom={"0px"}>
+       maxHeight={"350px"} position={"absolute"} width={"100%"} bottom={"0px"}>
         {activeConversation.messages?.map((item) => {
           if (item.sender) {
             return (

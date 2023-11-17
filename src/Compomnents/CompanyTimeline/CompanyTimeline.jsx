@@ -9,6 +9,7 @@ import {
   Image,
   Input,
   useMediaQuery,
+  useToast,
 } from "@chakra-ui/react";
 import { Step, Steps, useSteps } from "chakra-ui-steps";
 import CompanyBio from "./CompanyBio";
@@ -23,6 +24,10 @@ import leftblue_2 from "@/assets/Images/leftblue_2.png";
 import whitetick from "@/assets/Images/white-tick.svg";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import endPoints from "@/Utils/endpoints";
+import { roles } from "@/Utils/role";
+import { BACKEND_URL } from "@/Utils/urls";
+import Loader from "../Loader/Loader";
 
 const steps = [
   { label: "Company Bio" },
@@ -38,11 +43,12 @@ export const CompanyTimeline = ({ variant }) => {
     noOfEmployees: "",
     yearEstablished: "",
     webLink: "",
-    decsription: "",
+    description: "",
     country: "",
     province: "",
     city: "",
     address: "",
+    loading: false,
     platform: "",
     link: "",
     logo: false,
@@ -55,6 +61,7 @@ export const CompanyTimeline = ({ variant }) => {
   });
 
   const router = useRouter();
+  const toast = useToast();
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
@@ -69,18 +76,85 @@ export const CompanyTimeline = ({ variant }) => {
     // }
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
-  const handleNext = async () => {
-    if (isLastStep) {
-        nextStep();
-    
-
-      return;
-    }
-    if (!hasCompletedAllSteps) {
-      nextStep();
+  const handleNext =  (e) => {
+    e.preventDefault()
+    if (activeStep == 2) {
+      handleRegister();
     } else {
-      router.push("/company/profile-setting");
+      nextStep();
     }
+  };
+
+  const handleRegister = async () => {
+
+    try {
+      const postData = await axios({
+        method: "POST",
+        url: `${BACKEND_URL}${endPoints.company}`,
+        data: {
+          companyName: State.companyName,
+          location: {
+            country: State.country,
+            province: State.province,
+            city: State.city,
+            address: State.address,
+          },
+          // [role == roles.company ? "companyId" : "employeeId"]: id,
+          industry: State.industry,
+          directory: State.directory,
+          noOfEmployees: parseInt(State.noOfEmployees),
+          yearEstablished: parseInt(State.yearEstablished),
+          description: State.description,
+          webUrl: State.webLink,
+          companyLogo: State.logo,
+          socialLinks: State.links,
+        },
+      });
+      if (postData) {
+        handleUserAssociation(postData.data.data.id);
+        // console.log("postData", postData);
+      }
+    } catch (err) {
+      const errorMessage = err?.response?.data.message;
+      console.log("errr", err);
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+        };
+      });
+      toast({
+        position: "bottom-right",
+
+        title: errorMessage,
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
+  };
+  const handleUserAssociation = (companyId) => {
+    const role = localStorage.getItem("role");
+    const id = localStorage.getItem("id");
+    try {
+      const userAssociation = axios({
+        method: "PUT",
+        url: `${BACKEND_URL}${endPoints.user}/${id}`,
+        data: {
+          role: role,
+          [role == roles.company ? "companyId" : "employeeId"]: companyId,
+        },
+      });
+      if (userAssociation) {
+        setState((prev) => {
+          return {
+            ...prev,
+            loading: false,
+          };
+        });
+        router.push("/company/profile-setting");
+      }
+    } catch (err) {}
   };
   return (
     <Flex
@@ -266,7 +340,7 @@ export const CompanyTimeline = ({ variant }) => {
               variant={"blue-btn"}
               onClick={handleNext}
             >
-              {"Next"}
+              {State.loading ? <Loader /> : "Next"}
             </Button>
           </>
         )}

@@ -11,7 +11,7 @@ import {
 import React from "react";
 import { BiFilter, BiSortDown } from "react-icons/bi";
 import { TiTick } from "react-icons/ti";
-const CheckBoxDropDown = ({ label, listItme }) => {
+const CheckBoxDropDown = ({ label, listItem }) => {
   return (
     <Menu closeOnSelect={false}>
       <MenuButton
@@ -37,7 +37,7 @@ const CheckBoxDropDown = ({ label, listItme }) => {
       <MenuList minWidth="max-content">
         {/* <MenuDivider /> */}
         <MenuOptionGroup title="" type="checkbox">
-          {listItme?.map((item , index) => {
+          {listItem?.map((item , index) => {
             return (
               <MenuItemOption
               key={index}

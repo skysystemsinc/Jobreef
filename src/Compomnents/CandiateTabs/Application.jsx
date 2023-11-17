@@ -27,14 +27,41 @@ const Application = ({ filterKey }) => {
   const [showSelectCandidate, setshowSelectCandidate] = useState(false);
   const popOverListAll = ["Download Attachments", "Archive"];
   const popOverListArchived = ["Restore", "Delete"];
+
+  const sortArray = [
+    { label: "Sort Candidates By", listItem: ["Date Applied", "Relevance"] },
+    { label: "Status", listItem: ["New", "Read", "Interviewing", "Closed"] },
+    {
+      label: "Education",
+      listItem: [
+        "Masters Degree or Higher",
+        "Bachelor’s Degree or Higher",
+        "Associate Degree or Higher",
+        "Closed",
+      ],
+    },
+
+    {
+      label: "Skills",
+
+      listItem: [
+        "Associate Degree or Higher",
+        "System Architecture",
+        "Product Design",
+        "Leadership",
+      ],
+    },
+  ];
   const componentList = [
     <All
+      sortArray={sortArray}
       data={allData}
       filterKey={filterKey}
       cardStatus={"Interviewing"}
       popOverList={popOverListAll}
     />,
     <Archived
+      sortArray={sortArray}
       data={archivedData}
       filterKey={filterKey}
       cardStatus={"Archived"}

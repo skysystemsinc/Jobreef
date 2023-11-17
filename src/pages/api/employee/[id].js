@@ -1,79 +1,76 @@
+import prisma from "@/lib/prisma";
 
-
-const DeleteUser = async (req, res) => {
+const DeleteCompany = async (req, res) => {
   try {
-    // const deleteUser = await UserModel.findOneAndDelete({ _id: req.query.id });
-    const deleteUser = await prisma.User.delete({
+    const deleteEmployee = await prisma.Employee.delete({
       where: {
         id: req.query.id,
       },
     });
 
-    if (!deleteUser) {
+    if (!deleteEmployee) {
       return res.status(404).json({
-        message: `No user with id ${req.query.id}`,
+        message: `No employee with id ${req.query.id}`,
         success: false,
       });
     }
     res.status(200).json({
-      message: "User deleted successfully",
+      message: "Employee deleted successfully",
       success: true,
     });
   } catch (err) {
     res.status(500).json({
       error: err,
+      message: `No Employee with id ${req.query.id}`,
       success: false,
     });
   }
 };
-const UpdateUser = async (req, res) => {
+const UpdateCompany = async (req, res) => {
   const newObj = { ...req.body };
   try {
-    const user = await prisma.User.update({
+    const employee = await prisma.Employee.update({
       where: {
         id: req.query.id,
       },
       data: newObj,
     });
-    if (!user) {
+    console.log("employee", employee);
+    if (!employee) {
       return res.status(404).json({
-        message: `No user with id ${req.query.id}`,
+        message: `No employee with id ${req.query.id}`,
         success: false,
       });
     }
     res.status(200).json({
-      message: "User updated successfully",
+      message: "Employee updated successfully",
       success: true,
-
     });
   } catch (err) {
     res.status(500).json({
       error: err,
+      message: `No employee with id ${req.query.id}`,
       success: false,
-      message: `No user with id ${req.query.id}`,
-
     });
   }
 };
-const GetSingleUser = async (req, res) => {
+
+const GetSingleEmployee = async (req, res) => {
   try {
-    // const user = await UserModel.findOne({ _id: req.query.id });
-    const user = await prisma.User.findUnique({
-      include: {
-        company: true,
-      },
+    const employee = await prisma.Employee.findUnique({
       where: {
         id: req.query.id,
       },
     });
-    if (!user) {
+
+    if (!employee) {
       return res.status(404).json({
-        message: `No User with id ${req.query.id}`,
+        message: `No EMployee with id ${req.query.id}`,
         success: false,
       });
     }
     res.status(200).json({
-      data: user,
+      data: employee,
       success: true,
     });
   } catch (err) {
@@ -83,19 +80,19 @@ const GetSingleUser = async (req, res) => {
     });
   }
 };
+
 export default async function handler(req, res) {
   // switch the methods
-  
 
   switch (req.method) {
     case "GET": {
-      return GetSingleUser(req, res);
+      return GetSingleEmployee(req, res);
     }
-    case "PUT": {
-      return UpdateUser(req, res);
+    case "PATCH": {
+      return UpdateCompany(req, res);
     }
     case "DELETE": {
-      return DeleteUser(req, res);
+      return DeleteCompany(req, res);
     }
   }
 }

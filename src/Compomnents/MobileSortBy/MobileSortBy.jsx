@@ -1,25 +1,30 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
 import CheckBoxDropDown from "../CheckBoxDropDown/CheckBoxDropDown";
+import globalStyles from "@/styles/globalStyles";
 
-const MobileSortBy = () => {
-  const listItme = ["Date Applied", "Relevance"];
-  const listItme2 = ["New", "Read", "Interviewing", "Closed"];
-  const listItme3 = ["Masters Degree or Higher", "Bachelor’s Degree or Higher", "Associate Degree or Higher", "Closed"];
-  const listItme4 = ["Associate Degree or Higher", "System Architecture", "Product Design", "Leadership"];
+const MobileSortBy = ({ sortArray }) => {
   return (
     <Box
       mb={"20px"}
       flexWrap={"nowrap"}
+      sx={globalStyles.scrollBar}
       overflowX={"scroll"}
       display={"flex"}
       alignItems={"center"}
       gap={{ md: "20px", base: "12px" }}
     >
-      <CheckBoxDropDown listItme={listItme} label="Sort Candidates By" />
-      <CheckBoxDropDown listItme={listItme2} label="Status" />
+      {sortArray?.map((item, ind) => {
+        return (
+          <Box key={ind}>
+            <CheckBoxDropDown listItem={item.listItem} label={item.label} />
+          </Box>
+        );
+      })}
+      {/* <CheckBoxDropDown listItme={listItme2} label="Status" />
       <CheckBoxDropDown listItme={listItme3} label="Education" />
       <CheckBoxDropDown listItme={listItme3} label="Skills" />
+       */}
     </Box>
   );
 };

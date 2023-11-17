@@ -65,7 +65,7 @@ const PersonalInfo = ({ State, setState }) => {
         <Checkbox
           borderRadius={"10px"}
           onChange={handleSelectCompany}
-          checked={company}
+          checked={  company}
           size="md"
           defaultChecked
           colorScheme="blue"

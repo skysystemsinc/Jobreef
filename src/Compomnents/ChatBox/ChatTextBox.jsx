@@ -1,9 +1,16 @@
-import { Box, Button, Textarea } from "@chakra-ui/react";
+import { Box, Button, Input, Textarea } from "@chakra-ui/react";
 import React from "react";
 
 const ChatTextBox = () => {
   return (
     <Box position={"relative"}>
+       <Input
+       mb={"10px"}
+        placeholder={"Add subject"}
+        size="sm"
+        variant={"simple"}
+        
+      />
       <Textarea
         placeholder={"Send a message"}
         size="sm"

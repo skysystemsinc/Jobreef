@@ -11,6 +11,7 @@ import SerarchBox from "./SerarchBox";
 const All = ({
   filterKey,
   matchCandidate,
+  sortArray,
   cardStatus,
   cardStatusDisable,
   // data,
@@ -72,8 +73,8 @@ const All = ({
   return (
     <Box mt={{ md: "31px", base: "15px" }}>
       {searcBox ? <SerarchBox /> : null}
-      <Box display={{ lg: "none", base: "block" }}>
-        <MobileSortBy />
+      <Box display={{ lg: "block", base: "block" }}>
+        <MobileSortBy sortArray={sortArray} />
       </Box>
       <Box display={"flex"} gap={"31px"}>
         <Box>
@@ -82,7 +83,7 @@ const All = ({
               return (
                 <Box key={ind}>
                   <CandidateCard
-                  cardStatusDisable
+                  cardStatusDisable={cardStatusDisable}
                     data={item}
                     matchCandidate={matchCandidate}
                     cardStatus={cardStatus}
@@ -93,9 +94,9 @@ const All = ({
               );
             })}
         </Box>
-        <Box display={{ lg: "block", base: "none" }}>
+        {/* <Box display={{ lg: "block", base: "none" }}>
           <SortBy matchCandidate={matchCandidate} />
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );

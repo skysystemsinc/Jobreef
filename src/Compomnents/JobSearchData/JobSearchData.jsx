@@ -42,7 +42,7 @@ const JobSearchData = ({ setIsOpen }) => {
           alignItems="center" // Center the items vertically
           gap={'10px'}
         >
-          <InputGroup border={'1px solid lightgray'} display={"flex"} justifyContent={"center"} alignItems={"center"} px={"10px"}>
+          <InputGroup  borderRadius={"7px"} border={'1px solid lightgray'} display={"flex"} justifyContent={"center"} alignItems={"center"} px={"10px"}>
             <InputLeftElement
               pointerEvents="none"
               children={<Heading variant={"p7"} fontWeight={700} color={"gray.text"}>What</Heading>}
@@ -50,14 +50,17 @@ const JobSearchData = ({ setIsOpen }) => {
             />
             <Input
               ml={"10px"}
-              color={"black"}
-              type="text"
               variant="bg-input"
+              // color={"black"}
+              // type="text"
               placeholder="Job title, keywords, or company"
-              _placeholder={{ color: "rgba(0, 0, 0, 0.6)" }}
+              // _placeholder={{ color: "rgba(0, 0, 0, 0.6)" }}
+              borderRadius={"7px"}
+              // bg={"gray.200"}
+              bg={"transparent"}
+
               marginRight="2"
               onChange={(e) => setHandleCompanyEntry(e.target.value)}
-              bg={"gray.200"}
             />
             <InputRightElement
               pointerEvents="none"
@@ -65,7 +68,7 @@ const JobSearchData = ({ setIsOpen }) => {
             />
           </InputGroup>
 
-          <InputGroup border={'1px solid lightgray'} display={"flex"} justifyContent={"center"} alignItems={"center"} px={"10px"}>
+          <InputGroup  borderRadius={"7px"} border={'1px solid lightgray'} display={"flex"} justifyContent={"center"} alignItems={"center"} px={"10px"}>
             <InputLeftElement
               pointerEvents="none"
               children={<Heading variant={"p7"} fontWeight={700} color={"gray.text"}>Where</Heading>}
@@ -73,13 +76,16 @@ const JobSearchData = ({ setIsOpen }) => {
             />
             <Input
               ml={"15px"}
-              color={"black"}
-              type="text"
+              borderRadius={"7px"}
+
               variant="bg-input"
+              // color={"black"}
+              bg={"transparent"}
+              // type="text"
               placeholder="Search by Location e.g. “remote”"
-              _placeholder={{ color: "rgba(0, 0, 0, 0.6)" }}
-              marginRight="2"
-              bg={"gray.200"}
+              // _placeholder={{ color: "rgba(0, 0, 0, 0.6)" }}
+              // marginRight="2"
+              // bg={"gray.200"}
               onChange={(e) => setHandleLocationEntry(e.target.value)}
             />
              <InputRightElement

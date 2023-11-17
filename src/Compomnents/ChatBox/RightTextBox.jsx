@@ -1,4 +1,4 @@
-import { Box, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Divider, Heading, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import profile from "@/assets/Images/profile.svg";
 import UnreadMessage from "../ChatBox/UnreadMessage";
@@ -21,18 +21,22 @@ const RightTextBox = ({ data }) => {
         </Heading>
       </Box>
 
-      <Heading
+      <Box
         bg={"blue.800"}
         padding={"10px 14px"}
-        borderRadius={"8px"}
+        borderRadius={"5px"}
         color={"blue.300"}
         boxShadow={
           "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)"
         }
-        variant={"p12"}
       >
-        {data.text}
-      </Heading>
+        <Heading fontWeight={700} color={"blue.300"} variant={"p4"}>
+          Subject
+        </Heading>
+        <Divider borderColor={"gray.100"}  my={"7px"}/>
+
+        <Heading variant={"p12"}>{data.text}</Heading>
+      </Box>
     </Box>
   );
 };

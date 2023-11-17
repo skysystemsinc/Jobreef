@@ -28,15 +28,44 @@ const MatchCandidate = ({ filterKey }) => {
   const [showSelectCandidate, setshowSelectCandidate] = useState(false);
   const popOverListAll = ["Invite to Apply", "Not Interested"];
   const popOverListArchived = ["Delete", "Restore"];
+  const sortArray = [
+    { label: "Sort Candidates By", listItem: ["Relevance"] },
+
+    {
+      label: "Education",
+      listItem: [
+        "Masters Degree or Higher",
+        "Bachelor’s Degree or Higher",
+        "Associate Degree or Higher",
+        "Closed",
+      ],
+    },
+
+    {
+      label: "Skills",
+
+      listItem: [
+        "Associate Degree or Higher",
+        "System Architecture",
+        "Product Design",
+        "Leadership",
+      ],
+    },
+  ];
   const componentList = [
     <All
+    sortArray={sortArray}
       data={allData}
+      cardStatusDisable
       matchCandidate
       filterKey={filterKey}
       cardStatus={"Interviewing"}
       popOverList={popOverListAll}
     />,
     <Archived
+    sortArray={sortArray}
+
+      cardStatusDisable
       data={archivedData}
       filterKey={filterKey}
       matchCandidate

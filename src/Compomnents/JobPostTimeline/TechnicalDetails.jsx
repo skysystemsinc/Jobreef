@@ -152,22 +152,8 @@ const TechnicalDetails = ({ state, setState }) => {
           placeholder="Select Rate"
           label={"Rate"}
         />
-        <LabelInput
-          state={state.tags}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, tags: e.target.value };
-            });
-          }}
-          labelVariant={"label"}
-          type="text"
-          dropdown
-          variant={"bg-input"}
-          placeholder="Select Tags for Job Post"
-          label={"Tags"}
-        />
       </InputWrapper>
-      <InputWrapper style={{width:"100%"}}>
+      <InputWrapper style={{ width: "100%" }}>
         <LabelInput
           state={state.rate}
           setState={(e) => {
@@ -182,7 +168,24 @@ const TechnicalDetails = ({ state, setState }) => {
           dropdown
           placeholder="Select seniority level"
           label={"Seniority Level"}
-        /> 
+        />
+      </InputWrapper>
+
+      <InputWrapper>
+        <LabelInput
+          state={state.tags}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, tags: e.target.value };
+            });
+          }}
+          labelVariant={"label"}
+          type="text"
+          dropdown
+          variant={"bg-input"}
+          placeholder="Select Tags for Job Post"
+          label={"Tags"}
+        />
       </InputWrapper>
     </Box>
   );

@@ -1,16 +1,10 @@
-import { Box, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Divider, Heading, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import profile from "@/assets/Images/profile.svg";
 import UnreadMessage from "../ChatBox/UnreadMessage";
 const LeftTextBox = ({ data }) => {
   return (
-    <Box
-      mb={"10px"}
-      bg={"transparent"}
-      maxW={"500px"}
-      transition={".5s"}
-      pb="10px"
-    >
+    <Box mb={"10px"} maxW={"500px"} transition={".5s"} pb="10px">
       <Box display={"flex"} justifyContent={"space-between"} width={"100%"}>
         <Box display={"flex"} alignItems={"flex-start"} gap={"10px"}>
           <Image
@@ -30,19 +24,25 @@ const LeftTextBox = ({ data }) => {
         </Heading>
       </Box>
 
-      <Heading
+      <Box
         margin={"0px 0px 0px 50px"}
         px={4}
         pt={2}
-        borderRadius={'8px'}
+        borderRadius={"5px"}
+        bg={"blue.500"}
         boxShadow={
           "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)"
         }
-        color={"blue.300"}
-        variant={"p12"}
+        pb={"10px"}
       >
-        {data.text}
-      </Heading>
+        <Heading fontWeight={700} color={"white.100"} variant={"p4"}>
+          Subject
+        </Heading>
+        <Divider my={"8px"}/>
+        <Heading color={"white.100"} variant={"p12"}>
+          {data.text}
+        </Heading>
+      </Box>
     </Box>
   );
 };

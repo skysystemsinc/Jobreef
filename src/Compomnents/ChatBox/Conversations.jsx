@@ -89,7 +89,7 @@ const Conversations = ({ disableEdit }) => {
       </Box>
 
       <Box
-        height={"534px"}
+        height={"575px"}
         overflowY={"scroll"}
         sx={globalStyles.scrollBar}
         mt={"15px"}
