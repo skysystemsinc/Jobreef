@@ -13,6 +13,7 @@ import {
   Textarea,
   UnorderedList,
   useMediaQuery,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import LabelInput from "../LabelInput/LabelInput";
@@ -21,8 +22,19 @@ import { Link } from "@chakra-ui/next-js";
 import { BsDot, BsPlusLg } from "react-icons/bs";
 import upload from "@/assets/Images/upload.svg";
 import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
+import Loader from "../Loader/Loader";
+import { roles } from "@/Utils/role";
+import axios from "axios";
+import endPoints from "@/Utils/endpoints";
+import { BACKEND_URL } from "@/Utils/urls";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
-const SocialLink = ({ State, setState }) => {
+const SocialLink = ({ nextStep, State, setState, handlePrevious }) => {
+  const toast = useToast();
+  const router = useRouter();
+  const isAuthenticated = useSelector((state) => state.authentication.value);
+  
   const [isSmallerThe500] = useMediaQuery("(max-width: 787px)");
   const handleDelete = (index) => {
     const updatedLinks = [...State.links];
@@ -57,7 +69,7 @@ const SocialLink = ({ State, setState }) => {
     });
   };
 
-  const handleaddMore = () => {
+  const handleAddMore = () => {
     const updatedLinks = [...State.links];
     updatedLinks.push({ platform: "", link: "" });
     setState((prev) => {
@@ -67,6 +79,88 @@ const SocialLink = ({ State, setState }) => {
       };
     });
     // setFormData(updatedFormData);
+  };
+  const handleRegister = async () => {
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: true,
+      };
+    });
+    try {
+      const postData = await axios({
+        method: "POST",
+        url: `${BACKEND_URL}${endPoints.company}`,
+        data: {
+          companyName: State.companyName,
+
+          // [role == roles.company ? "companyId" : "employeeId"]: id,
+          industry: State.industry,
+          directory: State.directory,
+          noOfEmployees: parseInt(State.noOfEmployees),
+          yearEstablished: parseInt(State.yearEstablished),
+          description: State.description,
+          webUrl: State.webLink,
+          companyLogo: State.logo,
+          socialLinks: State.links,
+        },
+      });
+      if (postData) {
+        handleUserAssociation(postData.data.data.id);
+        // console.log("postData", postData);
+      }
+    } catch (err) {
+      const errorMessage = err?.response?.data.message;
+      console.log("errr", err);
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+        };
+      });
+      toast({
+        position: "bottom-right",
+
+        title: errorMessage,
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
+  };
+  const handleUserAssociation = (companyId) => {
+    const role =isAuthenticated.role;
+    const id =isAuthenticated.userId;
+    try {
+      const userAssociation = axios({
+        method: "PUT",
+        url: `${BACKEND_URL}${endPoints.user}/${id}`,
+        data: {
+          role: role,
+          location: [
+            {
+              country: State.country,
+              province: State.province,
+              city: State.city,
+              address: State.address,
+            },
+          ],
+          [ "companyId" ]: companyId,
+        },
+      });
+      if (userAssociation) {
+        setState((prev) => {
+          return {
+            ...prev,
+            loading: false,
+          };
+        });
+        // router.push("/company/profile-setting");
+        nextStep()
+      }
+    } catch (err) {
+      console.log("user error ", err);
+    }
   };
 
   return (
@@ -88,15 +182,7 @@ const SocialLink = ({ State, setState }) => {
               dropdown
               label={"Social Links"}
             />
-            {/* <LabelInput
-              state={item.link}
-              setState={ (e)=> handleLinkChange(e, index)}
-              labelVariant={"label"}
-              type="text"
-              variant={"bg-input"}
-              placeholder="Paste link to company social network page"
-              label={"Link"}
-            /> */}
+
             <Box width={isSmallerThe500 ? "96%" : "100%"} position={"relative"}>
               {isSmallerThe500 ? (
                 <Input
@@ -123,9 +209,8 @@ const SocialLink = ({ State, setState }) => {
                   cursor: "pointer",
                   position: "absolute",
                   top: {
-                 
                     md: "37px",
-                
+
                     // sm: "9px",
                     base: "9px",
                   },
@@ -141,16 +226,32 @@ const SocialLink = ({ State, setState }) => {
         );
       })}
 
-      {/* <Flex justifyContent={"center"}> */}
       <Button
-        onClick={handleaddMore}
+        onClick={handleAddMore}
         variant={"blue-btn"}
         width={"max-content"}
         px={{ md: "30px", base: "20px" }}
       >
         Add More
       </Button>
-      {/* </Flex> */}
+      <Flex
+        width="100%"
+        justify="center"
+        mt={{ md: "43px", base: "43px" }}
+        pb={"30px"}
+        gap={4}
+      >
+        <Button onClick={handlePrevious} variant="outline-blue">
+          {" Back"}
+        </Button>
+        <Button
+          // width={{ md: "200px", sm: "180px", base: "130px" }}
+          variant={"blue-btn"}
+          onClick={handleRegister}
+        >
+          {State.loading ? <Loader /> : "Next"}
+        </Button>
+      </Flex>
     </Box>
   );
 };

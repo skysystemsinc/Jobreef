@@ -16,7 +16,7 @@ const companies = () => {
 
         <CompanyTabs />
       </Box>
-      <DashboardFooter />
+      <DashboardFooter waveImage/>
 
     </OperatorLayout>
   );

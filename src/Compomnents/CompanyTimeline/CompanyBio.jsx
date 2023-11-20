@@ -1,6 +1,8 @@
 import {
   Box,
+  Button,
   Checkbox,
+  Flex,
   FormLabel,
   Heading,
   Image,
@@ -10,6 +12,7 @@ import {
   ListItem,
   Textarea,
   UnorderedList,
+  useToast,
 } from "@chakra-ui/react";
 import React from "react";
 import LabelInput from "../LabelInput/LabelInput";
@@ -19,8 +22,15 @@ import { BsDot } from "react-icons/bs";
 import upload from "@/assets/Images/upload.svg";
 import UploadBox from "../UploadBox/UploadBox";
 import CompanyLogoPreview from "../CompanyLogoPreview/CompanyLogoPreview";
+import Loader from "../Loader/Loader";
+import globalStyles from "@/styles/globalStyles";
+import endPoints from "@/Utils/endpoints";
+import axios from "axios";
+import { BACKEND_URL } from "@/Utils/urls";
 
-const CompanyBio = ({ State, setState }) => {
+const CompanyBio = ({ nextStep, State, setState }) => {
+  const toast = useToast();
+
   const list = [
     "Please upload logo in minimum 200x200 resolution",
     "The acceptable formats of the copy are .PDF, .JPEG or .PNG",
@@ -37,6 +47,26 @@ const CompanyBio = ({ State, setState }) => {
         };
       });
     }
+  };
+
+
+  const handleNext = () => {
+    if (
+      State.companyName === "" ||
+      State.directory === "" ||
+      State.description === "" ||
+      State.logo === ""
+    ) {
+      toast({
+        position: globalStyles.toastStyle.position,
+        title: `Required fields are empty`,
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+      return;
+    }
+    nextStep();
   };
   return (
     <Box>
@@ -69,7 +99,6 @@ const CompanyBio = ({ State, setState }) => {
           label={"Industry"}
         />
       </InputWrapper>
-
       <InputWrapper>
         <LabelInput
           state={State.directory}
@@ -157,7 +186,20 @@ const CompanyBio = ({ State, setState }) => {
         />
       )}
 
-     
+      <Flex
+        width="100%"
+        justify="center"
+        mt={{ md: "17px", base: "14px" }}
+        gap={4}
+      >
+        <Button
+          // width={{ "2xl": "200px", md: "140px", sm: "120px", base: "100px" }}
+          variant={"blue-btn"}
+          onClick={handleNext}
+        >
+          {State.loading ? <Loader /> : "Next"}
+        </Button>
+      </Flex>
     </Box>
   );
 };

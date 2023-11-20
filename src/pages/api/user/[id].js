@@ -1,4 +1,4 @@
-
+import prisma from "@/lib/prisma";
 
 const DeleteUser = async (req, res) => {
   try {
@@ -28,30 +28,33 @@ const DeleteUser = async (req, res) => {
 };
 const UpdateUser = async (req, res) => {
   const newObj = { ...req.body };
+  
   try {
     const user = await prisma.User.update({
       where: {
         id: req.query.id,
       },
-      data: newObj,
+      data: {
+        location: {
+          create: newObj.location,
+        },
+      },
+      include: {
+        location: true, // Include all posts in the returned object
+      },
     });
-    if (!user) {
-      return res.status(404).json({
-        message: `No user with id ${req.query.id}`,
-        success: false,
-      });
-    }
+
     res.status(200).json({
       message: "User updated successfully",
+      data:user,
       success: true,
-
     });
   } catch (err) {
+    console.log("err", err);
     res.status(500).json({
       error: err,
       success: false,
       message: `No user with id ${req.query.id}`,
-
     });
   }
 };
@@ -85,7 +88,6 @@ const GetSingleUser = async (req, res) => {
 };
 export default async function handler(req, res) {
   // switch the methods
-  
 
   switch (req.method) {
     case "GET": {

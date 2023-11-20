@@ -4,11 +4,16 @@ import React, { useState } from "react";
 import TextCard from "../TextCard/TextCard";
 import ExperianceForm from "./ExperianceForm";
 import ExperianceCard from "../ExperianceCard/ExperianceCard";
+import { useRouter } from "next/router";
 
-const WorkExperiance = ({ state, setState }) => {
-  // const [experianceData, setexperianceData] = useState([]);
-
-  // const experianceData = [];
+const WorkExperiance = ({nextStep}) => {
+  const router = useRouter();
+  const [state, setState] = useState({
+    edit: false,
+    delete: false,
+    experienceData: [],
+    loading: false,
+  });
   const experienceData = [
     {
       companyName: "Microsoft",
@@ -47,15 +52,10 @@ const WorkExperiance = ({ state, setState }) => {
     <Box>
       {state.addExperience || state.edit ? (
         <Box display={"flex"} justifyContent={"center"}>
-          <ExperianceForm
-            state={state}
-            setState={setState}
-            // setaddExperiance={setaddExperiance}
-          />
+          <ExperianceForm state={state} setState={setState} />
         </Box>
       ) : (
         <Box width={"100%"} mx={"auto"}>
-          {/* <ExperianceCard state={state} setState={setState} /> */}
           {experienceData.map((item, ind) => {
             return (
               <Box key={ind}>
@@ -79,6 +79,28 @@ const WorkExperiance = ({ state, setState }) => {
             >
               Add New Experience
             </Button>
+          </Flex>
+
+          <Flex
+            width="100%"
+            justify="center"
+            mt={{ md: "43px", base: "3px" }}
+            pb={"30px"}
+            gap={4}
+          >
+            <>
+              <Button
+                onClick={() => {
+                  router.push("/candidate/my-resume");
+                }}
+                variant="outline-blue"
+              >
+                {" Cancel"}
+              </Button>
+              <Button onClick={nextStep} variant={"blue-btn"}>
+                {state.loading ? <Loader /> : "Next"}
+              </Button>
+            </>
           </Flex>
         </Box>
       )}

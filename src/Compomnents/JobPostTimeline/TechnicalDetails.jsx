@@ -136,23 +136,7 @@ const TechnicalDetails = ({ state, setState }) => {
           label={"Maximum Salary "}
         />
       </InputWrapper>
-      <InputWrapper>
-        <LabelInput
-          state={state.rate}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, rate: e.target.value };
-            });
-          }}
-          labelVariant={"label"}
-          type="date"
-          variant={"bg-input"}
-          dropdownOption={rateOptions}
-          dropdown
-          placeholder="Select Rate"
-          label={"Rate"}
-        />
-      </InputWrapper>
+  
       <InputWrapper style={{ width: "100%" }}>
         <LabelInput
           state={state.rate}
@@ -168,6 +152,21 @@ const TechnicalDetails = ({ state, setState }) => {
           dropdown
           placeholder="Select seniority level"
           label={"Seniority Level"}
+        />
+            <LabelInput
+          state={state.rate}
+          setState={(e) => {
+            setState((prev) => {
+              return { ...prev, rate: e.target.value };
+            });
+          }}
+          labelVariant={"label"}
+          type="date"
+          variant={"bg-input"}
+          dropdownOption={rateOptions}
+          dropdown
+          placeholder="Select Rate"
+          label={"Rate"}
         />
       </InputWrapper>
 
