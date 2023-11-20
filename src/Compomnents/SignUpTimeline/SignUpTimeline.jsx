@@ -32,9 +32,8 @@ const steps = [
 ];
 
 export const SignUpTimeline = ({ candidate, variant }) => {
-  const router = useRouter();
-  const toast = useToast();
-  const { company, setCompany } = useContext(Role_context);
+
+  const { company } = useContext(Role_context);
   const [State, setState] = useState({
     name: "",
     lastName: "",
@@ -52,184 +51,19 @@ export const SignUpTimeline = ({ candidate, variant }) => {
     initialStep: 0,
   });
 
-  const isLastStep = activeStep === steps.length - 1;
   const [compeletedStep, setcompeletedStep] = useState([]);
-  const initialRender = useRef(true);
+
   useEffect(() => {
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
 
-  const handleNext = async () => {
-    if (activeStep == 0) {
-      validation();
-    } else if (activeStep == 1) {
-      handleRegister();
-    } else if (activeStep == 2) {
-      verifyOtp();
-    }
-  };
-
-  const handleRegister = async () => {
-    if (State.confirmPassword != State.password) {
-      toast({
-        position: "bottom-right",
-        title: `password does not match`,
-        status: "error",
-        variant: "subtle",
-        isClosable: true,
-      });
-      return;
-    }
-    setState((prev) => {
-      return {
-        ...prev,
-        loading: true,
-      };
-    });
-    try {
-      const postData = await axios({
-        method: "POST",
-        url: `${BACKEND_URL}${endPoints.user}`,
-        data: {
-          firstName: State.name,
-          lastName: State.lastName,
-          email: State.email,
-          password: State.password,
-          role: company ? roles.company : roles.employee,
-        },
-      });
-      if (postData) {
-        nextStep();
-
-        setState((prev) => {
-          return {
-            ...prev,
-            loading: false,
-            name: "",
-            lastName: "",
-            password: "",
-            confirmPassword: "",
-            email: "",
-            showEmail: postData.data.data.email,
-            userId: postData.data.data.id,
-          };
-        });
-      } else {
-      }
-    } catch (err) {
-      const errorMessage = err?.response?.data.message;
-      console.log("errr", err?.response?.data.message);
-      setState((prev) => {
-        return {
-          ...prev,
-          loading: false,
-        };
-      });
-      toast({
-        position: "bottom-right",
-
-        title: errorMessage,
-        status: "error",
-        variant: "subtle",
-        isClosable: true,
-      });
-    }
-  };
-  const validation = () => {
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
-    // Example usage:
-    const isValidEmail = emailPattern.test(State.email);
-    if (State.name == "" || State.lastName == "" || State.email == "") {
-      toast({
-        position: globalStyles.toastStyle.position,
-        title: `Required fields are empty`,
-        status: "error",
-        variant: "subtle",
-        isClosable: true,
-      });
-      return;
-    }
-    if (!isValidEmail) {
-      toast({
-        position: globalStyles.toastStyle.position,
-        title: `Email is invalid`,
-        status: "error",
-        variant: "subtle",
-        isClosable: true,
-      });
-      return;
-    }
-    nextStep();
-  };
-
-  const verifyOtp = async () => {
-    if (State.otp == "") {
-      toast({
-        position: "bottom-right",
-        title: `Please enter otp`,
-        status: "error",
-        variant: "subtle",
-        isClosable: true,
-      });
-      return;
-    }
-    try {
-      setState((prev) => {
-        return {
-          ...prev,
-          loading: true,
-        };
-      });
-      const verify = await axios({
-        method: "POST",
-        url: `${BACKEND_URL}${endPoints.verifyOtp}`,
-        data: {
-          userId: State.userId,
-          otp: parseInt(State.otp),
-        },
-      });
-      if (verify) {
-        localStorage.setItem("id", verify.data.data.id);
-        localStorage.setItem("role", verify.data.data.role);
-        toast({
-          position: "bottom-right",
-          title: `Email verify Successfully`,
-          status: "success",
-          variant: "subtle",
-          isClosable: true,
-        });
-        setState((prev) => {
-          return {
-            ...prev,
-            loading: false,
-          };
-        });
-        // setTimeout(() => {
-        if (verify.data.data.role == roles.company) {
-          router.push("/company/registration");
-        } else {
-          
-          window.location.href = "/candidate/registration";
-        }
-        // }, 1000);
-      }
-    } catch (err) {
-      const errorMessage = err?.response?.data.message;
-
-      setState((prev) => {
-        return {
-          ...prev,
-          loading: false,
-        };
-      });
-      toast({
-        position: "bottom-right",
-        title: errorMessage,
-        status: "error",
-        variant: "subtle",
-        isClosable: true,
-      });
+  const handlePrevious = () => {
+    prevStep();
+    if (compeletedStep.includes(activeStep)) {
+      const updatedCompletedSteps = compeletedStep.filter(
+        (step) => step != activeStep
+      );
+      setcompeletedStep(updatedCompletedSteps);
     }
   };
   return (
@@ -308,11 +142,26 @@ export const SignUpTimeline = ({ candidate, variant }) => {
                 }}
               >
                 {index == 0 ? (
-                  <PersonalInfo State={State} setState={setState} />
+                  <PersonalInfo
+                    nextStep={nextStep}
+                    activeStep={activeStep}
+                    handlePrevious={handlePrevious}
+                    State={State}
+                    setState={setState}
+                  />
                 ) : index == 1 ? (
-                  <Password State={State} setState={setState} />
+                  <Password
+                    nextStep={nextStep}
+                    activeStep={activeStep}
+                    handlePrevious={handlePrevious}
+                    State={State}
+                    setState={setState}
+                  />
                 ) : index == 2 ? (
                   <Otp
+                    nextStep={nextStep}
+                    activeStep={activeStep}
+                    handlePrevious={handlePrevious}
                     text={
                       company
                         ? `Please enter the 4 digit code send to ${State.showEmail}`
@@ -321,59 +170,12 @@ export const SignUpTimeline = ({ candidate, variant }) => {
                     State={State}
                     setState={setState}
                   />
-                ) : (
-                  <PersonalInfo />
-                )}
+                ) : null}
               </Box>
             </Step>
           );
         })}
       </Steps>
-      <Flex
-        width="100%"
-        justify="center"
-        mt={{ md: "43px", base: "43px" }}
-        pb={"30px"}
-        gap={4}
-      >
-        <>
-          <Button
-            isDisabled={activeStep === 0}
-            onClick={() => {
-              prevStep();
-              if (compeletedStep.includes(activeStep)) {
-                const updatedCompletedSteps = compeletedStep.filter(
-                  (step) => step != activeStep
-                );
-                setcompeletedStep(updatedCompletedSteps);
-              }
-            }}
-            variant="outline-blue"
-          >
-            {" Back"}
-          </Button>
-          <Button
-            // width={{ md: "200px", sm: "180px", base: "130px" }}
-            variant={"blue-btn"}
-            onClick={handleNext}
-          >
-            {State.loading ? <Loader /> : isLastStep ? "Verify" : "Next"}
-          </Button>
-          {/* {isLastStep && !company ? (
-            <a className="blue-btn" href="/candidate/registration">
-              Verify
-            </a>
-          ) : (
-            <Button
-              // width={{ md: "200px", sm: "180px", base: "130px" }}
-              variant={"blue-btn"}
-              onClick={handleNext}
-            >
-              {State.loading ? <Loader /> : isLastStep ? "Verify" : "Next"}
-            </Button>
-          )} */}
-        </>
-      </Flex>
     </Flex>
   );
 };

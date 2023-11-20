@@ -17,6 +17,9 @@ const SignUpLayout = dynamic(() => import("../Layout/SignUpLayout"), {
 
 const SignUp = ({ candidate }) => {
   const { company, setCompany } = useContext(Role_context);
+  // const company = useSelector((state) => state.authentication.i);
+  console.log("isAuthenticated", isAuthenticated);
+  
   return (
     <Box
       padding={{ md: "75px 30px 0px 30px", base: "75px 15px 0px 15px" }}

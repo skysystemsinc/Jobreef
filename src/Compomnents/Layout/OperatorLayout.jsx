@@ -10,7 +10,7 @@ import OperatorSidebar from "../SideBar/OperatorSidebar";
 const OperatorLayout = ({ children }) => {
   return (
     <>
-      <BottomWaveImage />
+      
       <OperatorSidebar />
       <Box
         // position={"relative"}

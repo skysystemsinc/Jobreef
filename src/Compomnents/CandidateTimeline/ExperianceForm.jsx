@@ -36,8 +36,6 @@ const ExperianceForm = ({ state, setState }) => {
   const router = useRouter();
   return (
     <Box mt={{ md: "13px" }} width={"100%"}>
-      {/* <Image src={profile.src} /> */}
-
       <Box mt={"0px"}>
         <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
           <LabelInput
@@ -270,7 +268,7 @@ const ExperianceForm = ({ state, setState }) => {
               setState((prev) => {
                 return { ...prev, addExperience: false, edit: false };
               });
-              // tabIndex == 0 ? null : setTabIndex(--tabIndex);
+              
             }}
             variant="outline-blue"
           >

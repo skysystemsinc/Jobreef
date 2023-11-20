@@ -15,7 +15,7 @@ const users = () => {
         </Box>
         <UsersTab />
       </Box>
-      <DashboardFooter />
+      <DashboardFooter waveImage/>
 
     </OperatorLayout>
   );

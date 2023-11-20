@@ -52,12 +52,14 @@ export const CandidateTimeline = ({ candidate, variant }) => {
     currentlyWorking: false,
     country: "",
     state: "",
+    province: "",
     city: "",
     number: "",
+    loading: false,
     description: "",
   });
   const { nextStep, prevStep, reset, activeStep } = useSteps({
-    initialStep: 0,
+    initialStep: 1,
   });
 
   const hasCompletedAllSteps = activeStep == steps.length;
@@ -65,20 +67,16 @@ export const CandidateTimeline = ({ candidate, variant }) => {
   const [compeletedStep, setcompeletedStep] = useState([]);
   const initialRender = useRef(true);
   useEffect(() => {
-    // if (initialRender.current) {
-    //   initialRender.current = false;
-    //   return;
-    // }
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
 
-  const handleNext = async () => {
-    if (activeStep === 6) {
-      router.push("/candidate/profile-setting");
-    } else {
-      nextStep();
-    }
-  };
+  // const handleNext = async () => {
+  //   if (activeStep === 6) {
+  //     router.push("/candidate/profile-setting");
+  //   } else {
+  //     nextStep();
+  //   }
+  // };
 
   return (
     <Flex
@@ -116,7 +114,6 @@ export const CandidateTimeline = ({ candidate, variant }) => {
           },
           // ml: {lg:20},
           "& .cui-steps__horizontal-step": {
-            
             _active: {
               "&::after": {
                 bg: "blue.500 !important",
@@ -206,9 +203,15 @@ export const CandidateTimeline = ({ candidate, variant }) => {
                 }}
               >
                 {index == 0 ? (
-                  <Overview state={state} setState={setState} />
+                  <Overview
+                    nextStep={nextStep}
+                    activeStep={activeStep}
+                    prevStep={prevStep}
+                    state={state}
+                    setState={setState}
+                  />
                 ) : index == 1 ? (
-                  <WorkExperiance state={state} setState={setState} />
+                  <WorkExperiance nextStep={nextStep} state={state} setState={setState} />
                 ) : index == 2 ? (
                   <Education state={state} setState={setState} />
                 ) : index == 3 ? (
@@ -226,7 +229,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
         })}
       </Steps>
 
-      {(state.addExperience && activeStep == 1) ||
+      {/* {(state.addExperience && activeStep == 1) ||
       state.edit ||
       (state.addEducation && activeStep == 2) ||
       (state.addCertificate && activeStep == 3) ? null : (
@@ -252,7 +255,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
             </Button>
           </>
         </Flex>
-      )}
+      )} */}
     </Flex>
   );
 };

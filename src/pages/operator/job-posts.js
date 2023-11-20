@@ -16,7 +16,7 @@ const jobposts = () => {
         </Box>
         <JobPostsTabs />
       </Box>
-      <DashboardFooter />
+      <DashboardFooter waveImage />
 
     </OperatorLayout>
   );

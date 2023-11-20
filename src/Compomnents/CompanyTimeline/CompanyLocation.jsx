@@ -1,6 +1,8 @@
 import {
   Box,
+  Button,
   Checkbox,
+  Flex,
   FormLabel,
   Heading,
   Image,
@@ -10,6 +12,7 @@ import {
   ListItem,
   Textarea,
   UnorderedList,
+  useToast,
 } from "@chakra-ui/react";
 import React from "react";
 import LabelInput from "../LabelInput/LabelInput";
@@ -17,8 +20,30 @@ import InputWrapper from "../InputWrapper/InputWrapper";
 import { Link } from "@chakra-ui/next-js";
 import { BsDot } from "react-icons/bs";
 import upload from "@/assets/Images/upload.svg";
+import Loader from "../Loader/Loader";
+import globalStyles from "@/styles/globalStyles";
 
-const CompanyLocation = ({ State, setState }) => {
+const CompanyLocation = ({nextStep, handlePrevious, State, setState }) => {
+  const toast = useToast();
+
+  const handleNext = () => {
+    if (
+      State.country === "" ||
+      State.province === "" ||
+      State.city === "" ||
+      State.address === ""
+    ) {
+      toast({
+        position: globalStyles.toastStyle.position,
+        title: `Required fields are empty`,
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+      return;
+    }
+    nextStep();
+  };
   return (
     <Box>
       <InputWrapper>
@@ -65,7 +90,6 @@ const CompanyLocation = ({ State, setState }) => {
           variant={"bg-input"}
           placeholder="Enter City"
           label={"City"}
-          
         />
         <LabelInput
           state={State.address}
@@ -81,6 +105,24 @@ const CompanyLocation = ({ State, setState }) => {
           label={"Street Address"}
         />
       </InputWrapper>
+      <Flex
+        width="100%"
+        justify="center"
+        mt={{ md: "43px", base: "43px" }}
+        pb={"30px"}
+        gap={4}
+      >
+        <Button onClick={handlePrevious} variant="outline-blue">
+          {" Back"}
+        </Button>
+        <Button
+          // width={{ md: "200px", sm: "180px", base: "130px" }}
+          variant={"blue-btn"}
+          onClick={handleNext}
+        >
+          {State.loading ? <Loader /> : "Next"}
+        </Button>
+      </Flex>
     </Box>
   );
 };

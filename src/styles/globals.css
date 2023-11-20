@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800&display=swap");
 .nintoFont {
   font-family: "Nunito", sans-serif;
 }
-.sora{
-  font-family: 'Sora', sans-serif !important;
+.sora {
+  font-family: "Sora", sans-serif !important;
 }
 .ql-snow {
   /* border-top: none !important; */
@@ -69,3 +69,6 @@ body {
   /* CSS rules for screens with a maximum width of 768px */
 }
 
+.chakra-alert__title {
+  font-weight: 600 !important;
+}

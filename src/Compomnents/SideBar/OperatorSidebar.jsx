@@ -14,6 +14,8 @@ import { useRouter } from "next/router";
 import white_candidate from "@/assets/Images/white_candidate.svg";
 import profile from "@/assets/Images/headerProfile.svg";
 import profile_white from "@/assets/Images/profile_white.svg";
+import upload_blog from "@/assets/Images/upload_blog.svg";
+import upload_blog_blue from "@/assets/Images/upload_blog_blue.svg";
 import Logo from "../Logo/Logo";
 import sidebarLogo from "@/assets/Images/sidebarLogo.svg";
 const OperatorSidebar = () => {
@@ -27,9 +29,7 @@ const OperatorSidebar = () => {
     {
       title: "Job Posts",
       icon:
-        router.pathname == "/operator/job-posts" 
-          ? white_job_post
-          : job_post,
+        router.pathname == "/operator/job-posts" ? white_job_post : job_post,
       pathname:
         router.pathname == "/company/create-job-post"
           ? "/company/create-job-post"
@@ -37,17 +37,13 @@ const OperatorSidebar = () => {
     },
     {
       title: "Users",
-      icon:
-        router.pathname == "/operator/users" ? white_candidate : candidate,
+      icon: router.pathname == "/operator/users" ? white_candidate : candidate,
       pathname: "/operator/users",
     },
 
     {
       title: "Companies",
-      icon:
-        router.pathname == "/operator/companies"
-          ? building
-          : blue_building,
+      icon: router.pathname == "/operator/companies" ? building : blue_building,
       pathname: "/operator/companies",
     },
     {
@@ -61,6 +57,14 @@ const OperatorSidebar = () => {
         router.pathname == "/company/add-members"
           ? "/company/add-members"
           : "/operator/operators",
+    },
+    {
+      title: "Upload Blogs",
+      icon:
+        router.pathname == "/operator/upload-blog"
+          ? upload_blog
+          : upload_blog_blue,
+      pathname: "/operator/upload-blog",
     },
   ];
   const activeStyle = {
@@ -95,10 +99,17 @@ const OperatorSidebar = () => {
       left={"0px"}
       boxShadow=" 0px 2px 15px 0px rgba(0, 0, 0, 0.06)"
     >
-      <Box display={{xl:"block", base:"none"}} p={{ xl: "30px 20px 0px 20px", base: "10px 10px 0px 7px" }}>
+      <Box
+        display={{ xl: "block", base: "none" }}
+        p={{ xl: "30px 20px 0px 20px", base: "10px 10px 0px 7px" }}
+      >
         <Logo />
       </Box>
-      <Box  p={"10px 8px"} bg={"white.100"} display={{xl:"none", base:"block"}}>
+      <Box
+        p={"10px 8px"}
+        bg={"white.100"}
+        display={{ xl: "none", base: "block" }}
+      >
         <Image width={"100px"} src={sidebarLogo.src} />
       </Box>
       <Box p={{ xl: "130px 20px 0px 10px", base: "70px 10px 0px 7px" }}>
