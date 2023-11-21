@@ -11,6 +11,7 @@ import { AiOutlineEyeInvisible } from "react-icons/ai";
 function PasswordInput({
   state,
   setState,
+  name,
   iconStyle,
   variant,
   placeholder,
@@ -25,6 +26,7 @@ function PasswordInput({
         onChange={setState}
         value={state}
         pr="4.5rem"
+        name={name}
         readOnly={readOnly}
         type={show ? "text" : "password"}
         placeholder={placeholder}

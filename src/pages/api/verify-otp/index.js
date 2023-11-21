@@ -1,5 +1,5 @@
 const verifyOtp = async (req, res) => {
-  const data = req.body;
+  const data =  JSON.parse( req.body);
   const verify = await prisma.User.findUnique({
     where: {
       id: data.userId,

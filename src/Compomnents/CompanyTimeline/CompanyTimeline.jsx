@@ -37,32 +37,6 @@ const steps = [
 ];
 
 export const CompanyTimeline = ({ variant }) => {
-  const isAuthenticated = useSelector((state) => state.authentication.value);
-  console.log("isAuthenticated",isAuthenticated)
-
-  const [State, setState] = useState({
-    companyName: "",
-    industry: "",
-    directory: "",
-    noOfEmployees: "",
-    yearEstablished: "",
-    webLink: "",
-    description: "",
-    country: "",
-    province: "",
-    city: "",
-    address: "",
-    loading: false,
-    platform: "",
-    link: "",
-    logo: false,
-    links: [
-      {
-        platform: "",
-        link: "",
-      },
-    ],
-  });
 
   const router = useRouter();
   const toast = useToast();
@@ -70,18 +44,12 @@ export const CompanyTimeline = ({ variant }) => {
     initialStep: 0,
   });
   const hasCompletedAllSteps = activeStep === steps.length;
-  const isLastStep = activeStep === steps.length - 1;
+
   const [compeletedStep, setcompeletedStep] = useState([]);
-  const initialRender = useRef(true);
+  
   useEffect(() => {
-    // if (initialRender.current) {
-    //   initialRender.current = false;
-    //   return;
-    // }
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
-
-
 
   const handlePrevious = () => {
     prevStep();
@@ -157,7 +125,7 @@ export const CompanyTimeline = ({ variant }) => {
           activeStep={activeStep}
         >
           {steps.map(({ label }, index) => {
-            const CostomeCheckIcon = () => {
+            const CostumeCheckIcon = () => {
               return (
                 <Heading
                   variant={"p1"}
@@ -172,7 +140,7 @@ export const CompanyTimeline = ({ variant }) => {
                 </Heading>
               );
             };
-            const CostomeIcon = () => {
+            const CostumeIcon = () => {
               return (
                 <Heading
                   variant={"p1"}
@@ -192,7 +160,7 @@ export const CompanyTimeline = ({ variant }) => {
             };
             return (
               <Step
-                checkIcon={CostomeCheckIcon}
+                checkIcon={CostumeCheckIcon}
                 label={
                   <Heading
                     variant={"p1"}
@@ -206,7 +174,7 @@ export const CompanyTimeline = ({ variant }) => {
                     {label}
                   </Heading>
                 }
-                icon={CostomeIcon}
+                icon={CostumeIcon}
                 flexDirection={"column"}
                 key={label}
               >
@@ -218,20 +186,19 @@ export const CompanyTimeline = ({ variant }) => {
                     width: "100%",
                   }}
                 >
-                  {
-                    index == 0 ? (
-                      <CompanyBio
-                        nextStep={nextStep}
-                        State={State}
-                        setState={setState}
-                      />
-                    ) : index == 1 ? (
-                      <CompanyLocation nextStep={nextStep} handlePrevious={handlePrevious} State={State} setState={setState} />
-                    ) : index == 2 ? (
-                      <SocialLink nextStep={nextStep} handlePrevious={handlePrevious} State={State} setState={setState} />
-                    ) : null
-                    // <PersonalInfo />
-                  }
+                  {index == 0 ? (
+                    <CompanyBio nextStep={nextStep} />
+                  ) : index == 1 ? (
+                    <CompanyLocation
+                      nextStep={nextStep}
+                      handlePrevious={handlePrevious}
+                    />
+                  ) : index == 2 ? (
+                    <SocialLink
+                      nextStep={nextStep}
+                      handlePrevious={handlePrevious}
+                    />
+                  ) : null}
                 </Box>
               </Step>
             );

@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 
 import bcrypt from "bcrypt";
 const addUser = async (req, res) => {
-  const data = req.body;
+  const data = JSON.parse( req.body);
   console.log("data", data);
   const emailExist = await prisma.User.findUnique({
     where: {

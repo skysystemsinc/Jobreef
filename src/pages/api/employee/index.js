@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 
 const addEmployee = async (req, res) => {
-  const data = req.body;
+  const data = JSON.parse( req.body);
 
   try {
     const employeeCreated = await prisma.Employee.create({

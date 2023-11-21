@@ -16,35 +16,83 @@ import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
 import globalStyles from "@/styles/globalStyles";
-import { format } from 'date-fns';
+import { format } from "date-fns";
+import CheckBox from "../CheckBox/CheckBox";
+import { httpRequest } from "@/helper/httpRrequest";
+import { BACKEND_URL } from "@/Utils/urls";
+import endPoints from "@/Utils/endpoints";
+import { useSelector } from "react-redux";
 const ExperianceForm = ({ state, setState }) => {
   const [readOnly, setReadOnly] = useState(false);
+  const employeeState = useSelector((state) => state.employeeRegister.value);
+
   const [Experience, setExperience] = useState({
     companyName: "",
     designation: "",
-    stateDate: new Date().toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' }),
-    endDate: new Date().toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' }),
+    stateDate: new Date().toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }),
+    endDate: new Date().toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }),
     country: "",
     state: "",
     city: "",
     streetAddress: "",
+
+    currentlyWorking: false,
     employmentType: "",
     jobFamily: "",
     jobSummary: "",
   });
-  
-  const router = useRouter();
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setExperience((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+  const handleCurrentlyWorking = (e) => {
+    e.target.checked == true ? setReadOnly(true) : setReadOnly(false);
+    setExperience((prev) => {
+      return { ...prev, currentlyWorking: e.target.checked };
+    });
+  };
+
+  const handleSave = async () => {
+    const body = {
+      workExperience: {
+        ...Experience,
+        location: {
+          country: Experience.country,
+          state: Experience.state,
+          city: Experience.city,
+          streetAddress: Experience.streetAddress,
+        },
+      },
+    };
+    const postData = await httpRequest(
+      `${BACKEND_URL}${endPoints.employee}/${employeeState.id}`,
+      "PUT",
+      body
+    );
+    console.log("postData",postData)
+  };
   return (
     <Box mt={{ md: "13px" }} width={"100%"}>
       <Box mt={"0px"}>
         <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
           <LabelInput
             state={Experience.companyName}
-            setState={(e) => {
-              setExperience((prev) => {
-                return { ...prev, companyName: e.target.value };
-              });
-            }}
+            setState={handleChange}
+            name={"companyName"}
             labelVariant={"label"}
             type="text"
             variant={"bg-input"}
@@ -52,13 +100,10 @@ const ExperianceForm = ({ state, setState }) => {
             label={"Company Name"}
           />
           <LabelInput
-            labelVariant={"label"}
             state={Experience.designation}
-            setState={(e) => {
-              setExperience((prev) => {
-                return { ...prev, designation: e.target.value };
-              });
-            }}
+            setState={handleChange}
+            name={"designation"}
+            labelVariant={"label"}
             type="text"
             variant={"bg-input"}
             placeholder="Enter your designation "
@@ -85,68 +130,52 @@ const ExperianceForm = ({ state, setState }) => {
 
             <Box width={"100%"} position={"relative"}>
               <Box>
-                {!readOnly ? (<LabelInput
-                  state={Experience.endDate}
-                  setState={(e) => {
-                    setExperience((prev) => {
-                      return { ...prev, endDate: e };
-                    });
-                  }}
-                  defaultValue={false}
-                  labelVariant={"label"}
-                  type="date"
-                  variant={"bg-input"}
-                  readOnly={readOnly}
-                  label={"Ending Date"}
-                />) : (<LabelInput
-                  // state={Experience.endDate}
-                  setState={(e) => {
-                    setExperience((prev) => {
-                      return {
-                        ...prev,
-                        endDate: new Date().toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' })
-                      };
-                    });
-                  }}
-                  defaultValue={false}
-                  labelVariant={"label"}
-                  type="text"
-                  variant={"bg-input"}
-                  readOnly={readOnly}
-                  placeholder= "Present"
-                  label={"Ending Date"}
-                />)}
+                {!readOnly ? (
+                  <LabelInput
+                    state={Experience.endDate}
+                    setState={(e) => {
+                      setExperience((prev) => {
+                        return { ...prev, endDate: e };
+                      });
+                    }}
+                    defaultValue={false}
+                    labelVariant={"label"}
+                    type="date"
+                    variant={"bg-input"}
+                    readOnly={readOnly}
+                    label={"Ending Date"}
+                  />
+                ) : (
+                  <LabelInput
+                    // state={Experience.endDate}
+                    // setState={(e) => {
+                    //   setExperience((prev) => {
+                    //     return {
+                    //       ...prev,
+                    //       endDate: new Date().toLocaleDateString(undefined, {
+                    //         year: "numeric",
+                    //         month: "2-digit",
+                    //         day: "2-digit",
+                    //       }),
+                    //     };
+                    //   });
+                    // }}
+                    defaultValue={false}
+                    labelVariant={"label"}
+                    type="text"
+                    variant={"bg-input"}
+                    readOnly={readOnly}
+                    placeholder="Present"
+                    label={"Ending Date"}
+                  />
+                )}
               </Box>
-              <Box
-                display={"flex"}
-                position={"absolute"}
-                bottom={"-30px"}
-                gap={"8px"}
-                alignItems={"center"}
-              >
-                <Checkbox
-                  // borderRadius={"10px"}
-                  checked={state.currentlyWorking}
-                  onChange={(e) => {
-                    e.target.checked == true
-                      ? setReadOnly(true)
-                      : setReadOnly(false);
-                    setState((prev) => {
-                      return { ...prev, currentlyWorking: e.target.checked };
-                    });
-                  }}
-                  sx={globalStyles.checkBoxStyle}
-                  borderColor={
-                    state.currentlyWorking ? "blue.500" : "black.200"
-                  }
-                  size="md"
-                  rounded={"md"}
-                  colorScheme="blue"
-                  // borderColor={"black.200"}
+              <Box mt={"10px"} position={"absolute"} bottom={"-30px"}>
+                <CheckBox
+                  label={"Currently Working Here"}
+                  selectSate={Experience.currentlyWorking}
+                  handleEvent={handleCurrentlyWorking}
                 />
-                <Heading variant={"p1"} color={state.currentlyWorking ? "blue.500" : "black.100"}>
-                  Currently Working Here
-                </Heading>
               </Box>
             </Box>
           </InputWrapper>
@@ -268,7 +297,6 @@ const ExperianceForm = ({ state, setState }) => {
               setState((prev) => {
                 return { ...prev, addExperience: false, edit: false };
               });
-              
             }}
             variant="outline-blue"
           >
@@ -277,12 +305,12 @@ const ExperianceForm = ({ state, setState }) => {
 
           <Button
             onClick={() => {
-              // setaddExperiance(false);
+              handleSave()
               setState((prev) => {
                 return { ...prev, addExperience: false, edit: false };
               });
             }}
-            // width={{ md: "160px", lg: "200px", sm: "140px", base: "120px" }}
+            
             width={"max-content"}
             px={{ md: "30px", base: "20px" }}
             variant={"blue-btn"}

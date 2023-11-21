@@ -25,6 +25,7 @@ import axios from "axios";
 import { BACKEND_URL } from "@/Utils/urls";
 import endPoints from "@/Utils/endpoints";
 import Loader from "../Loader/Loader";
+import { useSelector } from "react-redux";
 const steps = [
   { label: "Personal Info" },
   { label: "Password" },
@@ -32,20 +33,7 @@ const steps = [
 ];
 
 export const SignUpTimeline = ({ candidate, variant }) => {
-
-  const { company } = useContext(Role_context);
-  const [State, setState] = useState({
-    name: "",
-    lastName: "",
-    email: "",
-    loading: false,
-    role: company,
-    password: "",
-    confirmPassword: "",
-    otp: "",
-    showEmail: "",
-    userId: "",
-  });
+  const userState = useSelector((state) => state.userRegistration.value);
 
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
@@ -83,7 +71,7 @@ export const SignUpTimeline = ({ candidate, variant }) => {
         activeStep={activeStep}
       >
         {steps.map(({ label }, index) => {
-          const CostomeCheckIcon = () => {
+          const CostumeCheckIcon = () => {
             return (
               <Heading
                 variant={"p1"}
@@ -97,7 +85,7 @@ export const SignUpTimeline = ({ candidate, variant }) => {
               </Heading>
             );
           };
-          const CostomeIcon = () => {
+          const CostumeIcon = () => {
             return (
               <Heading
                 variant={"p1"}
@@ -116,8 +104,8 @@ export const SignUpTimeline = ({ candidate, variant }) => {
           };
           return (
             <Step
-              icon={CostomeIcon}
-              checkIcon={CostomeCheckIcon}
+              icon={CostumeIcon}
+              checkIcon={CostumeCheckIcon}
               label={
                 <Heading
                   variant={"p1"}
@@ -146,16 +134,14 @@ export const SignUpTimeline = ({ candidate, variant }) => {
                     nextStep={nextStep}
                     activeStep={activeStep}
                     handlePrevious={handlePrevious}
-                    State={State}
-                    setState={setState}
+                  
                   />
                 ) : index == 1 ? (
                   <Password
                     nextStep={nextStep}
                     activeStep={activeStep}
                     handlePrevious={handlePrevious}
-                    State={State}
-                    setState={setState}
+                    
                   />
                 ) : index == 2 ? (
                   <Otp
@@ -163,12 +149,11 @@ export const SignUpTimeline = ({ candidate, variant }) => {
                     activeStep={activeStep}
                     handlePrevious={handlePrevious}
                     text={
-                      company
-                        ? `Please enter the 4 digit code send to ${State.showEmail}`
+                      userState.isCompany
+                        ? `Please enter the 4 digit code send to ${userState.email}`
                         : "Please enter the 4 digit code sent to your email"
                     }
-                    State={State}
-                    setState={setState}
+             
                   />
                 ) : null}
               </Box>

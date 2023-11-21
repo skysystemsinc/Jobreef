@@ -1,5 +1,5 @@
 import { Box, Button, Flex, useToast } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import LabelInput from "../LabelInput/LabelInput";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import { Link } from "@chakra-ui/next-js";
@@ -8,14 +8,19 @@ import upload from "@/assets/Images/upload.svg";
 import axios from "axios";
 import endPoints from "@/Utils/endpoints";
 import { BACKEND_URL } from "@/Utils/urls";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loader/Loader";
+import { employee } from "@/schema/stateSchema";
+import { httpRequest } from "@/helper/httpRrequest";
+import { addEmployee } from "@/Reudx/slices/employee";
 
-const Overview = ({ nextStep, activeStep, prevStep, state, setState }) => {
-  const isAuthenticated = useSelector((state) => state.authentication.value);
+const Overview = ({ nextStep, activeStep, prevStep }) => {
   const toast = useToast();
-
-  const handleRegister = async () => {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.authentication.value);
+  const employeeState = useSelector((state) => state.employeeRegister.value);
+  const [state, setState] = useState({ ...employeeState, loading: false });
+  const handleRegister =  () => {
     if (
       state.country === "" ||
       state.province === "" ||
@@ -39,27 +44,13 @@ const Overview = ({ nextStep, activeStep, prevStep, state, setState }) => {
       };
     });
     try {
-      const postData = await axios({
-        method: "POST",
-        url: `${BACKEND_URL}${endPoints.employee}`,
-        data: {
-          phoneNumber: parseInt(state.number),
-          summary: state.description,
-          workExperience: [],
-          education: [],
-          certification: [],
-          skills: [],
-          achievement: {},
-          attachment: {},
-        },
-      });
-      if (postData) {
-        handleUserAssociation(postData.data.data.id);
-        // console.log("postData", postData);
+      if (employeeState.id) {
+        handleUpdateEmployee();
+      } else {
+        handleCreateEmployee();
       }
+
     } catch (err) {
-      const errorMessage = err?.response?.data.message;
-      console.log("errr", err);
       setState((prev) => {
         return {
           ...prev,
@@ -69,7 +60,7 @@ const Overview = ({ nextStep, activeStep, prevStep, state, setState }) => {
       toast({
         position: "bottom-right",
 
-        title: errorMessage,
+        title: "Error",
         status: "error",
         variant: "subtle",
         isClosable: true,
@@ -80,22 +71,39 @@ const Overview = ({ nextStep, activeStep, prevStep, state, setState }) => {
     const role = isAuthenticated.role;
     const id = isAuthenticated.userId;
     try {
-      const userAssociation = axios({
-        method: "PUT",
-        url: `${BACKEND_URL}${endPoints.user}/${id}`,
-        data: {
-          role: role,
-          location: [
-            {
-              country: state.country,
-              province: state.province,
-              city: state.city,
-              // address: state.address,
-            },
-          ],
-          ["employeeId"]: employeeId,
-        },
-      });
+      const body = {
+        role: role,
+        location: [
+          {
+            country: state.country,
+            province: state.province,
+            city: state.city,
+            // address: state.address,
+          },
+        ],
+        ["employeeId"]: employeeId,
+      };
+      const userAssociation = httpRequest(
+        `${BACKEND_URL}${endPoints.user}/${id}`,
+        "PUT",
+        body
+      );
+      // const userAssociation = axios({
+      //   method: "PUT",
+      //   url: `${BACKEND_URL}${endPoints.user}/${id}`,
+      //   data: {
+      //     role: role,
+      //     location: [
+      //       {
+      //         country: state.country,
+      //         province: state.province,
+      //         city: state.city,
+      //         // address: state.address,
+      //       },
+      //     ],
+      //     ["employeeId"]: employeeId,
+      //   },
+      // });
       if (userAssociation) {
         setState((prev) => {
           return {
@@ -110,17 +118,58 @@ const Overview = ({ nextStep, activeStep, prevStep, state, setState }) => {
       console.log("user error ", err);
     }
   };
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setState((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+  const handleCreateEmployee = async () => {
+    const body = {
+      phoneNumber: parseInt(state.number),
+      summary: state.description,
+      workExperience: [],
+      education: [],
+      certification: [],
+      skills: [],
+      achievement: {},
+      attachment: {},
+    };
+    const postData = await httpRequest(
+      `${BACKEND_URL}${endPoints.employee}`,
+      "POST",
+      body
+    );
+    handleUserAssociation(postData.data.id);
+
+    dispatch(addEmployee({ ...state, id: postData.data.id }));
+  };
+  const handleUpdateEmployee = async () => {
+    const body = {
+      phoneNumber: parseInt(state.number),
+      summary: state.description,
+    };
+    const postData = await httpRequest(
+      `${BACKEND_URL}${endPoints.employee}/${employeeState.id}`,
+      "PUT",
+      body
+    );
+    handleUserAssociation(postData.data.id);
+
+    dispatch(addEmployee({ ...state }));
+  };
   return (
     <Box>
       <InputWrapper>
         <LabelInput
           state={state.country}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, country: e.target.value };
-            });
-          }}
+          setState={handleChange}
           labelVariant={"label"}
+          name={"country"}
           type="text"
           variant={"bg-input"}
           placeholder="Select your home country"
@@ -130,13 +179,10 @@ const Overview = ({ nextStep, activeStep, prevStep, state, setState }) => {
 
         <LabelInput
           state={state.province}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, province: e.target.value };
-            });
-          }}
-          dropdown
+          setState={handleChange}
           labelVariant={"label"}
+          name={"province"}
+          dropdown
           type="text"
           variant={"bg-input"}
           placeholder="Select your state / province"
@@ -146,11 +192,8 @@ const Overview = ({ nextStep, activeStep, prevStep, state, setState }) => {
       <InputWrapper>
         <LabelInput
           state={state.city}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, city: e.target.value };
-            });
-          }}
+          setState={handleChange}
+          name={"city"}
           labelVariant={"label"}
           type="text"
           dropdow
@@ -160,11 +203,8 @@ const Overview = ({ nextStep, activeStep, prevStep, state, setState }) => {
         />
         <LabelInput
           state={state.number}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, number: e.target.value };
-            });
-          }}
+          setState={handleChange}
+          name={"number"}
           labelVariant={"label"}
           type="number"
           variant={"bg-input"}
@@ -175,11 +215,8 @@ const Overview = ({ nextStep, activeStep, prevStep, state, setState }) => {
       <InputWrapper>
         <LabelInput
           state={state.description}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, description: e.target.value };
-            });
-          }}
+          setState={handleChange}
+          name={"description"}
           labelVariant={"label"}
           textarea
           variant={"bg-teaxtarea"}

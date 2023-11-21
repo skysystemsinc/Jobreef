@@ -39,9 +39,6 @@ const steps = [
 ];
 
 export const CandidateTimeline = ({ candidate, variant }) => {
-  const router = useRouter();
-
-  const { company, setCompany } = useContext(Role_context);
   const [state, setState] = useState({
     addExperience: true,
     addEducation: true,
@@ -55,8 +52,8 @@ export const CandidateTimeline = ({ candidate, variant }) => {
     province: "",
     city: "",
     number: "",
-    loading: false,
     description: "",
+    loading: false,
   });
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 1,
@@ -211,7 +208,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
                     setState={setState}
                   />
                 ) : index == 1 ? (
-                  <WorkExperiance nextStep={nextStep} state={state} setState={setState} />
+                  <WorkExperiance  prevStep={prevStep} nextStep={nextStep} state={state} setState={setState} />
                 ) : index == 2 ? (
                   <Education state={state} setState={setState} />
                 ) : index == 3 ? (

@@ -14,7 +14,7 @@ import {
   UnorderedList,
   useToast,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import LabelInput from "../LabelInput/LabelInput";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import { Link } from "@chakra-ui/next-js";
@@ -22,16 +22,23 @@ import { BsDot } from "react-icons/bs";
 import upload from "@/assets/Images/upload.svg";
 import Loader from "../Loader/Loader";
 import globalStyles from "@/styles/globalStyles";
+import { company } from "@/schema/stateSchema";
+import { useDispatch, useSelector } from "react-redux";
+import { addCompany } from "@/Reudx/slices/company";
 
-const CompanyLocation = ({nextStep, handlePrevious, State, setState }) => {
+const CompanyLocation = ({ nextStep, handlePrevious, State, setState }) => {
   const toast = useToast();
+  const dispatch = useDispatch()
+  const companyState = useSelector((state) => state.companyRegister.value);
 
+  
+  const [companyLocation, setCompanyLocation] = useState(companyState);
   const handleNext = () => {
     if (
-      State.country === "" ||
-      State.province === "" ||
-      State.city === "" ||
-      State.address === ""
+      companyLocation.country === "" ||
+      companyLocation.province === "" ||
+      companyLocation.city === "" ||
+      companyLocation.address === ""
     ) {
       toast({
         position: globalStyles.toastStyle.position,
@@ -42,18 +49,27 @@ const CompanyLocation = ({nextStep, handlePrevious, State, setState }) => {
       });
       return;
     }
+    dispatch(addCompany(companyLocation))
     nextStep();
+  };
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setCompanyLocation((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
   };
   return (
     <Box>
       <InputWrapper>
         <LabelInput
-          state={State.country}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, country: e.target.value };
-            });
-          }}
+          state={companyLocation.country}
+          setState={handleChange}
+          name={"country"}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -62,12 +78,9 @@ const CompanyLocation = ({nextStep, handlePrevious, State, setState }) => {
           label={"Country*"}
         />
         <LabelInput
-          state={State.province}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, province: e.target.value };
-            });
-          }}
+          state={companyLocation.province}
+          setState={handleChange}
+          name={"province"}
           dropdown
           labelVariant={"label"}
           type="text"
@@ -79,12 +92,9 @@ const CompanyLocation = ({nextStep, handlePrevious, State, setState }) => {
 
       <InputWrapper>
         <LabelInput
-          state={State.city}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, city: e.target.value };
-            });
-          }}
+          state={companyLocation.city}
+          setState={handleChange}
+          name={"city"}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -92,12 +102,9 @@ const CompanyLocation = ({nextStep, handlePrevious, State, setState }) => {
           label={"City"}
         />
         <LabelInput
-          state={State.address}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, address: e.target.value };
-            });
-          }}
+          state={companyLocation.address}
+          setState={handleChange}
+          name={"address"}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}

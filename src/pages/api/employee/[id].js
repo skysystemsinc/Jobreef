@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 
-const DeleteCompany = async (req, res) => {
+const DeleteEmployee = async (req, res) => {
   try {
     const deleteEmployee = await prisma.Employee.delete({
       where: {
@@ -26,8 +26,8 @@ const DeleteCompany = async (req, res) => {
     });
   }
 };
-const UpdateCompany = async (req, res) => {
-  const newObj = { ...req.body };
+const UpdateEmployee = async (req, res) => {
+  const newObj = { ...JSON.parse(req.body) };
   try {
     const employee = await prisma.Employee.update({
       where: {
@@ -44,9 +44,11 @@ const UpdateCompany = async (req, res) => {
     }
     res.status(200).json({
       message: "Employee updated successfully",
+      data: employee,
       success: true,
     });
   } catch (err) {
+    console.log("error", err);
     res.status(500).json({
       error: err,
       message: `No employee with id ${req.query.id}`,
@@ -71,6 +73,7 @@ const GetSingleEmployee = async (req, res) => {
     }
     res.status(200).json({
       data: employee,
+
       success: true,
     });
   } catch (err) {
@@ -88,11 +91,11 @@ export default async function handler(req, res) {
     case "GET": {
       return GetSingleEmployee(req, res);
     }
-    case "PATCH": {
-      return UpdateCompany(req, res);
+    case "PUT": {
+      return UpdateEmployee(req, res);
     }
     case "DELETE": {
-      return DeleteCompany(req, res);
+      return DeleteEmployee(req, res);
     }
   }
 }

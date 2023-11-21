@@ -11,15 +11,17 @@ import Logo from "@/Compomnents/Logo/Logo";
 import { role, roles } from "@/Utils/role";
 import dynamic from "next/dynamic";
 import { Role_context } from "@/context/context";
+import { useSelector } from "react-redux";
 const SignUpLayout = dynamic(() => import("../Layout/SignUpLayout"), {
   ssr: false,
 });
 
 const SignUp = ({ candidate }) => {
-  const { company, setCompany } = useContext(Role_context);
-  // const company = useSelector((state) => state.authentication.i);
   
-  
+  const company = useSelector(
+    (state) => state.userRegistration.value.isCompany
+  );
+
   return (
     <Box
       padding={{ md: "75px 30px 0px 30px", base: "75px 15px 0px 15px" }}
@@ -56,7 +58,7 @@ const SignUp = ({ candidate }) => {
         <Box display={"flex"} justifyContent={"center"} mb={"52px"}>
           <Logo />
         </Box>
-        <SignUpTimeline  />
+        <SignUpTimeline />
       </Box>
     </Box>
   );

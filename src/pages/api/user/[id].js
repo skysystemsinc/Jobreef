@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import bcrypt from "bcrypt";
 
 const DeleteUser = async (req, res) => {
   try {
@@ -27,14 +28,33 @@ const DeleteUser = async (req, res) => {
   }
 };
 const UpdateUser = async (req, res) => {
-  const newObj = { ...req.body };
-  
+  const newObj = { ...JSON.parse(req.body) };
+  // const emailExist = await prisma.User.findUnique({
+  //   where: {
+  //     email: newObj.email,
+  //   },
+  // });
+
+  // if (emailExist) {
+  //   res.status(400).json({
+  //     message: "Email already exists",
+  //     success: false,
+  //   });
+  //   return;
+  // }
+  let hashPass;
+  if (newObj.password) {
+    hashPass = await bcrypt.hash(newObj.password, 10);
+  }
+
   try {
     const user = await prisma.User.update({
       where: {
         id: req.query.id,
       },
       data: {
+        ...newObj,
+        ...(newObj.password && { password: hashPass }),
         location: {
           create: newObj.location,
         },
@@ -46,7 +66,7 @@ const UpdateUser = async (req, res) => {
 
     res.status(200).json({
       message: "User updated successfully",
-      data:user,
+      data: user,
       success: true,
     });
   } catch (err) {
