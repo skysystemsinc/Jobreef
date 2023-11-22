@@ -3,6 +3,7 @@ import { Checkbox, Heading } from "@chakra-ui/react";
 import React from "react";
 
 const CheckBox = ({selectSate, label, handleEvent}) => {
+  console.log("selectSate",selectSate)
   return (
     <Checkbox
       display={"flex"}
@@ -12,7 +13,7 @@ const CheckBox = ({selectSate, label, handleEvent}) => {
       onChange={handleEvent}
       checked={selectSate}
       size="md"
-      defaultChecked
+      
       colorScheme="blue"
       // border={"1px solid "}
       borderColor={selectSate ? "blue.500" : "gray.text"}

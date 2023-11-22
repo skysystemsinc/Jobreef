@@ -33,7 +33,22 @@ const UpdateEmployee = async (req, res) => {
       where: {
         id: req.query.id,
       },
-      data: newObj,
+      // data: newObj,
+      // data: {
+      //   workExperience: {
+      //     update: [
+      //       {
+      //         where: {
+      //           // specify the condition to identify the work experience to update
+      //           // use properties that uniquely identify the work experience
+      //           companyName: 'Old Company Name',
+      //         },
+      //         data: updatedWorkExperience,
+      //       },
+      //       // you can add more update blocks for additional work experiences
+      //     ],
+      //   },
+      // },
     });
     console.log("employee", employee);
     if (!employee) {
@@ -51,7 +66,7 @@ const UpdateEmployee = async (req, res) => {
     console.log("error", err);
     res.status(500).json({
       error: err,
-      message: `No employee with id ${req.query.id}`,
+      message: `Server Error`,
       success: false,
     });
   }

@@ -5,53 +5,36 @@ import menu from "@/assets/Images/menu.svg";
 import { useRouter } from "next/router";
 import Popovers from "../PaginatedTable/Popovers";
 import profile_icon from "@/assets/Images/profile_icon.svg";
-const InActive = () => {
+import OperatorButton from "./OperatorButton";
+const Pending = () => {
   const router = useRouter();
-  const handleEdit = () => {
-    router.push("/operator/edit-job-post");
-  };
-  const actionList = [
-    { title: "Edit", handleEvent: handleEdit },
-    { title: "Delete" },
-  ];
   const columns = [
     {
-      id: "id",
-      jobTitle: "job Title",
-      company: "Company",
+      name: "Name",
+      email: "Email",
+      role: "Role",
 
-      createdBy: "Created By",
       createdAt: "Created On (MM/DD/YY) ",
-      status: "Status ",
       Actions: "Actions",
     },
   ];
-  const keys = [
-    "id",
-    "jobTitle",
-    "company",
-    "status",
-    "createdBy",
-    "createdAt",
-    "Actions",
-  ];
+  const keys = ["name", "email", "role", "createdAt", "Actions"];
+  const actionList = ["Restore", "Delete"];
   const data = [
     {
-      id: "1",
-      jobTitle: "Systems Engineer",
-      company: "Microsoft",
-      createdBy: "user@example.org",
+      name: { image: profile_icon.src, name: "Tom Brady" },
+      email: "tom@tb12.com",
+      role: "Administrator",
+
       createdAt: "20/08/23",
-      status: "Inactive",
       Actions: <Popovers actionList={actionList} />,
     },
     {
-      id: "2",
-      jobTitle: "Systems Engineer",
-      company: "Microsoft",
-      createdBy: "user@example.org",
+      name: { image: profile_icon.src, name: "Tom Brady" },
+      email: "tom@tb12.com",
+      role: "Administrator",
+
       createdAt: "20/08/23",
-      status: "Inactive",
       Actions: <Popovers actionList={actionList} />,
     },
   ];
@@ -67,7 +50,8 @@ const InActive = () => {
   };
   return (
     <>
-      <Box minH={"62vh"} pb={"20px"}>
+      <OperatorButton />
+      <Box minH={"52vh"} pb={"20px"}>
         <PaginatedTable
           keys={keys}
           totalPages={totalPages}
@@ -82,4 +66,4 @@ const InActive = () => {
   );
 };
 
-export default InActive;
+export default Pending;

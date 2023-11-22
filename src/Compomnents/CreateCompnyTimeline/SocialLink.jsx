@@ -35,15 +35,16 @@ import { addCompany } from "@/Reudx/slices/company";
 const SocialLink = ({ nextStep, handlePrevious }) => {
   const toast = useToast();
   const router = useRouter();
+  const { id } = router.query;
+
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.authentication.value);
   let companyState = useSelector((state) => state.companyRegister.value);
-  console.log("companyState",companyState)
+  console.log("companyState", companyState);
 
   let [State, setState] = useState({
     loading: false,
   });
-
 
   const [isSmallerThe500] = useMediaQuery("(max-width: 787px)");
   const handleDelete = (index) => {
@@ -60,156 +61,26 @@ const SocialLink = ({ nextStep, handlePrevious }) => {
       platform: event.target.value,
     };
     dispatch(addCompany({ ...companyState, links: updatedLinks }));
-    // setState((prev) => {
-    //   return {
-    //     ...prev,
-    //     links: updatedLinks,
-    //   };
-    // });
   };
 
   const handleLinkChange = (event, index) => {
     let updatedLinks = [...companyState.links];
     updatedLinks[index] = { ...updatedLinks[index], link: event.target.value };
     dispatch(addCompany({ ...companyState, links: updatedLinks }));
-
-    // setState((prev) => {
-    //   return {
-    //     ...prev,
-    //     links: updatedLinks,
-    //   };
-    // });
   };
 
   const handleAddMore = () => {
     const updatedLinks = [...companyState.links];
     updatedLinks.push({ platform: "", link: "" });
     dispatch(addCompany({ ...companyState, links: updatedLinks }));
-
-    // setState((prev) => {
-    //   return {
-    //     ...prev,
-    //     links: updatedLinks,
-    //   };
-    // });
-    // setFormData(updatedFormData);
-  };
-  const handleRegister = async () => {
-    setState((prev) => {
-      return {
-        ...prev,
-        loading: true,
-      };
-    });
-    try {
-      const body = {
-        companyName: companyState.companyName,
-        industry: companyState.industry,
-        directory: companyState.directory,
-        noOfEmployees: parseInt(companyState.noOfEmployees),
-        yearEstablished: parseInt(companyState.yearEstablished),
-        description: companyState.description,
-        webUrl: companyState.webLink,
-        companyLogo: companyState.logo,
-        socialLinks: companyState.links,
-      };
-      const postData =await httpRequest(
-        `${BACKEND_URL}${endPoints.company}`,
-        "POST",
-        body
-      );
-      console.log("postData",postData)
-      // const postData = await axios({
-      //   method: "POST",
-      //   url: `${BACKEND_URL}${endPoints.company}`,
-      //   data: {
-      //     companyName: State.companyName,
-
-      //     // [role == roles.company ? "companyId" : "employeeId"]: id,
-      //     industry: State.industry,
-      //     directory: State.directory,
-      //     noOfEmployees: parseInt(State.noOfEmployees),
-      //     yearEstablished: parseInt(State.yearEstablished),
-      //     description: State.description,
-      //     webUrl: State.webLink,
-      //     companyLogo: State.logo,
-      //     socialLinks: State.links,
-      //   },
-      // });
-      if (postData) {
-        handleUserAssociation(postData.data.id);
-        // console.log("postData", postData);
-      }
-    } catch (err) {
-      console.log("err",err)
-      setState((prev) => {
-        return {
-          ...prev,
-          loading: false,
-        };
-      });
-      toast({
-        position: "bottom-right",
-
-        title: "Error",
-        status: "error",
-        variant: "subtle",
-        isClosable: true,
-      });
-    }
-  };
-  const handleUserAssociation = (companyId) => {
-    const role = isAuthenticated.role;
-    const id = isAuthenticated.userId;
-    const body = {
-      role: role,
-      location: [
-        {
-          country: companyState.country,
-          province: companyState.province,
-          city: companyState.city,
-          address: companyState.address,
-        },
-      ],
-      ["companyId"]: companyId,
-    };
-    try {
-      const userAssociation = httpRequest(
-        `${BACKEND_URL}${endPoints.user}/${id}`,
-        "PUT",
-        body
-      );
-      // const userAssociation = axios({
-      //   method: "PUT",
-      //   url: `${BACKEND_URL}${endPoints.user}/${id}`,
-      //   data: {
-      //     role: role,
-      //     location: [
-      //       {
-      //         country: State.country,
-      //         province: State.province,
-      //         city: State.city,
-      //         address: State.address,
-      //       },
-      //     ],
-      //     ["companyId"]: companyId,
-      //   },
-      // });
-      if (userAssociation) {
-        setState((prev) => {
-          return {
-            ...prev,
-            loading: false,
-          };
-        });
-        // router.push("/company/profile-setting");
-        nextStep();
-      }
-    } catch (err) {
-      console.log("user error ", err);
-    }
   };
 
+  const handleCancel = () => {
+    router.push("/operator/companies");
+  };
+  const handleCreate = () => {
+    router.push("/operator/companies");
+  };
   return (
     <Box pr={"20px"}>
       {companyState?.links.map((item, index) => {
@@ -288,15 +159,15 @@ const SocialLink = ({ nextStep, handlePrevious }) => {
         pb={"30px"}
         gap={4}
       >
-        <Button onClick={handlePrevious} variant="outline-blue">
-          {" Back"}
+        <Button onClick={handleCancel} variant="outline-blue">
+          {" Cancel"}
         </Button>
         <Button
           // width={{ md: "200px", sm: "180px", base: "130px" }}
           variant={"blue-btn"}
-          onClick={handleRegister}
+          onClick={handleCreate}
         >
-          {State.loading ? <Loader /> : "Next"}
+          {State.loading ? <Loader /> : id ? "Update" : "Create"}
         </Button>
       </Flex>
     </Box>

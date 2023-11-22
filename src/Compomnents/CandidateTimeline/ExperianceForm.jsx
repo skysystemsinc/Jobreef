@@ -22,30 +22,22 @@ import { httpRequest } from "@/helper/httpRrequest";
 import { BACKEND_URL } from "@/Utils/urls";
 import endPoints from "@/Utils/endpoints";
 import { useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 const ExperianceForm = ({ state, setState }) => {
   const [readOnly, setReadOnly] = useState(false);
   const employeeState = useSelector((state) => state.employeeRegister.value);
 
   const [Experience, setExperience] = useState({
-    companyName: "",
-    designation: "",
-    stateDate: new Date().toLocaleDateString(undefined, {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    }),
-    endDate: new Date().toLocaleDateString(undefined, {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    }),
     country: "",
     state: "",
     city: "",
     streetAddress: "",
-
+    companyName: "",
+    designation: "",
+    startDate: null,
+    endDate: null,
     currentlyWorking: false,
-    employmentType: "",
+    employeeType: "",
     jobFamily: "",
     jobSummary: "",
   });
@@ -67,23 +59,35 @@ const ExperianceForm = ({ state, setState }) => {
   };
 
   const handleSave = async () => {
+    const id = uuidv4();
     const body = {
-      workExperience: {
-        ...Experience,
-        location: {
-          country: Experience.country,
-          state: Experience.state,
-          city: Experience.city,
-          streetAddress: Experience.streetAddress,
+      workExperience: [
+        {
+          id: id,
+          // ...Experience,
+          companyName: Experience.companyName,
+          designation: Experience.designation,
+          startDate: Experience.startDate,
+          endDate: Experience.endDate,
+          currentlyWorking: Experience.currentlyWorking,
+          employeeType: Experience.employeeType,
+          jobFamily: Experience.jobFamily,
+          jobSummary: Experience.jobSummary,
+          location: {
+            country: Experience.country,
+            province: Experience.state,
+            city: Experience.city,
+            address: Experience.streetAddress,
+          },
         },
-      },
+      ],
     };
     const postData = await httpRequest(
       `${BACKEND_URL}${endPoints.employee}/${employeeState.id}`,
       "PUT",
       body
     );
-    console.log("postData",postData)
+    console.log("postData", postData);
   };
   return (
     <Box mt={{ md: "13px" }} width={"100%"}>
@@ -114,10 +118,10 @@ const ExperianceForm = ({ state, setState }) => {
         <Box border={"1px solid white"} mb={"30px"}>
           <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
             <LabelInput
-              state={Experience.stateDate}
+              state={Experience.startDate}
               setState={(e) => {
                 setExperience((prev) => {
-                  return { ...prev, stateDate: e };
+                  return { ...prev, startDate: e };
                 });
               }}
               defaultValue={false}
@@ -246,10 +250,10 @@ const ExperianceForm = ({ state, setState }) => {
             placeholder="Select the type of employment"
             dropdown
             label={"Employment Type"}
-            state={Experience.employmentType}
+            state={Experience.employeeType}
             setState={(e) => {
               setExperience((prev) => {
-                return { ...prev, employmentType: e.target.value };
+                return { ...prev, employeeType: e.target.value };
               });
             }}
           />
@@ -305,12 +309,11 @@ const ExperianceForm = ({ state, setState }) => {
 
           <Button
             onClick={() => {
-              handleSave()
+              handleSave();
               setState((prev) => {
                 return { ...prev, addExperience: false, edit: false };
               });
             }}
-            
             width={"max-content"}
             px={{ md: "30px", base: "20px" }}
             variant={"blue-btn"}

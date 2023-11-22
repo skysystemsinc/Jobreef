@@ -3,21 +3,23 @@ import OperatorLayout from "@/Compomnents/Layout/OperatorLayout";
 import React from "react";
 import { Box } from "@chakra-ui/react";
 import SearchBox from "@/Compomnents/SearchBox/SearchBox";
-import ActiveJobs from "@/Compomnents/CompanyTabs/ActiveJobs";
+
 import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
-const companies = () => {
+
+import BlogTabs from "@/Compomnents/BlogTabs/BlogTabs";
+const blog = () => {
   return (
     <OperatorLayout>
       <Box px={"30px"}>
         <Box width={{ sm: "300px", base: "100%" }} my={"25px"}>
-          <SearchBox placeholder={"Search companies"} />
+          <SearchBox placeholder={"Search blog"} />
         </Box>
-        <CompanyTabs />
+        <BlogTabs />
       </Box>
-      <DashboardFooter waveImage/>
+      <DashboardFooter waveImage />
 
     </OperatorLayout>
   );
 };
 
-export default companies;
+export default blog;

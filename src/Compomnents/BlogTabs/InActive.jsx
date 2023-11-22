@@ -4,56 +4,48 @@ import PaginatedTable from "../PaginatedTable/PaginatedTable";
 import menu from "@/assets/Images/menu.svg";
 import { useRouter } from "next/router";
 import Popovers from "../PaginatedTable/Popovers";
-import profile_icon from "@/assets/Images/profile_icon.svg";
+import companyIcon from "@/assets/Images/companyIcon.svg";
+import CompanyButton from "./CompanyButton";
 const InActive = () => {
   const router = useRouter();
-  const handleEdit = () => {
-    router.push("/operator/edit-job-post");
+  const handleEdit = (id) => {
+    router.push(`/operator/create-company?id=${id}`);
   };
   const actionList = [
-    { title: "Edit", handleEvent: handleEdit },
+    { title: "Edit" ,handleEvent:handleEdit },
+    { title: "Activate" },
     { title: "Delete" },
   ];
+  
   const columns = [
     {
-      id: "id",
-      jobTitle: "job Title",
-      company: "Company",
-
-      createdBy: "Created By",
-      createdAt: "Created On (MM/DD/YY) ",
-      status: "Status ",
+      title: "Blog Title ",
+      category: "Category",
+      author: "Author",
+      lastUpdate: "Last Update",
+  
       Actions: "Actions",
     },
   ];
   const keys = [
-    "id",
-    "jobTitle",
-    "company",
-    "status",
-    "createdBy",
-    "createdAt",
+    "title",
+    "category",
+    "author",
+    "lastUpdate",
+
     "Actions",
   ];
   const data = [
     {
-      id: "1",
-      jobTitle: "Systems Engineer",
-      company: "Microsoft",
-      createdBy: "user@example.org",
-      createdAt: "20/08/23",
-      status: "Inactive",
+      title: "Marketing",
+      category: "Marketing",
+      author: "John",
+      lastUpdate: "20/08/23",
+      
       Actions: <Popovers actionList={actionList} />,
     },
-    {
-      id: "2",
-      jobTitle: "Systems Engineer",
-      company: "Microsoft",
-      createdBy: "user@example.org",
-      createdAt: "20/08/23",
-      status: "Inactive",
-      Actions: <Popovers actionList={actionList} />,
-    },
+
+
   ];
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -67,7 +59,9 @@ const InActive = () => {
   };
   return (
     <>
-      <Box minH={"62vh"} pb={"20px"}>
+      <CompanyButton />
+
+      <Box minH={"52vh"} pb={"20px"}>
         <PaginatedTable
           keys={keys}
           totalPages={totalPages}

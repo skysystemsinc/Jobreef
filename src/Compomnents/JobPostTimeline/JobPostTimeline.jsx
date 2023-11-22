@@ -35,7 +35,7 @@ const steps = [
   // { label: "Step 5" },
 ];
 
-const JobPostTimeline = ({ candidate, variant }) => {
+const JobPostTimeline = ({ isEdit, title, candidate, variant }) => {
   const [state, setState] = useState({
     jobTitle: "",
     employeeType: "",
@@ -84,7 +84,7 @@ const JobPostTimeline = ({ candidate, variant }) => {
         m={{ md: "42px 0px 40px 0px", base: "30px 0px 30px 0px" }}
         variant={"p6"}
       >
-        Create a New Job Post
+        {title}
       </Heading>
       <Flex
         flexDir="column"
@@ -216,7 +216,7 @@ const JobPostTimeline = ({ candidate, variant }) => {
               width: { md: "85%", base: "95%" },
             }}
           >
-            <Preview state={state} setState={setState} />
+            <Preview isEdit={isEdit} state={state} setState={setState} />
           </Box>
         ) : null}
 

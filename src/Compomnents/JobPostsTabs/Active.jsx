@@ -7,25 +7,49 @@ import Popovers from "../PaginatedTable/Popovers";
 import profile_icon from "@/assets/Images/profile_icon.svg";
 const Active = () => {
   const router = useRouter();
+  const handleEdit =()=>{
+    router.push("/operator/edit-job-post")
+  }
+  const actionList = [{title:"Deactivate"} , {title:"Edit" , handleEvent:handleEdit}];
+
   const columns = [
     {
-      name: "Name",
-      email: "Email",
-      role: "Role",
+      id: "id",
+      jobTitle: "job Title",
+      company: "Company",
+
       createdBy: "Created By",
       createdAt: "Created On (MM/DD/YY) ",
+      expireOn: "Expire On ",
       Actions: "Actions",
     },
   ];
-  const keys = ["name", "email", "role", "createdBy", "createdAt", "Actions"];
-  const actionList = ["Deactivate"];
+  const keys = [
+    "id",
+    "jobTitle",
+    "company",
+    "expireOn",
+    "createdBy",
+    "createdAt",
+    "Actions",
+  ];
   const data = [
     {
-      name:"Systems Engineer",
-      email: "user@example.org",
-      role: "Facechat",
+      id: "1",
+      jobTitle: "Systems Engineer",
+      company: "Microsoft",
       createdBy: "user@example.org",
       createdAt: "20/08/23",
+      expireOn: "20/08/23",
+      Actions: <Popovers actionList={actionList} />,
+    },
+    {
+      id: "2",
+      jobTitle: "Systems Engineer",
+      company: "Microsoft",
+      createdBy: "user@example.org",
+      createdAt: "20/08/23",
+      expireOn: "20/08/23",
       Actions: <Popovers actionList={actionList} />,
     },
   ];

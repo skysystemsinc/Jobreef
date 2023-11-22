@@ -5,7 +5,7 @@ import React from "react";
 const CompanyButton = () => {
   const router = useRouter();
   const handleCreate = () => {
-    router.push("/operator/create-company");
+    router.push("/operator/upload-blog");
   };
   return (
     <Box
@@ -15,7 +15,7 @@ const CompanyButton = () => {
       justifyContent={"flex-end !important"}
       mb={"12px"}
     >
-      <Button variant={"blue-btn"}>Create Company</Button>
+      <Button variant={"blue-btn"}>Create Blog Post</Button>
     </Box>
   );
 };

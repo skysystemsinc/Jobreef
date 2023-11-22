@@ -13,24 +13,20 @@ import {
 import React, { useState } from "react";
 
 import globalStyles from "@/styles/globalStyles";
-import ActiveJobs from "./ActiveJobs";
+import ActiveJobs from "./Active";
 
 import InActiveJobs from "./InActive";
 import { useRouter } from "next/router";
-import Pending from "./Pending";
+
 import CustomTabs from "../CustomeTabs/CustomeTabs";
 
-const CompanyTabs = ({ company }) => {
+const BlogTabs = ({ company }) => {
   const router = useRouter();
   let [tabIndex, setTabIndex] = useState(0);
-  const tabLists = ["Active", "Pending", "Inactive"];
+  const tabLists = ["Active", "Inactive"];
   const tabs = [
     { label: "Active", value: "Active", content: <ActiveJobs /> },
-    {
-      label: "Pending",
-      value: "Pending",
-      content: <Pending />,
-    },
+
     { label: "Inactive", value: "Inactive", content: <InActiveJobs /> },
 
     // Add more tabs if needed
@@ -81,7 +77,7 @@ const CompanyTabs = ({ company }) => {
               bottom={"0px"}
               variant={"blue-btn"}
             >
-              Create Company
+              Create Blog Post
             </Button>
           </TabList>
         </Box>
@@ -90,9 +86,7 @@ const CompanyTabs = ({ company }) => {
           <TabPanel px={"0px"}>
             <ActiveJobs />
           </TabPanel>
-          <TabPanel px={"0px"}>
-            <Pending />
-          </TabPanel>
+  
           <TabPanel px={"0px"}>
             <InActiveJobs />
           </TabPanel>
@@ -102,4 +96,4 @@ const CompanyTabs = ({ company }) => {
   );
 };
 
-export default CompanyTabs;
+export default BlogTabs;

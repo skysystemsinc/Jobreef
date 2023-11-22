@@ -8,12 +8,21 @@ import companyIcon from "@/assets/Images/companyIcon.svg";
 import CompanyButton from "./CompanyButton";
 const InActive = () => {
   const router = useRouter();
+  const handleEdit = (id) => {
+    router.push(`/operator/create-company?id=${id}`);
+  };
+  const actionList = [
+    { title: "Edit" ,handleEvent:handleEdit },
+    { title: "Restore" },
+    { title: "Delete" },
+  ];
+  
   const columns = [
     {
       companyName: "Company Name ",
       location: "Location",
       owner: "Owner",
-      members: "Members",
+      jobPosts: "job Posts",
       createdAt: "Created On (MM/DD/YY) ",
       Actions: "Actions",
     },
@@ -22,20 +31,36 @@ const InActive = () => {
     "companyName",
     "location",
     "owner",
-    "members",
+    "jobPosts",
     "createdAt",
     "Actions",
   ];
-  const actionList = ["Restore", "Delete "];
   const data = [
     {
-      companyName: { image: companyIcon.src, name: "Company Name" },
+      companyName: "Company Name",
       location: "Nassau, The Bahamas",
       owner: "Nassau, The Bahamas",
-      members: "35",
+      jobPosts: "35",
       createdAt: "20/08/23",
       Actions: <Popovers actionList={actionList} />,
     },
+    {
+      companyName: "Company Name",
+      location: "Nassau, The Bahamas",
+      owner: "Nassau, The Bahamas",
+      jobPosts: "35",
+      createdAt: "20/08/23",
+      Actions: <Popovers actionList={actionList} />,
+    },
+    {
+      companyName: "Company Name",
+      location: "Nassau, The Bahamas",
+      owner: "Nassau, The Bahamas",
+      jobPosts: "35",
+      createdAt: "20/08/23",
+      Actions: <Popovers actionList={actionList} />,
+    },
+
   ];
 
   const [currentPage, setCurrentPage] = useState(1);

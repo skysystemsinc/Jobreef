@@ -23,9 +23,7 @@ const DatePicker = ({
   const [date, setdate] = useState();
   const currentDate = moment();
   const defaultDate = currentDate.add(30, "days");
-  const [selectDate, setselectDate] = useState(false);
-  console.log("selectDate", selectDate);
-  const [isOpen, setisopen] = useState(false);
+  
   const calenderStle = {
     // "& .react-daterange-picker__calendar-button": {
     //   border: "1px solid red !important",
@@ -167,14 +165,7 @@ const DatePicker = ({
       backgroundColor: "gray.200",
     },
   };
-  // const initialRender = useRef(true);
-  // useEffect(() => {
-  //   if (initialRender.current) {
-  //     initialRender.current = false;
-  //     return;
-  //   }
-  //   setselectDate(true);
-  // }, [state]);
+
 
   return (
     <>
@@ -192,8 +183,8 @@ const DatePicker = ({
               }
               selectRange={false}
               defaultValue={defaultValue ? defaultDate.toDate() : false}
-              // onChange={setState}
-              onChange={setdate}
+              onChange={setState}
+              // onChange={setdate}
               minDate={defaultValue ? defaultDate.toDate() : false}
               value={state}
             />
@@ -202,7 +193,7 @@ const DatePicker = ({
         <InputGroup>
           <Input
             // value={ selectDate? moment(state).format("MM/DD/YYYY"):""}
-            value={date ? moment(date).format("MM/DD/YYYY") : ""}
+            value={state ? moment(state).format("MM/DD/YYYY") : ""}
             placeContent={"MM/DD/YYYY"}
             variant={"bg-input"}
             placeholder="MM/DD/YYYY"
