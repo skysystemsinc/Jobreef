@@ -13,7 +13,7 @@ const JobPostTimeline = dynamic(
 const crearteJobost = () => {
   return (
     <DasboardLayout disableWaveImage>
-      <JobPostTimeline />
+      <JobPostTimeline title="Create a New Job Post" />
       <DashboardFooter waveImage/>
     </DasboardLayout>
   );

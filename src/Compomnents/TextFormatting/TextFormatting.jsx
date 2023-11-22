@@ -43,6 +43,7 @@ const TextFormatting = ({ placeholder }) => {
   return (
     <ReactQuill
       formats={formate}
+    
       modules={module}
       style={{
         // border: "none",
@@ -51,6 +52,7 @@ const TextFormatting = ({ placeholder }) => {
         borderRadius: "8px ",
         backgroundColor: "#F7F9FB",
       }}
+      
       value={value}
       theme="snow"
       placeholder={placeholder}

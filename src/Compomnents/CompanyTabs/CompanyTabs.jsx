@@ -74,7 +74,7 @@ const CompanyTabs = ({ company }) => {
             })}
 
             <Button
-              // onClick={()=>router.push("/company/create-job-post")}
+              onClick={()=>router.push("/operator/create-company")}
               display={{ md: "block", base: "none" }}
               position={"absolute"}
               right={"12px"}

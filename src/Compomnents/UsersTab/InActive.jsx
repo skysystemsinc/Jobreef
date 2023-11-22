@@ -19,24 +19,25 @@ const InActive = () => {
     },
   ];
   const keys = ["name", "email", "userType", "createdAt", "Actions"];
-  const actionList = ["Restore", "Delete"];
+  
+  const handleEdit = (id) => {
+    router.push(`/operator/create-user?id=${id}`);
+  };
+  const actionList = [
+    { title: "Restore" },
+    { title: "Delete" },
+    { title: "Edit", handleEvent: handleEdit },
+  ];
   const data = [
     {
-      name: { image: profile_icon.src, name: "Tom Brady" },
+      name: "Tom Brady" ,
       email: "tom@tb12.com",
       userType: "Candidate",
       // members: "35",
       createdAt: "20/08/23",
       Actions: <Popovers actionList={actionList} />,
     },
-    {
-      name: { image: profile_icon.src, name: "Tom Brady" },
-      email: "tom@tb12.com",
-      userType: "Candidate",
-      // members: "35",
-      createdAt: "20/08/23",
-      Actions: <Popovers actionList={actionList} />,
-    },
+
   ];
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -51,7 +52,7 @@ const InActive = () => {
   return (
     <>
       <UserButton />
-      <Box minH={"62vh"} pb={"20px"}>
+      <Box minH={"52vh"} pb={"20px"}>
         <PaginatedTable
           keys={keys}
           totalPages={totalPages}

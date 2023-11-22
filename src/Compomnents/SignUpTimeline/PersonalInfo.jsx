@@ -14,38 +14,45 @@ import { Role_context } from "@/context/context";
 import globalStyles from "@/styles/globalStyles";
 import { useSteps } from "chakra-ui-steps";
 import Loader from "../Loader/Loader";
-import { useDispatch } from "react-redux";
-import { setAuthentication } from "@/Reudx/slices/authentication";
+import { useDispatch, useSelector } from "react-redux";
 
+import { addUser } from "@/Reudx/slices/userRegistration";
+import { registration } from "@/schema/stateSchema";
+import CheckBox from "../CheckBox/CheckBox";
 const PersonalInfo = ({
   handlePrevious,
-  State,
-  setState,
   activeStep,
   nextStep,
 }) => {
+  
   const toast = useToast();
   const dispatch = useDispatch();
-const [isCompany, setisCompany] = useState( )
-  const { company, setCompany } = useContext(Role_context);
+  const userState = useSelector((state) => state.userRegistration.value);
+
+  const [personalInfo, setPersonalInfo] = useState(userState);
   const handleSelectCompany = (e) => {
-    // dispatch(
-    //   setAuthentication({
-    //     isCompany: e.target.checked,
-    //   })
-    // );
-    setCompany(e.target.checked);
-    localStorage.setItem("company", e.target.checked);
+    dispatch(
+      addUser({
+        ...registration,
+        isCompany: e.target.checked,
+      })
+    );
+
+    setPersonalInfo((prev) => {
+      return {
+        ...prev,
+        isCompany: e.target.checked,
+      };
+    });
   };
   const handleNext = () => {
-    validation();
-  };
-  const validation = () => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
-    // Example usage:
-    const isValidEmail = emailPattern.test(State.email);
-    if (State.name == "" || State.lastName == "" || State.email == "") {
+    const isValidEmail = emailPattern.test(personalInfo.email);
+    if (
+      personalInfo.firstName == "" ||
+      personalInfo.lastName == "" ||
+      personalInfo.email == ""
+    ) {
       toast({
         position: globalStyles.toastStyle.position,
         title: `Required fields are empty`,
@@ -66,17 +73,26 @@ const [isCompany, setisCompany] = useState( )
       return;
     }
     nextStep();
+    dispatch(addUser({ ...personalInfo }));
   };
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setPersonalInfo((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+
   return (
     <Box>
       <Box marginBottom={{ sm: "25px", base: "22px" }}>
         <LabelInput
-          state={State.name}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, name: e.target.value };
-            });
-          }}
+          state={personalInfo.firstName}
+          name={"firstName"}
+          setState={handleChange}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -87,12 +103,9 @@ const [isCompany, setisCompany] = useState( )
 
       <Box marginBottom={{ sm: "25px", base: "22px" }}>
         <LabelInput
-          state={State.lastName}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, lastName: e.target.value };
-            });
-          }}
+          state={personalInfo.lastName}
+          name={"lastName"}
+          setState={handleChange}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -103,12 +116,9 @@ const [isCompany, setisCompany] = useState( )
 
       <Box marginBottom={{ sm: "10px", base: "10px" }}>
         <LabelInput
-          state={State.email}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, email: e.target.value };
-            });
-          }}
+          state={personalInfo.email}
+          name={"email"}
+          setState={handleChange}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -116,28 +126,11 @@ const [isCompany, setisCompany] = useState( )
           label={"Email"}
         />
       </Box>
-      <Box display={"flex"} alignItems={"center"} gap={"10px"}>
-        <Checkbox
-          borderRadius={"10px"}
-          onChange={handleSelectCompany}
-          checked={company}
-          size="md"
-          defaultChecked
-          colorScheme="blue"
-          // border={"1px solid "}
-          borderColor={company ? "blue.500" : "gray.text"}
-          rounded={"sm"}
-          sx={globalStyles.checkBoxStyle}
-        />
-        <Heading
-          variant={"p1"}
-          color={company ? "blue.500" : "gray.text"}
-          margin={"0px"}
-        >
-          Register as Employer{" "}
-        </Heading>
-      </Box>
-
+      <CheckBox
+        selectSate={personalInfo.isCompany}
+        label={"Register as Employer"}
+        handleEvent={handleSelectCompany}
+      />
       <Flex
         width="100%"
         justify="center"
@@ -157,7 +150,7 @@ const [isCompany, setisCompany] = useState( )
           variant={"blue-btn"}
           onClick={handleNext}
         >
-          {State.loading ? <Loader /> : "Next"}
+          {"Next"}
         </Button>
       </Flex>
     </Box>

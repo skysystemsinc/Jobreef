@@ -8,7 +8,7 @@ import {
   Input,
   useToast,
 } from "@chakra-ui/react";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import LabelInput from "../LabelInput/LabelInput";
 import Loader from "../Loader/Loader";
@@ -17,22 +17,24 @@ import endPoints from "@/Utils/endpoints";
 import { roles } from "@/Utils/role";
 import { Role_context } from "@/context/context";
 import { BACKEND_URL } from "@/Utils/urls";
+import { useDispatch, useSelector } from "react-redux";
+import { httpRequest } from "@/helper/httpRrequest";
+import { addUser } from "@/Reudx/slices/userRegistration";
 
 const Password = ({
-  State,
-  setState,
+
   activeStep,
   handlePrevious,
   nextStep,
 }) => {
-  const { company } = useContext(Role_context);
+  
+  const userState = useSelector((state) => state.userRegistration.value);
+  const dispatch = useDispatch();
+  const [state, setState] = useState({ ...userState, loading: false });
   const toast = useToast();
 
-  const handleNext = () => {
-    handleRegister();
-  };
-  const handleRegister = async () => {
-    if (State.confirmPassword == "" || State.password == "") {
+  const handleRegister = () => {
+    if (state.confirmPassword == "" || state.password == "") {
       toast({
         position: "bottom-right",
         title: `Required fields are empty`,
@@ -42,7 +44,7 @@ const Password = ({
       });
       return;
     }
-    if (State.confirmPassword != State.password) {
+    if (state.confirmPassword != state.password) {
       toast({
         position: "bottom-right",
         title: `password does not match`,
@@ -59,38 +61,13 @@ const Password = ({
       };
     });
     try {
-      const postData = await axios({
-        method: "POST",
-        url: `${BACKEND_URL}${endPoints.user}`,
-        data: {
-          firstName: State.name,
-          lastName: State.lastName,
-          email: State.email,
-          password: State.password,
-          role: company ? roles.company : roles.employee,
-        },
-      });
-      if (postData) {
-        nextStep();
-
-        setState((prev) => {
-          return {
-            ...prev,
-            loading: false,
-            name: "",
-            lastName: "",
-            password: "",
-            confirmPassword: "",
-            email: "",
-            showEmail: postData.data.data.email,
-            userId: postData.data.data.id,
-          };
-        });
+      if (userState.userId) {
+        handleUpdateUser();
       } else {
+        handleCreateUser();
       }
     } catch (err) {
-      const errorMessage = err?.response?.data.message;
-      console.log("errr", err);
+
       setState((prev) => {
         return {
           ...prev,
@@ -99,24 +76,136 @@ const Password = ({
       });
       toast({
         position: "bottom-right",
-
-        title: errorMessage,
+        title: "Error",
         status: "error",
         variant: "subtle",
         isClosable: true,
       });
     }
   };
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setState((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+
+  const handleCreateUser = async () => {
+    const body = {
+      firstName: state.firstName,
+      lastName: state.lastName,
+      email: state.email,
+      password: state.password,
+      role: userState.isCompany ? roles.company : roles.employee,
+    };
+    const postData = await httpRequest(
+      `${BACKEND_URL}${endPoints.user}`,
+      "POST",
+      body
+    );
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: false,
+      };
+    });
+    if (!postData.success) {
+    dispatch(addUser({ ...state, }));
+      
+      toast({
+        position: "bottom-right",
+        title: postData.message,
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+      return;
+    }
+    nextStep();
+    dispatch(addUser({ ...state, userId: postData.data.id }));
+
+    // if (postData.success) {
+    //   dispatch(addUser({ ...userState, userId: postData.data.id }));
+    //   toast({
+    //     position: "bottom-right",
+    //     title: postData.message,
+    //     status: "success",
+    //     variant: "subtle",
+    //     isClosable: true,
+    //   });
+    // } else {
+    //   toast({
+    //     position: "bottom-right",
+    //     title: postData.message,
+    //     status: "error",
+    //     variant: "subtle",
+    //     isClosable: true,
+    //   });
+    // }
+  };
+  const handleUpdateUser = async () => {
+    const body = {
+      firstName: state.firstName,
+      lastName: state.lastName,
+      email: state.email,
+      password: state.password,
+      role: userState.isCompany ? roles.company : roles.employee,
+    };
+    const postData = await httpRequest(
+      `${BACKEND_URL}${endPoints.user}/${userState.userId}`,
+      "PUT",
+      body
+    );
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: false,
+      };
+    });
+    if (!postData.success) {
+      dispatch(addUser({ ...userState, userId: postData.data.id }));
+      toast({
+        position: "bottom-right",
+        title: postData.message,
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+      return;
+    }
+    nextStep();
+    dispatch(addUser({ ...state }));
+
+    // if (postData.success) {
+    //   toast({
+    //     position: "bottom-right",
+    //     title: postData.message,
+    //     status: "success",
+    //     variant: "subtle",
+    //     isClosable: true,
+    //   });
+    // } else {
+    //   toast({
+    //     position: "bottom-right",
+    //     title: postData.message,
+    //     status: "error",
+    //     variant: "subtle",
+    //     isClosable: true,
+    //   });
+    // }
+  };
   return (
     <Box>
       <Box marginBottom={{ sm: "25px", base: "25px" }}>
         <LabelInput
-          state={State.password}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, password: e.target.value };
-            });
-          }}
+          state={state.password}
+          setState={handleChange}
+          name={"password"}
           passworInput
           labelVariant={"label"}
           type="text"
@@ -128,12 +217,9 @@ const Password = ({
 
       <Box marginBottom={{ sm: "22px", base: "22px" }}>
         <LabelInput
-          state={State.confirmPassword}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, confirmPassword: e.target.value };
-            });
-          }}
+          state={state.confirmPassword}
+          setState={handleChange}
+          name={"confirmPassword"}
           passworInput
           labelVariant={"label"}
           type="text"
@@ -160,9 +246,9 @@ const Password = ({
         <Button
           // width={{ md: "200px", sm: "180px", base: "130px" }}
           variant={"blue-btn"}
-          onClick={handleNext}
+          onClick={handleRegister}
         >
-          {State.loading ? <Loader /> : "Next"}
+          {state.loading ? <Loader /> : "Next"}
         </Button>
       </Flex>
     </Box>

@@ -5,13 +5,17 @@ import TextCard from "../TextCard/TextCard";
 import ExperianceForm from "./ExperianceForm";
 import ExperianceCard from "../ExperianceCard/ExperianceCard";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
-const WorkExperiance = ({nextStep}) => {
+const WorkExperiance = ({ prevStep, nextStep}) => {
+  console.log("prevStep",prevStep)
   const router = useRouter();
+  const employeeState = useSelector((state) => state.employeeRegister.value);
+
+
   const [state, setState] = useState({
     edit: false,
     delete: false,
-    experienceData: [],
     loading: false,
   });
   const experienceData = [
@@ -56,7 +60,7 @@ const WorkExperiance = ({nextStep}) => {
         </Box>
       ) : (
         <Box width={"100%"} mx={"auto"}>
-          {experienceData.map((item, ind) => {
+          {employeeState?.workExperience.map((item, ind) => {
             return (
               <Box key={ind}>
                 <ExperianceCard data={item} state={state} setState={setState} />
@@ -90,12 +94,10 @@ const WorkExperiance = ({nextStep}) => {
           >
             <>
               <Button
-                onClick={() => {
-                  router.push("/candidate/my-resume");
-                }}
+                onClick={()=>{ console.log("runnnn"), prevStep()}}
                 variant="outline-blue"
               >
-                {" Cancel"}
+                {" Back"}
               </Button>
               <Button onClick={nextStep} variant={"blue-btn"}>
                 {state.loading ? <Loader /> : "Next"}

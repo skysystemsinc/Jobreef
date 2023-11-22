@@ -12,8 +12,6 @@ const companies = () => {
         <Box width={{ sm: "300px", base: "100%" }} my={"25px"}>
           <SearchBox placeholder={"Search companies"} />
         </Box>
-        {/* <ActiveJobs /> */}
-
         <CompanyTabs />
       </Box>
       <DashboardFooter waveImage/>

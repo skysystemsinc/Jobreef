@@ -8,6 +8,7 @@ const DropDown = ({
   state,
   icon,
   variant,
+  name,
   style,
   placeholder,
 }) => {
@@ -15,17 +16,26 @@ const DropDown = ({
     <Box>
       <Select
         value={state}
+        name={name}
         onChange={setState}
-        // sx={{ color: "blue.500" }}
         variant={variant ? variant : "outline-dropdown"}
-        // variant={"filled"}
-        icon={icon ? icon : <Image width={"16px !important"}  src={black_arrow_down.src} />}
+        icon={
+          icon ? (
+            icon
+          ) : (
+            <Image width={"16px !important"} src={black_arrow_down.src} />
+          )
+        }
         placeholder={placeholder}
         sx={style}
       >
         {dropdownOption ? (
-          dropdownOption?.map((item , ind) => {
-            return <option key={ind} value={item}>{item}</option>;
+          dropdownOption?.map((item, ind) => {
+            return (
+              <option key={ind} value={item}>
+                {item}
+              </option>
+            );
           })
         ) : (
           <>

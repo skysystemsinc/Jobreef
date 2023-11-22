@@ -18,15 +18,17 @@ import { useRouter } from "next/router";
 import ActiveUsers from "./ActiveUsers";
 import InActive from "./InActive";
 import CustomTabs from "../CustomeTabs/CustomeTabs";
+import Pending from "./Pending";
 
 const UsersTab = ({ company }) => {
   const router = useRouter();
   let [tabIndex, setTabIndex] = useState(0);
-  const tabLists = ["Active", "Inactive"];
+  const tabLists = ["Active", "Inactive", "Pending"];
   const tabs = [
     { label: "Active", value: "Active", content: <ActiveUsers /> },
 
     { label: "Inactive", value: "Inactive", content: <InActive /> },
+    { label: "Pending", value: "Pending", content: <Pending /> },
 
     // Add more tabs if needed
   ];
@@ -69,7 +71,7 @@ const UsersTab = ({ company }) => {
             })}
 
             <Button
-              // onClick={()=>router.push("/company/create-job-post")}
+              onClick={()=>router.push("/operator/create-user")}
               display={{ md: "block", base: "none" }}
               position={"absolute"}
               right={"12px"}
@@ -87,6 +89,9 @@ const UsersTab = ({ company }) => {
           </TabPanel>
           <TabPanel px={"0px"}>
             <InActive />
+          </TabPanel>
+          <TabPanel px={"0px"}>
+            <Pending />
           </TabPanel>
         </TabPanels>
       </Tabs>

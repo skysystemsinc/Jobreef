@@ -92,6 +92,7 @@ const LabelInput = ({
           onChange={setState}
           placeholder={placeholder}
           size="sm"
+          name={name}
           readOnly={readOnly}
           variant={variant}
           resize={"none"}
@@ -104,6 +105,7 @@ const LabelInput = ({
         />
       ) : dropdown ? (
         <DropDown
+          name={name}
           dropdownOption={dropdownOption}
           state={state}
           setState={setState}
@@ -115,6 +117,7 @@ const LabelInput = ({
           state={state}
           iconStyle={iconStyle}
           readOnly={readOnly}
+          name={name}
           placeholder={placeholder}
           variant={variant}
         />

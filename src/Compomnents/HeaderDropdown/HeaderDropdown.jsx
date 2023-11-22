@@ -24,7 +24,7 @@ import logout from "@/assets/Images/logout.svg";
 import { role, roles } from "@/Utils/role";
 import { useRouter } from "next/router";
 import { Role_context } from "@/context/context";
-const HeaderDropdown = ({ candidate, operatorDropdown }) => {
+const HeaderDropdown = ({ candidate, operatorDropdown ,hiddenStyle }) => {
   const router = useRouter();
   const { company, setCompany } = useContext(Role_context);
 
@@ -108,7 +108,7 @@ const HeaderDropdown = ({ candidate, operatorDropdown }) => {
             objectFit={"cover"}
             src={header_profile.src}
           />
-          <Box display={{ xl: "block", base: "none" }} textAlign={"start"}>
+          <Box display={{ xl: "block", base: "none" }} sx={hiddenStyle} textAlign={"start"}>
             <Heading as={"p"} variant={"p4"}>
               {" "}
               Jacob Jones

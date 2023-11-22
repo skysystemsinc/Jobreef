@@ -5,6 +5,9 @@ import teamMembers from "./slices/teamMembers";
 import candidates from "./slices/candidates";
 import chat from "./slices/chat";
 import authentication from "./slices/authentication";
+import userRegistration from "./slices/userRegistration";
+import companyRegister from "./slices/company";
+import employeeRegister from "./slices/employee";
 
 const rootReducer = combineReducers({
   userProfileSlice,
@@ -12,6 +15,9 @@ const rootReducer = combineReducers({
   teamMembers,
   candidates,
   chat,
-  authentication
+  authentication,
+  userRegistration,
+  companyRegister,
+  employeeRegister
 });
 export default rootReducer;

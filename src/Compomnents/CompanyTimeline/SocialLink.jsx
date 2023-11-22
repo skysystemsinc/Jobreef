@@ -15,7 +15,7 @@ import {
   useMediaQuery,
   useToast,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LabelInput from "../LabelInput/LabelInput";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import { Link } from "@chakra-ui/next-js";
@@ -28,56 +28,70 @@ import axios from "axios";
 import endPoints from "@/Utils/endpoints";
 import { BACKEND_URL } from "@/Utils/urls";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { httpRequest } from "@/helper/httpRrequest";
+import { addCompany } from "@/Reudx/slices/company";
 
-const SocialLink = ({ nextStep, State, setState, handlePrevious }) => {
+const SocialLink = ({ nextStep, handlePrevious }) => {
   const toast = useToast();
   const router = useRouter();
+  const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.authentication.value);
-  
+  let companyState = useSelector((state) => state.companyRegister.value);
+  console.log("companyState",companyState)
+
+  let [State, setState] = useState({
+    loading: false,
+  });
+
+
   const [isSmallerThe500] = useMediaQuery("(max-width: 787px)");
   const handleDelete = (index) => {
-    const updatedLinks = [...State.links];
+    const updatedLinks = [...companyState.links];
     updatedLinks.splice(index, 1);
-    // setlinkArray(deleteArray);
-    setState((prev) => {
-      return {
-        ...prev,
-        links: updatedLinks,
-      };
-    });
+
+    dispatch(addCompany({ ...companyState, links: updatedLinks }));
   };
   const handlePlatformChange = (event, index) => {
-    let updatedLinks = [...State.links];
-    updatedLinks[index].platform = event.target.value;
-    setState((prev) => {
-      return {
-        ...prev,
-        links: updatedLinks,
-      };
-    });
+    let updatedLinks = [...companyState.links];
+
+    updatedLinks[index] = {
+      ...updatedLinks[index],
+      platform: event.target.value,
+    };
+    dispatch(addCompany({ ...companyState, links: updatedLinks }));
+    // setState((prev) => {
+    //   return {
+    //     ...prev,
+    //     links: updatedLinks,
+    //   };
+    // });
   };
 
   const handleLinkChange = (event, index) => {
-    let updatedLinks = [...State.links];
-    updatedLinks[index].link = event.target.value;
-    setState((prev) => {
-      return {
-        ...prev,
-        links: updatedLinks,
-      };
-    });
+    let updatedLinks = [...companyState.links];
+    updatedLinks[index] = { ...updatedLinks[index], link: event.target.value };
+    dispatch(addCompany({ ...companyState, links: updatedLinks }));
+
+    // setState((prev) => {
+    //   return {
+    //     ...prev,
+    //     links: updatedLinks,
+    //   };
+    // });
   };
 
   const handleAddMore = () => {
-    const updatedLinks = [...State.links];
+    const updatedLinks = [...companyState.links];
     updatedLinks.push({ platform: "", link: "" });
-    setState((prev) => {
-      return {
-        ...prev,
-        links: updatedLinks,
-      };
-    });
+    dispatch(addCompany({ ...companyState, links: updatedLinks }));
+
+    // setState((prev) => {
+    //   return {
+    //     ...prev,
+    //     links: updatedLinks,
+    //   };
+    // });
     // setFormData(updatedFormData);
   };
   const handleRegister = async () => {
@@ -88,30 +102,46 @@ const SocialLink = ({ nextStep, State, setState, handlePrevious }) => {
       };
     });
     try {
-      const postData = await axios({
-        method: "POST",
-        url: `${BACKEND_URL}${endPoints.company}`,
-        data: {
-          companyName: State.companyName,
+      const body = {
+        companyName: companyState.companyName,
+        industry: companyState.industry,
+        directory: companyState.directory,
+        noOfEmployees: parseInt(companyState.noOfEmployees),
+        yearEstablished: parseInt(companyState.yearEstablished),
+        description: companyState.description,
+        webUrl: companyState.webLink,
+        companyLogo: companyState.logo,
+        socialLinks: companyState.links,
+      };
+      const postData =await httpRequest(
+        `${BACKEND_URL}${endPoints.company}`,
+        "POST",
+        body
+      );
+      console.log("postData",postData)
+      // const postData = await axios({
+      //   method: "POST",
+      //   url: `${BACKEND_URL}${endPoints.company}`,
+      //   data: {
+      //     companyName: State.companyName,
 
-          // [role == roles.company ? "companyId" : "employeeId"]: id,
-          industry: State.industry,
-          directory: State.directory,
-          noOfEmployees: parseInt(State.noOfEmployees),
-          yearEstablished: parseInt(State.yearEstablished),
-          description: State.description,
-          webUrl: State.webLink,
-          companyLogo: State.logo,
-          socialLinks: State.links,
-        },
-      });
+      //     // [role == roles.company ? "companyId" : "employeeId"]: id,
+      //     industry: State.industry,
+      //     directory: State.directory,
+      //     noOfEmployees: parseInt(State.noOfEmployees),
+      //     yearEstablished: parseInt(State.yearEstablished),
+      //     description: State.description,
+      //     webUrl: State.webLink,
+      //     companyLogo: State.logo,
+      //     socialLinks: State.links,
+      //   },
+      // });
       if (postData) {
-        handleUserAssociation(postData.data.data.id);
+        handleUserAssociation(postData.data.id);
         // console.log("postData", postData);
       }
     } catch (err) {
-      const errorMessage = err?.response?.data.message;
-      console.log("errr", err);
+      console.log("err",err)
       setState((prev) => {
         return {
           ...prev,
@@ -121,7 +151,7 @@ const SocialLink = ({ nextStep, State, setState, handlePrevious }) => {
       toast({
         position: "bottom-right",
 
-        title: errorMessage,
+        title: "Error",
         status: "error",
         variant: "subtle",
         isClosable: true,
@@ -129,25 +159,42 @@ const SocialLink = ({ nextStep, State, setState, handlePrevious }) => {
     }
   };
   const handleUserAssociation = (companyId) => {
-    const role =isAuthenticated.role;
-    const id =isAuthenticated.userId;
-    try {
-      const userAssociation = axios({
-        method: "PUT",
-        url: `${BACKEND_URL}${endPoints.user}/${id}`,
-        data: {
-          role: role,
-          location: [
-            {
-              country: State.country,
-              province: State.province,
-              city: State.city,
-              address: State.address,
-            },
-          ],
-          [ "companyId" ]: companyId,
+    const role = isAuthenticated.role;
+    const id = isAuthenticated.userId;
+    const body = {
+      role: role,
+      location: [
+        {
+          country: companyState.country,
+          province: companyState.province,
+          city: companyState.city,
+          address: companyState.address,
         },
-      });
+      ],
+      ["companyId"]: companyId,
+    };
+    try {
+      const userAssociation = httpRequest(
+        `${BACKEND_URL}${endPoints.user}/${id}`,
+        "PUT",
+        body
+      );
+      // const userAssociation = axios({
+      //   method: "PUT",
+      //   url: `${BACKEND_URL}${endPoints.user}/${id}`,
+      //   data: {
+      //     role: role,
+      //     location: [
+      //       {
+      //         country: State.country,
+      //         province: State.province,
+      //         city: State.city,
+      //         address: State.address,
+      //       },
+      //     ],
+      //     ["companyId"]: companyId,
+      //   },
+      // });
       if (userAssociation) {
         setState((prev) => {
           return {
@@ -156,7 +203,7 @@ const SocialLink = ({ nextStep, State, setState, handlePrevious }) => {
           };
         });
         // router.push("/company/profile-setting");
-        nextStep()
+        nextStep();
       }
     } catch (err) {
       console.log("user error ", err);
@@ -165,7 +212,7 @@ const SocialLink = ({ nextStep, State, setState, handlePrevious }) => {
 
   return (
     <Box pr={"20px"}>
-      {State?.links.map((item, index) => {
+      {companyState?.links.map((item, index) => {
         return (
           <InputWrapper
             style={{ marginBottom: "15px" }}

@@ -20,6 +20,7 @@ import Logo from "../Logo/Logo";
 import sidebarLogo from "@/assets/Images/sidebarLogo.svg";
 const OperatorSidebar = () => {
   const router = useRouter();
+  const { pathname } = router;
   const navLinks = [
     {
       title: "Dashboard",
@@ -29,42 +30,59 @@ const OperatorSidebar = () => {
     {
       title: "Job Posts",
       icon:
-        router.pathname == "/operator/job-posts" ? white_job_post : job_post,
-      pathname:
-        router.pathname == "/company/create-job-post"
-          ? "/company/create-job-post"
-          : "/operator/job-posts",
+        router.pathname == "/operator/job-posts" ||
+        router.pathname == "/operator/edit-job-post"
+          ? white_job_post
+          : job_post,
+      pathname: "/operator/job-posts",
+      activePathnames: ["/operator/edit-job-post", "/operator/job-posts"],
     },
     {
       title: "Users",
-      icon: router.pathname == "/operator/users" ? white_candidate : candidate,
+      icon:
+        router.pathname == "/operator/users" ||
+        router.pathname == "/operator/create-user"
+          ? white_candidate
+          : candidate,
+      activePathnames: ["/operator/users", "/operator/create-user"],
+
       pathname: "/operator/users",
     },
 
     {
       title: "Companies",
-      icon: router.pathname == "/operator/companies" ? building : blue_building,
+      icon:
+        router.pathname == "/operator/companies" ||
+        router.pathname == "/operator/create-company"
+          ? building
+          : blue_building,
+      activePathnames: ["/operator/companies", "/operator/create-company"],
       pathname: "/operator/companies",
+      // pathname == "/operator/companies"
+      //   ? "/operator/companies"
+      //   : "/operator/create-company",
     },
     {
       title: "Operators",
       icon:
         router.pathname == "/operator/operators" ||
-        router.pathname == "/company/add-members"
+        router.pathname == "/operator/create-operator"
           ? profile_white
           : profile,
-      pathname:
-        router.pathname == "/company/add-members"
-          ? "/company/add-members"
-          : "/operator/operators",
+      pathname: "/operator/operators",
+
+      activePathnames: ["/operator/create-operator", "/operator/operators"],
     },
     {
-      title: "Upload Blogs",
+      title: "Blogs",
       icon:
-        router.pathname == "/operator/upload-blog"
+        router.pathname == "/operator/upload-blog" ||
+        router.pathname == "/operator/blog"
           ? upload_blog
           : upload_blog_blue,
-      pathname: "/operator/upload-blog",
+      activePathnames: ["/operator/upload-blog", "/operator/blog"],
+
+      pathname: "/operator/blog",
     },
   ];
   const activeStyle = {
@@ -117,7 +135,11 @@ const OperatorSidebar = () => {
           return (
             <Link key={ind} _hover={{ textDecor: "none" }} href={item.pathname}>
               <Box
-                sx={item.pathname == router.pathname ? activeStyle : null}
+                sx={
+                  item.activePathnames?.includes(router.pathname)
+                    ? activeStyle
+                    : null
+                }
                 padding={{ xl: "12px 10px", base: "10px 8px 10px 9px" }}
                 gap={"15px"}
                 key={ind}

@@ -24,13 +24,13 @@ const Popovers = ({ width, actionList }) => {
       // placement="right"
       closeOnBlur={false}
       size={"sm"}
-      placement="bottom-end"
+      placement="left"
     >
       <PopoverTrigger>
         {/* <Button>Trigger</Button>
          */}
         <Image
-        cursor={"pointer"}
+          cursor={"pointer"}
           onClick={(e) => {
             e.stopPropagation(), onToggle();
           }}
@@ -48,16 +48,17 @@ const Popovers = ({ width, actionList }) => {
           {actionList?.map((item, index) => {
             return (
               <Box
+                onClick={() => item.handleEvent(item.id)}
+                cursor={"pointer"}
                 key={index}
                 padding={"12px  20px"}
                 borderBottom={"1px solid"}
                 borderColor={"gray.500"}
                 transition={".5s"}
-                _hover={{  borderColor:"blue.500"}}
-
+                _hover={{ borderColor: "blue.500" }}
               >
                 <Heading as={"p"} variant={"p4"}>
-                  {item}
+                  {item.title ?? item}
                 </Heading>
               </Box>
             );

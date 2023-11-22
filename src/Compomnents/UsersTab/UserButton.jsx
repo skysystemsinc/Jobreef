@@ -8,7 +8,7 @@ const UserButton = () => {
       display={{ md: "none", base: "flex" }}
       justifyContent={"flex-end !important"}
       mb={"12px"}
-      // onClick={()=>router.push("/company/create-job-post")}
+      onClick={()=>router.push("/operator/create-user")}
     >
       <Button variant={"blue-btn"}>Create User</Button>
     </Box>

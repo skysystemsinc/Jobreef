@@ -8,7 +8,7 @@ const OperatorButton = () => {
       display={{ md: "none", base: "flex" }}
       justifyContent={"flex-end !important"}
       mb={"12px"}
-      // onClick={()=>router.push("/company/create-job-post")}
+      onClick={()=>router.push("/operator/create-operator")}
     >
       <Button variant={"blue-btn"}>Add Operator</Button>
     </Box>

@@ -1,7 +1,8 @@
+import { registration } from "@/schema/stateSchema";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: false,
+  value: registration,
 };
 
 const userRegistration = createSlice({
@@ -9,10 +10,9 @@ const userRegistration = createSlice({
   initialState: initialState,
   reducers: {
     addUser: (state, action) => {
-        console.log("state", state)
       state.value = action.payload;
     },
   },
 });
-export const { setAuthentication } = userRegistration.actions;
+export const { addUser } = userRegistration.actions;
 export default userRegistration.reducer;

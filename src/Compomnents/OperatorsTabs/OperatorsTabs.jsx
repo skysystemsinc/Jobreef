@@ -18,13 +18,15 @@ import { useRouter } from "next/router";
 import Active from "./Active";
 import InActive from "./InActive";
 import CustomTabs from "../CustomeTabs/CustomeTabs";
+import Pending from "./Pending";
 
 const OperatorsTabs = ({ company }) => {
   const router = useRouter();
   let [tabIndex, setTabIndex] = useState(0);
-  const tabLists = ["Active", "Inactive"];
+  const tabLists = ["Active", "Pending", "Inactive"];
   const tabs = [
     { label: "Active", value: "Active", content: <Active /> },
+    { label: "Pending", value: "Pending", content: <Pending /> },
 
     { label: "Inactive", value: "Inactive", content: <InActive /> },
 
@@ -41,7 +43,6 @@ const OperatorsTabs = ({ company }) => {
         }}
         index={tabIndex}
         display={{ sm: "block", base: "none" }}
-
         isFitted
       >
         <Box position={"relative"}>
@@ -70,7 +71,7 @@ const OperatorsTabs = ({ company }) => {
             })}
 
             <Button
-              // onClick={()=>router.push("/company/create-job-post")}
+              onClick={() => router.push("/operator/create-operator")}
               display={{ md: "block", base: "none" }}
               position={"absolute"}
               right={"12px"}
@@ -88,6 +89,9 @@ const OperatorsTabs = ({ company }) => {
           </TabPanel>
           <TabPanel px={"0px"}>
             <InActive />
+          </TabPanel>
+          <TabPanel px={"0px"}>
+            <Pending />
           </TabPanel>
         </TabPanels>
       </Tabs>

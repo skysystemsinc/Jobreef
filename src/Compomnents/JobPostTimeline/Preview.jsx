@@ -8,7 +8,7 @@ import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
 
-const Preview = ({ state, setState }) => {
+const Preview = ({ isEdit, state, setState }) => {
   const router = useRouter();
   const boxStyle = {
     // border:'1px solid red',
@@ -20,7 +20,20 @@ const Preview = ({ state, setState }) => {
 
     marginBottom: { md: "60px", base: "36px" },
   };
-
+  const handleCancel = () => {
+    if (isEdit) {
+      router.push("/operator/job-posts");
+    } else {
+      router.push("/company/job-posts");
+    }
+  };
+  const handleJob = () => {
+    if (isEdit) {
+      router.push("/operator/job-posts");
+    } else {
+      router.push("/company/job-posts");
+    }
+  };
   return (
     <Box>
       <Box sx={boxStyle}>
@@ -32,36 +45,18 @@ const Preview = ({ state, setState }) => {
       <Box sx={boxStyle}>
         <JobLocation state={state} setState={setState} />
       </Box>
-      <Box sx={{...boxStyle , marginBottom:"40px"}}>
+      <Box sx={{ ...boxStyle, marginBottom: "40px" }}>
         <DesiredSkills state={state} setState={setState} />
-        {/* <InputWrapper >
-          <LabelInput
-            // readOnly={readOnly}
-            labelVariant={"label"}
-            type="text"
-            variant={"bg-input"}
-            placeholder="Enter Desired Skills"
-            // dropdown={readOnly ? false : true}
-            label={"Desired Skills"}
-          />
-
-          <LabelInput
-            labelVariant={"label"}
-            type="text"
-            dropdown
-            variant={"bg-input"}
-            // readOnly={readOnly}
-            placeholder="Select Tags for Job Post"
-            label={"Tags"}
-          />
-        </InputWrapper> */}
       </Box>
-      <Button
-        onClick={() => router.push("/company/job-post")}
-        variant={"blue-btn"}
-      >
-        {"Save as Draft"}
-      </Button>
+
+      {isEdit ? null : (
+        <Button
+          onClick={() => router.push("/company/job-post")}
+          variant={"blue-btn"}
+        >
+          {"Save as Draft"}
+        </Button>
+      )}
       <Flex
         width="100%"
         justify="center"
@@ -69,17 +64,11 @@ const Preview = ({ state, setState }) => {
         mb={"30px"}
         gap={4}
       >
-        <Button
-          onClick={() => router.push("/company/job-post")}
-          variant="outline-blue"
-        >
+        <Button onClick={handleCancel} variant="outline-blue">
           {"Cancel"}
         </Button>
-        <Button
-          onClick={() => router.push("/company/job-post")}
-          variant={"blue-btn"}
-        >
-          {"Post job"}
+        <Button onClick={handleJob} variant={"blue-btn"}>
+          {isEdit ? "Update Job" : "Post job"}
         </Button>
       </Flex>
     </Box>

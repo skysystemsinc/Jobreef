@@ -8,12 +8,20 @@ import companyIcon from "@/assets/Images/companyIcon.svg";
 import CompanyButton from "./CompanyButton";
 const ActiveJobs = () => {
   const router = useRouter();
+  const handleEdit = (id) => {
+    router.push(`/operator/create-company?id=${id}`);
+  };
+  const actionList = [
+    { title: "Deactivate" },
+    { title: "Flag" },
+    { title: "Edit" ,handleEvent:handleEdit },
+  ];
   const columns = [
     {
       companyName: "Company Name ",
       location: "Location",
       owner: "Owner",
-      members: "Members",
+      jobPosts: "job Posts",
       createdAt: "Created On (MM/DD/YY) ",
       Actions: "Actions",
     },
@@ -22,25 +30,32 @@ const ActiveJobs = () => {
     "companyName",
     "location",
     "owner",
-    "members",
+    "jobPosts",
     "createdAt",
     "Actions",
   ];
-  const actionList = ["Deactivate", "Flag", ];
   const data = [
     {
-      companyName: { image: companyIcon.src, name: "Company Name" },
+      companyName: "Company Name",
       location: "Nassau, The Bahamas",
       owner: "Nassau, The Bahamas",
-      members: "35",
+      jobPosts: "35",
       createdAt: "20/08/23",
       Actions: <Popovers actionList={actionList} />,
     },
     {
-      companyName: { image: companyIcon.src, name: "Company Name" },
+      companyName: "Company Name",
       location: "Nassau, The Bahamas",
       owner: "Nassau, The Bahamas",
-      members: "35",
+      jobPosts: "35",
+      createdAt: "20/08/23",
+      Actions: <Popovers actionList={actionList} />,
+    },
+    {
+      companyName: "Company Name",
+      location: "Nassau, The Bahamas",
+      owner: "Nassau, The Bahamas",
+      jobPosts: "35",
       createdAt: "20/08/23",
       Actions: <Popovers actionList={actionList} />,
     },
@@ -57,7 +72,7 @@ const ActiveJobs = () => {
   };
   return (
     <>
-    <CompanyButton/>
+      <CompanyButton />
       <Box minH={"78vh"} pb={"20px"}>
         <PaginatedTable
           keys={keys}

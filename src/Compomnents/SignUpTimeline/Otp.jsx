@@ -19,23 +19,29 @@ import endPoints from "@/Utils/endpoints";
 import { roles } from "@/Utils/role";
 import { setAuthentication } from "@/Reudx/slices/authentication";
 import { useDispatch, useSelector } from "react-redux";
+import { httpRequest } from "@/helper/httpRrequest";
+import { addUser } from "@/Reudx/slices/userRegistration";
+import { registration } from "@/schema/stateSchema";
 
 const Otp = ({
   text,
-  State,
-  setState,
+  // State,
+  // setState,
   activeStep,
   handlePrevious,
   nextStep,
 }) => {
-  
-  const [test, settest] = useState();
+  const userState = useSelector((state) => state.userRegistration.value);
+  const [otp, setOtp] = useState("");
   const toast = useToast();
   const router = useRouter();
   const dispatch = useDispatch();
-
+  const [state, setState] = useState({
+    otp: "",
+    loading: false,
+  });
   const verifyOtp = async () => {
-    if (State.otp == "") {
+    if (state.otp === "") {
       toast({
         position: "bottom-right",
         title: `Please enter otp`,
@@ -52,27 +58,27 @@ const Otp = ({
           loading: true,
         };
       });
-      const verify = await axios({
-        method: "POST",
-        url: `${BACKEND_URL}${endPoints.verifyOtp}`,
-        data: {
-          userId: State.userId,
-          otp: parseInt(State.otp),
-        },
-      });
-      if (verify) {
+      const body = {
+        userId: userState.userId,
+        otp: parseInt(state.otp),
+      };
+      const verify = await httpRequest(
+        `${BACKEND_URL}${endPoints.verifyOtp}`,
+        "POST",
+        body
+      );
+     
+      if (verify.success) {
+        dispatch(addUser(registration));
         dispatch(
           setAuthentication({
-            role: verify.data.data.role,
-            userId: verify.data.data.id,
+            role: verify?.data?.role,
+            userId: verify?.data?.id,
           })
         );
-        // localStorage.setItem("id", verify.data.data.id);
-        // localStorage.setItem("role", verify.data.data.role);
-
         toast({
           position: "bottom-right",
-          title: `Email verified successfully`,
+          title: verify.message,
           status: "success",
           variant: "subtle",
           isClosable: true,
@@ -83,19 +89,28 @@ const Otp = ({
             loading: false,
           };
         });
-        // setTimeout(() => {
-        if (verify.data.data.role == roles.company) {
+        if (verify?.data?.role == roles.company) {
           router.push("/company/registration");
         } else {
-          // window.location.href = "/candidate/registration";
           router.push("/candidate/registration");
-
         }
-        // }, 1000);
+      } else {
+        toast({
+          position: "bottom-right",
+          title: verify.message,
+          status: "error",
+          variant: "subtle",
+          isClosable: true,
+        });
+        setState((prev) => {
+          return {
+            ...prev,
+            loading: false,
+          };
+        });
       }
     } catch (err) {
       console.log("err", err);
-      const errorMessage = err?.response?.data.message;
 
       setState((prev) => {
         return {
@@ -105,7 +120,7 @@ const Otp = ({
       });
       toast({
         position: "bottom-right",
-        title: errorMessage,
+        title: "Error!",
         status: "error",
         variant: "subtle",
         isClosable: true,
@@ -115,22 +130,6 @@ const Otp = ({
 
   return (
     <Box textAlign={"center"}>
-      {/* <button
-        onClick={() => {
-          console.log("runn")
-          settest({
-
-            role:"test",
-            userId: "asasas",
-          })
-          setAuthentication ({
-            role:"test",
-            userId: "asasas",
-          });
-        }}
-      >
-        test
-      </button> */}
       <Heading
         as={"p"}
         textAlign={"center"}
@@ -148,7 +147,7 @@ const Otp = ({
       </Heading>
       <HStack gap={"15px"} display={"flex"} justifyContent={"center"}>
         <PinInput
-          value={State?.otp}
+          value={state.otp}
           onChange={(e) => {
             setState((prev) => {
               return { ...prev, otp: e };
@@ -212,7 +211,7 @@ const Otp = ({
           variant={"blue-btn"}
           onClick={verifyOtp}
         >
-          {State.loading ? <Loader /> : "Verify"}
+          {state.loading ? <Loader /> : "Verify"}
         </Button>
       </Flex>
     </Box>

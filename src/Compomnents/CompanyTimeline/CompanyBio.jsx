@@ -14,7 +14,7 @@ import {
   UnorderedList,
   useToast,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import LabelInput from "../LabelInput/LabelInput";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import { Link } from "@chakra-ui/next-js";
@@ -27,10 +27,16 @@ import globalStyles from "@/styles/globalStyles";
 import endPoints from "@/Utils/endpoints";
 import axios from "axios";
 import { BACKEND_URL } from "@/Utils/urls";
+import { company } from "@/schema/stateSchema";
+import { useDispatch, useSelector } from "react-redux";
+import { addCompany } from "@/Reudx/slices/company";
 
 const CompanyBio = ({ nextStep, State, setState }) => {
   const toast = useToast();
+  const companyState = useSelector((state) => state.companyRegister.value);
+  const dispatch = useDispatch()
 
+  const [companyBio, setCompanyBio] = useState(companyState);
   const list = [
     "Please upload logo in minimum 200x200 resolution",
     "The acceptable formats of the copy are .PDF, .JPEG or .PNG",
@@ -40,7 +46,7 @@ const CompanyBio = ({ nextStep, State, setState }) => {
     const file = e.target.files[0];
     if (file) {
       const imageURL = URL.createObjectURL(file); // Create a URL for the selected file
-      setState((prev) => {
+      setCompanyBio((prev) => {
         return {
           ...prev,
           logo: imageURL,
@@ -49,13 +55,12 @@ const CompanyBio = ({ nextStep, State, setState }) => {
     }
   };
 
-
   const handleNext = () => {
     if (
-      State.companyName === "" ||
-      State.directory === "" ||
-      State.description === "" ||
-      State.logo === ""
+      companyBio.companyName === "" ||
+      companyBio.directory === "" ||
+      companyBio.description === "" ||
+      companyBio.logo === false
     ) {
       toast({
         position: globalStyles.toastStyle.position,
@@ -66,18 +71,28 @@ const CompanyBio = ({ nextStep, State, setState }) => {
       });
       return;
     }
+    dispatch(addCompany(companyBio))
     nextStep();
   };
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setCompanyBio((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+
   return (
     <Box>
       <InputWrapper>
         <LabelInput
-          state={State.companyName}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, companyName: e.target.value };
-            });
-          }}
+          state={companyBio.companyName}
+          setState={handleChange}
+          name={"companyName"}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -86,12 +101,9 @@ const CompanyBio = ({ nextStep, State, setState }) => {
         />
         <LabelInput
           dropdown
-          state={State.industry}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, industry: e.target.value };
-            });
-          }}
+          state={companyBio.industry}
+          setState={handleChange}
+          name={"industry"}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -101,12 +113,9 @@ const CompanyBio = ({ nextStep, State, setState }) => {
       </InputWrapper>
       <InputWrapper>
         <LabelInput
-          state={State.directory}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, directory: e.target.value };
-            });
-          }}
+          state={companyBio.directory}
+          setState={handleChange}
+          name={"directory"}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -115,12 +124,9 @@ const CompanyBio = ({ nextStep, State, setState }) => {
           label={"Listed in Directory*"}
         />
         <LabelInput
-          state={State.noOfEmployees}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, noOfEmployees: e.target.value };
-            });
-          }}
+          state={companyBio.noOfEmployees}
+          setState={handleChange}
+          name={"noOfEmployees"}
           labelVariant={"label"}
           type="number"
           variant={"bg-input"}
@@ -130,12 +136,9 @@ const CompanyBio = ({ nextStep, State, setState }) => {
       </InputWrapper>
       <InputWrapper>
         <LabelInput
-          state={State.yearEstablished}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, yearEstablished: e.target.value };
-            });
-          }}
+          state={companyBio.yearEstablished}
+          setState={handleChange}
+          name={"yearEstablished"}
           labelVariant={"label"}
           type="number"
           variant={"bg-input"}
@@ -143,12 +146,9 @@ const CompanyBio = ({ nextStep, State, setState }) => {
           label={"Year Established"}
         />
         <LabelInput
-          state={State.webLink}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, webLink: e.target.value };
-            });
-          }}
+          state={companyBio.webLink}
+          setState={handleChange}
+          name={"webLink"}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -159,21 +159,19 @@ const CompanyBio = ({ nextStep, State, setState }) => {
       </InputWrapper>
       <InputWrapper>
         <LabelInput
-          state={State.description}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, description: e.target.value };
-            });
-          }}
+          state={companyBio.description}
+          setState={handleChange}
+          name={"description"}
           labelVariant={"label"}
           textarea
+          
           variant={"bg-teaxtarea"}
           placeholder="Describe Your Company..."
           label={"Description*"}
         />
       </InputWrapper>
-      {State?.logo ? (
-        <CompanyLogoPreview logo={State.logo} />
+      {companyBio?.logo ? (
+        <CompanyLogoPreview logo={companyBio.logo} />
       ) : (
         <UploadBox
           style={{
@@ -197,7 +195,7 @@ const CompanyBio = ({ nextStep, State, setState }) => {
           variant={"blue-btn"}
           onClick={handleNext}
         >
-          {State.loading ? <Loader /> : "Next"}
+          {"Next"}
         </Button>
       </Flex>
     </Box>
