@@ -70,7 +70,7 @@ const BlogTabs = ({ company }) => {
             })}
 
             <Button
-              onClick={()=>router.push("/operator/create-company")}
+              onClick={()=>router.push("/operator/upload-blog")}
               display={{ md: "block", base: "none" }}
               position={"absolute"}
               right={"12px"}
