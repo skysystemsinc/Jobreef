@@ -16,10 +16,13 @@ const BlogForm = () => {
   const router = useRouter();
   const { id } = router.query;
   const [State, setState] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    role: "",
+    title: "",
+    summary: "",
+    description: "",
+    category: "",
+    keyword: "",
+    author: "",
+    timeRead: "",
   });
   const handleSend = async () => {
     try {
@@ -31,7 +34,16 @@ const BlogForm = () => {
       router.push("/operator/blog");
     } catch (error) {}
   };
-
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setState((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
   return (
     <Box
       minHeight={"82vh"}
@@ -48,12 +60,9 @@ const BlogForm = () => {
       </Heading>
       <InputWrapper>
         <LabelInput
-          state={State.firstName}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, firstName: e.target.value };
-            });
-          }}
+          state={State.title}
+          setState={handleChange}
+          name={"title"}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -64,12 +73,9 @@ const BlogForm = () => {
 
       <InputWrapper>
         <LabelInput
-          state={State.email}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, email: e.target.value };
-            });
-          }}
+          state={State.summary}
+          setState={handleChange}
+          name={"summary"}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -77,15 +83,12 @@ const BlogForm = () => {
           label={"Summary"}
         />
       </InputWrapper>
-      
+
       <InputWrapper>
         <LabelInput
-          state={State.email}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, email: e.target.value };
-            });
-          }}
+          state={State.description}
+          setState={handleChange}
+          name={"description"}
           labelVariant={"label"}
           type="text"
           textFormattter
@@ -96,29 +99,21 @@ const BlogForm = () => {
       </InputWrapper>
       <InputWrapper>
         <LabelInput
-          state={State.email}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, email: e.target.value };
-            });
-          }}
+          state={State.category}
+          setState={handleChange}
+          name={"category"}
           labelVariant={"label"}
           type="text"
-          
           variant={"bg-input"}
           placeholder="Enter Category"
           label={"Category"}
         />
         <LabelInput
-          state={State.email}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, email: e.target.value };
-            });
-          }}
+          state={State.keyword}
+          setState={handleChange}
+          name={"keyword"}
           labelVariant={"label"}
           type="text"
-          
           variant={"bg-input"}
           placeholder="Enter keywords for this blog "
           label={"Keywords"}
@@ -126,35 +121,26 @@ const BlogForm = () => {
       </InputWrapper>
       <InputWrapper>
         <LabelInput
-          state={State.email}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, email: e.target.value };
-            });
-          }}
+          state={State.author}
+          setState={handleChange}
+          name={"author"}
           labelVariant={"label"}
           type="text"
-          
           variant={"bg-input"}
           placeholder="Enter name of Author"
           label={"Author"}
         />
         <LabelInput
-          state={State.email}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, email: e.target.value };
-            });
-          }}
+          state={State.timeRead}
+          setState={handleChange}
+          name={"timeRead"}
           labelVariant={"label"}
           type="text"
-          
           variant={"bg-input"}
           placeholder="Enter time read"
           label={"Time Read"}
         />
       </InputWrapper>
-
 
       <Flex
         justifyContent={"center"}
@@ -163,17 +149,17 @@ const BlogForm = () => {
         gap={{ md: "21px", base: "13px" }}
       >
         <Button
-        //   px={{ md: "35px", base: "20px" }}
+          //   px={{ md: "35px", base: "20px" }}
           onClick={handleCancel}
-        //   width={"max-content"}
+          //   width={"max-content"}
           variant="outline-blue"
         >
           Cancel
         </Button>
         <Button
-        //   width={"max-content"}
+          //   width={"max-content"}
           onClick={handleSend}
-        //   px={{ md: "35px", base: "20px" }}
+          //   px={{ md: "35px", base: "20px" }}
           variant={"blue-btn"}
         >
           {id ? "Update" : " Save"}
