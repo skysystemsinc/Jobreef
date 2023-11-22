@@ -5,10 +5,11 @@ import { Box } from "@chakra-ui/react";
 import SearchBox from "@/Compomnents/SearchBox/SearchBox";
 import ActiveJobs from "@/Compomnents/CompanyTabs/ActiveJobs";
 import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
+import BlogForm from "@/Compomnents/BlogForm/BlogForm";
 const blog = () => {
   return (
     <OperatorLayout >
-        <Box minH={"80vh"}></Box>
+        <BlogForm/>
       <DashboardFooter waveImage />
     </OperatorLayout>
   );

@@ -20,7 +20,7 @@ const OperatorHeader = () => {
         size={"sm"}
         icon={<IoNotificationsOutline />}
       />
-      <HeaderDropdown operatorDropdown />
+      <HeaderDropdown hiddenStyle={{display:'block'}}  operatorDropdown />
     </Box>
   );
 };
