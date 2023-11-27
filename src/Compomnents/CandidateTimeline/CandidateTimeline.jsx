@@ -67,13 +67,6 @@ export const CandidateTimeline = ({ candidate, variant }) => {
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
 
-  // const handleNext = async () => {
-  //   if (activeStep === 6) {
-  //     router.push("/candidate/profile-setting");
-  //   } else {
-  //     nextStep();
-  //   }
-  // };
 
   return (
     <Flex
@@ -204,15 +197,13 @@ export const CandidateTimeline = ({ candidate, variant }) => {
                     nextStep={nextStep}
                     activeStep={activeStep}
                     prevStep={prevStep}
-                    state={state}
-                    setState={setState}
                   />
                 ) : index == 1 ? (
-                  <WorkExperiance  prevStep={prevStep} nextStep={nextStep} state={state} setState={setState} />
+                  <WorkExperiance prevStep={prevStep} nextStep={nextStep} />
                 ) : index == 2 ? (
-                  <Education state={state} setState={setState} />
+                  <Education />
                 ) : index == 3 ? (
-                  <Certification state={state} setState={setState} />
+                  <Certification />
                 ) : index == 4 ? (
                   <Skills />
                 ) : index == 5 ? (

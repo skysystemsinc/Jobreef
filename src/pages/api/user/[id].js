@@ -28,23 +28,23 @@ const DeleteUser = async (req, res) => {
   }
 };
 const UpdateUser = async (req, res) => {
-  const newObj = { ...JSON.parse(req.body) };
-  // const emailExist = await prisma.User.findUnique({
-  //   where: {
-  //     email: newObj.email,
-  //   },
-  // });
+  const data = { ...JSON.parse(req.body) };
+  const emailExist = await prisma.User.findUnique({
+    where: {
+      email: data.email,
+    },
+  });
 
-  // if (emailExist) {
-  //   res.status(400).json({
-  //     message: "Email already exists",
-  //     success: false,
-  //   });
-  //   return;
-  // }
-  let hashPass;
-  if (newObj.password) {
-    hashPass = await bcrypt.hash(newObj.password, 10);
+  if (emailExist) {
+    res.status(400).json({
+      message: "Email already exists",
+      success: false,
+    });
+    return;
+  }
+
+  if (data.password) {
+    data.password = await bcrypt.hash(data.password, 10);
   }
 
   try {
@@ -53,14 +53,13 @@ const UpdateUser = async (req, res) => {
         id: req.query.id,
       },
       data: {
-        ...newObj,
-        ...(newObj.password && { password: hashPass }),
+        ...data,
         location: {
-          create: newObj.location,
+          create: data.location,
         },
       },
       include: {
-        location: true, // Include all posts in the returned object
+        location: true, // Include all location in the returned object
       },
     });
 
@@ -70,11 +69,10 @@ const UpdateUser = async (req, res) => {
       success: true,
     });
   } catch (err) {
-    console.log("err", err);
     res.status(500).json({
       error: err,
       success: false,
-      message: `No user with id ${req.query.id}`,
+      message: `Error!`,
     });
   }
 };
@@ -84,6 +82,9 @@ const GetSingleUser = async (req, res) => {
     const user = await prisma.User.findUnique({
       include: {
         company: true,
+        employee: true,
+        location: true,
+        emailPreferences: true,
       },
       where: {
         id: req.query.id,

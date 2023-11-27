@@ -1,5 +1,5 @@
 const verifyOtp = async (req, res) => {
-  const data =  JSON.parse( req.body);
+  const data = JSON.parse(req.body);
   const verify = await prisma.User.findUnique({
     where: {
       id: data.userId,
@@ -7,11 +7,25 @@ const verifyOtp = async (req, res) => {
     },
   });
   if (verify) {
-    res.status(200).json({
-      message: "Otp verified Successfully",
-      success: true,
-      data: verify,
+    const user = await prisma.User.update({
+      where: {
+        id: data.userId,
+      },
+      data: {
+        verified: true,
+        ...(data.email && { email: data.email }),
+      },
+      include: {
+        location: true, // Include all location in the returned object
+      },
     });
+    if (user) {
+      res.status(200).json({
+        message: "Otp verified Successfully",
+        success: true,
+        data: user,
+      });
+    }
   } else {
     res.status(400).json({
       message: "Invalid otp",

@@ -36,13 +36,7 @@ function Context({ children }) {
     return toggle;
   };
 
-  useEffect(() => {
-    const role = JSON.parse(localStorage.getItem("company"));
 
-    if (role) {
-      setCompany(role);
-    }
-  }, []);
 
   return (
     <Role_context.Provider

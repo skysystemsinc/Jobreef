@@ -6,11 +6,13 @@ import profilePic from "@/assets/Images/profile.svg";
 const EditProifle = ({ readOnly, handleEvent, profile, profileStyle }) => {
   return (
     <Avatar
-      src={profilePic.src}
+      src={profile ?profile :profile_icon.src}
       // src={false}
       width={{ md: "120px", base: "90px" }}
       height={{ md: "120px", base: "90px" }}
-      sx={profileStyle}
+      border={"1px solid"}
+      borderColor={"gray.100"}
+      sx={{...profileStyle , objectFit:"cover" , img:{ border:`1px solid`, borderColor:'gray.100 !important'}}}
     >
       {readOnly ? null : (
         <FormLabel>

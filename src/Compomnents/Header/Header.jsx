@@ -36,6 +36,12 @@ import heart from "@/assets/Images/heart.svg";
 import { MdArrowDropDown } from "react-icons/md";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
+import { httpRequest } from "@/helper/httpRrequest";
+import { BACKEND_URL } from "@/Utils/urls";
+import endPoints from "@/Utils/endpoints";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { setLoginUser } from "@/Reudx/slices/LoginUser";
 const HeaderDropdown = dynamic(
   () => import("../HeaderDropdown/HeaderDropdown"),
   {
@@ -44,7 +50,27 @@ const HeaderDropdown = dynamic(
 );
 export default function Header({ candidate }) {
   const { isOpen, onToggle } = useDisclosure();
+  const dispatch = useDispatch();
   const [isSmallerThe500] = useMediaQuery("(max-width: 500px)");
+  // const getUser = async () => {
+  //   const id = localStorage.getItem("id");
+  //   try {
+  //     const postData = await httpRequest(
+  //       `${BACKEND_URL}${endPoints.user}/${id}`,
+  //       "GET"
+  //     );
+  //     if (postData.success) {
+  //       const { data } = postData;
+
+  //       dispatch(setLoginUser(postData.data));
+  //     }
+  //   } catch (error) {
+  //     console.log("error", error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   getUser();
+  // }, []);
 
   return (
     <Box zIndex={5} position={"sticky"} top={"0px"}>
@@ -52,7 +78,7 @@ export default function Header({ candidate }) {
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
         minH={"60px"}
-        py={{ md: 3 , base:0}}
+        py={{ md: 3, base: 0 }}
         // pb={{ base: 4, "2xl": 7 }}
         px={{ "2xl": 8, base: 1 }}
         // position={"relative"}
@@ -105,7 +131,7 @@ export default function Header({ candidate }) {
           justify={"flex-end"}
           direction={"row"}
           alignItems={"center"}
-          spacing={{xl: 6 , base:2}}
+          spacing={{ xl: 6, base: 2 }}
         >
           <IconButton
             isRound={true}
@@ -121,7 +147,7 @@ export default function Header({ candidate }) {
             icon={<IoNotificationsOutline />}
           />
           {/* <Box display={{ xl: "block", base: "none" }}> */}
-            <HeaderDropdown candidate={candidate} />
+          <HeaderDropdown candidate={candidate} />
           {/* </Box> */}
         </Stack>
       </Flex>
@@ -249,7 +275,6 @@ const MobileNav = ({ candidate }) => {
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
-      
     </Stack>
   );
 };

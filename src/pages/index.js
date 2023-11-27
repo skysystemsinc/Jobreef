@@ -11,6 +11,7 @@ import {
   Input,
   Text,
   useMediaQuery,
+  useToast,
 } from "@chakra-ui/react";
 import leftBlue from "@/assets/Images/leftBlue.png";
 import rightYellow from "@/assets/Images/lightYellow.png";
@@ -23,36 +24,103 @@ import { FcGoogle } from "react-icons/fc";
 import { color } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { httpRequest } from "@/helper/httpRrequest";
+import { BACKEND_URL } from "@/Utils/urls";
+import endPoints from "@/Utils/endpoints";
+import Loader from "@/Compomnents/Loader/Loader";
+import { useDispatch } from "react-redux";
+import { setLoginUser } from "@/Reudx/slices/LoginUser";
+import { roles } from "@/Utils/role";
 
 export default function Home() {
   const router = useRouter();
   const [isSmallerThe500] = useMediaQuery("(max-width: 500px)");
-  const [state, setstate] = useState({
+  const toast = useToast();
+  const dispatch = useDispatch();
+  const [state, setState] = useState({
     email: "",
     password: "",
+    loading: false,
   });
   useEffect(() => {
     localStorage.clear();
   }, []);
 
-  const handleLogin = () => {
-    if (state.email == "company@jobreef.com" || state.password == "123456789") {
-      router.push("/company/profile-setting");
+  const handleLogin = async () => {
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: true,
+      };
+    });
+    const body = {
+      email: state.email,
+      password: state.password,
+    };
+    try {
+      const postData = await httpRequest(
+        `${BACKEND_URL}${endPoints.login}`,
+        "POST",
+        body
+      );
+      if (postData.success) {
+        const { data } = postData;
+        localStorage.setItem("id", data.id);
+        dispatch(setLoginUser(postData.data));
+        if (data.role == roles.company) {
+          router.push("/company/profile-setting");
+        } else {
+          router.push("/candidate/profile-setting");
+        }
+        toast({
+          position: "bottom-right",
+          title: postData.message,
+          status: "success",
+          variant: "subtle",
+          isClosable: true,
+        });
+      } else {
+        toast({
+          position: "bottom-right",
+          title: postData.message,
+          status: "error",
+          variant: "subtle",
+          isClosable: true,
+        });
+      }
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+        };
+      });
+    } catch (error) {
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+        };
+      });
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
     }
-    // if (state.email == "company@jobreef.com" || state.password == "123456789") {
-    //   router.push("/candidate/profile-setting");
-    // } 
-    
-    else {
-      router.push("/candidate/profile-setting");
-    }
-    // else if (
-    //   state.email == "employee@jobreef.com" ||
-    //   state.password == "123456789"
-    // ) {
-    //   router.push("/candidate/profile-setting");
-    // }
   };
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setState((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+
   return (
     <>
       <Image
@@ -106,11 +174,8 @@ export default function Home() {
           <Box marginBottom={"20px"}>
             <LabelInput
               state={state.email}
-              setState={(e) => {
-                setstate((prev) => {
-                  return { ...prev, email: e.target.value };
-                });
-              }}
+              setState={handleChange}
+              name={"email"}
               labelVariant={"label"}
               type="email"
               variant={"shadow-input"}
@@ -121,11 +186,8 @@ export default function Home() {
           <Box>
             <LabelInput
               state={state.password}
-              setState={(e) => {
-                setstate((prev) => {
-                  return { ...prev, password: e.target.value };
-                });
-              }}
+              setState={handleChange}
+              name={"password"}
               iconStyle={{ marginTop: "7px" }}
               labelVariant={"label"}
               type="password"
@@ -180,7 +242,7 @@ export default function Home() {
               variant={"blue-btn"}
               width={{ md: "162px", base: "140px" }}
             >
-              Login
+              {state.loading ? <Loader /> : "  Login"}
             </Button>
             <Button
               width={{ base: "max-content" }}

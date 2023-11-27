@@ -27,15 +27,18 @@ import JobLocation from "./JobLocation";
 import DesiredSkills from "./DesiredSkills";
 import Preview from "./Preview";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
-const steps = [
-  { label: "Job Bio" },
-  { label: "Technical Details" },
-  { label: "Job Location" },
-  { label: "Desired Skills" },
-  // { label: "Step 5" },
-];
+import AssignJob from "./AssigneJob";
 
-const JobPostTimeline = ({ isEdit, title, candidate, variant }) => {
+const JobPostTimeline = ({ assignJob ,timeLine, isEdit, title, candidate, variant }) => {
+  const steps = [
+    // (...timeLine),
+    ...(timeLine && timeLine),
+
+    { label: "Job Bio" },
+    { label: "Technical Details" },
+    { label: "Job Location" },
+    { label: "Desired Skills" },
+  ];
   const [state, setState] = useState({
     jobTitle: "",
     employeeType: "",
@@ -66,10 +69,6 @@ const JobPostTimeline = ({ isEdit, title, candidate, variant }) => {
   const [compeletedStep, setcompeletedStep] = useState([]);
   const initialRender = useRef(true);
   useEffect(() => {
-    // if (initialRender.current) {
-    //   initialRender.current = false;
-    //   return;
-    // }
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
   const boxstyle = {
@@ -191,12 +190,14 @@ const JobPostTimeline = ({ isEdit, title, candidate, variant }) => {
                   {/* <JobBio /> */}
 
                   {index == 0 ? (
-                    <JobBio state={state} setState={setState} />
+                    <AssignJob />
                   ) : index == 1 ? (
-                    <TechnicalDetails state={state} setState={setState} />
+                    <JobBio state={state} setState={setState} />
                   ) : index == 2 ? (
-                    <JobLocation state={state} setState={setState} />
+                    <TechnicalDetails state={state} setState={setState} />
                   ) : index == 3 ? (
+                    <JobLocation state={state} setState={setState} />
+                  ) : index == 4 ? (
                     <DesiredSkills
                       style={boxstyle}
                       state={state}
@@ -216,7 +217,7 @@ const JobPostTimeline = ({ isEdit, title, candidate, variant }) => {
               width: { md: "85%", base: "95%" },
             }}
           >
-            <Preview isEdit={isEdit} state={state} setState={setState} />
+            <Preview  assignJob={assignJob} isEdit={isEdit} state={state} setState={setState} />
           </Box>
         ) : null}
 

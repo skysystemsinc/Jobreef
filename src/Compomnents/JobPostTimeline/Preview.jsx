@@ -7,8 +7,9 @@ import DesiredSkills from "./DesiredSkills";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
+import AssignJob from "./AssigneJob";
 
-const Preview = ({ isEdit, state, setState }) => {
+const Preview = ({ assignJob, isEdit, state, setState }) => {
   const router = useRouter();
   const boxStyle = {
     // border:'1px solid red',
@@ -45,9 +46,14 @@ const Preview = ({ isEdit, state, setState }) => {
       <Box sx={boxStyle}>
         <JobLocation state={state} setState={setState} />
       </Box>
-      <Box sx={{ ...boxStyle, marginBottom: "40px" }}>
+      <Box sx={{ ...boxStyle }}>
         <DesiredSkills state={state} setState={setState} />
       </Box>
+      {assignJob ? (
+        <Box sx={{ ...boxStyle, marginBottom: "40px" }}>
+          <AssignJob state={state} setState={setState} />
+        </Box>
+      ) : null}
 
       {isEdit ? null : (
         <Button

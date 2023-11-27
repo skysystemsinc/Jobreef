@@ -22,9 +22,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { httpRequest } from "@/helper/httpRrequest";
 import { addUser } from "@/Reudx/slices/userRegistration";
 import { registration } from "@/schema/stateSchema";
+import { setLoginUser } from "@/Reudx/slices/LoginUser";
 
 const Otp = ({
   text,
+  email,
+  emailChange,
+  setOtpState,
   // State,
   // setState,
   activeStep,
@@ -32,7 +36,8 @@ const Otp = ({
   nextStep,
 }) => {
   const userState = useSelector((state) => state.userRegistration.value);
-  const [otp, setOtp] = useState("");
+  const loginUser = useSelector((state) => state.LoginUser.value);
+
   const toast = useToast();
   const router = useRouter();
   const dispatch = useDispatch();
@@ -51,6 +56,7 @@ const Otp = ({
       });
       return;
     }
+    const id = localStorage.getItem("id");
     try {
       setState((prev) => {
         return {
@@ -59,7 +65,7 @@ const Otp = ({
         };
       });
       const body = {
-        userId: userState.userId,
+        userId: userState.userId ? userState.userId : id,
         otp: parseInt(state.otp),
       };
       const verify = await httpRequest(
@@ -67,7 +73,7 @@ const Otp = ({
         "POST",
         body
       );
-     
+
       if (verify.success) {
         dispatch(addUser(registration));
         dispatch(
@@ -89,10 +95,99 @@ const Otp = ({
             loading: false,
           };
         });
-        if (verify?.data?.role == roles.company) {
+        if (verify?.data?.role === roles.company) {
           router.push("/company/registration");
         } else {
           router.push("/candidate/registration");
+        }
+      } else {
+        toast({
+          position: "bottom-right",
+          title: verify.message,
+          status: "error",
+          variant: "subtle",
+          isClosable: true,
+        });
+        setState((prev) => {
+          return {
+            ...prev,
+            loading: false,
+          };
+        });
+      }
+    } catch (err) {
+      console.log("err", err);
+
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+        };
+      });
+      toast({
+        position: "bottom-right",
+        title: "Error!",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
+  };
+  const changeEmail = async () => {
+    if (state.otp === "") {
+      toast({
+        position: "bottom-right",
+        title: `Please enter otp`,
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+      return;
+    }
+    const id = localStorage.getItem("id");
+    try {
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: true,
+        };
+      });
+      const body = {
+        userId: userState.userId ? userState.userId : id,
+        otp: parseInt(state.otp),
+        email: email,
+      };
+      const verify = await httpRequest(
+        `${BACKEND_URL}${endPoints.verifyOtp}`,
+        "POST",
+        body
+      );
+
+      if (verify.success) {
+        dispatch(setLoginUser(verify.data));
+
+        toast({
+          position: "bottom-right",
+          title: verify.message,
+          status: "success",
+          variant: "subtle",
+          isClosable: true,
+        });
+        setState((prev) => {
+          return {
+            ...prev,
+            loading: false,
+          };
+        });
+        if (setOtpState) {
+          setOtpState((prev) => {
+            return {
+              ...prev,
+              isEdit: false,
+              readOnly: true,
+              otp: false,
+            };
+          });
         }
       } else {
         toast({
@@ -134,7 +229,6 @@ const Otp = ({
         as={"p"}
         textAlign={"center"}
         m={{
-          "2xl": "60px 0px 76px -62px",
           md: "30px 0px 62px 0px",
           base: "30px 0px 46px 0px",
         }}
@@ -204,12 +298,12 @@ const Otp = ({
           onClick={handlePrevious}
           variant="outline-blue"
         >
-          {" Back"}
+          {setOtpState ? "Cancel" : " Back"}
         </Button>
         <Button
           // width={{ md: "200px", sm: "180px", base: "130px" }}
           variant={"blue-btn"}
-          onClick={verifyOtp}
+          onClick={emailChange ? changeEmail : verifyOtp}
         >
           {state.loading ? <Loader /> : "Verify"}
         </Button>

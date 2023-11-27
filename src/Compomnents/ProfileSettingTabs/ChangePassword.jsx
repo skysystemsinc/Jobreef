@@ -1,30 +1,118 @@
-import { Box, Button, Heading, Image } from "@chakra-ui/react";
+import { Box, Button, Heading, Image, useToast } from "@chakra-ui/react";
 import LabelInput from "../LabelInput/LabelInput";
 import edit_outline from "@/assets/Images/edit_outline.svg";
 import { useRef, useState } from "react";
+import { httpRequest } from "@/helper/httpRrequest";
+import { BACKEND_URL } from "@/Utils/urls";
+import endPoints from "@/Utils/endpoints";
+import globalStyles from "@/styles/globalStyles";
+import Loader from "../Loader/Loader";
 const ChangePassword = () => {
-  const [state, setstate] = useState({
+  const toast = useToast();
+  const [state, setState] = useState({
     oldPassword: "",
     newPassword: "",
     confirmPassword: "",
+    isEdit: false,
+    readOnly: true,
+    loading: false,
   });
   const inputRef = useRef();
-  const [isEdit, setisEdit] = useState(false);
 
-  const [readOnly, setreadOnly] = useState(true);
   const handleEdit = () => {
-    setisEdit(true);
-    setreadOnly(false);
+    setState((prev) => {
+      return {
+        ...prev,
+        isEdit: true,
+        readOnly: false,
+      };
+    });
   };
-  const handleSave = () => {
-    setisEdit(false);
-
-    setreadOnly(true);
+  const handleSave = async () => {
+    if (state.newPassword !== state.confirmPassword) {
+      toast({
+        position: globalStyles.toastStyle.position,
+        title: "password does not match",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+      return;
+    }
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: true,
+      };
+    });
+    if (state.loading) return;
+    const id = localStorage.getItem("id");
+    const body = {
+      password: state.oldPassword,
+      newPassword: state.newPassword,
+      userId: id,
+    };
+    try {
+      const postData = await httpRequest(
+        `${BACKEND_URL}${endPoints.changePassword}`,
+        "PUT",
+        body
+      );
+      if (postData.success) {
+        setState((prev) => {
+          return {
+            ...prev,
+            loading: false,
+            isEdit: false,
+            readOnly:true,
+            oldPassword: "",
+            newPassword: "",
+            confirmPassword: "",
+          };
+        });
+      } else {
+        setState((prev) => {
+          return {
+            ...prev,
+            loading: false,
+          };
+        });
+      }
+      toast({
+        position: globalStyles.toastStyle.position,
+        title: postData.message,
+        status: postData.success ? "success" : "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    } catch (err) {
+      toast({
+        position: globalStyles.toastStyle.position,
+        title: "Error!",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
   };
   const handleCancel = () => {
-    setisEdit(false);
-
-    setreadOnly(true);
+    setState((prev) => {
+      return {
+        ...prev,
+        isEdit: false,
+        readOnly: true,
+      };
+    });
+  };
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setState((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
   };
   return (
     <Box
@@ -33,7 +121,7 @@ const ChangePassword = () => {
       flexDirection={"column"}
       alignItems={"center"}
     >
-      {isEdit ? (
+      {state.isEdit ? (
         <Box width={{ md: "564px", base: "100%" }}>
           <Heading
             textAlign={"center"}
@@ -45,11 +133,8 @@ const ChangePassword = () => {
           <Box mb={{ base: "35px" }}>
             <LabelInput
               state={state.oldPassword}
-              setState={(e) => {
-                setstate((prev) => {
-                  return { ...prev, oldPassword: e.target.value };
-                });
-              }}
+              setState={handleChange}
+              name={"oldPassword"}
               passworInput
               labelVariant={"label"}
               type="text"
@@ -61,11 +146,8 @@ const ChangePassword = () => {
           <Box mb={{ base: "15px" }}>
             <LabelInput
               state={state.newPassword}
-              setState={(e) => {
-                setstate((prev) => {
-                  return { ...prev, newPassword: e.target.value };
-                });
-              }}
+              setState={handleChange}
+              name={"newPassword"}
               passworInput
               labelVariant={"label"}
               type="text"
@@ -77,11 +159,8 @@ const ChangePassword = () => {
           <Box>
             <LabelInput
               state={state.confirmPassword}
-              setState={(e) => {
-                setstate((prev) => {
-                  return { ...prev, confirmPassword: e.target.value };
-                });
-              }}
+              setState={handleChange}
+              name={"confirmPassword"}
               passworInput
               labelVariant={"label"}
               type="text"
@@ -94,15 +173,12 @@ const ChangePassword = () => {
       ) : (
         <Box
           minHeight={"58vh"}
-          // border={"1px solid red"}
           mt={{ md: "50px", base: "10px" }}
-          // mt={{ md: "0px", base: "40px" }}
           width={{ md: "564px", base: "100%" }}
         >
           <LabelInput
             showEndLable
-            readOnly={readOnly}
-            setreadOnly={setreadOnly}
+            readOnly={state.readOnly}
             handleEdit={handleEdit}
             labelVariant={"label"}
             type="text"
@@ -122,7 +198,7 @@ const ChangePassword = () => {
         </Box>
       )}
 
-      {isEdit ? (
+      {state.isEdit ? (
         <Box
           display={"flex"}
           justifyContent={"center"}
@@ -135,7 +211,7 @@ const ChangePassword = () => {
               Cancel
             </Button>
             <Button onClick={handleSave} variant={"blue-btn"}>
-              Save
+              {state.loading ? <Loader /> : "Save"}
             </Button>
           </>
         </Box>
