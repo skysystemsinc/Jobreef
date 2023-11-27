@@ -17,7 +17,7 @@ const createJobPost = () => {
   return (
     <OperatorLayout>
       <Box>
-        <JobPostTimeline  assignJob timeLine={jobTimeline}  title="Create a New Job Post" />
+        <JobPostTimeline   assignJob timeLine={jobTimeline}  title="Create a New Job Post" />
       </Box>
       <DashboardFooter waveImage />
     </OperatorLayout>
