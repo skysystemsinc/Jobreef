@@ -29,11 +29,15 @@ import Preview from "./Preview";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import AssignJob from "./AssigneJob";
 
-const JobPostTimeline = ({ assignJob ,timeLine, isEdit, title, candidate, variant }) => {
+const JobPostTimeline = ({
+  assignJob,
+  timeLine,
+  isEdit,
+  title,
+  candidate,
+  variant,
+}) => {
   const steps = [
-    // (...timeLine),
-    ...(timeLine && timeLine),
-
     { label: "Job Bio" },
     { label: "Technical Details" },
     { label: "Job Location" },
@@ -127,7 +131,7 @@ const JobPostTimeline = ({ assignJob ,timeLine, isEdit, title, candidate, varian
           activeStep={activeStep}
         >
           {steps.map(({ label }, index) => {
-            const CostomeCheckIcon = () => {
+            const CostumeCheckIcon = () => {
               return (
                 <Heading
                   variant={"p1"}
@@ -141,7 +145,7 @@ const JobPostTimeline = ({ assignJob ,timeLine, isEdit, title, candidate, varian
                 </Heading>
               );
             };
-            const CostomeIcon = () => {
+            const CostumeIcon = () => {
               return (
                 <Heading
                   variant={"p1"}
@@ -161,9 +165,9 @@ const JobPostTimeline = ({ assignJob ,timeLine, isEdit, title, candidate, varian
 
             return (
               <Step
-                checkIcon={CostomeCheckIcon}
+                checkIcon={CostumeCheckIcon}
                 flexDirection={"column"}
-                icon={CostomeIcon}
+                icon={CostumeIcon}
                 key={label}
                 // icon={ hasCompletedAllSteps? false:CostomeIcon}
                 label={
@@ -190,14 +194,12 @@ const JobPostTimeline = ({ assignJob ,timeLine, isEdit, title, candidate, varian
                   {/* <JobBio /> */}
 
                   {index == 0 ? (
-                    <AssignJob />
-                  ) : index == 1 ? (
                     <JobBio state={state} setState={setState} />
-                  ) : index == 2 ? (
+                  ) : index == 1 ? (
                     <TechnicalDetails state={state} setState={setState} />
-                  ) : index == 3 ? (
+                  ) : index == 2 ? (
                     <JobLocation state={state} setState={setState} />
-                  ) : index == 4 ? (
+                  ) : index == 3 ? (
                     <DesiredSkills
                       style={boxstyle}
                       state={state}
@@ -217,7 +219,12 @@ const JobPostTimeline = ({ assignJob ,timeLine, isEdit, title, candidate, varian
               width: { md: "85%", base: "95%" },
             }}
           >
-            <Preview  assignJob={assignJob} isEdit={isEdit} state={state} setState={setState} />
+            <Preview
+              
+              isEdit={isEdit}
+              state={state}
+              setState={setState}
+            />
           </Box>
         ) : null}
 

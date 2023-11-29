@@ -49,7 +49,6 @@ const JobPostsTabs = ({ company }) => {
         index={tabIndex}
         isFitted
         display={{ sm: "block", base: "none" }}
-
       >
         <Box position={"relative"}>
           <TabList
@@ -75,6 +74,16 @@ const JobPostsTabs = ({ company }) => {
                 </Tab>
               );
             })}
+            <Button
+              onClick={() => router.push("/operator/create-job-post")}
+              display={{ md: "block", base: "none" }}
+              position={"absolute"}
+              right={"12px"}
+              bottom={"0px"}
+              variant={"blue-btn"}
+            >
+              Create Job Post
+            </Button>
           </TabList>
         </Box>
 

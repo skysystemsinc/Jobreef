@@ -20,6 +20,7 @@
     "@wojtekmaj/react-daterange-picker": "^5.4.3",
     "axios": "^1.6.2",
     "bcrypt": "^5.1.1",
+    "chakra-multiselect": "^0.4.6",
     "chakra-ui-steps": "^2.1.0",
     "creditcard.js": "^3.0.31",
     "date-fns": "^2.30.0",

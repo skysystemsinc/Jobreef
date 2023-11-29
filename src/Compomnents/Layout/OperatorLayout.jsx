@@ -10,14 +10,8 @@ import OperatorSidebar from "../SideBar/OperatorSidebar";
 const OperatorLayout = ({ children }) => {
   return (
     <>
-      
       <OperatorSidebar />
-      <Box
-        // position={"relative"}
-        // top={"0px"}
-        // zIndex={2}
-        ml={{ xl: "250px", base: "55px" }}
-      >
+      <Box ml={{ xl: "250px", base: "55px" }}>
         <OperatorHeader />
 
         {children}

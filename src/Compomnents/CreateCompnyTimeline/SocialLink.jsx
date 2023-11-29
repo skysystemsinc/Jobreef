@@ -165,9 +165,9 @@ const SocialLink = ({ nextStep, handlePrevious }) => {
         <Button
           // width={{ md: "200px", sm: "180px", base: "130px" }}
           variant={"blue-btn"}
-          onClick={handleCreate}
+          onClick={nextStep}
         >
-          {State.loading ? <Loader /> : id ? "Update" : "Create"}
+          {State.loading ? <Loader /> : id ? "Update" : "Next"}
         </Button>
       </Flex>
     </Box>

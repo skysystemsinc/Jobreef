@@ -6,10 +6,12 @@ import SearchBox from "@/Compomnents/SearchBox/SearchBox";
 import ActiveJobs from "@/Compomnents/CompanyTabs/ActiveJobs";
 import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
 import BlogForm from "@/Compomnents/BlogForm/BlogForm";
+import { BlogTimeline } from "@/Compomnents/BlogTimeline/BlogTimeline";
 const blog = () => {
   return (
     <OperatorLayout >
-        <BlogForm/>
+        {/* <BlogForm/> */}
+        <BlogTimeline/>
       <DashboardFooter waveImage />
     </OperatorLayout>
   );

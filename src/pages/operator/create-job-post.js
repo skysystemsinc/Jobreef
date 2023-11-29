@@ -9,6 +9,7 @@ import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
 import UserFrom from "@/Compomnents/UserForm/UserForm";
 import OperatorFrom from "@/Compomnents/OperatorsForm/OperatorsForm";
 import JobPostTimeline from "@/Compomnents/JobPostTimeline/JobPostTimeline";
+import OperatorJobPost from "@/Compomnents/OperatorJobPost/OperatorJobPost";
 const createJobPost = () => {
     const jobTimeline =[
         { label: "Assign Job" },
@@ -17,7 +18,7 @@ const createJobPost = () => {
   return (
     <OperatorLayout>
       <Box>
-        <JobPostTimeline   assignJob timeLine={jobTimeline}  title="Create a New Job Post" />
+        <OperatorJobPost     title="Create a New Job Post" />
       </Box>
       <DashboardFooter waveImage />
     </OperatorLayout>

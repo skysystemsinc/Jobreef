@@ -4,24 +4,9 @@ import { StepsTheme as Steps } from "chakra-ui-steps";
 import { Nunito } from "next/font/google";
 import { Sora } from "next/font/google";
 import "@fontsource/sora";
+import { MultiSelectTheme } from "chakra-multiselect";
 // theme.js
 
-const customStyles = {
-  scrollableBox: {
-    overflowY: "scroll",
-    scrollbarWidth: "none",
-    "&::-webkit-scrollbar": {
-      width: "6px", // You can adjust the width
-    },
-    "&::-webkit-scrollbar-thumb": {
-      backgroundColor: "#2CA5C3", // Customize the thumb color
-      borderRadius: "6px", // You can adjust the border radius
-    },
-    "&::-webkit-scrollbar-track": {
-      backgroundColor: "#ffffff", // Customize the track color
-    },
-  },
-};
 
 const nunito = Nunito({
   weight: ["200", "300", "400", "500", "600", "700", "900"],
@@ -99,6 +84,7 @@ const components = {
   Text: {
     variants: {},
   },
+  MultiSelect:MultiSelectTheme,
   Button: {
     variants: {
       "blue-btn": {

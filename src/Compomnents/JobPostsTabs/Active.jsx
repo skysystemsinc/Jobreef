@@ -5,12 +5,16 @@ import menu from "@/assets/Images/menu.svg";
 import { useRouter } from "next/router";
 import Popovers from "../PaginatedTable/Popovers";
 import profile_icon from "@/assets/Images/profile_icon.svg";
+import JobPostButton from "./JobPostButton";
 const Active = () => {
   const router = useRouter();
-  const handleEdit =()=>{
-    router.push("/operator/edit-job-post")
-  }
-  const actionList = [{title:"Deactivate"} , {title:"Edit" , handleEvent:handleEdit}];
+  const handleEdit = () => {
+    router.push("/operator/edit-job-post");
+  };
+  const actionList = [
+    { title: "Deactivate" },
+    { title: "Edit", handleEvent: handleEdit },
+  ];
 
   const columns = [
     {
@@ -43,15 +47,6 @@ const Active = () => {
       expireOn: "20/08/23",
       Actions: <Popovers actionList={actionList} />,
     },
-    {
-      id: "2",
-      jobTitle: "Systems Engineer",
-      company: "Microsoft",
-      createdBy: "user@example.org",
-      createdAt: "20/08/23",
-      expireOn: "20/08/23",
-      Actions: <Popovers actionList={actionList} />,
-    },
   ];
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -65,7 +60,8 @@ const Active = () => {
   };
   return (
     <>
-      <Box minH={"62vh"} pb={"20px"}>
+      <JobPostButton />
+      <Box  pb={"20px"}>
         <PaginatedTable
           keys={keys}
           totalPages={totalPages}

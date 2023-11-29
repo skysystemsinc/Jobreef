@@ -1558,6 +1558,11 @@ caniuse-lite@^1.0.30001406:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001559.tgz#95a982440d3d314c471db68d02664fb7536c5a30"
   integrity sha512-cPiMKZgqgkg5LY3/ntGeLFUpi6tzddBNS58A4tnTgQw1zON7u2sZMU7SzOeVH4tj20++9ggL+V6FDOFMTaFFYA==
 
+chakra-multiselect@^0.4.6:
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/chakra-multiselect/-/chakra-multiselect-0.4.6.tgz#9e964121b19d98c8cb5acf2801b4183ecd2252dc"
+  integrity sha512-dXlmTy+of8H0io3tAOvNmhM0fgVNgNSAjlK/FpRSl9VCGKIsHKWHB2tdHdFCo40ZJAChfNEPlNU7kGUPaImvUw==
+
 chakra-ui-steps@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/chakra-ui-steps/-/chakra-ui-steps-2.1.0.tgz#83fe1254b49f6231d5ebcb01c5f5c7ba3dc3241c"

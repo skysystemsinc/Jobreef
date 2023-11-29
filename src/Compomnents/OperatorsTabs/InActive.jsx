@@ -19,7 +19,15 @@ const InActive = () => {
     },
   ];
   const keys = ["name", "email", "role", "createdAt", "Actions"];
-  const actionList = ["Restore", "Delete"];
+  
+  const handleEdit = (id) => {
+    router.push(`/operator/create-operator?id=${id}`);
+  };
+  const actionList = [
+    { title: "Edit", handleEvent: handleEdit },
+    { title: "Restore" },
+    { title: "Delete" },
+  ];
   const data = [
     {
       name: { image: profile_icon.src, name: "Tom Brady" },

@@ -9,6 +9,8 @@ import JobPostsTabs from "@/Compomnents/JobPostsTabs/JobPostsTabs";
 import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
 const jobposts = () => {
   return (
+< >
+  
     <OperatorLayout>
       <Box px={"30px"}>
         <Box width={{ sm: "300px", base: "100%" }} my={"25px"}>
@@ -19,6 +21,8 @@ const jobposts = () => {
       <DashboardFooter waveImage />
 
     </OperatorLayout>
+
+    </>
   );
 };
 

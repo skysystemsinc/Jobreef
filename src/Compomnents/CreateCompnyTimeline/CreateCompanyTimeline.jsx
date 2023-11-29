@@ -29,11 +29,13 @@ import { roles } from "@/Utils/role";
 import { BACKEND_URL } from "@/Utils/urls";
 import Loader from "../Loader/Loader";
 import { useSelector } from "react-redux";
+import CompanyUser from "./CompanyUser";
 
 const steps = [
   { label: "Company Bio" },
   { label: "Company Location" },
   { label: "Social Links" },
+  { label: "Company User" },
 ];
 
 export const CreateCompanyTimeline = ({ variant }) => {
@@ -68,7 +70,7 @@ export const CreateCompanyTimeline = ({ variant }) => {
         m={{ md: "42px 0px 40px 0px", base: "30px 0px 30px 0px" }}
         variant={"p6"}
       >
-        { id?"Update Company": "Create Company"}
+        {id ? "Update Company" : "Create Company"}
       </Heading>
 
       <Flex
@@ -194,6 +196,8 @@ export const CreateCompanyTimeline = ({ variant }) => {
                         nextStep={nextStep}
                         handlePrevious={handlePrevious}
                       />
+                    ) : index == 3 ? (
+                      <CompanyUser prevStep={prevStep} />
                     ) : null}
                   </Box>
                 </Step>
