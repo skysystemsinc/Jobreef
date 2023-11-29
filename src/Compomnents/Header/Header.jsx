@@ -146,7 +146,9 @@ export default function Header({ notLogin, candidate }) {
           )}
 
           {notLogin ? (
-            <Button mr={"20px"} variant={"blue-btn"}>
+            <Button
+            width={"max-content"}
+            mr={{ lg: "20px", base: "0px" }} variant={"blue-btn"}>
               Login/Signup
             </Button>
           ) : (

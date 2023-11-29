@@ -7,7 +7,8 @@ import "@fontsource/open-sans";
 import Head from "next/head";
 import { Provider } from "react-redux";
 import { Role_context } from "../context/context"; // Corrected the import as needed
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 export default function App({ Component, pageProps }) {
   return (
     <ChakraProvider theme={theme}>

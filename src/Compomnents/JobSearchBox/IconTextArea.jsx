@@ -1,7 +1,13 @@
-import { Divider, Image, InputGroup, InputLeftElement, Textarea } from "@chakra-ui/react";
+import {
+  Divider,
+  Image,
+  InputGroup,
+  InputLeftElement,
+  Textarea,
+} from "@chakra-ui/react";
 import React from "react";
 
-const IconTextArea = ({ placeholder ,icon}) => {
+const IconTextArea = ({ placeholder, icon }) => {
   return (
     <InputGroup>
       <InputLeftElement
@@ -16,11 +22,14 @@ const IconTextArea = ({ placeholder ,icon}) => {
       </InputLeftElement>
       <Textarea
         variant={"simple"}
-        p={'5px 40px 20px 12px'}
-        pl={"63px"}
-
+        p={{
+          lg: "5px 40px 20px 12px",
+          sm: "12px 63px 20px 12px",
+          base: "6px 63px 20px 12px",
+        }}
+        pl={"63px !important"}
         overflow={"hidden"}
-        width={"300px"}
+        width={{ lg: "300px", base: "100%" }}
         borderRadius={"5px"}
         minHeight={"52px"}
         placeholder={placeholder}
