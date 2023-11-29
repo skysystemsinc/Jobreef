@@ -48,7 +48,7 @@ const HeaderDropdown = dynamic(
     ssr: false,
   }
 );
-export default function Header({ candidate }) {
+export default function Header({ notLogin, candidate }) {
   const { isOpen, onToggle } = useDisclosure();
   const dispatch = useDispatch();
   const [isSmallerThe500] = useMediaQuery("(max-width: 500px)");
@@ -133,22 +133,25 @@ export default function Header({ candidate }) {
           alignItems={"center"}
           spacing={{ xl: 6, base: 2 }}
         >
-          <IconButton
-            isRound={true}
-            variant="solid"
-            colorScheme="blue"
-            aria-label="Done"
-            // fontSize={"15px"}
-            size={"sm"}
-            // width={{ base: "35px" }}
-            // height={{ base: "35px" }}
-            // size={"lg"}
-            // size={["md", "md", "lg", "lg"]}
-            icon={<IoNotificationsOutline />}
-          />
-          {/* <Box display={{ xl: "block", base: "none" }}> */}
-          <HeaderDropdown candidate={candidate} />
-          {/* </Box> */}
+          {notLogin ? null : (
+            <IconButton
+              isRound={true}
+              variant="solid"
+              colorScheme="blue"
+              aria-label="Done"
+              // fontSize={"15px"}
+              size={"sm"}
+              icon={<IoNotificationsOutline />}
+            />
+          )}
+
+          {notLogin ? (
+            <Button mr={"20px"} variant={"blue-btn"}>
+              Login/Signup
+            </Button>
+          ) : (
+            <HeaderDropdown candidate={candidate} />
+          )}
         </Stack>
       </Flex>
 

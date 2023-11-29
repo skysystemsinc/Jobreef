@@ -11,9 +11,8 @@ const OperatorLayout = ({ children }) => {
   return (
     <>
       <OperatorSidebar />
-      <Box ml={{ xl: "250px", base: "55px" }}>
+      <Box minH={"100vh"} pb={"50px"} ml={{ xl: "250px", base: "55px" }}>
         <OperatorHeader />
-
         {children}
       </Box>
     </>

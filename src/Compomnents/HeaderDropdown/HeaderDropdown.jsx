@@ -54,7 +54,7 @@ const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
     {
       title: "Log Out",
       icon: <Image width={{ md: "22px", base: "19px" }} src={logout.src} />,
-      pathname: "/",
+      pathname: "/login",
     },
   ];
   const candidatedropdown = [
@@ -81,14 +81,14 @@ const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
     {
       title: "Log Out",
       icon: <Image width={{ md: "22px", base: "19px" }} src={logout.src} />,
-      pathname: "/",
+      pathname: "/login",
     },
   ];
   const operator = [
     {
       title: "Log Out",
       icon: <Image width={{ md: "22px", base: "19px" }} src={logout.src} />,
-      pathname: "/",
+      pathname: "/login",
     },
   ];
 

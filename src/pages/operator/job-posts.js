@@ -12,7 +12,7 @@ const jobposts = () => {
 < >
   
     <OperatorLayout>
-      <Box px={"30px"}>
+      <Box px={"30px"} pb={"35px"}>
         <Box width={{ sm: "300px", base: "100%" }} my={"25px"}>
           <SearchBox placeholder={"Search jobs"} />
         </Box>

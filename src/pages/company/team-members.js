@@ -16,7 +16,7 @@ const TeamMemeber = () => {
           display={"flex"}
           px={{ md: "21px", base: "5px" }}
           justifyContent={"center"}
-          // pb={'30px'}
+ 
         >
           <TeamMembers />
         </Box>

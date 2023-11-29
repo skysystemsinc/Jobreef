@@ -49,7 +49,7 @@ const colors = {
     900: "#D0D5DD",
     lightBorder: "#cdcdcd",
     light: "#797979",
-
+    textColor:"#595959",
     text: "#4A4A4A",
   },
   blue: {

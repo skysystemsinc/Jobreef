@@ -59,7 +59,7 @@ const InActive = () => {
   return (
     <>
       <OperatorButton />
-      <Box minH={"52vh"} pb={"20px"}>
+      <Box minH={"52vh"} >
         <PaginatedTable
           keys={keys}
           totalPages={totalPages}

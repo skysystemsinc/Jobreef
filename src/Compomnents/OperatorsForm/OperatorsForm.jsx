@@ -41,7 +41,7 @@ const OperatorFrom = () => {
 
   return (
     <Box
-      minHeight={"82vh"}
+      // minHeight={"82vh"}
       width={{ md: "70%", base: "100%" }}
       px={"10px"}
       mx={"auto"}
@@ -115,7 +115,7 @@ const OperatorFrom = () => {
       <Flex
         justifyContent={"center"}
         mt={{ md: "70px", base: "40px" }}
-        mb={"75px"}
+
         gap={{ md: "21px", base: "13px" }}
       >
         <Button

@@ -61,7 +61,8 @@ const Active = () => {
   return (
     <>
       <JobPostButton />
-      <Box  pb={"20px"}>
+      <Box  
+      >
         <PaginatedTable
           keys={keys}
           totalPages={totalPages}

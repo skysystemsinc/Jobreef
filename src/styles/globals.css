@@ -105,7 +105,7 @@ margin-top: 3px !important;
 color: #F7F9FB !important;
 }
 
-.chakra-stack button{
+.css-ux6frl , .css-1of3mtg{
   color:  #000 !important;
   transform: rotate(180deg) !important;
   color: #636364 !important;
@@ -113,4 +113,7 @@ color: #F7F9FB !important;
 }
 .css-e9kjw6{
   color: #ffff !important;
+  }
+  ::placeholder{
+    white-space: wrap !important;
   }

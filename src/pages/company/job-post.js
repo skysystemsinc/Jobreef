@@ -19,6 +19,7 @@ const JobPost = () => {
           position={"relative"}
           top={"0px"}
           zIndex={2}
+          pb={"50px"}
         >
           <JobPostTabs />
         </Box>

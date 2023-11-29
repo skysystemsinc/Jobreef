@@ -4,7 +4,8 @@ import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
 
 const DashboardFooter = ({ waveImage }) => {
   return (
-    <  Box  >
+    <  Box     position={"absolute"} bottom={"0px"}  left={"0px"} width={"100%"} >
+      <Box >
       {waveImage ? (
         <Box position={"relative"} height={"100%"}>
           <BottomWaveImage />
@@ -17,6 +18,7 @@ const DashboardFooter = ({ waveImage }) => {
             &copy; {new Date().getFullYear()} Jobreef Ltd.{" "}
           </Heading>
         </Container>
+      </Box>
       </Box>
     </Box>
   );

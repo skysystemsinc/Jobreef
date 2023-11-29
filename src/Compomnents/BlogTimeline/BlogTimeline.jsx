@@ -65,6 +65,7 @@ export const BlogTimeline = ({ variant }) => {
         alignItems={"center"}
         width={{ md: "70%", base: "100%" }}
         mx={"auto"}
+        pb={"20px"}
       >
         <Steps
           responsive={false}

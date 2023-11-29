@@ -17,6 +17,7 @@ const DasboardLayout = ({ disableWaveImage, children }) => {
         zIndex={2}
         ml={{ xl: "250px", base: "55px" }}
         mt={"40px"}
+        minH={"87vh"}
       >
         {/* <CompanyTabs /> */}
         {children}

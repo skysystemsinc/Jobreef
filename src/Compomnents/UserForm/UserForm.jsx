@@ -41,7 +41,7 @@ const UserFrom = () => {
 
   return (
     <Box
-      minHeight={"82vh"}
+
       width={{ md: "70%", base: "100%" }}
       px={"10px"}
       mx={"auto"}

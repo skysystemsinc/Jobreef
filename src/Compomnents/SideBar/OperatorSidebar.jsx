@@ -31,11 +31,12 @@ const OperatorSidebar = () => {
       title: "Job Posts",
       icon:
         router.pathname == "/operator/job-posts" ||
-        router.pathname == "/operator/edit-job-post"
+        router.pathname == "/operator/edit-job-post" ||
+        router.pathname == "/operator/create-job-post"
           ? white_job_post
           : job_post,
       pathname: "/operator/job-posts",
-      activePathnames: ["/operator/edit-job-post", "/operator/job-posts"],
+      activePathnames: ["/operator/edit-job-post","/operator/create-job-post", "/operator/job-posts"],
     },
     {
       title: "Users",

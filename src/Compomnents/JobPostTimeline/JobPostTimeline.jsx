@@ -81,7 +81,7 @@ const JobPostTimeline = ({
   };
 
   return (
-    <Box>
+    <Box pb={"50px"}>
       <Heading
         textAlign={"center"}
         m={{ md: "42px 0px 40px 0px", base: "30px 0px 30px 0px" }}

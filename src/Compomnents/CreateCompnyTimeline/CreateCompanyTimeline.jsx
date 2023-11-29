@@ -79,6 +79,7 @@ export const CreateCompanyTimeline = ({ variant }) => {
         alignItems={"center"}
         width={{ md: "70%", base: "100%" }}
         mx={"auto"}
+        // pb={"50px"}
       >
         {hasCompletedAllSteps ? (
           <Box

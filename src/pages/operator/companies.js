@@ -8,7 +8,7 @@ import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
 const companies = () => {
   return (
     <OperatorLayout>
-      <Box px={"30px"}>
+      <Box px={"30px"} pb={'20px'}>
         <Box width={{ sm: "300px", base: "100%" }} my={"25px"}>
           <SearchBox placeholder={"Search companies"} />
         </Box>

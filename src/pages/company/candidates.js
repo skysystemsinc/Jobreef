@@ -10,7 +10,7 @@ const index = () => {
   return (
     <>
       <CompanyDasboard disableWaveImage>
-        <Box px={"20px"}>
+        <Box px={"20px"} pb={'30px'}>
           <CandiateTabs />
         </Box>
       <DashboardFooter waveImage />
