@@ -148,9 +148,13 @@ const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
               >
                 <Heading as={"p"} variant={"p4"}>
                   {" "}
-                  {`${loginUser?.firstName} ${loginUser?.lastName}`}
+                  {/* {`${loginUser?.firstName} ${loginUser?.lastName}`} */}
+                  Jacob Jones
                 </Heading>
-                <Heading variant={"p1"}>{loginUser?.email}</Heading>
+                <Heading variant={"p1"}>
+                  {/* {loginUser?.email} */}
+                  jacobjones9@acme.com
+                </Heading>
               </Box>
 
               <Box display={{ xl: "block", base: "none" }}>
