@@ -48,27 +48,6 @@ const LatestJobs = () => {
     speed: 700,
     slidesToShow: 1,
     slidesToScroll: 1,
-    // arrows:true
-    // nextArrow: (
-    //   <CustomArrow
-    //     handleEvent={handleNext}
-    //     style={{
-    //       top:'50%',
-    //       right:'0px'
-    //     }}
-    //     icon={<FaChevronRight fontSize={"12px"} />}
-    //   />
-    // ),
-    // prevArrow: (
-    //   <CustomArrow
-    //   style={{
-    //     top:'50%',
-    //     left:'0px'
-    //   }}
-    //     handleEvent={handlePrev}
-    //     icon={<FaAngleLeft fontSize={"12px"} />}
-    //   />
-    // ),
   };
 
   return (
@@ -108,7 +87,7 @@ const LatestJobs = () => {
             </Box>
             Jobs
           </Heading>
-          <Heading color={"gray.text"} variant={"p7"}>
+          <Heading  textAlign={"center"} color={"gray.text"} variant={"p7"}>
             Dream jobs available from the best local employers
           </Heading>
         </Box>
@@ -130,9 +109,9 @@ const LatestJobs = () => {
             icon={<FaAngleLeft fontSize={"12px"} />}
           />
           <Slider ref={sliderRef} {...settings}>
-            {DataArray.map((item) => {
+            {DataArray.map((item , index) => {
               return (
-                <Box p={{ md:"20px", base:"10px"}} px={{ md: "50px", base:"10px"}}>
+                <Box key={index} p={{ md:"20px", base:"10px"}} px={{ md: "50px", base:"10px"}}>
                   <JobCard object={item} />
                 </Box>
               );

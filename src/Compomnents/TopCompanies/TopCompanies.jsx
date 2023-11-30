@@ -32,8 +32,7 @@ const TopCompanies = () => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
-          infinite: true,
-          dots: true,
+       
         },
       },
       {
@@ -76,6 +75,7 @@ const TopCompanies = () => {
   return (
     <Container mt={{ md: "60px", base:"40px"}} maxW={"5xl"}>
       <Heading
+      
         textAlign={"center"}
         className="sora"
         mb="17px"
@@ -106,9 +106,9 @@ const TopCompanies = () => {
           icon={<FaAngleLeft fontSize={"16"} />}
         />
         <Slider ref={sliderRef} {...settings}>
-          {DataArray.map((item) => {
+          {DataArray.map((item , ind) => {
             return (
-              <Box   p={"20px"} >
+              <Box   p={"20px"} key={ind} >
                 <Image mx={"auto"} width={{md: "120px", base:"100px"}} src={item.src} />
               </Box>
             );

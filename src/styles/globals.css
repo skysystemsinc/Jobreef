@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800&display=swap");
 .nintoFont {
   font-family: "Nunito", sans-serif;
+  
 }
 .sora {
   font-family: "Sora", sans-serif !important;
@@ -116,4 +117,7 @@ color: #F7F9FB !important;
   }
   ::placeholder{
     white-space: wrap !important;
+  }
+  body *{
+    /* border: 1px solid red; */
   }
