@@ -126,15 +126,17 @@ const TeamMembers = () => {
             Add Team Members{" "}
           </Button>
         </Flex>
-        <PaginatedTable
-          keys={keys}
-          totalPages={totalPages}
-          pageSize={pageSize}
-          currentPage={currentPage}
-          onPageChange={handlePageChange}
-          columns={columns}
-          data={data}
-        />
+        <Box mb={"60px"}>
+          <PaginatedTable
+            keys={keys}
+            totalPages={totalPages}
+            pageSize={pageSize}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+            columns={columns}
+            data={data}
+          />
+        </Box>
       </Box>
     </>
   );

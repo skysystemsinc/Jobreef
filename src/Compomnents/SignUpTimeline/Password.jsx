@@ -14,20 +14,14 @@ import LabelInput from "../LabelInput/LabelInput";
 import Loader from "../Loader/Loader";
 import axios from "axios";
 import endPoints from "@/Utils/endpoints";
-import { roles } from "@/Utils/role";
+import { accountType, roles } from "@/Utils/role";
 import { Role_context } from "@/context/context";
 import { BACKEND_URL } from "@/Utils/urls";
 import { useDispatch, useSelector } from "react-redux";
 import { httpRequest } from "@/helper/httpRrequest";
 import { addUser } from "@/Reudx/slices/userRegistration";
 
-const Password = ({
-
-  activeStep,
-  handlePrevious,
-  nextStep,
-}) => {
-  
+const Password = ({ activeStep, handlePrevious, nextStep }) => {
   const userState = useSelector((state) => state.userRegistration.value);
   const dispatch = useDispatch();
   const [state, setState] = useState({ ...userState, loading: false });
@@ -67,7 +61,6 @@ const Password = ({
         handleCreateUser();
       }
     } catch (err) {
-
       setState((prev) => {
         return {
           ...prev,
@@ -102,6 +95,9 @@ const Password = ({
       email: state.email,
       password: state.password,
       role: userState.isCompany ? roles.company : roles.employee,
+      accountType: userState.isCompany
+        ? accountType.employer
+        : accountType.candidate,
     };
     const postData = await httpRequest(
       `${BACKEND_URL}${endPoints.user}`,
@@ -115,8 +111,8 @@ const Password = ({
       };
     });
     if (!postData.success) {
-    dispatch(addUser({ ...state, }));
-      
+      dispatch(addUser({ ...state }));
+
       toast({
         position: "bottom-right",
         title: postData.message,
@@ -126,8 +122,8 @@ const Password = ({
       });
       return;
     }
-    nextStep();
     dispatch(addUser({ ...state, userId: postData.data.id }));
+    nextStep();
 
     // if (postData.success) {
     //   dispatch(addUser({ ...userState, userId: postData.data.id }));
@@ -168,36 +164,18 @@ const Password = ({
       };
     });
     if (!postData.success) {
-      dispatch(addUser({ ...userState, userId: postData.data.id }));
-      toast({
-        position: "bottom-right",
-        title: postData.message,
-        status: "error",
-        variant: "subtle",
-        isClosable: true,
-      });
-      return;
+      dispatch(addUser({ ...userState }));
+    } else {
+      nextStep();
+      dispatch(addUser({ ...state, userId: postData.data.id }));
     }
-    nextStep();
-    dispatch(addUser({ ...state }));
-
-    // if (postData.success) {
-    //   toast({
-    //     position: "bottom-right",
-    //     title: postData.message,
-    //     status: "success",
-    //     variant: "subtle",
-    //     isClosable: true,
-    //   });
-    // } else {
-    //   toast({
-    //     position: "bottom-right",
-    //     title: postData.message,
-    //     status: "error",
-    //     variant: "subtle",
-    //     isClosable: true,
-    //   });
-    // }
+    toast({
+      position: "bottom-right",
+      title: postData.message,
+      status: postData.success ? "success" : "error",
+      variant: "subtle",
+      isClosable: true,
+    });
   };
   return (
     <Box>

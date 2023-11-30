@@ -27,15 +27,22 @@ import JobLocation from "./JobLocation";
 import DesiredSkills from "./DesiredSkills";
 import Preview from "./Preview";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
-const steps = [
-  { label: "Job Bio" },
-  { label: "Technical Details" },
-  { label: "Job Location" },
-  { label: "Desired Skills" },
-  // { label: "Step 5" },
-];
+import AssignJob from "./AssigneJob";
 
-const JobPostTimeline = ({ isEdit, title, candidate, variant }) => {
+const JobPostTimeline = ({
+  assignJob,
+  timeLine,
+  isEdit,
+  title,
+  candidate,
+  variant,
+}) => {
+  const steps = [
+    { label: "Job Bio" },
+    { label: "Technical Details" },
+    { label: "Job Location" },
+    { label: "Desired Skills" },
+  ];
   const [state, setState] = useState({
     jobTitle: "",
     employeeType: "",
@@ -66,10 +73,6 @@ const JobPostTimeline = ({ isEdit, title, candidate, variant }) => {
   const [compeletedStep, setcompeletedStep] = useState([]);
   const initialRender = useRef(true);
   useEffect(() => {
-    // if (initialRender.current) {
-    //   initialRender.current = false;
-    //   return;
-    // }
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
   const boxstyle = {
@@ -78,7 +81,7 @@ const JobPostTimeline = ({ isEdit, title, candidate, variant }) => {
   };
 
   return (
-    <Box>
+    <Box pb={"50px"}>
       <Heading
         textAlign={"center"}
         m={{ md: "42px 0px 40px 0px", base: "30px 0px 30px 0px" }}
@@ -128,7 +131,7 @@ const JobPostTimeline = ({ isEdit, title, candidate, variant }) => {
           activeStep={activeStep}
         >
           {steps.map(({ label }, index) => {
-            const CostomeCheckIcon = () => {
+            const CostumeCheckIcon = () => {
               return (
                 <Heading
                   variant={"p1"}
@@ -142,7 +145,7 @@ const JobPostTimeline = ({ isEdit, title, candidate, variant }) => {
                 </Heading>
               );
             };
-            const CostomeIcon = () => {
+            const CostumeIcon = () => {
               return (
                 <Heading
                   variant={"p1"}
@@ -162,9 +165,9 @@ const JobPostTimeline = ({ isEdit, title, candidate, variant }) => {
 
             return (
               <Step
-                checkIcon={CostomeCheckIcon}
+                checkIcon={CostumeCheckIcon}
                 flexDirection={"column"}
-                icon={CostomeIcon}
+                icon={CostumeIcon}
                 key={label}
                 // icon={ hasCompletedAllSteps? false:CostomeIcon}
                 label={
@@ -216,7 +219,12 @@ const JobPostTimeline = ({ isEdit, title, candidate, variant }) => {
               width: { md: "85%", base: "95%" },
             }}
           >
-            <Preview isEdit={isEdit} state={state} setState={setState} />
+            <Preview
+              
+              isEdit={isEdit}
+              state={state}
+              setState={setState}
+            />
           </Box>
         ) : null}
 

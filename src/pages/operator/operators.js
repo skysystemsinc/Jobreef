@@ -8,7 +8,7 @@ import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
 const operators = () => {
   return (
     <OperatorLayout>
-      <Box px={"30px"}>
+      <Box px={"30px"} >
         <Box width={{ sm: "300px", base: "100%" }} my={"25px"}>
           <SearchBox placeholder={"Search operators"} />
         </Box>

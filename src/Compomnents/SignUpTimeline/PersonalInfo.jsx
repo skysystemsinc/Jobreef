@@ -128,6 +128,7 @@ const PersonalInfo = ({
       </Box>
       <CheckBox
         selectSate={personalInfo.isCompany}
+        defaultCheck={personalInfo.isCompany}
         label={"Register as Employer"}
         handleEvent={handleSelectCompany}
       />

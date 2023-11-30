@@ -8,6 +8,7 @@ import authentication from "./slices/authentication";
 import userRegistration from "./slices/userRegistration";
 import companyRegister from "./slices/company";
 import employeeRegister from "./slices/employee";
+import LoginUser from "./slices/LoginUser";
 
 const rootReducer = combineReducers({
   userProfileSlice,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   authentication,
   userRegistration,
   companyRegister,
-  employeeRegister
+  employeeRegister,
+  LoginUser
 });
 export default rootReducer;

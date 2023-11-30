@@ -41,7 +41,7 @@ const UserFrom = () => {
 
   return (
     <Box
-      minHeight={"82vh"}
+
       width={{ md: "70%", base: "100%" }}
       px={"10px"}
       mx={"auto"}
@@ -107,8 +107,8 @@ const UserFrom = () => {
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
-          placeholder="Select Role of the Employee"
-          label={"Role*"}
+          placeholder="Select Role of the User"
+          label={"User type*"}
         />
       </InputWrapper>
 

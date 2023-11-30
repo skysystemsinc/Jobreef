@@ -6,6 +6,7 @@ import {
   FormLabel,
   Image,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
 import profile from "@/assets/Images/profile.svg";
@@ -20,26 +21,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserProfile } from "@/Reudx/slices/userProfileSlice";
 import axios from "axios";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
+import { BACKEND_URL } from "@/Utils/urls";
+import { httpRequest } from "@/helper/httpRrequest";
+import endPoints from "@/Utils/endpoints";
+import { setLoginUser } from "@/Reudx/slices/LoginUser";
+import Loader from "../Loader/Loader";
 const AboutYouTabs = () => {
   const dispatch = useDispatch();
-  const userProfile = useSelector((state) => state.userProfileSlice.value);
+  const toast = useToast();
 
-  const [state, setstate] = useState({
-    firstName: "",
-    lastName: "",
-    accountType: "",
-    number: "",
-    profilePic: false,
+  const loginUser = useSelector((state) => state.LoginUser.value);
+
+  const [state, setState] = useState({
+    ...loginUser,
+    loading: false,
+    readOnly: true,
   });
-
-  const [isEdit, setisEdit] = useState(false);
-  const [readOnly, setreadOnly] = useState(true);
+  
   const router = useRouter();
   const handleEditProfile = (e) => {
     const file = e.target.files[0];
     if (file) {
       const imageURL = URL.createObjectURL(file); // Create a URL for the selected file
-      setstate((prev) => {
+      setState((prev) => {
         return {
           ...prev,
           profilePic: imageURL,
@@ -49,46 +53,86 @@ const AboutYouTabs = () => {
   };
 
   const handleSave = async () => {
-    setisEdit(false);
-    setreadOnly(true);
-    const response = await axios("/api/company/userProfile", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: { ...state },
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: true,
+      };
     });
-  };
+    if (state.loading) return;
+    const id = localStorage.getItem("id");
 
-  const getData = async () => {
+    const body = {
+      firstName: state.firstName,
+      lastName: state.lastName,
+      accountType: state.accountType,
+      phoneNumber: parseInt(state.phoneNumber),
+      profilePic: state.profilePic,
+    };
     try {
-      const userProfile = await axios({
-        method: "GET",
-        url: "/api/company/userProfile",
+      const postData = await httpRequest(
+        `${BACKEND_URL}${endPoints.user}/${id}`,
+        "PUT",
+        body
+      );
+      if (postData.success) {
+        const { data } = postData;
+        localStorage.setItem("id", data.id);
+        dispatch(setLoginUser(postData.data));
+
+        toast({
+          position: "bottom-right",
+          title: postData.message,
+          status: "success",
+          variant: "subtle",
+          isClosable: true,
+        });
+      }
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+          readOnly: true,
+        };
       });
-      dispatch(getUserProfile(userProfile.data));
-    } catch (err) {}
+    } catch (error) {
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+          isEdit: false,
+          readOnly: true,
+        };
+      });
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
   };
-
-  useEffect(() => {
-    getData();
-    return () => {};
-  }, []);
-
-  useSkipInitialEffect(() => {
-    setstate({
-      firstName: userProfile.name,
-      lastName: userProfile.lastName,
-      accountType: userProfile.accountType,
-      number: userProfile.number,
-      profilePic: userProfile.profilePic,
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setState((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
     });
-  }, [userProfile]);
+  };
+  useSkipInitialEffect(() => {
+    if (loginUser) {
+      setState({ ...loginUser, loading: false, readOnly: true });
+    }
+  }, [loginUser]);
   return (
     <Box mt={{ md: "91px", lg: "60px", base: "40px" }}>
       <Box display={"flex"} justifyContent={"center"}>
         <EditProifle
-          readOnly={readOnly}
+          readOnly={state.readOnly}
           handleEvent={handleEditProfile}
           profile={state.profilePic}
         />
@@ -97,30 +141,22 @@ const AboutYouTabs = () => {
         <InputWrapper gap={{ xl: "70px", "2xl": "142px", base: "20px" }}>
           <LabelInput
             state={state.firstName}
-            setState={(e) => {
-              setstate((prev) => {
-                return { ...prev, firstName: e.target.value };
-              });
-            }}
+            setState={handleChange}
+            name={"firstName"}
             labelVariant={"label"}
             type="text"
-            readOnly={readOnly}
-            setreadOnly={setreadOnly}
+            readOnly={state.readOnly}
             variant={"bg-input"}
             placeholder="Enter Name"
             label={"First Name"}
           />
           <LabelInput
             state={state.lastName}
-            setState={(e) => {
-              setstate((prev) => {
-                return { ...prev, lastName: e.target.value };
-              });
-            }}
+            setState={handleChange}
+            name={"lastName"}
             labelVariant={"label"}
             type="text"
-            readOnly={readOnly}
-            setreadOnly={setreadOnly}
+            readOnly={state.readOnly}
             variant={"bg-input"}
             placeholder="Enter Last Name"
             label={"Last Name"}
@@ -128,22 +164,27 @@ const AboutYouTabs = () => {
         </InputWrapper>
 
         <InputWrapper gap={{ xl: "70px", "2xl": "142px", base: "20px" }}>
-          {router.pathname.includes(roles.candidate) ? (
+          {loginUser.role == roles.employee ? (
             <LabelInput
               labelVariant={"label"}
               type="text"
               variant={"bg-input"}
-              readOnly={readOnly}
-              setreadOnly={setreadOnly}
+              readOnly={state.readOnly}
+              // setreadOnly={setreadOnly}
               dropdown
+              state={state.accountType}
+              setState={handleChange}
+              name={"accountType"}
               placeholder="Yes"
+              imoptnatIcon
               label={"Visible to Employers"}
             />
           ) : (
             <LabelInput
               labelVariant={"label"}
               readOnly={true}
-              setreadOnly={setreadOnly}
+              // setreadOnly={setreadOnly}
+
               state={state.accountType}
               setState={(e) => {
                 setstate((prev) => {
@@ -158,14 +199,11 @@ const AboutYouTabs = () => {
           )}
 
           <LabelInput
-            state={state.number}
-            setState={(e) => {
-              setstate((prev) => {
-                return { ...prev, number: e.target.value };
-              });
-            }}
-            readOnly={readOnly}
-            setreadOnly={setreadOnly}
+            state={state.phoneNumber}
+            setState={handleChange}
+            name={"phoneNumber"}
+            readOnly={state.readOnly}
+            // setreadOnly={setreadOnly}
             labelVariant={"label"}
             type="number"
             variant={"bg-input"}
@@ -184,26 +222,36 @@ const AboutYouTabs = () => {
         mb={"30px"}
         pb={"39px"}
       >
-        {isEdit ? (
+        {state.isEdit ? (
           <>
             <Button
               onClick={() => {
-                setisEdit(false);
-                setreadOnly(true);
+                setState((prev) => {
+                  return {
+                    ...prev,
+                    isEdit: false,
+                    readOnly: true,
+                  };
+                });
               }}
               variant="outline-blue"
             >
               Cancel
             </Button>
             <Button onClick={handleSave} variant={"blue-btn"}>
-              Save
+              {state.loading ? <Loader /> : "Save"}
             </Button>
           </>
         ) : (
           <Button
             onClick={() => {
-              setisEdit(true);
-              setreadOnly(false);
+              setState((prev) => {
+                return {
+                  ...prev,
+                  isEdit: true,
+                  readOnly: false,
+                };
+              });
             }}
             variant={"blue-btn"}
             display={"flex"}

@@ -17,6 +17,7 @@ import arrowupright from "../../../../assets/Images/arrow-up-right.svg";
 import ComponentMyChip from "@/Compomnents/ComponentMyChip/ComponentMyChip";
 import { FiSearch, FiMapPin } from "react-icons/fi";
 import woman from "../../../../assets/Images/woman.png";
+import BlogCard from "@/Compomnents/BlogCard/BlogCard";
 const categories = [
   { key: "Information", value: 2 },
   { key: "Design", value: 2 },
@@ -180,10 +181,7 @@ const ArticleDesktop = () => {
                   >
                     Software and Tools
                   </Heading>
-                  <Heading
-                    variant={"p4"}
-                    color={"gray.text"}
-                  >
+                  <Heading variant={"p4"} color={"gray.text"}>
                     Mi tincidunt elit, id quisque ligula ac diam, amet. Vel
                     etiam suspendisse morbi eleifend faucibus eget vestibulum
                     felis. Dictum quis montes, sit sit. Tellus aliquam enim
@@ -319,7 +317,7 @@ const ArticleDesktop = () => {
             </Box>
           </Box>
         </Box>
-        <Box m={"4%"} >
+        <Box m={"4%"}>
           <Box display={"flex"} flexDirection={"column"} gap={2}>
             <Heading color={"blue.500"} fontWeight={"bold"} variant={"p4"}>
               Our Blog
@@ -334,68 +332,78 @@ const ArticleDesktop = () => {
           </Box>
         </Box>
         <Box>
-          <Box flex={3} display={"flex"} flexWrap={"wrap"} gap={"2%"}>
+          <Box
+            display={"grid"}
+            gridTemplateColumns={{
+              lg: "repeat(3, 1fr)",
+              md: "repeat(2, 1fr)",
+              sm: "repeat(2, 1fr)",
+              base: "repeat(1, 1fr)",
+            }}
+          >
             {blog2.map((object) => {
               return (
-                <Box
-                  mb={"4%"}
-                  width={"32%"}
-                  display={"flex"}
-                  flexDirection="column"
-                  gap={'2px'}
-                  transition={"all 0.4s ease"}
-                  _hover={{
-                    cursor: "pointer",
-                    boxShadow:
-                      "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)",
-                    transition: "all 0.4s ease",
-                    transform: "scale(1.05)",
-                  }}
-                  // onClick={()=>{object}} object bhejna hai Article ko
-                >
-                  <Image width={"100%"} src={Generalblog.src} />
-                  <Heading
-                    color={"blue.500"}
-                    fontWeight={"bold"}
-                    variant={"p4"}
-                  >
-                    {object.Name}
-                  </Heading>
-                  <Box
-                    alignItems={"start"}
-                    display={"flex"}
-                    justifyContent={"space-between"}
-                  >
-                    <Heading
-                      color={"gray.text"}
-                      fontWeight={"bold"}
-                      variant={"p5"}
-                    >
-                      {object.Title}
-                    </Heading>
-                    <Box mt={"1%"}>
-                      <Image src={arrowupright.src} />
-                    </Box>
-                  </Box>
-                  <Heading color={"gray.text"} variant={"p4"}>
-                    How do you create compelling presentations that wow your colleagues and impress your managers?
-                  </Heading>
-                  <Box display={"flex"} gap={"2%"}>
-                    <Image src={Avatar.src} />
-                    <Box display={"flex"} flexDirection={"Column"}>
-                      <Heading
-                        color={"gray.text"}
-                        fontWeight={"bold"}
-                        variant={"p4"}
-                      >
-                        {object.UserName}
-                      </Heading>
-                      <Heading color={"gray.text"} variant={"p4"}>
-                        {object.Date}
-                      </Heading>
-                    </Box>
-                  </Box>
-                </Box>
+                <BlogCard />
+                // <Box
+                //   mb={"4%"}
+                //   width={"32%"}
+                //   display={"flex"}
+                //   flexDirection="column"
+                //   gap={"2px"}
+                //   transition={"all 0.4s ease"}
+                //   _hover={{
+                //     cursor: "pointer",
+                //     boxShadow:
+                //       "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)",
+                //     transition: "all 0.4s ease",
+                //     transform: "scale(1.05)",
+                //   }}
+                //   // onClick={()=>{object}} object bhejna hai Article ko
+                // >
+                //   <Image width={"100%"} src={Generalblog.src} />
+                //   <Heading
+                //     color={"blue.500"}
+                //     fontWeight={"bold"}
+                //     variant={"p4"}
+                //   >
+                //     {object.Name}
+                //   </Heading>
+                //   <Box
+                //     alignItems={"start"}
+                //     display={"flex"}
+                //     justifyContent={"space-between"}
+                //   >
+                //     <Heading
+                //       color={"gray.text"}
+                //       fontWeight={"bold"}
+                //       variant={"p5"}
+                //     >
+                //       {object.Title}
+                //     </Heading>
+                //     <Box mt={"1%"}>
+                //       <Image src={arrowupright.src} />
+                //     </Box>
+                //   </Box>
+                //   <Heading color={"gray.text"} variant={"p4"}>
+                //     How do you create compelling presentations that wow your
+                //     colleagues and impress your managers?
+                //   </Heading>
+                //   <Box display={"flex"} gap={"2%"}>
+                //     <Image src={Avatar.src} />
+                //     <Box display={"flex"} flexDirection={"Column"}>
+                //       <Heading
+                //         color={"gray.text"}
+                //         fontWeight={"bold"}
+                //         variant={"p4"}
+                //       >
+                //         {object.UserName}
+                //       </Heading>
+                //       <Heading color={"gray.text"} variant={"p4"}>
+                //         {object.Date}
+                //       </Heading>
+                //     </Box>
+                //   </Box>
+                // </Box>
               );
             })}
           </Box>

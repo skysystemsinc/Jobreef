@@ -27,30 +27,16 @@ const DeleteEmployee = async (req, res) => {
   }
 };
 const UpdateEmployee = async (req, res) => {
-  const newObj = { ...JSON.parse(req.body) };
+  const data = { ...JSON.parse(req.body) };
+  
   try {
     const employee = await prisma.Employee.update({
       where: {
         id: req.query.id,
       },
-      // data: newObj,
-      // data: {
-      //   workExperience: {
-      //     update: [
-      //       {
-      //         where: {
-      //           // specify the condition to identify the work experience to update
-      //           // use properties that uniquely identify the work experience
-      //           companyName: 'Old Company Name',
-      //         },
-      //         data: updatedWorkExperience,
-      //       },
-      //       // you can add more update blocks for additional work experiences
-      //     ],
-      //   },
-      // },
+      data:data
     });
-    console.log("employee", employee);
+
     if (!employee) {
       return res.status(404).json({
         message: `No employee with id ${req.query.id}`,
@@ -77,6 +63,10 @@ const GetSingleEmployee = async (req, res) => {
     const employee = await prisma.Employee.findUnique({
       where: {
         id: req.query.id,
+      },
+      include: {
+        company: true,
+        employee: true,
       },
     });
 

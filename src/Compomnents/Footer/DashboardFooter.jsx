@@ -2,11 +2,12 @@ import { Box, Container, Heading } from "@chakra-ui/react";
 import React from "react";
 import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
 
-const DashboardFooter = ({waveImage}) => {
+const DashboardFooter = ({ waveImage }) => {
   return (
-    <>
+    <  Box     position={"absolute"} bottom={"0px"}  left={"0px"} width={"100%"} >
+      <Box >
       {waveImage ? (
-        <Box position={"relative"} height={"100%"}  >
+        <Box position={"relative"} height={"100%"}>
           <BottomWaveImage />
         </Box>
       ) : null}
@@ -18,7 +19,8 @@ const DashboardFooter = ({waveImage}) => {
           </Heading>
         </Container>
       </Box>
-    </>
+      </Box>
+    </Box>
   );
 };
 

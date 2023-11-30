@@ -156,7 +156,7 @@ const Overview = ({ nextStep, activeStep, prevStep }) => {
     const postData = await httpRequest(
       `${BACKEND_URL}${endPoints.employee}/${employeeState.id}`,
       "PUT",
-      body
+      {data:body}
     );
     handleUserAssociation(postData.data.id);
 

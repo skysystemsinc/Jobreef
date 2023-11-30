@@ -5,6 +5,7 @@ import menu from "@/assets/Images/menu.svg";
 import { useRouter } from "next/router";
 import Popovers from "../PaginatedTable/Popovers";
 import profile_icon from "@/assets/Images/profile_icon.svg";
+import JobPostButton from "./JobPostButton";
 const InActive = () => {
   const router = useRouter();
   const handleEdit = () => {
@@ -67,6 +68,7 @@ const InActive = () => {
   };
   return (
     <>
+    <JobPostButton/>
       <Box minH={"62vh"} pb={"20px"}>
         <PaginatedTable
           keys={keys}

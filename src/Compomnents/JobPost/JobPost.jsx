@@ -24,6 +24,7 @@ const JobPostTabs = ({ company }) => {
   return (
     <>
       <Tabs
+      
       // px={ {xl:"0px",   base: "10px"}}
         onChange={(index) => {
           setTabIndex(index);

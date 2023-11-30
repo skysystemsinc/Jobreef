@@ -19,7 +19,14 @@ const Active = () => {
     },
   ];
   const keys = ["name", "email", "role", "createdAt", "Actions"];
-  const actionList = ["Deactivate"];
+  // const actionList = ["Deactivate"];
+  const handleEdit = (id) => {
+    router.push(`/operator/create-operator?id=${id}`);
+  };
+  const actionList = [
+    { title: "Deactivate" },
+    { title: "Edit" ,handleEvent:handleEdit },
+  ];
   const data = [
     {
       name: { image: profile_icon.src, name: "Tom Brady" },
@@ -44,7 +51,7 @@ const Active = () => {
   return (
     <>
     <OperatorButton/>
-      <Box minH={"52vh"} pb={"20px"}>
+      <Box minH={"52vh"} >
         <PaginatedTable
           keys={keys}
           totalPages={totalPages}

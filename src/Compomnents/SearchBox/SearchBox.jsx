@@ -8,7 +8,6 @@ const SearchBox = ({placeholder}) => {
   return (
     <InputGroup>
       <InputRightElement height={"35px"} pointerEvents="none">
-        {/* <CiSearch fontSize={"18px"} color="blue.700" /> */}
         <Image src={search.src} width={"16px"} />
       </InputRightElement>
       <Input
@@ -28,7 +27,6 @@ const SearchBox = ({placeholder}) => {
             color: "blue.700",
           },
         }}
-        // height={"35px"}
       />
     </InputGroup>
   );

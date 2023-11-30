@@ -2,8 +2,8 @@ import globalStyles from "@/styles/globalStyles";
 import { Checkbox, Heading } from "@chakra-ui/react";
 import React from "react";
 
-const CheckBox = ({selectSate, label, handleEvent}) => {
-  console.log("selectSate",selectSate)
+const CheckBox = ({ defaultCheck, selectSate, label, handleEvent }) => {
+  console.log("selectSate", selectSate);
   return (
     <Checkbox
       display={"flex"}
@@ -13,7 +13,7 @@ const CheckBox = ({selectSate, label, handleEvent}) => {
       onChange={handleEvent}
       checked={selectSate}
       size="md"
-      
+      defaultChecked={defaultCheck ? defaultCheck : false}
       colorScheme="blue"
       // border={"1px solid "}
       borderColor={selectSate ? "blue.500" : "gray.text"}
@@ -27,7 +27,6 @@ const CheckBox = ({selectSate, label, handleEvent}) => {
       >
         {/* Register as Employer{" "} */}
         {label}
-        
       </Heading>
     </Checkbox>
   );

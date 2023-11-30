@@ -4,24 +4,8 @@ import { StepsTheme as Steps } from "chakra-ui-steps";
 import { Nunito } from "next/font/google";
 import { Sora } from "next/font/google";
 import "@fontsource/sora";
+import { MultiSelectTheme } from "chakra-multiselect";
 // theme.js
-
-const customStyles = {
-  scrollableBox: {
-    overflowY: "scroll",
-    scrollbarWidth: "none",
-    "&::-webkit-scrollbar": {
-      width: "6px", // You can adjust the width
-    },
-    "&::-webkit-scrollbar-thumb": {
-      backgroundColor: "#2CA5C3", // Customize the thumb color
-      borderRadius: "6px", // You can adjust the border radius
-    },
-    "&::-webkit-scrollbar-track": {
-      backgroundColor: "#ffffff", // Customize the track color
-    },
-  },
-};
 
 const nunito = Nunito({
   weight: ["200", "300", "400", "500", "600", "700", "900"],
@@ -63,8 +47,9 @@ const colors = {
     800: "#FEFEFE",
     900: "#D0D5DD",
     lightBorder: "#cdcdcd",
+    borderColor: "#EEE",
     light: "#797979",
-
+    textColor: "#595959",
     text: "#4A4A4A",
   },
   blue: {
@@ -74,11 +59,15 @@ const colors = {
     500: "#2CA5C3",
     400: "#DFF1F6",
     300: "#344054",
-
+    200: "#F8FCFD",
     100: "#F4F9FF",
   },
   orange: {
     100: "#FB784B",
+  },
+  yellow: {
+    100: "#FFDE59",
+    200: "#e0c146",
   },
 };
 const fonts = {
@@ -99,6 +88,7 @@ const components = {
   Text: {
     variants: {},
   },
+  MultiSelect: MultiSelectTheme,
   Button: {
     variants: {
       "blue-btn": {
@@ -303,13 +293,13 @@ const components = {
           fontFamily: "var(--chakra-\fonts-openSans)",
           color: "black.100 !important",
           // bg: "text.gray !important",
-          height:'39px',
+          height: "39px",
           border: "1px solid",
           borderColor: "gray.900",
           // borderColor: "red",
           borderRadius: "8px",
           // p: "10px 20px 20px 12px",
-          pb:"5px",
+          pb: "5px",
           // boxShadow: " 0px 4px 20px 0px #0000000D !important",
           _placeholder: {
             color: "gray.100    ",
@@ -463,7 +453,7 @@ const components = {
       // Variant for h1
       h1: {
         // fontSize: { "2xl": "40px" , base:"20px" },
-        fontSize: "25px",
+        fontSize: ["17px", "17px", "20px", "25px", "25px", , "25px"],
         color: "white.100",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
@@ -516,7 +506,7 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontSize: ["13px", "14px", "14px"],
         // lineHeight:{ md: '24px' , base:"20px"},
-        lineHeight: "20px",
+        lineHeight: "23px",
         // fontSize: "20px",
       },
       p5: {
@@ -537,6 +527,7 @@ const components = {
         color: "blue.500",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
+        lineHeight:"22px",
         fontSize: ["13px", "13px", "15px", "15px", "15px", "15px"],
       },
       p8: {

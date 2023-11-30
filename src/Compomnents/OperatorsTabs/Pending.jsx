@@ -19,7 +19,15 @@ const Pending = () => {
     },
   ];
   const keys = ["name", "email", "role", "createdAt", "Actions"];
-  const actionList = ["Restore", "Delete"];
+
+  const handleEdit = (id) => {
+    router.push(`/operator/create-operator?id=${id}`);
+  };
+  const actionList = [
+    { title: "Edit", handleEvent: handleEdit },
+    { title: "Approve" },
+    { title: "Reject" },
+  ];
   const data = [
     {
       name: { image: profile_icon.src, name: "Tom Brady" },
@@ -51,7 +59,7 @@ const Pending = () => {
   return (
     <>
       <OperatorButton />
-      <Box minH={"52vh"} pb={"20px"}>
+      <Box minH={"52vh"} >
         <PaginatedTable
           keys={keys}
           totalPages={totalPages}

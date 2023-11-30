@@ -10,10 +10,9 @@ const index = () => {
   return (
     <OperatorLayout>
       <Box px={"30px"}>
-        <JobPostTimeline isEdit title="Edit Job Post" />
+        <JobPostTimeline timeLine={[]} isEdit title="Edit Job Post" />
       </Box>
-      <DashboardFooter waveImage/>
-
+      <DashboardFooter waveImage />
     </OperatorLayout>
   );
 };

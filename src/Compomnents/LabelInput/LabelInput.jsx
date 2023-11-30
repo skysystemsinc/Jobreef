@@ -41,7 +41,6 @@ const LabelInput = ({
   placeholder,
   dropdown,
   readOnly,
-  setreadOnly,
   label,
 }) => {
   return (

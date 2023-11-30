@@ -2,8 +2,8 @@ import prisma from "@/lib/prisma";
 
 import bcrypt from "bcrypt";
 const addUser = async (req, res) => {
-  const data = JSON.parse( req.body);
-  console.log("data", data);
+  const data = JSON.parse(req.body);
+
   const emailExist = await prisma.User.findUnique({
     where: {
       email: data.email,
@@ -22,6 +22,12 @@ const addUser = async (req, res) => {
       //TODO otp will send on email
       const userCreated = await prisma.User.create({
         data: {
+          // emailPreferences: {
+          //   jobUpdates: true,
+          //   messageThread: true,
+          //   insightfulTips: false,
+          //   promoNewsletter: false,
+          // },
           firstName: data.firstName,
           lastName: data.lastName,
           email: data.email,
