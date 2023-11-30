@@ -116,9 +116,9 @@ const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
   return (
     <>
     {/* false temp add */}
-      {false ? (
+      {/* {false ? (
         <LoadingSkeleton />
-      ) : (
+      ) : ( */}
         <Menu>
           <MenuButton
             as={Button}
@@ -315,7 +315,7 @@ const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
                 })}
           </MenuList>
         </Menu>
-      )}
+      {/* )} */}
     </>
   );
 };
