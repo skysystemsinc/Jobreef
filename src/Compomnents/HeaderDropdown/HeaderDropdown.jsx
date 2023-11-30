@@ -115,7 +115,8 @@ const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
   }, []);
   return (
     <>
-      {!loginUser ? (
+    {/* false temp add */}
+      {false ? (
         <LoadingSkeleton />
       ) : (
         <Menu>
