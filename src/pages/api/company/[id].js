@@ -30,16 +30,16 @@ const DeleteCompany = async (req, res) => {
   }
 };
 const UpdateCompany = async (req, res) => {
-  const newObj = { ...req.body };
+  const data = { ...req.body };
   try {
-    const user = await prisma.Company.update({
+    const company = await prisma.Company.update({
       where: {
         id: req.query.id,
       },
-      data: newObj,
+      data: data,
     });
-    console.log("user", user);
-    if (!user) {
+    console.log("company", company);
+    if (!company) {
       return res.status(404).json({
         message: `No company with id ${req.query.id}`,
         success: false,
@@ -50,9 +50,10 @@ const UpdateCompany = async (req, res) => {
       success: true,
     });
   } catch (err) {
+    console.log("err",err)
     res.status(500).json({
       error: err,
-      message: `No company with id ${req.query.id}`,
+      message: `internal server error`,
       success: false,
     });
   }
@@ -93,7 +94,7 @@ export default async function handler(req, res) {
     case "GET": {
       return GetSingleCompany(req, res);
     }
-    case "PATCH": {
+    case "PUT": {
       return UpdateCompany(req, res);
     }
     case "DELETE": {

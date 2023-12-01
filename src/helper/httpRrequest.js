@@ -2,6 +2,7 @@ const httpRequest = async (url, method, data = null, option) => {
   try {
     const options = {
       method: method,
+      'Content-Type': 'application/json',
       body: data ? JSON.stringify(data) : null,
       ...option,
     };

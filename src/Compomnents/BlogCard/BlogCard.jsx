@@ -58,7 +58,11 @@ const BlogCard = () => {
         impress your managers?
       </Heading>
       <Box display={"flex"} gap={"17px"}>
-        <Image src={Avatar.src} />
+        <Image width={"45px"} 
+        height={"45px"}
+        objectFit={"cover"}
+
+         src={Avatar.src} />
         <Box display={"flex"} flexDirection={"Column"}>
           <Heading color={"gray.text"} fontWeight={700} variant={"p4"}>
             Olivia Rhye

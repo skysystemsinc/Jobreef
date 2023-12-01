@@ -55,7 +55,7 @@ const MessageHeader = () => {
                 {activeConversation.name}
               </Heading>
               <Heading color={"blue.300"} variant={"p12"}>
-                {activeConversation.activeStatus}
+                {/* {activeConversation.activeStatus} */}
               </Heading>
             </Box>
           </Box>

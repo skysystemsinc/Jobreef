@@ -30,6 +30,7 @@ import endPoints from "@/Utils/endpoints";
 import { httpRequest } from "@/helper/httpRrequest";
 import { BACKEND_URL } from "@/Utils/urls";
 import LoadingSkeleton from "../LoadingSkeleton/LoadingSkeleton";
+import { addCompany } from "@/Reudx/slices/company";
 const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -103,6 +104,7 @@ const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
         const { data } = postData;
 
         dispatch(setLoginUser(postData.data));
+        dispatch(addCompany(postData.data.company));
       }
     } catch (error) {
       console.log("error", error);

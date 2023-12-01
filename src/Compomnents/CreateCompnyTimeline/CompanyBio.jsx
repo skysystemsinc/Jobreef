@@ -56,22 +56,22 @@ const CompanyBio = ({ nextStep, State, setState }) => {
   };
 
   const handleNext = () => {
-    if (
-      companyBio.companyName === "" ||
-      companyBio.directory === "" ||
-      companyBio.description === "" ||
-      companyBio.logo === false
-    ) {
-      toast({
-        position: globalStyles.toastStyle.position,
-        title: `Required fields are empty`,
-        status: "error",
-        variant: "subtle",
-        isClosable: true,
-      });
-      return;
-    }
-    dispatch(addCompany(companyBio))
+    // if (
+    //   companyBio.companyName === "" ||
+    //   companyBio.directory === "" ||
+    //   companyBio.description === "" ||
+    //   companyBio.logo === false
+    // ) {
+    //   toast({
+    //     position: globalStyles.toastStyle.position,
+    //     title: `Required fields are empty`,
+    //     status: "error",
+    //     variant: "subtle",
+    //     isClosable: true,
+    //   });
+    //   return;
+    // }
+    // dispatch(addCompany(companyBio))
     nextStep();
   };
 

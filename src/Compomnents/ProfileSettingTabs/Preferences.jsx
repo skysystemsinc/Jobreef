@@ -7,6 +7,7 @@ import {
   Heading,
   Image,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import profile from "@/assets/Images/profile.svg";
@@ -17,31 +18,118 @@ import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
 import { roles } from "@/Utils/role";
 import EditProifle from "../EditProifle/EditProifle";
+import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
+import { useSelector } from "react-redux";
+import { post, put } from "@/helper/fetch";
+import Loader from "../Loader/Loader";
+import endPoints from "@/Utils/endpoints";
 const Preferences = () => {
-  const dropDownOptions = ["Yes", "No"];
+  const toast = useToast();
+  const dropDownOptions = [
+    { label: "Yes", value: "true" },
+    { label: "No", value: "false" },
+  ];
+  const loginUser = useSelector((state) => state.LoginUser.value);
+
+  const [formData, setFormData] = useState({
+    ...loginUser.emailPreferences,
+  });
+  console.log("formData", formData);
 
   const [state, setState] = useState({
-    readOnly: false,
+    readOnly: true,
     isEdit: false,
-    jobUpdates: true,
-    messageThread: true,
-    promoNewsletter: false,
-    insightfulTips: false,
-
+    loading: false,
   });
 
   const handleChange = (e) => {
+    console.log("e", e);
     const name = e.target.name;
     const value = e.target.value;
-    setState((prev) => {
+    setFormData((prev) => {
       return {
         ...prev,
-        [name]: value,
+        [name]: { label: value == "true" ? "Yes" : "No", value },
       };
     });
   };
 
+  const handleCancel = () => {
+    setState((prev) => {
+      return {
+        ...prev,
+        isEdit: false,
+        readOnly: true,
+      };
+    });
+  };
+  const handleEdit = () => {
+    setState((prev) => {
+      return {
+        ...prev,
+        isEdit: true,
+        readOnly: false,
+      };
+    });
+  };
+  const handleSave = async () => {
+    if (state.loading) return;
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: true,
+      };
+    });
+
+    const body = {
+      jobUpdates: !!formData.jobUpdates.value,
+      messageThread: !!formData.messageThread.value,
+      insightfulTips: !!formData.insightfulTips.value,
+      promoNewsletter: !!formData.promoNewsletter.value,
+    };
+    try {
+      const id = localStorage.getItem("id");
+      const postData = await put(
+        `${endPoints.emailPreferences}/${id}`,
+
+        body
+      );
+      if (postData.success) {
+        setState((prev) => {
+          return {
+            ...prev,
+            loading: false,
+            readOnly: true,
+            isEdit: false,
+          };
+        });
+      }
+      toast({
+        position: "bottom-right",
+        title: postData.message,
+        status: postData.success ? "success" : "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    } catch (error) {
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+          isEdit: false,
+          readOnly: true,
+        };
+      });
+    }
+  };
+
+  useSkipInitialEffect(() => {
+    if (loginUser) {
+      setFormData(loginUser.emailPreferences);
+    }
+  }, [loginUser]);
   return (
+    // <></>
     <Box minH={"58vh"}>
       <Box mt={{ md: "60px", base: "30px" }}>
         <Heading
@@ -53,10 +141,11 @@ const Preferences = () => {
         </Heading>
         <InputWrapper gap={{ xl: "70px", "2xl": "142px", base: "20px" }}>
           <LabelInput
-            state={state.firstName}
+            state={formData?.jobUpdates?.label}
             setState={handleChange}
             labelVariant={"label"}
             type="text"
+            name={"jobUpdates"}
             readOnly={state.readOnly}
             dropdownOption={dropDownOptions}
             variant={"bg-input"}
@@ -68,12 +157,9 @@ const Preferences = () => {
             labelVariant={"label"}
             readOnly={state.readOnly}
             dropdownOption={dropDownOptions}
-            state={state.accountType}
-            setState={(e) => {
-              setstate((prev) => {
-                return { ...prev, accountType: e.target.value };
-              });
-            }}
+            state={formData?.messageThread?.label}
+            name={"messageThread"}
+            setState={handleChange}
             dropdown={state.readOnly ? false : true}
             type="text"
             variant={"bg-input"}
@@ -84,13 +170,10 @@ const Preferences = () => {
 
         <InputWrapper gap={{ xl: "70px", "2xl": "142px", base: "20px" }}>
           <LabelInput
-            state={state.lastName}
             dropdownOption={dropDownOptions}
-            setState={(e) => {
-              setstate((prev) => {
-                return { ...prev, lastName: e.target.value };
-              });
-            }}
+            state={formData?.insightfulTips?.label}
+            setState={handleChange}
+            name={"insightfulTips"}
             dropdown={state.readOnly ? false : true}
             labelVariant={"label"}
             type="text"
@@ -101,17 +184,14 @@ const Preferences = () => {
           />
 
           <LabelInput
-            state={state.number}
             dropdownOption={dropDownOptions}
-            setState={(e) => {
-              setstate((prev) => {
-                return { ...prev, number: e.target.value };
-              });
-            }}
+            state={formData?.promoNewsletter?.label}
+            setState={handleChange}
+            name={"promoNewsletter"}
             dropdown={state.readOnly ? false : true}
             readOnly={state.readOnly}
             labelVariant={"label"}
-            type="number"
+            type="text"
             variant={"bg-input"}
             placeholder="Yes/No"
             label={" Newsletter and promotions"}
@@ -130,31 +210,16 @@ const Preferences = () => {
       >
         {state.isEdit ? (
           <>
-            <Button
-              onClick={() => {
-                setisEdit(false);
-                setreadOnly(true);
-              }}
-              variant="outline-blue"
-            >
+            <Button onClick={handleCancel} variant="outline-blue">
               Cancel
             </Button>
-            <Button
-              onClick={() => {
-                setisEdit(false);
-                setreadOnly(true);
-              }}
-              variant={"blue-btn"}
-            >
-              Save
+            <Button onClick={handleSave} variant={"blue-btn"}>
+              {state.loading ? <Loader /> : "Save"}
             </Button>
           </>
         ) : (
           <Button
-            onClick={() => {
-              setisEdit(true);
-              setreadOnly(false);
-            }}
+            onClick={handleEdit}
             variant={"blue-btn"}
             display={"flex"}
             alignItems={"center"}

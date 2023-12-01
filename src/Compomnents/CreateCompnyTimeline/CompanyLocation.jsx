@@ -34,22 +34,22 @@ const CompanyLocation = ({ nextStep, handlePrevious, State, setState }) => {
   
   const [companyLocation, setCompanyLocation] = useState(companyState);
   const handleNext = () => {
-    if (
-      companyLocation.country === "" ||
-      companyLocation.province === "" ||
-      companyLocation.city === "" ||
-      companyLocation.address === ""
-    ) {
-      toast({
-        position: globalStyles.toastStyle.position,
-        title: `Required fields are empty`,
-        status: "error",
-        variant: "subtle",
-        isClosable: true,
-      });
-      return;
-    }
-    dispatch(addCompany(companyLocation))
+    // if (
+    //   companyLocation.country === "" ||
+    //   companyLocation.province === "" ||
+    //   companyLocation.city === "" ||
+    //   companyLocation.address === ""
+    // ) {
+    //   toast({
+    //     position: globalStyles.toastStyle.position,
+    //     title: `Required fields are empty`,
+    //     status: "error",
+    //     variant: "subtle",
+    //     isClosable: true,
+    //   });
+    //   return;
+    // }
+    // dispatch(addCompany(companyLocation))
     nextStep();
   };
 

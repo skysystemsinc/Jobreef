@@ -5,6 +5,7 @@ const endPoints = {
   employee:'employee',
   login:"login",
   resendOtp:"resend-otp",
-  changePassword:"change-password"
+  changePassword:"change-password",
+  emailPreferences:"emailPreferences",
 };
 export default endPoints;

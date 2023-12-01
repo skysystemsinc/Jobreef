@@ -41,8 +41,8 @@ const footerLink = [
   {
     heading: "Our Company",
     links: [
-      { link: "About Us", pathName: "" },
-      { link: "Contact", pathName: "" },
+      { link: "About Us", pathName: "/about" },
+      { link: "Contact", pathName: "/contact" },
       { link: "Careers", pathName: "" },
     ],
   },

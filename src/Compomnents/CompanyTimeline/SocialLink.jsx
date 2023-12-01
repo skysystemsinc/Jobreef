@@ -38,58 +38,58 @@ const SocialLink = ({ nextStep, handlePrevious }) => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.authentication.value);
   let companyState = useSelector((state) => state.companyRegister.value);
-  console.log("companyState",companyState)
+  console.log("companyState", companyState);
 
   let [State, setState] = useState({
     loading: false,
   });
 
-
   const [isSmallerThe500] = useMediaQuery("(max-width: 787px)");
   const handleDelete = (index) => {
-    const updatedLinks = [...companyState.links];
+    const updatedLinks = [...companyState.socialLinks];
     updatedLinks.splice(index, 1);
 
-    dispatch(addCompany({ ...companyState, links: updatedLinks }));
+    dispatch(addCompany({ ...companyState, socialLinks: updatedLinks }));
   };
   const handlePlatformChange = (event, index) => {
-    let updatedLinks = [...companyState.links];
+    let updatedLinks = [...companyState.socialLinks];
 
     updatedLinks[index] = {
       ...updatedLinks[index],
       platform: event.target.value,
     };
-    dispatch(addCompany({ ...companyState, links: updatedLinks }));
+    dispatch(addCompany({ ...companyState, socialLinks: updatedLinks }));
     // setState((prev) => {
     //   return {
     //     ...prev,
-    //     links: updatedLinks,
+    //     socialLinks: updatedLinks,
     //   };
     // });
   };
 
   const handleLinkChange = (event, index) => {
-    let updatedLinks = [...companyState.links];
+    console.log("event",event);
+    let updatedLinks = [...companyState.socialLinks];
     updatedLinks[index] = { ...updatedLinks[index], link: event.target.value };
-    dispatch(addCompany({ ...companyState, links: updatedLinks }));
+    dispatch(addCompany({ ...companyState, socialLinks: updatedLinks }));
 
     // setState((prev) => {
     //   return {
     //     ...prev,
-    //     links: updatedLinks,
+    //     socialLinks: updatedLinks,
     //   };
     // });
   };
 
   const handleAddMore = () => {
-    const updatedLinks = [...companyState.links];
+    const updatedLinks = [...companyState.socialLinks];
     updatedLinks.push({ platform: "", link: "" });
-    dispatch(addCompany({ ...companyState, links: updatedLinks }));
+    dispatch(addCompany({ ...companyState, socialLinks: updatedLinks }));
 
     // setState((prev) => {
     //   return {
     //     ...prev,
-    //     links: updatedLinks,
+    //     socialLinks: updatedLinks,
     //   };
     // });
     // setFormData(updatedFormData);
@@ -111,37 +111,23 @@ const SocialLink = ({ nextStep, handlePrevious }) => {
         description: companyState.description,
         webUrl: companyState.webLink,
         companyLogo: companyState.logo,
-        socialLinks: companyState.links,
+        socialLinks: companyState.socialLinks,
       };
-      const postData =await httpRequest(
+      const postData = await httpRequest(
         `${BACKEND_URL}${endPoints.company}`,
         "POST",
         body
       );
-      console.log("postData",postData)
-      // const postData = await axios({
-      //   method: "POST",
-      //   url: `${BACKEND_URL}${endPoints.company}`,
-      //   data: {
-      //     companyName: State.companyName,
+      console.log("postData", postData);
 
-      //     // [role == roles.company ? "companyId" : "employeeId"]: id,
-      //     industry: State.industry,
-      //     directory: State.directory,
-      //     noOfEmployees: parseInt(State.noOfEmployees),
-      //     yearEstablished: parseInt(State.yearEstablished),
-      //     description: State.description,
-      //     webUrl: State.webLink,
-      //     companyLogo: State.logo,
-      //     socialLinks: State.links,
-      //   },
-      // });
       if (postData) {
+        dispatch(addCompany(postData.data));
+
         handleUserAssociation(postData.data.id);
         // console.log("postData", postData);
       }
     } catch (err) {
-      console.log("err",err)
+      console.log("err", err);
       setState((prev) => {
         return {
           ...prev,
@@ -212,7 +198,7 @@ const SocialLink = ({ nextStep, handlePrevious }) => {
 
   return (
     <Box pr={"20px"}>
-      {companyState?.links.map((item, index) => {
+      {companyState?.socialLinks.map((item, index) => {
         return (
           <InputWrapper
             style={{ marginBottom: "15px" }}

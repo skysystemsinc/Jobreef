@@ -21,6 +21,8 @@ const Login = async (req, res) => {
       include: {
         company: true,
         employee: true,
+        location: true,
+        emailPreferences: true,
       },
     });
     if (user) {
