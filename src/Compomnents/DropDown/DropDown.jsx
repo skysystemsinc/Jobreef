@@ -21,7 +21,7 @@ const DropDown = ({
     <Box>
       <MultiSelect
         options={dropdownOption??option}
-        value={state}
+        value={state ??""}
         label=""
         single
         name={name}
