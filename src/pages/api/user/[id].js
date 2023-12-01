@@ -29,18 +29,22 @@ const DeleteUser = async (req, res) => {
 };
 const UpdateUser = async (req, res) => {
   const data = { ...JSON.parse(req.body) };
-  const emailExist = await prisma.User.findUnique({
-    where: {
-      email: data.email,
-    },
-  });
+  // const data = req.body 
 
-  if (emailExist) {
-    res.status(400).json({
-      message: "Email already exists",
-      success: false,
+  if (data.email) {
+    const emailExist = await prisma.User.findUnique({
+      where: {
+        email: data.email,
+      },
     });
-    return;
+
+    if (emailExist) {
+      res.status(400).json({
+        message: "Email already exists",
+        success: false,
+      });
+      return;
+    }
   }
 
   if (data.password) {
@@ -69,6 +73,7 @@ const UpdateUser = async (req, res) => {
       success: true,
     });
   } catch (err) {
+    console.log("err",err)
     res.status(500).json({
       error: err,
       success: false,

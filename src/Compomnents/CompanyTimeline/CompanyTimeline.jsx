@@ -210,7 +210,7 @@ export const CompanyTimeline = ({ variant }) => {
           <Button
             isDisabled={activeStep === 0}
             onClick={() => {
-              router.push("/");
+              router.push("/login");
             }}
             variant="blue-btn"
           >

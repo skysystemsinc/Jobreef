@@ -108,7 +108,7 @@ color: #F7F9FB !important;
 
 .css-ux6frl , .css-1of3mtg{
   color:  #000 !important;
-  transform: rotate(180deg) !important;
+  /* transform: rotate(180deg) !important; */
   color: #636364 !important;
   background-color: transparent !important;
 }

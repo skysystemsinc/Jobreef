@@ -14,7 +14,8 @@ let company = {
   directory: "",
   noOfEmployees: "",
   yearEstablished: "",
-  webLink: "",
+  webUrl: "",
+  telePhone:"",
   description: "",
   country: "",
   province: "",
@@ -24,7 +25,7 @@ let company = {
   platform: "",
   link: "",
   logo: false,
-  links: [
+  socialLinks: [
     {
       platform: "",
       link: "",

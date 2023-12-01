@@ -22,22 +22,22 @@ const addUser = async (req, res) => {
       //TODO otp will send on email
       const userCreated = await prisma.User.create({
         data: {
-          // emailPreferences: {
-          //   jobUpdates: true,
-          //   messageThread: true,
-          //   insightfulTips: false,
-          //   promoNewsletter: false,
-          // },
+          emailPreferences: {
+            create: {
+              jobUpdates: true,
+              messageThread: true,
+              insightfulTips: false,
+              promoNewsletter: false,
+            },
+          },
           firstName: data.firstName,
           lastName: data.lastName,
           email: data.email,
           password: hashPass,
           otp: otp,
-          // phoneNumber: data.phoneNumber,
           role: data.role,
           accountType: data.accountType,
           companyId: data.companyId,
-          // employeeId: data.employeeId ?? null,
           ...(data.employeeId !== undefined && { employeeId: data.employeeId }),
         },
       });

@@ -40,7 +40,6 @@ const SocialLink = ({ nextStep, handlePrevious }) => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.authentication.value);
   let companyState = useSelector((state) => state.companyRegister.value);
-  console.log("companyState", companyState);
 
   let [State, setState] = useState({
     loading: false,

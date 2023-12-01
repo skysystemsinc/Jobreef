@@ -12,6 +12,7 @@ import {
   ListItem,
   Textarea,
   UnorderedList,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import LabelInput from "../LabelInput/LabelInput";
@@ -27,65 +28,34 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { getCompanyProfile } from "@/Reudx/slices/companyProfile";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
+import endPoints from "@/Utils/endpoints";
+import Loader from "../Loader/Loader";
+import { put } from "@/helper/fetch";
 
 const CompanyBio = () => {
-  const [State, setState] = useState({
-    companyName: "",
-    industry: "",
-    directory: "",
-    noOfEmployees: "",
-    yearEstablished: "",
-    webLink: "",
-    decsription: "",
-    logo: false,
-    country: "",
-    province: "",
-    city: "",
-    telephone: "",
-    address: "",
-    platform: "",
-    link: "",
-    links: [
-      {
-        platform: "",
-        link: "",
-      },
-    ],
+  const toast = useToast();
+  const companyState = useSelector((state) => state.companyRegister.value);
+  console.log("companyState", companyState);
+
+  const [formData, setFormData] = useState(companyState);
+  const [state, setState] = useState({
+    isEdit: false,
+    readOnly: true,
+    loading: false,
   });
-  const companyProfile = useSelector((state) => state.companyProfile.value);
 
   const dispatch = useDispatch();
-  const [isEdit, setisEdit] = useState(false);
-  const [readOnly, setreadOnly] = useState(true);
 
   const uploadList = [
     "Please upload logo in minimum 200x200 resolution",
     "The acceptable formats of the copy are .PDF, .JPEG or .PNG",
   ];
-  const handleEdit = () => {
-    setreadOnly(false);
-    setisEdit(true);
-  };
-  const handleSave = async () => {
-    const response = await axios("/api/company/companyProfile", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: { ...State },
-    });
-    setreadOnly(true);
-    setisEdit(false);
-  };
-  const handleCancel = () => {
-    setreadOnly(true);
-    setisEdit(false);
-  };
+
   const handleLogo = (e) => {
     const file = e.target.files[0];
     if (file) {
       const imageURL = URL.createObjectURL(file); // Create a URL for the selected file
-      setState((prev) => {
+      setFormData((prev) => {
         return {
           ...prev,
           logo: imageURL,
@@ -93,43 +63,97 @@ const CompanyBio = () => {
       });
     }
   };
-  const getData = async () => {
+
+  const handleCancel = () => {
+    setState((prev) => {
+      return {
+        ...prev,
+        isEdit: false,
+        readOnly: true,
+      };
+    });
+  };
+  const handleEdit = () => {
+    setState((prev) => {
+      return {
+        ...prev,
+        isEdit: true,
+        readOnly: false,
+      };
+    });
+  };
+  const handleSave = async () => {
+    if (state.loading) return;
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: true,
+      };
+    });
+    const body = {
+      ...companyState,
+    };
+    delete body.id;
     try {
-      const userProfile = await axios({
-        method: "GET",
-        url: "/api/company/companyProfile",
+      const postData = await put(
+        `${endPoints.company}/${companyState.id}`,
+
+        body
+      );
+      if (postData.success) {
+        setState((prev) => {
+          return {
+            ...prev,
+            loading: false,
+            readOnly: true,
+            isEdit: false,
+          };
+        });
+      }
+      toast({
+        position: "bottom-right",
+        title: postData.message,
+        status: postData.success ? "success" : "error",
+        variant: "subtle",
+        isClosable: true,
       });
-      dispatch(getCompanyProfile(userProfile.data));
-    } catch (err) {}
+    } catch (error) {
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+          isEdit: false,
+          readOnly: true,
+        };
+      });
+    }
+  };
+  const handleChange = (e) => {
+    console.log("e", e);
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
   };
 
-  useEffect(() => {
-    getData();
-    return () => {};
-  }, []);
   useSkipInitialEffect(() => {
-    setState({
-      companyName: companyProfile.companyName,
-      industry: companyProfile.industry,
-      directory: companyProfile.directory,
-      noOfEmployees: companyProfile.noOfEmployees,
-      yearEstablished: companyProfile.yearEstablished,
-      webLink: companyProfile.webLink,
-      decsription: companyProfile.decsription,
-      logo: companyProfile.logo,
-    });
-  }, [companyProfile]);
+    if (companyState) {
+      setFormData(companyState);
+    }
+  }, [companyState]);
   return (
+    // <></>
     <Box mt={{ md: "50px", base: "10px" }}>
       <InputWrapper>
         <LabelInput
-          state={State.companyName}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, companyName: e.target.value };
-            });
-          }}
-          readOnly={readOnly}
+          state={formData.companyName}
+          name={"companyName"}
+          setState={handleChange}
+          readOnly={state.readOnly}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -137,46 +161,38 @@ const CompanyBio = () => {
           label={"Company Name*"}
         />
         <LabelInput
-          state={State.industry}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, industry: e.target.value };
-            });
-          }}
-          dropdown={readOnly ? false : true}
+          state={formData.industry}
+          name={"industry"}
+          setState={handleChange}
+          dropdown={state.readOnly ? false : true}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
           placeholder="Select Industry"
           label={"Industry"}
-          readOnly={readOnly}
+          readOnly={state.readOnly}
         />
       </InputWrapper>
 
       <InputWrapper>
         <LabelInput
-          state={State.directory}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, directory: e.target.value };
-            });
-          }}
+          state={formData.directory}
+          name={"directory"}
+          setState={handleChange}
           labelVariant={"label"}
           type="text"
-          readOnly={readOnly}
+          readOnly={state.readOnly}
           variant={"bg-input"}
-          dropdown={readOnly ? false : true}
+          dropdown={state.readOnly ? false : true}
           placeholder="Select Option"
           label={"Listed in Directory*"}
         />
         <LabelInput
-          state={State.noOfEmployees}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, noOfEmployees: e.target.value };
-            });
-          }}
+          state={formData.noOfEmployees}
+          name={"noOfEmployees"}
+          setState={handleChange}
           labelVariant={"label"}
+          readOnly={state.readOnly}
           type="text"
           variant={"bg-input"}
           placeholder="Enter Number of Employees"
@@ -185,46 +201,37 @@ const CompanyBio = () => {
       </InputWrapper>
       <InputWrapper>
         <LabelInput
-          state={State.yearEstablished}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, yearEstablished: e.target.value };
-            });
-          }}
+          state={formData.yearEstablished}
+          name={"yearEstablished"}
+          setState={handleChange}
           labelVariant={"label"}
-          readOnly={readOnly}
+          readOnly={state.readOnly}
           type="text"
           variant={"bg-input"}
           placeholder="Enter Year in Numbers"
           label={"Year Established"}
         />
         <LabelInput
-          state={State.webLink}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, webLink: e.target.value };
-            });
-          }}
+          state={formData.webUrl}
+          name={"webUrl"}
+          setState={handleChange}
           labelVariant={"label"}
           type="text"
-          readOnly={readOnly}
+          readOnly={state.readOnly}
           variant={"bg-input"}
           placeholder="Enter Company Website URL"
           label={"Website"}
         />
       </InputWrapper>
       <InputWrapper>
-        <Box sx={{width:'49%'}}>
+        <Box sx={{ width: "49%" }}>
           <LabelInput
-            state={State.telephone}
-            setState={(e) => {
-              setState((prev) => {
-                return { ...prev, telephone: e.target.value };
-              });
-            }}
+            state={formData.telePhone}
+            name={"telePhone"}
+            setState={handleChange}
             labelVariant={"label"}
-            readOnly={readOnly}
-            type="text"
+            readOnly={state.readOnly}
+            type="number"
             variant={"bg-input"}
             placeholder="Enter Telephone "
             label={"Telephone"}
@@ -233,15 +240,12 @@ const CompanyBio = () => {
       </InputWrapper>
       <InputWrapper>
         <LabelInput
-          state={State.decsription}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, decsription: e.target.value };
-            });
-          }}
+          state={formData.description}
+          name={"description"}
+          setState={handleChange}
           labelVariant={"label"}
           textarea
-          readOnly={readOnly}
+          readOnly={state.readOnly}
           variant={"bg-teaxtarea"}
           placeholder="Describe Your Company..."
           label={"Description*"}
@@ -249,14 +253,14 @@ const CompanyBio = () => {
       </InputWrapper>
 
       <Box mt={{ md: "80px", base: "40px" }}>
-        {isEdit ? (
+        {state.isEdit ? (
           <UploadBox
             handleEvent={handleLogo}
             list={uploadList}
             titie={"Upload Company Logo"}
           />
         ) : (
-          <CompanyLogoPreview logo={State.logo} />
+          <CompanyLogoPreview logo={formData.logo} />
         )}
       </Box>
 
@@ -266,13 +270,13 @@ const CompanyBio = () => {
         mb={"70px"}
         justifyContent={"center"}
       >
-        {isEdit ? (
+        {state.isEdit ? (
           <>
             <Button onClick={handleCancel} variant="outline-blue">
               Cancel
             </Button>
             <Button onClick={handleSave} variant={"blue-btn"}>
-              Save
+              {state.loading ? <Loader /> : "  Save"}
             </Button>
           </>
         ) : (

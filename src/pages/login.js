@@ -31,6 +31,7 @@ import Loader from "@/Compomnents/Loader/Loader";
 import { useDispatch } from "react-redux";
 import { setLoginUser } from "@/Reudx/slices/LoginUser";
 import { roles } from "@/Utils/role";
+import { addCompany } from "@/Reudx/slices/company";
 
 export default function Login() {
   const router = useRouter();
@@ -67,6 +68,7 @@ export default function Login() {
         const { data } = postData;
         localStorage.setItem("id", data.id);
         dispatch(setLoginUser(postData.data));
+        dispatch(addCompany(postData?.data?.company));
         if (data.role == roles.company) {
           router.push("/company/profile-setting");
         } else {
@@ -95,6 +97,7 @@ export default function Login() {
         };
       });
     } catch (error) {
+      console.log("error",error);
       setState((prev) => {
         return {
           ...prev,

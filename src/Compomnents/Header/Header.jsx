@@ -51,6 +51,7 @@ const HeaderDropdown = dynamic(
 export default function Header({ notLogin, candidate }) {
   const { isOpen, onToggle } = useDisclosure();
   const dispatch = useDispatch();
+  const router = useRouter();
   const [isSmallerThe500] = useMediaQuery("(max-width: 500px)");
   // const getUser = async () => {
   //   const id = localStorage.getItem("id");
@@ -147,8 +148,13 @@ export default function Header({ notLogin, candidate }) {
 
           {notLogin ? (
             <Button
-            width={"max-content"}
-            mr={{ lg: "20px", base: "0px" }} variant={"blue-btn"}>
+              width={"max-content"}
+              onClick={() => {
+                router.push("/login");
+              }}
+              mr={{ lg: "20px", base: "0px" }}
+              variant={"blue-btn"}
+            >
               Login/Signup
             </Button>
           ) : (
