@@ -29,7 +29,7 @@ const PaginatedTable = ({
   pageSize,
   currentPage,
   onPageChange,
-  showExteraHeader,
+  showExtraHeader,
 }) => {
   const startIndex = (currentPage - 1) * pageSize;
   // const endIndex = currentPage * pageSize;
@@ -76,15 +76,21 @@ const PaginatedTable = ({
         bg={"white.100"}
         // mb={"30px"}
       >
+        {showExtraHeader?
+        <Box bg={"blue.500"} p={"20px 15px 10px"} >
+          <Heading variant={'p7'} color={"white.100"} fontWeight={400} > Recent Orders</Heading>
+        </Box>
+        :null
+        }
         <Table variant="custome-table">
           <Thead>
-            {showExteraHeader ? (
+            {/* {showExtraHeader ? (
               <Tr>
                 <Th fontWeight={700} colspan={"100%"}>
                   Recent Orders
                 </Th>
               </Tr>
-            ) : null}
+            ) : null} */}
             {columns.map((item, ind) => {
               return (
                 <Tr sx={trStyle} key={ind}>
@@ -160,7 +166,7 @@ const PaginatedTable = ({
         display={"flex"}
         justifyContent={"space-between"}
         alignItems={"center"}
-        mt={"20px"}
+        // mt={"20px"}
         mb={"17px"}
         pt={"15px"}
         flexWrap={"wrap"}

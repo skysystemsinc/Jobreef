@@ -150,6 +150,7 @@ const Password = ({ activeStep, handlePrevious, nextStep }) => {
       lastName: state.lastName,
       email: state.email,
       password: state.password,
+      verified: false,
       role: userState.isCompany ? roles.company : roles.employee,
     };
     const postData = await httpRequest(

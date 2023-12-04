@@ -598,6 +598,8 @@ const components = {
     variants: {
       "custome-table": {
         table: {
+              position: "relative",
+            top: "-21px",
           borderCollapse: "separate",
           borderSpacing: "0px 20px",
 
@@ -631,8 +633,8 @@ const components = {
             },
           },
           thead: {
-            position: "relative",
-            top: "-21px",
+            // position: "relative",
+            // top: "-21px",
             bg: "blue.500",
             // tr: { position: "relative", top: "-21px" },
             th: {

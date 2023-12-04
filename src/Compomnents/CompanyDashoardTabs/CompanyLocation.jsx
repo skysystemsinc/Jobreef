@@ -12,6 +12,7 @@ import {
   ListItem,
   Textarea,
   UnorderedList,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import LabelInput from "../LabelInput/LabelInput";
@@ -22,69 +23,112 @@ import white_edit from "@/assets/Images/white-edit.svg";
 import { useSelector } from "react-redux";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import axios from "axios";
+import endPoints from "@/Utils/endpoints";
+import { put } from "@/helper/fetch";
+import Loader from "../Loader/Loader";
 
 const CompanyLocation = () => {
-  const companyProfile = useSelector((state) => state.companyProfile.value);
+  const toast = useToast()
+  const companyState = useSelector((state) => state.companyRegister.value);
+  console.log("companyState", companyState);
 
-  const [State, setState] = useState({
-    country: "",
-    province: "",
-    city: "",
-    address: "",
-
-    links: [
-      {
-        platform: "",
-        link: "",
-      },
-    ],
+  const [state, setState] = useState({
+    isEdit: false,
+    readOnly: true,
   });
-  const [isEdit, setisEdit] = useState(false);
-  const [readOnly, setreadOnly] = useState(true);
-
-  const uploadList = [
-    "Please upload logo in minimum 200x200 resolution",
-    "The acceptable formats of the copy are .PDF, .JPEG or .PNG",
-  ];
+  const [formData, setFormData] = useState(
+    companyState?.location && companyState?.location[0]
+  );
+  console.log("formData",formData)
+  const handleCancel = () => {
+    setState((prev) => {
+      return {
+        ...prev,
+        isEdit: false,
+        readOnly: true,
+      };
+    });
+  };
   const handleEdit = () => {
-    setreadOnly(false);
-    setisEdit(true);
+    setState((prev) => {
+      return {
+        ...prev,
+        isEdit: true,
+        readOnly: false,
+      };
+    });
   };
   const handleSave = async () => {
-    const response = await axios("/api/company/companyProfile", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: { ...State },
+    if (state.loading) return;
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: true,
+      };
     });
-    setreadOnly(true);
-    setisEdit(false);
+    const body = {
+      location: [{...formData}],
+    };
+    delete body.id;
+    try {
+      const postData = await put(
+        `${endPoints.company}/${companyState.id}`,
+
+        body
+      );
+      if (postData.success) {
+        setState((prev) => {
+          return {
+            ...prev,
+            loading: false,
+            readOnly: true,
+            isEdit: false,
+          };
+        });
+      }
+      toast({
+        position: "bottom-right",
+        title: postData.message,
+        status: postData.success ? "success" : "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    } catch (error) {
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+          isEdit: false,
+          readOnly: true,
+        };
+      });
+    }
   };
-  const handleCancel = () => {
-    setreadOnly(true);
-    setisEdit(false);
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
   };
   useSkipInitialEffect(() => {
-    setState({
-      country: companyProfile.country,
-      province: companyProfile.province,
-      city: companyProfile.city,
-      address: companyProfile.address,
-    });
-  }, [companyProfile]);
+    if (companyState) {
+      setFormData(companyState?.location && companyState?.location[0]);
+    }
+  }, [companyState]);
   return (
     <Box mt={{ md: "50px", base: "10px" }}>
       <InputWrapper>
         <LabelInput
-          state={State.country}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, country: e.target.value };
-            });
-          }}
-          readOnly={readOnly}
-          dropdown={readOnly ? false : true}
+          state={formData?.country}
+          setState={handleChange}
+          name={"country"}
+          readOnly={state.readOnly}
+          dropdown={state.readOnly ? false : true}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -92,45 +136,36 @@ const CompanyLocation = () => {
           label={"Country*"}
         />
         <LabelInput
-          state={State.province}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, province: e.target.value };
-            });
-          }}
-          dropdown={readOnly ? false : true}
+          state={formData?.province}
+          setState={handleChange}
+          name={"province"}
+          dropdown={state.readOnly ? false : true}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
           placeholder="Select State/Province"
           label={"State/Province"}
-          readOnly={readOnly}
+          readOnly={state.readOnly}
         />
       </InputWrapper>
 
       <InputWrapper>
         <LabelInput
-          state={State.city}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, city: e.target.value };
-            });
-          }}
+          state={formData?.city}
+          setState={handleChange}
+          name={"city"}
           labelVariant={"label"}
           type="text"
-          readOnly={readOnly}
+          readOnly={state.readOnly}
           variant={"bg-input"}
           placeholder="Enter City"
           label={"Enter City"}
         />
         <LabelInput
-          state={State.address}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, address: e.target.value };
-            });
-          }}
-          readOnly={readOnly}
+          state={formData?.address}
+          setState={handleChange}
+          name={"address"}
+          readOnly={state.readOnly}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -139,7 +174,7 @@ const CompanyLocation = () => {
         />
       </InputWrapper>
 
-      {isEdit ? (
+      {state.isEdit ? (
         <Flex
           gap={"20px"}
           mt={{ md: "122px", base: "60px" }}
@@ -150,7 +185,7 @@ const CompanyLocation = () => {
             Cancel
           </Button>
           <Button onClick={handleSave} variant={"blue-btn"}>
-            Save
+            {state.loading ? <Loader /> : " Save"}
           </Button>
         </Flex>
       ) : (
