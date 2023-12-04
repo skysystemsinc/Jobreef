@@ -13,14 +13,18 @@ import Loader from "../Loader/Loader";
 import { employee } from "@/schema/stateSchema";
 import { httpRequest } from "@/helper/httpRrequest";
 import { addEmployee } from "@/Reudx/slices/employee";
+import { post, put } from "@/helper/fetch";
 
 const Overview = ({ nextStep, activeStep, prevStep }) => {
   const toast = useToast();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.authentication.value);
-  const employeeState = useSelector((state) => state.employeeRegister.value);
-  const [state, setState] = useState({ ...employeeState, loading: false });
-  const handleRegister =  () => {
+  const employeeState = useSelector(
+    (state) => state.employeeRegister.value.employee
+  );
+  const [state, setState] = useState({ ...employeeState });
+  const [loading, setLoading] = useState(false);
+  const handleRegister = () => {
     if (
       state.country === "" ||
       state.province === "" ||
@@ -37,19 +41,13 @@ const Overview = ({ nextStep, activeStep, prevStep }) => {
       });
       return;
     }
-    setState((prev) => {
-      return {
-        ...prev,
-        loading: true,
-      };
-    });
+    setLoading(true);
     try {
       if (employeeState.id) {
         handleUpdateEmployee();
       } else {
         handleCreateEmployee();
       }
-
     } catch (err) {
       setState((prev) => {
         return {
@@ -73,6 +71,8 @@ const Overview = ({ nextStep, activeStep, prevStep }) => {
     try {
       const body = {
         role: role,
+        phoneNumber: parseInt(state.number),
+
         location: [
           {
             country: state.country,
@@ -88,29 +88,9 @@ const Overview = ({ nextStep, activeStep, prevStep }) => {
         "PUT",
         body
       );
-      // const userAssociation = axios({
-      //   method: "PUT",
-      //   url: `${BACKEND_URL}${endPoints.user}/${id}`,
-      //   data: {
-      //     role: role,
-      //     location: [
-      //       {
-      //         country: state.country,
-      //         province: state.province,
-      //         city: state.city,
-      //         // address: state.address,
-      //       },
-      //     ],
-      //     ["employeeId"]: employeeId,
-      //   },
-      // });
+
       if (userAssociation) {
-        setState((prev) => {
-          return {
-            ...prev,
-            loading: false,
-          };
-        });
+        setLoading(false);
         // router.push("/company/profile-setting");
         nextStep();
       }
@@ -130,7 +110,7 @@ const Overview = ({ nextStep, activeStep, prevStep }) => {
   };
   const handleCreateEmployee = async () => {
     const body = {
-      phoneNumber: parseInt(state.number),
+      // phoneNumber: parseInt(state.number),
       summary: state.description,
       workExperience: [],
       education: [],
@@ -139,11 +119,8 @@ const Overview = ({ nextStep, activeStep, prevStep }) => {
       achievement: {},
       attachment: {},
     };
-    const postData = await httpRequest(
-      `${BACKEND_URL}${endPoints.employee}`,
-      "POST",
-      body
-    );
+    const postData = await post(`${endPoints.employee}`, body);
+    console.log("postData",postData)
     handleUserAssociation(postData.data.id);
 
     dispatch(addEmployee({ ...state, id: postData.data.id }));
@@ -153,10 +130,9 @@ const Overview = ({ nextStep, activeStep, prevStep }) => {
       phoneNumber: parseInt(state.number),
       summary: state.description,
     };
-    const postData = await httpRequest(
-      `${BACKEND_URL}${endPoints.employee}/${employeeState.id}`,
-      "PUT",
-      {data:body}
+    const postData = await put(
+      `${endPoints.employee}/${employeeState.id}`,
+      body
     );
     handleUserAssociation(postData.data.id);
 
@@ -243,7 +219,7 @@ const Overview = ({ nextStep, activeStep, prevStep }) => {
             {" Back"}
           </Button>
           <Button variant={"blue-btn"} onClick={handleRegister}>
-            {state.loading ? <Loader /> : "Next"}
+            {loading ? <Loader /> : "Next"}
           </Button>
         </>
       </Flex>

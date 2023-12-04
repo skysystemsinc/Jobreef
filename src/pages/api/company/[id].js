@@ -48,6 +48,7 @@ const UpdateCompany = async (req, res) => {
     res.status(200).json({
       message: "Company updated successfully",
       success: true,
+      data:company
     });
   } catch (err) {
     console.log("err",err)
@@ -65,6 +66,9 @@ const GetSingleCompany = async (req, res) => {
       where: {
         id: req.query.id,
       },
+      // include: {
+      //   location: true, // Include all location in the returned object
+      // },
     });
 
     if (!company) {

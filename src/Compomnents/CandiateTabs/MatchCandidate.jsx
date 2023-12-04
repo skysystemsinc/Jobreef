@@ -7,6 +7,7 @@ import SelectedCandidate from "../ArchivedTabs/SelectedCandidate";
 import { useSelector } from "react-redux";
 import DropDown from "../DropDown/DropDown";
 import blue_arrow_down from "@/assets/Images/blue-arrow-down.svg";
+import CandidatesDropdown from "./CandidatesDropdown";
 
 const MatchCandidate = ({ filterKey }) => {
   const candidates = useSelector((state) => state.candidates.value.filter);
@@ -75,14 +76,8 @@ const MatchCandidate = ({ filterKey }) => {
   ];
   return (
     <Box>
-      <Box display={{ md: "none", base: "flex" }} justifyContent={"flex-end"}>
-        <DropDown
-          style={{ width: "max-content" }}
-          icon={<Image src={blue_arrow_down.src} />}
-          placeholder={"Systems Engineer"}
-          variant={"bg-dropdown"}
-        />
-      </Box>
+      <CandidatesDropdown />
+
       {selectedCandidates ? (
         <Box mt={{ md: "31px", base: "15px" }}>
           <SelectedCandidate matchCandidate />

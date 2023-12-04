@@ -6,7 +6,7 @@ import { HiLocationMarker } from "react-icons/hi";
 import edit_outline from "@/assets/Images/edit_outline.svg";
 import trash from "@/assets/Images/trash.svg";
 import moment from "moment";
-const ExperianceCard = ({ data, state, setState }) => {
+const ExperianceCard = ({ handleEdit, data, state, setState }) => {
   return (
     <Box
       p={{ sm: "16px", base: "12px" }}
@@ -54,8 +54,10 @@ const ExperianceCard = ({ data, state, setState }) => {
               </Box>
 
               <Heading color={"gray.text"} variant={"p4"}>
-                {moment(data.stateDate).format("MMMM YYYY")}  {" - "} 
-                { moment(data.endDate).format("MMMM YYYY")}
+                {moment(data.stateDate).format("MMMM YYYY")} {" - "}
+                {data.endDate
+                  ? moment(data.endDate).format("MMMM YYYY")
+                  : "Present"}
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
@@ -68,7 +70,8 @@ const ExperianceCard = ({ data, state, setState }) => {
                 variant={"p4"}
               >
                 {" "}
-                <HiLocationMarker style={{ color: "#4A4A4A" }} /> {data.country}
+                <HiLocationMarker style={{ color: "#4A4A4A" }} />{" "}
+                {data.location.country}
               </Heading>
             </Box>
           </Box>
@@ -83,13 +86,7 @@ const ExperianceCard = ({ data, state, setState }) => {
           gap={"18px"}
         >
           <Box
-            onClick={() =>
-              setState((prev) => {
-                return {
-                  ...prev,
-                  edit: true,
-                };
-              })
+            onClick={handleEdit
             }
             cursor={"pointer"}
             display={"flex"}

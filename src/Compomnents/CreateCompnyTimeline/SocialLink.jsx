@@ -82,7 +82,7 @@ const SocialLink = ({ nextStep, handlePrevious }) => {
   };
   return (
     <Box pr={"20px"}>
-      {companyState?.links.map((item, index) => {
+      {companyState?.socialLinks.map((item, index) => {
         return (
           <InputWrapper
             style={{ marginBottom: "15px" }}

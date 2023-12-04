@@ -13,7 +13,7 @@ export async function get(endpoint) {
       },
     });
 
-    if (response.success) {
+    if (response.ok) {
       return await response.json();
     } else {
       throw new Error("Request failed");
@@ -36,11 +36,12 @@ export async function post(endpoint, body) {
       body: JSON.stringify(body),
     });
 
-    if (response.success) {
+    if (response.ok) {
       return await response.json();
     } else {
       throw new Error("Request failed");
     }
+    console.log("response",response)
   } catch (error) {
     console.error(error);
     throw error;
@@ -58,7 +59,7 @@ export async function put(endpoint, body) {
       body: JSON.stringify(body),
     });
 
-    if (response.success) {
+    if (response.ok) {
       return await response.json();
     } else {
       throw new Error("Request failed");

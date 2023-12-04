@@ -124,18 +124,21 @@ const CandiateTabs = ({ company }) => {
               );
             })}
 
-            <Box
-              display={{ md: "block", base: "none" }}
-              position={"absolute"}
-              right={"12px"}
-              bottom={"0px"}
-            >
-              <DropDown
-                icon={<Image src={blue_arrow_down.src} />}
-                placeholder={"Systems Engineer"}
-                variant={"bg-dropdown"}
-              />
-            </Box>
+            {tabIndex == 2 ? null : (
+              <Box
+                display={{ md: "block", base: "none" }}
+                position={"absolute"}
+                right={"12px"}
+                bottom={"0px"}
+              >
+                <DropDown
+                  defaultDropdown
+                  icon={<Image src={blue_arrow_down.src} />}
+                  placeholder={"Systems Engineer"}
+                  variant={"bg-dropdown"}
+                />
+              </Box>
+            )}
           </TabList>
         </Box>
 

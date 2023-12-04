@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 
 const addEmployee = async (req, res) => {
-  const data = JSON.parse( req.body);
+  const data = req.body;
 
   try {
     const employeeCreated = await prisma.Employee.create({
@@ -19,7 +19,7 @@ const addEmployee = async (req, res) => {
     });
 
     res.status(201).json({
-      message: "Company Created successfully",
+      message: "Employee Created successfully",
       data: employeeCreated,
       success: true,
     });
@@ -68,6 +68,39 @@ const DeleteAllEmployees = async (req, res) => {
   }
 };
 
+const updateObjectById = async (req, res) => {
+  const { employeeId, objectId, arrayName, updatedData } = req.body;
+  try {
+    const updatedEmployee = await prisma.Employee.update({
+      where: { id: employeeId },
+      data: {
+        [arrayName]: {
+          updateMany: {
+            where: { id: objectId },
+            data: updatedData,
+          },
+        },
+      },
+      include: {
+        [arrayName]: true,
+      },
+    });
+
+    res.status(200).json({
+      data: updatedEmployee,
+      message: "Employees update successfully",
+      success: true,
+    });
+  } catch (err) {
+    console.log("err",err)
+    res.status(500).json({
+      message: "internal server error",
+      error: err,
+      success: false,
+    });
+  }
+};
+
 export default async function handler(req, res) {
   switch (req.method) {
     case "GET": {
@@ -79,6 +112,9 @@ export default async function handler(req, res) {
 
     case "POST": {
       return addEmployee(req, res);
+    }
+    case "PUT": {
+      return updateObjectById(req, res);
     }
   }
 }

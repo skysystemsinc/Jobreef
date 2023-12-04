@@ -20,7 +20,7 @@ import { roles } from "@/Utils/role";
 import EditProifle from "../EditProifle/EditProifle";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import { useSelector } from "react-redux";
-import { post, put } from "@/helper/fetch";
+import {  put } from "@/helper/fetch";
 import Loader from "../Loader/Loader";
 import endPoints from "@/Utils/endpoints";
 const Preferences = () => {

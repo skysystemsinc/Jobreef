@@ -56,7 +56,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
     loading: false,
   });
   const { nextStep, prevStep, reset, activeStep } = useSteps({
-    initialStep: 1,
+    initialStep: 0,
   });
 
   const hasCompletedAllSteps = activeStep == steps.length;

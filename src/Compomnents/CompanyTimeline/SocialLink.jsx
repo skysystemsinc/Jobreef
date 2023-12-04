@@ -68,7 +68,7 @@ const SocialLink = ({ nextStep, handlePrevious }) => {
   };
 
   const handleLinkChange = (event, index) => {
-    console.log("event",event);
+    console.log("event", event);
     let updatedLinks = [...companyState.socialLinks];
     updatedLinks[index] = { ...updatedLinks[index], link: event.target.value };
     dispatch(addCompany({ ...companyState, socialLinks: updatedLinks }));
@@ -112,6 +112,14 @@ const SocialLink = ({ nextStep, handlePrevious }) => {
         webUrl: companyState.webLink,
         companyLogo: companyState.logo,
         socialLinks: companyState.socialLinks,
+        location: [
+          {
+            country: companyState.country,
+            province: companyState.province,
+            city: companyState.city,
+            address: companyState.address,
+          },
+        ],
       };
       const postData = await httpRequest(
         `${BACKEND_URL}${endPoints.company}`,
@@ -149,14 +157,14 @@ const SocialLink = ({ nextStep, handlePrevious }) => {
     const id = isAuthenticated.userId;
     const body = {
       role: role,
-      location: [
-        {
-          country: companyState.country,
-          province: companyState.province,
-          city: companyState.city,
-          address: companyState.address,
-        },
-      ],
+      // location: [
+      //   {
+      //     country: companyState.country,
+      //     province: companyState.province,
+      //     city: companyState.city,
+      //     address: companyState.address,
+      //   },
+      // ],
       ["companyId"]: companyId,
     };
     try {

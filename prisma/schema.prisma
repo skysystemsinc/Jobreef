@@ -59,8 +59,8 @@ model User {
 }
 
 model Company {
-  id              String        @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt       DateTime      @default(now())
+  id              String         @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt       DateTime       @default(now())
   user            User[]
   companyName     String
   industry        String?
@@ -72,13 +72,13 @@ model Company {
   telePhone       String?
   companyLogo     String?
   socialLinks     SocialLinks[]
+  location         LocationType[]
 }
 
 model Employee {
   createdAt      DateTime         @default(now())
   id             String           @id @default(auto()) @map("_id") @db.ObjectId
   user           User?
-  phoneNumber    Int
   summary        String
   workExperience WorkExperience[]
   education      Education[]

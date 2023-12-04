@@ -27,7 +27,7 @@ const DeleteEmployee = async (req, res) => {
   }
 };
 const UpdateEmployee = async (req, res) => {
-  const data = { ...JSON.parse(req.body) };
+  const data =  req.body ;
   
   try {
     const employee = await prisma.Employee.update({
@@ -52,7 +52,7 @@ const UpdateEmployee = async (req, res) => {
     console.log("error", err);
     res.status(500).json({
       error: err,
-      message: `Server Error`,
+      message: `internal server  error`,
       success: false,
     });
   }

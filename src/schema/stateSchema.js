@@ -15,7 +15,7 @@ let company = {
   noOfEmployees: "",
   yearEstablished: "",
   webUrl: "",
-  telePhone:"",
+  telePhone: "",
   description: "",
   country: "",
   province: "",
@@ -40,7 +40,21 @@ const employee = {
   number: "",
   description: "",
 
-  workExperience:[],
-  id:null
+  workExperience: [],
+  id: null,
 };
-export { registration, company ,employee};
+const workExperience = {
+  country: "",
+  state: "",
+  city: "",
+  streetAddress: "",
+  companyName: "",
+  designation: "",
+  startDate: null,
+  endDate: null,
+  currentlyWorking: false,
+  employeeType: "",
+  jobFamily: "",
+  jobSummary: "",
+};
+export { registration, company, employee ,workExperience};

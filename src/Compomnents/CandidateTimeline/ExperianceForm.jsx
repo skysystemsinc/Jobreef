@@ -8,6 +8,7 @@ import {
   Heading,
   Image,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import profile from "@/assets/Images/profile.svg";
@@ -21,26 +22,31 @@ import CheckBox from "../CheckBox/CheckBox";
 import { httpRequest } from "@/helper/httpRrequest";
 import { BACKEND_URL } from "@/Utils/urls";
 import endPoints from "@/Utils/endpoints";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
+import { post, put } from "@/helper/fetch";
+import { addEmployee } from "@/Reudx/slices/employee";
+import Loader from "../Loader/Loader";
+import { workExperience } from "@/schema/stateSchema";
+import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 const ExperianceForm = ({ state, setState }) => {
+  const toast = useToast();
+  const dispatch = useDispatch();
   const [readOnly, setReadOnly] = useState(false);
-  const employeeState = useSelector((state) => state.employeeRegister.value);
+  const [loading, setLoading] = useState(false);
+  const formData = useSelector(
+    (state) => state.employeeRegister.value.formData
+  );
 
-  const [Experience, setExperience] = useState({
-    country: "",
-    state: "",
-    city: "",
-    streetAddress: "",
-    companyName: "",
-    designation: "",
-    startDate: null,
-    endDate: null,
-    currentlyWorking: false,
-    employeeType: "",
-    jobFamily: "",
-    jobSummary: "",
-  });
+  const employeeState = useSelector(
+    (state) => state.employeeRegister.value.employee
+  );
+  const employeeFormData = useSelector(
+    (state) => state.employeeRegister.value.formData
+  );
+
+  const [Experience, setExperience] = useState(workExperience);
+  console.log("Experience", Experience);
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -59,12 +65,27 @@ const ExperianceForm = ({ state, setState }) => {
   };
 
   const handleSave = async () => {
+    //TODO add validation of date
+    if (loading) return;
+    const isValid = Object.values(Experience).some((value) => value === "");
+    console.log("isValid", isValid);
+    if (isValid) {
+      toast({
+        position: "bottom-right",
+        title: " required fields are empty",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+      return;
+    }
+    setLoading(true);
     const id = uuidv4();
     const body = {
       workExperience: [
+        ...employeeState.workExperience,
         {
           id: id,
-          // ...Experience,
           companyName: Experience.companyName,
           designation: Experience.designation,
           startDate: Experience.startDate,
@@ -82,13 +103,127 @@ const ExperianceForm = ({ state, setState }) => {
         },
       ],
     };
-    const postData = await httpRequest(
-      `${BACKEND_URL}${endPoints.employee}/${employeeState.id}`,
-      "PUT",
-      body
-    );
-    console.log("postData", postData);
+
+    try {
+      const postData = await put(
+        `${endPoints.employee}/${employeeState.id}`,
+        body
+      );
+      if (postData.success) {
+        setLoading(false);
+        setState((prev) => {
+          return { ...prev, addExperience: false };
+        });
+
+        dispatch(
+          addEmployee({
+            ...employeeState,
+            workExperience: postData.data.workExperience,
+          })
+        );
+      }
+      toast({
+        position: "bottom-right",
+        title: postData.message,
+        status: postData.success ? "success" : "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    } catch (err) {
+      setLoading(false);
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
   };
+  const handleUpdate = async () => {
+    //TODO add validation of date
+    if (loading) return;
+    const isValid = Object.values(Experience).some((value) => value === "");
+    console.log("isValid", isValid);
+    if (isValid) {
+      toast({
+        position: "bottom-right",
+        title: " required fields are empty",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+      return;
+    }
+    setLoading(true);
+
+    const body = {
+      employeeId: employeeState.id,
+      objectId: Experience.id,
+      arrayName: "workExperience",
+      updatedData: {
+        id: Experience.id,
+        companyName: Experience.companyName,
+        designation: Experience.designation,
+        startDate: Experience.startDate,
+        endDate: Experience.endDate,
+        currentlyWorking: Experience.currentlyWorking,
+        employeeType: Experience.employeeType,
+        jobFamily: Experience.jobFamily,
+        jobSummary: Experience.jobSummary,
+        location: {
+          country: Experience.country,
+          province: Experience.state,
+          city: Experience.city,
+          address: Experience.streetAddress,
+        },
+      },
+    };
+
+    try {
+      const postData = await put(`${endPoints.employee}`, body);
+      if (postData.success) {
+        setLoading(false);
+        setState((prev) => {
+          return { ...prev, edit: false };
+        });
+
+        dispatch(
+          addEmployee({
+            ...employeeState,
+            workExperience: postData.data.workExperience,
+          })
+        );
+      }
+      toast({
+        position: "bottom-right",
+        title: postData.message,
+        status: postData.success ? "success" : "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    } catch (err) {
+      setLoading(false);
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
+  };
+  const handleCancel = () => {
+    setState((prev) => {
+      return { ...prev, addExperience: false, edit: false };
+    });
+  };
+
+  useSkipInitialEffect(() => {
+    if (formData) {
+      setExperience({ ...formData, ...formData.location });
+    }
+  }, [formData]);
   return (
     <Box mt={{ md: "13px" }} width={"100%"}>
       <Box mt={"0px"}>
@@ -100,7 +235,7 @@ const ExperianceForm = ({ state, setState }) => {
             labelVariant={"label"}
             type="text"
             variant={"bg-input"}
-            placeholder="Enter the name of place of your employement"
+            placeholder="Enter the name of place of your employment"
             label={"Company Name"}
           />
           <LabelInput
@@ -187,11 +322,8 @@ const ExperianceForm = ({ state, setState }) => {
         <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
           <LabelInput
             state={Experience.country}
-            setState={(e) => {
-              setExperience((prev) => {
-                return { ...prev, country: e.target.value };
-              });
-            }}
+            setState={handleChange}
+            name={"country"}
             labelVariant={"label"}
             type="date"
             variant={"bg-input"}
@@ -201,11 +333,8 @@ const ExperianceForm = ({ state, setState }) => {
           />
           <LabelInput
             state={Experience.state}
-            setState={(e) => {
-              setExperience((prev) => {
-                return { ...prev, state: e.target.value };
-              });
-            }}
+            setState={handleChange}
+            name={"state"}
             labelVariant={"label"}
             type="date"
             dropdown
@@ -217,11 +346,8 @@ const ExperianceForm = ({ state, setState }) => {
         <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
           <LabelInput
             state={Experience.city}
-            setState={(e) => {
-              setExperience((prev) => {
-                return { ...prev, city: e.target.value };
-              });
-            }}
+            setState={handleChange}
+            name={"city"}
             labelVariant={"label"}
             type="text"
             variant={"bg-input"}
@@ -230,11 +356,8 @@ const ExperianceForm = ({ state, setState }) => {
           />
           <LabelInput
             state={Experience.streetAddress}
-            setState={(e) => {
-              setExperience((prev) => {
-                return { ...prev, streetAddress: e.target.value };
-              });
-            }}
+            setState={handleChange}
+            name={"streetAddress"}
             labelVariant={"label"}
             type="text"
             variant={"bg-input"}
@@ -251,21 +374,15 @@ const ExperianceForm = ({ state, setState }) => {
             dropdown
             label={"Employment Type"}
             state={Experience.employeeType}
-            setState={(e) => {
-              setExperience((prev) => {
-                return { ...prev, employeeType: e.target.value };
-              });
-            }}
+            setState={handleChange}
+            name={"employeeType"}
           />
           <LabelInput
             labelVariant={"label"}
             type="date"
             state={Experience.jobFamily}
-            setState={(e) => {
-              setExperience((prev) => {
-                return { ...prev, jobFamily: e.target.value };
-              });
-            }}
+            setState={handleChange}
+            name={"jobFamily"}
             variant={"bg-input"}
             placeholder="Select the job family"
             dropdown
@@ -278,11 +395,8 @@ const ExperianceForm = ({ state, setState }) => {
             labelVariant={"label"}
             type="text"
             state={Experience.jobSummary}
-            setState={(e) => {
-              setExperience((prev) => {
-                return { ...prev, jobSummary: e.target.value };
-              });
-            }}
+            setState={handleChange}
+            name={"jobSummary"}
             textarea
             variant={"bg-teaxtarea"}
             placeholder="Describe what you did during this job "
@@ -296,29 +410,23 @@ const ExperianceForm = ({ state, setState }) => {
           my={{ md: "56px", base: "20px" }}
           pb={"39px"}
         >
-          <Button
-            onClick={() => {
-              setState((prev) => {
-                return { ...prev, addExperience: false, edit: false };
-              });
-            }}
-            variant="outline-blue"
-          >
+          <Button onClick={handleCancel} variant="outline-blue">
             Cancel
           </Button>
 
           <Button
-            onClick={() => {
-              handleSave();
-              setState((prev) => {
-                return { ...prev, addExperience: false, edit: false };
-              });
-            }}
+            onClick={Experience.id ? handleUpdate : handleSave}
             width={"max-content"}
             px={{ md: "30px", base: "20px" }}
             variant={"blue-btn"}
           >
-            {state.edit ? "Update Experience" : "Save Experience"}
+            {loading ? (
+              <Loader />
+            ) : state.edit ? (
+              "Update Experience"
+            ) : (
+              "Save Experience"
+            )}
           </Button>
         </Box>
       </Box>

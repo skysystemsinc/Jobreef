@@ -13,6 +13,7 @@ import {
   Textarea,
   UnorderedList,
   useMediaQuery,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import LabelInput from "../LabelInput/LabelInput";
@@ -26,107 +27,153 @@ import white_edit from "@/assets/Images/white-edit.svg";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
+import Loader from "../Loader/Loader";
+import { put } from "@/helper/fetch";
+import endPoints from "@/Utils/endpoints";
 
 const SocialLink = () => {
   const [isSmallerThe500] = useMediaQuery("(max-width: 787px)");
-
-  const companyProfile = useSelector((state) => state.companyProfile.value);
-
-  const [State, setState] = useState({
-    links: [
-      {
-        platform: "",
-        link: "",
-      },
-    ],
+  const companyState = useSelector((state) => state.companyRegister.value);
+const toast = useToast()
+  const [state, setState] = useState({
+    isEdit: false,
+    readOnly: true,
   });
+  const [formData, setFormData] = useState(companyState);
+  console.log("formData", formData);
 
-  const [isEdit, setisEdit] = useState(false);
-  const [readOnly, setreadOnly] = useState(true);
-  const handleDelete = (index) => {
-    const updatedLinks = [...State.links];
-    updatedLinks.splice(index, 1);
-
+  const handleCancel = () => {
     setState((prev) => {
       return {
         ...prev,
-        links: updatedLinks,
+        isEdit: false,
+        readOnly: true,
       };
     });
   };
   const handleEdit = () => {
-    setreadOnly(false);
-    setisEdit(true);
-  };
-  const handleSave = async () => {
-    const response = await axios("/api/company/companyProfile", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: { ...State },
-    });
-    setreadOnly(true);
-    setisEdit(false);
-  };
-  const handleCancel = () => {
-    setreadOnly(true);
-    setisEdit(false);
-  };
-
-  const handlePlatformChange = (event, index) => {
-    let updatedLinks = [...State.links];
-    updatedLinks[index].platform = event.target.value;
     setState((prev) => {
       return {
         ...prev,
-        links: updatedLinks,
+        isEdit: true,
+        readOnly: false,
+      };
+    });
+  };
+  const handleSave = async () => {
+    if (state.loading) return;
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: true,
+      };
+    });
+    const body = {
+      socialLinks:formData.socialLinks
+    };
+    delete body.id;
+    try {
+      const postData = await put(
+        `${endPoints.company}/${companyState.id}`,
+
+        body
+      );
+      if (postData.success) {
+        setState((prev) => {
+          return {
+            ...prev,
+            loading: false,
+            readOnly: true,
+            isEdit: false,
+          };
+        });
+      }
+      toast({
+        position: "bottom-right",
+        title: postData.message,
+        status: postData.success ? "success" : "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    } catch (error) {
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+          isEdit: false,
+          readOnly: true,
+        };
+      });
+    }
+  };
+  const handleDelete = (index) => {
+    const updatedLinks = [...formData.socialLinks];
+    updatedLinks.splice(index, 1);
+
+    setFormData((prev) => {
+      return {
+        ...prev,
+        socialLinks: updatedLinks,
+      };
+    });
+  };
+  const handlePlatformChange = (event, index) => {
+    let updatedLinks = [...formData.socialLinks];
+    updatedLinks[index] = {
+      ...updatedLinks[index],
+      platform: event.target.value,
+    };
+    setFormData((prev) => {
+      return {
+        ...prev,
+        socialLinks: updatedLinks,
       };
     });
   };
 
   const handleLinkChange = (event, index) => {
-    let updatedLinks = [...State.links];
-    updatedLinks[index].link = event.target.value;
-    setState((prev) => {
+    let updatedLinks = [...formData.socialLinks];
+    updatedLinks[index] = { ...updatedLinks[index], link: event.target.value };
+
+    setFormData((prev) => {
       return {
         ...prev,
-        links: updatedLinks,
+        socialLinks: updatedLinks,
       };
     });
   };
 
-  const handleaddMore = () => {
-    const updatedLinks = [...State.links];
+  const handleAddMore = () => {
+    const updatedLinks = [...formData.socialLinks];
     updatedLinks.push({ platform: "", link: "" });
-    setState((prev) => {
+    setFormData((prev) => {
       return {
         ...prev,
-        links: updatedLinks,
+        socialLinks: updatedLinks,
       };
     });
     // setFormData(updatedFormData);
   };
   useSkipInitialEffect(() => {
-    setState({
-      links: companyProfile.links,
-    });
-  }, [companyProfile]);
+    if (companyState) {
+      setFormData(companyState);
+    }
+  }, [companyState]);
 
   return (
     <Box minH={"55vh"} mt={{ md: "50px", base: "10px" }}>
-      {State?.links?.map((item, index) => {
+      {formData?.socialLinks?.map((item, index) => {
         return (
           <InputWrapper key={index} gap={"15px"}>
             <LabelInput
               state={item.platform}
               setState={(e) => handlePlatformChange(e, index)}
-              readOnly={readOnly}
+              readOnly={state.readOnly}
               labelVariant={"label"}
               type="text"
               variant={"bg-input"}
               placeholder="Select Platform"
-              dropdown={readOnly ? false : true}
+              dropdown={state.readOnly ? false : true}
               label={"Social Links"}
             />
             {/* <LabelInput
@@ -154,12 +201,12 @@ const SocialLink = () => {
                   labelVariant={"label"}
                   type="text"
                   variant={"bg-input"}
-                  readOnly={readOnly}
+                  readOnly={state.readOnly}
                   placeholder="Paste link to company social network page"
                   label={"Link"}
                 />
               )}
-              {isEdit ? (
+              {state.isEdit ? (
                 <Box
                   sx={{
                     cursor: "pointer",
@@ -185,13 +232,13 @@ const SocialLink = () => {
         );
       })}
 
-      {isEdit ? (
-        <Button onClick={handleaddMore} variant={"blue-btn"}>
+      {state.isEdit ? (
+        <Button onClick={handleAddMore} variant={"blue-btn"}>
           Add More
         </Button>
       ) : null}
 
-      {isEdit ? (
+      {state.isEdit ? (
         <Flex
           gap={"20px"}
           mt={{ md: "122px", base: "60px" }}
@@ -202,7 +249,7 @@ const SocialLink = () => {
             Cancel
           </Button>
           <Button onClick={handleSave} variant={"blue-btn"}>
-            Save
+            { state.loading? <Loader/>:"Save"}
           </Button>
         </Flex>
       ) : (

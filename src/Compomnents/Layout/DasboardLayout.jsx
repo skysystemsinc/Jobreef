@@ -12,9 +12,9 @@ const DasboardLayout = ({ disableWaveImage, children }) => {
       {disableWaveImage ? null : <BottomWaveImage />}
       <SideBar />
       <Box
-        position={"relative"}
-        top={"0px"}
-        zIndex={2}
+        // position={"relative"}
+        // top={"0px"}
+        // zIndex={2}
         ml={{ xl: "250px", base: "55px" }}
         mt={"40px"}
         minH={"87vh"}

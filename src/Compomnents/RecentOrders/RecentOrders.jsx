@@ -42,9 +42,9 @@ const RecentOrders = () => {
 
   return (
     <PaginatedTable
-    showExteraHeader
-      trStyle={{ position: "relative !important", top: "-41px !important" }}
-      
+      showExtraHeader
+      //   trStyle={{ position: "relative !important", top: "-41px !important" }}
+
       keys={keys}
       totalPages={totalPages}
       pageSize={pageSize}

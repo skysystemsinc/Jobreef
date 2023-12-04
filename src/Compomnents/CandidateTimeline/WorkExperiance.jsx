@@ -5,18 +5,18 @@ import TextCard from "../TextCard/TextCard";
 import ExperianceForm from "./ExperianceForm";
 import ExperianceCard from "../ExperianceCard/ExperianceCard";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setExperienceForm, setFormData } from "@/Reudx/slices/employee";
 
-const WorkExperiance = ({ prevStep, nextStep}) => {
-  console.log("prevStep",prevStep)
-  const router = useRouter();
-  const employeeState = useSelector((state) => state.employeeRegister.value);
-
+const WorkExperiance = ({ prevStep, nextStep }) => {
+  const dispatch = useDispatch();
+  const employeeState = useSelector(
+    (state) => state.employeeRegister.value.employee
+  );
 
   const [state, setState] = useState({
     edit: false,
     delete: false,
-    loading: false,
   });
   const experienceData = [
     {
@@ -52,6 +52,15 @@ const WorkExperiance = ({ prevStep, nextStep}) => {
         "Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability. Requirements Analysis: Collaborate with stakeholders, customers, and cross-functional teams to gather and analyze system requirements,",
     },
   ];
+  const handleEditSingleExp = (data) => {
+    setState((prev) => {
+      return {
+        ...prev,
+        edit: true,
+      };
+    });
+    dispatch(setExperienceForm(data));
+  };
   return (
     <Box>
       {state.addExperience || state.edit ? (
@@ -63,7 +72,12 @@ const WorkExperiance = ({ prevStep, nextStep}) => {
           {employeeState?.workExperience.map((item, ind) => {
             return (
               <Box key={ind}>
-                <ExperianceCard data={item} state={state} setState={setState} />
+                <ExperianceCard
+                  handleEdit={() => handleEditSingleExp(item)}
+                  data={item}
+                  state={state}
+                  setState={setState}
+                />
               </Box>
             );
           })}
@@ -71,7 +85,6 @@ const WorkExperiance = ({ prevStep, nextStep}) => {
           <Flex justifyContent={"center"}>
             <Button
               onClick={() => {
-                // setaddExperiance(true);
                 setState((prev) => {
                   return { ...prev, addExperience: true };
                 });
@@ -93,14 +106,11 @@ const WorkExperiance = ({ prevStep, nextStep}) => {
             gap={4}
           >
             <>
-              <Button
-                onClick={()=>{ console.log("runnnn"), prevStep()}}
-                variant="outline-blue"
-              >
+              <Button onClick={prevStep} variant="outline-blue">
                 {" Back"}
               </Button>
               <Button onClick={nextStep} variant={"blue-btn"}>
-                {state.loading ? <Loader /> : "Next"}
+                Next
               </Button>
             </>
           </Flex>
