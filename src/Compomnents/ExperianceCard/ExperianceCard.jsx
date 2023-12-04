@@ -71,7 +71,7 @@ const ExperianceCard = ({ handleEdit, data, state, setState }) => {
               >
                 {" "}
                 <HiLocationMarker style={{ color: "#4A4A4A" }} />{" "}
-                {data.location.country}
+                {data?.location?.country}
               </Heading>
             </Box>
           </Box>
