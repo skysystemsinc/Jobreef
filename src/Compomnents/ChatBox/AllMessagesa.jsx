@@ -11,18 +11,22 @@ const AllMessages = () => {
 
   return (
     <Box
-    // mt={"px"}
+      // mt={"px"}
       mb={"20px"}
       sx={globalStyles.scrollBar}
       height={"350px"}
+      mt={"5px"}
       position={"relative"}
       // border={"1px solid red"}
     >
-      <Box 
-      overflowY={"scroll"}
-      sx={globalStyles.scrollBar}
-
-       maxHeight={"350px"} position={"absolute"} width={"100%"} bottom={"0px"}>
+      <Box
+        overflowY={"scroll"}
+        sx={globalStyles.scrollBar}
+        maxHeight={"350px"}
+        position={"absolute"}
+        width={"100%"}
+        bottom={"0px"}
+      >
         {activeConversation.messages?.map((item) => {
           if (item.sender) {
             return (

@@ -81,7 +81,7 @@ export default function Header({ notLogin, candidate }) {
         minH={"60px"}
         py={{ md: 3, base: 0 }}
         // pb={{ base: 4, "2xl": 7 }}
-        px={{ "2xl": 8, base: 1 }}
+        px={{ "2xl": 8, md: 4, base: 2 }}
         // position={"relative"}
         // top={"0px"}
 

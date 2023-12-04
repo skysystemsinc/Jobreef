@@ -40,13 +40,25 @@ const JobSearchData = ({ setIsOpen }) => {
           display={{ lg: "flex", base: "none" }}
           mt={"0px"}
           alignItems="center" // Center the items vertically
-          gap={'10px'}
+          gap={"10px"}
         >
-          <InputGroup  borderRadius={"7px"} border={'1px solid lightgray'} display={"flex"} justifyContent={"center"} alignItems={"center"} px={"10px"}>
+          <InputGroup
+            bg={"blue.200"}
+            borderRadius={"7px"}
+            border={"1px solid lightgray"}
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            px={"10px"}
+          >
             <InputLeftElement
               pointerEvents="none"
-              children={<Heading variant={"p7"} fontWeight={700} color={"gray.text"}>What</Heading>}
-              mx={'10px'}
+              children={
+                <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
+                  What
+                </Heading>
+              }
+              mx={"10px"}
             />
             <Input
               ml={"10px"}
@@ -58,7 +70,6 @@ const JobSearchData = ({ setIsOpen }) => {
               borderRadius={"7px"}
               // bg={"gray.200"}
               bg={"transparent"}
-
               marginRight="2"
               onChange={(e) => setHandleCompanyEntry(e.target.value)}
             />
@@ -68,16 +79,27 @@ const JobSearchData = ({ setIsOpen }) => {
             />
           </InputGroup>
 
-          <InputGroup  borderRadius={"7px"} border={'1px solid lightgray'} display={"flex"} justifyContent={"center"} alignItems={"center"} px={"10px"}>
+          <InputGroup
+            bg={"blue.200"}
+            borderRadius={"7px"}
+            border={"1px solid lightgray"}
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            px={"10px"}
+          >
             <InputLeftElement
               pointerEvents="none"
-              children={<Heading variant={"p7"} fontWeight={700} color={"gray.text"}>Where</Heading>}
-              mx={'10px'}
+              children={
+                <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
+                  Where
+                </Heading>
+              }
+              mx={"10px"}
             />
             <Input
               ml={"15px"}
               borderRadius={"7px"}
-
               variant="bg-input"
               // color={"black"}
               bg={"transparent"}
@@ -88,14 +110,14 @@ const JobSearchData = ({ setIsOpen }) => {
               // bg={"gray.200"}
               onChange={(e) => setHandleLocationEntry(e.target.value)}
             />
-             <InputRightElement
-                pointerEvents="none"
-                children={
-                  <Image
-                    width={{ md: "20px", base: "20px" }}
-                    src={location.src}
-                  />
-                }
+            <InputRightElement
+              pointerEvents="none"
+              children={
+                <Image
+                  width={{ md: "20px", base: "20px" }}
+                  src={location.src}
+                />
+              }
             />
           </InputGroup>
 
@@ -117,12 +139,23 @@ const JobSearchData = ({ setIsOpen }) => {
           rowGap={1}
           mb={"20px"}
         >
-          
-          <InputGroup border={'1px solid lightgray'} display={"flex"} justifyContent={"center"} alignItems={"center"} px={"10px"}>
+          <InputGroup
+            bg={"blue.200"}
+            borderRadius={"6px"}
+            border={"1px solid lightgray"}
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            px={"10px"}
+          >
             <InputLeftElement
               pointerEvents="none"
-              children={<Heading variant={"p7"} fontWeight={700} color={"gray.text"}>What</Heading>}
-              mx={'10px'}
+              children={
+                <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
+                  What
+                </Heading>
+              }
+              mx={"10px"}
             />
             <Input
               ml={"10px"}
@@ -140,11 +173,23 @@ const JobSearchData = ({ setIsOpen }) => {
               children={<FiSearch color="black" />}
             />
           </InputGroup>
-          <InputGroup border={'1px solid lightgray'} display={"flex"} justifyContent={"center"} alignItems={"center"} px={"10px"}>
+          <InputGroup
+            bg={"blue.200"}
+            borderRadius={"6px"}
+            border={"1px solid lightgray"}
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            px={"10px"}
+          >
             <InputLeftElement
               pointerEvents="none"
-              children={<Heading variant={"p7"} fontWeight={700} color={"gray.text"}>Where</Heading>}
-              mx={'10px'}
+              children={
+                <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
+                  Where
+                </Heading>
+              }
+              mx={"10px"}
             />
             <Input
               ml={"15px"}
@@ -157,19 +202,18 @@ const JobSearchData = ({ setIsOpen }) => {
               bg={"gray.200"}
               onChange={(e) => setHandleLocationEntry(e.target.value)}
             />
-             <InputRightElement
-                pointerEvents="none"
-                children={
-                  <Image
-                    width={{ md: "20px", base: "20px" }}
-                    src={location.src}
-                  />
-                }
+            <InputRightElement
+              pointerEvents="none"
+              children={
+                <Image
+                  width={{ md: "20px", base: "20px" }}
+                  src={location.src}
+                />
+              }
             />
           </InputGroup>
 
-          
-          <Flex justifyContent="space-between" alignItems="center" mt={'20px'}>
+          <Flex justifyContent="space-between" alignItems="center" mt={"20px"}>
             <Button
               onClick={searchNow}
               sx={{ padding: "20px 40px" }}
@@ -179,7 +223,6 @@ const JobSearchData = ({ setIsOpen }) => {
             >
               Search Now
             </Button>
-         
           </Flex>
         </Box>
       </Box>

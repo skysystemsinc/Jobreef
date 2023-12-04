@@ -133,7 +133,7 @@ const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
             <Box
               display={"flex"}
               alignItems={"center"}
-              justifyContent={"flex-start"}
+              justifyContent={"flex-end"}
               gap={"10px"}
               position={"relative"}
             >
@@ -162,7 +162,7 @@ const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
 
               <Box display={{ xl: "block", base: "none" }}>
                 <HiOutlineChevronDown
-                  style={{ position: "absolute", right: "0px", top: "6px" }}
+                  style={{ position: "absolute", right: "8px", top: "3px" }}
                   color="black.100"
                   // fontSize={{ "2xl": "27px", base: "240px" }}
                   fontSize={"17px"}
