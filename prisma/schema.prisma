@@ -17,6 +17,11 @@ type LocationType {
   address  String?
 }
 
+type CertificateMedia {
+  name String
+  url  String
+}
+
 model Location {
   id       String  @id @default(auto()) @map("_id") @db.ObjectId
   user     User?   @relation(fields: [userId], references: [id])
@@ -72,7 +77,7 @@ model Company {
   telePhone       String?
   companyLogo     String?
   socialLinks     SocialLinks[]
-  location         LocationType[]
+  location        LocationType[]
 }
 
 model Employee {
@@ -84,16 +89,17 @@ model Employee {
   education      Education[]
   certification  Certification[]
   skills         Skills[]
-  achievement    Achievement
-  attachment     Attachment
-  // user  User?
+  achievement    Achievement[]
+  attachment     Attachment[]
 }
 
-type WorkExperience {
+model WorkExperience {
+  id               String       @id @default(auto()) @map("_id") @db.ObjectId
+  employee         Employee?    @relation(fields: [employeeId], references: [id])
+  employeeId       String?      @db.ObjectId
   companyName      String
   designation      String
   currentlyWorking Boolean?
-  id               String
   location         LocationType
   employeeType     String
   jobFamily        String
@@ -103,8 +109,11 @@ type WorkExperience {
   createdAt        DateTime     @default(now())
 }
 
-type Education {
-  name              String
+model Education {
+  id                String       @id @default(auto()) @map("_id") @db.ObjectId
+  employee          Employee?    @relation(fields: [employeeId], references: [id])
+  employeeId        String?      @db.ObjectId
+  schoolName        String
   diploma           String
   currentlyEnrolled Boolean?
   location          LocationType
@@ -115,28 +124,40 @@ type Education {
   createdAt         DateTime     @default(now())
 }
 
-type Certification {
-  name             String
-  organization     String
+model Certification {
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  employee         Employee? @relation(fields: [employeeId], references: [id])
+  employeeId       String?   @db.ObjectId
+  certificateName  String
+  organizationName String
   certificateId    String
   createdAt        DateTime  @default(now())
   issuedOn         DateTime  @default(now())
   validUntil       DateTime? @default(now())
   noExpiry         Boolean?
-  certificateMedia String[]
+  certificateMedia CertificateMedia[]
 }
 
-type Skills {
-  name  String
-  level String
+model Skills {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  employee   Employee? @relation(fields: [employeeId], references: [id])
+  employeeId String?   @db.ObjectId
+  name       String
+  level      String
 }
 
-type Achievement {
+model Achievement {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  employee   Employee? @relation(fields: [employeeId], references: [id])
+  employeeId String?   @db.ObjectId
   resume     String[]
   additional String[]
 }
 
-type Attachment {
+model Attachment {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  employee   Employee? @relation(fields: [employeeId], references: [id])
+  employeeId String?   @db.ObjectId
   resume     String[]
   additional String[]
 }

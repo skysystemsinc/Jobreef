@@ -33,21 +33,23 @@ let company = {
   ],
 };
 const employee = {
+
   country: "",
   state: "",
   province: "",
   city: "",
   number: "",
   description: "",
-
   workExperience: [],
-  id: null,
+  education: [],
+  certification: [],
+  id: "656edc22abdf31d7cc472968",
 };
 const workExperience = {
   country: "",
-  state: "",
+  province: "",
   city: "",
-  streetAddress: "",
+  address: "",
   companyName: "",
   designation: "",
   startDate: null,
@@ -57,4 +59,26 @@ const workExperience = {
   jobFamily: "",
   jobSummary: "",
 };
-export { registration, company, employee ,workExperience};
+const education = {
+  schoolName: "",
+  diploma: "",
+  currentlyEnrolled:false,
+  startDate: null,
+  endDate: null,
+  country: "",
+  province: "",
+  city: "",
+  address: "",
+  gpa: "",
+  description: "",
+};
+const certification = {
+  certificateName: "",
+  organizationName: "",
+  certificateId: "",
+  issuedOn: null,
+  noExpiry:false,
+  validUntil: null,
+  certificateMedia:[]
+};
+export { certification, registration, company,education, employee, workExperience };

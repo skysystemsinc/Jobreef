@@ -3,7 +3,7 @@ import { Checkbox, Heading } from "@chakra-ui/react";
 import React from "react";
 
 const CheckBox = ({ defaultCheck, selectSate, label, handleEvent }) => {
-  console.log("selectSate", selectSate);
+  
   return (
     <Checkbox
       display={"flex"}

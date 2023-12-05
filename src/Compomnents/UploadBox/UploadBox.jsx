@@ -26,6 +26,7 @@ const UploadBox = ({
   list,
   style,
 }) => {
+  
   return (
     <Flex justifyContent={"center"}>
       <Box
@@ -73,25 +74,15 @@ const UploadBox = ({
         </Box>
         {showSelectedImage ? (
           <Box width="90%" mx={"auto"}>
-            {showSelectedImage?.map((item) => {
+            {showSelectedImage?.map((item , ind) => {
+              
               return (
                 <UploadedCard
-                  fileName={item.pdfFile.name}
+                  fileName={item.name}
                   crossIcon={<RxCross2 />}
                   boxStyle={{ border: "none" }}
-                  handleDelete={handleDelete}
-                  // handleDelete={
-                  //   () => {
-                  //     if (item.resume) {
-                  //       handleDelete(ind, "resume");
-                  //     } else {
-                  //       handleDelete(ind, "additional");
-                  //     }
-                  //   }
-
-                  // }
-
-                  // fileName={"What Ever"}
+                  handleDelete={ ()=> handleDelete(ind)}
+      
                 />
               );
             })}

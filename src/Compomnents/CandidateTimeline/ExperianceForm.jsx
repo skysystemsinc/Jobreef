@@ -37,16 +37,11 @@ const ExperianceForm = ({ state, setState }) => {
   const formData = useSelector(
     (state) => state.employeeRegister.value.formData
   );
-
   const employeeState = useSelector(
     (state) => state.employeeRegister.value.employee
   );
-  const employeeFormData = useSelector(
-    (state) => state.employeeRegister.value.formData
-  );
-
   const [Experience, setExperience] = useState(workExperience);
-  console.log("Experience", Experience);
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -69,7 +64,7 @@ const ExperianceForm = ({ state, setState }) => {
     if (loading) return;
     const isValid = Object.values(Experience).some((value) => value === "");
     console.log("isValid", isValid);
-    if (isValid) {
+    if (isValid || Experience.startDate == null) {
       toast({
         position: "bottom-right",
         title: " required fields are empty",
@@ -80,35 +75,27 @@ const ExperianceForm = ({ state, setState }) => {
       return;
     }
     setLoading(true);
-    const id = uuidv4();
+
     const body = {
-      workExperience: [
-        ...employeeState.workExperience,
-        {
-          id: id,
-          companyName: Experience.companyName,
-          designation: Experience.designation,
-          startDate: Experience.startDate,
-          endDate: Experience.endDate,
-          currentlyWorking: Experience.currentlyWorking,
-          employeeType: Experience.employeeType,
-          jobFamily: Experience.jobFamily,
-          jobSummary: Experience.jobSummary,
-          location: {
-            country: Experience.country,
-            province: Experience.state,
-            city: Experience.city,
-            address: Experience.streetAddress,
-          },
-        },
-      ],
+      employeeId: employeeState.id,
+      companyName: Experience.companyName,
+      designation: Experience.designation,
+      startDate: Experience.startDate,
+      endDate: Experience.endDate,
+      currentlyWorking: Experience.currentlyWorking,
+      employeeType: Experience.employeeType,
+      jobFamily: Experience.jobFamily,
+      jobSummary: Experience.jobSummary,
+      location: {
+        country: Experience.country,
+        province: Experience.province,
+        city: Experience.city,
+        address: Experience.address,
+      },
     };
 
     try {
-      const postData = await put(
-        `${endPoints.employee}/${employeeState.id}`,
-        body
-      );
+      const postData = await post(`${endPoints.workExperience}`, body);
       if (postData.success) {
         setLoading(false);
         setState((prev) => {
@@ -118,7 +105,7 @@ const ExperianceForm = ({ state, setState }) => {
         dispatch(
           addEmployee({
             ...employeeState,
-            workExperience: postData.data.workExperience,
+            workExperience: [...employeeState.workExperience, postData.data],
           })
         );
       }
@@ -145,7 +132,7 @@ const ExperianceForm = ({ state, setState }) => {
     if (loading) return;
     const isValid = Object.values(Experience).some((value) => value === "");
     console.log("isValid", isValid);
-    if (isValid) {
+    if (isValid || Experience.startDate == null) {
       toast({
         position: "bottom-right",
         title: " required fields are empty",
@@ -158,30 +145,27 @@ const ExperianceForm = ({ state, setState }) => {
     setLoading(true);
 
     const body = {
-      employeeId: employeeState.id,
-      objectId: Experience.id,
-      arrayName: "workExperience",
-      updatedData: {
-        id: Experience.id,
-        companyName: Experience.companyName,
-        designation: Experience.designation,
-        startDate: Experience.startDate,
-        endDate: Experience.endDate,
-        currentlyWorking: Experience.currentlyWorking,
-        employeeType: Experience.employeeType,
-        jobFamily: Experience.jobFamily,
-        jobSummary: Experience.jobSummary,
-        location: {
-          country: Experience.country,
-          province: Experience.state,
-          city: Experience.city,
-          address: Experience.streetAddress,
-        },
+      companyName: Experience.companyName,
+      designation: Experience.designation,
+      startDate: Experience.startDate,
+      endDate: Experience.endDate,
+      currentlyWorking: Experience.currentlyWorking,
+      employeeType: Experience.employeeType,
+      jobFamily: Experience.jobFamily,
+      jobSummary: Experience.jobSummary,
+      location: {
+        country: Experience.country,
+        province: Experience.province,
+        city: Experience.city,
+        address: Experience.address,
       },
     };
 
     try {
-      const postData = await put(`${endPoints.employee}`, body);
+      const postData = await put(
+        `${endPoints.workExperience}/${Experience.id}`,
+        body
+      );
       if (postData.success) {
         setLoading(false);
         setState((prev) => {
@@ -191,7 +175,9 @@ const ExperianceForm = ({ state, setState }) => {
         dispatch(
           addEmployee({
             ...employeeState,
-            workExperience: postData.data.workExperience,
+            workExperience: employeeState.workExperience.map((item) =>
+              item.id === postData.data.id ? postData.data : item
+            ),
           })
         );
       }
@@ -221,6 +207,7 @@ const ExperianceForm = ({ state, setState }) => {
 
   useSkipInitialEffect(() => {
     if (formData) {
+      formData.currentlyWorking ? setReadOnly(true) : setReadOnly(false);
       setExperience({ ...formData, ...formData.location });
     }
   }, [formData]);
@@ -286,19 +273,6 @@ const ExperianceForm = ({ state, setState }) => {
                   />
                 ) : (
                   <LabelInput
-                    // state={Experience.endDate}
-                    // setState={(e) => {
-                    //   setExperience((prev) => {
-                    //     return {
-                    //       ...prev,
-                    //       endDate: new Date().toLocaleDateString(undefined, {
-                    //         year: "numeric",
-                    //         month: "2-digit",
-                    //         day: "2-digit",
-                    //       }),
-                    //     };
-                    //   });
-                    // }}
                     defaultValue={false}
                     labelVariant={"label"}
                     type="text"
@@ -313,6 +287,7 @@ const ExperianceForm = ({ state, setState }) => {
                 <CheckBox
                   label={"Currently Working Here"}
                   selectSate={Experience.currentlyWorking}
+                  defaultCheck={Experience.currentlyWorking}
                   handleEvent={handleCurrentlyWorking}
                 />
               </Box>
@@ -332,9 +307,9 @@ const ExperianceForm = ({ state, setState }) => {
             label={"Country"}
           />
           <LabelInput
-            state={Experience.state}
+            state={Experience.province}
             setState={handleChange}
-            name={"state"}
+            name={"province"}
             labelVariant={"label"}
             type="date"
             dropdown
@@ -355,9 +330,9 @@ const ExperianceForm = ({ state, setState }) => {
             label={"City"}
           />
           <LabelInput
-            state={Experience.streetAddress}
+            state={Experience.address}
             setState={handleChange}
-            name={"streetAddress"}
+            name={"address"}
             labelVariant={"label"}
             type="text"
             variant={"bg-input"}

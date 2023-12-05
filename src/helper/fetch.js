@@ -41,7 +41,7 @@ export async function post(endpoint, body) {
     } else {
       throw new Error("Request failed");
     }
-    console.log("response",response)
+    console.log("response", response);
   } catch (error) {
     console.error(error);
     throw error;
@@ -54,9 +54,24 @@ export async function put(endpoint, body) {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        
       },
       body: JSON.stringify(body),
+    });
+
+    if (response.ok) {
+      return await response.json();
+    } else {
+      throw new Error("Request failed");
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+export async function deleteApi(endpoint, body) {
+  try {
+    const response = await fetch(BACKEND_URL + endpoint, {
+      method: "DELETE",
     });
 
     if (response.ok) {

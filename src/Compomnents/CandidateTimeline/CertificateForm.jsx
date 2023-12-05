@@ -8,6 +8,7 @@ import {
   Heading,
   Image,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import profile from "@/assets/Images/profile.svg";
@@ -17,16 +18,27 @@ import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
 import UploadBox from "../UploadBox/UploadBox";
 import globalStyles from "@/styles/globalStyles";
+import { certification } from "@/schema/stateSchema";
+import CheckBox from "../CheckBox/CheckBox";
+import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
+import { useDispatch, useSelector } from "react-redux";
+import { post, put } from "@/helper/fetch";
+import endPoints from "@/Utils/endpoints";
+import { addEmployee } from "@/Reudx/slices/employee";
+import Loader from "../Loader/Loader";
 const CertificationForm = ({ state, setState }) => {
-  const [certification, setCertification] = useState({
-    certificateName: "",
-    organizationName: "",
-    certificateId: "",
-    issuedOn: new Date(),
-    validUntil: new Date(),
-  });
   const router = useRouter();
-  console.log("certification", certification)
+  const toast = useToast();
+  const dispatch = useDispatch();
+  const formDataState = useSelector(
+    (state) => state.employeeRegister.value.formData
+  );
+  const employeeState = useSelector(
+    (state) => state.employeeRegister.value.employee
+  );
+  const [formData, setFormData] = useState(certification);
+  console.log("formData", formData);
+  const [loading, setLoading] = useState(false);
 
   const [readOnly, setReadOnly] = useState(false);
 
@@ -35,6 +47,194 @@ const CertificationForm = ({ state, setState }) => {
     "The acceptable formats of the copy are .PDF, .JPEG or .PNG",
     "Uploading of digital copy is not mandatory",
   ];
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+  const handleCurrentlyChecked = (e) => {
+    e.target.checked == true ? setReadOnly(true) : setReadOnly(false);
+    setFormData((prev) => {
+      return { ...prev, noExpiry: e.target.checked };
+    });
+  };
+
+  const handleSave = async () => {
+    //TODO add validation of date
+    if (loading) return;
+    const isValid = Object.values(formData).some((value) => value === "");
+
+    if (isValid || formData.issuedOn === null) {
+      toast({
+        position: "bottom-right",
+        title: " required fields are empty",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+      return;
+    }
+    setLoading(true);
+
+    const body = {
+      ...formData,
+      employeeId: employeeState.id,
+    };
+    try {
+      const postData = await post(`${endPoints.certification}`, body);
+      if (postData.success) {
+        setLoading(false);
+        setState((prev) => {
+          return { ...prev, add: false };
+        });
+
+        dispatch(
+          addEmployee({
+            ...employeeState,
+            certification: [...employeeState.certification, postData.data],
+          })
+        );
+      }
+      toast({
+        position: "bottom-right",
+        title: postData.message,
+        status: postData.success ? "success" : "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    } catch (err) {
+      console.log("err", err);
+      setLoading(false);
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
+  };
+  const handleUpdate = async () => {
+    //TODO add validation of date
+    if (loading) return;
+    const isValid = Object.values(formData).some((value) => value === "");
+    console.log("isValid", isValid);
+    if (isValid || formData.issuedOn === null) {
+      toast({
+        position: "bottom-right",
+        title: " required fields are empty",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+      return;
+    }
+    setLoading(true);
+
+    const body = {
+      certificateName: formData.certificateName,
+      organizationName: formData.organizationName,
+      certificateId: formData.certificateId,
+      issuedOn: formData.issuedOn,
+      noExpiry: formData.noExpiry,
+      validUntil: formData.validUntil,
+      certificateMedia: formData.certificateMedia,
+    };
+
+    try {
+      const postData = await put(
+        `${endPoints.certification}/${formData.id}`,
+        body
+      );
+      if (postData.success) {
+        setLoading(false);
+        setState((prev) => {
+          return { ...prev, edit: false };
+        });
+
+        dispatch(
+          addEmployee({
+            ...employeeState,
+            certification: employeeState.certification.map((item) =>
+              item.id === postData.data.id ? postData.data : item
+            ),
+          })
+        );
+      }
+      toast({
+        position: "bottom-right",
+        title: postData.message,
+        status: postData.success ? "success" : "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    } catch (err) {
+      console.log("err", err);
+      setLoading(false);
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
+  };
+  const handleCancel = () => {
+    setState((prev) => {
+      return { ...prev, addExperience: false, edit: false };
+    });
+  };
+
+  useSkipInitialEffect(() => {
+    if (formDataState) {
+      formDataState.noExpiry ? setReadOnly(true) : setReadOnly(false);
+      setFormData({ ...formDataState });
+    }
+  }, [formDataState]);
+
+  const handleUpload = (event, key, index) => {
+    //  = Array.from(event.target.files);
+    const selectedFile = Array.from(event.target.files).map((file, index) => {
+      return {
+        name: file.name,
+        url: "",
+      };
+      // console.log("file.name", file);
+      // if (file) {
+      //   const reader = new FileReader();
+      //   reader.onload = (e) => {
+      //     mediaArray.push({ name: file.name, url: e.target.result });
+      //   };
+      //   reader.readAsDataURL(file);
+      // }
+    });
+
+    setFormData((prev) => {
+      return {
+        ...prev,
+        certificateMedia: [...formData.certificateMedia, ...selectedFile],
+        // certificateMedia: mediaArray,
+      };
+    });
+  };
+  const handleMediaDelete = (ind) => {
+    const updatedArray = [...formData.certificateMedia];
+    console.log("updatedArray", updatedArray);
+    updatedArray.splice(ind, 1);
+    setFormData((prev) => {
+      return {
+        ...prev,
+        certificateMedia: updatedArray,
+      };
+    });
+  };
   return (
     <Box width={"100%"}>
       {/* <Image src={profile.src} /> */}
@@ -42,12 +242,9 @@ const CertificationForm = ({ state, setState }) => {
       <Box mt={"0px"}>
         <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
           <LabelInput
-            state={certification.certificateName}
-            setState={(e) => {
-              setCertification((prev) => {
-                return { ...prev, certificateName: e.target.value };
-              });
-            }}
+            state={formData.certificateName}
+            setState={handleChange}
+            name={"certificateName"}
             labelVariant={"label"}
             type="text"
             variant={"bg-input"}
@@ -55,12 +252,9 @@ const CertificationForm = ({ state, setState }) => {
             label={"Name of Certificate"}
           />
           <LabelInput
-            state={certification.organizationName}
-            setState={(e) => {
-              setCertification((prev) => {
-                return { ...prev, organizationName: e.target.value };
-              });
-            }}
+            state={formData.organizationName}
+            setState={handleChange}
+            name={"organizationName"}
             labelVariant={"label"}
             type="text"
             variant={"bg-input"}
@@ -72,12 +266,9 @@ const CertificationForm = ({ state, setState }) => {
         <Box border={"1px solid white"}>
           <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
             <LabelInput
-              state={certification.certificateId}
-              setState={(e) => {
-                setCertification((prev) => {
-                  return { ...prev, certificateId: e.target.value };
-                });
-              }}
+              state={formData.certificateId}
+              setState={handleChange}
+              name={"certificateId"}
               labelVariant={"label"}
               type="text"
               variant={"bg-input"}
@@ -86,9 +277,9 @@ const CertificationForm = ({ state, setState }) => {
             />
 
             <LabelInput
-              state={certification.issuedOn}
+              state={formData.issuedOn}
               setState={(e) => {
-                setCertification((prev) => {
+                setFormData((prev) => {
                   return { ...prev, issuedOn: e };
                 });
               }}
@@ -113,9 +304,9 @@ const CertificationForm = ({ state, setState }) => {
         <Box width={{ xl: "48%", base: "100%" }} position={"relative"}>
           <Box>
             <LabelInput
-              state={certification.validUntil}
+              state={formData.validUntil}
               setState={(e) => {
-                setCertification((prev) => {
+                setFormData((prev) => {
                   return { ...prev, validUntil: e };
                 });
               }}
@@ -134,35 +325,25 @@ const CertificationForm = ({ state, setState }) => {
             gap={"10px"}
             alignItems={"center"}
           >
-            <Checkbox
-              // borderRadius={"10px"}
-              // defaultChecked
-              checked={state.currentlyWorking}
-              onChange={(e) => {
-                e.target.checked == true
-                  ? setReadOnly(true)
-                  : setReadOnly(false);
-                setState((prev) => {
-                  return { ...prev, currentlyWorking: e.target.checked };
-                });
-              }}
-              borderColor={"black.200"}
-              size="md"
-              rounded={"base"}
-              colorScheme="blue"
-              sx={globalStyles.checkBoxStyle}
+            <CheckBox
+              label={"This formData has no expiry"}
+              selectSate={formData.noExpiry}
+              defaultCheck={formData.noExpiry}
+              handleEvent={handleCurrentlyChecked}
             />
-            <Heading variant={"p1"} color={"black.100"}>
-              This certification has no expiry
-            </Heading>
           </Box>
         </Box>
 
         <Box mt={{ md: "95px", base: "80px" }}>
           <UploadBox
+            handleEvent={handleUpload}
             btnLabelStyle={{ padding: "0px 10px" }}
-            butLabel={"Drag & Drop"}
+            butLabel={"Upload"}
+            handleDelete={handleMediaDelete}
             list={uploadList}
+            showSelectedImage={formData.certificateMedia}
+            // showSelectedImage={"data"}
+
             titie={"Upload Certificate in Digital Format"}
           />
         </Box>
@@ -174,29 +355,24 @@ const CertificationForm = ({ state, setState }) => {
           mt={{ md: "73px", base: "50px" }}
           pb={"39px"}
         >
-          <Button
-            onClick={() => {
-              setState((prev) => {
-                return { ...prev, addCertificate: false, edit: false };
-              });
-            }}
-            variant="outline-blue"
-          >
+          <Button onClick={handleCancel} variant="outline-blue">
             Cancel
           </Button>
 
           <Button
-            onClick={() => {
-              setState((prev) => {
-                return { ...prev, addCertificate: false, edit: false };
-              });
-            }}
+            onClick={formData.id ? handleUpdate : handleSave}
             // width={{ md: "160px", lg: "200px", sm: "140px", base: "120px" }}
             width={"max-content"}
             px={{ md: "30px", base: "20px" }}
             variant={"blue-btn"}
           >
-            {state.edit ? "Update Certification" : " Save Certification"}
+            {loading ? (
+              <Loader />
+            ) : state.edit ? (
+              "Update Certification"
+            ) : (
+              " Save Certification"
+            )}
           </Button>
         </Box>
       </Box>

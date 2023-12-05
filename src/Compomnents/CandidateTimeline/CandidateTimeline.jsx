@@ -20,13 +20,14 @@ import { Role_context } from "@/context/context";
 import Overview from "./Overview";
 import Password from "../SignUpTimeline/Password";
 import Otp from "../SignUpTimeline/Otp";
-import WorkExperiance from "./WorkExperiance";
+
 import Education from "./Education";
 import Certification from "./Certitfication";
 import Skills from "./Skills";
 import Attachments from "./Attchement";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import TimelineAttachments from "./Attchement";
+import WorkExperience from "./WorkExperience";
 const steps = [
   { label: "Overview" },
   { label: "Work Experience" },
@@ -35,38 +36,18 @@ const steps = [
   { label: "Skills" },
   { label: "Attachments" },
   { label: "Achievement" },
-  // { label: "Achievement2" },
 ];
 
 export const CandidateTimeline = ({ candidate, variant }) => {
-  const [state, setState] = useState({
-    addExperience: true,
-    addEducation: true,
-    addCertificate: true,
-    overview: true,
-    edit: false,
-    delete: false,
-    currentlyWorking: false,
-    country: "",
-    state: "",
-    province: "",
-    city: "",
-    number: "",
-    description: "",
-    loading: false,
-  });
   const { nextStep, prevStep, reset, activeStep } = useSteps({
-    initialStep: 0,
+    initialStep: 3,
   });
 
-  const hasCompletedAllSteps = activeStep == steps.length;
-  const isLastStep = activeStep === steps.length - 1;
   const [compeletedStep, setcompeletedStep] = useState([]);
-  const initialRender = useRef(true);
+  
   useEffect(() => {
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
-
 
   return (
     <Flex
@@ -76,7 +57,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
       width="100%"
       // ml={{lg:20}}
     >
-      <DeleteModal
+      {/* <DeleteModal
         onOpen={() =>
           setState((prev) => {
             return { ...prev, delete: true };
@@ -88,11 +69,10 @@ export const CandidateTimeline = ({ candidate, variant }) => {
             return { ...prev, delete: false };
           })
         }
-      />
+      /> */}
       <Steps
         responsive={false}
-        // sx={stepTyle}
-        // sx={stepTyle}
+
         sx={{
           ...globalStyles.stepperContainter,
           width: {
@@ -199,51 +179,23 @@ export const CandidateTimeline = ({ candidate, variant }) => {
                     prevStep={prevStep}
                   />
                 ) : index == 1 ? (
-                  <WorkExperiance prevStep={prevStep} nextStep={nextStep} />
+                  <WorkExperience prevStep={prevStep} nextStep={nextStep} />
                 ) : index == 2 ? (
-                  <Education />
+                  <Education prevStep={prevStep} nextStep={nextStep} />
                 ) : index == 3 ? (
-                  <Certification />
+                  <Certification  prevStep={prevStep} nextStep={nextStep}/>
                 ) : index == 4 ? (
-                  <Skills />
+                  <Skills prevStep={prevStep} nextStep={nextStep}/>
                 ) : index == 5 ? (
-                  <TimelineAttachments />
+                  <TimelineAttachments prevStep={prevStep} nextStep={nextStep}/>
                 ) : index == 6 ? (
-                  <TimelineAttachments />
+                  <TimelineAttachments prevStep={prevStep} nextStep={nextStep}/>
                 ) : null}
               </Box>
             </Step>
           );
         })}
       </Steps>
-
-      {/* {(state.addExperience && activeStep == 1) ||
-      state.edit ||
-      (state.addEducation && activeStep == 2) ||
-      (state.addCertificate && activeStep == 3) ? null : (
-        <Flex
-          width="100%"
-          justify="center"
-          mt={{ md: "43px", base: "3px" }}
-          pb={"30px"}
-          gap={4}
-        >
-          <>
-            <Button
-              isDisabled={activeStep === 0}
-              onClick={() => {
-                prevStep();
-              }}
-              variant="outline-blue"
-            >
-              {" Back"}
-            </Button>
-            <Button variant={"blue-btn"} onClick={handleNext}>
-              {"Next"}
-            </Button>
-          </>
-        </Flex>
-      )} */}
     </Flex>
   );
 };

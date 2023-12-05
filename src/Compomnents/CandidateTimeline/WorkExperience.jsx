@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Text, useToast } from "@chakra-ui/react";
 import React, { useState } from "react";
 
 import TextCard from "../TextCard/TextCard";
@@ -6,16 +6,22 @@ import ExperianceForm from "./ExperianceForm";
 import ExperianceCard from "../ExperianceCard/ExperianceCard";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { setExperienceForm, setFormData } from "@/Reudx/slices/employee";
+import { addEmployee, setFormData } from "@/Reudx/slices/employee";
+import { workExperience } from "@/schema/stateSchema";
+import DeleteModal from "../DeleteModal/DeleteModal";
+import endPoints from "@/Utils/endpoints";
+import { deleteApi } from "@/helper/fetch";
 
-const WorkExperiance = ({ prevStep, nextStep }) => {
+const WorkExperience = ({ prevStep, nextStep }) => {
   const dispatch = useDispatch();
+  const toast = useToast();
   const employeeState = useSelector(
     (state) => state.employeeRegister.value.employee
   );
 
   const [state, setState] = useState({
     edit: false,
+    loading: false,
     delete: false,
   });
   const experienceData = [
@@ -59,10 +65,79 @@ const WorkExperiance = ({ prevStep, nextStep }) => {
         edit: true,
       };
     });
-    dispatch(setExperienceForm(data));
+    dispatch(setFormData(data));
+  };
+  const handleAddNew = (data) => {
+    setState((prev) => {
+      return { ...prev, addExperience: true };
+    });
+    dispatch(setFormData(workExperience));
+  };
+  const handleDelete = async () => {
+    setState((prev) => {
+      return { ...prev, loading: true };
+    });
+    try {
+      const postData = await deleteApi(
+        `${endPoints.workExperience}/${state.delete.id}`
+      );
+      if (postData.success) {
+        dispatch(
+          addEmployee({
+            ...employeeState,
+            workExperience: employeeState.workExperience.filter(
+              (item) => item.id !== postData.data.id
+            ),
+          })
+        );
+        setState((prev) => {
+          return { ...prev, delete: false, loading: false };
+        });
+      }
+      toast({
+        position: "bottom-right",
+        title: postData.message,
+        status: postData.success ? "success" : "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    } catch (err) {
+      console.log("err", err);
+      setState((prev) => {
+        return { ...prev, loading: false };
+      });
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
+  };
+  const handleNext = () => {
+    // TODO will update stages
+    nextStep();
   };
   return (
     <Box>
+      <DeleteModal
+        handleDelete={handleDelete}
+        onOpen={() =>
+          setState((prev) => {
+            return { ...prev, delete: true };
+          })
+        }
+        name={state.delete.companyName}
+
+        loading={state.loading}
+        isOpen={state.delete}
+        onClose={() =>
+          setState((prev) => {
+            return { ...prev, delete: false };
+          })
+        }
+      />
       {state.addExperience || state.edit ? (
         <Box display={"flex"} justifyContent={"center"}>
           <ExperianceForm state={state} setState={setState} />
@@ -74,6 +149,14 @@ const WorkExperiance = ({ prevStep, nextStep }) => {
               <Box key={ind}>
                 <ExperianceCard
                   handleEdit={() => handleEditSingleExp(item)}
+                  handleDelete={() => {
+                    setState((prev) => {
+                      return {
+                        ...prev,
+                        delete: item,
+                      };
+                    });
+                  }}
                   data={item}
                   state={state}
                   setState={setState}
@@ -84,11 +167,7 @@ const WorkExperiance = ({ prevStep, nextStep }) => {
 
           <Flex justifyContent={"center"}>
             <Button
-              onClick={() => {
-                setState((prev) => {
-                  return { ...prev, addExperience: true };
-                });
-              }}
+              onClick={handleAddNew}
               width="max-content"
               px={"10px"}
               mb={{ md: "38px", base: "20px" }}
@@ -109,7 +188,7 @@ const WorkExperiance = ({ prevStep, nextStep }) => {
               <Button onClick={prevStep} variant="outline-blue">
                 {" Back"}
               </Button>
-              <Button onClick={nextStep} variant={"blue-btn"}>
+              <Button onClick={handleNext} variant={"blue-btn"}>
                 Next
               </Button>
             </>
@@ -120,4 +199,4 @@ const WorkExperiance = ({ prevStep, nextStep }) => {
   );
 };
 
-export default WorkExperiance;
+export default WorkExperience;

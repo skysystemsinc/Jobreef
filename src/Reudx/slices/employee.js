@@ -15,11 +15,11 @@ const employeeRegister = createSlice({
     addEmployee: (state, action) => {
       state.value.employee = action.payload;
     },
-    setExperienceForm: (state, action) => {
+    setFormData: (state, action) => {
       state.value.formData = action.payload;
     },
   },
 });
-export const { addEmployee, setExperienceForm } = employeeRegister.actions;
+export const { addEmployee, setFormData } = employeeRegister.actions;
 
 export default employeeRegister.reducer;

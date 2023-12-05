@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Text, useToast } from "@chakra-ui/react";
 import React, { useState } from "react";
 import ExperianceForm from "./ExperianceForm";
 import ExperianceCard from "../ExperianceCard/ExperianceCard";
@@ -8,8 +8,14 @@ import EducationCard from "../EducationCard/EducationCard";
 
 import CertificationForm from "./CertificateForm";
 import CeritifcateCard from "../CeritifcateCard/CeritifcateCard";
+import { useDispatch, useSelector } from "react-redux";
+import { addEmployee, setFormData } from "@/Reudx/slices/employee";
+import { certification } from "@/schema/stateSchema";
+import { deleteApi } from "@/helper/fetch";
+import endPoints from "@/Utils/endpoints";
+import DeleteModal from "../DeleteModal/DeleteModal";
 
-const Certification = ({ state, setState }) => {
+const Certification = ({ prevStep, nextStep }) => {
   const style = {
     maxWidth: "240px",
   };
@@ -39,18 +45,119 @@ const Certification = ({ state, setState }) => {
       validUntil: new Date(),
     },
   ];
+
+  const dispatch = useDispatch();
+  const employeeState = useSelector(
+    (state) => state.employeeRegister.value.employee
+  );
+  const toast = useToast();
+
+  const [state, setState] = useState({
+    edit: false,
+    loading: false,
+    delete: false,
+    add: false,
+  });
+
+  const handleEditSingleData = (data) => {
+    setState((prev) => {
+      return {
+        ...prev,
+        edit: true,
+      };
+    });
+    dispatch(setFormData(data));
+  };
+  const handleAddNew = (data) => {
+    setState((prev) => {
+      return { ...prev, add: true };
+    });
+    dispatch(setFormData(certification));
+  };
+  const handleDelete = async () => {
+    setState((prev) => {
+      return { ...prev, loading: true };
+    });
+    try {
+      const postData = await deleteApi(
+        `${endPoints.certification}/${state.delete.id}`
+      );
+      if (postData.success) {
+        dispatch(
+          addEmployee({
+            ...employeeState,
+            certification: employeeState.certification.filter(
+              (item) => item.id !== postData.data.id
+            ),
+          })
+        );
+        setState((prev) => {
+          return { ...prev, delete: false, loading: false };
+        });
+      }
+      toast({
+        position: "bottom-right",
+        title: postData.message,
+        status: postData.success ? "success" : "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    } catch (err) {
+      console.log("err", err);
+      setState((prev) => {
+        return { ...prev, loading: false };
+      });
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
+  };
+  const handleNext = () => {
+    // TODO will update stages
+    nextStep();
+  };
+
   return (
     <Box>
-      {state.addCertificate || state.edit ? (
+      <DeleteModal
+        handleDelete={handleDelete}
+        onOpen={() =>
+          setState((prev) => {
+            return { ...prev, delete: true };
+          })
+        }
+        name={state.delete.certificateName}
+        loading={state.loading}
+        isOpen={state.delete}
+        onClose={() =>
+          setState((prev) => {
+            return { ...prev, delete: false };
+          })
+        }
+      />
+      {state.add || state.edit ? (
         <Box display={"flex"} justifyContent={"center"}>
           <CertificationForm state={state} setState={setState} />
         </Box>
       ) : (
         <Box width={"100%"} mx={"auto"}>
-          {certificationData.map((item) => {
+          {employeeState.certification.map((item) => {
             return (
               <Box>
                 <CeritifcateCard
+                  handleEdit={() => handleEditSingleData(item)}
+                  handleDelete={() => {
+                    setState((prev) => {
+                      return {
+                        ...prev,
+                        delete: item,
+                      };
+                    });
+                  }}
                   data={item}
                   state={state}
                   headingStyle={style}
@@ -62,11 +169,7 @@ const Certification = ({ state, setState }) => {
 
           <Flex justifyContent={"center"}>
             <Button
-              onClick={() => {
-                setState((prev) => {
-                  return { ...prev, addCertificate: true };
-                });
-              }}
+              onClick={handleAddNew}
               width="max-content"
               px={"20px"}
               mt={{ md: "17px", base: "15px" }}
@@ -75,6 +178,22 @@ const Certification = ({ state, setState }) => {
             >
               Add Certification
             </Button>
+          </Flex>
+          <Flex
+            width="100%"
+            justify="center"
+            mt={{ md: "43px", base: "3px" }}
+            pb={"30px"}
+            gap={4}
+          >
+            <>
+              <Button onClick={prevStep} variant="outline-blue">
+                {" Back"}
+              </Button>
+              <Button onClick={handleNext} variant={"blue-btn"}>
+                Next
+              </Button>
+            </>
           </Flex>
         </Box>
       )}

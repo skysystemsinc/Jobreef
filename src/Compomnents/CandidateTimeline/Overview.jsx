@@ -110,30 +110,22 @@ const Overview = ({ nextStep, activeStep, prevStep }) => {
   };
   const handleCreateEmployee = async () => {
     const body = {
-      // phoneNumber: parseInt(state.number),
       summary: state.description,
-      workExperience: [],
-      education: [],
-      certification: [],
-      skills: [],
-      achievement: {},
-      attachment: {},
+
     };
     const postData = await post(`${endPoints.employee}`, body);
-    console.log("postData",postData)
+    console.log("postData", postData);
     handleUserAssociation(postData.data.id);
 
     dispatch(addEmployee({ ...state, id: postData.data.id }));
   };
   const handleUpdateEmployee = async () => {
     const body = {
-      phoneNumber: parseInt(state.number),
       summary: state.description,
     };
-    const postData = await put(
-      `${endPoints.employee}/${employeeState.id}`,
-      body
-    );
+    const postData = await put(`${endPoints.employee}/${employeeState.id}`, {
+      data: body,
+    });
     handleUserAssociation(postData.data.id);
 
     dispatch(addEmployee({ ...state }));

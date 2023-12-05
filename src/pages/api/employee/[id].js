@@ -2,39 +2,43 @@ import prisma from "@/lib/prisma";
 
 const DeleteEmployee = async (req, res) => {
   try {
-    const deleteEmployee = await prisma.Employee.delete({
+    const deleteExp = await prisma.Employee.delete({
       where: {
         id: req.query.id,
       },
     });
 
-    if (!deleteEmployee) {
+    if (!deleteExp) {
       return res.status(404).json({
         message: `No employee with id ${req.query.id}`,
         success: false,
       });
     }
     res.status(200).json({
-      message: "Employee deleted successfully",
+      message: "employee deleted successfully",
       success: true,
+      data:deleteExp
     });
   } catch (err) {
     res.status(500).json({
       error: err,
-      message: `No Employee with id ${req.query.id}`,
+      message: `internal server error `,
       success: false,
     });
   }
 };
 const UpdateEmployee = async (req, res) => {
-  const data =  req.body ;
-  
+  // const data = req.body;
+  const { data } = req.body;
+
   try {
     const employee = await prisma.Employee.update({
       where: {
         id: req.query.id,
       },
-      data:data
+      data: {
+        ...data,
+      },
     });
 
     if (!employee) {

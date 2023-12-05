@@ -6,7 +6,14 @@ import { HiLocationMarker } from "react-icons/hi";
 import edit_outline from "@/assets/Images/edit_outline.svg";
 import trash from "@/assets/Images/trash.svg";
 import moment from "moment";
-const EducationCard = ({ data, setState, headingStyle, dispableBlueCard }) => {
+const EducationCard = ({
+  handleEdit,
+  handleDelete,
+  data,
+  setState,
+  headingStyle,
+  disableBlueCard,
+}) => {
   return (
     <Box
       p={{ sm: "20px", base: "12px" }}
@@ -55,7 +62,9 @@ const EducationCard = ({ data, setState, headingStyle, dispableBlueCard }) => {
 
               <Heading color={"gray.text"} sx={headingStyle} variant={"p4"}>
                 {moment(data.stateDate).format("MMMM YYYY")} {" - "}
-                {moment(data.endDate).format("MMMM YYYY")}
+                {data.endDate
+                  ? moment(data.endDate).format("MMMM YYYY")
+                  : "Present"}
               </Heading>
               <Box fontSize={{ sm: "14px", base: "8px" }}>
                 <GoDotFill style={{ color: "#D9D9D9" }} />
@@ -72,7 +81,8 @@ const EducationCard = ({ data, setState, headingStyle, dispableBlueCard }) => {
                 <HiLocationMarker
                   style={{ color: "#4A4A4A", fontSize: "20px" }}
                 />{" "}
-                {data.state}, {data.city}, {data.country}
+                {/* {data?.location?.province}, {data?.location?.city},{" "} */}
+                {data?.location?.country}
               </Heading>
             </Box>
           </Box>
@@ -88,14 +98,7 @@ const EducationCard = ({ data, setState, headingStyle, dispableBlueCard }) => {
         >
           <Box
             cursor={"pointer"}
-            onClick={() =>
-              setState((prev) => {
-                return {
-                  ...prev,
-                  edit: true,
-                };
-              })
-            }
+            onClick={handleEdit}
             display={"flex"}
             alignItems={"center"}
             gap={"10px"}
@@ -107,14 +110,7 @@ const EducationCard = ({ data, setState, headingStyle, dispableBlueCard }) => {
             <Heading variant={"p5"}>Edit</Heading>
           </Box>
           <Box
-            onClick={() =>
-              setState((prev) => {
-                return {
-                  ...prev,
-                  delete: true,
-                };
-              })
-            }
+            onClick={handleDelete}
             cursor={"pointer"}
             display={"flex"}
             alignItems={"center"}

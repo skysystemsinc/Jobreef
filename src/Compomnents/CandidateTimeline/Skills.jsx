@@ -22,7 +22,7 @@ import { BsDot, BsPlusLg } from "react-icons/bs";
 import upload from "@/assets/Images/upload.svg";
 import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
 
-const Skills = () => {
+const Skills = ({ prevStep, nextStep }) => {
   const [State, setState] = useState({
     links: [{ platform: "", link: "" }],
   });
@@ -70,6 +70,9 @@ const Skills = () => {
       };
     });
     // setFormData(updatedFormData);
+  };
+  const handleNext = () => {
+    nextStep();
   };
 
   return (
@@ -128,7 +131,11 @@ const Skills = () => {
                   color: "#2CA5C3",
                 }}
               >
-                <AiOutlineDelete onClick={() => State.links.length>1 ? handleDelete(index) : null} />
+                <AiOutlineDelete
+                  onClick={() =>
+                    State.links.length > 1 ? handleDelete(index) : null
+                  }
+                />
               </Box>
             </Box>
           </InputWrapper>
@@ -137,13 +144,30 @@ const Skills = () => {
 
       {/* <Flex justifyContent={"center"}> */}
       <Button
-        onClick={ State.links.length < 5 ? handleaddMore : null}
+        onClick={State.links.length < 5 ? handleaddMore : null}
         variant={"blue-btn"}
         width={"max-content"}
         px={{ md: "33px", base: "20px" }}
       >
         Add Skill
       </Button>
+
+      <Flex
+        width="100%"
+        justify="center"
+        mt={{ md: "43px", base: "3px" }}
+        pb={"30px"}
+        gap={4}
+      >
+        <>
+          <Button onClick={prevStep} variant="outline-blue">
+            {" Back"}
+          </Button>
+          <Button onClick={handleNext} variant={"blue-btn"}>
+            Next
+          </Button>
+        </>
+      </Flex>
       {/* </Flex> */}
     </Box>
   );

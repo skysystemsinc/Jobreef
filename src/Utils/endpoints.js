@@ -7,5 +7,8 @@ const endPoints = {
   resendOtp:"resend-otp",
   changePassword:"change-password",
   emailPreferences:"emailPreferences",
+  workExperience:"workexperience",
+  education:"education",
+  certification:"certification",
 };
 export default endPoints;
