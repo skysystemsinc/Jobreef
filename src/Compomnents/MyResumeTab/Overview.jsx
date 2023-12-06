@@ -21,9 +21,16 @@ const Overview = ({ setTabIndex, tabIndex }) => {
   const employeeState = useSelector(
     (state) => state.employeeRegister.value.employee
   );
-  const [formData, setFormData] = useState({
-    ...employeeState,
-    ...employeeState.location[0],
+  const
+   [formData, setFormData] = useState({
+    country: "",
+    state: "",
+    city: "",
+    number: "",
+    description: "",
+    // ...employeeState,
+    // employeeState?.location &&...employeeState?.location[0],
+
   });
 
   const [state, setState] = useState({
