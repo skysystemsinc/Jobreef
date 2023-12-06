@@ -73,14 +73,6 @@ const Overview = ({ nextStep, activeStep, prevStep }) => {
         role: role,
         phoneNumber: parseInt(state.number),
 
-        location: [
-          {
-            country: state.country,
-            province: state.province,
-            city: state.city,
-            // address: state.address,
-          },
-        ],
         ["employeeId"]: employeeId,
       };
       const userAssociation = httpRequest(
@@ -111,7 +103,14 @@ const Overview = ({ nextStep, activeStep, prevStep }) => {
   const handleCreateEmployee = async () => {
     const body = {
       summary: state.description,
-
+      location: [
+        {
+          country: state.country,
+          province: state.province,
+          city: state.city,
+          // address: state.address,
+        },
+      ],
     };
     const postData = await post(`${endPoints.employee}`, body);
     console.log("postData", postData);
@@ -122,6 +121,13 @@ const Overview = ({ nextStep, activeStep, prevStep }) => {
   const handleUpdateEmployee = async () => {
     const body = {
       summary: state.description,
+      location: [
+        {
+          country: state.country,
+          province: state.province,
+          city: state.city,
+        },
+      ],
     };
     const postData = await put(`${endPoints.employee}/${employeeState.id}`, {
       data: body,

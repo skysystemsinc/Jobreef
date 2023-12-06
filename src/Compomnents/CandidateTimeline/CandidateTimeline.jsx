@@ -12,20 +12,16 @@ import {
 } from "@chakra-ui/react";
 import { Step, Steps, useSteps } from "chakra-ui-steps";
 
-import { useRouter } from "next/router";
-import { role, roles } from "@/Utils/role";
+
 import globalStyles from "@/styles/globalStyles";
 import { useContext, useEffect, useRef, useState } from "react";
-import { Role_context } from "@/context/context";
+
 import Overview from "./Overview";
-import Password from "../SignUpTimeline/Password";
-import Otp from "../SignUpTimeline/Otp";
 
 import Education from "./Education";
 import Certification from "./Certitfication";
 import Skills from "./Skills";
-import Attachments from "./Attchement";
-import DeleteModal from "../DeleteModal/DeleteModal";
+
 import TimelineAttachments from "./Attchement";
 import WorkExperience from "./WorkExperience";
 const steps = [
@@ -40,11 +36,11 @@ const steps = [
 
 export const CandidateTimeline = ({ candidate, variant }) => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
-    initialStep: 3,
+    initialStep: 0,
   });
 
   const [compeletedStep, setcompeletedStep] = useState([]);
-  
+
   useEffect(() => {
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);
@@ -55,24 +51,9 @@ export const CandidateTimeline = ({ candidate, variant }) => {
       justifyContent={"center"}
       alignItems={"center"}
       width="100%"
-      // ml={{lg:20}}
     >
-      {/* <DeleteModal
-        onOpen={() =>
-          setState((prev) => {
-            return { ...prev, delete: true };
-          })
-        }
-        isOpen={state.delete}
-        onClose={() =>
-          setState((prev) => {
-            return { ...prev, delete: false };
-          })
-        }
-      /> */}
       <Steps
         responsive={false}
-
         sx={{
           ...globalStyles.stepperContainter,
           width: {
@@ -183,13 +164,19 @@ export const CandidateTimeline = ({ candidate, variant }) => {
                 ) : index == 2 ? (
                   <Education prevStep={prevStep} nextStep={nextStep} />
                 ) : index == 3 ? (
-                  <Certification  prevStep={prevStep} nextStep={nextStep}/>
+                  <Certification prevStep={prevStep} nextStep={nextStep} />
                 ) : index == 4 ? (
-                  <Skills prevStep={prevStep} nextStep={nextStep}/>
+                  <Skills prevStep={prevStep} nextStep={nextStep} />
                 ) : index == 5 ? (
-                  <TimelineAttachments prevStep={prevStep} nextStep={nextStep}/>
+                  <TimelineAttachments
+                    prevStep={prevStep}
+                    nextStep={nextStep}
+                  />
                 ) : index == 6 ? (
-                  <TimelineAttachments prevStep={prevStep} nextStep={nextStep}/>
+                  <TimelineAttachments
+                    prevStep={prevStep}
+                    nextStep={nextStep}
+                  />
                 ) : null}
               </Box>
             </Step>

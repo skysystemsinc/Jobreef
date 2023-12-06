@@ -49,6 +49,7 @@ const Education = ({prevStep, nextStep}) => {
   const employeeState = useSelector(
     (state) => state.employeeRegister.value.employee
   );
+  console.log("employeeState",employeeState);
   const toast = useToast();
 
   const [state, setState] = useState({

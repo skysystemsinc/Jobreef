@@ -17,7 +17,7 @@ type LocationType {
   address  String?
 }
 
-type CertificateMedia {
+type Media {
   name String
   url  String
 }
@@ -90,7 +90,9 @@ model Employee {
   certification  Certification[]
   skills         Skills[]
   achievement    Achievement[]
-  attachment     Attachment[]
+  location        LocationType[]
+
+  attachment     Attachment?
 }
 
 model WorkExperience {
@@ -135,7 +137,7 @@ model Certification {
   issuedOn         DateTime  @default(now())
   validUntil       DateTime? @default(now())
   noExpiry         Boolean?
-  certificateMedia CertificateMedia[]
+  certificateMedia Media[]
 }
 
 model Skills {
@@ -150,16 +152,16 @@ model Achievement {
   id         String    @id @default(auto()) @map("_id") @db.ObjectId
   employee   Employee? @relation(fields: [employeeId], references: [id])
   employeeId String?   @db.ObjectId
-  resume     String[]
-  additional String[]
+  resume     Media[]
+  additional Media[]
 }
 
 model Attachment {
   id         String    @id @default(auto()) @map("_id") @db.ObjectId
   employee   Employee? @relation(fields: [employeeId], references: [id])
-  employeeId String?   @db.ObjectId
-  resume     String[]
-  additional String[]
+  employeeId String    @unique @db.ObjectId
+  resume     Media[]
+  additional Media[]
 }
 
 type SocialLinks {

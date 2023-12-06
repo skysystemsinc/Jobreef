@@ -184,7 +184,7 @@ const EducationForm = ({ state, setState }) => {
   };
   const handleCancel = () => {
     setState((prev) => {
-      return { ...prev, addExperience: false, edit: false };
+      return { ...prev, add: false, edit: false };
     });
   };
 

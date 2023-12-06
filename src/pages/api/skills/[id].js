@@ -1,10 +1,30 @@
 import prisma from "@/lib/prisma";
-import bcrypt from "bcrypt";
 
+const addSingle = async (req, res) => {
+  const data = req.body;
+
+  try {
+    const created = await prisma.Skills.create({
+      data: data,
+    });
+    res.status(201).json({
+      message: "skills created successfully",
+      data: created,
+      success: true,
+    });
+  } catch (err) {
+    console.log("err", err);
+    res.status(500).json({
+      error: err,
+      success: false,
+      message: "internal server error ",
+    });
+  }
+};
 const DeleteSingle = async (req, res) => {
   try {
     // const deleteUser = await UserModel.findOneAndDelete({ _id: req.query.id });
-    const deleteData = await prisma.Education.delete({
+    const deleteData = await prisma.Skills.delete({
       where: {
         id: req.query.id,
       },
@@ -12,17 +32,17 @@ const DeleteSingle = async (req, res) => {
 
     if (!deleteData) {
       return res.status(404).json({
-        message: `No education with id ${req.query.id}`,
+        message: `No skills with id ${req.query.id}`,
         success: false,
       });
     }
     res.status(200).json({
-      message: "education deleted successfully",
+      message: "skills deleted successfully",
       success: true,
-      data:deleteData
+      data: deleteData,
     });
   } catch (err) {
-    console.log("err", err)
+    console.log("err", err);
     res.status(500).json({
       error: err,
       message: "internal server error ",
@@ -35,7 +55,7 @@ const UpdateData = async (req, res) => {
   const data = req.body;
 
   try {
-    const user = await prisma.Education.update({
+    const user = await prisma.Skills.update({
       where: {
         id: req.query.id,
       },
@@ -48,7 +68,7 @@ const UpdateData = async (req, res) => {
     });
 
     res.status(200).json({
-      message: "education updated successfully",
+      message: "skills updated successfully",
       data: user,
       success: true,
     });
@@ -64,7 +84,7 @@ const UpdateData = async (req, res) => {
 const GetSingleData = async (req, res) => {
   try {
     // const user = await UserModel.findOne({ _id: req.query.id });
-    const singleData = await prisma.Education.findUnique({
+    const singleData = await prisma.Skills.findUnique({
       include: {
         employee: true,
       },
@@ -74,7 +94,7 @@ const GetSingleData = async (req, res) => {
     });
     if (!singleData) {
       return res.status(404).json({
-        message: `No education with id ${req.query.id}`,
+        message: `No skills with id ${req.query.id}`,
         success: false,
       });
     }
@@ -83,7 +103,7 @@ const GetSingleData = async (req, res) => {
       success: true,
     });
   } catch (err) {
-    console.log("err",err);
+    console.log("err", err);
     res.status(500).json({
       error: err,
       message: `internal server error`,
@@ -104,6 +124,9 @@ export default async function handler(req, res) {
     }
     case "DELETE": {
       return DeleteSingle(req, res);
+    }
+    case "POST": {
+      return addSingle(req, res);
     }
   }
 }

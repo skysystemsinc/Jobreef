@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 const Login = async (req, res) => {
   const { email, password } = JSON.parse(req.body);
-  
+
   const options = {
     secure: true,
     expire: process.env.EXPIRES_TOKEN + Date.now(),
@@ -20,7 +20,17 @@ const Login = async (req, res) => {
       },
       include: {
         company: true,
-        employee: true,
+        employee: {
+          include: {
+            skills: true,
+            workExperience: true,
+            education: true,
+            certification: true,
+            skills: true,
+            achievement: true,
+            attachment: true,
+          },
+        },
         location: true,
         emailPreferences: true,
       },

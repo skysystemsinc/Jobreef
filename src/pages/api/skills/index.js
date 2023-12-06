@@ -1,27 +1,32 @@
 import prisma from "@/lib/prisma";
 
-const add = async (req, res) => {
+const addMany = async (req, res) => {
   const data = req.body;
-  const body = {
-    employeeId: data.employeeId,
-
-    certificateName: data.certificateName,
-    organizationName: data.organizationName,
-    certificateId: data.certificateId,
-    issuedOn: data.issuedOn,
-    noExpiry: data.noExpiry,
-    validUntil: data.validUntil,
-    certificateMedia: data.certificateMedia,
-  };
 
   try {
-    const created = await prisma.Certification.create({
-      data: body,
+    const created = await prisma.Employee.update({
+      where: {
+        id: data.employeeId,
+      },
+      //   data: data,
+      include: {
+        skills: true,
+      },
+      data: {
+        skills: {
+          create: data.data,
+        },
+      },
     });
-
+    // const getData = await prisma.Skills.findMany({
+    //   where: {
+    //     employeeId: data[0].employeeId,
+    //   },
+    // });
+    console.log("created", created);
     res.status(201).json({
-      message: "certification created successfully",
-      data: created,
+      message: "skills created successfully",
+      data: created.skills,
       success: true,
     });
   } catch (err) {
@@ -29,13 +34,14 @@ const add = async (req, res) => {
     res.status(500).json({
       error: err,
       success: false,
+      message: "internal server error ",
     });
   }
 };
 
 const GetAll = async (req, res) => {
   try {
-    const experience = await prisma.Certification.findMany({
+    const experience = await prisma.Skills.findMany({
       include: {
         employee: true,
       },
@@ -48,24 +54,24 @@ const GetAll = async (req, res) => {
     console.log("err", err);
     res.status(500).json({
       error: err,
-      message: "internal server error ",
-
       success: false,
+      message: "internal server error ",
     });
   }
 };
 const DeleteAll = async (req, res) => {
   try {
-    const deleteData = await prisma.Certification.deleteMany({});
+    const deleteData = await prisma.Skills.deleteMany({});
     res.status(200).json({
       data: deleteData,
-      message: "certification Deleted successfully",
+      message: "skills Deleted successfully",
       success: true,
     });
   } catch (err) {
     res.status(500).json({
       error: err,
       success: false,
+      message: "internal server error ",
     });
   }
 };
@@ -79,7 +85,7 @@ export default async function handler(req, res) {
     }
 
     case "POST": {
-      return add(req, res);
+      return addMany(req, res);
     }
   }
 }

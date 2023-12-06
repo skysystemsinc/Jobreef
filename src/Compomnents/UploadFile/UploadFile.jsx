@@ -1,23 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import UploadBox from "../UploadBox/UploadBox";
-import { Box, Button, Flex, useToast } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import UploadedCard from "../UploadedCard/UploadedCard";
 import dummy_resume from "@/assets/Images/dummy_resume.svg";
-import { useDispatch, useSelector } from "react-redux";
-import { post } from "@/helper/fetch";
-import endPoints from "@/Utils/endpoints";
-import { addEmployee } from "@/Reudx/slices/employee";
-import Loader from "../Loader/Loader";
 
 // import dummy_resume from "@/assets/pdf/dummy.pdf";
-const Attachments = ({ style }) => {
-  const [loading, setLoading] = useState(false);
-  const toast = useToast();
-  const dispatch = useDispatch();
-
-  const employeeState = useSelector(
-    (state) => state.employeeRegister.value.employee
-  );
+const UploadFile = ({ style, data }) => {
   const [state, setState] = useState({
     resume: [],
     additional: [],
@@ -45,8 +33,7 @@ const Attachments = ({ style }) => {
               allFile: [
                 ...prev.allFile,
                 {
-                  // url: e.target.result,
-                  url: "",
+                  url: e.target.result,
 
                   name: file.name,
                 },
@@ -54,8 +41,7 @@ const Attachments = ({ style }) => {
               [key]: [
                 ...prev[key],
                 {
-                  // url: e.target.result,
-                  url: "",
+                  url: e.target.result,
                   name: file.name,
                 },
               ],
@@ -66,52 +52,14 @@ const Attachments = ({ style }) => {
       }
     });
   };
-  const handleSave = async () => {
-    if (loading) return;
-    setLoading(true);
-    try {
-      const body = {
-        resume: state.resume,
-        additional: state.additional,
-        employeeId: employeeState.id,
-        id: employeeState?.attachments?.id,
+  const handleSave = () => {
+    setState((prev) => {
+      return {
+        ...prev,
+        save: true,
+        select: false,
       };
-      const postData = await post(`${endPoints.attachment}`, body);
-      if (postData.success) {
-        setLoading(false);
-        setState((prev) => {
-          return {
-            ...prev,
-            save: true,
-            select: false,
-          };
-        });
-
-        dispatch(
-          addEmployee({
-            ...employeeState,
-            attachments: postData.data,
-          })
-        );
-      }
-      toast({
-        position: "bottom-right",
-        title: postData.message,
-        status: postData.success ? "success" : "error",
-        variant: "subtle",
-        isClosable: true,
-      });
-    } catch (err) {
-      console.log("err", err);
-      setLoading(false);
-      toast({
-        position: "bottom-right",
-        title: "Error",
-        status: "error",
-        variant: "subtle",
-        isClosable: true,
-      });
-    }
+    });
   };
   const handleCancel = () => {
     setState((prev) => {
@@ -152,18 +100,16 @@ const Attachments = ({ style }) => {
   };
 
   useEffect(() => {
-    const data = employeeState.attachments;
-    if (data) {
-      setState((prev) => {
-        return {
-          ...prev,
-          resume: data.resume,
-          additional: data.additional,
-          allFile: [...data.resume, ...data.additional],
-        };
-      });
-    }
-  }, [employeeState]);
+    setState((prev) => {
+      return {
+        ...prev,
+        resume: data.resume,
+        additional: data.additional,
+        allFile: [...data.resume, ...data.additional],
+      };
+    });
+  }, []);
+
   return (
     <Box minHeight={"59vh"}>
       {state.select ? (
@@ -191,7 +137,7 @@ const Attachments = ({ style }) => {
               Cancel
             </Button>
             <Button onClick={handleSave} variant={"blue-btn"}>
-              {loading ? <Loader /> : "Save"}
+              Save
             </Button>
           </Flex>
         </Box>
@@ -244,4 +190,4 @@ const Attachments = ({ style }) => {
   );
 };
 
-export default Attachments;
+export default UploadFile;

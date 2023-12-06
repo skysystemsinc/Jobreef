@@ -10,5 +10,7 @@ const endPoints = {
   workExperience:"workexperience",
   education:"education",
   certification:"certification",
+  skills:"skills",
+  attachment:"attachment",
 };
 export default endPoints;

@@ -17,7 +17,7 @@ const DeleteEmployee = async (req, res) => {
     res.status(200).json({
       message: "employee deleted successfully",
       success: true,
-      data:deleteExp
+      data: deleteExp,
     });
   } catch (err) {
     res.status(500).json({
@@ -38,6 +38,15 @@ const UpdateEmployee = async (req, res) => {
       },
       data: {
         ...data,
+      },
+      include: {
+        skills: true,
+        workExperience: true,
+        education: true,
+        certification: true,
+        skills: true,
+        achievement: true,
+        attachment: true,
       },
     });
 
@@ -69,8 +78,13 @@ const GetSingleEmployee = async (req, res) => {
         id: req.query.id,
       },
       include: {
-        company: true,
-        employee: true,
+        skills: true,
+        workExperience: true,
+        education: true,
+        certification: true,
+        skills: true,
+        achievement: true,
+        attachment: true,
       },
     });
 

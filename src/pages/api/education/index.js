@@ -4,6 +4,7 @@ const add = async (req, res) => {
   const data = req.body;
   const body = {
     schoolName: data.schoolName,
+    employeeId: data.employeeId,
     diploma: data.diploma,
     startDate: data.startDate,
     endDate: data.endDate,

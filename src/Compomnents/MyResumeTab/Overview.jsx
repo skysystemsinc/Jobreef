@@ -15,8 +15,17 @@ import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
 import white_edit from "@/assets/Images/white-edit.svg";
+import { useSelector } from "react-redux";
 
 const Overview = ({ setTabIndex, tabIndex }) => {
+  const employeeState = useSelector(
+    (state) => state.employeeRegister.value.employee
+  );
+  const [formData, setFormData] = useState({
+    ...employeeState,
+    ...employeeState.location[0],
+  });
+
   const [state, setState] = useState({
     readOnly: true,
     isEdit: false,
@@ -27,19 +36,30 @@ const Overview = ({ setTabIndex, tabIndex }) => {
     description: "",
   });
   const router = useRouter();
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
   return (
-    <Box mt={{ md: "30px", base: "16px" }} mb={"40px"} width={{ lg: "60%", base: "100%" }}>
+    <Box
+      mt={{ md: "30px", base: "16px" }}
+      mb={"40px"}
+      width={{ lg: "60%", base: "100%" }}
+    >
       {/* <Image src={profile.src} /> */}
 
       <Box mt={"0px"}>
         <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
           <LabelInput
-            state={state.country}
-            setState={(e) => {
-              setState((prev) => {
-                return { ...prev, country: e.target.value };
-              });
-            }}
+            state={formData.country}
+            setState={handleChange}
+            name={"country"}
             readOnly={state.readOnly}
             labelVariant={"label"}
             type="text"
@@ -49,12 +69,9 @@ const Overview = ({ setTabIndex, tabIndex }) => {
             label={"Country"}
           />
           <LabelInput
-            state={state.state}
-            setState={(e) => {
-              setState((prev) => {
-                return { ...prev, state: e.target.value };
-              });
-            }}
+            state={formData.province}
+            setState={handleChange}
+            name={"province"}
             readOnly={state.readOnly}
             labelVariant={"label"}
             type="text"
@@ -67,12 +84,9 @@ const Overview = ({ setTabIndex, tabIndex }) => {
 
         <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
           <LabelInput
-            state={state.city}
-            setState={(e) => {
-              setState((prev) => {
-                return { ...prev, city: e.target.value };
-              });
-            }}
+            state={formData.city}
+            setState={handleChange}
+            name={"city"}
             labelVariant={"label"}
             type="text"
             readOnly={state.readOnly}
@@ -83,13 +97,10 @@ const Overview = ({ setTabIndex, tabIndex }) => {
           <LabelInput
             readOnly={state.readOnly}
             labelVariant={"label"}
-            state={state.number}
-            setState={(e) => {
-              setState((prev) => {
-                return { ...prev, number: e.target.value };
-              });
-            }}
-            type="number"
+            state={formData.phoneNumber}
+            setState={handleChange}
+            name={"city"}
+            type="phoneNumber"
             variant={"bg-input"}
             placeholder="Enter your phone number"
             label={"Phone Number"}
@@ -97,17 +108,14 @@ const Overview = ({ setTabIndex, tabIndex }) => {
         </InputWrapper>
         {/* <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}> */}
         <LabelInput
-          state={state.description}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, description: e.target.value };
-            });
-          }}
+          state={formData.summary}
+          setState={handleChange}
+          name={"summary"}
           labelVariant={"label"}
           readOnly={state.readOnly}
           type="text"
           variant={"bg-teaxtarea"}
-          placeholder="Describe yourself for your emoployers"
+          placeholder="Describe yourself for your employer"
           textarea
           label={"Summary"}
         />

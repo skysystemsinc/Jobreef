@@ -121,10 +121,10 @@ const CertificationForm = ({ state, setState }) => {
     }
   };
   const handleUpdate = async () => {
-    //TODO add validation of date
+   
     if (loading) return;
     const isValid = Object.values(formData).some((value) => value === "");
-    console.log("isValid", isValid);
+  
     if (isValid || formData.issuedOn === null) {
       toast({
         position: "bottom-right",
@@ -188,16 +188,11 @@ const CertificationForm = ({ state, setState }) => {
   };
   const handleCancel = () => {
     setState((prev) => {
-      return { ...prev, addExperience: false, edit: false };
+      return { ...prev, add: false, edit: false };
     });
   };
 
-  useSkipInitialEffect(() => {
-    if (formDataState) {
-      formDataState.noExpiry ? setReadOnly(true) : setReadOnly(false);
-      setFormData({ ...formDataState });
-    }
-  }, [formDataState]);
+
 
   const handleUpload = (event, key, index) => {
     //  = Array.from(event.target.files);
@@ -235,6 +230,12 @@ const CertificationForm = ({ state, setState }) => {
       };
     });
   };
+  useSkipInitialEffect(() => {
+    if (formDataState) {
+      formDataState.noExpiry ? setReadOnly(true) : setReadOnly(false);
+      setFormData({ ...formDataState });
+    }
+  }, [formDataState]);
   return (
     <Box width={"100%"}>
       {/* <Image src={profile.src} /> */}
@@ -292,15 +293,6 @@ const CertificationForm = ({ state, setState }) => {
           </InputWrapper>
         </Box>
 
-        {/* <Box maxWidth={{ xl: "48%", base: "100%" }}>
-            <LabelInput
-              labelVariant={"label"}
-              type="date"
-              variant={"bg-input"}
-              placeholder="Enter your GPA"
-              label={"Issued On"}
-            />
-          </Box> */}
         <Box width={{ xl: "48%", base: "100%" }} position={"relative"}>
           <Box>
             <LabelInput
