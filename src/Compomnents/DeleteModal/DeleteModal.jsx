@@ -1,4 +1,6 @@
-const {
+import Loader from "../Loader/Loader";
+
+import {
   Heading,
   Box,
   Modal,
@@ -9,9 +11,9 @@ const {
   ModalBody,
   ModalFooter,
   Button,
-} = require("@chakra-ui/react");
+} from "@chakra-ui/react";
 
-function DeleteModal({ isOpen, onOpen, onClose }) {
+function DeleteModal({ name, loading, handleDelete, isOpen, onOpen, onClose }) {
   //   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -39,7 +41,12 @@ function DeleteModal({ isOpen, onOpen, onClose }) {
                 color={"black.100"}
                 fontWeight={500}
               >
-                Are you sure you want to delete it?
+                Are you sure you want to delete it{" "}
+                <Box as="span" fontWeight={700}>
+                  {" "}
+                  {name}{" "}
+                </Box>
+                ?
               </Heading>
             </Box>
           </ModalBody>
@@ -62,12 +69,13 @@ function DeleteModal({ isOpen, onOpen, onClose }) {
               Cancel
             </Button>
             <Button
+              onClick={handleDelete}
               height={"32px"}
               width={"max-content"}
               px={"20px"}
               variant={"blue-btn"}
             >
-              Delete
+              {loading ? <Loader /> : "Delete"}
             </Button>
           </ModalFooter>
         </ModalContent>

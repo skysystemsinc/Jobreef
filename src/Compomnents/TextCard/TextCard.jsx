@@ -5,9 +5,6 @@ const TextCard = ({ addHandle, title, subittle, btnLable }) => {
   return (
     <Box
       minH={"50vh"}
-    //   mb={"80px"}
-    //   pl={{ md: "30px", base: "0px" }}
-    
       display={"flex"}
       justifyContent={"center"}
       alignItems={"flex-start"}

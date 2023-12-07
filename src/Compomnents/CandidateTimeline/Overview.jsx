@@ -29,7 +29,7 @@ const Overview = ({ nextStep, activeStep, prevStep }) => {
       state.country === "" ||
       state.province === "" ||
       state.city === "" ||
-      state.number === "" ||
+      state.phoneNumber === "" ||
       state.description === ""
     ) {
       toast({
@@ -73,14 +73,6 @@ const Overview = ({ nextStep, activeStep, prevStep }) => {
         role: role,
         phoneNumber: parseInt(state.number),
 
-        location: [
-          {
-            country: state.country,
-            province: state.province,
-            city: state.city,
-            // address: state.address,
-          },
-        ],
         ["employeeId"]: employeeId,
       };
       const userAssociation = httpRequest(
@@ -110,33 +102,35 @@ const Overview = ({ nextStep, activeStep, prevStep }) => {
   };
   const handleCreateEmployee = async () => {
     const body = {
-      // phoneNumber: parseInt(state.number),
-      summary: state.description,
-      workExperience: [],
-      education: [],
-      certification: [],
-      skills: [],
-      achievement: {},
-      attachment: {},
+      description: state.description,
+      location: {
+        country: state.country,
+        province: state.province,
+        city: state.city,
+        // address: state.address,
+      },
     };
     const postData = await post(`${endPoints.employee}`, body);
-    console.log("postData",postData)
+    console.log("postData", postData);
     handleUserAssociation(postData.data.id);
 
-    dispatch(addEmployee({ ...state, id: postData.data.id }));
+    dispatch(addEmployee({ ...state, id: postData.data.id, ...postData.data }));
   };
   const handleUpdateEmployee = async () => {
     const body = {
-      phoneNumber: parseInt(state.number),
-      summary: state.description,
+      description: state.description,
+      location: {
+        country: state.country,
+        province: state.province,
+        city: state.city,
+      },
     };
-    const postData = await put(
-      `${endPoints.employee}/${employeeState.id}`,
-      body
+    const postData = await put(`${endPoints.employee}/${employeeState.id}`, 
+      body,
     );
     handleUserAssociation(postData.data.id);
 
-    dispatch(addEmployee({ ...state }));
+    dispatch(addEmployee({ ...state ,...postData.data}));
   };
   return (
     <Box>
@@ -178,9 +172,9 @@ const Overview = ({ nextStep, activeStep, prevStep }) => {
           label={"City"}
         />
         <LabelInput
-          state={state.number}
+          state={state.phoneNumber}
           setState={handleChange}
-          name={"number"}
+          name={"phoneNumber"}
           labelVariant={"label"}
           type="number"
           variant={"bg-input"}

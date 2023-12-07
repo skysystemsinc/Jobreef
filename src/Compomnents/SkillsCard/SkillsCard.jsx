@@ -38,7 +38,7 @@ const SkillsCard = ({ data, handleEdit, handleDelete }) => {
                 Skill Name
               </Heading>
               <Heading variant={"p7"} color={"gray.text"}>
-                {data.skillName}
+                {data.name}
               </Heading>
             </Box>
             <Box>
@@ -46,7 +46,7 @@ const SkillsCard = ({ data, handleEdit, handleDelete }) => {
                 Skill Level
               </Heading>
               <Heading variant={"p7"} color={"gray.text"}>
-                {data.skillLevel}
+                {data.level}
               </Heading>
             </Box>
           </Box>

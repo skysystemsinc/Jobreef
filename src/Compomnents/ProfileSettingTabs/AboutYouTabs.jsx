@@ -183,8 +183,7 @@ const AboutYouTabs = () => {
             <LabelInput
               labelVariant={"label"}
               readOnly={true}
-              // setreadOnly={setreadOnly}
-
+              
               state={state.accountType}
               setState={(e) => {
                 setstate((prev) => {

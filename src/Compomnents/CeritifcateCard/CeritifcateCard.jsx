@@ -8,6 +8,8 @@ import trash from "@/assets/Images/trash.svg";
 import moment from "moment";
 const CeritifcateCard = ({
   data,
+  handleEdit,
+  handleDelete,
   state,
   setState,
   headingStyle,
@@ -49,14 +51,7 @@ const CeritifcateCard = ({
         >
           <Box
             cursor={"pointer"}
-            onClick={() =>
-              setState((prev) => {
-                return {
-                  ...prev,
-                  edit: true,
-                };
-              })
-            }
+            onClick={handleEdit}
             display={"flex"}
             alignItems={"center"}
             gap={"10px"}
@@ -69,14 +64,7 @@ const CeritifcateCard = ({
           </Box>
           <Box
             cursor={"pointer"}
-            onClick={() =>
-              setState((prev) => {
-                return {
-                  ...prev,
-                  delete: true,
-                };
-              })
-            }
+            onClick={handleDelete}
             display={"flex"}
             alignItems={"center"}
             gap={"5px"}
@@ -102,8 +90,10 @@ const CeritifcateCard = ({
         </Box>
 
         <Heading color={"gray.text"} variant={"p12"} sx={headingStyle}>
-          {moment(data.stateDate).format("MMMM YYYY")} {" - "}
-          {moment(data.endDate).format("MMMM YYYY")}
+          {moment(data.issuedOn).format("MMMM YYYY")} {" - "}
+          {data.validUntil
+            ? moment(data.validUntil).format("MMMM YYYY")
+            : "present"}
         </Heading>
         <Box fontSize={{ sm: "14px", base: "8px" }}>
           <GoDotFill style={{ color: "#D9D9D9" }} />

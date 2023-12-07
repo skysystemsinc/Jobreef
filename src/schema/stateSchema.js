@@ -39,15 +39,23 @@ const employee = {
   city: "",
   number: "",
   description: "",
-
-  workExperience: [],
+  workExperience: false,
+  education: false,
+  attachments: {
+    resume: [],
+    additional: [],
+  },
+  achievement: false,
+  certification:false,
+  skills: false,
+  // id: "65714f5716dc9f3d6dc313f5",
   id: null,
 };
 const workExperience = {
   country: "",
-  state: "",
+  province: "",
   city: "",
-  streetAddress: "",
+  address: "",
   companyName: "",
   designation: "",
   startDate: null,
@@ -57,4 +65,42 @@ const workExperience = {
   jobFamily: "",
   jobSummary: "",
 };
-export { registration, company, employee ,workExperience};
+const education = {
+  schoolName: "",
+  diploma: "",
+  currentlyEnrolled: false,
+  startDate: null,
+  endDate: null,
+  country: "",
+  province: "",
+  city: "",
+  address: "",
+  gpa: "",
+  description: "",
+};
+const certification = {
+  certificateName: "",
+  organizationName: "",
+  certificateId: "",
+  issuedOn: null,
+  noExpiry: false,
+  validUntil: null,
+  certificateMedia: [],
+};
+const achievement = {
+  name: "",
+  issueOrganization: "",
+  issuedOn: "",
+  media: [],
+};
+const skills = [{ name: "", level: "" }];
+export {
+  skills,
+  certification,
+  registration,
+  company,
+  achievement,
+  education,
+  employee,
+  workExperience,
+};

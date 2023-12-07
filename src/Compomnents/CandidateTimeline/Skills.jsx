@@ -13,6 +13,7 @@ import {
   Textarea,
   UnorderedList,
   useMediaQuery,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import LabelInput from "../LabelInput/LabelInput";
@@ -21,60 +22,143 @@ import { Link } from "@chakra-ui/next-js";
 import { BsDot, BsPlusLg } from "react-icons/bs";
 import upload from "@/assets/Images/upload.svg";
 import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
+import { skills } from "@/schema/stateSchema";
+import { useDispatch, useSelector } from "react-redux";
+import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
+import endPoints from "@/Utils/endpoints";
+import { post, put } from "@/helper/fetch";
+import { addEmployee } from "@/Reudx/slices/employee";
+import Loader from "../Loader/Loader";
 
-const Skills = () => {
-  const [State, setState] = useState({
-    links: [{ platform: "", link: "" }],
-  });
+const Skills = ({ prevStep, nextStep }) => {
+  const dispatch = useDispatch();
+  const toast = useToast();
+  const employeeState = useSelector(
+    (state) => state.employeeRegister.value.employee
+  );
+  const [loading, setLoading] = useState(false);
+
+  const [formData, setFormData] = useState([
+    { ...skills, name: "", level: "" },
+  ]);
+  console.log("formData", formData);
   const [isSmallerThe500] = useMediaQuery("(max-width: 787px)");
   const handleDelete = (index) => {
-    const updatedLinks = [...State.links];
+    const updatedLinks = [...formData];
     updatedLinks.splice(index, 1);
-    // setlinkArray(deleteArray);
-    setState((prev) => {
-      return {
-        ...prev,
-        links: updatedLinks,
-      };
+
+    setFormData((prev) => {
+      return updatedLinks;
     });
   };
   const handlePlatformChange = (event, index) => {
-    let updatedLinks = [...State.links];
-    updatedLinks[index].platform = event.target.value;
-    setState((prev) => {
-      return {
-        ...prev,
-        links: updatedLinks,
-      };
+    let updatedLinks = [...formData];
+    // updatedLinks[index].name = event.target.value;
+    updatedLinks[index] = { ...updatedLinks[index], name: event.target.value };
+
+    setFormData((prev) => {
+      return updatedLinks;
     });
   };
 
   const handleLinkChange = (event, index) => {
-    let updatedLinks = [...State.links];
-    updatedLinks[index].link = event.target.value;
-    setState((prev) => {
-      return {
-        ...prev,
-        links: updatedLinks,
-      };
+    let updatedLinks = [...formData];
+    // updatedLinks[index].level = event.target.value;
+    updatedLinks[index] = { ...updatedLinks[index], level: event.target.value };
+
+    setFormData((prev) => {
+      return updatedLinks;
     });
   };
 
-  const handleaddMore = () => {
-    const updatedLinks = [...State.links];
-    updatedLinks.push({ platform: "", link: "" });
-    setState((prev) => {
+  const handleAddMore = () => {
+    const updatedLinks = [...formData];
+    updatedLinks.push({ name: "", level: "" });
+    setFormData((prev) => {
+      return updatedLinks;
+    });
+  };
+  const handleNext = async () => {
+    setLoading(true);
+    if (loading) return;
+    const modifyPayload = formData.map((item) => {
       return {
-        ...prev,
-        links: updatedLinks,
+        name: item.name,
+        level: item.level,
+        // employeeId: employeeState.id,
       };
     });
-    // setFormData(updatedFormData);
-  };
+    const body = {
+      // employeeId: employeeState.id,
+      data: modifyPayload,
+    };
+    try {
+      const postData = await post(
+        `${endPoints.skills}/${employeeState.id}`,
+        body
+      );
+      if (postData.success) {
+        nextStep();
 
+        setLoading(false);
+
+        dispatch(
+          addEmployee({
+            ...employeeState,
+            skills: postData.data,
+          })
+        );
+      }
+      toast({
+        position: "bottom-right",
+        title: postData.message,
+        status: postData.success ? "success" : "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    } catch (err) {
+      console.log("err", err);
+      setLoading(false);
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
+  };
+  
+  useSkipInitialEffect(() => {
+    if (!employeeState?.skills) {
+      setFormData([{name:"", level:''}]);
+    }else{
+      setFormData(employeeState.skills);
+
+    }
+  }, [employeeState]);
+
+  const option = [
+    {
+      label: "beginner",
+      value: "beginner",
+    },
+    {
+      label: "intermediate",
+      value: "intermediate",
+    },
+    {
+      label: "proficient",
+      value: "proficient",
+    },
+    {
+      label: "expert",
+      value: "expert",
+    },
+  ];
   return (
     <Box pr={"20px"}>
-      {State?.links.map((item, index) => {
+      {formData?.map((item, index) => {
         return (
           <InputWrapper
             style={{ marginBottom: "15px" }}
@@ -82,7 +166,7 @@ const Skills = () => {
             gap={"15px"}
           >
             <LabelInput
-              state={item.platform}
+              state={item.name}
               setState={(e) => handlePlatformChange(e, index)}
               labelVariant={"label"}
               type="text"
@@ -93,14 +177,15 @@ const Skills = () => {
             <Box width={isSmallerThe500 ? "96%" : "100%"} position={"relative"}>
               {isSmallerThe500 ? (
                 <Input
-                  value={item.link}
+                  value={item.level}
                   onChange={(e) => handleLinkChange(e, index)}
                   variant={"bg-input"}
                   placeholder="Select level of your skill"
                 />
               ) : (
                 <LabelInput
-                  state={item.link}
+                  dropdownOption={option}
+                  state={item.level}
                   setState={(e) => handleLinkChange(e, index)}
                   labelVariant={"label"}
                   type="text"
@@ -128,7 +213,11 @@ const Skills = () => {
                   color: "#2CA5C3",
                 }}
               >
-                <AiOutlineDelete onClick={() => State.links.length>1 ? handleDelete(index) : null} />
+                <AiOutlineDelete
+                  onClick={() =>
+                    formData.length > 1 ? handleDelete(index) : null
+                  }
+                />
               </Box>
             </Box>
           </InputWrapper>
@@ -137,13 +226,30 @@ const Skills = () => {
 
       {/* <Flex justifyContent={"center"}> */}
       <Button
-        onClick={ State.links.length < 5 ? handleaddMore : null}
+        onClick={formData.length < 5 ? handleAddMore : null}
         variant={"blue-btn"}
         width={"max-content"}
         px={{ md: "33px", base: "20px" }}
       >
         Add Skill
       </Button>
+
+      <Flex
+        width="100%"
+        justify="center"
+        mt={{ md: "43px", base: "3px" }}
+        pb={"30px"}
+        gap={4}
+      >
+        <>
+          <Button onClick={prevStep} variant="outline-blue">
+            {" Back"}
+          </Button>
+          <Button onClick={handleNext} variant={"blue-btn"}>
+            {loading ? <Loader /> : "Next"}
+          </Button>
+        </>
+      </Flex>
       {/* </Flex> */}
     </Box>
   );

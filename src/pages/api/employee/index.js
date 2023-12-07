@@ -8,18 +8,28 @@ const addEmployee = async (req, res) => {
       data: {
         location: data.location,
         phoneNumber: data.phoneNumber,
-        summary: data.summary,
-        workExperience: data.workExperience,
-        education: data.education,
-        certification: data.certification,
-        skills: data.skills,
-        achievement: data.achievement,
-        attachment: data.attachment,
+        description: data.description,
+        // workExperience: data.workExperience,
+        // education: data.education,
+        // certification: data.certification,
+        // skills: data.skills,
+        // achievement: data.achievement,
+        // attachment: data.attachment,
       },
+      include: {
+        skills: true,
+        workExperience: true,
+        education: true,
+        certification: true,
+        skills: true,
+        achievement: true,
+        attachment: true,
+      },
+
     });
 
     res.status(201).json({
-      message: "Employee Created successfully",
+      message: "Employee created successfully",
       data: employeeCreated,
       success: true,
     });

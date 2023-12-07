@@ -31,6 +31,7 @@ import { httpRequest } from "@/helper/httpRrequest";
 import { BACKEND_URL } from "@/Utils/urls";
 import LoadingSkeleton from "../LoadingSkeleton/LoadingSkeleton";
 import { addCompany } from "@/Reudx/slices/company";
+import { addEmployee } from "@/Reudx/slices/employee";
 const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -104,7 +105,8 @@ const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
         const { data } = postData;
 
         dispatch(setLoginUser(postData.data));
-        dispatch(addCompany(postData.data.company));
+        dispatch(addCompany(postData?.data?.company));
+        dispatch(addEmployee(postData?.data?.employee));
       }
     } catch (error) {
       console.log("error", error);
@@ -117,206 +119,206 @@ const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
   }, []);
   return (
     <>
-    {/* false temp add */}
+      {/* false temp add */}
       {/* {false ? (
         <LoadingSkeleton />
       ) : ( */}
-        <Menu>
-          <MenuButton
-            as={Button}
-            variant={"unstyled"}
-            // border={"1px solid red"}
-            height={"max-content"}
-            width={"max-content"}
-            // rightIcon={<HiOutlineChevronDown color="red" fontSize={"24px"} />}
+      <Menu>
+        <MenuButton
+          as={Button}
+          variant={"unstyled"}
+          // border={"1px solid red"}
+          height={"max-content"}
+          width={"max-content"}
+          // rightIcon={<HiOutlineChevronDown color="red" fontSize={"24px"} />}
+        >
+          <Box
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"flex-end"}
+            gap={"10px"}
+            position={"relative"}
           >
+            <Image
+              width={{ md: "40px", base: "30px" }}
+              height={{ md: "40px", base: "30px" }}
+              borderRadius={"100px"}
+              objectFit={"cover"}
+              src={header_profile.src}
+            />
             <Box
-              display={"flex"}
-              alignItems={"center"}
-              justifyContent={"flex-end"}
-              gap={"10px"}
-              position={"relative"}
+              display={{ xl: "block", base: "none" }}
+              sx={hiddenStyle}
+              textAlign={"start"}
             >
-              <Image
-                width={{ md: "40px", base: "30px" }}
-                height={{ md: "40px", base: "30px" }}
-                borderRadius={"100px"}
-                objectFit={"cover"}
-                src={header_profile.src}
-              />
-              <Box
-                display={{ xl: "block", base: "none" }}
-                sx={hiddenStyle}
-                textAlign={"start"}
-              >
-                <Heading as={"p"} variant={"p4"}>
-                  {" "}
-                  {/* {`${loginUser?.firstName} ${loginUser?.lastName}`} */}
-                  Jacob Jones
-                </Heading>
-                <Heading variant={"p1"}>
-                  {/* {loginUser?.email} */}
-                  jacobjones9@acme.com
-                </Heading>
-              </Box>
-
-              <Box display={{ xl: "block", base: "none" }}>
-                <HiOutlineChevronDown
-                  style={{ position: "absolute", right: "8px", top: "3px" }}
-                  color="black.100"
-                  // fontSize={{ "2xl": "27px", base: "240px" }}
-                  fontSize={"17px"}
-                />
-              </Box>
+              <Heading as={"p"} variant={"p4"}>
+                {" "}
+                {/* {`${loginUser?.firstName} ${loginUser?.lastName}`} */}
+                Jacob Jones
+              </Heading>
+              <Heading variant={"p1"}>
+                {/* {loginUser?.email} */}
+                jacobjones9@acme.com
+              </Heading>
             </Box>
-          </MenuButton>
-          <MenuList py="0px">
-            {candidate
-              ? candidatedropdown.map((item, index) => {
-                  return (
-                    <Link
-                      key={index}
-                      _hover={{ textDecoration: "none" }}
-                      href={item.pathname}
-                    >
-                      <MenuItem
-                        key={index}
-                        transition={".5s"}
-                        _hover={{
-                          bg: "gray.200",
-                          "& .hoverText": { color: "blue.500" },
-                        }}
-                        borderBottom={"1px solid #0000001a"}
-                        // p={{ md: "14px 20px 16px 20px", base: "7px 16px 14px 16px" }}
-                        p={{
-                          md: "14px 20px 16px 20px",
-                          base: "13px 16px 13px 16px",
-                        }}
 
-                        // mb={"6px"}
+            <Box display={{ xl: "block", base: "none" }}>
+              <HiOutlineChevronDown
+                style={{ position: "absolute", right: "8px", top: "3px" }}
+                color="black.100"
+                // fontSize={{ "2xl": "27px", base: "240px" }}
+                fontSize={"17px"}
+              />
+            </Box>
+          </Box>
+        </MenuButton>
+        <MenuList py="0px">
+          {candidate
+            ? candidatedropdown.map((item, index) => {
+                return (
+                  <Link
+                    key={index}
+                    _hover={{ textDecoration: "none" }}
+                    href={item.pathname}
+                  >
+                    <MenuItem
+                      key={index}
+                      transition={".5s"}
+                      _hover={{
+                        bg: "gray.200",
+                        "& .hoverText": { color: "blue.500" },
+                      }}
+                      borderBottom={"1px solid #0000001a"}
+                      // p={{ md: "14px 20px 16px 20px", base: "7px 16px 14px 16px" }}
+                      p={{
+                        md: "14px 20px 16px 20px",
+                        base: "13px 16px 13px 16px",
+                      }}
+
+                      // mb={"6px"}
+                    >
+                      <Box
+                        border={"1px solid black.100"}
+                        display={"flex"}
+                        justifyContent={"center"}
+                        alignItems={"center"}
+                        gap={"10px"}
+                        className="hoverText"
                       >
-                        <Box
-                          border={"1px solid black.100"}
-                          display={"flex"}
-                          justifyContent={"center"}
-                          alignItems={"center"}
-                          gap={"10px"}
+                        {/* <Image src={dasboadrd.src} /> */}
+                        {item.icon}
+
+                        <Heading
                           className="hoverText"
+                          transition={".5s"}
+                          mb="1px"
+                          as={"p"}
+                          variant={"p4"}
                         >
-                          {/* <Image src={dasboadrd.src} /> */}
-                          {item.icon}
-
-                          <Heading
-                            className="hoverText"
-                            transition={".5s"}
-                            mb="1px"
-                            as={"p"}
-                            variant={"p4"}
-                          >
-                            {" "}
-                            {item.title}
-                          </Heading>
-                        </Box>
-                      </MenuItem>
-                    </Link>
-                  );
-                })
-              : operatorDropdown
-              ? operator.map((item, index) => {
-                  return (
-                    <Link
+                          {" "}
+                          {item.title}
+                        </Heading>
+                      </Box>
+                    </MenuItem>
+                  </Link>
+                );
+              })
+            : operatorDropdown
+            ? operator.map((item, index) => {
+                return (
+                  <Link
+                    key={index}
+                    _hover={{ textDecoration: "none" }}
+                    href={item.pathname}
+                  >
+                    <MenuItem
                       key={index}
-                      _hover={{ textDecoration: "none" }}
-                      href={item.pathname}
+                      bg="transparent"
+                      transition={".5s"}
+                      _hover={{
+                        bg: "gray.200",
+                        "& .hoverText": { color: "blue.500" },
+                      }}
+                      borderBottom={"1px solid #0000001a"}
+                      p={{
+                        md: "14px 20px 16px 20px",
+                        base: "13px 16px 13px 16px",
+                      }}
+                      // mb={"6px"}
                     >
-                      <MenuItem
-                        key={index}
-                        bg="transparent"
-                        transition={".5s"}
-                        _hover={{
-                          bg: "gray.200",
-                          "& .hoverText": { color: "blue.500" },
-                        }}
-                        borderBottom={"1px solid #0000001a"}
-                        p={{
-                          md: "14px 20px 16px 20px",
-                          base: "13px 16px 13px 16px",
-                        }}
-                        // mb={"6px"}
+                      <Box
+                        border={"1px solid black.100"}
+                        display={"flex"}
+                        justifyContent={"center"}
+                        alignItems={"center"}
+                        gap={"10px"}
                       >
-                        <Box
-                          border={"1px solid black.100"}
-                          display={"flex"}
-                          justifyContent={"center"}
-                          alignItems={"center"}
-                          gap={"10px"}
-                        >
-                          {item.icon}
+                        {item.icon}
 
-                          <Heading
-                            transition={".5s"}
-                            className="hoverText"
-                            mb="1px"
-                            as={"p"}
-                            variant={"p4"}
-                          >
-                            {" "}
-                            {item.title}
-                          </Heading>
-                        </Box>
-                      </MenuItem>
-                    </Link>
-                  );
-                })
-              : companydropdown.map((item, index) => {
-                  return (
-                    <Link
+                        <Heading
+                          transition={".5s"}
+                          className="hoverText"
+                          mb="1px"
+                          as={"p"}
+                          variant={"p4"}
+                        >
+                          {" "}
+                          {item.title}
+                        </Heading>
+                      </Box>
+                    </MenuItem>
+                  </Link>
+                );
+              })
+            : companydropdown.map((item, index) => {
+                return (
+                  <Link
+                    key={index}
+                    _hover={{ textDecoration: "none" }}
+                    href={item.pathname}
+                  >
+                    <MenuItem
                       key={index}
-                      _hover={{ textDecoration: "none" }}
-                      href={item.pathname}
+                      bg="transparent"
+                      transition={".5s"}
+                      _hover={{
+                        bg: "gray.200",
+                        "& .hoverText": { color: "blue.500" },
+                      }}
+                      borderBottom={"1px solid #0000001a"}
+                      p={{
+                        md: "14px 20px 16px 20px",
+                        base: "13px 16px 13px 16px",
+                      }}
+                      // mb={"6px"}
                     >
-                      <MenuItem
-                        key={index}
-                        bg="transparent"
-                        transition={".5s"}
-                        _hover={{
-                          bg: "gray.200",
-                          "& .hoverText": { color: "blue.500" },
-                        }}
-                        borderBottom={"1px solid #0000001a"}
-                        p={{
-                          md: "14px 20px 16px 20px",
-                          base: "13px 16px 13px 16px",
-                        }}
-                        // mb={"6px"}
+                      <Box
+                        border={"1px solid black.100"}
+                        display={"flex"}
+                        justifyContent={"center"}
+                        alignItems={"center"}
+                        gap={"10px"}
                       >
-                        <Box
-                          border={"1px solid black.100"}
-                          display={"flex"}
-                          justifyContent={"center"}
-                          alignItems={"center"}
-                          gap={"10px"}
-                        >
-                          {/* <Image src={dasboadrd.src} /> */}
-                          {item.icon}
+                        {/* <Image src={dasboadrd.src} /> */}
+                        {item.icon}
 
-                          <Heading
-                            transition={".5s"}
-                            className="hoverText"
-                            mb="1px"
-                            as={"p"}
-                            variant={"p4"}
-                          >
-                            {" "}
-                            {item.title}
-                          </Heading>
-                        </Box>
-                      </MenuItem>
-                    </Link>
-                  );
-                })}
-          </MenuList>
-        </Menu>
+                        <Heading
+                          transition={".5s"}
+                          className="hoverText"
+                          mb="1px"
+                          as={"p"}
+                          variant={"p4"}
+                        >
+                          {" "}
+                          {item.title}
+                        </Heading>
+                      </Box>
+                    </MenuItem>
+                  </Link>
+                );
+              })}
+        </MenuList>
+      </Menu>
       {/* )} */}
     </>
   );

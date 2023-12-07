@@ -1,57 +1,30 @@
 import { Box, Button, Flex, Heading, Text, useToast } from "@chakra-ui/react";
 import React, { useState } from "react";
+
+import TextCard from "../TextCard/TextCard";
 import ExperianceForm from "./ExperianceForm";
 import ExperianceCard from "../ExperianceCard/ExperianceCard";
-import TextCard from "../TextCard/TextCard";
-import EducationForm from "./EducationForm";
-import EducationCard from "../EducationCard/EducationCard";
-
-import CertificationForm from "./CertificateForm";
-import CeritifcateCard from "../CeritifcateCard/CeritifcateCard";
+import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { addEmployee, setFormData } from "@/Reudx/slices/employee";
-import { certification } from "@/schema/stateSchema";
-import { deleteApi } from "@/helper/fetch";
-import endPoints from "@/Utils/endpoints";
+import { workExperience } from "@/schema/stateSchema";
 import DeleteModal from "../DeleteModal/DeleteModal";
+import endPoints from "@/Utils/endpoints";
+import { deleteApi } from "@/helper/fetch";
 import { ExpCardLoading } from "../LoadingSkeleton/LoadingSkeleton";
 
-const Certification = ({ prevStep, nextStep }) => {
-  const style = {
-    maxWidth: "240px",
-  };
-  const certificationData = [
-    {
-      certificateName: "Diploma Name",
-      organizationName: "Jobreef Professional Academy",
-      noExpiry: false,
-      readOnly: false,
-      certificateId: "2f8ae5bfaa4c46dc3bba77655",
-      issuedOn: new Date(),
-      country: " USA",
-      state: "Chicago",
-      city: " Illinois",
-      validUntil: new Date(),
-    },
-    {
-      certificateName: "Diploma Name",
-      organizationName: "Jobreef Professional Academy",
-      noExpiry: false,
-      readOnly: false,
-      certificateId: "2f8ae5bfaa4c46dc3bba77655",
-      issuedOn: new Date(),
-      country: " USA",
-      state: "Chicago",
-      city: " Illinois",
-      validUntil: new Date(),
-    },
-  ];
-
+const WorkExperience = ({
+  containerStyle,
+  showAddText,
+  disableNextButton,
+  prevStep,
+  nextStep,
+}) => {
   const dispatch = useDispatch();
+  const toast = useToast();
   const employeeState = useSelector(
     (state) => state.employeeRegister.value.employee
   );
-  const toast = useToast();
 
   const [state, setState] = useState({
     edit: false,
@@ -59,8 +32,41 @@ const Certification = ({ prevStep, nextStep }) => {
     delete: false,
     add: false,
   });
-
-  const handleEditSingleData = (data) => {
+  const experienceData = [
+    {
+      companyName: "Microsoft",
+      designation: "Senior System’s Design Engineer",
+      currentlyWorking: false,
+      readOnly: false,
+      stateDate: new Date(),
+      endDate: new Date(),
+      country: "USA",
+      state: "",
+      city: "",
+      streetAddress: "",
+      employmentType: "",
+      jobFamily: "",
+      jobSummary:
+        "Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability. Requirements Analysis: Collaborate with stakeholders, customers, and cross-functional teams to gather and analyze system requirements,",
+    },
+    {
+      companyName: "Microsoft",
+      designation: "Senior System’s Design Engineer",
+      currentlyWorking: false,
+      readOnly: false,
+      stateDate: new Date(),
+      endDate: new Date(),
+      country: "USA",
+      state: "",
+      city: "",
+      streetAddress: "",
+      employmentType: "",
+      jobFamily: "",
+      jobSummary:
+        "Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability. Requirements Analysis: Collaborate with stakeholders, customers, and cross-functional teams to gather and analyze system requirements,",
+    },
+  ];
+  const handleEditSingleExp = (data) => {
     setState((prev) => {
       return {
         ...prev,
@@ -73,7 +79,7 @@ const Certification = ({ prevStep, nextStep }) => {
     setState((prev) => {
       return { ...prev, add: true };
     });
-    dispatch(setFormData(certification));
+    dispatch(setFormData(workExperience));
   };
   const handleDelete = async () => {
     setState((prev) => {
@@ -81,13 +87,13 @@ const Certification = ({ prevStep, nextStep }) => {
     });
     try {
       const postData = await deleteApi(
-        `${endPoints.certification}/${state.delete.id}`
+        `${endPoints.workExperience}/${state.delete.id}`
       );
       if (postData.success) {
         dispatch(
           addEmployee({
             ...employeeState,
-            certification: employeeState.certification.filter(
+            workExperience: employeeState.workExperience.filter(
               (item) => item.id !== postData.data.id
             ),
           })
@@ -121,18 +127,17 @@ const Certification = ({ prevStep, nextStep }) => {
     // TODO will update stages
     nextStep();
   };
-
   return (
     <Box>
       <DeleteModal
         handleDelete={handleDelete}
-        name={state.delete.certificateName}
-        loading={state.loading}
         onOpen={() =>
           setState((prev) => {
             return { ...prev, delete: true };
           })
         }
+        name={state.delete.companyName}
+        loading={state.loading}
         isOpen={state.delete}
         onClose={() =>
           setState((prev) => {
@@ -141,49 +146,50 @@ const Certification = ({ prevStep, nextStep }) => {
         }
       />
       {state.add || state.edit ? (
-        <Box display={"flex"} justifyContent={"center"}>
-          <CertificationForm state={state} setState={setState} />
+        <Box mx={"auto"}>
+          <ExperianceForm state={state} setState={setState} />
         </Box>
       ) : (
         <Box width={"100%"} mx={"auto"}>
-          {!employeeState?.certification ? (
-            <ExpCardLoading />
-          ) : (
-            employeeState?.certification?.map((item) => {
-              return (
-                <Box>
-                  <CeritifcateCard
-                    handleEdit={() => handleEditSingleData(item)}
-                    handleDelete={() => {
-                      setState((prev) => {
-                        return {
-                          ...prev,
-                          delete: item,
-                        };
-                      });
-                    }}
-                    data={item}
-                    state={state}
-                    headingStyle={style}
-                    setState={setState}
-                  />
-                </Box>
-              );
-            })
-          )}
+          <Box>
+            {!employeeState?.workExperience ? (
+              <ExpCardLoading />
+            ) : (
+              employeeState?.workExperience?.map((item, ind) => {
+                return (
+                  <Box key={ind}>
+                    <ExperianceCard
+                      handleEdit={() => handleEditSingleExp(item)}
+                      handleDelete={() => {
+                        setState((prev) => {
+                          return {
+                            ...prev,
+                            delete: item,
+                          };
+                        });
+                      }}
+                      data={item}
+                      state={state}
+                      setState={setState}
+                    />
+                  </Box>
+                );
+              })
+            )}
+          </Box>
 
           <Flex justifyContent={"center"}>
             <Button
               onClick={handleAddNew}
               width="max-content"
-              px={"20px"}
-              mt={{ md: "17px", base: "15px" }}
-              mb={"40px"}
+              px={"10px"}
+              mb={{ md: "38px", base: "20px" }}
               variant={"blue-btn"}
             >
-              Add Certification
+              Add New Experience
             </Button>
           </Flex>
+
           <Flex
             width="100%"
             justify="center"
@@ -193,7 +199,7 @@ const Certification = ({ prevStep, nextStep }) => {
           >
             <>
               <Button onClick={prevStep} variant="outline-blue">
-                {" Back"}
+                {"Back"}
               </Button>
               <Button onClick={handleNext} variant={"blue-btn"}>
                 Next
@@ -206,4 +212,4 @@ const Certification = ({ prevStep, nextStep }) => {
   );
 };
 
-export default Certification;
+export { WorkExperience };

@@ -16,16 +16,21 @@ import globalStyles from "@/styles/globalStyles";
 import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
 import AboutYouTabs from "../ProfileSettingTabs/AboutYouTabs";
 import Overview from "./Overview";
-import WorkExperiance from "./WorkExperiance";
+
 import Education from "./Education";
 import Certification from "./Certification";
 import Skills from "./Skills";
 import Attachments from "./Attachments";
 import Achievement from "./Achivement";
 import CustomTabs from "../CustomeTabs/CustomeTabs";
+import WorkExperience from "./WorkExperience";
+import { useSelector } from "react-redux";
 
 const MyResumeTabs = () => {
   let [tabIndex, setTabIndex] = useState(0);
+  const employeeState = useSelector(
+    (state) => state.employeeRegister.value.employee
+  );
   const tabList = [
     {
       title: "Overview",
@@ -54,7 +59,7 @@ const MyResumeTabs = () => {
     {
       label: "Work Experience",
       value: "Work Experience",
-      content: <WorkExperiance />,
+      content: <WorkExperience />,
     },
     { label: "Education", value: "Education", content: <Education /> },
     {
@@ -114,7 +119,7 @@ const MyResumeTabs = () => {
             </Box>
           </TabPanel>
           <TabPanel>
-            <WorkExperiance />
+              <WorkExperience  />
           </TabPanel>
           <TabPanel>
             <Education />

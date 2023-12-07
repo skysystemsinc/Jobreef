@@ -1,31 +1,39 @@
 import { Box, Button, Flex, Heading, Text, useToast } from "@chakra-ui/react";
 import React, { useState } from "react";
-
+import ExperianceForm from "./ExperianceForm";
+import ExperianceCard from "../ExperianceCard/ExperianceCard";
 import TextCard from "../TextCard/TextCard";
+import EducationForm from "./EducationForm";
+import EducationCard from "../EducationCard/EducationCard";
 
-import CertificationForm from "./CertificationForm";
+import CertificationForm from "./CertificateForm";
 import CeritifcateCard from "../CeritifcateCard/CeritifcateCard";
-import SkillsForm from "./SkillsForm";
-import SkillsCard from "../SkillsCard/SkillsCard";
-import DeleteModal from "../DeleteModal/DeleteModal";
 import { useDispatch, useSelector } from "react-redux";
 import { addEmployee, setFormData } from "@/Reudx/slices/employee";
-import { skills } from "@/schema/stateSchema";
+import { achievement, certification } from "@/schema/stateSchema";
 import { deleteApi } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
+import DeleteModal from "../DeleteModal/DeleteModal";
+import AchievementForm from "../MyResumeTab/AchievementForm";
+import AchievementCard from "../AchievementCard/AchievementCard";
 import { ExpCardLoading } from "../LoadingSkeleton/LoadingSkeleton";
 
-const Skills = () => {
+const Achievement = ({ prevStep, nextStep }) => {
+  const style = {
+    maxWidth: "240px",
+  };
+
   const dispatch = useDispatch();
-  const toast = useToast();
   const employeeState = useSelector(
     (state) => state.employeeRegister.value.employee
   );
-  const [state, setState] = useState({
-    add: false,
+  const toast = useToast();
 
+  const [state, setState] = useState({
     edit: false,
+    loading: false,
     delete: false,
+    add: false,
   });
 
   const handleEditSingleData = (data) => {
@@ -41,7 +49,7 @@ const Skills = () => {
     setState((prev) => {
       return { ...prev, add: true };
     });
-    dispatch(setFormData({ name: "", level: "" }));
+    dispatch(setFormData(achievement));
   };
   const handleDelete = async () => {
     setState((prev) => {
@@ -49,13 +57,13 @@ const Skills = () => {
     });
     try {
       const postData = await deleteApi(
-        `${endPoints.skills}/${state.delete.id}`
+        `${endPoints.achievement}/${state.delete.id}`
       );
       if (postData.success) {
         dispatch(
           addEmployee({
             ...employeeState,
-            skills: employeeState.skills.filter(
+            achievement: employeeState.achievement.filter(
               (item) => item.id !== postData.data.id
             ),
           })
@@ -85,17 +93,22 @@ const Skills = () => {
       });
     }
   };
+  const handleNext = () => {
+    // TODO will update stages
+    nextStep();
+  };
+
   return (
     <Box>
       <DeleteModal
-        loading={state.loading}
         handleDelete={handleDelete}
+        name={state.delete.name}
+        loading={state.loading}
         onOpen={() =>
           setState((prev) => {
             return { ...prev, delete: true };
           })
         }
-        name={state.delete.name}
         isOpen={state.delete}
         onClose={() =>
           setState((prev) => {
@@ -104,23 +117,18 @@ const Skills = () => {
         }
       />
       {state.add || state.edit ? (
-        <Box display={"flex"} justifyContent={"center"}>
-          <SkillsForm state={state} setState={setState} />
+        <Box>
+          <AchievementForm state={state} setState={setState} />
         </Box>
-      ) : employeeState.skills.length > 0 ? (
-        <Box
-          minH={"60vh"}
-          mt={"30px"}
-          width={{ xl: "72%", base: "100%" }}
-          mx={"auto"}
-        >
-          {!employeeState.skills ? (
+      ) : (
+        <Box width={"100%"} mx={"auto"}>
+          {!employeeState?.achievement ? (
             <ExpCardLoading />
           ) : (
-            employeeState.skills.map((item, ind) => {
+            employeeState?.achievement?.map((item) => {
               return (
-                <Box key={ind}>
-                  <SkillsCard
+                <Box>
+                  <AchievementCard
                     handleEdit={() => handleEditSingleData(item)}
                     handleDelete={() => {
                       setState((prev) => {
@@ -131,6 +139,9 @@ const Skills = () => {
                       });
                     }}
                     data={item}
+                    state={state}
+                    headingStyle={style}
+                    setState={setState}
                   />
                 </Box>
               );
@@ -141,27 +152,34 @@ const Skills = () => {
             <Button
               onClick={handleAddNew}
               width="max-content"
-              px={{ md: "40px", base: "20px" }}
-              mt={{ md: "61px", base: "20px" }}
+              px={"20px"}
+              mt={{ md: "17px", base: "15px" }}
               mb={"40px"}
               variant={"blue-btn"}
             >
-              Add Skills
+              Add Achievement
             </Button>
           </Flex>
-        </Box>
-      ) : (
-        <Box minHeight={"68vh"} pl={{ md: "30px", base: "0px" }}>
-          <TextCard
-            addHandle={handleAddNew}
-            title={"Let Employers Know How Skilled Your Are:"}
-            subittle={"Add Your Top Skillsets."}
-            btnLable={"Add Skills"}
-          />
+          <Flex
+            width="100%"
+            justify="center"
+            mt={{ md: "43px", base: "3px" }}
+            pb={"30px"}
+            gap={4}
+          >
+            <>
+              <Button onClick={prevStep} variant="outline-blue">
+                {" Back"}
+              </Button>
+              <Button onClick={handleNext} variant={"blue-btn"}>
+                Next
+              </Button>
+            </>
+          </Flex>
         </Box>
       )}
     </Box>
   );
 };
 
-export default Skills;
+export default Achievement;

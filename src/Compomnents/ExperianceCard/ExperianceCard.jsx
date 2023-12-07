@@ -6,7 +6,13 @@ import { HiLocationMarker } from "react-icons/hi";
 import edit_outline from "@/assets/Images/edit_outline.svg";
 import trash from "@/assets/Images/trash.svg";
 import moment from "moment";
-const ExperianceCard = ({ handleEdit, data, state, setState }) => {
+const ExperianceCard = ({
+  handleDelete,
+  handleEdit,
+  data,
+  state,
+  setState,
+}) => {
   return (
     <Box
       p={{ sm: "16px", base: "12px" }}
@@ -32,7 +38,6 @@ const ExperianceCard = ({ handleEdit, data, state, setState }) => {
           alignItems={"flex-start"}
           gap={{ md: "13px", base: "12px" }}
         >
-        
           <Box>
             <Heading variant={"p7"} color={"gray.text"}>
               {data.designation}
@@ -84,8 +89,7 @@ const ExperianceCard = ({ handleEdit, data, state, setState }) => {
           gap={"18px"}
         >
           <Box
-            onClick={handleEdit
-            }
+            onClick={handleEdit}
             cursor={"pointer"}
             display={"flex"}
             alignItems={"center"}
@@ -98,14 +102,7 @@ const ExperianceCard = ({ handleEdit, data, state, setState }) => {
             <Heading variant={"p5"}>Edit</Heading>
           </Box>
           <Box
-            onClick={() =>
-              setState((prev) => {
-                return {
-                  ...prev,
-                  delete: true,
-                };
-              })
-            }
+            onClick={handleDelete}
             cursor={"pointer"}
             display={"flex"}
             alignItems={"center"}

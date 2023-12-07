@@ -8,12 +8,11 @@ import trash from "@/assets/Images/trash.svg";
 import moment from "moment";
 const AchievementCard = ({
   data,
-  state,
+  handleEdit,
+  handleDelete,
   setState,
   headingStyle,
-  dispableBlueCard,
 }) => {
-  const [isSmallerThe500] = useMediaQuery("(max-width: 500px)");
 
   return (
     <Box
@@ -36,8 +35,7 @@ const AchievementCard = ({
         flexWrap={{ xl: "nowrap", base: "wrap" }}
       >
         <Heading variant={"p7"} color={"gray.text"}>
-          {/* {data.certificateName} */}
-          Achievement Name
+          {data.name}
         </Heading>
 
         <Box
@@ -50,14 +48,7 @@ const AchievementCard = ({
         >
           <Box
             cursor={"pointer"}
-            onClick={() =>
-              setState((prev) => {
-                return {
-                  ...prev,
-                  edit: true,
-                };
-              })
-            }
+            onClick={handleEdit}
             display={"flex"}
             alignItems={"center"}
             gap={"10px"}
@@ -70,14 +61,7 @@ const AchievementCard = ({
           </Box>
           <Box
             cursor={"pointer"}
-            onClick={() =>
-              setState((prev) => {
-                return {
-                  ...prev,
-                  delete: true,
-                };
-              })
-            }
+            onClick={handleDelete}
             display={"flex"}
             alignItems={"center"}
             gap={"5px"}
@@ -96,24 +80,16 @@ const AchievementCard = ({
         gap={{ md: "10px", sm: "6px", base: "5px" }}
       >
         <Heading color={"gray.text"} variant={"p12"} sx={headingStyle}>
-          {/* {data.organizationName} */}
-          Organisation Name
+          {data.issueOrganization}
         </Heading>
         <Box fontSize={{ sm: "14px", base: "8px" }}>
           <GoDotFill style={{ color: "#D9D9D9" }} />
         </Box>
 
         <Heading color={"gray.text"} variant={"p12"} sx={headingStyle}>
-          {moment(data.stateDate).format("MMMM YYYY")} {" - "}
-          {moment(data.endDate).format("MMMM YYYY")}
+          {moment(data.issuedOn).format("MMMM YYYY")}
         </Heading>
-        {/* <Box fontSize={{ sm: "14px", base: "8px" }}>
-          <GoDotFill style={{ color: "#D9D9D9" }} />
-        </Box> */}
-
-   
       </Box>
-     
     </Box>
   );
 };

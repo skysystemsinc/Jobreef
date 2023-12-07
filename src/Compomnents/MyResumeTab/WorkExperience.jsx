@@ -1,21 +1,18 @@
 import { Box, Button, Flex, Heading, Text, useToast } from "@chakra-ui/react";
 import React, { useState } from "react";
 
+import ExperianceCard from "../ExperianceCard/ExperianceCard";
 import TextCard from "../TextCard/TextCard";
-
-import CertificationForm from "./CertificationForm";
-import CeritifcateCard from "../CeritifcateCard/CeritifcateCard";
-import SkillsForm from "./SkillsForm";
-import SkillsCard from "../SkillsCard/SkillsCard";
 import DeleteModal from "../DeleteModal/DeleteModal";
+import ExperianceForm from "../CandidateTimeline/ExperianceForm";
+import { ExpCardLoading } from "../LoadingSkeleton/LoadingSkeleton";
 import { useDispatch, useSelector } from "react-redux";
 import { addEmployee, setFormData } from "@/Reudx/slices/employee";
-import { skills } from "@/schema/stateSchema";
+import { workExperience } from "@/schema/stateSchema";
 import { deleteApi } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
-import { ExpCardLoading } from "../LoadingSkeleton/LoadingSkeleton";
 
-const Skills = () => {
+const WorkExperience = () => {
   const dispatch = useDispatch();
   const toast = useToast();
   const employeeState = useSelector(
@@ -23,12 +20,12 @@ const Skills = () => {
   );
   const [state, setState] = useState({
     add: false,
-
+    loading: false,
     edit: false,
     delete: false,
   });
 
-  const handleEditSingleData = (data) => {
+  const handleEditSingleExp = (data) => {
     setState((prev) => {
       return {
         ...prev,
@@ -41,7 +38,7 @@ const Skills = () => {
     setState((prev) => {
       return { ...prev, add: true };
     });
-    dispatch(setFormData({ name: "", level: "" }));
+    dispatch(setFormData(workExperience));
   };
   const handleDelete = async () => {
     setState((prev) => {
@@ -49,13 +46,13 @@ const Skills = () => {
     });
     try {
       const postData = await deleteApi(
-        `${endPoints.skills}/${state.delete.id}`
+        `${endPoints.workExperience}/${state.delete.id}`
       );
       if (postData.success) {
         dispatch(
           addEmployee({
             ...employeeState,
-            skills: employeeState.skills.filter(
+            workExperience: employeeState.workExperience.filter(
               (item) => item.id !== postData.data.id
             ),
           })
@@ -88,14 +85,15 @@ const Skills = () => {
   return (
     <Box>
       <DeleteModal
-        loading={state.loading}
-        handleDelete={handleDelete}
         onOpen={() =>
           setState((prev) => {
             return { ...prev, delete: true };
           })
         }
-        name={state.delete.name}
+        name={state.delete.companyName}
+
+        loading={state.loading}
+        handleDelete={handleDelete}
         isOpen={state.delete}
         onClose={() =>
           setState((prev) => {
@@ -104,24 +102,24 @@ const Skills = () => {
         }
       />
       {state.add || state.edit ? (
-        <Box display={"flex"} justifyContent={"center"}>
-          <SkillsForm state={state} setState={setState} />
+        <Box width={{ md: "70%", base: "100%" }} mx={"auto"} mt={'50px'}>
+          <ExperianceForm state={state} setState={setState} />
         </Box>
-      ) : employeeState.skills.length > 0 ? (
+      ) : employeeState?.workExperience.length > 0 ? (
         <Box
-          minH={"60vh"}
           mt={"30px"}
-          width={{ xl: "72%", base: "100%" }}
+          minHeight={"63vh"}
+          width={{ lg: "73%", base: "100%" }}
           mx={"auto"}
         >
-          {!employeeState.skills ? (
+          {!employeeState?.workExperience ? (
             <ExpCardLoading />
           ) : (
-            employeeState.skills.map((item, ind) => {
+            employeeState?.workExperience.map((item, ind) => {
               return (
                 <Box key={ind}>
-                  <SkillsCard
-                    handleEdit={() => handleEditSingleData(item)}
+                  <ExperianceCard
+                    handleEdit={() => handleEditSingleExp(item)}
                     handleDelete={() => {
                       setState((prev) => {
                         return {
@@ -131,6 +129,8 @@ const Skills = () => {
                       });
                     }}
                     data={item}
+                    state={state}
+                    setState={setState}
                   />
                 </Box>
               );
@@ -141,22 +141,22 @@ const Skills = () => {
             <Button
               onClick={handleAddNew}
               width="max-content"
-              px={{ md: "40px", base: "20px" }}
-              mt={{ md: "61px", base: "20px" }}
-              mb={"40px"}
+              px={"12px"}
+              mt={{ md: "41px", base: "20px" }}
               variant={"blue-btn"}
             >
-              Add Skills
+              Add New Experience
             </Button>
           </Flex>
         </Box>
       ) : (
         <Box minHeight={"68vh"} pl={{ md: "30px", base: "0px" }}>
           <TextCard
-            addHandle={handleAddNew}
-            title={"Let Employers Know How Skilled Your Are:"}
-            subittle={"Add Your Top Skillsets."}
-            btnLable={"Add Skills"}
+            addHandle={handleAddNew
+            }
+            title={"Ready to build an impressive resume?"}
+            subittle={"Start by including your work experiences."}
+            btnLable={"Add  Experience"}
           />
         </Box>
       )}
@@ -164,4 +164,4 @@ const Skills = () => {
   );
 };
 
-export default Skills;
+export default WorkExperience;
