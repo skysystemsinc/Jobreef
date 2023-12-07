@@ -29,7 +29,8 @@ const DeleteEmployee = async (req, res) => {
 };
 const UpdateEmployee = async (req, res) => {
   // const data = req.body;
-  const { data } = req.body;
+  const data = req.body;
+  console.log("data", req.body);
 
   try {
     const employee = await prisma.Employee.update({

@@ -7,40 +7,37 @@ import {
   FormLabel,
   Image,
   Input,
+  useToast,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import profile from "@/assets/Images/profile.svg";
 import edit from "@/assets/Images/edit.svg";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
 import white_edit from "@/assets/Images/white-edit.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
+import Loader from "../Loader/Loader";
+import { put } from "@/helper/fetch";
+import endPoints from "@/Utils/endpoints";
+import { addEmployee } from "@/Reudx/slices/employee";
 
 const Overview = ({ setTabIndex, tabIndex }) => {
+  const toast = useToast();
+  const dispatch = useDispatch();
   const employeeState = useSelector(
     (state) => state.employeeRegister.value.employee
   );
-  const
-   [formData, setFormData] = useState({
-    country: "",
-    state: "",
-    city: "",
-    number: "",
-    description: "",
-    // ...employeeState,
-    // employeeState?.location &&...employeeState?.location[0],
-
+  
+  const [formData, setFormData] = useState({
+    ...employeeState,
   });
 
   const [state, setState] = useState({
     readOnly: true,
     isEdit: false,
-    country: "",
-    state: "",
-    city: "",
-    number: "",
-    description: "",
+    loading: false,
   });
   const router = useRouter();
   const handleChange = (e) => {
@@ -52,6 +49,79 @@ const Overview = ({ setTabIndex, tabIndex }) => {
         [name]: value,
       };
     });
+  };
+  useEffect(() => {
+    if (employeeState) {
+      setFormData({
+        ...employeeState,
+        ...employeeState?.location,
+      });
+    }
+  }, [employeeState]);
+  const handleEdit = () => {
+    setState({ ...state, readOnly: false, isEdit: true });
+  };
+  const handleCancel = () => {
+    setState({ ...state, readOnly: false, edit: true });
+  };
+  const handleSave = async () => {
+    if (state.loading) return;
+    setState({ ...state, loading: true });
+    const isValid = Object.values(formData).some((value) => value === "");
+    if (isValid) {
+      toast({
+        position: "bottom-right",
+        title: " required fields are empty",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+      return;
+    }
+    setState({ ...state, loading: true });
+
+    const body = {
+      description: formData.description,
+      phoneNumber: parseInt(formData.phoneNumber),
+      location: {
+        country: formData.country,
+        province: formData.province,
+        city: formData.city,
+        address: formData.address,
+      },
+    };
+
+    try {
+      const postData = await put(
+        `${endPoints.employee}/${employeeState.id}`,
+        body
+      );
+      if (postData.success) {
+        setState({ ...state, loading: false, isEdit: false, readOnly: true });
+        dispatch(
+          addEmployee({
+            ...postData.data,
+          })
+        );
+      }
+      toast({
+        position: "bottom-right",
+        title: postData.message,
+        status: postData.success ? "success" : "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    } catch (err) {
+      console.log("err", err);
+      setState({ ...state, loading: false });
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
   };
   return (
     <Box
@@ -106,8 +176,8 @@ const Overview = ({ setTabIndex, tabIndex }) => {
             labelVariant={"label"}
             state={formData.phoneNumber}
             setState={handleChange}
-            name={"city"}
-            type="phoneNumber"
+            name={"phoneNumber"}
+            type="number"
             variant={"bg-input"}
             placeholder="Enter your phone number"
             label={"Phone Number"}
@@ -115,9 +185,9 @@ const Overview = ({ setTabIndex, tabIndex }) => {
         </InputWrapper>
         {/* <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}> */}
         <LabelInput
-          state={formData.summary}
+          state={formData.description}
           setState={handleChange}
-          name={"summary"}
+          name={"description"}
           labelVariant={"label"}
           readOnly={state.readOnly}
           type="text"
@@ -131,43 +201,16 @@ const Overview = ({ setTabIndex, tabIndex }) => {
         <Flex mt="50px" justifyContent={"center"} gap={"30px"}>
           {state.isEdit ? (
             <>
-              <Button
-                onClick={() => {
-                  setState((pre) => {
-                    return {
-                      isEdit: false,
-                      readOnly: true,
-                    };
-                  });
-                }}
-                variant="outline-blue"
-              >
+              <Button onClick={handleCancel} variant="outline-blue">
                 Cancel
               </Button>
-              <Button
-                onClick={() => {
-                  setState((pre) => {
-                    return {
-                      isEdit: false,
-                      readOnly: true,
-                    };
-                  });
-                }}
-                variant={"blue-btn"}
-              >
-                Save
+              <Button onClick={handleSave} variant={"blue-btn"}>
+                {state.loading ? <Loader /> : "Save"}
               </Button>
             </>
           ) : (
             <Button
-              onClick={() => {
-                setState((pre) => {
-                  return {
-                    isEdit: true,
-                    readOnly: false,
-                  };
-                });
-              }}
+              onClick={handleEdit}
               variant={"blue-btn"}
               display={"flex"}
               alignItems={"center"}

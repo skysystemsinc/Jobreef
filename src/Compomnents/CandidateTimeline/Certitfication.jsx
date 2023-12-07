@@ -14,6 +14,7 @@ import { certification } from "@/schema/stateSchema";
 import { deleteApi } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
 import DeleteModal from "../DeleteModal/DeleteModal";
+import { ExpCardLoading } from "../LoadingSkeleton/LoadingSkeleton";
 
 const Certification = ({ prevStep, nextStep }) => {
   const style = {
@@ -125,13 +126,13 @@ const Certification = ({ prevStep, nextStep }) => {
     <Box>
       <DeleteModal
         handleDelete={handleDelete}
+        name={state.delete.certificateName}
+        loading={state.loading}
         onOpen={() =>
           setState((prev) => {
             return { ...prev, delete: true };
           })
         }
-        name={state.delete.certificateName}
-        loading={state.loading}
         isOpen={state.delete}
         onClose={() =>
           setState((prev) => {
@@ -145,27 +146,31 @@ const Certification = ({ prevStep, nextStep }) => {
         </Box>
       ) : (
         <Box width={"100%"} mx={"auto"}>
-          {employeeState.certification.map((item) => {
-            return (
-              <Box>
-                <CeritifcateCard
-                  handleEdit={() => handleEditSingleData(item)}
-                  handleDelete={() => {
-                    setState((prev) => {
-                      return {
-                        ...prev,
-                        delete: item,
-                      };
-                    });
-                  }}
-                  data={item}
-                  state={state}
-                  headingStyle={style}
-                  setState={setState}
-                />
-              </Box>
-            );
-          })}
+          {!employeeState?.certification ? (
+            <ExpCardLoading />
+          ) : (
+            employeeState?.certification?.map((item) => {
+              return (
+                <Box>
+                  <CeritifcateCard
+                    handleEdit={() => handleEditSingleData(item)}
+                    handleDelete={() => {
+                      setState((prev) => {
+                        return {
+                          ...prev,
+                          delete: item,
+                        };
+                      });
+                    }}
+                    data={item}
+                    state={state}
+                    headingStyle={style}
+                    setState={setState}
+                  />
+                </Box>
+              );
+            })
+          )}
 
           <Flex justifyContent={"center"}>
             <Button

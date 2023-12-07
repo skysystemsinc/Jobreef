@@ -23,7 +23,8 @@ import Certification from "./Certitfication";
 import Skills from "./Skills";
 
 import TimelineAttachments from "./Attchement";
-import WorkExperience from "./WorkExperience";
+import {WorkExperience }from "./WorkExperience";
+import Achievement from "./Achievement";
 const steps = [
   { label: "Overview" },
   { label: "Work Experience" },
@@ -168,7 +169,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
                 ) : index == 4 ? (
                   <Skills prevStep={prevStep} nextStep={nextStep} />
                 ) : index == 5 ? (
-                  <TimelineAttachments
+                  <Achievement
                     prevStep={prevStep}
                     nextStep={nextStep}
                   />

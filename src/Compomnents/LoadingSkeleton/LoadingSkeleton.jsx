@@ -28,5 +28,20 @@ const LoadingSkeleton = () => {
     </Flex>
   );
 };
+const ExpCardLoading = () => {
+  return (
+    <Flex gap={"10px"}  borderRadius={"10px"} mb={'10px'} alignItems={"center"} width={"100%"}>
+ 
+      <Box width={"100%"}>
+    
+        <Skeleton
+        startColor="gray.100"
+        endColor="gray.700"
+        
+        speed={0.9} height="100px" />
+      </Box>
+    </Flex>
+  );
+};
 
-export default LoadingSkeleton;
+export { ExpCardLoading, LoadingSkeleton};

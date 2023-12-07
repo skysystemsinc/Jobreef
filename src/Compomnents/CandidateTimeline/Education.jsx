@@ -12,6 +12,7 @@ import { addEmployee, setFormData } from "@/Reudx/slices/employee";
 import { education } from "@/schema/stateSchema";
 import { deleteApi } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
+import { ExpCardLoading } from "../LoadingSkeleton/LoadingSkeleton";
 const educationData = [
   {
     schoolName: "Walter Payton College Preparatory High School",
@@ -44,21 +45,25 @@ const educationData = [
       "Lead the design and development of system architectures, ensuring they meet the project requirements, performance criteria, and scalability. Requirements Analysis: Collaborate with stakeholders, customers, and cross-functional teams to gather and analyze system requirements, ensuring clear and unambiguous specifications. Oversee the integration",
   },
 ];
-const Education = ({prevStep, nextStep}) => {
+const Education = ({
+  showAddText,
+  containerStyle,
+  disableNextButton,
+  prevStep,
+  nextStep,
+}) => {
+  const toast = useToast();
   const dispatch = useDispatch();
   const employeeState = useSelector(
     (state) => state.employeeRegister.value.employee
   );
-  console.log("employeeState",employeeState);
-  const toast = useToast();
-
+  
   const [state, setState] = useState({
     edit: false,
     loading: false,
     delete: false,
     add: false,
   });
- 
 
   const handleEditSingleData = (data) => {
     setState((prev) => {
@@ -116,7 +121,7 @@ const Education = ({prevStep, nextStep}) => {
         isClosable: true,
       });
     }
-  }; 
+  };
   const handleNext = () => {
     // TODO will update stages
     nextStep();
@@ -144,44 +149,48 @@ const Education = ({prevStep, nextStep}) => {
         }
       />
       {state.add || state.edit ? (
-        <Box display={"flex"} justifyContent={"center"}>
+        <Box display={"flex"} justifyContent={"center"} >
           <EducationForm state={state} setState={setState} />
         </Box>
       ) : (
         <Box width={"100%"} mx={"auto"}>
-          {/* TODO add loading screen */}
-          {employeeState?.education?.map((item) => {
-            return (
-              <EducationCard
-                handleEdit={() => handleEditSingleData(item)}
-                handleDelete={() => {
-                  setState((prev) => {
-                    return {
-                      ...prev,
-                      delete: item,
-                    };
-                  });
-                }}
-                headingStyle={style}
-                disableBlueCard
-                data={item}
-              />
-            );
-          })}
+          <Box >
+            {!employeeState?.education ? (
+              <ExpCardLoading />
+            ) : (
+              employeeState?.education?.map((item) => {
+                return (
+                  <EducationCard
+                    handleEdit={() => handleEditSingleData(item)}
+                    handleDelete={() => {
+                      setState((prev) => {
+                        return {
+                          ...prev,
+                          delete: item,
+                        };
+                      });
+                    }}
+                    headingStyle={style}
+                    disableBlueCard
+                    data={item}
+                  />
+                );
+              })
+            )}
+          </Box>
 
           <Flex justifyContent={"center"}>
             <Button
               onClick={handleAddNew}
               px={"10px"}
               width="max-content"
-              //   mt={{ md: "px", base: "20px" }}
+
               mb={"40px"}
               variant={"blue-btn"}
             >
               Add New Education
             </Button>
           </Flex>
-
 
           <Flex
             width="100%"
@@ -190,14 +199,12 @@ const Education = ({prevStep, nextStep}) => {
             pb={"30px"}
             gap={4}
           >
-            <>
-              <Button onClick={prevStep} variant="outline-blue">
-                {" Back"}
-              </Button>
-              <Button onClick={handleNext} variant={"blue-btn"}>
-                Next
-              </Button>
-            </>
+            <Button onClick={prevStep} variant="outline-blue">
+              {"Back"}
+            </Button>
+            <Button onClick={handleNext} variant={"blue-btn"}>
+              Next
+            </Button>
           </Flex>
         </Box>
       )}

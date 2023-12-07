@@ -11,8 +11,15 @@ import { workExperience } from "@/schema/stateSchema";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import endPoints from "@/Utils/endpoints";
 import { deleteApi } from "@/helper/fetch";
+import { ExpCardLoading } from "../LoadingSkeleton/LoadingSkeleton";
 
-const WorkExperience = ({ prevStep, nextStep }) => {
+const WorkExperience = ({
+  containerStyle,
+  showAddText,
+  disableNextButton,
+  prevStep,
+  nextStep,
+}) => {
   const dispatch = useDispatch();
   const toast = useToast();
   const employeeState = useSelector(
@@ -23,6 +30,7 @@ const WorkExperience = ({ prevStep, nextStep }) => {
     edit: false,
     loading: false,
     delete: false,
+    add: false,
   });
   const experienceData = [
     {
@@ -69,7 +77,7 @@ const WorkExperience = ({ prevStep, nextStep }) => {
   };
   const handleAddNew = (data) => {
     setState((prev) => {
-      return { ...prev, addExperience: true };
+      return { ...prev, add: true };
     });
     dispatch(setFormData(workExperience));
   };
@@ -129,7 +137,6 @@ const WorkExperience = ({ prevStep, nextStep }) => {
           })
         }
         name={state.delete.companyName}
-
         loading={state.loading}
         isOpen={state.delete}
         onClose={() =>
@@ -138,32 +145,38 @@ const WorkExperience = ({ prevStep, nextStep }) => {
           })
         }
       />
-      {state.addExperience || state.edit ? (
-        <Box display={"flex"} justifyContent={"center"}>
+      {state.add || state.edit ? (
+        <Box mx={"auto"}>
           <ExperianceForm state={state} setState={setState} />
         </Box>
       ) : (
         <Box width={"100%"} mx={"auto"}>
-          {employeeState?.workExperience.map((item, ind) => {
-            return (
-              <Box key={ind}>
-                <ExperianceCard
-                  handleEdit={() => handleEditSingleExp(item)}
-                  handleDelete={() => {
-                    setState((prev) => {
-                      return {
-                        ...prev,
-                        delete: item,
-                      };
-                    });
-                  }}
-                  data={item}
-                  state={state}
-                  setState={setState}
-                />
-              </Box>
-            );
-          })}
+          <Box>
+            {!employeeState?.workExperience ? (
+              <ExpCardLoading />
+            ) : (
+              employeeState?.workExperience?.map((item, ind) => {
+                return (
+                  <Box key={ind}>
+                    <ExperianceCard
+                      handleEdit={() => handleEditSingleExp(item)}
+                      handleDelete={() => {
+                        setState((prev) => {
+                          return {
+                            ...prev,
+                            delete: item,
+                          };
+                        });
+                      }}
+                      data={item}
+                      state={state}
+                      setState={setState}
+                    />
+                  </Box>
+                );
+              })
+            )}
+          </Box>
 
           <Flex justifyContent={"center"}>
             <Button
@@ -186,7 +199,7 @@ const WorkExperience = ({ prevStep, nextStep }) => {
           >
             <>
               <Button onClick={prevStep} variant="outline-blue">
-                {" Back"}
+                {"Back"}
               </Button>
               <Button onClick={handleNext} variant={"blue-btn"}>
                 Next
@@ -199,4 +212,4 @@ const WorkExperience = ({ prevStep, nextStep }) => {
   );
 };
 
-export default WorkExperience;
+export { WorkExperience };

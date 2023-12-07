@@ -12,5 +12,6 @@ const endPoints = {
   certification:"certification",
   skills:"skills",
   attachment:"attachment",
+  achievement:"achievement"
 };
 export default endPoints;

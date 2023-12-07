@@ -1,162 +1,215 @@
 import React, { useState } from "react";
 import UploadBox from "../UploadBox/UploadBox";
-import { Box, Button, Checkbox, Flex, Heading } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Flex,
+  Heading,
+  useToast,
+} from "@chakra-ui/react";
 import UploadedCard from "../UploadedCard/UploadedCard";
 import dummy_resume from "@/assets/Images/dummy_resume.svg";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
+import { achievement } from "@/schema/stateSchema";
+import { useDispatch, useSelector } from "react-redux";
+import endPoints from "@/Utils/endpoints";
+import { addEmployee } from "@/Reudx/slices/employee";
+import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
+import Loader from "../Loader/Loader";
+import { post, put } from "@/helper/fetch";
 
 // import dummy_resume from "@/assets/pdf/dummy.pdf";
-const AchievementForm = ({ style , handleSaveAch}) => {
-  const [state, setState] = useState({
-    resume: [],
-    additional: [],
-    allFile: [],
+const AchievementForm = ({ state, setState, style, handleSaveAch }) => {
+  const employeeState = useSelector(
+    (state) => state.employeeRegister.value.employee
+  );
+  const formDataState = useSelector(
+    (state) => state.employeeRegister.value.formData
+  );
+  const toast = useToast();
+  const dispatch = useDispatch();
+  const [formData, setFormData] = useState(achievement);
+  const [loading, setLoading] = useState(false);
 
-    save: false,
-
-    select: false,
-  });
   const list = [
     "The acceptable file formats are PDF, Word, PNG, and JPEG files",
     "This will be included in submitted job applications",
   ];
-  const handleSingleFile = (event, key, ind) => {
-    console.log("index", ind);
-    const selectedFile = event.target.files[0];
-    if (selectedFile) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const updatedObject = {
-          pdfUrl: e.target.result,
-          uploadProgress: 100,
-          pdfFile: selectedFile,
-        };
-        setState((prev) => {
-          const allFile = [...prev.allFile]; // Create a copy of the allFile array
-          const keyAllFile = [...prev[key]]; // Create a copy of the allFile array
-          console.log("ind", allFile);
-          allFile.splice(ind, 1, updatedObject);
-          keyAllFile.splice(ind, 1, updatedObject);
-
-          return {
-            select: true,
-            // [key]: true,
-            allFile: allFile,
-            [key]: keyAllFile,
-          };
-        });
-      };
-      reader.readAsDataURL(selectedFile);
-    }
-    // selectedFile.map((file, index) => {
-    // });
-  };
 
   const handleUpload = (event, key, index) => {
-    //TODO make dynamic progress barr with axios
-    console.log("runn", key);
+    //  = Array.from(event.target.files);
+    const selectedFile = Array.from(event.target.files).map((file, index) => {
+      return {
+        name: file.name,
+        url: "",
+      };
+      // console.log("file.name", file);
+      // if (file) {
+      //   const reader = new FileReader();
+      //   reader.onload = (e) => {
+      //     mediaArray.push({ name: file.name, url: e.target.result });
+      //   };
+      //   reader.readAsDataURL(file);
+      // }
+    });
 
-    if (index !== undefined) {
-      console.log("handleSingleFile", index);
-      handleSingleFile(event, key, index);
-    } else {
-      console.log("else", index);
+    setFormData((prev) => {
+      return {
+        ...prev,
+        media: [...formData.media, ...selectedFile],
+        // certificateMedia: mediaArray,
+      };
+    });
+  };
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+  const handleSave = async () => {
+    if (loading) return;
+    const isValid = Object.values(formData).some((value) => value === "");
 
-      const selectedFile = Array.from(event.target.files);
-      selectedFile.map((file, index) => {
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            setState((prev) => {
-              console.log("...prev[key],", key);
-              return {
-                ...prev,
-                select: true,
-                // [key]: true,
-                allFile: [
-                  ...prev.allFile,
-                  {
-                    pdfUrl: e.target.result,
-                    uploadProgress: 100,
-                    pdfFile: file,
-                  },
-                ],
-                [key]: [
-                  ...prev[key],
-                  {
-                    uploadProgress: 100,
-                    pdfUrl: e.target.result,
-                    pdfFile: file,
-                  },
-                ],
-              };
-            });
-          };
-          reader.readAsDataURL(file);
-        }
+    if (isValid || formData.issuedOn == null) {
+      toast({
+        position: "bottom-right",
+        title: " required fields are empty",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+      return;
+    }
+    setLoading(true);
+
+    const body = {
+      ...formData,
+      employeeId: employeeState.id,
+    };
+    try {
+      const postData = await post(`${endPoints.achievement}`, body);
+      if (postData.success) {
+        setLoading(false);
+        setState((prev) => {
+          return { ...prev, add: false };
+        });
+
+        dispatch(
+          addEmployee({
+            ...employeeState,
+            achievement: [...employeeState.achievement, postData.data],
+          })
+        );
+      }
+      toast({
+        position: "bottom-right",
+        title: postData.message,
+        status: postData.success ? "success" : "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    } catch (err) {
+      console.log("err", err);
+      setLoading(false);
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
       });
     }
   };
-  const handleSave = () => {
-    setState((prev) => {
-      return {
-        ...prev,
-        save: true,
-        select: false,
-      };
-    });
+  const handleUpdate = async () => {
+    //TODO add validation of date
+    if (loading) return;
+    const isValid = Object.values(formData).some((value) => value === "");
+    console.log("isValid", isValid);
+    if (isValid || formData.issuedOn == null) {
+      toast({
+        position: "bottom-right",
+        title: " required fields are empty",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+      return;
+    }
+    setLoading(true);
+
+    const body = {
+      name: formData.name,
+      issueOrganization: formData.issueOrganization,
+      issuedOn: formData.issuedOn,
+      media: formData.media,
+    };
+
+    try {
+      const postData = await put(
+        `${endPoints.achievement}/${formData.id}`,
+        body
+      );
+      if (postData.success) {
+        setLoading(false);
+        setState((prev) => {
+          return { ...prev, edit: false };
+        });
+
+        dispatch(
+          addEmployee({
+            ...employeeState,
+            achievement: employeeState.achievement.map((item) =>
+              item.id === postData.data.id ? postData.data : item
+            ),
+          })
+        );
+      }
+      toast({
+        position: "bottom-right",
+        title: postData.message,
+        status: postData.success ? "success" : "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    } catch (err) {
+      console.log("err", err);
+      setLoading(false);
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
   };
   const handleCancel = () => {
     setState((prev) => {
-      return {
-        ...prev,
-        save: false,
-        select: false,
-        resume: [],
-        additional: [],
-        allFile: [],
-      };
+      return { ...prev, add: false, edit: false };
     });
   };
-  const handleDelete = (ind, key) => {
-    setState((prev) => {
-      const allFile = [...prev.allFile]; // Create a copy of the allFile array
-      const keyAllFile = [...prev[key]]; // Create a copy of the allFile array
-      console.log("ind", prev);
-      allFile.splice(ind, 1);
-      keyAllFile.splice(ind, 1);
-      if (allFile.length == 0) {
-        return {
-          ...prev,
-          select: false,
-          // [key]: true,
-          save: false,
-          allFile: allFile,
-          [key]: keyAllFile,
-        };
-      } else {
-        return {
-          ...prev,
-          // select: false,
-          allFile: allFile,
-          [key]: keyAllFile,
-        };
-      }
-    });
-  };
+
+  useSkipInitialEffect(() => {
+    if (formDataState) {
+      setFormData({ ...formDataState });
+    }
+  }, [formDataState]);
   return (
     <Box minHeight={"59vh"}>
-      <Box width={{ md: "60%", base: "100%" }} mx={"auto"} mt={"50px"}>
+      <Box width={"100%"}>
         <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
           <LabelInput
             labelVariant={"label"}
-            // state={certification.certificateName}
-            // setState={(e) => {
-            //   setCertification((prev) => {
-            //     return { ...prev, certificateName: e.target.value };
-            //   });
-            // }}
+            state={formData.name}
+            setState={handleChange}
+            name={"name"}
             type="text"
             variant={"bg-input"}
             placeholder="Enter the name of your certificate"
@@ -164,12 +217,9 @@ const AchievementForm = ({ style , handleSaveAch}) => {
           />
           <LabelInput
             labelVariant={"label"}
-            // state={certification.organizationName}
-            // setState={(e) => {
-            //   setCertification((prev) => {
-            //     return { ...prev, organizationName: e.target.value };
-            //   });
-            // }}
+            state={formData.issueOrganization}
+            setState={handleChange}
+            name={"issueOrganization"}
             type="text"
             variant={"bg-input"}
             placeholder="Enter the name of issuing organization"
@@ -180,12 +230,16 @@ const AchievementForm = ({ style , handleSaveAch}) => {
           <Box width={{ md: "49%", base: "100%" }}>
             <LabelInput
               labelVariant={"label"}
-              // state={certification.certificateName}
-              // setState={(e) => {
-              //   setCertification((prev) => {
-              //     return { ...prev, certificateName: e.target.value };
-              //   });
-              // }}
+              state={formData.issuedOn}
+              setState={(e) => {
+                setFormData((prev) => {
+                  return {
+                    ...prev,
+                    issuedOn: e,
+                  };
+                });
+              }}
+              name={"issuedOn"}
               type="date"
               variant={"bg-input"}
               placeholder="MM/DD/YYYY"
@@ -194,91 +248,12 @@ const AchievementForm = ({ style , handleSaveAch}) => {
           </Box>
         </InputWrapper>
       </Box>
-      {state.select ? (
-        <Box mt={"60px"}>
-          <Box width={{ md: " 60%", base: "100%" }} mx={"auto"} sx={style}>
-            {state.allFile.map((item, ind) => {
-              return (
-                <Box mb={"15px"}>
-                  <UploadedCard
-                    handleDelete={
-                      () => {
-                        if (item.resume) {
-                          handleDelete(ind, "resume");
-                        } else {
-                          handleDelete(ind, "additional");
-                        }
-                      }
-
-                      // handleDelete(ind , "additional")
-                    }
-                    // pdfPreview={state.pdfUrl}
-
-                    fileName={item.pdfFile.name}
-                    handleEvent={(e) => {
-                      if (item.resume) {
-                        handleUpload(e, "resume", ind);
-                      } else {
-                        handleUpload(e, "additional", ind);
-                      }
-                    }}
-                  />
-                </Box>
-              );
-            })}
-
-            {/* <UploadedCard pdfPreview={dummy_resume.src} /> */}
-          </Box>
-          <Flex justifyContent={"center"} gap={"20px"} mt={"43px"}>
-            <Button onClick={handleCancel} variant="outline-blue">
-              Cancel
-            </Button>
-            <Button onClick={handleSave} variant={"blue-btn"}>
-              Save
-            </Button>
-          </Flex>
-        </Box>
-      ) : state.save ? (
-        <Flex
-          mt={{ md: "50px", base: "20px" }}
-          alignItems={"flex-start"}
-          gap={{ md: "30px", base: "10px" }}
-          flexWrap={"wrap"}
-          justifyContent={"center"}
-        >
-  
-          {state.additional.length > 0 ? (
-            <UploadBox
-              handleDelete={(e) => handleDelete(e, "additional")}
-              showSelectedImage={state.additional}
-              // handleEvent={handleUpload}
-              handleEvent={(e) => handleUpload(e, "additional")}
-              titie={"Upload in Digital Format"}
-              list={list}
-            />
-          ) : (
-            <UploadBox
-              handleEvent={(e) => handleUpload(e, "additional")}
-              titie={"Upload in Digital Format"}
-              list={list}
-            />
-          )}
-        </Flex>
-      ) : (
-        <Flex
-          mt={{ md: "50px", base: "20px" }}
-          alignItems={"center"}
-          gap={{ md: "30px", base: "10px" }}
-          flexWrap={"wrap"}
-          justifyContent={"center"}
-        >
-          <UploadBox
-            handleEvent={(e) => handleUpload(e, "additional")}
-            list={list}
-            titie={"Upload in Digital Format"}
-          />
-        </Flex>
-      )}
+      <UploadBox
+        showSelectedImage={formData.media}
+        handleEvent={handleUpload}
+        list={list}
+        titie={"Upload in Digital Format"}
+      />
 
       <Box
         display={"flex"}
@@ -287,31 +262,21 @@ const AchievementForm = ({ style , handleSaveAch}) => {
         mt={"50px"}
         pb={"39px"}
       >
-        <Button
-          onClick={() => {
-            handleSave();
-            // tabIndex == 0 ? null : setTabIndex(--tabIndex);
-          }}
-          // width={"max-content"}
-          // px={{ md: "30px", base: "20px" }}
-          variant="outline-blue"
-        >
+        <Button onClick={handleCancel} variant="outline-blue">
           Cancel
         </Button>
 
         <Button
-          onClick={() => {
-            // tabIndex == 2 ? null : setTabIndex(++tabIndex);
-            // router.push("/");
-            handleSaveAch();
-          }}
-          // width={{ md: "160px", lg: "200px", sm: "140px", base: "120px" }}
-          // width={"max-content"}
-          // px={{ md: "20px", base: "20px" }}
-
+          onClick={formData.id ? handleUpdate : handleSave}
           variant={"blue-btn"}
         >
-          {state.edit ? "Update  Achievement" : " Save  Achievement"}
+          {loading ? (
+            <Loader />
+          ) : state.edit ? (
+            "Update  Achievement"
+          ) : (
+            " Save  Achievement"
+          )}
         </Button>
       </Box>
     </Box>

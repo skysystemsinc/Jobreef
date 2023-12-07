@@ -38,7 +38,9 @@ const Skills = ({ prevStep, nextStep }) => {
   );
   const [loading, setLoading] = useState(false);
 
-  const [formData, setFormData] = useState(skills);
+  const [formData, setFormData] = useState([
+    { ...skills, name: "", level: "" },
+  ]);
   console.log("formData", formData);
   const [isSmallerThe500] = useMediaQuery("(max-width: 787px)");
   const handleDelete = (index) => {
@@ -87,11 +89,14 @@ const Skills = ({ prevStep, nextStep }) => {
       };
     });
     const body = {
-      employeeId: employeeState.id,
+      // employeeId: employeeState.id,
       data: modifyPayload,
     };
     try {
-      const postData = await post(`${endPoints.skills}`, body);
+      const postData = await post(
+        `${endPoints.skills}/${employeeState.id}`,
+        body
+      );
       if (postData.success) {
         nextStep();
 
@@ -123,9 +128,13 @@ const Skills = ({ prevStep, nextStep }) => {
       });
     }
   };
+  
   useSkipInitialEffect(() => {
-    if (employeeState) {
+    if (!employeeState?.skills) {
+      setFormData([{name:"", level:''}]);
+    }else{
       setFormData(employeeState.skills);
+
     }
   }, [employeeState]);
 

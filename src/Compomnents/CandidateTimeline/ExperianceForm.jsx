@@ -99,7 +99,7 @@ const ExperianceForm = ({ state, setState }) => {
       if (postData.success) {
         setLoading(false);
         setState((prev) => {
-          return { ...prev, addExperience: false };
+          return { ...prev, add: false };
         });
 
         dispatch(
@@ -201,7 +201,7 @@ const ExperianceForm = ({ state, setState }) => {
   };
   const handleCancel = () => {
     setState((prev) => {
-      return { ...prev, addExperience: false, edit: false };
+      return { ...prev, add: false, edit: false };
     });
   };
 

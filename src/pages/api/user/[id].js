@@ -29,7 +29,7 @@ const DeleteUser = async (req, res) => {
 };
 const UpdateUser = async (req, res) => {
   const data = { ...JSON.parse(req.body) };
-  // const data = req.body 
+  // const data = req.body
 
   if (data.email) {
     const emailExist = await prisma.User.findUnique({
@@ -73,7 +73,7 @@ const UpdateUser = async (req, res) => {
       success: true,
     });
   } catch (err) {
-    console.log("err",err)
+    console.log("err", err);
     res.status(500).json({
       error: err,
       success: false,
@@ -87,7 +87,17 @@ const GetSingleUser = async (req, res) => {
     const user = await prisma.User.findUnique({
       include: {
         company: true,
-        employee: true,
+        employee: {
+          include: {
+            skills: true,
+            workExperience: true,
+            education: true,
+            certification: true,
+            skills: true,
+            achievement: true,
+            attachment: true,
+          },
+        },
         location: true,
         emailPreferences: true,
       },

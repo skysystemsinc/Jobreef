@@ -1,14 +1,23 @@
 import prisma from "@/lib/prisma";
 
-const addSingle = async (req, res) => {
+const add = async (req, res) => {
   const data = req.body;
+  const body = {
+    employeeId: data.employeeId,
+
+    name: data.name,
+    issueOrganization: data.issueOrganization,
+    issuedOn: data.issuedOn,
+    media: data.media,
+  };
 
   try {
-    const created = await prisma.Skills.create({
-      data: data,
+    const created = await prisma.Achievement.create({
+      data: body,
     });
+
     res.status(201).json({
-      message: "skills created successfully",
+      message: "achievement created successfully",
       data: created,
       success: true,
     });
@@ -17,14 +26,13 @@ const addSingle = async (req, res) => {
     res.status(500).json({
       error: err,
       success: false,
-      message: "internal server error ",
     });
   }
 };
 
 const GetAll = async (req, res) => {
   try {
-    const experience = await prisma.Skills.findMany({
+    const experience = await prisma.Achievement.findMany({
       include: {
         employee: true,
       },
@@ -37,24 +45,24 @@ const GetAll = async (req, res) => {
     console.log("err", err);
     res.status(500).json({
       error: err,
-      success: false,
       message: "internal server error ",
+
+      success: false,
     });
   }
 };
 const DeleteAll = async (req, res) => {
   try {
-    const deleteData = await prisma.Skills.deleteMany({});
+    const deleteData = await prisma.Achievement.deleteMany({});
     res.status(200).json({
       data: deleteData,
-      message: "skills Deleted successfully",
+      message: "achievement Deleted successfully",
       success: true,
     });
   } catch (err) {
     res.status(500).json({
       error: err,
       success: false,
-      message: "internal server error ",
     });
   }
 };
@@ -68,7 +76,7 @@ export default async function handler(req, res) {
     }
 
     case "POST": {
-      return addSingle(req, res);
+      return add(req, res);
     }
   }
 }

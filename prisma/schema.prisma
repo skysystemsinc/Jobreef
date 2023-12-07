@@ -17,6 +17,12 @@ type LocationType {
   address  String?
 }
 
+// const  BasicEntities =  {
+//   active Boolean? @default(true)
+//   delete Boolean? @default(false)
+//   flag   Boolean? @default(false)
+// }
+
 type Media {
   name String
   url  String
@@ -49,8 +55,12 @@ model User {
   companyId        String?           @db.ObjectId
   employee         Employee?         @relation(fields: [employeeId], references: [id])
   employeeId       String?           @unique @db.ObjectId
+  stages           Int?
   firstName        String
   lastName         String
+  active           Boolean?          @default(true)
+  delete           Boolean?          @default(false)
+  flag             Boolean?          @default(false)
   email            String?           @unique
   profilePic       String?
   otp              Int?
@@ -78,21 +88,23 @@ model Company {
   companyLogo     String?
   socialLinks     SocialLinks[]
   location        LocationType[]
+  jobs            Job[]
 }
 
 model Employee {
   createdAt      DateTime         @default(now())
   id             String           @id @default(auto()) @map("_id") @db.ObjectId
   user           User?
-  summary        String
+  description    String?
+  phoneNumber    Int?
   workExperience WorkExperience[]
   education      Education[]
   certification  Certification[]
   skills         Skills[]
   achievement    Achievement[]
-  location        LocationType[]
+  location       LocationType
 
-  attachment     Attachment?
+  attachment Attachment?
 }
 
 model WorkExperience {
@@ -149,11 +161,14 @@ model Skills {
 }
 
 model Achievement {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  employee   Employee? @relation(fields: [employeeId], references: [id])
-  employeeId String?   @db.ObjectId
-  resume     Media[]
-  additional Media[]
+  id                String    @id @default(auto()) @map("_id") @db.ObjectId
+  employee          Employee? @relation(fields: [employeeId], references: [id])
+  employeeId        String?   @db.ObjectId
+  name              String
+  issueOrganization String
+
+  issuedOn DateTime? @default(now())
+  media    Media[]
 }
 
 model Attachment {
@@ -162,6 +177,29 @@ model Attachment {
   employeeId String    @unique @db.ObjectId
   resume     Media[]
   additional Media[]
+}
+
+model Job {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  company   Company? @relation(fields: [companyId], references: [id])
+  companyId String?  @db.ObjectId
+  createdAt DateTime @default(now())
+
+  title               String
+  employmentType      String
+  locationType        String
+  applicationType     String
+  externalURL         String
+  jobDescription      String
+  opening             Int
+  minimumEducation    String
+  yearsofExperience   String
+  jobFamily           String
+  rate                String
+  tags                String[]
+  location            LocationType
+  desiredSkills       String[]
+  applicationDeadline DateTime     @default(now())
 }
 
 type SocialLinks {
