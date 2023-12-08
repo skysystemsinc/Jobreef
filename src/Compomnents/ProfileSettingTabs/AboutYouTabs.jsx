@@ -176,7 +176,7 @@ const AboutYouTabs = () => {
               setState={handleChange}
               name={"accountType"}
               placeholder="Yes"
-              imoptnatIcon
+              importantIcon
               label={"Visible to Employers"}
             />
           ) : (

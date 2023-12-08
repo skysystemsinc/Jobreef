@@ -24,18 +24,20 @@ const LabelInput = ({
   pattern,
   name,
   textarea,
+  multipleSelectDropdown,
+  defaultDropdown,
   iconStyle,
   defaultValue,
   icon,
   state,
   setState,
-  textFormattter,
+  textFormatter,
   handleEdit,
   type,
   showEndLable,
-  imoptnatIcon,
+  importantIcon,
   inputRef,
-  passworInput,
+  passwordInput,
   labelVariant,
   variant,
   placeholder,
@@ -54,7 +56,7 @@ const LabelInput = ({
       >
         <Box display={"flex"} gap={"10px"}>
           {label}
-          {imoptnatIcon ? <Image src={info.src} width={"16px"} /> : null}
+          {importantIcon ? <Image src={info.src} width={"16px"} /> : null}
         </Box>
         {showEndLable ? (
           <Box
@@ -96,21 +98,23 @@ const LabelInput = ({
           variant={variant}
           resize={"none"}
         />
-      ) : textFormattter ? (
+      ) : textFormatter ? (
         <TextFormatting
           value={state}
-          onChange={setState}
+          setValue={setState}
           placeholder={placeholder}
         />
       ) : dropdown ? (
         <DropDown
           name={name}
+          defaultDropdown={defaultDropdown}
+          multipleSelectDropdown={multipleSelectDropdown}
           dropdownOption={dropdownOption}
           state={state}
           setState={setState}
           placeholder={placeholder}
         />
-      ) : passworInput ? (
+      ) : passwordInput ? (
         <PasswordInput
           setState={setState}
           state={state}

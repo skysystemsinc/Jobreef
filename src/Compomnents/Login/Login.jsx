@@ -80,7 +80,7 @@ export default function Login({disabledGoogleButton}) {
             iconStyle={{ marginTop: "7px" }}
             labelVariant={"label"}
             type="password"
-            passworInput
+            passwordInput
             variant={"bg-input"}
             placeholder="Enter your Password"
             label={"Password"}

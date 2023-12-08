@@ -196,7 +196,7 @@ export default function Login() {
               iconStyle={{ marginTop: "7px" }}
               labelVariant={"label"}
               type="password"
-              passworInput
+              passwordInput
               variant={"shadow-input"}
               placeholder="Enter your Password"
               label={"Password"}

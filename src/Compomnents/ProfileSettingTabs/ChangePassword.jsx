@@ -135,7 +135,7 @@ const ChangePassword = () => {
               state={state.oldPassword}
               setState={handleChange}
               name={"oldPassword"}
-              passworInput
+              passwordInput
               labelVariant={"label"}
               type="text"
               variant={"bg-input"}
@@ -148,7 +148,7 @@ const ChangePassword = () => {
               state={state.newPassword}
               setState={handleChange}
               name={"newPassword"}
-              passworInput
+              passwordInput
               labelVariant={"label"}
               type="text"
               variant={"bg-input"}
@@ -161,7 +161,7 @@ const ChangePassword = () => {
               state={state.confirmPassword}
               setState={handleChange}
               name={"confirmPassword"}
-              passworInput
+              passwordInput
               labelVariant={"label"}
               type="text"
               variant={"bg-input"}
@@ -187,7 +187,7 @@ const ChangePassword = () => {
             iconStyle={{ marginTop: "7px" }}
             placeholder="Enter Password"
             label={"Password"}
-            passworInput
+            passwordInput
             icon={
               <Image
                 width={{ md: "17px", base: "15px" }}

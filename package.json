@@ -17,6 +17,7 @@
     "@fontsource/sora": "^5.0.15",
     "@prisma/client": "^5.6.0",
     "@reduxjs/toolkit": "^1.9.7",
+    "@tanstack/react-table": "^8.10.7",
     "@wojtekmaj/react-daterange-picker": "^5.4.3",
     "axios": "^1.6.2",
     "bcrypt": "^5.1.1",

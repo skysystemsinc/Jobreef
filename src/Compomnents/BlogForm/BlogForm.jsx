@@ -91,7 +91,7 @@ const BlogForm = () => {
           name={"description"}
           labelVariant={"label"}
           type="text"
-          textFormattter
+          textFormatter
           variant={"bg-input"}
           placeholder="Enter Description"
           label={"Description"}

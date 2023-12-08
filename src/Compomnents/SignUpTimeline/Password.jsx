@@ -185,7 +185,7 @@ const Password = ({ activeStep, handlePrevious, nextStep }) => {
           state={state.password}
           setState={handleChange}
           name={"password"}
-          passworInput
+          passwordInput
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -199,7 +199,7 @@ const Password = ({ activeStep, handlePrevious, nextStep }) => {
           state={state.confirmPassword}
           setState={handleChange}
           name={"confirmPassword"}
-          passworInput
+          passwordInput
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}

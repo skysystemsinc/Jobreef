@@ -17,11 +17,10 @@ type LocationType {
   address  String?
 }
 
-// const  BasicEntities =  {
-//   active Boolean? @default(true)
-//   delete Boolean? @default(false)
-//   flag   Boolean? @default(false)
-// }
+type SocialLinks {
+  platform String
+  link     String
+}
 
 type Media {
   name String
@@ -180,29 +179,34 @@ model Attachment {
 }
 
 model Job {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  company   Company? @relation(fields: [companyId], references: [id])
-  companyId String?  @db.ObjectId
-  createdAt DateTime @default(now())
-
+  id                  String       @id @default(auto()) @map("_id") @db.ObjectId
+  company             Company?     @relation(fields: [companyId], references: [id])
+  companyId           String?      @db.ObjectId
+  createdAt           DateTime     @default(now())
+  active              Boolean?     @default(true)
+  delete              Boolean?     @default(false)
+  status              Int?         @default(-1)
+  // -1 for expire job
+  // 1 for active  job?
+  // 0 for pause  job?
+  flag                Boolean?     @default(false)
+  draft               Boolean?     @default(false)
   title               String
   employmentType      String
   locationType        String
+  seniorityLevel      String
   applicationType     String
   externalURL         String
   jobDescription      String
   opening             Int
   minimumEducation    String
-  yearsofExperience   String
+  minimumSalary       String
+  maximumSalary       String
+  yearsOfExperience   String
   jobFamily           String
   rate                String
   tags                String[]
   location            LocationType
-  desiredSkills       String[]
-  applicationDeadline DateTime     @default(now())
-}
-
-type SocialLinks {
-  platform String
-  link     String
+  desiredSkills       String
+  applicationDeadline DateTime     
 }

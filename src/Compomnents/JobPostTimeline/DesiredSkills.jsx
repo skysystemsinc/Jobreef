@@ -13,6 +13,7 @@ import {
   Textarea,
   UnorderedList,
   useMediaQuery,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import LabelInput from "../LabelInput/LabelInput";
@@ -23,68 +24,61 @@ import upload from "@/assets/Images/upload.svg";
 import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
 import IconButton from "../IconButton/IconButton";
 import white_edit from "@/assets/Images/white-edit.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { addJob } from "@/Reudx/slices/jobPost";
+import NextPrevBtn from "./NextPrevBtn";
 
-const DesiredSkills = ({ style, state, setState }) => {
-  const [isSmallerThe500] = useMediaQuery("(max-width: 787px)");
+const DesiredSkills = ({ disableNextPrev, style, prevStep, nextStep }) => {
+  const toast = useToast();
+  const dispatch = useDispatch();
 
-  const [linkArray, setlinkArray] = useState([1]);
-  const handleDelete = (index) => {
-    const deleteArray = [...linkArray];
-    deleteArray.splice(index, 1);
-    setlinkArray(deleteArray);
+  const jobState = useSelector((state) => state.jobPost.value);
+  const [formData, setFormData] = useState(jobState);
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
   };
-
-  
-  const [readOnly, setreadOnly] = useState(false);
-
+  const handleSave = () => {
+    if (formData.desiredSkills === "") {
+      toast({
+        position: "bottom-right",
+        title: " required fields are empty",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+      return;
+    }
+    dispatch(addJob({ ...formData }));
+    nextStep();
+  };
   return (
     <Box sx={style}>
-      {linkArray.map((item, index) => {
-        return (
-          <InputWrapper key={index} gap={"15px"}>
-            <LabelInput
-              state={state.desiredSkill}
-              setState={(e) => {
-                setState((prev) => {
-                  return { ...prev, desiredSkill: e.target.value };
-                });
-              }}
-              readOnly={readOnly}
-              labelVariant={"label"}
-              type="text"
-              variant={"bg-input"}
-              placeholder="Enter Desired Skills"
-              
-              label={"Desired Skills"}
-            />
-
-            {/* <LabelInput
-              state={state.tags}
-              setState={(e) => {
-                setState((prev) => {
-                  return { ...prev, tags: e.target.value };
-                });
-              }}
-              labelVariant={"label"}
-              type="text"
-              dropdown
-              variant={"bg-input"}
-              readOnly={readOnly}
-              placeholder="Select Tags for Job Post"
-              label={"Tags"}
-            /> */}
-          </InputWrapper>
-        );
-      })}
-
-      {/* {isEdit ? (
-        <Button
-          onClick={() => setlinkArray([...linkArray, 2])}
-          variant={"blue-btn"}
-        >
-          Add more
-        </Button>
-      ) : null} */}
+      <Box>
+        <LabelInput
+          state={formData.desiredSkills}
+          setState={handleChange}
+          name={"desiredSkills"}
+          readOnly={false}
+          labelVariant={"label"}
+          type="text"
+          variant={"bg-input"}
+          placeholder="Enter Desired Skills"
+          label={"Desired Skills"}
+        />
+      </Box>
+      {disableNextPrev ? null : (
+        <Box mt={{ md: "100px", base: "40px" }}>
+          <NextPrevBtn handleNext={handleSave} handlePrev={prevStep} />
+        </Box>
+      )}
     </Box>
   );
 };

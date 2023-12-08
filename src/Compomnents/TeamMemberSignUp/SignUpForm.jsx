@@ -94,7 +94,7 @@ const SignUpForm = () => {
                 labelVariant={"label"}
                 type="text"
                 readOnly={readOnly}
-                passworInput
+                passwordInput
                 setreadOnly={setreadOnly}
                 variant={"bg-input"}
                 placeholder="Enter your Password"
@@ -103,7 +103,7 @@ const SignUpForm = () => {
               <LabelInput
                 labelVariant={"label"}
                 type="text"
-                passworInput
+                passwordInput
                 readOnly={readOnly}
                 setreadOnly={setreadOnly}
                 variant={"bg-input"}

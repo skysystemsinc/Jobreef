@@ -10,6 +10,7 @@ import {
   ListItem,
   Textarea,
   UnorderedList,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import LabelInput from "../LabelInput/LabelInput";
@@ -17,41 +18,59 @@ import InputWrapper from "../InputWrapper/InputWrapper";
 import { Link } from "@chakra-ui/next-js";
 import { BsDot } from "react-icons/bs";
 import upload from "@/assets/Images/upload.svg";
+import { useDispatch, useSelector } from "react-redux";
+import NextPrevBtn from "./NextPrevBtn";
+import { addJob } from "@/Reudx/slices/jobPost";
 
-const TechnicalDetails = ({ state, setState }) => {
-  const [salaryRange, setsalaryRange] = useState({
-    type: "text",
-  });
+const TechnicalDetails = ({ disableNextPrev, prevStep, nextStep }) => {
+  const toast = useToast();
+  const dispatch = useDispatch();
+
+  const jobState = useSelector((state) => state.jobPost.value);
+  const [formData, setFormData] = useState(jobState);
 
   const salaryRangeOption = ["Range Salary", "Starting Salary"];
   const rateOptions = [
-    "Monthly",
-    "Annual",
-    "Weekly",
-    "Bi-weekly",
-    "Hourly",
-    "Daily",
+    { label: "Monthly", value: "Monthly" },
+    { label: "Annual", value: "Annual" },
+    { label: "Weekly", value: "Weekly" },
+    { label: "Bi-weekly", value: "Bi-weekly" },
+    { label: "Hourly", value: "Hourly" },
+    { label: "Daily", value: "Daily" },
   ];
-  const handleSelectSalary = (e) => {
-    if (e.target.value == salaryRangeOption[0]) {
-      setsalaryRange({ type: "text" });
-    } else {
-      setsalaryRange({ type: "number" });
-    }
-    setState((prev) => {
-      return { ...prev, salaryType: e.target.value };
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
     });
+  };
+
+  const handleSave = () => {
+    if (formData.minimumSalary === "") {
+      toast({
+        position: "bottom-right",
+        title: " required fields are empty",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+      return;
+    }
+    dispatch(addJob({ ...formData }));
+    nextStep();
   };
   return (
     <Box>
       <InputWrapper>
         <LabelInput
-          state={state.noOfOpening}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, noOfOpening: e.target.value };
-            });
-          }}
+          state={formData.opening}
+          setState={handleChange}
+          name={"opening"}
           labelVariant={"label"}
           type="number"
           variant={"bg-input"}
@@ -59,14 +78,11 @@ const TechnicalDetails = ({ state, setState }) => {
           label={"Number of Openings"}
         />
         <LabelInput
-          state={state.minimumEducation}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, minimumEducation: e.target.value };
-            });
-          }}
+          state={formData.minimumEducation}
+          setState={handleChange}
+          name={"minimumEducation"}
           labelVariant={"label"}
-          dropdown
+          
           type="text"
           variant={"bg-input"}
           placeholder="Select Education Level for this job"
@@ -76,26 +92,19 @@ const TechnicalDetails = ({ state, setState }) => {
 
       <InputWrapper>
         <LabelInput
-          state={state.yearsOfExperiance}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, yearsOfExperiance: e.target.value };
-            });
-          }}
+          state={formData.yearsOfExperience}
+          setState={handleChange}
+          name={"yearsOfExperience"}
           labelVariant={"label"}
           type="text"
-          dropdown
           variant={"bg-input"}
           placeholder="Enter the years of experience desired for this job"
           label={"Years of Experience"}
         />
         <LabelInput
-          state={state.jobFamily}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, jobFamily: e.target.value };
-            });
-          }}
+          state={formData.jobFamily}
+          setState={handleChange}
+          name={"jobFamily"}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -107,13 +116,9 @@ const TechnicalDetails = ({ state, setState }) => {
 
       <InputWrapper>
         <LabelInput
-          state={state.salaryType}
-          setState={(e) => {
-            handleSelectSalary(e);
-            // setState((prev) => {
-            //   return { ...prev, salaryType: e.target.value };
-            // });
-          }}
+          state={formData.minimumSalary}
+          setState={handleChange}
+          name={"minimumSalary"}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -123,28 +128,22 @@ const TechnicalDetails = ({ state, setState }) => {
           label={"Minimum Salary"}
         />
         <LabelInput
-          state={state.salaryRange}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, salaryRange: e.target.value };
-            });
-          }}
+          state={formData.maximumSalary}
+          setState={handleChange}
+          name={"maximumSalary"}
           labelVariant={"label"}
-          type={salaryRange.type}
+          type={"text"}
           variant={"bg-input"}
           placeholder={"Enter Maximum salary"}
           label={"Maximum Salary "}
         />
       </InputWrapper>
-  
+
       <InputWrapper style={{ width: "100%" }}>
         <LabelInput
-          state={state.rate}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, rate: e.target.value };
-            });
-          }}
+          state={formData.seniorityLevel}
+          setState={handleChange}
+          name={"seniorityLevel"}
           labelVariant={"label"}
           type="date"
           variant={"bg-input"}
@@ -153,13 +152,10 @@ const TechnicalDetails = ({ state, setState }) => {
           placeholder="Select seniority level"
           label={"Seniority Level"}
         />
-            <LabelInput
-          state={state.rate}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, rate: e.target.value };
-            });
-          }}
+        <LabelInput
+          state={formData.rate}
+          setState={handleChange}
+          name={"rate"}
           labelVariant={"label"}
           type="date"
           variant={"bg-input"}
@@ -172,20 +168,25 @@ const TechnicalDetails = ({ state, setState }) => {
 
       <InputWrapper>
         <LabelInput
-          state={state.tags}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, tags: e.target.value };
-            });
+          state={formData.tags}
+          setState={(e)=>{
+            console.log("e",e);
+            setFormData({ ...formData, tags: e})
           }}
+          name={"tags"}
           labelVariant={"label"}
           type="text"
           dropdown
+          multipleSelectDropdown
           variant={"bg-input"}
           placeholder="Select Tags for Job Post"
           label={"Tags"}
         />
       </InputWrapper>
+
+      {disableNextPrev ? null : (
+        <NextPrevBtn handleNext={handleSave} handlePrev={prevStep} />
+      )}
     </Box>
   );
 };

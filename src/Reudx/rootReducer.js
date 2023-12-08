@@ -9,6 +9,7 @@ import userRegistration from "./slices/userRegistration";
 import companyRegister from "./slices/company";
 import employeeRegister from "./slices/employee";
 import LoginUser from "./slices/LoginUser";
+import jobPost from "./slices/jobPost";
 
 const rootReducer = combineReducers({
   userProfileSlice,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   userRegistration,
   companyRegister,
   employeeRegister,
-  LoginUser
+  LoginUser,
+  jobPost
 });
 export default rootReducer;

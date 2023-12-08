@@ -7,8 +7,8 @@ const ReactQuill = dynamic(() => import("react-quill"), {
 
 import "react-quill/dist/quill.snow.css";
 
-const TextFormatting = ({ placeholder }) => {
-  const [value, setValue] = useState("");
+const TextFormatting = ({ placeholder ,value ,setValue}) => {
+  // const [value, setValue] = useState("");
   const formate = [
     "header",
     "font",

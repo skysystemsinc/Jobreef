@@ -27,16 +27,15 @@ const SideBar = () => {
         router.pathname == "/company/create-job-post"
           ? white_job_post
           : job_post,
-      pathname:
-        router.pathname == "/company/create-job-post"
-          ? "/company/create-job-post"
-          : "/company/job-post",
+      pathname: "/company/job-post",
+      activePathnames: ["/company/create-job-post", "/company/job-post"],
     },
     {
       title: "Candidates",
       icon:
         router.pathname == "/company/candidates" ? white_candidate : candidate,
       pathname: "/company/candidates",
+      activePathnames: ["/company/candidates"],
     },
     {
       title: "Team Members",
@@ -45,10 +44,8 @@ const SideBar = () => {
         router.pathname == "/company/add-members"
           ? white_team
           : team,
-      pathname:
-        router.pathname == "/company/add-members"
-          ? "/company/add-members"
-          : "/company/team-members",
+      pathname: "/company/team-members",
+      activePathnames: ["/company/add-members", "/company/team-members"],
     },
     {
       title: "Company Details",
@@ -57,6 +54,7 @@ const SideBar = () => {
           ? building
           : blue_building,
       pathname: "/company/comapany-details",
+      activePathnames: ["/company/comapany-details"],
     },
   ];
   const activeStyle = {
@@ -66,7 +64,7 @@ const SideBar = () => {
     height: { xl: "auto", base: "40px" },
     display: "flex",
     justifyContent: { xl: "flex-start", base: "center" },
-    trnsition:".5s",
+    trnsition: ".5s",
     _hover: {
       backgroundColor: "blue.600",
     },
@@ -96,7 +94,12 @@ const SideBar = () => {
         return (
           <Link key={ind} _hover={{ textDecor: "none" }} href={item.pathname}>
             <Box
-              sx={item.pathname == router.pathname ? activeStyle : null}
+              // sx={item.pathname == router.pathname ? activeStyle : null}
+              sx={
+                item.activePathnames?.includes(router.pathname)
+                  ? activeStyle
+                  : null
+              }
               padding={{ xl: "12px 10px", base: "10px 8px 10px 9px" }}
               gap={"15px"}
               key={ind}

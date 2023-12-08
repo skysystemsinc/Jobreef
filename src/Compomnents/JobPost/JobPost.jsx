@@ -10,22 +10,52 @@ import {
   Tabs,
   Text,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import globalStyles from "@/styles/globalStyles";
 import ActiveJobs from "./ActiveJobs";
 
 import InActiveJobs from "./InActive";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { get } from "@/helper/fetch";
+import endPoints from "@/Utils/endpoints";
+import { setAllJobs } from "@/Reudx/slices/jobPost";
 
 const JobPostTabs = ({ company }) => {
-  const router = useRouter()
+  const router = useRouter();
+
+  const dispatch = useDispatch();
   let [tabIndex, setTabIndex] = useState(0);
+  const companyState = useSelector((state) => state.companyRegister.value);
+
+  const getAllJobs = async () => {
+    try {
+      const postData = await get(
+        `${endPoints.jobs}/${endPoints.companyJobs}/${companyState.id}`,
+        "GET"
+      );
+      if (postData.success) {
+        const { data } = postData;
+        
+
+        dispatch(setAllJobs(data));
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  useEffect(() => {
+    if (companyState.id) {
+      getAllJobs();
+    }
+  }, [companyState]);
+
   return (
     <>
       <Tabs
-      
-      // px={ {xl:"0px",   base: "10px"}}
+        // px={ {xl:"0px",   base: "10px"}}
         onChange={(index) => {
           setTabIndex(index);
         }}
@@ -41,7 +71,7 @@ const JobPostTabs = ({ company }) => {
             sx={{
               ...globalStyles.fullTab,
               ...globalStyles.scrollBar,
-              ml: { md: "0px" , base:'0px'},
+              ml: { md: "0px", base: "0px" },
               whiteSpace: "nowrap",
 
               overflowX: "scroll",
@@ -66,7 +96,7 @@ const JobPostTabs = ({ company }) => {
             </Tab>
 
             <Button
-            onClick={()=>router.push("/company/create-job-post")}
+              onClick={() => router.push("/company/create-job-post")}
               display={{ md: "block", base: "none" }}
               position={"absolute"}
               right={"12px"}
@@ -79,15 +109,14 @@ const JobPostTabs = ({ company }) => {
         </Box>
 
         <TabPanels>
-          <TabPanel  px={"0px"}>
+          <TabPanel px={"0px"}>
             <Box
               width={"100%"}
               // border={"1px solid red"}
               display={{ md: "none", base: "flex" }}
               justifyContent={"flex-end !important"}
               mb={"12px"}
-            onClick={()=>router.push("/company/create-job-post")}
-
+              onClick={() => router.push("/company/create-job-post")}
             >
               <Button variant={"blue-btn"}>Create a Job Post</Button>
             </Box>
@@ -95,8 +124,7 @@ const JobPostTabs = ({ company }) => {
           </TabPanel>
           <TabPanel px={"0px"}>
             <Box
-            onClick={()=>router.push("/company/create-job-post")}
-
+              onClick={() => router.push("/company/create-job-post")}
               width={"100%"}
               // border={"1px solid red"}
               display={{ md: "none", base: "flex" }}
