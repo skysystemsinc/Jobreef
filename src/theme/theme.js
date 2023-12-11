@@ -53,6 +53,7 @@ const colors = {
     text: "#4A4A4A",
   },
   blue: {
+    900:'#81BEC7',
     800: "#E9F5F8",
     700: "#667085",
     600: "#336CB0",
@@ -110,6 +111,41 @@ const components = {
         transition: ".5s",
         _hover: {
           bg: "blue.600",
+        },
+      },
+      "white-btn": {
+        textAlign: "center",
+        bg: "white.100",
+        height: { sm: "38px", base: "36px" },
+
+        width: {
+          sm: "172px",
+          base: "130px",
+        },
+        color: "blue.500",
+        fontWeight: 600,
+        fontSize: { sm: "13px", base: "12px" },
+        transition: ".5s",
+        _hover: {
+          bg: "gray.500",
+        },
+      },
+      "yellow-btn": {
+        textAlign: "center",
+        bg: "yellow.100",
+        height: { sm: "38px", base: "36px" },
+
+        width: "max-content",
+        px: {
+          md: "40px",
+          base: "25px",
+        },
+        color: "blue.500",
+        fontWeight: 700,
+        fontSize: { sm: "13px", base: "12px" },
+        transition: ".5s",
+        _hover: {
+          bg: "yellow.200",
         },
       },
       "outline-blue": {
@@ -469,6 +505,15 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         margin: "0px",
       },
+      h3: {
+        fontWeight: 500,
+
+        color: "white.100",
+        fontSize: ["32px", "32px ", "32px ", "32px ", "40px ", "40px "],
+        lineHeight: { md: "28px", base: "20px" },
+        fontFamily: "var(--chakra-\fonts-openSans)",
+        margin: "0px",
+      },
       // Variant for h2
 
       // h2: {
@@ -527,7 +572,7 @@ const components = {
         color: "blue.500",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
-        lineHeight:"22px",
+        lineHeight: "22px",
         fontSize: ["13px", "13px", "15px", "15px", "15px", "15px"],
       },
       p8: {
@@ -535,7 +580,7 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 400,
         lineHeight: ["22px", "33px", "36px", "36px", "36px", "36px"],
-        fontSize: ["17px", "23px", "27px", "27px", "27px", "30px"],
+        fontSize: ["15px", "20px", "27px", "27px", "27px", "30px"],
       },
       p9: {
         color: "black.100",
@@ -598,8 +643,8 @@ const components = {
     variants: {
       "custome-table": {
         table: {
-              position: "relative",
-            top: "-21px",
+          position: "relative",
+          top: "-21px",
           borderCollapse: "separate",
           borderSpacing: "0px 20px",
 

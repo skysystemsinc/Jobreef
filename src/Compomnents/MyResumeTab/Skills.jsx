@@ -107,17 +107,17 @@ const Skills = () => {
         <Box display={"flex"} justifyContent={"center"}>
           <SkillsForm state={state} setState={setState} />
         </Box>
-      ) : employeeState.skills.length > 0 ? (
+      ) : employeeState?.skills?.length > 0 ? (
         <Box
           minH={"60vh"}
           mt={"30px"}
           width={{ xl: "72%", base: "100%" }}
           mx={"auto"}
         >
-          {!employeeState.skills ? (
+          {!employeeState?.skills ? (
             <ExpCardLoading />
           ) : (
-            employeeState.skills.map((item, ind) => {
+            employeeState?.skills?.map((item, ind) => {
               return (
                 <Box key={ind}>
                   <SkillsCard

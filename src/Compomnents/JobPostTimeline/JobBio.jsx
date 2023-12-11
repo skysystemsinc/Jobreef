@@ -1,5 +1,5 @@
-import { Box, Image, Input,Button } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { Box, Image, Input, Button, useToast, Flex } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import LabelInput from "../LabelInput/LabelInput";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import { Link } from "@chakra-ui/next-js";
@@ -7,21 +7,71 @@ import { BsDot } from "react-icons/bs";
 import upload from "@/assets/Images/upload.svg";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import TextFormatting from "../TextFormatting/TextFormatting";
+import { useDispatch, useSelector } from "react-redux";
+import { job } from "@/schema/stateSchema";
+import IconButton from "../IconButton/IconButton";
+import NextPrevBtn from "./NextPrevBtn";
+import { addJob } from "@/Reudx/slices/jobPost";
+import { get } from "@/helper/fetch";
+import endPoints from "@/Utils/endpoints";
 
-const JobBio = ({ state, setState }) => {
+const JobBio = ({ disableNextPrev, prevStep, nextStep }) => {
+  // const applicationType = [
+  //   { label: "External", value: "External" },
+  //   { label: "Internal", value: "Internal" },
+  // ];
+  const toast = useToast();
+  const dispatch = useDispatch();
+
+  const jobState = useSelector((state) => state.jobPost.value);
+  const [formData, setFormData] = useState(jobState);
+
   const applicationType = ["External", "Internal"];
-  const [readOnly, setreadOnly] = useState(false);
-  const [urlPlaceholder, seturlPlaceholder] = useState("External");
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+  const handleSave = () => {
+    if (
+      formData.title === "" ||
+      formData.applicationType === "" ||
+      formData.jobDescription === "" ||
+      formData.applicationDeadline == null
+    ) {
+      toast({
+        position: "bottom-right",
+        title: " required fields are empty",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+      return;
+    }
+    dispatch(addJob({ ...formData }));
+    nextStep();
+  };
+  useEffect(() => {
+    if(jobState){
+
+      setFormData(jobState)
+    }
+  }, [jobState])
+  
+
   return (
     <Box>
       <InputWrapper>
         <LabelInput
-          state={state.jobTitle}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, jobTitle: e.target.value };
-            });
-          }}
+          state={formData.title}
+          setState={handleChange}
+          name={"title"}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -29,12 +79,9 @@ const JobBio = ({ state, setState }) => {
           label={"Job Title*"}
         />
         <LabelInput
-          state={state.employeeType}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, employeeType: e.target.value };
-            });
-          }}
+          state={formData.employmentType}
+          setState={handleChange}
+          name={"employmentType"}
           dropdown
           labelVariant={"label"}
           type="text"
@@ -46,26 +93,23 @@ const JobBio = ({ state, setState }) => {
 
       <InputWrapper>
         <LabelInput
-          state={state.applicationDeadline}
+          state={formData.applicationDeadline}
           setState={(e) => {
-            setState((prev) => {
+            setFormData((prev) => {
               return { ...prev, applicationDeadline: e };
             });
           }}
           labelVariant={"label"}
           type="date"
-          imoptnatIcon
+          importantIcon
           variant={"bg-input"}
           placeholder="MM/DD/YYYY"
           label={"Application Deadline"}
         />
         <LabelInput
-          state={state.locationType}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, locationType: e.target.value };
-            });
-          }}
+          state={formData.locationType}
+          setState={handleChange}
+          name={"locationType"}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -76,28 +120,20 @@ const JobBio = ({ state, setState }) => {
       </InputWrapper>
       <InputWrapper>
         <LabelInput
-          state={state.applicationType.type}
-          setState={(e) => {
-            setState((prev) => {
-              return {
-                ...prev,
-                applicationType: {
-                  ...prev.applicationType,
-                  type: e.target.value,
-                },
-              };
-            });
-          }}
+          state={formData.applicationType}
+          setState={handleChange}
+          name={"applicationType"}
           labelVariant={"label"}
           dropdownOption={applicationType}
           type="date"
           dropdown
-          imoptnatIcon
+          defaultDropdown={true}
+          importantIcon
           variant={"bg-input"}
           placeholder="Select application type"
           label={"Application Type"}
         />
-        {state.applicationType.type === applicationType[1] ? (
+        {formData.applicationType === applicationType[1] ? (
           <Input
             mt={"30px"}
             readOnly={true}
@@ -107,44 +143,41 @@ const JobBio = ({ state, setState }) => {
           />
         ) : (
           <LabelInput
-            state={state.applicationType.url}
-            setState={(e) => {
-              setState((prev) => {
-                return {
-                  ...prev,
-                  applicationType: {
-                    ...prev.applicationType,
-                    url: e.target.value,
-                  },
-                };
-              });
-            }}
+            state={formData.externalURL}
+            setState={handleChange}
+            name={"externalURL"}
             labelVariant={"label"}
             type="text"
             variant={"bg-input"}
-            readOnly={readOnly}
+            readOnly={false}
             placeholder="Enter URL to Redirect Candidates"
-            label={urlPlaceholder}
+            label={"External"}
           />
         )}
       </InputWrapper>
 
-      <Box marginBottom={{ md: "25px", base: "15px" }}>     
+      <Box marginBottom={{ md: "25px", base: "15px" }}>
         <LabelInput
-            state={state.description}
-            
-            setState={(e) => {
-              setState((prev) => {
-                return { ...prev, description: e.target.value };
-              });
-            }}
-            labelVariant={"label"}
-            textFormattter
-            variant={"bg-teaxtarea"}
-            placeholder="Enter the job description in detail for candidates"
-            label={"Job Description*"}
-          />
+          state={formData.jobDescription}
+          setState={(e) => {
+            setFormData((prev) => {
+              return {
+                ...prev,
+                jobDescription: e,
+              };
+            });
+          }}
+          name={"jobDescription"}
+          labelVariant={"label"}
+          textFormatter
+          variant={"bg-teaxtarea"}
+          placeholder="Enter the job description in detail for candidates"
+          label={"Job Description*"}
+        />
       </Box>
+      {disableNextPrev ? null : (
+        <NextPrevBtn handleNext={handleSave} handlePrev={() => {}} />
+      )}
     </Box>
   );
 };

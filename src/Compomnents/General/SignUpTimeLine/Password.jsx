@@ -38,7 +38,7 @@ const Password = ({ State, setState }) => {
               return { ...prev, password: e.target.value };
             });
           }}
-          passworInput
+          passwordInput
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -55,7 +55,7 @@ const Password = ({ State, setState }) => {
               return { ...prev, confirmPassword: e.target.value };
             });
           }}
-          passworInput
+          passwordInput
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}

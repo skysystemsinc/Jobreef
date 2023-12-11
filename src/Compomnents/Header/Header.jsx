@@ -42,6 +42,8 @@ import endPoints from "@/Utils/endpoints";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setLoginUser } from "@/Reudx/slices/LoginUser";
+import { TbCaretDown } from "react-icons/tb";
+import blueDownArrow from "@/assets/Images/blueDownArrow.svg";
 const HeaderDropdown = dynamic(
   () => import("../HeaderDropdown/HeaderDropdown"),
   {
@@ -53,25 +55,45 @@ export default function Header({ notLogin, candidate }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const [isSmallerThe500] = useMediaQuery("(max-width: 500px)");
-  // const getUser = async () => {
-  //   const id = localStorage.getItem("id");
-  //   try {
-  //     const postData = await httpRequest(
-  //       `${BACKEND_URL}${endPoints.user}/${id}`,
-  //       "GET"
-  //     );
-  //     if (postData.success) {
-  //       const { data } = postData;
+  const NAV_ITEMS = [
+    {
+      label: "Home",
+      pathName: "/",
+      // icon: <Image src={heart.src} />,
+    },
+    {
+      label: "Search Jobs",
+      pathName: "/candidate/job-search",
+    },
+    {
+      label: "For Job Seekers",
+      icon: (
+        <Image
+          src={router.pathname === "/jobseeker" ? blueDownArrow.src : heart.src}
+        />
+      ),
 
-  //       dispatch(setLoginUser(postData.data));
-  //     }
-  //   } catch (error) {
-  //     console.log("error", error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   getUser();
-  // }, []);
+      pathName: "/jobseeker",
+    },
+    {
+      label: "For Employers",
+      icon: (
+        <Image
+          src={router.pathname === "/employers" ? blueDownArrow.src : heart.src}
+        />
+      ),
+
+      pathName: "/employers",
+    },
+    {
+      label: "Career Advice",
+      pathName: "#",
+    },
+    {
+      label: "Our Company ",
+      pathName: "#",
+    },
+  ];
 
   return (
     <Box zIndex={5} position={"sticky"} top={"0px"}>
@@ -176,9 +198,48 @@ const DesktopNav = () => {
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
   const router = useRouter();
 
+  const NAV_ITEMS = [
+    {
+      label: "Home",
+      pathName: "/",
+      // icon: <Image src={heart.src} />,
+    },
+    {
+      label: "Search Jobs",
+      pathName: "/candidate/job-search",
+    },
+    {
+      label: "For Job Seekers",
+      icon: (
+        <Image
+          src={router.pathname === "/jobseeker" ? blueDownArrow.src : heart.src}
+        />
+      ),
+
+      pathName: "/jobseeker",
+    },
+    {
+      label: "For Employers",
+      icon: (
+        <Image
+          src={router.pathname === "/employers" ? blueDownArrow.src : heart.src}
+        />
+      ),
+
+      pathName: "/employers",
+    },
+    {
+      label: "Career Advice",
+      pathName: "#",
+    },
+    {
+      label: "Our Company ",
+      pathName: "#",
+    },
+  ];
   return (
     <Stack direction={"row"} spacing={1}>
-      {NAV_ITEMS.map((navItem) => (
+      {NAV_ITEMS.map((navItem, ind) => (
         <Box key={navItem.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
@@ -208,7 +269,16 @@ const DesktopNav = () => {
                   color: "blue.500",
                 }}
               >
-                {navItem.label} {navItem.icon ?? ""}
+                {navItem.label}
+
+                {ind == 1 || ind == 2 ? (
+                  <Box>
+                    <TbCaretDown  fontSize={"18px"} />
+                  </Box>
+                ) :
+                null}
+
+                {/* {navItem.icon ?? ""} */}
               </Link>
             </PopoverTrigger>
 
@@ -277,6 +347,46 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 };
 
 const MobileNav = ({ candidate }) => {
+  const router = useRouter();
+  const NAV_ITEMS = [
+    {
+      label: "Home",
+      pathName: "/",
+      // icon: <Image src={heart.src} />,
+    },
+    {
+      label: "Search Jobs",
+      pathName: "/candidate/job-search",
+    },
+    {
+      label: "For Job Seekers",
+      icon: (
+        <Image
+          src={router.pathname === "/jobseeker" ? blueDownArrow.src : heart.src}
+        />
+      ),
+
+      pathName: "/jobseeker",
+    },
+    {
+      label: "For Employers",
+      icon: (
+        <Image
+          src={router.pathname === "/employers" ? blueDownArrow.src : heart.src}
+        />
+      ),
+
+      pathName: "/employers",
+    },
+    {
+      label: "Career Advice",
+      pathName: "#",
+    },
+    {
+      label: "Our Company ",
+      pathName: "#",
+    },
+  ];
   return (
     <Stack
       bg={useColorModeValue("white", "gray.800")}
@@ -342,38 +452,3 @@ const MobileNavItem = ({ label, children, href }) => {
     </Stack>
   );
 };
-
-const NAV_ITEMS = [
-  {
-    label: "Home",
-    pathName: "/",
-    // icon: <Image src={heart.src} />,
-  },
-  {
-    label: "Search Jobs",
-    pathName: "/candidate/job-search",
-  },
-  {
-    label: "For Job Seekers",
-    icon: <Image src={heart.src} />,
-
-    href: "#",
-  },
-  {
-    label: "For Employers",
-    icon: (
-      // <MdArrowDropDown/>,
-      <Image src={heart.src} />
-    ),
-
-    href: "#",
-  },
-  {
-    label: "Career Advice",
-    href: "#",
-  },
-  {
-    label: "Our Company ",
-    href: "#",
-  },
-];

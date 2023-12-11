@@ -33,10 +33,13 @@ const PaginatedTable = ({
 }) => {
   const startIndex = (currentPage - 1) * pageSize;
   // const endIndex = currentPage * pageSize;
-  const [sorting, setSorting] = useState({ key: "Candidates", ascending: true });
+  const [sorting, setSorting] = useState({
+    key: "Candidates",
+    ascending: true,
+  });
   const endIndex = Math.min(currentPage * pageSize, data.length);
 
-  const paginatedData = data.slice(startIndex, endIndex);
+  const paginatedData = data?.slice(startIndex, endIndex);
   const [tableData, settableData] = useState(paginatedData);
   const activeStyle = {
     backgroundColor: "transparent",
@@ -76,21 +79,16 @@ const PaginatedTable = ({
         bg={"white.100"}
         // mb={"30px"}
       >
-        {showExtraHeader?
-        <Box bg={"blue.500"} p={"20px 15px 10px"} >
-          <Heading variant={'p7'} color={"white.100"} fontWeight={400} > Recent Orders</Heading>
-        </Box>
-        :null
-        }
+        {showExtraHeader ? (
+          <Box bg={"blue.500"} p={"20px 15px 10px"}>
+            <Heading variant={"p7"} color={"white.100"} fontWeight={400}>
+              {" "}
+              Recent Orders
+            </Heading>
+          </Box>
+        ) : null}
         <Table variant="custome-table">
           <Thead>
-            {/* {showExtraHeader ? (
-              <Tr>
-                <Th fontWeight={700} colspan={"100%"}>
-                  Recent Orders
-                </Th>
-              </Tr>
-            ) : null} */}
             {columns.map((item, ind) => {
               return (
                 <Tr sx={trStyle} key={ind}>

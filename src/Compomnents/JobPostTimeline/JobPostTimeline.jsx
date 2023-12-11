@@ -28,57 +28,59 @@ import DesiredSkills from "./DesiredSkills";
 import Preview from "./Preview";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import AssignJob from "./AssigneJob";
+import { get } from "@/helper/fetch";
+import endPoints from "@/Utils/endpoints";
+import { addJob } from "@/Reudx/slices/jobPost";
+import { useDispatch, useSelector } from "react-redux";
 
-const JobPostTimeline = ({
-  assignJob,
-  timeLine,
-  isEdit,
-  title,
-  candidate,
-  variant,
-}) => {
+const JobPostTimeline = ({ isEdit, title }) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  const jobState = useSelector((state) => state.jobPost.jobs.allJobs);
+
+  const { id } = router.query;
   const steps = [
     { label: "Job Bio" },
     { label: "Technical Details" },
     { label: "Job Location" },
     { label: "Desired Skills" },
   ];
-  const [state, setState] = useState({
-    jobTitle: "",
-    employeeType: "",
-    applicationDeadline: new Date(),
-    locationType: "",
-    description: "",
-    noOfOpening: "",
-    minimumEducation: "",
-    yearsOfExperiance: "",
-    jobFamily: "",
-    salaryType: "",
-    salaryRange: "",
-    country: "",
-    state: "",
-    city: "",
-    streetAddress: "",
-    desiredSkill: "",
-    tags: "",
-    applicationType: { type: "External", url: "" },
-    rate: "",
-  });
+
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
-  const [completedSteps, setcompletedSteps] = useState([0]);
-  const isLastStep = activeStep === steps.length - 1;
+
   const hasCompletedAllSteps = activeStep === steps.length;
-  const [compeletedStep, setcompeletedStep] = useState([]);
-  const initialRender = useRef(true);
+  const [completedStep, setCompletedStep] = useState([]);
+
   useEffect(() => {
-    setcompeletedStep([...compeletedStep, activeStep]);
+    setCompletedStep([...completedStep, activeStep]);
   }, [activeStep]);
-  const boxstyle = {
+  const boxStyle = {
     minH: "55vh",
     marginTop: { md: "60px", base: "10px" },
   };
+  const getJob = async () => {
+    console.log("get job by id");
+
+    try {
+      const postData = await get(`${endPoints.jobs}/${id}`);
+      console.log("postData", postData);
+
+      if (postData) {
+        dispatch(addJob(postData.data));
+      }
+    } catch (err) {
+      console.log("err", err);
+    }
+  };
+  useEffect(() => {
+    console.log("id", id);
+    if (id) {
+      getJob();
+    }
+  }, [router.query]);
 
   return (
     <Box pb={"50px"}>
@@ -87,7 +89,7 @@ const JobPostTimeline = ({
         m={{ md: "42px 0px 40px 0px", base: "30px 0px 30px 0px" }}
         variant={"p6"}
       >
-        {title}
+        {id ? "Update a Job Post" : "Create a New Job Post"}
       </Heading>
       <Flex
         flexDir="column"
@@ -152,7 +154,7 @@ const JobPostTimeline = ({
                   fontWeight={700}
                   sx={{
                     // color:'#fff'
-                    color: compeletedStep.includes(index)
+                    color: completedStep.includes(index)
                       ? "blue.500"
                       : "gray.light",
                   }}
@@ -174,7 +176,7 @@ const JobPostTimeline = ({
                   <Heading
                     variant={"p1"}
                     sx={{
-                      color: compeletedStep.includes(index)
+                      color: completedStep.includes(index)
                         ? "blue.500"
                         : "gray.light",
                     }}
@@ -194,16 +196,16 @@ const JobPostTimeline = ({
                   {/* <JobBio /> */}
 
                   {index == 0 ? (
-                    <JobBio state={state} setState={setState} />
+                    <JobBio nextStep={nextStep} prevStep={prevStep} />
                   ) : index == 1 ? (
-                    <TechnicalDetails state={state} setState={setState} />
+                    <TechnicalDetails nextStep={nextStep} prevStep={prevStep} />
                   ) : index == 2 ? (
-                    <JobLocation state={state} setState={setState} />
+                    <JobLocation nextStep={nextStep} prevStep={prevStep} />
                   ) : index == 3 ? (
                     <DesiredSkills
-                      style={boxstyle}
-                      state={state}
-                      setState={setState}
+                      nextStep={nextStep}
+                      prevStep={prevStep}
+                      style={boxStyle}
                     />
                   ) : null}
                 </Box>
@@ -211,7 +213,7 @@ const JobPostTimeline = ({
             );
           })}
         </Steps>
-        {/* {hasCompletedAllSteps ? <TimelineSubtitle /> : null} */}
+
         {hasCompletedAllSteps ? (
           <Box
             sx={{
@@ -219,65 +221,9 @@ const JobPostTimeline = ({
               width: { md: "85%", base: "95%" },
             }}
           >
-            <Preview
-              
-              isEdit={isEdit}
-              state={state}
-              setState={setState}
-            />
+            <Preview isEdit={isEdit} />
           </Box>
         ) : null}
-
-        {hasCompletedAllSteps ? null : (
-          <Flex
-            width={{ md: "75%", base: "95%" }}
-            // width="75%"
-            justify="space-between"
-            // mt={{ md: "22px", base: "0px" }}
-            pb={"30px"}
-            gap={4}
-          >
-            <>
-              <IconButton
-                handleEvent={() => {
-                  if (activeStep != 0) {
-                    if (compeletedStep.includes(activeStep)) {
-                      const updatedCompletedSteps = compeletedStep.filter(
-                        (step) => step != activeStep
-                      );
-
-                      setcompeletedStep(updatedCompletedSteps);
-                    }
-                    prevStep();
-                  }
-                  // activeStep == 0 ? null : prevStep();
-                }}
-                iconSize={"21px"}
-                icon={grayArrow}
-                btnLabel={"Previous"}
-                variant={"unstyled"}
-              />
-
-              <Button
-                variant={"blue-btn"}
-                onClick={() => {
-                  nextStep();
-                  setcompletedSteps([...completedSteps, activeStep]);
-                  // if (activeStep == 2) {
-                  //   if (!company) {
-                  //     router.push("/candidate/profile-setting");
-                  //   } else {
-                  //     router.push("/registeraion");
-                  //   }
-                  // } else {
-                  // }
-                }}
-              >
-                {"Next"}
-              </Button>
-            </>
-          </Flex>
-        )}
       </Flex>
     </Box>
   );

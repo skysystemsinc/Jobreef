@@ -48,7 +48,7 @@ const Popovers = ({ width, actionList }) => {
           {actionList?.map((item, index) => {
             return (
               <Box
-                onClick={() => item.handleEvent(item.id)}
+                onClick={item.handleEvent}
                 cursor={"pointer"}
                 key={index}
                 padding={"12px  20px"}

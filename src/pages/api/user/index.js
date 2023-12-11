@@ -33,6 +33,7 @@ const addUser = async (req, res) => {
           ...data,
           otp:otp,
           password: hashPass,
+          ...(data.employeeId ?? { employeeId: data.employeeId }),
           // firstName: data.firstName,
           // lastName: data.lastName,
           // email: data.email,

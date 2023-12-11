@@ -8,9 +8,9 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-const ContactForm = () => {
+const ContactForm = ({ style,label , smallText}) => {
   return (
-    <Box bg={"blue.200"} py={{md: "30px", base:"20px"}} height={"250px"} mb={"190px"}>
+    <Box bg={"blue.200"} py={{md: "30px", base:"20px"}} height={"250px"} mb={"190px"} sx={style} >
       <Heading
         className="sora"
         fontWeight={700}
@@ -19,9 +19,9 @@ const ContactForm = () => {
         variant={"h1"}
         mb={{md: "40px", base:"27px"}}
       >
-        Leave Us A
+        {label}
         <Box mx={"10px"} as="span" color={"blue.500"}>
-          Message
+          {smallText}
         </Box>
       </Heading>
 

@@ -34,8 +34,9 @@ import { addCompany } from "@/Reudx/slices/company";
 
 const SocialLink = ({ nextStep, handlePrevious }) => {
   const toast = useToast();
-  const router = useRouter();
   const dispatch = useDispatch();
+  
+  const router = useRouter();
   const isAuthenticated = useSelector((state) => state.authentication.value);
   let companyState = useSelector((state) => state.companyRegister.value);
   console.log("companyState", companyState);

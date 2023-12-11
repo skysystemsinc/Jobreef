@@ -8,7 +8,9 @@ const DropDown = ({
   setState,
   state,
   icon,
+  multipleSelectDropdown,
   variant,
+  multiple,
   name,
   defaultDropdown,
   style,
@@ -18,6 +20,14 @@ const DropDown = ({
     {
       label: "option1",
       value: "option1",
+    },
+    {
+      label: "option2",
+      value: "option2",
+    },
+    {
+      label: "option3",
+      value: "option3",
     },
   ];
   return (
@@ -58,6 +68,17 @@ const DropDown = ({
             </>
           )}
         </Select>
+      ) : multipleSelectDropdown ? (
+        <MultiSelect
+          options={dropdownOption ?? option}
+          value={state ?? ""}
+          label=""
+          multiple
+          name={name}
+          onChange={setState}
+          placeholder={placeholder}
+          SelectIconButtonProps={{ icon: <Image src={black_arrow_down.src} /> }}
+        />
       ) : (
         <MultiSelect
           options={dropdownOption ?? option}

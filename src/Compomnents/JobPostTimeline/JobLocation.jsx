@@ -10,25 +10,59 @@ import {
   ListItem,
   Textarea,
   UnorderedList,
+  useToast,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import LabelInput from "../LabelInput/LabelInput";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import { Link } from "@chakra-ui/next-js";
 import { BsDot } from "react-icons/bs";
 import upload from "@/assets/Images/upload.svg";
+import { useDispatch, useSelector } from "react-redux";
+import NextPrevBtn from "./NextPrevBtn";
+import { addJob } from "@/Reudx/slices/jobPost";
 
-const JobLocation = ({ state, setState }) => {
+const JobLocation = ({ disableNextPrev, prevStep, nextStep }) => {
+  const toast = useToast();
+  const dispatch = useDispatch();
+  const jobState = useSelector((state) => state.jobPost.value);
+  const [formData, setFormData] = useState(jobState);
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+  const handleSave = () => {
+    if (
+      formData.country === "" ||
+      formData.province === "" ||
+      formData.address === "" ||
+      formData.city === ""
+    ) {
+      toast({
+        position: "bottom-right",
+        title: " required fields are empty",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+      return;
+    }
+    dispatch(addJob({ ...formData }));
+    nextStep();
+  };
   return (
     <Box>
       <InputWrapper>
         <LabelInput
-          state={state.country}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, country: e.target.value };
-            });
-          }}
+          state={formData.country}
+          setState={handleChange}
+          name={"country"}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -37,12 +71,9 @@ const JobLocation = ({ state, setState }) => {
           label={"Country*"}
         />
         <LabelInput
-          state={state.state}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, state: e.target.value };
-            });
-          }}
+          state={formData.province}
+          setState={handleChange}
+          name={"province"}
           dropdown
           labelVariant={"label"}
           type="text"
@@ -54,12 +85,9 @@ const JobLocation = ({ state, setState }) => {
 
       <InputWrapper>
         <LabelInput
-          state={state.city}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, city: e.target.value };
-            });
-          }}
+          state={formData.city}
+          setState={handleChange}
+          name={"city"}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -67,12 +95,9 @@ const JobLocation = ({ state, setState }) => {
           label={"City"}
         />
         <LabelInput
-          state={state.streetAddress}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, streetAddress: e.target.value };
-            });
-          }}
+          state={formData.address}
+          setState={handleChange}
+          name={"address"}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -80,6 +105,9 @@ const JobLocation = ({ state, setState }) => {
           label={"Street Address"}
         />
       </InputWrapper>
+      {disableNextPrev ? null : (
+        <NextPrevBtn handleNext={handleSave} handlePrev={prevStep} />
+      )}
     </Box>
   );
 };

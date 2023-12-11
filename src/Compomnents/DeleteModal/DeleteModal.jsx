@@ -13,7 +13,15 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-function DeleteModal({ name, loading, handleDelete, isOpen, onOpen, onClose }) {
+function DeleteModal({
+  deleteBtnLabel,
+  name,
+  loading,
+  handleDelete,
+  isOpen,
+  onOpen,
+  onClose,
+}) {
   //   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -41,7 +49,7 @@ function DeleteModal({ name, loading, handleDelete, isOpen, onOpen, onClose }) {
                 color={"black.100"}
                 fontWeight={500}
               >
-                Are you sure you want to delete it{" "}
+                Are you sure you want to { deleteBtnLabel??" delete"} it{" "}
                 <Box as="span" fontWeight={700}>
                   {" "}
                   {name}{" "}
@@ -75,7 +83,7 @@ function DeleteModal({ name, loading, handleDelete, isOpen, onOpen, onClose }) {
               px={"20px"}
               variant={"blue-btn"}
             >
-              {loading ? <Loader /> : "Delete"}
+              {loading ? <Loader /> : deleteBtnLabel ?? "Delete"}
             </Button>
           </ModalFooter>
         </ModalContent>

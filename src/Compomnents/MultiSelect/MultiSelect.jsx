@@ -5,6 +5,7 @@ import { Image } from "@chakra-ui/react";
 
 const CustomMultiSelect = () => {
   const [value, setValue] = useState([]);
+  console.log("value",value);
 
   const options = [
     { label: "option1", value: "option1" },
