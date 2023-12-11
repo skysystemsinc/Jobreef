@@ -24,15 +24,8 @@ const HireTalent = () => {
             receiving applications from the best local talent.
           </Heading>
           <Button
-            variant={"blue-btn"}
-            bg={"yellow.100"}
-            color={"blue.500"}
-            fontWeight={700}
-            width={"max-content"}
-            px={{md: "40px", base:"25px"}}
-            _hover={{
-              backgroundColor: "yellow.200",
-            }}
+            variant={"yellow-btn"}
+
           >
             Find Your Next Hire
           </Button>
