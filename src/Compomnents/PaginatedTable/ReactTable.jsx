@@ -1,6 +1,7 @@
 // Importing necessary modules
 import {
   Box,
+  Button,
   Heading,
   Image,
   Table,
@@ -23,10 +24,8 @@ import moment from "moment";
 import arrow_right from "@/assets/Images/arrow-right.svg";
 import arrow_left from "@/assets/Images/arrow-left.svg";
 
-
-function ReactTable({ data ,columns}) {
+function ReactTable({ data, columns }) {
   const actionList = ["Edit", "Pause", "Close job"];
-
 
   // Using the useReactTable hook
   const table = useReactTable({
@@ -40,7 +39,12 @@ function ReactTable({ data ,columns}) {
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
-
+  const activeStyle = {
+    backgroundColor: "transparent",
+    border: "1px solid",
+    borderColor: "blue.500",
+    color: "blue.500",
+  };
   return (
     <Box
       boxShadow="0px 2px 15px 0px rgba(0, 0, 0, 0.06)"
@@ -140,27 +144,37 @@ function ReactTable({ data ,columns}) {
             cursor={"pointer"}
             width={{ md: "22px", base: "16px" }}
             src={arrow_right.src}
+            disabled={!table.getCanPreviousPage()}
           />
 
-          {/* {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-            (page, index) => {
-              return (
-                <Button
-                  key={index}
-                  disabled={currentPage == totalPages}
-                  onClick={() => onPageChange(page)}
-                  variant={"square-btn"}
-                  border={"2px solid "}
-                  borderColor={"blue.500"}
-                  color={page === index ? "red" : "#fff"}
-                  bg="blue.500"
-                  sx={currentPage === index + 1 ? activeStyle : {}}
-                >
-                  {page}
-                </Button>
-              );
-            }
-          )} */}
+          {Array.from(
+            { length: table.getPageCount() },
+            (_, index) => index + 1
+          ).map((page, index) => {
+            return (
+              <Button
+                key={index}
+                // disabled={currentPage == totalPages}
+                onClick={() => table.setPageIndex(index)}
+                variant={"square-btn"}
+                border={"2px solid "}
+                borderColor={"blue.500"}
+                color={
+                  table.getState().pagination.pageIndex  === index
+                    ? "blue.500"
+                    : "white.100"
+                }
+                bg="blue.500"
+                sx={
+                  table.getState().pagination.pageIndex === index 
+                    ? activeStyle
+                    : {}
+                }
+              >
+                {page}
+              </Button>
+            );
+          })}
 
           <Image
             // _disabled={currentPage == totalPages}
@@ -168,6 +182,7 @@ function ReactTable({ data ,columns}) {
             cursor={"pointer"}
             width={{ md: "22px", base: "16px" }}
             src={arrow_left.src}
+            disabled={!table.getCanNextPage()}
           />
         </Box>
       </Box>

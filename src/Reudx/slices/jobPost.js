@@ -19,7 +19,9 @@ const jobPost = createSlice({
       state.value = action.payload;
     },
     setAllJobs: (state, action) => {
-      const activeJobs = action.payload.filter((item) => item.active === true);
+      const activeJobs = action.payload.filter(
+        (item) => item.active === true && item.status == 1
+      );
       const inActiveJobs = action.payload.filter(
         (item) => item.active === false
       );

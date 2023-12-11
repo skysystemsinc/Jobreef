@@ -275,16 +275,7 @@ const DesktopNav = () => {
                   <Box>
                     <TbCaretDown  fontSize={"18px"} />
                   </Box>
-                ) : // <Image
-                //   src={
-                //     (router.pathname === "/jobseeker" &&
-                //       navItem.label == "For Job Seekers") ||
-                //     (router.pathname === "/candidate/job-search" &&
-                //       navItem.label === "Search Jobs")
-                //       ? blueDownArrow.src
-                //       : heart.src
-                //   }
-                // />
+                ) :
                 null}
 
                 {/* {navItem.icon ?? ""} */}

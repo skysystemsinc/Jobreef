@@ -185,7 +185,7 @@ model Job {
   createdAt           DateTime     @default(now())
   active              Boolean?     @default(true)
   delete              Boolean?     @default(false)
-  status              Int?         @default(-1)
+  status              Int?         @default(1)
   // -1 for expire job
   // 1 for active  job?
   // 0 for pause  job?

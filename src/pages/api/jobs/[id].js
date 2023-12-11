@@ -66,7 +66,7 @@ const GetSingleData = async (req, res) => {
     // const user = await UserModel.findOne({ _id: req.query.id });
     const singleData = await prisma.Job.findUnique({
       include: {
-        employee: true,
+        company: true,
       },
       where: {
         id: req.query.id,
@@ -79,10 +79,12 @@ const GetSingleData = async (req, res) => {
       });
     }
     res.status(200).json({
-      data: user,
+      data: singleData,
       success: true,
     });
   } catch (err) {
+
+    console.log("jobs pge",err);
     res.status(500).json({
       error: err,
       message: `internal server error`,

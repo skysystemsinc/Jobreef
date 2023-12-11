@@ -28,9 +28,17 @@ import DesiredSkills from "./DesiredSkills";
 import Preview from "./Preview";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import AssignJob from "./AssigneJob";
+import { get } from "@/helper/fetch";
+import endPoints from "@/Utils/endpoints";
+import { addJob } from "@/Reudx/slices/jobPost";
+import { useDispatch, useSelector } from "react-redux";
 
 const JobPostTimeline = ({ isEdit, title }) => {
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  const jobState = useSelector((state) => state.jobPost.jobs.allJobs);
+
   const { id } = router.query;
   const steps = [
     { label: "Job Bio" },
@@ -53,6 +61,26 @@ const JobPostTimeline = ({ isEdit, title }) => {
     minH: "55vh",
     marginTop: { md: "60px", base: "10px" },
   };
+  const getJob = async () => {
+    console.log("get job by id");
+
+    try {
+      const postData = await get(`${endPoints.jobs}/${id}`);
+      console.log("postData", postData);
+
+      if (postData) {
+        dispatch(addJob(postData.data));
+      }
+    } catch (err) {
+      console.log("err", err);
+    }
+  };
+  useEffect(() => {
+    console.log("id", id);
+    if (id) {
+      getJob();
+    }
+  }, [router.query]);
 
   return (
     <Box pb={"50px"}>

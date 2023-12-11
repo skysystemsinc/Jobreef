@@ -1,5 +1,5 @@
 import { Box, Image, Input, Button, useToast, Flex } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LabelInput from "../LabelInput/LabelInput";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import { Link } from "@chakra-ui/next-js";
@@ -12,6 +12,8 @@ import { job } from "@/schema/stateSchema";
 import IconButton from "../IconButton/IconButton";
 import NextPrevBtn from "./NextPrevBtn";
 import { addJob } from "@/Reudx/slices/jobPost";
+import { get } from "@/helper/fetch";
+import endPoints from "@/Utils/endpoints";
 
 const JobBio = ({ disableNextPrev, prevStep, nextStep }) => {
   // const applicationType = [
@@ -55,6 +57,13 @@ const JobBio = ({ disableNextPrev, prevStep, nextStep }) => {
     dispatch(addJob({ ...formData }));
     nextStep();
   };
+  useEffect(() => {
+    if(jobState){
+
+      setFormData(jobState)
+    }
+  }, [jobState])
+  
 
   return (
     <Box>
@@ -167,7 +176,7 @@ const JobBio = ({ disableNextPrev, prevStep, nextStep }) => {
         />
       </Box>
       {disableNextPrev ? null : (
-        <NextPrevBtn handleNext={handleSave} handlePrev={prevStep} />
+        <NextPrevBtn handleNext={handleSave} handlePrev={() => {}} />
       )}
     </Box>
   );
