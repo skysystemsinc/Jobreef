@@ -12,27 +12,142 @@ import {
   ListItem,
   Textarea,
   UnorderedList,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import LabelInput from "../LabelInput/LabelInput";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import axios from "axios";
 import { useRouter } from "next/router";
+import globalStyles from "@/styles/globalStyles";
+import { useDispatch, useSelector } from "react-redux";
+import { addTeamMember, getTeamMembers } from "@/Reudx/slices/teamMembers";
+import { post, put } from "@/helper/fetch";
+import endPoints from "@/Utils/endpoints";
+import Loader from "../Loader/Loader";
+import { roles } from "@/Utils/role";
 
 const AddMemebersForm = () => {
   const router = useRouter();
-  const [State, setState] = useState({
+  const dispatch = useDispatch();
+  const companyState = useSelector((state) => state.companyRegister.value);
+
+  const toast = useToast();
+  const [state, setState] = useState({
+    loading: false,
+  });
+  const userState = useSelector((state) => state.teamMembers.value.allMembers);
+  const singleUser = useSelector((state) => state.teamMembers.value.member);
+  const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    role: "",
+    employeeRole: "",
   });
   const handleSend = async () => {
     try {
-      router.push("/company/team-members")
+      const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      const isValidEmail = emailPattern.test(formData.email);
+      if (
+        formData.firstName == "" ||
+        formData.lastName == "" ||
+        formData.email == "" ||
+        formData.role == ""
+      ) {
+        toast({
+          position: globalStyles.toastStyle.position,
+          title: `Required fields are empty`,
+          status: "error",
+          variant: "subtle",
+          isClosable: true,
+        });
+        return;
+      }
+      if (!isValidEmail) {
+        toast({
+          position: globalStyles.toastStyle.position,
+          title: `Email is invalid`,
+          status: "error",
+          variant: "subtle",
+          isClosable: true,
+        });
+        return;
+      }
+      setState({ ...state, loading: true });
+      if (formData.id) {
+        handleUpdateUser();
+      } else {
+        handleCreateUser();
+      }
     } catch (error) {}
   };
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+  const handleCreateUser = async () => {
+    const postData = await post(`${endPoints.user}`, {
+      ...formData,
+      role: roles.employee,
+      
+      companyId: companyState.id,
+    });
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: false,
+      };
+    });
+    dispatch(addTeamMember({ ...formData }));
+    dispatch(getTeamMembers([ ...userState, postData.data]));
+    setState({ ...state, loading: false });
 
+    router.push("/company/team-members");
+    toast({
+      position: "bottom-right",
+      title: postData.message,
+      // status: "error",
+      status: postData.success ? "success" : "error",
+      variant: "subtle",
+      isClosable: true,
+    });
+  };
+  const handleUpdateUser = async () => {
+    delete formData?.id;
+
+    const postData = await put(`${endPoints.user}`, formData);
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: false,
+      };
+    });
+
+    dispatch(addTeamMember({ ...formData }));
+    dispatch(
+      getTeamMembers([
+        ...userState.map((item) =>
+          item.id === postData.data.id ? postData.data : item
+        ),
+      ])
+    );
+    toast({
+      position: "bottom-right",
+      title: postData.message,
+      status: postData.success ? "success" : "error",
+      variant: "subtle",
+      isClosable: true,
+    });
+  };
+  const handleCancel = () => {
+    router.push("/company/team-members");
+  };
   return (
     <Box minHeight={"82vh"} width={{ md: "70%", base: "100%" }} px={"10px"}>
       <Heading
@@ -44,12 +159,9 @@ const AddMemebersForm = () => {
       </Heading>
       <InputWrapper>
         <LabelInput
-          state={State.firstName}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, firstName: e.target.value };
-            });
-          }}
+          state={formData.firstName}
+          name={"firstName"}
+          setState={handleChange}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -57,12 +169,9 @@ const AddMemebersForm = () => {
           label={"First Name*"}
         />
         <LabelInput
-          state={State.lastName}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, lastName: e.target.value };
-            });
-          }}
+          state={formData.lastName}
+          name={"lastName"}
+          setState={handleChange}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -73,29 +182,22 @@ const AddMemebersForm = () => {
 
       <InputWrapper>
         <LabelInput
-          state={State.email}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, email: e.target.value };
-            });
-          }}
+          state={formData.email}
+          setState={handleChange}
           labelVariant={"label"}
           type="text"
-
+          name={"email"}
           variant={"bg-input"}
           placeholder="Enter Employee Email Address"
           label={"Email*"}
         />
         <LabelInput
           dropdown
-          state={State.role}
-          setState={(e) => {
-            setState((prev) => {
-              return { ...prev, role: e.target.value };
-            });
-          }}
+          state={formData.employeeRole}
+          setState={handleChange}
           labelVariant={"label"}
           type="text"
+          name={"employeeRole"}
           variant={"bg-input"}
           placeholder="Select Role of the Employee"
           label={"Role*"}
@@ -108,14 +210,16 @@ const AddMemebersForm = () => {
         mb={"75px"}
         gap={{ md: "21px", base: "13px" }}
       >
-        <Button variant="outline-blue">Cancel</Button>
+        <Button onClick={handleCancel} variant="outline-blue">
+          Cancel
+        </Button>
         <Button
           onClick={handleSend}
           width={"max-content"}
           px={{ md: "35px", base: "20px" }}
           variant={"blue-btn"}
         >
-          Send Invitation
+          {state.loading ? <Loader /> : "Send Invitation"}
         </Button>
       </Flex>
     </Box>

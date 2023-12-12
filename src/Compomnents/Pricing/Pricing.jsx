@@ -3,6 +3,41 @@ import React from "react";
 import PricingCard from "../PricingCard/PricingCard";
 
 const Pricing = () => {
+  const pricingArray = [
+    {
+      title: "Standard Job Post",
+      amount: "4.99",
+      day: "/day",
+      feature: [
+        "Applicant Tracking",
+        "Candidate Screening",
+        "Instant Messaging",
+        "7-Day Free Trial*",
+      ],
+    },
+    {
+      title: "Featured Job Post",
+      amount: "9.99",
+      day: "/day",
+      feature: [
+        "All Standard Features",
+        "Top Search Results",
+        "Homepage Placement",
+        "Social Media Post ",
+      ],
+    },
+    {
+      title: "Enterprise Contract",
+      amount: "Custom",
+      day: "",
+      feature: [
+        "Volume Discounts",
+        "Flexible Billing",
+        "Featured Company",
+        "Premium Support",
+      ],
+    },
+  ];
   return (
     <Container maxW={"60em"}>
       <Box
@@ -25,7 +60,7 @@ const Pricing = () => {
       </Box>
       <Box
         mb={{ md: "90px", base: "40px" }}
-        columnGap={{ md: "60px", base:"40px"}}
+        columnGap={{ md: "60px", base: "40px" }}
         display={"grid"}
         gridTemplateColumns={{
           lg: "repeat(3, 1fr)",
@@ -34,9 +69,11 @@ const Pricing = () => {
           base: "repeat(1, 1fr)",
         }}
       >
-        <PricingCard />
-        <PricingCard />
-        <PricingCard />
+        {pricingArray.map((item) => {
+          return <PricingCard  data={item} />;
+        })}
+        {/* <PricingCard />
+        <PricingCard /> */}
       </Box>
     </Container>
   );

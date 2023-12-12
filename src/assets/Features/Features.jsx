@@ -9,7 +9,7 @@ const Features = () => {
     "Branded Company Page",
   ];
   return (
-    <Container  maxW={"62em"}>
+    <Container  maxW={"55em"}>
       <Heading
         textAlign={"center"}
         fontWeight={700}
@@ -43,7 +43,7 @@ const Features = () => {
                 borderBottom={index == 3 ? "none" : "1px solid"}
                 borderColor={"blue.500"}
               >
-                <Heading className="sora" fontWeight={700} variant={"p8"} color={"gray.text"}>
+                <Heading className="sora" fontWeight={700} variant={"p6"} color={"gray.text"}>
                   {item}
                 </Heading>
               </Box>
@@ -52,7 +52,7 @@ const Features = () => {
         </Box>
 
         {/* <Box > */}
-          <Image width={{ md: "50%", base: "100%" }} src={featurePic.src} />
+          <Image width={{ md: "48%", base: "100%" }} src={featurePic.src} />
         {/* </Box> */}
       </Box>
     </Container>

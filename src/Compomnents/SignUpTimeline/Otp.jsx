@@ -23,6 +23,7 @@ import { httpRequest } from "@/helper/httpRrequest";
 import { addUser } from "@/Reudx/slices/userRegistration";
 import { registration } from "@/schema/stateSchema";
 import { setLoginUser } from "@/Reudx/slices/LoginUser";
+import { post } from "@/helper/fetch";
 
 const Otp = ({
   text,
@@ -68,9 +69,9 @@ const Otp = ({
         userId: userState.userId ? userState.userId : id,
         otp: parseInt(state.otp),
       };
-      const verify = await httpRequest(
-        `${BACKEND_URL}${endPoints.verifyOtp}`,
-        "POST",
+      const verify = await post(
+        `${endPoints.verifyOtp}`,
+
         body
       );
 
@@ -157,9 +158,9 @@ const Otp = ({
         otp: parseInt(state.otp),
         email: email,
       };
-      const verify = await httpRequest(
-        `${BACKEND_URL}${endPoints.verifyOtp}`,
-        "POST",
+      const verify = await post(
+        `${endPoints.verifyOtp}`,
+
         body
       );
 

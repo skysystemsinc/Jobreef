@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const Login = async (req, res) => {
-  const { email, password } = JSON.parse(req.body);
+  const { email, password } = req.body;
 
   const options = {
     secure: true,
@@ -70,7 +70,7 @@ const Login = async (req, res) => {
     } else {
       res.status(404).json({
         data: user,
-        message: "Email does not exist",
+        message: "Invalid Email and Password",
         success: false,
       });
     }

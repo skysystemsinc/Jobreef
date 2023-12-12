@@ -12,7 +12,6 @@ import {
 } from "@chakra-ui/react";
 import { Step, Steps, useSteps } from "chakra-ui-steps";
 
-
 import globalStyles from "@/styles/globalStyles";
 import { useContext, useEffect, useRef, useState } from "react";
 
@@ -23,7 +22,7 @@ import Certification from "./Certitfication";
 import Skills from "./Skills";
 
 import TimelineAttachments from "./Attchement";
-import {WorkExperience }from "./WorkExperience";
+import { WorkExperience } from "./WorkExperience";
 import Achievement from "./Achievement";
 const steps = [
   { label: "Overview" },
@@ -31,8 +30,8 @@ const steps = [
   { label: "Education" },
   { label: "Certifications" },
   { label: "Skills" },
-  { label: "Attachments" },
   { label: "Achievement" },
+  { label: "Attachments" },
 ];
 
 export const CandidateTimeline = ({ candidate, variant }) => {
@@ -169,15 +168,12 @@ export const CandidateTimeline = ({ candidate, variant }) => {
                 ) : index == 4 ? (
                   <Skills prevStep={prevStep} nextStep={nextStep} />
                 ) : index == 5 ? (
-                  <Achievement
-                    prevStep={prevStep}
-                    nextStep={nextStep}
-                  />
-                ) : index == 6 ? (
                   <TimelineAttachments
                     prevStep={prevStep}
                     nextStep={nextStep}
                   />
+                ) : index == 6 ? (
+                  <Achievement prevStep={prevStep} nextStep={nextStep} />
                 ) : null}
               </Box>
             </Step>

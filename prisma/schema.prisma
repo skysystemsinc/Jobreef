@@ -48,25 +48,28 @@ model EmailPreferences {
 }
 
 model User {
-  id               String            @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt        DateTime          @default(now())
-  company          Company?          @relation(fields: [companyId], references: [id])
-  companyId        String?           @db.ObjectId
-  employee         Employee?         @relation(fields: [employeeId], references: [id])
-  employeeId       String?           @unique @db.ObjectId
-  stages           Int?
-  firstName        String
-  lastName         String
-  active           Boolean?          @default(true)
-  delete           Boolean?          @default(false)
-  flag             Boolean?          @default(false)
-  email            String?           @unique
-  profilePic       String?
-  otp              Int?
-  role             String
-  accountType      String?
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt    DateTime  @default(now())
+  company      Company?  @relation(fields: [companyId], references: [id])
+  companyId    String?   @db.ObjectId
+  employee     Employee? @relation(fields: [employeeId], references: [id])
+  employeeId   String?   @unique @db.ObjectId
+  stages       Int?  @default(0)
+  firstName    String
+  lastName     String
+  active       Boolean?  @default(true)
+  delete       Boolean?  @default(false)
+  flag         Boolean?  @default(false)
+  email        String?   @unique
+  profilePic   String?
+  otp          Int?
+  role         Role
+  accountType  String?
+  employeeRole String?
+  jobTitle     String?
+
   verified         Boolean           @default(false)
-  password         String
+  password         String?
   phoneNumber      Int?
   location         Location[]
   emailPreferences EmailPreferences?
@@ -185,10 +188,11 @@ model Job {
   createdAt           DateTime     @default(now())
   active              Boolean?     @default(true)
   delete              Boolean?     @default(false)
-  status              Int?         @default(1)
+  status              Status       @default(active)
   // -1 for expire job
-  // 1 for active  job?
   // 0 for pause  job?
+  // 1 for active  job?
+  // 2 for draft  job?
   flag                Boolean?     @default(false)
   draft               Boolean?     @default(false)
   title               String
@@ -208,5 +212,19 @@ model Job {
   tags                String[]
   location            LocationType
   desiredSkills       String
-  applicationDeadline DateTime     
+  applicationDeadline DateTime
+}
+enum Status {
+  expire @map("-1")
+  pause  @map("0")
+  active @map("1")
+  draft  @map("2")
+}
+
+enum Role {
+  employee  @map("employee")
+  company   @map("company")
+  candidate @map("candidate")
+
+  // Add more roles as needed
 }

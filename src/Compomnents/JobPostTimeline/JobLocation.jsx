@@ -26,7 +26,8 @@ const JobLocation = ({ disableNextPrev, prevStep, nextStep }) => {
   const toast = useToast();
   const dispatch = useDispatch();
   const jobState = useSelector((state) => state.jobPost.value);
-  const [formData, setFormData] = useState(jobState);
+  const [formData, setFormData] = useState({...jobState,...jobState.location});
+  console.log("formData",formData);
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;

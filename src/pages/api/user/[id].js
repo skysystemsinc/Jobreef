@@ -28,7 +28,7 @@ const DeleteUser = async (req, res) => {
   }
 };
 const UpdateUser = async (req, res) => {
-  const data = { ...JSON.parse(req.body) };
+  const data = { ...req.body };
   // const data = req.body
 
   if (data.email) {
@@ -86,7 +86,11 @@ const GetSingleUser = async (req, res) => {
     // const user = await UserModel.findOne({ _id: req.query.id });
     const user = await prisma.User.findUnique({
       include: {
-        company: true,
+        company: {
+          include:{
+            user:true
+          }
+        },
         employee: {
           include: {
             skills: true,

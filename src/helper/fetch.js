@@ -68,7 +68,7 @@ export async function put(endpoint, body) {
     throw error;
   }
 }
-export async function deleteApi(endpoint, body) {
+export async function deleteApi(endpoint) {
   try {
     const response = await fetch(BACKEND_URL + endpoint, {
       method: "DELETE",

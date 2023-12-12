@@ -1,81 +1,223 @@
-import { Box, Button, Flex, Image } from "@chakra-ui/react";
-import React, { useState } from "react";
-import PaginatedTable from "../PaginatedTable/PaginatedTable";
-import menu from "@/assets/Images/menu.svg";
+import { Box, Button, Flex, Image, useToast } from "@chakra-ui/react";
+import React, { useMemo, useState } from "react";
+
 import { useRouter } from "next/router";
 import Popovers from "../PaginatedTable/Popovers";
-const InActiveJobs = () => {
+import { useDispatch, useSelector } from "react-redux";
+
+import ReactTable from "../PaginatedTable/ReactTable";
+import moment from "moment";
+import { addJob, setAllJobs } from "@/Reudx/slices/jobPost";
+import DeleteModal from "../DeleteModal/DeleteModal";
+import { deleteApi, put } from "@/helper/fetch";
+import endPoints from "@/Utils/endpoints";
+const InActive = () => {
   const router = useRouter();
-  const columns = [
-    {
-      jobTitle: "Job Title",
-      employeeType: "Employment Type",
-      Candidates: "Candidates",
-      noOfOpening: "Openings",
-      status: "Status",
-      Actions: "Actions",
-    },
-  ];
-  const keys = [
-    "jobTitle",
-    "employeeType",
-    "Candidates",
-    "noOfOpening",
-    "status",
-    "Actions",
-  ];
-  const actionList = ["Edit", "Pause", "Close job"];
-  const data = [
-    {
-      jobTitle: "Social Media Manager",
-      employeeType: "mscott@example.org",
-      Candidates: "1",
-      noOfOpening: "1 Year",
-      status: "Expired",
-      Actions: <Popovers actionList={actionList} />,
-    },
-    {
-      jobTitle: "Social Media Manager",
-      employeeType: "mscott@example.org",
-      Candidates: "1",
-      noOfOpening: "1 Year",
-      status: "Expired",
-      Actions: <Popovers actionList={actionList} />,
-    },
-    {
-      jobTitle: "Front End Developer",
-      employeeType: "mscott@example.org",
-      Candidates: "5",
-      noOfOpening: "1 Year",
-      status: "Expired",
-      Actions: <Popovers actionList={actionList} />,
-    },
-  ];
+  const toast = useToast();
+  const dispatch = useDispatch();
+  // const [activeJob, setPauseJob] = useState(false)
+  const [state, setState] = useState({
+    activeJob: false,
+    loading: false,
+    deleteJob: false,
+  });
+  const jobState = useSelector((state) => state.jobPost.jobs.inActiveJobs);
+  const allJobState = useSelector((state) => state.jobPost.jobs.allJobs);
+  console.log("jobState", jobState);
+  const handleEdit = (data) => {
+    router.push(`/company/create-job-post?id=${data.id}`);
+    dispatch(addJob({ ...data, ...data.location }));
+  };
+  const handleActive = async () => {
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: true,
+      };
+    });
+    try {
+      const postData = await put(`${endPoints.jobs}/${state.activeJob.id}`, {
+        active: true,
+        status: 1,
+      });
+      console.log("postData", postData);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 5; // Number of rows per page
-  const totalPages = Math.ceil(data.length / pageSize);
-
-  const handlePageChange = (newPage) => {
-    if (newPage >= 1 && newPage <= totalPages) {
-      setCurrentPage(newPage);
+      if (postData) {
+        toast({
+          position: "bottom-right",
+          title: "job active successfully",
+          status: "success",
+          variant: "subtle",
+          isClosable: true,
+        });
+        setState((prev) => {
+          return {
+            ...prev,
+            loading: false,
+            activeJob: false,
+          };
+        });
+        dispatch(
+          setAllJobs([
+            ...allJobState.map((item) =>
+              item.id === postData.data.id ? postData.data : item
+            ),
+          ])
+        );
+      }
+    } catch (err) {
+      console.log("err", err);
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+        };
+      });
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
     }
   };
+  const handleDeleteJob = async () => {
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: true,
+      };
+    });
+    try {
+      const postData = await deleteApi(`${endPoints.jobs}/${state.deleteJob.id}`);
+      console.log("postData", postData);
+
+      if (postData) {
+        toast({
+          position: "bottom-right",
+          title: "job delete successfully",
+          status: "success",
+          variant: "subtle",
+          isClosable: true,
+        });
+        setState((prev) => {
+          return {
+            ...prev,
+            loading: false,
+            deleteJob: false,
+          };
+        });
+        dispatch(
+          setAllJobs([
+            ...allJobState.filter((item) =>
+              // item.id === postData.data.id ? postData.data : item
+              item.id !== postData.data.id
+            ),
+          ])
+        );
+      }
+    } catch (err) {
+      console.log("err", err);
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+        };
+      });
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
+  };
+
+  const columns = useMemo(
+    () => [
+      {
+        accessorKey: "title",
+        header: "Job Title",
+      },
+      {
+        accessorKey: "employmentType",
+        header: "Employment Type",
+        cell: ({ row: { original } }) =>
+          original.employmentType === "" ? "-" : original.employmentType,
+      },
+      {
+        accessorKey: "opening",
+        header: "Openings",
+        cell: ({ row: { original } }) => original.opening,
+      },
+      {
+        accessorKey: "status",
+        header: "Status",
+        cell: ({ row: { original } }) => {
+          {
+            return original.status == -1
+              ? "Expire"
+              : original.status == 0
+              ? "Paused"
+              : "Draft";
+          }
+        },
+      },
+      {
+        accessorKey: "action",
+        header: "Action",
+        cell: ({ row: { original } }) => {
+          const actionList = [
+            { title: "Edit", handleEvent: () => handleEdit(original) },
+            {
+              title: "Activate",
+              handleEvent: () => setState({ ...state, activeJob: original }),
+            },
+            {
+              title: "Delete Job",
+              handleEvent: () => setState({ ...state, deleteJob: original }),
+            },
+          ];
+          return <Popovers actionList={actionList} />;
+        },
+      },
+    ],
+    []
+  );
+
   return (
     <>
+      <DeleteModal
+        name={state?.activeJob?.title}
+        loading={state.loading}
+        handleDelete={handleActive}
+        isOpen={state.activeJob}
+        onClose={() =>
+          setState((prev) => {
+            return { ...prev, activeJob: false };
+          })
+        }
+        deleteBtnLabel={"Active"}
+      />
+      <DeleteModal
+        name={state?.deleteJob?.title}
+        loading={state.loading}
+        handleDelete={handleDeleteJob}
+        isOpen={state.deleteJob}
+        onClose={() =>
+          setState((prev) => {
+            return { ...prev, deleteJob: false };
+          })
+        }
+        // deleteBtnLabel={""}
+      />
       <Box minH={"78vh"} pb={"20px"}>
-        <PaginatedTable
-          keys={keys}
-          totalPages={totalPages}
-          pageSize={pageSize}
-          currentPage={currentPage}
-          onPageChange={handlePageChange}
-          columns={columns}
-          data={data}
-        />
+        <ReactTable columns={columns} data={jobState} />
       </Box>
     </>
   );
 };
 
-export default InActiveJobs;
+export default InActive;

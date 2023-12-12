@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: {
-    userId:"657155024fddda6847fb1475"
+    // userId:"657155024fddda6847fb1475"
+    userId:false
   },
 };
 

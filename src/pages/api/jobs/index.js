@@ -22,6 +22,9 @@ const add = async (req, res) => {
     location: data.location,
     desiredSkills: data.desiredSkills,
     applicationDeadline: data.applicationDeadline,
+    draft: data.draft,
+    active: data.active,
+    status: data.status,
   };
 
   try {

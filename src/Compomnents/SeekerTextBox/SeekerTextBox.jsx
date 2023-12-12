@@ -1,7 +1,7 @@
 import { Box, Heading } from "@chakra-ui/react";
 import React from "react";
 
-const SeekerTextBox = () => {
+const SeekerTextBox = ({ title, subTitle, style }) => {
   return (
     <Box
       display={"flex"}
@@ -12,17 +12,17 @@ const SeekerTextBox = () => {
       mt={{ md: "50px", base: "30px" }}
       px={"10px"}
     >
-      <Box maxWidth={"420px"} textAlign={{ md: "center", base: "start" }}>
+      <Box maxWidth={"490px"} textAlign={{ md: "center", base: "start" }} sx={ style}>
         <Heading
           mb={{ md: "10px", base: "3px" }}
           color={"gray.600"}
-          variant={"h2"}
+          variant={"h3"}
+          className="sora"
         >
-          Improve Your Prospects
+          {title}
         </Heading>
-        <Heading textAlign={"start"} color={"gray.600"} variant={"p5"}>
-          Use our suite of jobseeker tools and resources to take your career to
-          the next level!
+        <Heading textAlign={"start"} sx={style} color={"gray.600"} variant={"p5"}>
+          {subTitle}
         </Heading>
       </Box>
     </Box>

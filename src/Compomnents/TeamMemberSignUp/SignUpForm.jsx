@@ -9,7 +9,7 @@ import {
   Image,
   Input,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import profile from "@/assets/Images/profile.svg";
 import edit from "@/assets/Images/edit.svg";
 import white_edit from "@/assets/Images/white-edit.svg";
@@ -21,26 +21,101 @@ import { useRouter } from "next/router";
 import { roles } from "@/Utils/role";
 import EditProifle from "../EditProifle/EditProifle";
 import ConfirmationBox from "../ConfirmationBox/ConfirmationBox";
+import { useSelector } from "react-redux";
+import { get, put } from "@/helper/fetch";
+import endPoints from "@/Utils/endpoints";
+import { setLoginUser } from "@/Reudx/slices/LoginUser";
+import { addCompany } from "@/Reudx/slices/company";
 const SignUpForm = () => {
-  const [isEdit, setisEdit] = useState(false);
-  const [readOnly, setreadOnly] = useState(false);
-  const [isCountinue, setisCountinue] = useState(false);
   const router = useRouter();
+  const { id } = router.query;
+  // const [isContinue, setIsContinue] = useState(false);
+  const [state, setState] = useState({
+    loading:false,
+    isContinue:false
+  })
+  const [formData, setFormData] = useState({
+    password: "",
+    confirmPassword: "",
+  });
+  console.log("formData", formData);
   const profileStyle = {
     width: { md: "100px", base: "70px" },
     height: { md: "100px", base: "70px" },
   };
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+
+  const getUser = async () => {
+    try {
+      const postData = await get(`${endPoints.user}/${id}`);
+      if (postData.success) {
+        const { data } = postData;
+        setFormData({ ...formData, ...postData.data });
+        // dispatch(setLoginUser(postData.data));
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  const handleUpdateUser = async () => {
+    const body = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      password: formData.password,
+      
+    };
+    const postData = await put(
+      `${endPoints.user}/${id}`,
+
+      body
+    );
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: false,
+      };
+    });
+    if (!postData.success) {
+      dispatch(addUser({ ...userState }));
+    } else {
+      nextStep();
+      dispatch(addUser({ ...state, userId: postData.data.id }));
+    }
+    toast({
+      position: "bottom-right",
+      title: postData.message,
+      status: postData.success ? "success" : "error",
+      variant: "subtle",
+      isClosable: true,
+    });
+  };
+  useEffect(() => {
+    if (id) {
+      getUser();
+    }
+  }, [router.query]);
   return (
     <Box mt={{ base: "34px" }}>
-      {isCountinue ? (
-        <Box  mt={{ md: "60px" , base:"40px"}}>
+      {state.isContinue ? (
+        <Box mt={{ md: "60px", base: "40px" }}>
           <ConfirmationBox
             description={
               "Thank you for signing up! You can login and begin posting jobs on behalf of your company!"
             }
           />
 
-          <Flex mt={{ md: "150px" , base:'50px'}} justifyContent={"center"}>
+          <Flex mt={{ md: "150px", base: "50px" }} justifyContent={"center"}>
             <Button onClick={() => router.push("/")} variant={"blue-btn"}>
               Login
             </Button>
@@ -58,10 +133,15 @@ const SignUpForm = () => {
             gap={{ md: "25px", base: "10px" }}
           >
             <Box>
-              <EditProifle profileStyle={profileStyle} profile={profile} />
+              <EditProifle
+                profileStyle={profileStyle}
+                profile={formData.profilePic}
+              />
             </Box>
             <Box>
-              <Heading variant={"p6"}>Charles Cartwright</Heading>
+              <Heading variant={"p6"}>
+                {`${formData?.firstName} `} {`${formData?.lastName}`}
+              </Heading>
               <Box
                 display={"flex"}
                 alignItems={"center"}
@@ -71,13 +151,14 @@ const SignUpForm = () => {
                 <Box display={"flex"} alignItems={"center"} gap={"7px"}>
                   <Image src={company.src} width={"25px"} />
                   <Heading variant={"p7"} color={"gray.light"} fontWeight={400}>
-                    Jobreef
+                    {formData?.company?.companyName}
                   </Heading>
                 </Box>
                 <Box display={"flex"} alignItems={"center"} gap={"7px"}>
                   <Image src={email.src} width={"25px"} />
                   <Heading variant={"p7"} color={"gray.light"} fontWeight={400}>
-                    charles@jobreef.com
+                    {formData?.email}
+                    {/* charles@jobreef.com */}
                   </Heading>
                 </Box>
               </Box>
@@ -91,11 +172,12 @@ const SignUpForm = () => {
               }}
             >
               <LabelInput
+                state={formData.password}
+                setState={handleChange}
+                name={"password"}
                 labelVariant={"label"}
                 type="text"
-                readOnly={readOnly}
                 passwordInput
-                setreadOnly={setreadOnly}
                 variant={"bg-input"}
                 placeholder="Enter your Password"
                 label={"Enter Password"}
@@ -103,9 +185,10 @@ const SignUpForm = () => {
               <LabelInput
                 labelVariant={"label"}
                 type="text"
+                state={formData.confirmPassword}
+                setState={handleChange}
+                name={"confirmPassword"}
                 passwordInput
-                readOnly={readOnly}
-                setreadOnly={setreadOnly}
                 variant={"bg-input"}
                 placeholder="Enter your Password"
                 label={"Confirm Password"}
@@ -118,20 +201,21 @@ const SignUpForm = () => {
               }}
             >
               <LabelInput
+                state={formData.phoneNumber}
+                setState={handleChange}
+                name={"phoneNumber"}
                 labelVariant={"label"}
                 type="number"
-                readOnly={readOnly}
-                setreadOnly={setreadOnly}
                 variant={"bg-input"}
                 placeholder="Enter your Phone Number"
                 label={"Mobile Number"}
               />
               <LabelInput
+                state={formData.jobTitle}
+                setState={handleChange}
+                name={"jobTitle"}
                 labelVariant={"label"}
                 type="text"
-                
-                readOnly={readOnly}
-                setreadOnly={setreadOnly}
                 variant={"bg-input"}
                 placeholder="Enter your Job Title"
                 label={"Job Title"}
@@ -148,7 +232,7 @@ const SignUpForm = () => {
           >
             <Button
               onClick={() => {
-                setisCountinue(true);
+                setIsContinue(true);
               }}
               variant={"blue-btn"}
               display={"flex"}

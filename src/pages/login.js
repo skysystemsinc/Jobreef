@@ -33,6 +33,7 @@ import { setLoginUser } from "@/Reudx/slices/LoginUser";
 import { roles } from "@/Utils/role";
 import { addCompany } from "@/Reudx/slices/company";
 import { addEmployee } from "@/Reudx/slices/employee";
+import { post } from "@/helper/fetch";
 
 export default function Login() {
   const router = useRouter();
@@ -60,9 +61,9 @@ export default function Login() {
       password: state.password,
     };
     try {
-      const postData = await httpRequest(
-        `${BACKEND_URL}${endPoints.login}`,
-        "POST",
+      const postData = await post(
+        `${endPoints.login}`,
+
         body
       );
       if (postData.success) {

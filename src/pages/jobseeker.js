@@ -10,7 +10,12 @@ const jobseeker = () => {
   return (
     <>
       <Header notLogin />
-      <SeekerTextBox />
+      <SeekerTextBox
+        title={"Improve Your Prospects"}
+        subTitle={
+          "Use our suite of jobseeker tools and resources to take your career to the next level!"
+        }
+      />
       <Advices />
       <Box mb={"50px"}>
         <NewsLetter />

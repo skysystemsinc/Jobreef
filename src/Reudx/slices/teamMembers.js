@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: {},
+  value: {
+    allMembers:false,
+    member:false,
+  },
 };
 
 const teamMembers = createSlice({
@@ -9,9 +12,12 @@ const teamMembers = createSlice({
   initialState: initialState,
   reducers: {
     getTeamMembers: (state, action) => {
-      state.value = action.payload;
+      state.value.allMembers = action.payload;
+    },
+    addTeamMember: (state, action) => {
+      state.value.member = action.payload;
     },
   },
 });
-export const { getTeamMembers } = teamMembers.actions;
+export const { getTeamMembers ,addTeamMember } = teamMembers.actions;
 export default teamMembers.reducer;

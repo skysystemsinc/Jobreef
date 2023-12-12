@@ -124,11 +124,9 @@ function ReactTable({ data, columns }) {
         // color={"blue.500"}
       >
         <Heading color={"blue.500"} variant={"p4"}>
-          {`Showing ${
-            table.getState().pagination.pageIndex + 1
-          } to ${table.getPageCount()} of ${
-            table.getFilteredRowModel().rows.length
-          } Entries`}
+          {`Showing ${table.getState().pagination.pageIndex + 1} to 
+          ${table.getFilteredRowModel().rows.length}
+          of ${table.getPageCount()} Entries`}
         </Heading>
         <Box
           flexWrap={"wrap"}
@@ -160,13 +158,13 @@ function ReactTable({ data, columns }) {
                 border={"2px solid "}
                 borderColor={"blue.500"}
                 color={
-                  table.getState().pagination.pageIndex  === index
+                  table.getState().pagination.pageIndex === index
                     ? "blue.500"
                     : "white.100"
                 }
                 bg="blue.500"
                 sx={
-                  table.getState().pagination.pageIndex === index 
+                  table.getState().pagination.pageIndex === index
                     ? activeStyle
                     : {}
                 }

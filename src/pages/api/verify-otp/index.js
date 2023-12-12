@@ -1,5 +1,5 @@
 const verifyOtp = async (req, res) => {
-  const data = JSON.parse(req.body);
+  const data = req.body
   const verify = await prisma.User.findUnique({
     where: {
       id: data.userId,
@@ -21,7 +21,7 @@ const verifyOtp = async (req, res) => {
     });
     if (user) {
       res.status(200).json({
-        message: "Otp verified Successfully",
+        message: "Email verified Successfully",
         success: true,
         data: user,
       });

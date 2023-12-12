@@ -1,7 +1,7 @@
 import { Box, Button, Heading, Image } from "@chakra-ui/react";
 import React from "react";
 import blueTick from "@/assets/Images/blueclick.svg";
-const PricingCard = () => {
+const PricingCard = ({ data }) => {
   const feature = [
     "Applicant Tracking",
     "Candidate Screening",
@@ -22,7 +22,7 @@ const PricingCard = () => {
         py={"16px"}
       >
         <Heading color={"white.100"} fontWeight={600} variant={"p11"}>
-          Standard Job Post
+          {data.title}
         </Heading>
       </Box>
 
@@ -41,9 +41,10 @@ const PricingCard = () => {
           mb={"10px"}
           fontWeight={800}
         >
-          4.99
+          {data.amount}
+
           <Box as="span" fontSize={"12px"}>
-            /day
+            {data.day}
           </Box>
         </Heading>
         <Box
@@ -52,15 +53,18 @@ const PricingCard = () => {
         // alignItems={"center"}
         // flexDirection={"column"}
         >
-          {feature.map((item) => {
+          {data.feature.map((item) => {
             return (
               <Box
                 display={"flex"}
                 alignItems={"center"}
-                mb={{ md: "7px", base:"9px"}}
-                gap={{ md: "20px", base:"10px"}}
+                mb={{ md: "7px", base: "9px" }}
+                gap={{ md: "20px", base: "10px" }}
               >
-                <Image width={{ md: "21px", base:'18px'}} src={blueTick.src} />
+                <Image
+                  width={{ md: "21px", base: "18px" }}
+                  src={blueTick.src}
+                />
                 <Box
                   minW={"150px"}
                   // border={"1px solid red"}
