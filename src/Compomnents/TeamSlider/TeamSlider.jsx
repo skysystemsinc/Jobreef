@@ -3,7 +3,7 @@ import { DataArray } from "../JobSearchData/tempSchema";
 import { Box, Button, Container, Heading, Image } from "@chakra-ui/react";
 import Generalblog from "@/assets/Images/Generalblog.svg";
 import Slider from "react-slick"
-const TeamSlider = () => {
+const TeamSlider = ({style}) => {
   const settings = {
     dots: false,
     infinite: false,
@@ -42,6 +42,7 @@ const TeamSlider = () => {
             key={index}
             
             px={{ md: "20px", base:"2px"}}
+            sx={style}
           >
             <Image
             // borderRadius={"5px"}

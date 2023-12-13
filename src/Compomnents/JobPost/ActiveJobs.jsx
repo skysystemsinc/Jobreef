@@ -90,7 +90,7 @@ const ActiveJobs = () => {
       };
     });
     try {
-      const postData = await put(`${endPoints.jobs}/${state.pauseJob.id}`, {
+      const postData = await put(`${endPoints.jobs}/${state.closeJob.id}`, {
         active: false,
         status: -1,
       });
@@ -99,7 +99,7 @@ const ActiveJobs = () => {
       if (postData) {
         toast({
           position: "bottom-right",
-          title: "job paused successfully",
+          title: "job close successfully",
           status: "success",
           variant: "subtle",
           isClosable: true,
@@ -108,7 +108,7 @@ const ActiveJobs = () => {
           return {
             ...prev,
             loading: false,
-            pauseJob: false,
+            closeJob: false,
           };
         });
         dispatch(

@@ -21,6 +21,7 @@ const Preview = ({ assignJob, isEdit, state, setState }) => {
   const router = useRouter();
   const { id } = router.query;
   const [loading, setLoading] = useState(false);
+  const [draftLoading, setDraftLoading] = useState(false)
   const jobState = useSelector((state) => state.jobPost.value);
   const allJobState = useSelector((state) => state.jobPost.jobs.allJobs);
   const companyState = useSelector((state) => state.companyRegister.value);
@@ -69,6 +70,47 @@ const Preview = ({ assignJob, isEdit, state, setState }) => {
     } catch (err) {
       console.log("err", err);
       setLoading(false);
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
+  };
+  const handleDraft = async () => {
+    setDraftLoading(true);
+    try {
+      const tags = jobState.tags.map((item) => {
+        return item.value;
+      });
+      const body = {
+        ...jobState,
+        opening: parseInt(jobState.opening),
+        location: {
+          country: jobState.country,
+          city: jobState.city,
+          province: jobState.province,
+          city: jobState.city,
+        },
+        active:false,
+        status:2,
+        draft:true,
+        tags: tags,
+        companyId: companyState.id,
+      };
+      const postData = await post(`${endPoints.jobs}`, body);
+      console.log("postData", postData);
+      setDraftLoading(false)
+      if (postData) {
+        dispatch(setAllJobs([...allJobState, postData.data]));
+        dispatch(addJob(job));
+        router.push("/company/job-post");
+      }
+    } catch (err) {
+      console.log("err", err);
+      setDraftLoading(false);
       toast({
         position: "bottom-right",
         title: "Error",
@@ -139,15 +181,7 @@ const Preview = ({ assignJob, isEdit, state, setState }) => {
       });
     }
   };
-  const handleCreateJob = () => {
-    if (isEdit) {
-      router.push("/operator/job-post");
-    } else {
-      handleSave();
-
-      // router.push("/company/job-posts");
-    }
-  };
+ 
   return (
     <Box>
       <Box sx={boxStyle}>
@@ -168,12 +202,12 @@ const Preview = ({ assignJob, isEdit, state, setState }) => {
         </Box>
       ) : null}
 
-      {isEdit ? null : (
+      {id ? null : (
         <Button
-          onClick={() => router.push("/company/job-post")}
+          onClick={handleDraft}
           variant={"blue-btn"}
         >
-          {"Save as Draft"}
+          {draftLoading? <Loader/>:  "Save as Draft"}
         </Button>
       )}
       <Flex

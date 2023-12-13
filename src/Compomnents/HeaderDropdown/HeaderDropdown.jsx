@@ -32,6 +32,8 @@ import { BACKEND_URL } from "@/Utils/urls";
 import LoadingSkeleton from "../LoadingSkeleton/LoadingSkeleton";
 import { addCompany } from "@/Reudx/slices/company";
 import { addEmployee } from "@/Reudx/slices/employee";
+import { get } from "@/helper/fetch";
+import { getTeamMembers } from "@/Reudx/slices/teamMembers";
 const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -97,15 +99,14 @@ const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
   const getUser = async () => {
     const id = localStorage.getItem("id");
     try {
-      const postData = await httpRequest(
-        `${BACKEND_URL}${endPoints.user}/${id}`,
-        "GET"
-      );
+      const postData = await get(`${endPoints.user}/${id}`);
       if (postData.success) {
         const { data } = postData;
 
         dispatch(setLoginUser(postData.data));
         dispatch(addCompany(postData?.data?.company));
+        dispatch(getTeamMembers(postData?.data?.company?.user));
+
         dispatch(addEmployee(postData?.data?.employee));
       }
     } catch (error) {

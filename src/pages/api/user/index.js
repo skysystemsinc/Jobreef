@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 
 import bcrypt from "bcrypt";
 const addUser = async (req, res) => {
-  const data = JSON.parse(req.body);
+  const data = req.body;
 
   const emailExist = await prisma.User.findUnique({
     where: {
@@ -16,7 +16,10 @@ const addUser = async (req, res) => {
       success: false,
     });
   } else {
-    const hashPass = await bcrypt.hash(data.password, 10);
+    if(data.password){
+      data.password  =await bcrypt.hash(data.password, 10)
+    }
+    
     try {
       const otp = Math.floor(1000 + Math.random() * 9000);
       //TODO otp will send on email
@@ -32,8 +35,8 @@ const addUser = async (req, res) => {
           },
           ...data,
           otp:otp,
-          password: hashPass,
-          ...(data.employeeId ?? { employeeId: data.employeeId }),
+          // password: data.password,
+          // ...(data.employeeId ?? { employeeId: data.employeeId }),
           // firstName: data.firstName,
           // lastName: data.lastName,
           // email: data.email,

@@ -53,7 +53,7 @@ const colors = {
     text: "#4A4A4A",
   },
   blue: {
-    900:'#81BEC7',
+    900: "#81BEC7",
     800: "#E9F5F8",
     700: "#667085",
     600: "#336CB0",
@@ -499,7 +499,7 @@ const components = {
         fontWeight: 500,
 
         color: "gray.text",
-        fontSize: ["20px", "20px ", "30px ", "30px ", "35px ", "35px "],
+        fontSize: ["20px", "20px ", "30px ", "30px ", "30px ", "30px "],
 
         lineHeight: { md: "28px", base: "20px" },
         fontFamily: "var(--chakra-\fonts-openSans)",
@@ -509,8 +509,8 @@ const components = {
         fontWeight: 500,
 
         color: "white.100",
-        fontSize: ["32px", "32px ", "32px ", "32px ", "40px ", "40px "],
-        lineHeight: { md: "28px", base: "20px" },
+        fontSize: ["27px", "30px ", "32px ", "32px ", "40px ", "40px "],
+        lineHeight: { md: "28px", sm: "20px", base: "18px" },
         fontFamily: "var(--chakra-\fonts-openSans)",
         margin: "0px",
       },

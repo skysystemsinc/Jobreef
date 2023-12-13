@@ -13,7 +13,7 @@ import {
   useColorModeValue,
   Image,
   Heading,
-  Link,
+  // Link,
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
@@ -23,6 +23,7 @@ import Facebook from "@/assets/Images/Facebook.svg";
 import Instagram from "@/assets/Images/Instagram.svg";
 import LinkedIn from "@/assets/Images/LinkedIn.svg";
 import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
+import { Link } from "@chakra-ui/next-js";
 const Logo = (props) => {
   return <Image width={{ md: "190px", base: "141px" }} src={footerLogo.src} />;
 };
@@ -31,11 +32,11 @@ const footerLink = [
   {
     heading: "Services",
     links: [
-      { link: "Search Jobs", pathName: "" },
-      { link: "Jobreef For Employers", pathName: "" },
+      { link: "Search Jobs", pathName: "/candidate/job-search" },
+      { link: "Jobreef For Employers", pathName: "/employers" },
       { link: "Jobseeker Tools", pathName: "" },
       { link: "Career  Blog", pathName: "" },
-      { link: "Advertising", pathName: "" },
+      { link: "Advertising", pathName: "/advertise" },
     ],
   },
   {
@@ -53,7 +54,7 @@ const footerLink = [
       { link: "Privacy Policy", pathName: "" },
       { link: "Usage Guidelines", pathName: "" },
       { link: "Disclaimer", pathName: "" },
-      { link: "Help Center", pathName: "" },
+      { link: "Help Center", pathName: "/help-center" },
     ],
   },
 ];

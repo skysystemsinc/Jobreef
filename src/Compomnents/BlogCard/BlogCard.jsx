@@ -4,7 +4,7 @@ import Generalblog from "@/assets/Images/Generalblog.svg";
 import arrowupright from "@/assets/Images/arrow-up-right.svg";
 import Avatar from "@/assets/Images/Avatar.png";
 
-const BlogCard = () => {
+const BlogCard = ({ disableProfile }) => {
   return (
     <Box
       mb={"4%"}
@@ -57,21 +57,25 @@ const BlogCard = () => {
         How do you create compelling presentations that wow your colleagues and
         impress your managers?
       </Heading>
-      <Box display={"flex"} gap={"17px"}>
-        <Image width={"45px"} 
-        height={"45px"}
-        objectFit={"cover"}
 
-         src={Avatar.src} />
-        <Box display={"flex"} flexDirection={"Column"}>
-          <Heading color={"gray.text"} fontWeight={700} variant={"p4"}>
-            Olivia Rhye
-          </Heading>
-          <Heading color={"gray.text"} variant={"p4"}>
-          20 Jan 2022
-          </Heading>
+      {disableProfile ? null : (
+        <Box display={"flex"} gap={"17px"}>
+          <Image
+            width={"45px"}
+            height={"45px"}
+            objectFit={"cover"}
+            src={Avatar.src}
+          />
+          <Box display={"flex"} flexDirection={"Column"}>
+            <Heading color={"gray.text"} fontWeight={700} variant={"p4"}>
+              Olivia Rhye
+            </Heading>
+            <Heading color={"gray.text"} variant={"p4"}>
+              20 Jan 2022
+            </Heading>
+          </Box>
         </Box>
-      </Box>
+      )}
     </Box>
   );
 };

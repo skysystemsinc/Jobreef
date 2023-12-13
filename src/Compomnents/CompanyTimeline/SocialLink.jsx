@@ -31,11 +31,12 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { httpRequest } from "@/helper/httpRrequest";
 import { addCompany } from "@/Reudx/slices/company";
+import { post, put } from "@/helper/fetch";
 
 const SocialLink = ({ nextStep, handlePrevious }) => {
   const toast = useToast();
   const dispatch = useDispatch();
-  
+
   const router = useRouter();
   const isAuthenticated = useSelector((state) => state.authentication.value);
   let companyState = useSelector((state) => state.companyRegister.value);
@@ -158,20 +159,11 @@ const SocialLink = ({ nextStep, handlePrevious }) => {
     const id = isAuthenticated.userId;
     const body = {
       role: role,
-      // location: [
-      //   {
-      //     country: companyState.country,
-      //     province: companyState.province,
-      //     city: companyState.city,
-      //     address: companyState.address,
-      //   },
-      // ],
       ["companyId"]: companyId,
     };
     try {
-      const userAssociation = httpRequest(
-        `${BACKEND_URL}${endPoints.user}/${id}`,
-        "PUT",
+      const userAssociation = put(
+        `${endPoints.user}/${id}`,
         body
       );
       // const userAssociation = axios({

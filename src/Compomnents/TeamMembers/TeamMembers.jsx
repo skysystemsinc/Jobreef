@@ -1,112 +1,223 @@
-import { Box, Button, Flex, Image } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { Box, Button, Flex, Image, useToast } from "@chakra-ui/react";
+import React, { useEffect, useMemo, useState } from "react";
 import PaginatedTable from "../PaginatedTable/PaginatedTable";
 import menu from "@/assets/Images/menu.svg";
 import { useRouter } from "next/router";
 import Popovers from "../PaginatedTable/Popovers";
 import { getTeamMembers } from "@/Reudx/slices/teamMembers";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import ReactTable from "../PaginatedTable/ReactTable";
+import DeleteModal from "../DeleteModal/DeleteModal";
+import { put } from "@/helper/fetch";
+import endPoints from "@/Utils/endpoints";
 const TeamMembers = () => {
-  const teamMemebers = useSelector((state) => state.teamMembers.value);
-
+  const toast = useToast();
+  const dispatch = useDispatch();
+  const userState = useSelector((state) => state.teamMembers.value.allMembers);
+  const [state, setState] = useState({
+    activeUser: false,
+    disableUser: false,
+  });
+  console.log("state", state);
   const router = useRouter();
-  const columns = [
-    {
-      name: "Name",
-      email: "Email",
-      JobTitle: "Job Title",
-      role: "Role",
-      status: "Status",
-      Actions: "Actions",
-    },
-  ];
-  const keys = ["name", "email", "JobTitle", "role", "status", "Actions"];
-  const actionList = ["Edit", "Disable"];
-  const data = [
-    {
-      name: "Michael Scott",
-      email: "mscott@example.org",
-      JobTitle: "Director, Talent Acquisition",
-      role: "Owner",
-      status: "Active",
-      Actions: <Popovers actionList={actionList} />,
-    },
-    {
-      name: "Michael Scott",
-      email: "mscott@example.org",
-      JobTitle: "Director, Talent Acquisition",
-      role: "Owner",
-      status: "Active",
-      Actions: <Popovers actionList={actionList} />,
-    },
-    {
-      name: "Michael Scott",
-      email: "mscott@example.org",
-      JobTitle: "Director, Talent Acquisition",
-      role: "Owner",
-      status: "Active",
-      Actions: <Popovers actionList={actionList} />,
-    },
-    {
-      name: "Michael Scott",
-      email: "mscott@example.org",
-      JobTitle: "Director, Talent Acquisition",
-      role: "Owner",
-      status: "Active",
-      Actions: <Popovers actionList={actionList} />,
-    },
-    {
-      name: "Michael Scott",
-      email: "mscott@example.org",
-      JobTitle: "Director, Talent Acquisition",
-      role: "Owner",
-      status: "Active",
-      Actions: <Popovers actionList={actionList} />,
-    },
-    {
-      name: "Michael Scott",
-      email: "mscott@example.org",
-      JobTitle: "Director, Talent Acquisition",
-      role: "Owner",
-      status: "Active",
-      Actions: <Popovers actionList={actionList} />,
-    },
-    {
-      name: "Michael Scott",
-      email: "mscott@example.org",
-      JobTitle: "Director, Talent Acquisition",
-      role: "Owner",
-      status: "Active",
-      Actions: <Popovers actionList={actionList} />,
-    },
-  ];
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 5; // Number of rows per page
-  const totalPages = Math.ceil(data.length / pageSize);
-
-  const handlePageChange = (newPage) => {
-    if (newPage >= 1 && newPage <= totalPages) {
-      setCurrentPage(newPage);
+  const columns = useMemo(
+    () => [
+      {
+        accessorKey: "name",
+        header: "Name",
+        cell: ({ row: { original } }) =>
+          original.firstName + " " + original.lastName,
+      },
+      {
+        accessorKey: "email",
+        header: "Email",
+        // cell: ({ row: { original } }) =>
+        //   original.employmentType === "" ? "-" : original.employmentType,
+      },
+      {
+        accessorKey: "employeeRole",
+        header: "Role",
+        // cell: ({ row: { original } }) => original.opening,
+        cell: ({ row: { original } }) => original.employeeRole ?? "-",
+      },
+      {
+        accessorKey: "jobTitle",
+        header: "Job Title",
+        // original.employeeRole === "" ? "-" : original.employeeRole,
+        cell: ({ row: { original } }) =>
+          original.jobTitle === "" ? "-" : original.jobTitle,
+      },
+      {
+        accessorKey: "active",
+        header: "Status",
+        // original.employeeRole === "" ? "-" : original.employeeRole,
+        cell: ({ row: { original } }) =>
+          original.stages === 0
+            ? "Invite Pending"
+            : original.active
+            ? "Active"
+            : "Disable",
+      },
+      {
+        accessorKey: "action",
+        header: "Action",
+        cell: ({ row: { original } }) => {
+          const activeActionList = [
+            { title: "Edit", handleEvent: () => handleEdit(original) },
+            {
+              title: "Disable",
+              handleEvent: () => setState({ ...state, disableUser: original }),
+            },
+          ];
+          const disableActionList = [
+            { title: "Edit", handleEvent: () => handleEdit(original) },
+            {
+              title: "Active",
+              handleEvent: () => setState({ ...state, activeUser: original }),
+            },
+          ];
+          return (
+            <Popovers
+              actionList={
+                original.active ? activeActionList : disableActionList
+              }
+            />
+          );
+        },
+      },
+    ],
+    []
+  );
+  const handleActiveUser = async () => {
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: true,
+      };
+    });
+    try {
+      const postData = await put(`${endPoints.user}/${state.activeUser.id}`, {
+        active: true,
+      });
+      if (postData) {
+        toast({
+          position: "bottom-right",
+          title: "user Active successfully",
+          status: "success",
+          variant: "subtle",
+          isClosable: true,
+        });
+        setState((prev) => {
+          return {
+            ...prev,
+            loading: false,
+            activeUser: false,
+          };
+        });
+        dispatch(
+          getTeamMembers([
+            ...userState.map((item) =>
+              item.id === postData.data.id ? postData.data : item
+            ),
+          ])
+        );
+      }
+    } catch (err) {
+      console.log("err", err);
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+        };
+      });
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
+  };
+  const handleDisableUser = async () => {
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: true,
+      };
+    });
+    try {
+      const postData = await put(`${endPoints.user}/${state.disableUser.id}`, {
+        active: false,
+      });
+      if (postData) {
+        toast({
+          position: "bottom-right",
+          title: "user Disable successfully",
+          status: "success",
+          variant: "subtle",
+          isClosable: true,
+        });
+        setState((prev) => {
+          return {
+            ...prev,
+            loading: false,
+            disableUser: false,
+          };
+        });
+        dispatch(
+          getTeamMembers([
+            ...userState.map((item) =>
+              item.id === postData.data.id ? postData.data : item
+            ),
+          ])
+        );
+      }
+    } catch (err) {
+      console.log("err", err);
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+        };
+      });
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
     }
   };
 
-  const getData = async () => {
-    try {
-      const teamMembers = await axios({
-        method: "GET",
-        url: "/api/company/teamMembers",
-      });
-      dispatch(getTeamMembers(teamMembers.data));
-    } catch (err) {}
-  };
-
-  useEffect(() => {
-    getData();
-    return () => {};
-  }, []);
   return (
     <>
+      <DeleteModal
+        name={state?.activeUser?.title}
+        loading={state.loading}
+        handleDelete={handleActiveUser}
+        isOpen={state.activeUser}
+        onClose={() =>
+          setState((prev) => {
+            return { ...prev, activeUser: false };
+          })
+        }
+        deleteBtnLabel={"Active"}
+      />
+      <DeleteModal
+        name={state?.disableUser?.title}
+        loading={state.loading}
+        handleDelete={handleDisableUser}
+        isOpen={state.disableUser}
+        onClose={() =>
+          setState((prev) => {
+            return { ...prev, disableUser: false };
+          })
+        }
+        deleteBtnLabel={"Disable"}
+      />
       <Box
         minH={"78vh"}
         width={"99%"}
@@ -127,15 +238,7 @@ const TeamMembers = () => {
           </Button>
         </Flex>
         <Box mb={"60px"}>
-          <PaginatedTable
-            keys={keys}
-            totalPages={totalPages}
-            pageSize={pageSize}
-            currentPage={currentPage}
-            onPageChange={handlePageChange}
-            columns={columns}
-            data={data}
-          />
+          <ReactTable columns={columns} data={userState} />
         </Box>
       </Box>
     </>

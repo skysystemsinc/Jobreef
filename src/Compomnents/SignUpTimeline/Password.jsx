@@ -20,6 +20,7 @@ import { BACKEND_URL } from "@/Utils/urls";
 import { useDispatch, useSelector } from "react-redux";
 import { httpRequest } from "@/helper/httpRrequest";
 import { addUser } from "@/Reudx/slices/userRegistration";
+import { post, put } from "@/helper/fetch";
 
 const Password = ({ activeStep, handlePrevious, nextStep }) => {
   const userState = useSelector((state) => state.userRegistration.value);
@@ -99,9 +100,9 @@ const Password = ({ activeStep, handlePrevious, nextStep }) => {
         ? accountType.employer
         : accountType.candidate,
     };
-    const postData = await httpRequest(
-      `${BACKEND_URL}${endPoints.user}`,
-      "POST",
+    const postData = await post(
+      `${endPoints.user}`,
+
       body
     );
     setState((prev) => {
@@ -153,9 +154,9 @@ const Password = ({ activeStep, handlePrevious, nextStep }) => {
       verified: false,
       role: userState.isCompany ? roles.company : roles.employee,
     };
-    const postData = await httpRequest(
-      `${BACKEND_URL}${endPoints.user}/${userState.userId}`,
-      "PUT",
+    const postData = await put(
+      `${endPoints.user}/${userState.userId}`,
+
       body
     );
     setState((prev) => {
