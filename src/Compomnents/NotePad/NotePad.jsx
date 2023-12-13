@@ -1,7 +1,7 @@
 import { Box, Heading, Image, Textarea } from "@chakra-ui/react";
 import React from "react";
 import send from "@/assets/Images/send.svg";
-import cross from "@/assets/Images/cross.svg";
+import deleteIcon from "@/assets/Images/delete.svg";
 import blue_arrow_down from "@/assets/Images/blue-arrow-down.svg";
 import DropDown from "../DropDown/DropDown";
 
@@ -9,40 +9,22 @@ const NotePad = () => {
   return (
     <Box
       padding={"20px"}
-      border={"1px solid red"}
+      
       height={"max-content"}
-      borderColor={"gray.lightBorder"}
+      borderColor={"white.200"}
+      boxShadow={"0px 1px 2px 0px rgba(16, 24, 40, 0.10), 0px 1px 3px 0px rgba(16, 24, 40, 0.10)"}
       bg={"white.100"}
       borderRadius={"8px"}
     >
-      <Box
-        borderBottom={"1px solid "}
-        borderColor={"gray.lightBorder"}
-        pb={"17px"}
-        display={"flex"}
-        justifyContent={"space-between"}
-        alignItems={"center"}
-        gap={"20px"}
-      >
-        <Heading color={"gray.text"} variant={"p7"}>
-          {" "}
-          Notepad
-        </Heading>
-        {/* <DropDown
-          icon={<Image src={blue_arrow_down.src} />}
-          placeholder={"Previous Applications"}
-          variant={"bg-dropdown"}
-          style={{ width: "100%" }}
-        /> */}
-      </Box>
-      <Box sx={{mt:"15px"}}>
+
+      {/* <Box sx={{mt:"15px"}}>
         <DropDown
           icon={<Image src={blue_arrow_down.src} />}
           placeholder={"Previous Applications"}
           variant={"bg-dropdown"}
           style={{ width: "100%" }}
         />
-      </Box>
+      </Box> */}
       <Box
         mt={"20px"}
         p={"20px"}
@@ -59,15 +41,15 @@ const NotePad = () => {
             Interviewed candidate on the 15th and was very impressed by
             experience. Salary ask is within range as well.
           </Heading>
-          <Image src={cross.src} width={"20px"} mt={"7px"} />
+          <Image  cursor={"pointer"} src={deleteIcon.src} width={"12px"} mt={"7px"} />
         </Box>
         <Heading mt={"20px"} variant={"p4"}>
           Author: Jacob Jonees
         </Heading>
       </Box>
 
-      <Box height={"300px"}></Box>
-      <Box position={"relative"}>
+      {/* <Box height={"300px"}></Box> */}
+      <Box position={"relative"} mt={"40px"}>
         <Textarea
           placeholder={"Enter notes or comments about this candidate..."}
           size="sm"
@@ -76,6 +58,7 @@ const NotePad = () => {
           resize={"none"}
         />
         <Image
+        cursor={"pointer"}
           src={send.src}
           position={"absolute"}
           bottom={"11px"}

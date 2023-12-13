@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import DropDown from "../DropDown/DropDown";
 import blue_arrow_down from "@/assets/Images/blue-arrow-down.svg";
 import CandidatesDropdown from "./CandidatesDropdown";
+import { HiOutlineMail } from "react-icons/hi";
 
 const MatchCandidate = ({ filterKey }) => {
   const candidates = useSelector((state) => state.candidates.value.filter);
@@ -55,7 +56,7 @@ const MatchCandidate = ({ filterKey }) => {
   ];
   const componentList = [
     <All
-    sortArray={sortArray}
+      sortArray={sortArray}
       data={allData}
       cardStatusDisable
       matchCandidate
@@ -64,8 +65,7 @@ const MatchCandidate = ({ filterKey }) => {
       popOverList={popOverListAll}
     />,
     <Archived
-    sortArray={sortArray}
-
+      sortArray={sortArray}
       cardStatusDisable
       data={archivedData}
       filterKey={filterKey}
@@ -74,13 +74,20 @@ const MatchCandidate = ({ filterKey }) => {
       popOverList={popOverListArchived}
     />,
   ];
+
+  const profileBtn = [
+    {
+      name: "Invite to Apply",
+      icon: <HiOutlineMail className="hoverColor" />,
+    },
+  ];
   return (
     <Box>
       <CandidatesDropdown />
 
       {selectedCandidates ? (
         <Box mt={{ md: "31px", base: "15px" }}>
-          <SelectedCandidate matchCandidate />
+          <SelectedCandidate  matchCandidate  profileBtn={profileBtn} />
         </Box>
       ) : (
         <ArchivedTabs componentList={componentList} tablist={tablist} />

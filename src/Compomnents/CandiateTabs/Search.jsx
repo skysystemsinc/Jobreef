@@ -5,7 +5,8 @@ import All from "../ArchivedTabs/All";
 import Archived from "../ArchivedTabs/Archived";
 import SelectedCandidate from "../ArchivedTabs/SelectedCandidate";
 import { useSelector } from "react-redux";
-
+import { IoSaveOutline } from "react-icons/io5";
+import { HiOutlineMail } from "react-icons/hi";
 const Search = ({ filterKey }) => {
   const candidates = useSelector((state) => state.candidates.value.filter);
   const selectedCandidates = useSelector(
@@ -66,11 +67,24 @@ const Search = ({ filterKey }) => {
       popOverList={popOverListArchived}
     />,
   ];
+
+  const profileBtn = [
+    {
+      name: "Send Message",
+      icon: <HiOutlineMail className="hoverColor" />,
+    },
+    {
+      name: "Save",
+      icon: <IoSaveOutline  className="hoverColor" />,
+
+
+    },
+  ];
   return (
     <Box>
       {selectedCandidates ? (
         <Box mt={{ md: "31px", base: "15px" }}>
-          <SelectedCandidate matchCandidate />
+          <SelectedCandidate profileBtn={profileBtn} matchCandidate />
         </Box>
       ) : (
         <ArchivedTabs componentList={componentList} tablist={tablist} />

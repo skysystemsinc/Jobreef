@@ -23,7 +23,7 @@ const ActiveJobs = () => {
   });
   const jobState = useSelector((state) => state.jobPost.jobs.activeJobs);
   const allJobState = useSelector((state) => state.jobPost.jobs.allJobs);
-  console.log("jobState", jobState);
+  console.log("jobState", jobState,allJobState);
   const handleEdit = (data) => {
     router.push(`/company/create-job-post?id=${data.id}`);
     dispatch(addJob({ ...data, ...data.location }));

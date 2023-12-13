@@ -81,6 +81,7 @@ const DropDown = ({
         />
       ) : (
         <MultiSelect
+          sx={{ input: { width: "100% !important" } }}
           options={dropdownOption ?? option}
           value={state ?? ""}
           label=""
