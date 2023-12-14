@@ -35,6 +35,7 @@ const addUser = async (req, res) => {
           },
           ...data,
           otp:otp,
+          otpTimestamp: new Date()
           // password: data.password,
           // ...(data.employeeId ?? { employeeId: data.employeeId }),
           // firstName: data.firstName,

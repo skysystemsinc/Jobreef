@@ -34,7 +34,7 @@ function PasswordInput({
       />
       <InputRightElement width="3.5rem">
         <Icon
-          fontSize={{ "2xl": "25px", sm: "20px", base: "16px" }}
+          fontSize={{  sm: "20px", base: "16px" }}
           onClick={handleClick}
           // marginTop={{ md: "0px", base: "8px" }}
           cursor={"pointer"}
