@@ -102,6 +102,8 @@ const Overview = ({ nextStep, activeStep, prevStep }) => {
   };
   const handleCreateEmployee = async () => {
     const body = {
+      userId: isAuthenticated.userId,
+      phoneNumber: parseInt(state.phoneNumber),
       description: state.description,
       location: {
         country: state.country,
@@ -112,12 +114,16 @@ const Overview = ({ nextStep, activeStep, prevStep }) => {
     };
     const postData = await post(`${endPoints.employee}`, body);
     console.log("postData", postData);
-    handleUserAssociation(postData.data.id);
+    // handleUserAssociation(postData.data.id);
+    nextStep();
+    setLoading(false);
 
     dispatch(addEmployee({ ...state, id: postData.data.id, ...postData.data }));
   };
   const handleUpdateEmployee = async () => {
     const body = {
+      phoneNumber: parseInt(state.phoneNumber),
+
       description: state.description,
       location: {
         country: state.country,
@@ -125,12 +131,15 @@ const Overview = ({ nextStep, activeStep, prevStep }) => {
         city: state.city,
       },
     };
-    const postData = await put(`${endPoints.employee}/${employeeState.id}`, 
-      body,
+    const postData = await put(
+      `${endPoints.employee}/${employeeState.id}`,
+      body
     );
-    handleUserAssociation(postData.data.id);
+    nextStep();
 
-    dispatch(addEmployee({ ...state ,...postData.data}));
+    // handleUserAssociation(postData.data.id);
+
+    dispatch(addEmployee({ ...state, ...postData.data }));
   };
   return (
     <Box>

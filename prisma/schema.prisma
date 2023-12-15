@@ -48,12 +48,17 @@ model EmailPreferences {
 }
 
 model User {
-  id               String            @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt        DateTime          @default(now())
-  company          Company?          @relation(fields: [companyId], references: [id])
-  companyId        String?           @db.ObjectId
-  employee         Employee?         @relation(fields: [employeeId], references: [id])
-  employeeId       String?           @unique @db.ObjectId
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime  @default(now())
+  // owner   Company?  @relation( "UserToOwner", fields: [ownerId], references: [id])
+  // ownerId String?   @db.ObjectId
+  owner     Company?   @relation("companyEmployer", fields: [ownerId], references: [id])
+  ownerId   String?    @db.ObjectId
+  employee  Employee?
+  company   Company?  @relation("UserToCompany")
+  // employee         Employee?         @relation(fields: [employeeId], references: [id])
+
+  // employeeId       String?           @unique @db.ObjectId
   stages           Int?              @default(0)
   firstName        String
   lastName         String
@@ -67,7 +72,7 @@ model User {
   accountType      String?
   employeeRole     String?
   jobTitle         String?
-  otpTimestamp     DateTime?          @default(now())
+  otpTimestamp     DateTime?         @default(now())
   verified         Boolean           @default(false)
   password         String?
   phoneNumber      Int?
@@ -78,7 +83,10 @@ model User {
 model Company {
   id              String         @id @default(auto()) @map("_id") @db.ObjectId
   createdAt       DateTime       @default(now())
-  user            User[]
+  // employees       User[]  @relation("CompanyToEmployees")
+  user            User?          @relation("UserToCompany", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  userId          String?        @unique @db.ObjectId
+  employers       User[]         @relation("companyEmployer")
   companyName     String
   industry        String?
   directory       String
@@ -96,7 +104,9 @@ model Company {
 model Employee {
   createdAt      DateTime         @default(now())
   id             String           @id @default(auto()) @map("_id") @db.ObjectId
-  user           User?
+  // user           User?
+  user           User?             @relation(fields: [userId], references: [id])
+  userId         String           @unique @db.ObjectId
   description    String?
   phoneNumber    Int?
   workExperience WorkExperience[]
@@ -192,7 +202,7 @@ model Job {
   active              Boolean?     @default(true)
   delete              Boolean?     @default(false)
   // status              Status       @default(active)
-  status              Int       @default(1)
+  status              Int          @default(1)
   // -1 for expire job
   // 0 for pause  job?
   // 1 for active  job?

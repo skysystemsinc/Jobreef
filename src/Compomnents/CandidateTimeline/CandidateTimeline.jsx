@@ -40,13 +40,22 @@ export const CandidateTimeline = ({ candidate, variant }) => {
     initialStep: 0,
   });
 
-  const [compeletedStep, setcompeletedStep] = useState([]);
+  const [completedStep, setCompletedStep] = useState([]);
   const hasCompletedAllSteps = activeStep === steps.length;
 
   useEffect(() => {
-    setcompeletedStep([...compeletedStep, activeStep]);
+    setCompletedStep([...completedStep, activeStep]);
   }, [activeStep]);
+  const handlePrevious = () => {
+    prevStep();
+    if (completedStep.includes(activeStep)) {
+      const updatedCompletedSteps = completedStep.filter(
+        (step) => step != activeStep
+      );
 
+      setCompletedStep(updatedCompletedSteps);
+    }
+  };
   return (
     <Flex
       flexDir="column"
@@ -118,7 +127,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
                   variant={"p1"}
                   fontWeight={700}
                   sx={{
-                    color: compeletedStep.includes(index)
+                    color: completedStep.includes(index)
                       ? "blue.500"
                       : "gray.light",
                   }}
@@ -139,7 +148,7 @@ export const CandidateTimeline = ({ candidate, variant }) => {
                       // marginTop: 10,
                       display: { sm: "block", base: "none" }, // color:'#fff'
 
-                      color: compeletedStep.includes(index)
+                      color: completedStep.includes(index)
                         ? "blue.500"
                         : "gray.light",
                     }}
@@ -162,23 +171,23 @@ export const CandidateTimeline = ({ candidate, variant }) => {
                     <Overview
                       nextStep={nextStep}
                       activeStep={activeStep}
-                      prevStep={prevStep}
+                      prevStep={handlePrevious}
                     />
                   ) : index == 1 ? (
-                    <WorkExperience prevStep={prevStep} nextStep={nextStep} />
+                    <WorkExperience prevStep={handlePrevious} nextStep={nextStep} />
                   ) : index == 2 ? (
-                    <Education prevStep={prevStep} nextStep={nextStep} />
+                    <Education prevStep={handlePrevious} nextStep={nextStep} />
                   ) : index == 3 ? (
-                    <Certification prevStep={prevStep} nextStep={nextStep} />
+                    <Certification prevStep={handlePrevious} nextStep={nextStep} />
                   ) : index == 4 ? (
-                    <Skills prevStep={prevStep} nextStep={nextStep} />
+                    <Skills prevStep={handlePrevious} nextStep={nextStep} />
                   ) : index == 5 ? (
                     <TimelineAttachments
-                      prevStep={prevStep}
+                      prevStep={handlePrevious}
                       nextStep={nextStep}
                     />
                   ) : index == 6 ? (
-                    <Achievement prevStep={prevStep} nextStep={nextStep} />
+                    <Achievement prevStep={handlePrevious} nextStep={nextStep} />
                   ) : null}
                 </Box>
               </Step>
