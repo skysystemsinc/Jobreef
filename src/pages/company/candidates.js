@@ -1,4 +1,5 @@
-import CandiateTabs from "@/Compomnents/CandiateTabs/CandiateTabs";
+
+import CandidateTabs from "@/Compomnents/CandiateTabs/CandidateTabs";
 import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
 
 import CompanyDasboard from "@/Compomnents/Layout/DasboardLayout";
@@ -11,7 +12,7 @@ const index = () => {
     <>
       <CompanyDasboard disableWaveImage>
         <Box px={"20px"} pb={'30px'}>
-          <CandiateTabs />
+          <CandidateTabs />
         </Box>
       <DashboardFooter waveImage />
 

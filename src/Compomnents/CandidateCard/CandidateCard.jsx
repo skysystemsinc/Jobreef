@@ -129,7 +129,7 @@ const CandidateCard = ({
                 <GoDotFill style={{ color: "#D9D9D9" }} />
               </Box>
               <Heading color={"gray.text"} variant={"p4"}>
-                {/* University of The Bahamas */}
+                
                 {data?.diploma}
               </Heading>
             </Box>
