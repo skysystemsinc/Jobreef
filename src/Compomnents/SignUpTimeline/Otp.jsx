@@ -23,7 +23,8 @@ import { httpRequest } from "@/helper/httpRrequest";
 import { addUser } from "@/Reudx/slices/userRegistration";
 import { registration } from "@/schema/stateSchema";
 import { setLoginUser } from "@/Reudx/slices/LoginUser";
-import { post } from "@/helper/fetch";
+import { post, put } from "@/helper/fetch";
+import OtpProgressBar from "./OtpProgressBar";
 
 const Otp = ({
   text,
@@ -45,6 +46,7 @@ const Otp = ({
   const [state, setState] = useState({
     otp: "",
     loading: false,
+    otpLoading: false,
   });
   const verifyOtp = async () => {
     if (state.otp === "") {
@@ -66,8 +68,9 @@ const Otp = ({
         };
       });
       const body = {
-        userId: userState.userId ? userState.userId : id,
+        userId: userState.userId,
         otp: parseInt(state.otp),
+        email: userState.email,
       };
       const verify = await post(
         `${endPoints.verifyOtp}`,
@@ -223,7 +226,54 @@ const Otp = ({
       });
     }
   };
+  const handleResend = async (e) => {
+    e.preventDefault();
+    setState((prev) => {
+      return {
+        ...prev,
+        otpLoading: true,
+      };
+    });
+    
+    const body = {
+      email: userState.email ,
+      userId: userState.userId ,
+    };
+    try {
+      const postData = await put(
+        `${endPoints.resendOtp}`,
 
+        body
+      );
+      // dispatch(setLoginUser({ ...loginUser, ...postData.data }));
+
+      dispatch(addUser({ ...userState, ...postData.data }));
+
+      if (postData.success) {
+        setState((prev) => {
+          return {
+            ...prev,
+            otpLoading: false,
+            otp: "",
+          };
+        });
+      }
+      toast({
+        position: "bottom-right",
+        title: postData.message,
+        status: postData.success ? "success" : "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    } catch (error) {
+      setState((prev) => {
+        return {
+          ...prev,
+          otpLoading: false,
+        };
+      });
+    }
+  };
   return (
     <Box textAlign={"center"}>
       <Heading
@@ -261,11 +311,16 @@ const Otp = ({
 
       <Box mt={"26px"}>
         <Link
+          onClick={handleResend}
           _hover={{ textDecoration: "none" }}
           variant={"blue-link"}
           href="/"
         >
-          Resend OTP
+          {state.otpLoading ? (
+            <Loader style={{ color: "blue.500" }} />
+          ) : (
+            " Resend OTP"
+          )}
         </Link>
 
         <Box
@@ -275,12 +330,13 @@ const Otp = ({
           justifyContent={"center"}
           mt={"18px"}
         >
-          <CircularProgress
+          <OtpProgressBar />
+          {/* <CircularProgress
             value={52}
             thickness={"13px"}
             size={{ md: "27px", base: "20px" }}
             color="blue.500"
-          />
+          /> */}
           <Heading fontWeight={400} variant={"p7"} color={"gray.600"}>
             Code will expire in 5 minutes.
           </Heading>
@@ -299,12 +355,12 @@ const Otp = ({
           onClick={handlePrevious}
           variant="outline-blue"
         >
-          {setOtpState ? "Cancel" : " Back"}
+          {" Back"}
         </Button>
         <Button
           // width={{ md: "200px", sm: "180px", base: "130px" }}
           variant={"blue-btn"}
-          onClick={emailChange ? changeEmail : verifyOtp}
+          onClick={verifyOtp}
         >
           {state.loading ? <Loader /> : "Verify"}
         </Button>

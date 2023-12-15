@@ -21,12 +21,29 @@ type SocialLinks {
   platform String
   link     String
 }
+type ScreeningQuestions {
+  question String
+  type     String
+}
 
 type Media {
   name String
   url  String
 }
+enum Status {
+  expire   @map("-1")
+  pause  @map("0")
+  active @map("1")
+  draft  @map("2")
+}
 
+enum Role {
+  employee  @map("employee")
+  company   @map("company")
+  candidate @map("candidate")
+
+  // Add more roles as needed
+}
 model Location {
   id       String  @id @default(auto()) @map("_id") @db.ObjectId
   user     User?   @relation(fields: [userId], references: [id])
@@ -48,26 +65,31 @@ model EmailPreferences {
 }
 
 model User {
-  id           String    @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt    DateTime  @default(now())
-  company      Company?  @relation(fields: [companyId], references: [id])
-  companyId    String?   @db.ObjectId
-  employee     Employee? @relation(fields: [employeeId], references: [id])
-  employeeId   String?   @unique @db.ObjectId
-  stages       Int?  @default(0)
-  firstName    String
-  lastName     String
-  active       Boolean?  @default(true)
-  delete       Boolean?  @default(false)
-  flag         Boolean?  @default(false)
-  email        String?   @unique
-  profilePic   String?
-  otp          Int?
-  role         Role
-  accountType  String?
-  employeeRole String?
-  jobTitle     String?
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime  @default(now())
+  // owner   Company?  @relation( "UserToOwner", fields: [ownerId], references: [id])
+  // ownerId String?   @db.ObjectId
+  owner     Company?   @relation("companyEmployer", fields: [ownerId], references: [id])
+  ownerId   String?    @db.ObjectId
+  employee  Employee?
+  company   Company?  @relation("UserToCompany")
+  // employee         Employee?         @relation(fields: [employeeId], references: [id])
 
+  // employeeId       String?           @unique @db.ObjectId
+  stages           Int?              @default(0)
+  firstName        String
+  lastName         String
+  active           Boolean?          @default(true)
+  delete           Boolean?          @default(false)
+  flag             Boolean?          @default(false)
+  email            String?           @unique
+  profilePic       String?
+  otp              Int?
+  role             Role
+  accountType      String?
+  employeeRole     String?
+  jobTitle         String?
+  otpTimestamp     DateTime?         @default(now())
   verified         Boolean           @default(false)
   password         String?
   phoneNumber      Int?
@@ -78,7 +100,10 @@ model User {
 model Company {
   id              String         @id @default(auto()) @map("_id") @db.ObjectId
   createdAt       DateTime       @default(now())
-  user            User[]
+  // employees       User[]  @relation("CompanyToEmployees")
+  user            User?          @relation("UserToCompany", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  userId          String?        @unique @db.ObjectId
+  employers       User[]         @relation("companyEmployer")
   companyName     String
   industry        String?
   directory       String
@@ -96,7 +121,9 @@ model Company {
 model Employee {
   createdAt      DateTime         @default(now())
   id             String           @id @default(auto()) @map("_id") @db.ObjectId
-  user           User?
+  // user           User?
+  user           User?             @relation(fields: [userId], references: [id])
+  userId         String           @unique @db.ObjectId
   description    String?
   phoneNumber    Int?
   workExperience WorkExperience[]
@@ -107,6 +134,9 @@ model Employee {
   location       LocationType
 
   attachment Attachment?
+
+  // appliedJobIds String[]      @db.ObjectId
+  // appliedJob    AppliedJobs[] @relation(fields: [appliedJobIds], references: [id])
 }
 
 model WorkExperience {
@@ -181,6 +211,7 @@ model Attachment {
   additional Media[]
 }
 
+
 model Job {
   id                  String       @id @default(auto()) @map("_id") @db.ObjectId
   company             Company?     @relation(fields: [companyId], references: [id])
@@ -188,7 +219,8 @@ model Job {
   createdAt           DateTime     @default(now())
   active              Boolean?     @default(true)
   delete              Boolean?     @default(false)
-  status              Status       @default(active)
+  // status              Status       @default(active)
+  status              Int          @default(1)
   // -1 for expire job
   // 0 for pause  job?
   // 1 for active  job?
@@ -213,18 +245,16 @@ model Job {
   location            LocationType
   desiredSkills       String
   applicationDeadline DateTime
-}
-enum Status {
-  expire @map("-1")
-  pause  @map("0")
-  active @map("1")
-  draft  @map("2")
+  ScreeningQuestions  ScreeningQuestions[]
 }
 
-enum Role {
-  employee  @map("employee")
-  company   @map("company")
-  candidate @map("candidate")
-
-  // Add more roles as needed
-}
+// model AppliedJobs {
+//   matchCandiate Boolean
+//   id            String     @id @default(auto()) @map("_id") @db.ObjectId
+//   active        Boolean    @default(false)
+//   Archived      Boolean    @default(false)
+//   employeeIds     String[]   @db.ObjectId
+//   employees     Employee[] @relation(fields: [employeeIds], references: [id])
+//   // job           Job        @relation(fields: [jobId], references: [id])
+//   // jobId         String     @db.ObjectId
+// }

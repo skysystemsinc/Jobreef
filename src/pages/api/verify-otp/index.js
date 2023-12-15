@@ -6,6 +6,22 @@ const verifyOtp = async (req, res) => {
       otp: data.otp,
     },
   });
+
+  // const duration = 5 * 60 * 1000;
+  const duration =5 * 60 * 1000;
+  console.log("duration",duration);
+  const currentTimestamp = Date.now();
+  console.log("verify",verify);
+  const startingTimestamp = verify?.otpTimestamp;
+  console.log("currentTimestamp - startingTimestamp",currentTimestamp - startingTimestamp);
+  if (currentTimestamp - startingTimestamp >duration) {
+    res.status(400).json({
+      message: "OTP expired",
+      success: false,
+    });
+    return;
+  }
+
   if (verify) {
     const user = await prisma.User.update({
       where: {

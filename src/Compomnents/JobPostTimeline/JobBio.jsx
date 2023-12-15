@@ -58,12 +58,10 @@ const JobBio = ({ disableNextPrev, prevStep, nextStep }) => {
     nextStep();
   };
   useEffect(() => {
-    if(jobState){
-
-      setFormData(jobState)
+    if (jobState) {
+      setFormData(jobState);
     }
-  }, [jobState])
-  
+  }, [jobState]);
 
   return (
     <Box>
@@ -96,7 +94,7 @@ const JobBio = ({ disableNextPrev, prevStep, nextStep }) => {
           state={formData.applicationDeadline}
           setState={(e) => {
             setFormData((prev) => {
-              return { ...prev, applicationDeadline: e };
+              return { ...prev, applicationDeadline: new Date(e) };
             });
           }}
           labelVariant={"label"}

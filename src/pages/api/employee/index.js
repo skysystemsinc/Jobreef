@@ -9,6 +9,7 @@ const addEmployee = async (req, res) => {
         location: data.location,
         phoneNumber: data.phoneNumber,
         description: data.description,
+        userId: data.userId,
         // workExperience: data.workExperience,
         // education: data.education,
         // certification: data.certification,
@@ -24,8 +25,8 @@ const addEmployee = async (req, res) => {
         skills: true,
         achievement: true,
         attachment: true,
+        user:true
       },
-
     });
 
     res.status(201).json({
@@ -102,7 +103,7 @@ const updateObjectById = async (req, res) => {
       success: true,
     });
   } catch (err) {
-    console.log("err",err)
+    console.log("err", err);
     res.status(500).json({
       message: "internal server error",
       error: err,

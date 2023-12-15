@@ -50,50 +50,11 @@ const HeaderDropdown = dynamic(
     ssr: false,
   }
 );
-export default function Header({ notLogin, candidate }) {
+export default function Header({ hideNavLinks, notLogin, candidate }) {
   const { isOpen, onToggle } = useDisclosure();
   const dispatch = useDispatch();
   const router = useRouter();
   const [isSmallerThe500] = useMediaQuery("(max-width: 500px)");
-  const NAV_ITEMS = [
-    {
-      label: "Home",
-      pathName: "/",
-      // icon: <Image src={heart.src} />,
-    },
-    {
-      label: "Search Jobs",
-      pathName: "/candidate/job-search",
-    },
-    {
-      label: "For Job Seekers",
-      icon: (
-        <Image
-          src={router.pathname === "/jobseeker" ? blueDownArrow.src : heart.src}
-        />
-      ),
-
-      pathName: "/jobseeker",
-    },
-    {
-      label: "For Employers",
-      icon: (
-        <Image
-          src={router.pathname === "/employers" ? blueDownArrow.src : heart.src}
-        />
-      ),
-
-      pathName: "/employers",
-    },
-    {
-      label: "Career Advice",
-      pathName: "#",
-    },
-    {
-      label: "Our Company ",
-      pathName: "#",
-    },
-  ];
 
   return (
     <Box zIndex={5} position={"sticky"} top={"0px"}>
@@ -144,9 +105,11 @@ export default function Header({ notLogin, candidate }) {
             <Logo width={{ md: "130px", base: "120px" }} />
           </Link>
 
-          <Flex display={{ base: "none", xl: "flex" }} mx={"auto"}>
-            <DesktopNav candidate={candidate} />
-          </Flex>
+          {hideNavLinks ? null : (
+            <Flex display={{ base: "none", xl: "flex" }} mx={"auto"}>
+              <DesktopNav candidate={candidate} />
+            </Flex>
+          )}
         </Flex>
 
         <Stack
@@ -273,10 +236,9 @@ const DesktopNav = () => {
 
                 {ind == 1 || ind == 2 ? (
                   <Box>
-                    <TbCaretDown  fontSize={"18px"} />
+                    <TbCaretDown fontSize={"18px"} />
                   </Box>
-                ) :
-                null}
+                ) : null}
 
                 {/* {navItem.icon ?? ""} */}
               </Link>

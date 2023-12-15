@@ -1,7 +1,7 @@
 import { Spinner } from "@chakra-ui/react";
 import React from "react";
 
-const Loader = () => {
+const Loader = ({style}) => {
   return (
     <Spinner
       thickness="2px"
@@ -9,6 +9,7 @@ const Loader = () => {
       // emptyColor="gray.200"
       color="white.100"
       size="md"
+      sx={style}
     />
   );
 };

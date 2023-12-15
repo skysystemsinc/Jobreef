@@ -2,7 +2,7 @@ import { Box, Container, Heading } from "@chakra-ui/react";
 import React from "react";
 import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
 
-const DashboardFooter = ({ waveImage }) => {
+const DashboardFooter = ({ waveImage, style}) => {
   return (
     <Box
       position={"absolute"}
@@ -13,6 +13,7 @@ const DashboardFooter = ({ waveImage }) => {
         base: "55px",
 
       }}
+      sx={style}
       width={"100%"}
     >
       <Box>

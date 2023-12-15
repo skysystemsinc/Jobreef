@@ -4,7 +4,7 @@ import { Box } from "@chakra-ui/react";
 import NotePad from "../NotePad/NotePad";
 import { useSelector } from "react-redux";
 
-const SelectedCandidate = ({ matchCandidate }) => {
+const SelectedCandidate = ({ profileBtn,  matchCandidate }) => {
   const selectedCandidates = useSelector(
     (state) => state.candidates.value.selected
   );
@@ -14,9 +14,9 @@ const SelectedCandidate = ({ matchCandidate }) => {
   return (
     <Box display={"flex"} gap="20px">
       <Box width={"100%"}>
-        <SelectedCandidateCard matchCandidate={matchCandidate} toggle={toggle} setToggle={setToggle} />
+        <SelectedCandidateCard  profileBtn={profileBtn} matchCandidate={matchCandidate} toggle={toggle} setToggle={setToggle} />
       </Box>
-      { toggle ? (matchCandidate ? null
+      {/* { toggle ? (matchCandidate ? null
        :
        <Box
           width={{ "2xl": "700px", base: "520px" }}
@@ -24,7 +24,7 @@ const SelectedCandidate = ({ matchCandidate }) => {
         >
           <NotePad />
         </Box>)
-       : null}
+       : null} */}
     </Box>
   );
 };

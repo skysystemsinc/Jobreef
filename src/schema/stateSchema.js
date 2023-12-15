@@ -48,8 +48,8 @@ const employee = {
   achievement: false,
   certification: false,
   skills: false,
-  // id: "65714f5716dc9f3d6dc313f5",
-  id: null,
+  id: "657c34f999882859c18f667f",
+  // id: null,
 };
 const workExperience = {
   country: "",
@@ -111,10 +111,17 @@ const job = {
   city: "",
   address: "",
   desiredSkills: "",
+  province:'',
   tags: [],
   externalURL:"",
   applicationType: "",
   rate: "",
+  screeningQuestions: [
+    {
+      question: "",
+      type: "",
+    },
+  ],
 };
 const skills = [{ name: "", level: "" }];
 export {

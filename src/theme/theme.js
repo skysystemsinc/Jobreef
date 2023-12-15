@@ -62,6 +62,7 @@ const colors = {
     300: "#344054",
     200: "#F8FCFD",
     100: "#F4F9FF",
+    bg:"#F1F1F1"
   },
   orange: {
     100: "#FB784B",
@@ -295,7 +296,7 @@ const components = {
             color: "gray.light",
             fontWeight: 400,
             // textTransform: " capitalize",
-            fontSize: { "2xl": "18px", base: "14px" },
+            fontSize:  "14px" 
           },
         },
 

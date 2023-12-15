@@ -25,6 +25,7 @@ const add = async (req, res) => {
     draft: data.draft,
     active: data.active,
     status: data.status,
+    ScreeningQuestions: data.ScreeningQuestions,
   };
 
   try {

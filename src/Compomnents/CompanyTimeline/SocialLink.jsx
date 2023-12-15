@@ -105,6 +105,7 @@ const SocialLink = ({ nextStep, handlePrevious }) => {
     });
     try {
       const body = {
+        userId:isAuthenticated.userId,
         companyName: companyState.companyName,
         industry: companyState.industry,
         directory: companyState.directory,
@@ -132,8 +133,14 @@ const SocialLink = ({ nextStep, handlePrevious }) => {
 
       if (postData) {
         dispatch(addCompany(postData.data));
-
-        handleUserAssociation(postData.data.id);
+        setState((prev) => {
+          return {
+            ...prev,
+            loading: false,
+          };
+        });
+        nextStep();
+        // handleUserAssociation(postData.data.id);
         // console.log("postData", postData);
       }
     } catch (err) {
@@ -189,8 +196,8 @@ const SocialLink = ({ nextStep, handlePrevious }) => {
             loading: false,
           };
         });
-        // router.push("/company/profile-setting");
         nextStep();
+        // router.push("/company/profile-setting");
       }
     } catch (err) {
       console.log("user error ", err);

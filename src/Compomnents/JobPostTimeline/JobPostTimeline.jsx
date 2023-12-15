@@ -32,6 +32,7 @@ import { get } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
 import { addJob } from "@/Reudx/slices/jobPost";
 import { useDispatch, useSelector } from "react-redux";
+import ScreeningQuestion from "./ScreeningQuestion";
 
 const JobPostTimeline = ({ isEdit, title }) => {
   const router = useRouter();
@@ -45,6 +46,7 @@ const JobPostTimeline = ({ isEdit, title }) => {
     { label: "Technical Details" },
     { label: "Job Location" },
     { label: "Desired Skills" },
+    { label: "Screening Questions" },
   ];
 
   const { nextStep, prevStep, reset, activeStep } = useSteps({
@@ -206,6 +208,12 @@ const JobPostTimeline = ({ isEdit, title }) => {
                       nextStep={nextStep}
                       prevStep={prevStep}
                       style={boxStyle}
+                    />
+                  ) : index == 4 ? (
+                    <ScreeningQuestion
+                    
+                    nextStep={nextStep}
+                    prevStep={prevStep}
                     />
                   ) : null}
                 </Box>
