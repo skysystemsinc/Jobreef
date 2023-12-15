@@ -15,7 +15,7 @@ const All = ({
   cardStatus,
   cardStatusDisable,
   // data,
-  searcBox,
+searchBox,
   handleEvent,
   popOverList,
 }) => {
@@ -71,12 +71,12 @@ const All = ({
     dispatch(getSelectedCandidates(data));
   };
   return (
-    <Box mt={{ md: "31px", base: "15px" }}>
-      {searcBox ? <SerarchBox /> : null}
-      <Box display={{ lg: "block", base: "block" }}>
+    <Box  mt={{ md: "31px", base: "15px" }}>
+      {searchBox ? <SerarchBox /> : null}
+      <Box >
         <MobileSortBy sortArray={sortArray} />
       </Box>
-      <Box display={"flex"} gap={"31px"}>
+      <Box width={"100%"}  >
         <Box>
           {data &&
             data.map((item, ind) => {

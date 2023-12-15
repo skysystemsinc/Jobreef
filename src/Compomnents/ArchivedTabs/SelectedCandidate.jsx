@@ -16,7 +16,7 @@ const SelectedCandidate = ({ profileBtn,  matchCandidate }) => {
       <Box width={"100%"}>
         <SelectedCandidateCard  profileBtn={profileBtn} matchCandidate={matchCandidate} toggle={toggle} setToggle={setToggle} />
       </Box>
-      { toggle ? (matchCandidate ? null
+      {/* { toggle ? (matchCandidate ? null
        :
        <Box
           width={{ "2xl": "700px", base: "520px" }}
@@ -24,7 +24,7 @@ const SelectedCandidate = ({ profileBtn,  matchCandidate }) => {
         >
           <NotePad />
         </Box>)
-       : null}
+       : null} */}
     </Box>
   );
 };

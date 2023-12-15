@@ -20,8 +20,8 @@ const Search = ({ filterKey }) => {
 
   const tablist = [`Search Results`, `Saved (8)`];
 
-  const popOverListAll = ["Invite to Apply", "Save"];
-  const popOverListArchived = ["Invite to Apply", "Delete"];
+  const popOverListAll = ["Send Message", "Save Candidate"];
+  const popOverListArchived = ["Send Message", "Delete"];
   const sortArray = [
     { label: "Sort Candidates By", listItem: ["Date Applied", "Relevance"] },
     { label: "Status", listItem: ["New", "Read", "Interviewing", "Closed"] },
@@ -49,8 +49,9 @@ const Search = ({ filterKey }) => {
   const componentList = [
     <All
     sortArray={sortArray}
-      searcBox
+      searchBox
       data={allData}
+      matchCandidate
       filterKey={filterKey}
       cardStatusDisable
       // cardStatus={"Interviewing"}

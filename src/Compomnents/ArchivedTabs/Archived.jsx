@@ -10,6 +10,7 @@ const Archived = ({
   filterKey,
   cardStatusDisable,
   // data,
+  // cardStatus,
   sortArray,
   matchCandidate,
   cardStatus,
@@ -18,7 +19,7 @@ const Archived = ({
 }) => {
   const data = [
     {
-      status: "new",
+      status: matchCandidate ? "New" : " Archived",
       archived: false,
       name: "Aaron Brown",
       country: "Nassau",
@@ -69,7 +70,7 @@ const Archived = ({
 
       <MobileSortBy sortArray={sortArray} />
 
-      <Box display={"flex"} gap={"31px"}>
+      <Box>
         <Box>
           {data &&
             data.map((item, ind) => {

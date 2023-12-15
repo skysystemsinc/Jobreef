@@ -58,19 +58,19 @@ const MatchCandidate = ({ filterKey }) => {
     <All
       sortArray={sortArray}
       data={allData}
-      cardStatusDisable
-      matchCandidate
+      // cardStatusDisable
+      
       filterKey={filterKey}
       cardStatus={"Interviewing"}
       popOverList={popOverListAll}
     />,
     <Archived
       sortArray={sortArray}
-      cardStatusDisable
+      // cardStatusDisable
       data={archivedData}
       filterKey={filterKey}
       matchCandidate
-      cardStatus={"Archived"}
+      cardStatus={"New"}
       popOverList={popOverListArchived}
     />,
   ];
