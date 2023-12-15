@@ -1,3 +1,4 @@
+import { status } from "@/Utils/role";
 import { job } from "@/schema/stateSchema";
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -20,7 +21,7 @@ const jobPost = createSlice({
     },
     setAllJobs: (state, action) => {
       const activeJobs = action.payload.filter(
-        (item) => item.active === true && item.status == 1
+        (item) => item.active === true && item.status == status.active
       );
       const inActiveJobs = action.payload.filter(
         (item) => item.active === false

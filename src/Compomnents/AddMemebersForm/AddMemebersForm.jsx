@@ -25,7 +25,7 @@ import { addTeamMember, getTeamMembers } from "@/Reudx/slices/teamMembers";
 import { post, put } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
 import Loader from "../Loader/Loader";
-import { roles } from "@/Utils/role";
+import { role, roles } from "@/Utils/role";
 
 const AddMemebersForm = () => {
   const router = useRouter();
@@ -42,8 +42,9 @@ const AddMemebersForm = () => {
     firstName: "",
     lastName: "",
     email: "",
-    employeeRole: "",
+    role: "",
   });
+  console.log("role", formData.role);
   const handleSend = async () => {
     try {
       const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -94,9 +95,12 @@ const AddMemebersForm = () => {
   const handleCreateUser = async () => {
     const postData = await post(`${endPoints.user}`, {
       ...formData,
-      role: roles.employee,
-      
-      companyId: companyState.id,
+      // role: roles.recruiter,
+
+      // companyAdminId: companyState.id,
+      ...(formData.role == roles.recruiter && {
+        companyAdminId: companyState.id,
+      }),
     });
     setState((prev) => {
       return {
@@ -105,7 +109,7 @@ const AddMemebersForm = () => {
       };
     });
     dispatch(addTeamMember({ ...formData }));
-    dispatch(getTeamMembers([ ...userState, postData.data]));
+    dispatch(getTeamMembers([...userState, postData.data]));
     setState({ ...state, loading: false });
 
     router.push("/company/team-members");
@@ -148,6 +152,11 @@ const AddMemebersForm = () => {
   const handleCancel = () => {
     router.push("/company/team-members");
   };
+
+  const roleDropdown = [
+    // { label: "Owner", value: roles.company },
+    { label: "Recruiter", value: roles.recruiter },
+  ];
   return (
     <Box minHeight={"82vh"} width={{ md: "70%", base: "100%" }} px={"10px"}>
       <Heading
@@ -193,11 +202,12 @@ const AddMemebersForm = () => {
         />
         <LabelInput
           dropdown
-          state={formData.employeeRole}
+          dropdownOption={roleDropdown}
+          state={formData.role}
           setState={handleChange}
           labelVariant={"label"}
           type="text"
-          name={"employeeRole"}
+          name={"role"}
           variant={"bg-input"}
           placeholder="Select Role of the Employee"
           label={"Role*"}

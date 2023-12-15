@@ -16,10 +16,10 @@ const addUser = async (req, res) => {
       success: false,
     });
   } else {
-    if(data.password){
-      data.password  =await bcrypt.hash(data.password, 10)
+    if (data.password) {
+      data.password = await bcrypt.hash(data.password, 10);
     }
-    
+
     try {
       const otp = Math.floor(1000 + Math.random() * 9000);
       //TODO otp will send on email
@@ -34,8 +34,8 @@ const addUser = async (req, res) => {
             },
           },
           ...data,
-          otp:otp,
-          otpTimestamp: new Date()
+          otp: otp,
+          otpTimestamp: new Date(),
           // password: data.password,
           // ...(data.employeeId ?? { employeeId: data.employeeId }),
           // firstName: data.firstName,
@@ -46,7 +46,11 @@ const addUser = async (req, res) => {
           // accountType: data.accountType,
           // companyId: data.companyId,
           // ...(data.employeeId !== undefined && { employeeId: data.employeeId }),
-
+        },
+        include: {
+          companyAdmin: true,
+          company: true,
+          employee: true,
         },
       });
 

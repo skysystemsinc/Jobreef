@@ -11,6 +11,7 @@ import { addJob, setAllJobs } from "@/Reudx/slices/jobPost";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import { deleteApi, put } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
+import { status } from "@/Utils/role";
 const InActive = () => {
   const router = useRouter();
   const toast = useToast();
@@ -157,9 +158,9 @@ const InActive = () => {
         header: "Status",
         cell: ({ row: { original } }) => {
           {
-            return original.status == -1
+            return original.status == status.expire
               ? "Expire"
-              : original.status == 0
+              : original.status == status.pause
               ? "Paused"
               : "Draft";
           }
