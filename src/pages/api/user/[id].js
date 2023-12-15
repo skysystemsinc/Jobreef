@@ -29,11 +29,15 @@ const DeleteUser = async (req, res) => {
 };
 const UpdateUser = async (req, res) => {
   const data = { ...req.body };
-  // const data = req.body
 
   if (data.email) {
     const emailExist = await prisma.User.findUnique({
       where: {
+        // id: { not: req.query.id },
+        NOT: {
+          id: req.query.id,
+        },
+
         email: data.email,
       },
     });
@@ -58,6 +62,7 @@ const UpdateUser = async (req, res) => {
       },
       data: {
         ...data,
+        otpTimestamp: new Date(),
         location: {
           create: data.location,
         },
@@ -87,9 +92,9 @@ const GetSingleUser = async (req, res) => {
     const user = await prisma.User.findUnique({
       include: {
         company: {
-          include:{
-            user:true
-          }
+          include: {
+            user: true,
+          },
         },
         employee: {
           include: {

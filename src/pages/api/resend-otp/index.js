@@ -1,12 +1,15 @@
 import prisma from "@/lib/prisma";
 
 const resendOtp = async (req, res) => {
-  const data = JSON.parse(req.body);
+  const data = req.body;
   const otp = Math.floor(1000 + Math.random() * 9000);
   try {
     const emailExist = await prisma.User.findUnique({
       where: {
         email: data.email,
+        NOT: {
+          id: data.userId,
+        },
       },
     });
     if (emailExist) {
@@ -22,6 +25,8 @@ const resendOtp = async (req, res) => {
       },
       data: {
         otp: otp,
+        otpTimestamp: new Date()
+
       },
       include: {
         location: true, // Include all location in the returned object
@@ -35,8 +40,9 @@ const resendOtp = async (req, res) => {
       });
     }
   } catch (err) {
+    console.log("resend otp", err);
     res.status(400).json({
-      message: "Error!",
+      message: "internal server error",
       error: err,
       success: false,
     });
@@ -45,7 +51,7 @@ const resendOtp = async (req, res) => {
 
 export default async function handler(req, res) {
   switch (req.method) {
-    case "POST": {
+    case "PUT": {
       return resendOtp(req, res);
     }
   }

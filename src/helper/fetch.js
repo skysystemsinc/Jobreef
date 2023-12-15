@@ -1,4 +1,5 @@
-const { BACKEND_URL } = require("@/Utils/urls");
+// const { BACKEND_URL } = require("@/Utils/urls");
+import { BACKEND_URL } from "@/Utils/urls"
 
 export async function get(endpoint) {
   // const item = typeof window !== "undefined" ? localStorage.getItem("token") : null;
@@ -12,12 +13,15 @@ export async function get(endpoint) {
         //   Authorization: "Bearer " + item,
       },
     });
+    console.log("response", response);
+    return await response.json();
 
-    if (response.ok) {
-      return await response.json();
-    } else {
-      throw new Error("Request failed");
-    }
+    // if (response.ok) {
+    //   return await response.json();
+    // } else {
+    //   // throw new Error("Request failed");
+    //   return await response.json();
+    // }
   } catch (error) {
     console.error(error);
     throw error;
@@ -35,13 +39,15 @@ export async function post(endpoint, body) {
       },
       body: JSON.stringify(body),
     });
-
-    if (response.ok) {
-      return await response.json();
-    } else {
-      throw new Error("Request failed");
-    }
     console.log("response", response);
+    return await response.json();
+
+    // if (response.ok) {
+    //   return await response.json();
+    // } else {
+    //   // throw new Error("Request failed");
+    //   return await response.json();
+    // }
   } catch (error) {
     console.error(error);
     throw error;
@@ -57,12 +63,16 @@ export async function put(endpoint, body) {
       },
       body: JSON.stringify(body),
     });
+    console.log("response", response);
+    return await response.json();
 
-    if (response.ok) {
-      return await response.json();
-    } else {
-      throw new Error("Request failed");
-    }
+    // if (response.ok) {
+    //   return await response.json();
+    // } else {
+    //   return await response.json();
+
+    //   // throw new Error("Request failed");
+    // }
   } catch (error) {
     console.error(error);
     throw error;
@@ -74,11 +84,11 @@ export async function deleteApi(endpoint) {
       method: "DELETE",
     });
 
-    if (response.ok) {
-      return await response.json();
-    } else {
-      throw new Error("Request failed");
-    }
+    return await response.json();
+    // if (response.ok) {
+    // } else {
+    //   throw new Error("Request failed");
+    // }
   } catch (error) {
     console.error(error);
     throw error;

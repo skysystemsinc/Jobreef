@@ -65,26 +65,26 @@ model EmailPreferences {
 }
 
 model User {
-  id           String    @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt    DateTime  @default(now())
-  company      Company?  @relation(fields: [companyId], references: [id])
-  companyId    String?   @db.ObjectId
-  employee     Employee? @relation(fields: [employeeId], references: [id])
-  employeeId   String?   @unique @db.ObjectId
-  stages       Int?  @default(0)
-  firstName    String
-  lastName     String
-  active       Boolean?  @default(true)
-  delete       Boolean?  @default(false)
-  flag         Boolean?  @default(false)
-  email        String?   @unique
-  profilePic   String?
-  otp          Int?
-  role         Role
-  accountType  String?
-  employeeRole String?
-  jobTitle     String?
-
+  id               String            @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt        DateTime          @default(now())
+  company          Company?          @relation(fields: [companyId], references: [id])
+  companyId        String?           @db.ObjectId
+  employee         Employee?         @relation(fields: [employeeId], references: [id])
+  employeeId       String?           @unique @db.ObjectId
+  stages           Int?              @default(0)
+  firstName        String
+  lastName         String
+  active           Boolean?          @default(true)
+  delete           Boolean?          @default(false)
+  flag             Boolean?          @default(false)
+  email            String?           @unique
+  profilePic       String?
+  otp              Int?
+  role             Role
+  accountType      String?
+  employeeRole     String?
+  jobTitle         String?
+  otpTimestamp     DateTime?          @default(now())
   verified         Boolean           @default(false)
   password         String?
   phoneNumber      Int?
@@ -124,6 +124,9 @@ model Employee {
   location       LocationType
 
   attachment Attachment?
+
+  // appliedJobIds String[]      @db.ObjectId
+  // appliedJob    AppliedJobs[] @relation(fields: [appliedJobIds], references: [id])
 }
 
 model WorkExperience {
@@ -206,6 +209,7 @@ model Job {
   createdAt           DateTime     @default(now())
   active              Boolean?     @default(true)
   delete              Boolean?     @default(false)
+  // status              Status       @default(active)
   status              Int       @default(1)
   // -1 for expire job
   // 0 for pause  job?
@@ -233,3 +237,14 @@ model Job {
   applicationDeadline DateTime
   ScreeningQuestions  ScreeningQuestions[]
 }
+
+// model AppliedJobs {
+//   matchCandiate Boolean
+//   id            String     @id @default(auto()) @map("_id") @db.ObjectId
+//   active        Boolean    @default(false)
+//   Archived      Boolean    @default(false)
+//   employeeIds     String[]   @db.ObjectId
+//   employees     Employee[] @relation(fields: [employeeIds], references: [id])
+//   // job           Job        @relation(fields: [jobId], references: [id])
+//   // jobId         String     @db.ObjectId
+// }

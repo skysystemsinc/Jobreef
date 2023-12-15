@@ -3,7 +3,7 @@ import LabelInput from "../LabelInput/LabelInput";
 import edit_outline from "@/assets/Images/edit_outline.svg";
 import { useRef, useState } from "react";
 import white_edit from "@/assets/Images/white-edit.svg";
-import Otp from "../SignUpTimeline/Otp";
+
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
@@ -13,6 +13,8 @@ import { BACKEND_URL } from "@/Utils/urls";
 import endPoints from "@/Utils/endpoints";
 import { setLoginUser } from "@/Reudx/slices/LoginUser";
 import Loader from "../Loader/Loader";
+import { put } from "@/helper/fetch";
+import Otp from "./Otp";
 
 const EmailTabs = () => {
   const loginUser = useSelector((state) => state.LoginUser.value);
@@ -41,8 +43,6 @@ const EmailTabs = () => {
       return {
         ...prev,
         loading: true,
-    
-     
       };
     });
     const id = localStorage.getItem("id");
@@ -51,9 +51,9 @@ const EmailTabs = () => {
       userId: id,
     };
     try {
-      const postData = await httpRequest(
-        `${BACKEND_URL}${endPoints.resendOtp}`,
-        "POST",
+      const postData = await put(
+        `${endPoints.resendOtp}`,
+
         body
       );
       if (postData.success) {

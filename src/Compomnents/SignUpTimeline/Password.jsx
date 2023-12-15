@@ -123,7 +123,7 @@ const Password = ({ activeStep, handlePrevious, nextStep }) => {
       });
       return;
     }
-    dispatch(addUser({ ...state, userId: postData.data.id }));
+    dispatch(addUser({ ...state, userId: postData.data.id ,...postData.data}));
     nextStep();
 
     // if (postData.success) {
@@ -159,6 +159,11 @@ const Password = ({ activeStep, handlePrevious, nextStep }) => {
 
       body
     );
+    const resendOtp = await put(`${endPoints.resendOtp}`, {
+      email: state.email,
+      userId: userState.userId,
+    });
+
     setState((prev) => {
       return {
         ...prev,
@@ -171,6 +176,7 @@ const Password = ({ activeStep, handlePrevious, nextStep }) => {
       nextStep();
       dispatch(addUser({ ...state, userId: postData.data.id }));
     }
+    console.log("postData", postData);
     toast({
       position: "bottom-right",
       title: postData.message,

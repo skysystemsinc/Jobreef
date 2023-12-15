@@ -296,7 +296,7 @@ const components = {
             color: "gray.light",
             fontWeight: 400,
             // textTransform: " capitalize",
-            fontSize: { "2xl": "18px", base: "14px" },
+            fontSize:  "14px" 
           },
         },
 

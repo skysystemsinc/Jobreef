@@ -24,7 +24,7 @@ import { addUser } from "@/Reudx/slices/userRegistration";
 import { registration } from "@/schema/stateSchema";
 import { setLoginUser } from "@/Reudx/slices/LoginUser";
 import { post, put } from "@/helper/fetch";
-import OtpProgressBar from "./OtpProgressBar";
+import OtpProgressBar from "./OtpProgreesBar";
 
 const Otp = ({
   text,
@@ -48,6 +48,7 @@ const Otp = ({
     loading: false,
     otpLoading: false,
   });
+
   const verifyOtp = async () => {
     if (state.otp === "") {
       toast({
@@ -68,96 +69,7 @@ const Otp = ({
         };
       });
       const body = {
-        userId: userState.userId,
-        otp: parseInt(state.otp),
-        email: userState.email,
-      };
-      const verify = await post(
-        `${endPoints.verifyOtp}`,
-
-        body
-      );
-
-      if (verify.success) {
-        dispatch(addUser(registration));
-        dispatch(
-          setAuthentication({
-            role: verify?.data?.role,
-            userId: verify?.data?.id,
-          })
-        );
-        toast({
-          position: "bottom-right",
-          title: verify.message,
-          status: "success",
-          variant: "subtle",
-          isClosable: true,
-        });
-        setState((prev) => {
-          return {
-            ...prev,
-            loading: false,
-          };
-        });
-        if (verify?.data?.role === roles.company) {
-          router.push("/company/registration");
-        } else {
-          router.push("/candidate/registration");
-        }
-      } else {
-        toast({
-          position: "bottom-right",
-          title: verify.message,
-          status: "error",
-          variant: "subtle",
-          isClosable: true,
-        });
-        setState((prev) => {
-          return {
-            ...prev,
-            loading: false,
-          };
-        });
-      }
-    } catch (err) {
-      console.log("err", err);
-
-      setState((prev) => {
-        return {
-          ...prev,
-          loading: false,
-        };
-      });
-      toast({
-        position: "bottom-right",
-        title: "Error!",
-        status: "error",
-        variant: "subtle",
-        isClosable: true,
-      });
-    }
-  };
-  const changeEmail = async () => {
-    if (state.otp === "") {
-      toast({
-        position: "bottom-right",
-        title: `Please enter otp`,
-        status: "error",
-        variant: "subtle",
-        isClosable: true,
-      });
-      return;
-    }
-    const id = localStorage.getItem("id");
-    try {
-      setState((prev) => {
-        return {
-          ...prev,
-          loading: true,
-        };
-      });
-      const body = {
-        userId: userState.userId ? userState.userId : id,
+        userId: id,
         otp: parseInt(state.otp),
         email: email,
       };
@@ -173,7 +85,7 @@ const Otp = ({
         toast({
           position: "bottom-right",
           title: verify.message,
-          status: "success",
+          status: verify.success ? "success" : "error",
           variant: "subtle",
           isClosable: true,
         });
@@ -181,32 +93,20 @@ const Otp = ({
           return {
             ...prev,
             loading: false,
+            otp:""
           };
         });
-        if (setOtpState) {
-          setOtpState((prev) => {
-            return {
-              ...prev,
-              isEdit: false,
-              readOnly: true,
-              otp: false,
-            };
-          });
-        }
-      } else {
-        toast({
-          position: "bottom-right",
-          title: verify.message,
-          status: "error",
-          variant: "subtle",
-          isClosable: true,
-        });
-        setState((prev) => {
+        setOtpState((prev) => {
           return {
             ...prev,
-            loading: false,
+            email:verify.email,
+            isEdit: false,
+            readOnly: true,
+            otp: false,
           };
         });
+
+
       }
     } catch (err) {
       console.log("err", err);
@@ -234,10 +134,10 @@ const Otp = ({
         otpLoading: true,
       };
     });
-    
+    const id = localStorage.getItem("id");
     const body = {
-      email: userState.email ,
-      userId: userState.userId ,
+      email: email,
+      userId: id,
     };
     try {
       const postData = await put(
@@ -245,9 +145,8 @@ const Otp = ({
 
         body
       );
-      // dispatch(setLoginUser({ ...loginUser, ...postData.data }));
+      dispatch(setLoginUser({ ...loginUser, ...postData.data }));
 
-      dispatch(addUser({ ...userState, ...postData.data }));
 
       if (postData.success) {
         setState((prev) => {
@@ -319,7 +218,7 @@ const Otp = ({
           {state.otpLoading ? (
             <Loader style={{ color: "blue.500" }} />
           ) : (
-            " Resend OTP"
+            "Resend OTP"
           )}
         </Link>
 
@@ -332,11 +231,11 @@ const Otp = ({
         >
           <OtpProgressBar />
           {/* <CircularProgress
-            value={52}
-            thickness={"13px"}
-            size={{ md: "27px", base: "20px" }}
-            color="blue.500"
-          /> */}
+              value={52}
+              thickness={"13px"}
+              size={{ md: "27px", base: "20px" }}
+              color="blue.500"
+            /> */}
           <Heading fontWeight={400} variant={"p7"} color={"gray.600"}>
             Code will expire in 5 minutes.
           </Heading>
@@ -355,7 +254,7 @@ const Otp = ({
           onClick={handlePrevious}
           variant="outline-blue"
         >
-          {" Back"}
+          {"Cancel"}
         </Button>
         <Button
           // width={{ md: "200px", sm: "180px", base: "130px" }}

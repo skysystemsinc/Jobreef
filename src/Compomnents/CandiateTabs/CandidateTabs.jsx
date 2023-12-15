@@ -28,7 +28,7 @@ import data from "@/db/candidates.json";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import Search from "./Search";
 import CustomTabs from "../CustomeTabs/CustomeTabs";
-const CandiateTabs = ({ company }) => {
+const CandidateTabs = ({ company }) => {
   const candidates = useSelector((state) => state.candidates.value.all);
 
   const router = useRouter();
@@ -158,4 +158,4 @@ const CandiateTabs = ({ company }) => {
   );
 };
 
-export default CandiateTabs;
+export default CandidateTabs;
