@@ -14,6 +14,7 @@ import { addJob, getAllJobs, setAllJobs } from "@/Reudx/slices/jobPost";
 import Loader from "../Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { job } from "@/schema/stateSchema";
+import ScreeningQuestion from "./ScreeningQuestion";
 
 const Preview = ({ assignJob, isEdit, state, setState }) => {
   const toast = useToast();
@@ -24,6 +25,7 @@ const Preview = ({ assignJob, isEdit, state, setState }) => {
   const [draftLoading, setDraftLoading] = useState(false)
   const jobState = useSelector((state) => state.jobPost.value);
   const allJobState = useSelector((state) => state.jobPost.jobs.allJobs);
+  console.log("allJobState",allJobState);
   const companyState = useSelector((state) => state.companyRegister.value);
 
   const boxStyle = {
@@ -152,6 +154,7 @@ const Preview = ({ assignJob, isEdit, state, setState }) => {
         },
         desiredSkills: jobState.desiredSkills,
         applicationDeadline: jobState.applicationDeadline,
+        ScreeningQuestions: jobState.ScreeningQuestions,
       };
 
       const postData = await put(`${endPoints.jobs}/${id}`, body);
@@ -193,8 +196,11 @@ const Preview = ({ assignJob, isEdit, state, setState }) => {
       <Box sx={boxStyle}>
         <JobLocation state={state} disableNextPrev setState={setState} />
       </Box>
-      <Box sx={{ ...boxStyle, paddingBottom: "50px !important" }}>
+      <Box sx={{ ...boxStyle, paddingBottom: "40px !important" }}>
         <DesiredSkills state={state} disableNextPrev setState={setState} />
+      </Box>
+      <Box sx={{ ...boxStyle, paddingBottom: "50px !important" }}>
+        <ScreeningQuestion  state={state} disableNextPrev setState={setState} />
       </Box>
       {assignJob ? (
         <Box sx={{ ...boxStyle, marginBottom: "40px" }}>

@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 import DropDown from "../DropDown/DropDown";
 import blue_arrow_down from "@/assets/Images/blue-arrow-down.svg";
 import CandidatesDropdown from "./CandidatesDropdown";
+import { HiOutlineMail } from "react-icons/hi";
+import { BsChevronDown } from "react-icons/bs";
 
 const Application = ({ filterKey }) => {
   const candidates = useSelector((state) => state.candidates.value.filter);
@@ -69,13 +71,32 @@ const Application = ({ filterKey }) => {
       popOverList={popOverListArchived}
     />,
   ];
+
+  
+  const profileBtn = [
+    {
+      name: "Send Message",
+      icon: <HiOutlineMail className="hoverColor" />,
+
+
+    },
+
+    {
+      name: "Status:",
+      span: "read",
+      icon: <BsChevronDown className="hoverColor" />,
+      
+
+    },
+
+  ];
   return (
     <Box>
-      <CandidatesDropdown />
+      <CandidatesDropdown  />
 
       {selectedCandidates ? (
         <Box mt={{ md: "31px", base: "15px" }}>
-          <SelectedCandidate />
+          <SelectedCandidate profileBtn={profileBtn} />
         </Box>
       ) : (
         <ArchivedTabs componentList={componentList} tablist={tablist} />

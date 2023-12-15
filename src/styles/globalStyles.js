@@ -82,6 +82,55 @@ const globalStyles = {
       // margin: "0px",
     },
   },
+  buttonTab: {
+    // borderBottom: "1px solid ",
+    // borderColor: "gray.700",
+    backgroundColor: "transparent",
+    // mx: "auto",
+    gap:"0px !important",
+    flexWrap:"wrap",
+    alignItems: "flex-end",
+    // paddingLeft: { md: "56px", base: "10px" },
+
+    selectTab: {
+      position: "relative",
+      fontWeight: 600,
+      height: "34px",
+      padding: "20px 30px !important",
+      margin: " 0px  0px ",
+      borderColor:"white.200 !important",
+      border
+      :"1px solid",
+      backgroundColor:"transparent ",
+      color: "blue.500",
+      // "&::after": {
+      //   content: `""`,
+      //   position: "absolute",
+      //   top: "31px",
+      //   bg: "blue.500",
+      //   // borderRadius: "12px 12px 0px 0px",
+      //   left: "0%",
+      //   width: "100%",
+      //   height: "3px",
+      // },
+    },
+    tabelinkStyle: {
+      fontWeight: 500,
+      borderRadius:"8px 8px 0px 0px",
+      color: "gray.text",
+      height: "34px",
+      borderColor:"white.200",
+      backgroundColor:"blue.bg",
+      
+      width: "max-content !important",
+      
+      padding: "20px 30px !important",
+      fontSize:"13px",
+      margin: " 0px  0px ",
+      fontFamily: "var(--chakra-\fonts-openSans)",
+      // margin: "0px",
+    },
+  },
   scrollBar: {
     // width: "1px !important",
     "&::-webkit-scrollbar": {
@@ -285,6 +334,7 @@ const globalStyles = {
       // Make the checkbox round
     },
   },
+  boxShadowV1:" 0px 1px 2px 0px rgba(16, 24, 40, 0.06), 0px 1px 3px 0px rgba(16, 24, 40, 0.10)",
   toastStyle: {
     position: "bottom-right",
   },

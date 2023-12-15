@@ -116,6 +116,12 @@ const job = {
   externalURL:"",
   applicationType: "",
   rate: "",
+  screeningQuestions: [
+    {
+      question: "",
+      type: "",
+    },
+  ],
 };
 const skills = [{ name: "", level: "" }];
 export {
