@@ -1,12 +1,16 @@
 import prisma from "@/lib/prisma";
 
- const GET = async (req, res) => {
+const GET = async (req, res) => {
   const { id } = req.query;
-  console.log("companyId",id ,req.query);
+  console.log("companyId", id, req.query);
   try {
     const job = await prisma.Job.findMany({
       where: {
         companyId: id,
+      },
+      include: {
+        company: true,
+        // applications: { include: { employee: true } },
       },
     });
     res.status(200).json({
@@ -23,4 +27,4 @@ import prisma from "@/lib/prisma";
     });
   }
 };
-export default GET
+export default GET;

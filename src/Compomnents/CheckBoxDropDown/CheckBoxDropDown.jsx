@@ -16,19 +16,31 @@ const CheckBoxDropDown = ({ label, listItem }) => {
     <Menu closeOnSelect={false}>
       <MenuButton
         bg="blue.500"
-        px={"20px"}
+        px={"10px"}
         borderRadius={"100px"}
-        height={"35px"}
+        height={"37px"}
         color={"white.100"}
         as={Box}
         width={"max-content"}
+        minWidth={"180px"}
         display={"flex"}
         whiteSpace={"nowrap"}
         alignItems={"center"}
       >
-        <Box display={"flex"} alignItems={"center"} gap={"7px"}>
-          <BiFilter fontSize={"20px"} />{" "}
-          <Heading fontWeight={400} color={"white.100"} variant={"p10"}>
+        <Box
+          // gap={"4px"}
+          display={"flex"}
+          alignItems={"center"}
+        >
+            <BiFilter fontSize={"30px"} />{" "}
+
+          <Heading
+            width={"100%"}
+            textAlign={"center"}
+            fontWeight={400}
+            color={"white.100"}
+            variant={"p10"}
+          >
             {" "}
             {label}{" "}
           </Heading>
@@ -37,11 +49,11 @@ const CheckBoxDropDown = ({ label, listItem }) => {
       <MenuList minWidth="max-content">
         {/* <MenuDivider /> */}
         <MenuOptionGroup title="" type="checkbox">
-          {listItem?.map((item , index) => {
+          {listItem?.map((item, index) => {
             return (
               <MenuItemOption
-              key={index}
-                sx={{ "& .chakra-menu__icon":{color:"#000"} }}
+                key={index}
+                sx={{ "& .chakra-menu__icon": { color: "#000" } }}
                 value={item}
               >
                 <Heading fontWeight={400} variant={"p10"}>

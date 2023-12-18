@@ -1,20 +1,19 @@
 import { Box, Button, Heading } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { ScreenQuestionTimeline } from "../ScreenQuestionTimeline/ScreenQuestionTimeline";
 import BeginBox from "./BeginBox";
 
 const ScreeningQuestion = () => {
+  const [isBegin, setIsBegin] = useState(false);
   return (
     <Box
-      minH={"100vh"}
-    //   display={"flex"}
+      minH={{ md: "100vh", base:"100vh"}}
+      //   display={"flex"}
       justifyContent={"center"}
-      
-    //   alignItems={"center"}
-    >
-      {/* <BeginBox /> */}
-        <ScreenQuestionTimeline />
 
+      //   alignItems={"center"}
+    >
+      {isBegin ? <ScreenQuestionTimeline /> : <BeginBox  setIsBegin={setIsBegin}/>}
     </Box>
   );
 };

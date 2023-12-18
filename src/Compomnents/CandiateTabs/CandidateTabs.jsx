@@ -28,8 +28,13 @@ import data from "@/db/candidates.json";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import Search from "./Search";
 import CustomTabs from "../CustomeTabs/CustomeTabs";
+import endPoints from "@/Utils/endpoints";
+import { setAllJobs } from "@/Reudx/slices/jobPost";
+import { get } from "@/helper/fetch";
+import CandidatesDropdown from "./CandidatesDropdown";
 const CandidateTabs = ({ company }) => {
   const candidates = useSelector((state) => state.candidates.value.all);
+  const allJobState = useSelector((state) => state.jobPost.jobs.allJobs);
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -83,6 +88,30 @@ const CandidateTabs = ({ company }) => {
 
     // Add more tabs if needed
   ];
+
+  const companyState = useSelector((state) => state.companyRegister.value);
+
+  const getAllJobs = async () => {
+    try {
+      const postData = await get(
+        `${endPoints.jobs}/${endPoints.companyJobs}/${companyState.id}`,
+        "GET"
+      );
+      if (postData.success) {
+        const { data } = postData;
+
+        dispatch(setAllJobs(data));
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  useEffect(() => {
+    if (companyState.id) {
+      getAllJobs();
+    }
+  }, [companyState]);
   return (
     <>
       <Box display={{ md: "none", base: "block" }}>
@@ -125,19 +154,32 @@ const CandidateTabs = ({ company }) => {
             })}
 
             {tabIndex == 2 ? null : (
-              <Box
-                display={{ md: "block", base: "none" }}
-                position={"absolute"}
-                right={"12px"}
-                bottom={"0px"}
-              >
-                <DropDown
-                  defaultDropdown
-                  icon={<Image src={blue_arrow_down.src} />}
-                  placeholder={"Systems Engineer"}
-                  variant={"bg-dropdown"}
-                />
-              </Box>
+              <CandidatesDropdown
+                style={{
+                  position: "absolute",
+                  bottom: "0px",
+                  right: "12px",
+                  display: {
+                    md: "block",
+                    base: "none",
+                  },
+                }}
+              />
+              // <Box
+              //   display={{ md: "block", base: "none" }}
+              //   position={"absolute"}
+              //   right={"12px"}
+              //   bottom={"0px"}
+              // >
+              //   <DropDown
+              //     dropdownOption={allJobState}
+              //     keyName={"title"}
+              //     defaultDropdown
+              //     icon={<Image src={blue_arrow_down.src} />}
+              //     placeholder={""}
+              //     variant={"bg-dropdown"}
+              //   />
+              // </Box>
             )}
           </TabList>
         </Box>

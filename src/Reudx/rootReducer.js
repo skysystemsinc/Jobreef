@@ -10,6 +10,7 @@ import companyRegister from "./slices/company";
 import employeeRegister from "./slices/employee";
 import LoginUser from "./slices/LoginUser";
 import jobPost from "./slices/jobPost";
+import jobApplicants from "./slices/jobApplicants";
 
 const rootReducer = combineReducers({
   userProfileSlice,
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   companyRegister,
   employeeRegister,
   LoginUser,
-  jobPost
+  jobPost,
+  jobApplicants
 });
 export default rootReducer;

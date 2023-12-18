@@ -6,7 +6,7 @@ import MobileSortBy from "../MobileSortBy/MobileSortBy";
 import SelectedCandidate from "./SelectedCandidate";
 import { useDispatch, useSelector } from "react-redux";
 import { getSelectedCandidates } from "@/Reudx/slices/candidates";
-import SerarchBox from "./SerarchBox";
+import SearchBox from "./SearchBox";
 
 const All = ({
   filterKey,
@@ -15,7 +15,7 @@ const All = ({
   cardStatus,
   cardStatusDisable,
   // data,
-searchBox,
+  searchBox,
   handleEvent,
   popOverList,
 }) => {
@@ -71,19 +71,20 @@ searchBox,
     dispatch(getSelectedCandidates(data));
   };
   return (
-    <Box  mt={{ md: "31px", base: "15px" }}>
-      {searchBox ? <SerarchBox /> : null}
-      <Box >
+    <Box mt={{ md: "31px", base: "15px" }}>
+      {searchBox ? <SearchBox /> : null}
+      <Box>
         <MobileSortBy sortArray={sortArray} />
       </Box>
-      <Box width={"100%"}  >
+      <Box width={"100%"}>
         <Box>
-          {data &&
-            data.map((item, ind) => {
+          {data&&
+          
+            data?.map((item, ind) => {
               return (
                 <Box key={ind}>
                   <CandidateCard
-                  cardStatusDisable={cardStatusDisable}
+                    cardStatusDisable={cardStatusDisable}
                     data={item}
                     matchCandidate={matchCandidate}
                     cardStatus={cardStatus}
@@ -94,9 +95,6 @@ searchBox,
               );
             })}
         </Box>
-        {/* <Box display={{ lg: "block", base: "none" }}>
-          <SortBy matchCandidate={matchCandidate} />
-        </Box> */}
       </Box>
     </Box>
   );

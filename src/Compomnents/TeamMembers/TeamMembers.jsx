@@ -18,7 +18,7 @@ const TeamMembers = () => {
     activeUser: false,
     disableUser: false,
   });
-  console.log("state", state);
+  console.log("state", userState);
   const router = useRouter();
 
   const columns = useMemo(
@@ -53,11 +53,7 @@ const TeamMembers = () => {
         header: "Status",
         // original.employeeRole === "" ? "-" : original.employeeRole,
         cell: ({ row: { original } }) =>
-          original.stages === 0
-            ? "Invite Pending"
-            : original.active
-            ? "Active"
-            : "Disable",
+          original.active || original.stages === 0 ? "Active" : "Disable",
       },
       {
         accessorKey: "action",

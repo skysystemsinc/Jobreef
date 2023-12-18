@@ -16,18 +16,17 @@ const Application = ({ filterKey }) => {
   const selectedCandidates = useSelector(
     (state) => state.candidates.value.selected
   );
+  // const applicationScreen = useSelector(
+  //   (state) => state.jobApplicants.value.applications
+  // );
 
   const allData =
     candidates && candidates?.filter((item) => item[filterKey] == false);
   const archivedData =
     candidates && candidates?.filter((item) => item[filterKey] == true);
 
-  // const tablist = [
-  //   `All (${allData?.length ?? "0"})`,
-  //   ` Archived (${archivedData?.length ?? "0"})`,
-  // ];
   const tablist = [`All (1)`, ` Archived (1)`];
-  const [showSelectCandidate, setshowSelectCandidate] = useState(false);
+
   const popOverListAll = ["Download Attachments", "Archive"];
   const popOverListArchived = ["Restore", "Delete"];
 
@@ -58,7 +57,8 @@ const Application = ({ filterKey }) => {
   const componentList = [
     <All
       sortArray={sortArray}
-      data={allData}
+      // data={applicationScreen}
+      data={[]}
       filterKey={filterKey}
       cardStatus={"Interviewing"}
       popOverList={popOverListAll}
@@ -72,27 +72,21 @@ const Application = ({ filterKey }) => {
     />,
   ];
 
-  
   const profileBtn = [
     {
       name: "Send Message",
       icon: <HiOutlineMail className="hoverColor" />,
-
-
     },
 
     {
       name: "Status:",
       span: "read",
       icon: <BsChevronDown className="hoverColor" />,
-      
-
     },
-
   ];
   return (
     <Box>
-      <CandidatesDropdown  />
+      <CandidatesDropdown />
 
       {selectedCandidates ? (
         <Box mt={{ md: "31px", base: "15px" }}>

@@ -12,11 +12,7 @@ const teamMembers = createSlice({
   initialState: initialState,
   reducers: {
     getTeamMembers: (state, action) => {
-      if (typeof window != undefined) {
-        const id = localStorage.getItem("id");
-        const filterData = action.payload?.filter((item) => item.id != id);
-        state.value.allMembers =filterData;
-      }
+      state.value.allMembers = action.payload;
     },
     addTeamMember: (state, action) => {
       state.value.member = action.payload;

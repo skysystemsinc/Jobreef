@@ -56,6 +56,8 @@ const GetAll = async (req, res) => {
 
       include: {
         company: true,
+        applications: { include: { employee: true } },
+
       },
     });
     res.status(200).json({

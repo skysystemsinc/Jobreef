@@ -19,10 +19,10 @@ const DeleteSingle = async (req, res) => {
     res.status(200).json({
       message: "job deleted successfully",
       success: true,
-      data:deleteData
+      data: deleteData,
     });
   } catch (err) {
-    console.log("err", err)
+    console.log("err", err);
     res.status(500).json({
       error: err,
       message: "internal server error ",
@@ -67,6 +67,7 @@ const GetSingleData = async (req, res) => {
     const singleData = await prisma.Job.findUnique({
       include: {
         company: true,
+        applications: { include: { employee: true } },
       },
       where: {
         id: req.query.id,
@@ -83,8 +84,7 @@ const GetSingleData = async (req, res) => {
       success: true,
     });
   } catch (err) {
-
-    console.log("jobs pge",err);
+    console.log("jobs pge", err);
     res.status(500).json({
       error: err,
       message: `internal server error`,

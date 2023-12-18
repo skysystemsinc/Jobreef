@@ -19,6 +19,7 @@ import resume from "@/assets/Images/resume.svg";
 
 import my_job from "@/assets/Images/job-post.svg";
 
+// import header_profile from "@/assets/Images/profile_icon.svg";
 import header_profile from "@/assets/Images/profile.svg";
 import logout from "@/assets/Images/logout.svg";
 import { role, roles } from "@/Utils/role";
@@ -29,7 +30,7 @@ import { setLoginUser } from "@/Reudx/slices/LoginUser";
 import endPoints from "@/Utils/endpoints";
 import { httpRequest } from "@/helper/httpRrequest";
 import { BACKEND_URL } from "@/Utils/urls";
-import LoadingSkeleton from "../LoadingSkeleton/LoadingSkeleton";
+import {LoadingSkeleton} from "../LoadingSkeleton/LoadingSkeleton";
 import { addCompany } from "@/Reudx/slices/company";
 import { addEmployee } from "@/Reudx/slices/employee";
 import { get } from "@/helper/fetch";
@@ -105,7 +106,7 @@ const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
 
         dispatch(setLoginUser(postData.data));
         dispatch(addCompany(postData?.data?.company));
-        dispatch(getTeamMembers(postData?.data?.company?.user));
+        dispatch(getTeamMembers(postData?.data?.company?.companyEmployees));
 
         dispatch(addEmployee(postData?.data?.employee));
       }
@@ -120,8 +121,8 @@ const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
   }, []);
   return (
     <>
-      {/* false temp add */}
-      {/* {false ? (
+      
+      {/* {!loginUser ? (
         <LoadingSkeleton />
       ) : ( */}
       <Menu>
@@ -145,7 +146,7 @@ const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
               height={{ md: "40px", base: "30px" }}
               borderRadius={"100px"}
               objectFit={"cover"}
-              src={header_profile.src}
+              src={ loginUser?.profilePic?? header_profile.src}
             />
             <Box
               display={{ xl: "block", base: "none" }}
@@ -320,7 +321,7 @@ const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
               })}
         </MenuList>
       </Menu>
-      {/* )} */}
+       {/* )}  */}
     </>
   );
 };
