@@ -6,7 +6,7 @@ import MobileSortBy from "../MobileSortBy/MobileSortBy";
 import SelectedCandidate from "./SelectedCandidate";
 import { useDispatch, useSelector } from "react-redux";
 import { getSelectedCandidates } from "@/Reudx/slices/candidates";
-import SerarchBox from "./SerarchBox";
+import SearchBox from "./SearchBox";
 
 const All = ({
   filterKey,
@@ -72,7 +72,7 @@ searchBox,
   };
   return (
     <Box  mt={{ md: "31px", base: "15px" }}>
-      {searchBox ? <SerarchBox /> : null}
+      {searchBox ? <SearchBox /> : null}
       <Box >
         <MobileSortBy sortArray={sortArray} />
       </Box>
@@ -94,9 +94,7 @@ searchBox,
               );
             })}
         </Box>
-        {/* <Box display={{ lg: "block", base: "none" }}>
-          <SortBy matchCandidate={matchCandidate} />
-        </Box> */}
+ 
       </Box>
     </Box>
   );

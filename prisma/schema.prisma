@@ -27,6 +27,11 @@ type ScreeningQuestions {
   type     String
 }
 
+type QuestionsAns {
+  question String
+  ans      String
+}
+
 type Media {
   name String
   url  String
@@ -37,6 +42,13 @@ enum Status {
   pause  @map("pause")
   active @map("active")
   draft  @map("draft")
+}
+
+enum jobStatus {
+  new          @map("new")
+  UnderReview  @map("Under Review")
+  Interviewing @map("Interviewing ")
+  draft        @map("draft")
 }
 
 enum Role {
@@ -130,10 +142,8 @@ model Employee {
   achievement    Achievement[]
   location       LocationType
 
-  attachment Attachment?
-
-  // appliedJobIds String[]      @db.ObjectId
-  // appliedJob    AppliedJobs[] @relation(fields: [appliedJobIds], references: [id])
+  attachment  Attachment?
+  appliedJobs appliedJobs[]
 }
 
 model WorkExperience {
@@ -242,15 +252,21 @@ model Job {
   desiredSkills       String
   applicationDeadline DateTime
   ScreeningQuestions  ScreeningQuestions[]
+
+  applications appliedJobs[]
 }
 
-// model AppliedJobs {
-//   matchCandiate Boolean
-//   id            String     @id @default(auto()) @map("_id") @db.ObjectId
-//   active        Boolean    @default(false)
-//   Archived      Boolean    @default(false)
-//   employeeIds     String[]   @db.ObjectId
-//   employees     Employee[] @relation(fields: [employeeIds], references: [id])
-//   // job           Job        @relation(fields: [jobId], references: [id])
-//   // jobId         String     @db.ObjectId
-// }
+model appliedJobs {
+  id            String         @id @default(auto()) @map("_id") @db.ObjectId
+  job           Job            @relation(fields: [jobId], references: [id])
+  jobId         String         @db.ObjectId
+  employee      Employee       @relation(fields: [employeeId], references: [id])
+  employeeId    String         @db.ObjectId
+  archived      Boolean        @default(false)
+  status        jobStatus      @default(new)
+  screeningQues QuestionsAns[]
+  attchments    Media[]
+  messages      String[]
+  saved         Boolean        @default(false)
+  // Add additional fields related to the job application if needed
+}

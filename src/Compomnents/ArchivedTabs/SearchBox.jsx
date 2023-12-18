@@ -10,7 +10,7 @@ import React from "react";
 import { FiSearch } from "react-icons/fi";
 import location from "../../assets/Images/location.svg";
 
-const SerarchBox = () => {
+const SearchBox = () => {
   return (
     <Flex
       gap={ { md:"30px", base:"10px"}}
@@ -70,4 +70,4 @@ const SerarchBox = () => {
   );
 };
 
-export default SerarchBox;
+export default SearchBox;

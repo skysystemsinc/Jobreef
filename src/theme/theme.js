@@ -390,7 +390,7 @@ const components = {
           bg: "gray.200",
 
           fontWeight: 600,
-          fontSize: { "2xl": "18px", base: "14px" },
+          fontSize: {  base: "14px" },
           // textTransform: " capitalize",
 
           // _placeholder: {

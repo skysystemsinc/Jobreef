@@ -31,6 +31,9 @@ function ReactTable({ data, columns }) {
   const table = useReactTable({
     data,
     columns,
+    state: {
+      isLoading: true,
+    },
     initialState: {
       pagination: {
         pageSize: 5,

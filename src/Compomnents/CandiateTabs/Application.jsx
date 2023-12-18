@@ -22,12 +22,8 @@ const Application = ({ filterKey }) => {
   const archivedData =
     candidates && candidates?.filter((item) => item[filterKey] == true);
 
-  // const tablist = [
-  //   `All (${allData?.length ?? "0"})`,
-  //   ` Archived (${archivedData?.length ?? "0"})`,
-  // ];
   const tablist = [`All (1)`, ` Archived (1)`];
-  const [showSelectCandidate, setshowSelectCandidate] = useState(false);
+  
   const popOverListAll = ["Download Attachments", "Archive"];
   const popOverListArchived = ["Restore", "Delete"];
 
