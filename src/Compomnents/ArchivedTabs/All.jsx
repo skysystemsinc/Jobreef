@@ -15,7 +15,7 @@ const All = ({
   cardStatus,
   cardStatusDisable,
   // data,
-searchBox,
+  searchBox,
   handleEvent,
   popOverList,
 }) => {
@@ -71,19 +71,20 @@ searchBox,
     dispatch(getSelectedCandidates(data));
   };
   return (
-    <Box  mt={{ md: "31px", base: "15px" }}>
+    <Box mt={{ md: "31px", base: "15px" }}>
       {searchBox ? <SearchBox /> : null}
-      <Box >
+      <Box>
         <MobileSortBy sortArray={sortArray} />
       </Box>
-      <Box width={"100%"}  >
+      <Box width={"100%"}>
         <Box>
-          {data &&
-            data.map((item, ind) => {
+          {data&&
+          
+            data?.map((item, ind) => {
               return (
                 <Box key={ind}>
                   <CandidateCard
-                  cardStatusDisable={cardStatusDisable}
+                    cardStatusDisable={cardStatusDisable}
                     data={item}
                     matchCandidate={matchCandidate}
                     cardStatus={cardStatus}
@@ -94,7 +95,6 @@ searchBox,
               );
             })}
         </Box>
- 
       </Box>
     </Box>
   );

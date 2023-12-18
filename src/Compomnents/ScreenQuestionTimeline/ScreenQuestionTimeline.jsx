@@ -84,9 +84,7 @@ export const ScreenQuestionTimeline = ({ variant }) => {
       mt={"50px"}
     >
       {hasCompletedAllSteps ? (
-       
-
-       <CompleteMsg/>
+        <CompleteMsg />
       ) : (
         <Steps
           responsive={false}
@@ -136,7 +134,6 @@ export const ScreenQuestionTimeline = ({ variant }) => {
             return (
               <Step
                 checkIcon={CostumeCheckIcon}
-         
                 icon={CostumeIcon}
                 flexDirection={"column"}
                 key={label}
@@ -149,12 +146,12 @@ export const ScreenQuestionTimeline = ({ variant }) => {
                     width: "100%",
                   }}
                 >
-             
-                    <Question
+                  <Question
+                    showCheckBox={index == 1 ? true : false}
+                    qNo={index + 1}
                     nextStep={nextStep}
                     handlePrevious={handlePrevious}
                   />
-            
                 </Box>
               </Step>
             );

@@ -6,7 +6,7 @@ import React from 'react'
 const index = () => {
   return (
     <>
-    <Header hideNavLinks />
+    <Header hideNavLinks  candidate/>
     <ScreeningQuestion/>
     <DashboardFooter style={{pl:"0px"}} waveImage/>
     </>

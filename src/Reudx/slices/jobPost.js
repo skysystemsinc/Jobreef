@@ -1,3 +1,4 @@
+import endPoints from "@/Utils/endpoints";
 import { status } from "@/Utils/role";
 import { job } from "@/schema/stateSchema";
 import { createSlice } from "@reduxjs/toolkit";
@@ -8,6 +9,12 @@ const initialState = {
     activeJobs: false,
     inActiveJobs: false,
     allJobs: false,
+    applicants: false,
+  },
+  jobApplicants: {
+    application: false,
+    matchCandidate: false,
+    search: false,
   },
 };
 
@@ -30,6 +37,7 @@ const jobPost = createSlice({
       state.jobs.activeJobs = activeJobs;
       state.jobs.inActiveJobs = inActiveJobs;
     },
+
   },
 });
 export const { addJob, setAllJobs } = jobPost.actions;

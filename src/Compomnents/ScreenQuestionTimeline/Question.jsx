@@ -3,7 +3,7 @@ import React from "react";
 import { ScreenQuestionTimeline } from "../ScreenQuestionTimeline/ScreenQuestionTimeline";
 import CheckBox from "../CheckBox/CheckBox";
 
-const Question = ({ nextStep, handlePrevious }) => {
+const Question = ({ showCheckBox, qNo, nextStep, handlePrevious }) => {
   return (
     <Box
       border={"1px solid"}
@@ -17,15 +17,22 @@ const Question = ({ nextStep, handlePrevious }) => {
     >
       <Box>
         <Heading mb={"16px"} variant={"p6"} fontWeight={600}>
-          1. Question #1
+          {qNo}. Question #{qNo}
         </Heading>
-        <Input mt={'40px'} variant={"bg-input"} placeholder="Enter your response here" />
-        {/* <Box ml={'20px'}>
-          <Box mb={"10px"}>
-            <CheckBox label={"Yes"} />
+        {showCheckBox ? (
+          <Box ml={"20px"}>
+            <Box mb={"10px"}>
+              <CheckBox label={"Yes"} />
+            </Box>
+            <CheckBox label={"No"} />
           </Box>
-          <CheckBox label={"No"} />
-        </Box >  */}
+        ) : (
+          <Input
+            mt={"40px"}
+            variant={"bg-input"}
+            placeholder="Enter your response here"
+          />
+        )}
       </Box>
 
       <Flex
@@ -37,7 +44,7 @@ const Question = ({ nextStep, handlePrevious }) => {
         <Button variant={"outline-blue"} onClick={handlePrevious}>
           {"Previous"}
         </Button>
-        <Button variant={"blue-btn"} onClick={ nextStep}>
+        <Button variant={"blue-btn"} onClick={nextStep}>
           {"Next"}
         </Button>
       </Flex>

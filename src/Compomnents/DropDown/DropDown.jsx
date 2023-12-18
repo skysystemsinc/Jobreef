@@ -35,7 +35,7 @@ const DropDown = ({
     <Box>
       {defaultDropdown ? (
         <Select
-        defaultValue={dropdownOption &&dropdownOption[0]}
+          defaultValue={dropdownOption && dropdownOption[0]}
           value={state}
           name={name}
           onChange={setState}
@@ -52,9 +52,9 @@ const DropDown = ({
         >
           {dropdownOption ? (
             dropdownOption?.map((item, ind) => {
-              console.log("item[keyName]",item[keyName]);
+              console.log("item[keyName]", item[keyName]);
               return item[keyName] ? (
-                <option   key={ind} value={item}>
+                <option key={ind} value={JSON.stringify(item)}>
                   {/* {item.label} */}
                   {item[keyName]}
                 </option>
@@ -78,7 +78,6 @@ const DropDown = ({
           value={state ?? ""}
           label=""
           multiple
-          
           name={name}
           onChange={setState}
           placeholder={placeholder}
