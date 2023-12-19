@@ -121,6 +121,13 @@ const job = {
     {
       question: "",
       type: "",
+      rightAns:"",
+      options:[
+        {name:""},
+        {name:""},
+        {name:""},
+
+      ]
     },
   ],
 };

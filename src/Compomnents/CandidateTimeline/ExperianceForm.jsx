@@ -37,11 +37,13 @@ const ExperianceForm = ({ state, setState }) => {
   const formData = useSelector(
     (state) => state.employeeRegister.value.formData
   );
+  console.log("formData", formData);
   const employeeState = useSelector(
     (state) => state.employeeRegister.value.employee
   );
   const [Experience, setExperience] = useState(workExperience);
 
+  console.log("Experience", Experience);
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -60,7 +62,6 @@ const ExperianceForm = ({ state, setState }) => {
   };
 
   const handleSave = async () => {
-    //TODO add validation of date
     if (loading) return;
     const isValid = Object.values(Experience).some((value) => value === "");
     console.log("isValid", isValid);
@@ -93,7 +94,7 @@ const ExperianceForm = ({ state, setState }) => {
         address: Experience.address,
       },
     };
-
+    console.log("body", body);
     try {
       const postData = await post(`${endPoints.workExperience}`, body);
       if (postData.success) {
@@ -369,10 +370,14 @@ const ExperianceForm = ({ state, setState }) => {
           <LabelInput
             labelVariant={"label"}
             type="text"
+            textFormatter
             state={Experience.jobSummary}
-            setState={handleChange}
+            setState={(e) =>
+              setExperience((prev) => {
+                return { ...prev, jobSummary: e };
+              })
+            }
             name={"jobSummary"}
-            textarea
             variant={"bg-teaxtarea"}
             placeholder="Describe what you did during this job "
             label={"Job Summary"}

@@ -11,6 +11,7 @@ import { addJob, setAllJobs } from "@/Reudx/slices/jobPost";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import { put } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
+import { status } from "@/Utils/role";
 const ActiveJobs = () => {
   const router = useRouter();
   const toast = useToast();
@@ -23,7 +24,7 @@ const ActiveJobs = () => {
   });
   const jobState = useSelector((state) => state.jobPost.jobs.activeJobs);
   const allJobState = useSelector((state) => state.jobPost.jobs.allJobs);
-  console.log("jobState", jobState,allJobState);
+  console.log("jobState", jobState, allJobState);
   const handleEdit = (data) => {
     router.push(`/company/create-job-post?id=${data.id}`);
     dispatch(addJob({ ...data, ...data.location }));
@@ -38,7 +39,7 @@ const ActiveJobs = () => {
     try {
       const postData = await put(`${endPoints.jobs}/${state.pauseJob.id}`, {
         active: false,
-        status: 0,
+        status: status.pause,
       });
       console.log("postData", postData);
 
@@ -92,7 +93,7 @@ const ActiveJobs = () => {
     try {
       const postData = await put(`${endPoints.jobs}/${state.closeJob.id}`, {
         active: false,
-        status: -1,
+        status: status.expire,
       });
       console.log("postData", postData);
 
@@ -145,14 +146,28 @@ const ActiveJobs = () => {
       },
       {
         accessorKey: "employmentType",
-        header: "Employment Type",
-        cell: ({ row: { original } }) =>
-          original.employmentType === "" ? "-" : original.employmentType,
+        header: "Applicants",
+        cell: ({ row: { original } }) => original?._count?.applications,
       },
       {
-        accessorKey: "opening",
-        header: "Openings",
-        cell: ({ row: { original } }) => original.opening,
+        accessorKey: "spent",
+        header: "Spent",
+        cell: ({ row: { original } }) =>
+          original?.spent === "" ? "-" : original?.spent,
+      },
+      // {
+      //   accessorKey: "opening",
+      //   header: "Openings",
+      //   cell: ({ row: { original } }) => original.opening,
+      // },
+      {
+        accessorKey: "updatedAt",
+        header: "Updated On",
+        cell: ({ row: { original } }) => {
+          {
+            return moment(original.updatedAt).format("YYYY-MM-DD");
+          }
+        },
       },
       {
         accessorKey: "applicationDeadline",

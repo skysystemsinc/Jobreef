@@ -120,9 +120,12 @@ const ExperianceCard = ({
           pt={"14px"}
           color={"gray.text"}
           variant={"p5"}
-        >
-          {data.jobSummary}
-        </Heading>
+          as={"div"}
+          px={"25px"}
+          dangerouslySetInnerHTML={{ __html: data.jobSummary }}
+        />
+          {/* {data.jobSummary} */}
+        {/* </Heading> */}
       </Box>
     </Box>
   );

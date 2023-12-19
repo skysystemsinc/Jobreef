@@ -5,10 +5,16 @@ const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
 });
 
-import "react-quill/dist/quill.snow.css";
+// import "react-quill/dist/quill.snow.css";
 
-const TextFormatting = ({ placeholder ,value ,setValue}) => {
+const TextFormatting = ({
+  placeholder,
+
+  value,
+  setValue,
+}) => {
   // const [value, setValue] = useState("");
+  // console.log("value",value);
   const formate = [
     "header",
     "font",
@@ -43,7 +49,6 @@ const TextFormatting = ({ placeholder ,value ,setValue}) => {
   return (
     <ReactQuill
       formats={formate}
-    
       modules={module}
       style={{
         // border: "none",
@@ -52,7 +57,6 @@ const TextFormatting = ({ placeholder ,value ,setValue}) => {
         borderRadius: "8px ",
         backgroundColor: "#F7F9FB",
       }}
-      
       value={value}
       theme="snow"
       placeholder={placeholder}

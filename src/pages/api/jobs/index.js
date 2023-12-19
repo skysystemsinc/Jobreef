@@ -25,12 +25,20 @@ const add = async (req, res) => {
     draft: data.draft,
     active: data.active,
     status: data.status,
-    ScreeningQuestions: data.ScreeningQuestions,
+    screeningQuestions: data.screeningQuestions,
   };
 
   try {
     const created = await prisma.Job.create({
       data: body,
+      include:{
+
+        _count: {
+          select: {
+            applications: true,
+          },
+        },
+      }
     });
 
     res.status(201).json({

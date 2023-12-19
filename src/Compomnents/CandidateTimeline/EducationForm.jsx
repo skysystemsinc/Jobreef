@@ -28,7 +28,7 @@ import { useDispatch, useSelector } from "react-redux";
 const EducationForm = ({ state, setState }) => {
   const router = useRouter();
   const toast = useToast();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const formDataState = useSelector(
     (state) => state.employeeRegister.value.formData
   );
@@ -39,7 +39,7 @@ const EducationForm = ({ state, setState }) => {
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState(education);
-  console.log("formData",formData)
+  console.log("formData", formData);
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -101,7 +101,7 @@ const EducationForm = ({ state, setState }) => {
         isClosable: true,
       });
     } catch (err) {
-      console.log("err",err);
+      console.log("err", err);
       setLoading(false);
       toast({
         position: "bottom-right",
@@ -171,7 +171,7 @@ const EducationForm = ({ state, setState }) => {
         isClosable: true,
       });
     } catch (err) {
-      console.log("err",err);
+      console.log("err", err);
       setLoading(false);
       toast({
         position: "bottom-right",
@@ -336,11 +336,15 @@ const EducationForm = ({ state, setState }) => {
         <Box mb={{ md: "100px", base: "10px" }} mt={"20px"}>
           <LabelInput
             state={formData.description}
-            setState={handleChange}
+            // setState={()}
+            setState={(e) =>
+              setFormData((prev) => ({ ...prev, description: e }))
+            }
+            textFormatter
             name={"description"}
             labelVariant={"label"}
             type="text"
-            textarea
+
             variant={"bg-teaxtarea"}
             placeholder="Describe what you did and studied during this period"
             label={"Description"}

@@ -22,9 +22,15 @@ type SocialLinks {
   link     String
 }
 
+type Options {
+  name String
+}
+
 type ScreeningQuestions {
   question String
   type     String
+  rightAns String
+  options  Options[]
 }
 
 type QuestionsAns {
@@ -80,29 +86,31 @@ model EmailPreferences {
 }
 
 model User {
-  id               String            @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt        DateTime          @default(now())
-  companyAdmin     Company?          @relation("companyAdmin", fields: [companyAdminId], references: [id])
-  companyAdminId   String?           @db.ObjectId
-  employee         Employee?
-  company          Company?          @relation("UserToCompany")
-  stages           Int?              @default(0)
-  firstName        String
-  lastName         String
-  active           Boolean?          @default(true)
-  delete           Boolean?          @default(false)
-  flag             Boolean?          @default(false)
-  email            String?           @unique
-  profilePic       String?
-  otp              Int?
-  role             Role
-  accountType      String?
-  employeeRole     String?
-  jobTitle         String?
-  otpTimestamp     DateTime?         @default(now())
-  verified         Boolean           @default(false)
-  password         String?
-  phoneNumber      Int?
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt      DateTime  @default(now())
+  companyAdmin   Company?  @relation("companyAdmin", fields: [companyAdminId], references: [id])
+  companyAdminId String?   @db.ObjectId
+  employee       Employee?
+  company        Company?  @relation("UserToCompany")
+  stages         Int?      @default(0)
+  firstName      String
+  lastName       String
+  active         Boolean?  @default(true)
+  delete         Boolean?  @default(false)
+  flag           Boolean?  @default(false)
+  email          String?   @unique
+  profilePic     String?
+  otp            Int?
+  role           Role
+  accountType    String?
+  employeeRole   String?
+  jobTitle       String?
+  otpTimestamp   DateTime? @default(now())
+  verified       Boolean   @default(false)
+  password       String?
+  phoneNumber    Int?
+  visible        Boolean   @default(true)
+
   location         Location[]
   emailPreferences EmailPreferences?
 }
@@ -141,9 +149,8 @@ model Employee {
   skills         Skills[]
   achievement    Achievement[]
   location       LocationType
-
-  attachment  Attachment?
-  appliedJobs appliedJobs[]
+  attachment     Attachment?
+  appliedJobs    appliedJobs[]
 }
 
 model WorkExperience {
@@ -251,7 +258,8 @@ model Job {
   location            LocationType
   desiredSkills       String
   applicationDeadline DateTime
-  ScreeningQuestions  ScreeningQuestions[]
+  screeningQuestions  ScreeningQuestions[]
+  updatedAt           DateTime             @updatedAt
 
   applications appliedJobs[]
 }
@@ -268,5 +276,6 @@ model appliedJobs {
   attchments    Media[]
   messages      String[]
   saved         Boolean        @default(false)
+  updatedAt     DateTime       @updatedAt
   // Add additional fields related to the job application if needed
 }

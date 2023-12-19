@@ -52,7 +52,7 @@ const DropDown = ({
         >
           {dropdownOption ? (
             dropdownOption?.map((item, ind) => {
-              console.log("item[keyName]", item[keyName]);
+              
               return item[keyName] ? (
                 <option key={ind} value={JSON.stringify(item)}>
                   {/* {item.label} */}

@@ -51,10 +51,11 @@ export const DataArray = [
       name: "Microsoft",
       tags: "Urgently Hiring",
       location: "Redmond, Washington State",
-      Salary: "150,000$",
+      Salary: "$150,000",
       JobModel: "Remote",
       EmploymentType: "Full-Time",
       Experience: 3,
+      SalaryRate:"Monthly",
       ApplicationDeadline: "07/31/2023",
       DesiredSkills: [
         "Technical knowledge",
@@ -69,6 +70,8 @@ export const DataArray = [
     },
     {
       imageurl: "",
+      SalaryRate:"Monthly",
+
       title: "Senior System's Design Engineer",
       name: "Microsoft",
       tags: "Urgently Hiring",
@@ -99,6 +102,32 @@ export const DataArray = [
       JobModel: "Remote",
       EmploymentType: "Full-Time",
       Experience: 3,
+      SalaryRate:"Monthly",
+
+      ApplicationDeadline: "07/31/2023",
+      DesiredSkills: [
+        "Technical knowledge",
+        "System Architecture",
+        "Risk Management",
+        "Project Management",
+        "Quality Focus",
+        "Q/A Testing",
+        "LeaderShip",
+        "Product Design",
+      ],
+    },
+    {
+      imageurl: "",
+      SalaryRate:"Monthly",
+
+      title: "Senior System's Design Engineer",
+      name: "Microsoft",
+      tags: "Urgently Hiring",
+      location: "Redmond, Washington State",
+      Salary: "150,000$",
+      JobModel: "Remote",
+      EmploymentType: "Full-Time",
+      Experience: 3,
       ApplicationDeadline: "07/31/2023",
       DesiredSkills: [
         "Technical knowledge",
@@ -115,6 +144,8 @@ export const DataArray = [
       imageurl: "",
       title: "Senior System's Design Engineer",
       name: "Microsoft",
+      SalaryRate:"Monthly",
+
       tags: "Urgently Hiring",
       location: "Redmond, Washington State",
       Salary: "150,000$",
@@ -144,6 +175,8 @@ export const DataArray = [
       EmploymentType: "Full-Time",
       Experience: 3,
       ApplicationDeadline: "07/31/2023",
+      SalaryRate:"Monthly",
+
       DesiredSkills: [
         "Technical knowledge",
         "System Architecture",
@@ -158,28 +191,8 @@ export const DataArray = [
     {
       imageurl: "",
       title: "Senior System's Design Engineer",
-      name: "Microsoft",
-      tags: "Urgently Hiring",
-      location: "Redmond, Washington State",
-      Salary: "150,000$",
-      JobModel: "Remote",
-      EmploymentType: "Full-Time",
-      Experience: 3,
-      ApplicationDeadline: "07/31/2023",
-      DesiredSkills: [
-        "Technical knowledge",
-        "System Architecture",
-        "Risk Management",
-        "Project Management",
-        "Quality Focus",
-        "Q/A Testing",
-        "LeaderShip",
-        "Product Design",
-      ],
-    },
-    {
-      imageurl: "",
-      title: "Senior System's Design Engineer",
+      SalaryRate:"Monthly",
+
       name: "Microsoft",
       tags: "Urgently Hiring",
       location: "Redmond, Washington State",
