@@ -106,7 +106,7 @@ const Achievement = () => {
         <Box mx={"auto"} mt={"50px"} width={{ md: "70%", base: "100%" }}>
           <AchievementForm state={state} setState={setState} />
         </Box>
-      ) : employeeState.achievement.length > 0 ? (
+      ) : employeeState?.achievement?.length > 0 ? (
         <Box
           mt={"30px"}
           minHeight={"63vh"}

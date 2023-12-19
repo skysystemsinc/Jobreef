@@ -22,10 +22,10 @@ const Preview = ({ assignJob, isEdit, state, setState }) => {
   const router = useRouter();
   const { id } = router.query;
   const [loading, setLoading] = useState(false);
-  const [draftLoading, setDraftLoading] = useState(false)
+  const [draftLoading, setDraftLoading] = useState(false);
   const jobState = useSelector((state) => state.jobPost.value);
   const allJobState = useSelector((state) => state.jobPost.jobs.allJobs);
-  console.log("allJobState",allJobState);
+  console.log("allJobState", allJobState);
   const companyState = useSelector((state) => state.companyRegister.value);
 
   const boxStyle = {
@@ -44,7 +44,19 @@ const Preview = ({ assignJob, isEdit, state, setState }) => {
   };
 
   const handleSave = async () => {
+    const q1 = jobState?.screeningQuestions[0];
+    if (q1.question == "" || q1.type == "") {
+      toast({
+        position: "bottom-right",
+        title: "Add at least one question.",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+      return;
+    }
     setLoading(true);
+
     try {
       const tags = jobState.tags.map((item) => {
         return item.value;
@@ -65,7 +77,11 @@ const Preview = ({ assignJob, isEdit, state, setState }) => {
       console.log("postData", postData);
 
       if (postData) {
-        dispatch(setAllJobs([...allJobState, postData.data]));
+        if (allJobState.length) {
+          dispatch(setAllJobs([...allJobState, postData.data]));
+        } else {
+          dispatch(setAllJobs([postData.data]));
+        }
         dispatch(addJob(job));
         router.push("/company/job-post");
       }
@@ -96,17 +112,20 @@ const Preview = ({ assignJob, isEdit, state, setState }) => {
           province: jobState.province,
           city: jobState.city,
         },
-        active:false,
-        status:2,
-        draft:true,
+        active: false,
+        status: 2,
+        draft: true,
         tags: tags,
         companyId: companyState.id,
       };
       const postData = await post(`${endPoints.jobs}`, body);
       console.log("postData", postData);
-      setDraftLoading(false)
+      setDraftLoading(false);
       if (postData) {
-        dispatch(setAllJobs([...allJobState, postData.data]));
+        if (allJobState.length) {
+        } else {
+          dispatch(setAllJobs([postData.data]));
+        }
         dispatch(addJob(job));
         router.push("/company/job-post");
       }
@@ -184,7 +203,7 @@ const Preview = ({ assignJob, isEdit, state, setState }) => {
       });
     }
   };
- 
+
   return (
     <Box>
       <Box sx={boxStyle}>
@@ -200,7 +219,7 @@ const Preview = ({ assignJob, isEdit, state, setState }) => {
         <DesiredSkills state={state} disableNextPrev setState={setState} />
       </Box>
       <Box sx={{ ...boxStyle, paddingBottom: "50px !important" }}>
-        <ScreeningQuestion  state={state} disableNextPrev setState={setState} />
+        <ScreeningQuestion state={state} disableNextPrev setState={setState} />
       </Box>
       {assignJob ? (
         <Box sx={{ ...boxStyle, marginBottom: "40px" }}>
@@ -209,11 +228,8 @@ const Preview = ({ assignJob, isEdit, state, setState }) => {
       ) : null}
 
       {id ? null : (
-        <Button
-          onClick={handleDraft}
-          variant={"blue-btn"}
-        >
-          {draftLoading? <Loader/>:  "Save as Draft"}
+        <Button onClick={handleDraft} variant={"blue-btn"}>
+          {draftLoading ? <Loader /> : "Save as Draft"}
         </Button>
       )}
       <Flex

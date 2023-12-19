@@ -23,7 +23,8 @@
 }
 .ql-container {
   border: none !important;
-  padding: 4px 20px 60px 10px !important;
+  /* padding: 4px 20px 60px 10px !important; */
+  height: 140px !important;
   /* margin: 20px 0px !important; */
   border-bottom-right-radius: 10px !important;
   border-bottom-left-radius: 10px !important;

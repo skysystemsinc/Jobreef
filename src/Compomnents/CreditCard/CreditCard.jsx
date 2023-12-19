@@ -23,7 +23,7 @@ function CreditCardForm({handleCancel ,handleSave}) {
     name: "",
     expiry: "",
     cvc: "",
-
+    address:"",
     date: "",
     month: "",
   });
@@ -101,6 +101,19 @@ function CreditCardForm({handleCancel ,handleSave}) {
             label={"Name On Card"}
           />
         </Box>
+        <Box my={"25px"}>
+          <LabelInput
+            setState={handleInputChange}
+            state={state.address}
+            name={"address"}
+            required
+            labelVariant={"label"}
+            type="tel"
+            variant={"bg-input"}
+            placeholder="Enter address"
+            label={"Billing address"}
+          />
+        </Box>
         <InputWrapper gap={{ xl: "80px", base: "20px" }}>
           <LabelInput
             state={state.cvc}
@@ -160,7 +173,7 @@ function CreditCardForm({handleCancel ,handleSave}) {
           </Box>
         </InputWrapper>
 
-        <Flex gap={"25px"} justifyContent="center" mt={"70px"}>
+        <Flex mb={"40px"} gap={"25px"} justifyContent="center" mt={"70px"}>
           <Button  onClick={handleCancel} variant="outline-blue">Cancel</Button>
           <Button onClick={handleSave} variant={"blue-btn"}>Save</Button>
         </Flex>

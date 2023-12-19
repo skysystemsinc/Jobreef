@@ -26,7 +26,8 @@ import { httpRequest } from "@/helper/httpRrequest";
 import endPoints from "@/Utils/endpoints";
 import { setLoginUser } from "@/Reudx/slices/LoginUser";
 import Loader from "../Loader/Loader";
-const AboutYouTabs = () => {
+import { put } from "@/helper/fetch";
+const AboutYouTabs = ({ candidate }) => {
   const dispatch = useDispatch();
   const toast = useToast();
 
@@ -37,7 +38,7 @@ const AboutYouTabs = () => {
     loading: false,
     readOnly: true,
   });
-  
+  console.log("state", state);
   const router = useRouter();
   const handleEditProfile = (e) => {
     const file = e.target.files[0];
@@ -66,13 +67,14 @@ const AboutYouTabs = () => {
       firstName: state.firstName,
       lastName: state.lastName,
       accountType: state.accountType,
+      visible: JSON.parse(state?.visible?.value?.toLowerCase()),
       phoneNumber: parseInt(state.phoneNumber),
       profilePic: state.profilePic,
     };
     try {
-      const postData = await httpRequest(
-        `${BACKEND_URL}${endPoints.user}/${id}`,
-        "PUT",
+      const postData = await put(
+        `${endPoints.user}/${id}`,
+
         body
       );
       if (postData.success) {
@@ -125,9 +127,22 @@ const AboutYouTabs = () => {
   };
   useSkipInitialEffect(() => {
     if (loginUser) {
-      setState({ ...loginUser, loading: false, readOnly: true });
+      setState({
+        ...loginUser,
+        loading: false,
+        readOnly: true,
+        visible: {
+          label: loginUser.visible == true ? "Yes" : "No",
+          value: loginUser.visible.toString(),
+        },
+      });
     }
   }, [loginUser]);
+
+  const dropDownOptions = [
+    { label: "Yes", value: "true" },
+    { label: "No", value: "false" },
+  ];
   return (
     <Box mt={{ md: "91px", lg: "60px", base: "40px" }}>
       <Box display={"flex"} justifyContent={"center"}>
@@ -164,18 +179,27 @@ const AboutYouTabs = () => {
         </InputWrapper>
 
         <InputWrapper gap={{ xl: "70px", "2xl": "142px", base: "20px" }}>
-          {loginUser.role == roles.employee ? (
+          {candidate ? (
             <LabelInput
               labelVariant={"label"}
               type="text"
               variant={"bg-input"}
               readOnly={state.readOnly}
-              // setreadOnly={setreadOnly}
-              dropdown
-              state={state.accountType}
-              setState={handleChange}
+              dropdown={state.readOnly ? false : true}
+              dropdownOption={dropDownOptions}
+              state={state?.visible?.label}
+              setState={(e) => {
+                console.log("Boolean(e.target.value)", e.target.value);
+                setState((prev) => ({
+                  ...prev,
+                  visible: {
+                    label: e.target.value == "true" ? "Yes" : "No",
+                    value: e.target.value,
+                  },
+                }));
+              }}
               name={"accountType"}
-              placeholder="Yes"
+              placeholder="Yes/No"
               importantIcon
               label={"Visible to Employers"}
             />
@@ -183,7 +207,6 @@ const AboutYouTabs = () => {
             <LabelInput
               labelVariant={"label"}
               readOnly={true}
-              
               state={state.accountType}
               setState={(e) => {
                 setstate((prev) => {

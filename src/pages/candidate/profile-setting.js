@@ -21,7 +21,7 @@ const profileSetting = () => {
           width={{ xl: "70%", base: "100%" }}
           px={{ md: "20px", base: "10px" }}
         >
-          <ProfileSettingTabs />
+          <ProfileSettingTabs candidate/>
         </Box>
       </Box>
       <Footer waveImage />

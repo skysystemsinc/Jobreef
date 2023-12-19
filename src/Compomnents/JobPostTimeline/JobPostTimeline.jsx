@@ -83,7 +83,15 @@ const JobPostTimeline = ({ isEdit, title }) => {
       getJob();
     }
   }, [router.query]);
-
+  const handlePrevious = () => {
+    prevStep();
+    if (completedStep.includes(activeStep)) {
+      const updatedCompletedSteps = completedStep.filter(
+        (step) => step != activeStep
+      );
+      setCompletedStep(updatedCompletedSteps);
+    }
+  };
   return (
     <Box pb={"50px"}>
       <Heading
@@ -198,22 +206,22 @@ const JobPostTimeline = ({ isEdit, title }) => {
                   {/* <JobBio /> */}
 
                   {index == 0 ? (
-                    <JobBio nextStep={nextStep} prevStep={prevStep} />
+                    <JobBio nextStep={nextStep} prevStep={handlePrevious} />
                   ) : index == 1 ? (
-                    <TechnicalDetails nextStep={nextStep} prevStep={prevStep} />
+                    <TechnicalDetails nextStep={nextStep} prevStep={handlePrevious} />
                   ) : index == 2 ? (
-                    <JobLocation nextStep={nextStep} prevStep={prevStep} />
+                    <JobLocation nextStep={nextStep} prevStep={handlePrevious} />
                   ) : index == 3 ? (
                     <DesiredSkills
                       nextStep={nextStep}
-                      prevStep={prevStep}
+                      prevStep={handlePrevious}
                       style={boxStyle}
                     />
                   ) : index == 4 ? (
                     <ScreeningQuestion
                     
                     nextStep={nextStep}
-                    prevStep={prevStep}
+                    prevStep={handlePrevious}
                     />
                   ) : null}
                 </Box>

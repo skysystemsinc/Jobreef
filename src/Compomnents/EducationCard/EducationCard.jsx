@@ -128,9 +128,13 @@ const EducationCard = ({
           pt={"14px"}
           color={"gray.text"}
           variant={"p5"}
-        >
-          {data.description}
+
+          px={"20px"}
+          dangerouslySetInnerHTML={{ __html: data.description }}
+        />
+          {/* {data.description}
         </Heading>
+         */}
       </Box>
     </Box>
   );

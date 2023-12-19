@@ -62,7 +62,20 @@ const JobBio = ({ disableNextPrev, prevStep, nextStep }) => {
       setFormData(jobState);
     }
   }, [jobState]);
-
+  const option = [
+    {
+      label: "Remote",
+      value: "Remote",
+    },
+    {
+      label: "On-site",
+      value: "On-site",
+    },
+    {
+      label: "hybrid",
+      value: "hybrid",
+    },
+  ];
   return (
     <Box>
       <InputWrapper>
@@ -111,6 +124,7 @@ const JobBio = ({ disableNextPrev, prevStep, nextStep }) => {
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
+          dropdownOption={option}
           dropdown
           placeholder="Select Job Location e.g. remote, on-site, hybrid"
           label={"Location Type"}

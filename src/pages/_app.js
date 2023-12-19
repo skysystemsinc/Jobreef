@@ -9,6 +9,8 @@ import { Provider } from "react-redux";
 import { Role_context } from "../context/context"; // Corrected the import as needed
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "react-quill/dist/quill.snow.css";
+
 export default function App({ Component, pageProps }) {
   return (
     <ChakraProvider theme={theme}>

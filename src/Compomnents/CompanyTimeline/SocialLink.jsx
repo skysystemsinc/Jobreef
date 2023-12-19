@@ -115,6 +115,7 @@ const SocialLink = ({ nextStep, handlePrevious }) => {
         webUrl: companyState.webLink,
         companyLogo: companyState.logo,
         socialLinks: companyState.socialLinks,
+        telePhone: companyState.telePhone,
         location: [
           {
             country: companyState.country,

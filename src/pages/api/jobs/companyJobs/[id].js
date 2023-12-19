@@ -11,6 +11,11 @@ const GET = async (req, res) => {
       include: {
         company: true,
         // applications: { include: { employee: true } },
+        _count: {
+          select: {
+            applications: true,
+          },
+        },
       },
     });
     res.status(200).json({

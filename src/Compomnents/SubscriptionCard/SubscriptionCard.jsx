@@ -29,7 +29,16 @@ const SubscriptionCard = ({ noActiveSub }) => {
             Jobreef Recruit PRO | Renews 30/11/2023
           </Heading>
         )}
-        {noActiveSub ? null : (
+        {noActiveSub ? (
+          <Button
+            // onClick={handleAdd}
+            width={"max-content"}
+            variant={"outline-blue"}
+          >
+            {" "}
+            Add Subscription Plan
+          </Button>
+        ) : (
           <Button width={"max-content"} variant={"outline-blue"}>
             {" "}
             Cancel Subscription
