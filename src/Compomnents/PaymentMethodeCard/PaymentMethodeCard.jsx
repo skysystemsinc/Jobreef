@@ -2,7 +2,13 @@ import React from "react";
 import { Box, Button, Heading, Flex, Input, Image } from "@chakra-ui/react";
 import EditDeleteButtons from "../EditDeleteButtons/EditDeleteButtons";
 import paycard from "@/assets/Images/paycard.svg";
-const PaymentMethodeCard = ({ handleDelete, handleEdit, handleCancel ,handleAdd, addPaymentMethode }) => {
+const PaymentMethodeCard = ({
+  handleDelete,
+  handleEdit,
+  handleCancel,
+  handleAdd,
+  addPaymentMethode,
+}) => {
   return (
     <Box
       border={"1px solid"}
@@ -16,7 +22,12 @@ const PaymentMethodeCard = ({ handleDelete, handleEdit, handleCancel ,handleAdd,
         <Heading color={"gray.text"} variant={"p7"}>
           Payment Method
         </Heading>
-        {addPaymentMethode ? null : <EditDeleteButtons handleDelete={handleDelete} handleEdit={handleEdit} />}
+        {addPaymentMethode ? null : (
+          <EditDeleteButtons
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+          />
+        )}
       </Box>
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Box mt={"13px"} display="flex" gap={"15px"}>
@@ -41,11 +52,15 @@ const PaymentMethodeCard = ({ handleDelete, handleEdit, handleCancel ,handleAdd,
         </Box>
 
         {addPaymentMethode ? (
-          <Button onClick={handleAdd} width={"max-content"} variant={"outline-blue"}>
+          <Button
+            onClick={handleAdd}
+            width={"max-content"}
+            variant={"outline-blue"}
+          >
             {" "}
             Add Payment Method
           </Button>
-        ) : null}
+        ) :null}
       </Box>
     </Box>
   );

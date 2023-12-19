@@ -31,7 +31,7 @@ const steps = [
   { label: "Education" },
   { label: "Certifications" },
   { label: "Skills" },
-  { label: "Achievement" },
+  { label: "Awards" },
   { label: "Attachments" },
 ];
 

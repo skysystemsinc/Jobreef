@@ -48,7 +48,7 @@ const MyResumeTabs = () => {
       title: "Skills",
     },
     {
-      title: "Achievements",
+      title: "Awards",
     },
     {
       title: "Attachments",
@@ -68,7 +68,7 @@ const MyResumeTabs = () => {
       content: <Certification />,
     },
     { label: "Skills", value: "Skills", content: <Skills /> },
-    { label: "Achievements", value: "Achievements", content: <Achievement /> },
+    { label: "Awards", value: "Awards", content: <Achievement /> },
     { label: "Attachments", value: "Attachments", content: <Attachments /> },
 
     // Add more tabs if needed

@@ -39,7 +39,7 @@ const InActive = () => {
     try {
       const postData = await put(`${endPoints.jobs}/${state.activeJob.id}`, {
         active: true,
-        status: 1,
+        status: status.active,
       });
       console.log("postData", postData);
 
@@ -144,14 +144,23 @@ const InActive = () => {
       },
       {
         accessorKey: "employmentType",
-        header: "Employment Type",
-        cell: ({ row: { original } }) =>
-          original.employmentType === "" ? "-" : original.employmentType,
+        header: "Applicants",
+        cell: ({ row: { original } }) => original?._count?.applications,
       },
       {
-        accessorKey: "opening",
-        header: "Openings",
-        cell: ({ row: { original } }) => original.opening,
+        accessorKey: "spent",
+        header: "Spent",
+        cell: ({ row: { original } }) =>
+          original?.spent === "" ? "-" : original?.spent,
+      },
+      {
+        accessorKey: "updatedAt",
+        header: "Updated On",
+        cell: ({ row: { original } }) => {
+          {
+            return moment(original.updatedAt).format("YYYY-MM-DD");
+          }
+        },
       },
       {
         accessorKey: "status",

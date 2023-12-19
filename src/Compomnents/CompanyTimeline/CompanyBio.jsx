@@ -34,7 +34,7 @@ import { addCompany } from "@/Reudx/slices/company";
 const CompanyBio = ({ nextStep, State, setState }) => {
   const toast = useToast();
   const companyState = useSelector((state) => state.companyRegister.value);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [companyBio, setCompanyBio] = useState(companyState);
   const list = [
@@ -71,7 +71,7 @@ const CompanyBio = ({ nextStep, State, setState }) => {
       });
       return;
     }
-    dispatch(addCompany(companyBio))
+    dispatch(addCompany(companyBio));
     nextStep();
   };
 
@@ -157,6 +157,19 @@ const CompanyBio = ({ nextStep, State, setState }) => {
           label={"Website"}
         />
       </InputWrapper>
+      <Box width={"49%"} mb={"25px"}>
+        <LabelInput
+          state={companyBio.telePhone}
+          setState={handleChange}
+          name={"telePhone"}
+          labelVariant={"label"}
+          type="number"
+          variant={"bg-input"}
+          placeholder="Enter telephone"
+          // dropdown
+          label={"Telephone"}
+        />
+      </Box>
       <InputWrapper>
         <LabelInput
           state={companyBio.description}
@@ -164,7 +177,6 @@ const CompanyBio = ({ nextStep, State, setState }) => {
           name={"description"}
           labelVariant={"label"}
           textarea
-          
           variant={"bg-teaxtarea"}
           placeholder="Describe Your Company..."
           label={"Description*"}

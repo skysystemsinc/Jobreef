@@ -44,6 +44,11 @@ const UpdateData = async (req, res) => {
       },
       include: {
         company: true, // Include all location in the returned object
+        _count: {
+          select: {
+            applications: true,
+          },
+        },
       },
     });
 

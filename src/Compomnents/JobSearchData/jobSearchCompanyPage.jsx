@@ -35,7 +35,7 @@ const DataArray = [
     name: "Microsoft",
     tags: "Urgently Hiring",
     location: "Redmond, Washington State",
-    Salary: "150,000$",
+    Salary: "$150,000",
     EmploymentType: "Full-Time",
     Experience: "3",
     ApplicationDeadline: "07/31/2023",
@@ -59,7 +59,7 @@ const DataArray2 = [
     name: "Microsoft",
     tags: "Urgently Hiring",
     location: "Redmond, Washington State",
-    Salary: "150,000$",
+    Salary: "$150,000",
     EmploymentType: "Full-Time",
     Experience: "3",
     ApplicationDeadline: "07/31/2023",
@@ -80,7 +80,7 @@ const DataArray2 = [
     name: "Microsoft",
     tags: "Urgently Hiring",
     location: "Redmond, Washington State",
-    Salary: "150,000$",
+    Salary: "$150,000",
     EmploymentType: "Full-Time",
     Experience: "3",
     ApplicationDeadline: "07/31/2023",
@@ -490,6 +490,7 @@ const JobSearchCompanyPage = () => {
         </Box>
       </Box>
       {/* need to design right side from here */}
+
       <Box
         display={{ lg: "block", base: "block" }}
         flex={1}
@@ -498,6 +499,11 @@ const JobSearchCompanyPage = () => {
         pl={{ lg: 10, base: 0 }}
         gridTemplateColumns={{ xl: "repeat(2, 1fr)", base: "1fr" }}
       >
+      <Heading color={"black.100"} variant={"p5"} mb={'10px'} fontWeight={700}>
+      Related Jobs
+
+      </Heading>
+
         {DataArray2.map((object) => (
           <Box
             p={{ sm: "20px", base: "12px" }}

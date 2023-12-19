@@ -23,6 +23,7 @@ let company = {
   address: "",
   loading: false,
   platform: "",
+  // telePhone:"",
   link: "",
   logo: false,
   socialLinks: [
@@ -48,8 +49,8 @@ const employee = {
   achievement: false,
   certification: false,
   skills: false,
-  id: "657c34f999882859c18f667f",
-  // id: null,
+  // id: "657c281299882859c18f6672",
+  id: null,
 };
 const workExperience = {
   country: "",
@@ -120,6 +121,13 @@ const job = {
     {
       question: "",
       type: "",
+      rightAns:"",
+      options:[
+        {name:""},
+        {name:""},
+        {name:""},
+
+      ]
     },
   ],
 };

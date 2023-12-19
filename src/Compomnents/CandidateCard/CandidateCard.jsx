@@ -8,7 +8,7 @@ import { MdOutlineStarOutline } from "react-icons/md";
 import Star from "@/assets/Images/Star.svg";
 import Popovers from "../PaginatedTable/Popovers";
 import Chip from "../Chip/Chip";
-import squareTick from "@/assets/Images/squareTick.svg";
+import squareTick from "@/assets/Images/greenCheck.svg";
 import redCross from "@/assets/Images/redCross.svg";
 const CandidateCard = ({
   matchCandidate,

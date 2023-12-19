@@ -27,7 +27,7 @@ const Password = ({ activeStep, handlePrevious, nextStep }) => {
   const dispatch = useDispatch();
   const [state, setState] = useState({ ...userState, loading: false });
   const toast = useToast();
-
+console.log("userState",userState);
   const handleRegister = () => {
     if (state.confirmPassword == "" || state.password == "") {
       toast({
@@ -88,6 +88,7 @@ const Password = ({ activeStep, handlePrevious, nextStep }) => {
       };
     });
   };
+  console.log("roles.company",userState.isCompany ? roles.company : roles.candidate );
 
   const handleCreateUser = async () => {
     const body = {
@@ -95,7 +96,8 @@ const Password = ({ activeStep, handlePrevious, nextStep }) => {
       lastName: state.lastName,
       email: state.email,
       password: state.password,
-      role: userState.isCompany ? roles.company : roles.employee,
+      role: userState.isCompany ? roles.company : roles.candidate,
+      // role:roles.company,
       accountType: userState.isCompany
         ? accountType.employer
         : accountType.candidate,
