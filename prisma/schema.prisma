@@ -52,7 +52,7 @@ enum jobStatus {
 }
 
 enum Role {
-  recruiter @map("recruiter ")
+  recruiter @map("recruiter")
   company   @map("company")
   candidate @map("candidate")
 

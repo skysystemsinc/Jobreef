@@ -41,8 +41,8 @@ const Overview = ({ setTabIndex, tabIndex }) => {
   });
   const router = useRouter();
   const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
+    const name = e?.target?.name;
+    const value = e?.target?.value;
     setFormData((prev) => {
       return {
         ...prev,
@@ -185,6 +185,7 @@ const Overview = ({ setTabIndex, tabIndex }) => {
         </InputWrapper>
         {/* <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}> */}
         <LabelInput
+        textFormatter
           state={formData.description}
           setState={handleChange}
           name={"description"}
@@ -193,7 +194,7 @@ const Overview = ({ setTabIndex, tabIndex }) => {
           type="text"
           variant={"bg-teaxtarea"}
           placeholder="Describe yourself for your employer"
-          textarea
+          
           label={"Summary"}
         />
         {/* </InputWrapper> */}

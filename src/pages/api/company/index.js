@@ -9,6 +9,7 @@ const addCompany = async (req, res) => {
         companyName: data.companyName,
         location: data.location,
         userId: data.userId,
+        telePhone: data.telePhone,
         // country: data.country,
         // city: data.city,
         // address: data.address,
