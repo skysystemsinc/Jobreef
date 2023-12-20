@@ -104,7 +104,7 @@ const ScreeningQuestion = ({ disableNextPrev, nextStep, prevStep }) => {
     dispatch(addJob({ ...jobState, screeningQuestions: updateOtp }));
   };
 
-  const questionType = ["Single", "CheckBox Selection", "Multiple"];
+  const questionType = ["Short Answer", "Yes/No", "Multiple Choice"];
   const checkBox = ["Yes", "No"];
 
   return (

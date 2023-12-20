@@ -1,3 +1,4 @@
+'use client'
 import {
   Box,
   Button,
@@ -37,6 +38,7 @@ const JobPostTabs = ({ company }) => {
       );
       if (postData.success) {
         const { data } = postData;
+        console.log("data",data);
         
 
         dispatch(setAllJobs(data));
@@ -47,10 +49,11 @@ const JobPostTabs = ({ company }) => {
   };
 
   useEffect(() => {
+    console.log("test render");
     if (companyState.id) {
       getAllJobs();
     }
-  }, [companyState]);
+  }, []);
 
   return (
     <>

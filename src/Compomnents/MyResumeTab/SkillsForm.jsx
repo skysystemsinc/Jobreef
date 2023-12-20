@@ -27,6 +27,7 @@ const SkillsForm = ({
 
   state,
 }) => {
+
   const router = useRouter();
   const toast = useToast();
   const dispatch = useDispatch()
@@ -98,7 +99,7 @@ console.log("formData",formData);
 
     console.log("body",skills);
     try {
-      const postData = await post(`${endPoints.skills}`, skills);
+      const postData = await post(`${endPoints.skills}`, {...skills,employeeId:employeeState.id});
       if (postData.success) {
         setLoading(false);
         setState((prev) => {

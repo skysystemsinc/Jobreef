@@ -2,6 +2,7 @@ let role = null;
 
 const roles = {
   recruiter: "recruiter",
+  owner:"owner",
   company: "company",
   candidate: "candidate",
 };

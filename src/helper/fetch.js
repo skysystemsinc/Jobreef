@@ -1,3 +1,4 @@
+'use client'
 // const { BACKEND_URL } = require("@/Utils/urls");
 import { BACKEND_URL } from "@/Utils/urls"
 

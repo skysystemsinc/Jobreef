@@ -14,6 +14,7 @@ const CandidateCard = ({
   matchCandidate,
   cardStatusDisable,
   cardStatus,
+  status,
   data,
   handleEvent,
   popOverList,
@@ -58,14 +59,14 @@ const CandidateCard = ({
           </Box> */}
             <Box>
               <Heading variant={"p7"} fontWeight={700} color={"blue.500"}>
-                {data?.name}
+                {`${data?.user?.firstName}  ${data?.user?.lastName}`}
               </Heading>
               <Heading
                 mt={{ md: "8px", base: "3px" }}
                 variant={"p4"}
                 color={"gray.text"}
               >
-                {data?.country}, {data?.state}
+                {data?.location?.country}, {data?.location?.province}
               </Heading>
             </Box>
           </Box>
@@ -88,13 +89,13 @@ const CandidateCard = ({
                 gap={"10px"}
               >
                 <Heading color={"gray.text"} variant={"p4"}>
-                  {data?.desiginatation}
+                  {data?.workExperience&& data?.workExperience[0]?.designation}
                 </Heading>
                 <Box fontSize={{ sm: "14px", base: "8px" }}>
                   <GoDotFill style={{ color: "#D9D9D9" }} />
                 </Box>
                 <Heading color={"gray.text"} variant={"p4"}>
-                  {data?.companyName}
+                  {data?.workExperience && data?.workExperience[0]?.companyName}
                 </Heading>
               </Box>
             </Box>
@@ -108,13 +109,13 @@ const CandidateCard = ({
                 gap={"10px"}
               >
                 <Heading color={"gray.text"} variant={"p4"}>
-                  {data?.schoolName}
+                  {data?.education && data?.education[0]?.schoolName}
                 </Heading>
                 <Box fontSize={{ sm: "14px", base: "8px" }}>
                   <GoDotFill style={{ color: "#D9D9D9" }} />
                 </Box>
                 <Heading color={"gray.text"} variant={"p4"}>
-                  {data?.diploma}
+                  {data?.education && data?.education[0]?.diploma}
                 </Heading>
               </Box>
             </Box>
@@ -262,7 +263,7 @@ const CandidateCard = ({
             Status:{" "}
             <Box as="span" color={"blue.500"}>
               {" "}
-              {data?.status}
+              {status}
             </Box>
           </Heading>
         )}

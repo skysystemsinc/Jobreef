@@ -4,7 +4,8 @@ import DropDown from "../DropDown/DropDown";
 import blue_arrow_down from "@/assets/Images/blue-arrow-down.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { DropdownLoading } from "../LoadingSkeleton/LoadingSkeleton";
-import { setJobApplicants } from "@/Reudx/slices/jobApplicants";
+import { jobApplicants } from "@/Reudx/slices/jobApplicants";
+import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 
 const CandidatesDropdown = ({ style }) => {
   const allJobState = useSelector((state) => state.jobPost.jobs.allJobs);
@@ -13,13 +14,8 @@ const CandidatesDropdown = ({ style }) => {
   const handleSelectJob = (data) => {
     const parseData = JSON.parse(data.target.value);
     console.log("parseData", parseData);
-    dispatch(setJobApplicants({ id: parseData.id }));
+    dispatch(jobApplicants(parseData.id));
   };
-  useEffect(() => {
-    if (allJobState) {
-      dispatch(setJobApplicants({ id: allJobState[0].id }));
-    }
-  }, [allJobState]);
 
   return (
     <Box
@@ -27,20 +23,20 @@ const CandidatesDropdown = ({ style }) => {
       sx={style}
       justifyContent={"flex-end"}
     >
-      {/* {!allJobState ? (
+      {!allJobState ? (
         <DropdownLoading />
-      ) : ( */}
+      ) : (
         <DropDown
-          // setState={handleSelectJob}
+          setState={handleSelectJob}
           defaultDropdown
-          // dropdownOption={allJobState}
+          dropdownOption={allJobState}
           keyName={"title"}
           style={{ width: "max-content", minWidth: "170px" }}
           icon={<Image src={blue_arrow_down.src} />}
           placeholder={""}
           variant={"bg-dropdown"}
         />
-      {/* )} */}
+      )}
     </Box>
   );
 };

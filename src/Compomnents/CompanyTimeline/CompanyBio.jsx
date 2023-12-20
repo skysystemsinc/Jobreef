@@ -27,7 +27,7 @@ import globalStyles from "@/styles/globalStyles";
 import endPoints from "@/Utils/endpoints";
 import axios from "axios";
 import { BACKEND_URL } from "@/Utils/urls";
-import { company } from "@/schema/stateSchema";
+import { company, directory, industryOptions } from "@/schema/stateSchema";
 import { useDispatch, useSelector } from "react-redux";
 import { addCompany } from "@/Reudx/slices/company";
 
@@ -104,6 +104,7 @@ const CompanyBio = ({ nextStep, State, setState }) => {
           state={companyBio.industry}
           setState={handleChange}
           name={"industry"}
+          dropdownOption={industryOptions}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -118,6 +119,7 @@ const CompanyBio = ({ nextStep, State, setState }) => {
           name={"directory"}
           labelVariant={"label"}
           type="text"
+          dropdownOption={directory}
           variant={"bg-input"}
           dropdown
           placeholder="Select Option"

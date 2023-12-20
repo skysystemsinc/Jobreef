@@ -72,7 +72,22 @@ const GetSingleData = async (req, res) => {
     const singleData = await prisma.Job.findUnique({
       include: {
         company: true,
-        applications: { include: { employee: true } },
+        applications: {
+          include: {
+            employee: {
+              include: {
+                skills: true,
+                workExperience: true,
+                education: true,
+                certification: true,
+                skills: true,
+                user: true,
+                achievement: true,
+                attachment: true,
+              },
+            },
+          },
+        },
       },
       where: {
         id: req.query.id,

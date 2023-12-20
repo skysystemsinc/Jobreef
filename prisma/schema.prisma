@@ -59,6 +59,7 @@ enum jobStatus {
 
 enum Role {
   recruiter @map("recruiter")
+  owner     @map("owner")
   company   @map("company")
   candidate @map("candidate")
 
@@ -93,6 +94,9 @@ model User {
   employee       Employee?
   company        Company?  @relation("UserToCompany")
   stages         Int?      @default(0)
+
+  // 0 for pending invite
+  inviteAccepted  Boolean @default(false) 
   firstName      String
   lastName       String
   active         Boolean?  @default(true)
