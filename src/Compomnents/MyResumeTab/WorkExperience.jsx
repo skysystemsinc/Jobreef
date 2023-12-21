@@ -7,7 +7,7 @@ import DeleteModal from "../DeleteModal/DeleteModal";
 import ExperianceForm from "../CandidateTimeline/ExperianceForm";
 import { ExpCardLoading } from "../LoadingSkeleton/LoadingSkeleton";
 import { useDispatch, useSelector } from "react-redux";
-import { addEmployee, setFormData } from "@/Reudx/slices/employee";
+import { addEmployee, setFormData } from "@/Redux/slices/employee";
 import { workExperience } from "@/schema/stateSchema";
 import { deleteApi } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
@@ -91,7 +91,6 @@ const WorkExperience = () => {
           })
         }
         name={state.delete.companyName}
-
         loading={state.loading}
         handleDelete={handleDelete}
         isOpen={state.delete}
@@ -102,7 +101,7 @@ const WorkExperience = () => {
         }
       />
       {state.add || state.edit ? (
-        <Box width={{ md: "70%", base: "100%" }} mx={"auto"} mt={'50px'}>
+        <Box width={{ md: "70%", base: "100%" }} mx={"auto"} mt={"50px"}>
           <ExperianceForm state={state} setState={setState} />
         </Box>
       ) : employeeState?.workExperience.length > 0 ? (
@@ -152,8 +151,7 @@ const WorkExperience = () => {
       ) : (
         <Box minHeight={"68vh"} pl={{ md: "30px", base: "0px" }}>
           <TextCard
-            addHandle={handleAddNew
-            }
+            addHandle={handleAddNew}
             title={"Ready to build an impressive resume?"}
             subittle={"Start by including your work experiences."}
             btnLable={"Add  Experience"}

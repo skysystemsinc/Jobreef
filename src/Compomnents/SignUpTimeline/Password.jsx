@@ -19,7 +19,7 @@ import { Role_context } from "@/context/context";
 import { BACKEND_URL } from "@/Utils/urls";
 import { useDispatch, useSelector } from "react-redux";
 import { httpRequest } from "@/helper/httpRrequest";
-import { addUser } from "@/Reudx/slices/userRegistration";
+import { addUser } from "@/Redux/slices/userRegistration";
 import { post, put } from "@/helper/fetch";
 
 const Password = ({ activeStep, handlePrevious, nextStep }) => {
@@ -27,7 +27,7 @@ const Password = ({ activeStep, handlePrevious, nextStep }) => {
   const dispatch = useDispatch();
   const [state, setState] = useState({ ...userState, loading: false });
   const toast = useToast();
-console.log("userState",userState);
+  console.log("userState", userState);
   const handleRegister = () => {
     if (state.confirmPassword == "" || state.password == "") {
       toast({
@@ -88,7 +88,10 @@ console.log("userState",userState);
       };
     });
   };
-  console.log("roles.company",userState.isCompany ? roles.company : roles.candidate );
+  console.log(
+    "roles.company",
+    userState.isCompany ? roles.company : roles.candidate
+  );
 
   const handleCreateUser = async () => {
     const body = {
@@ -125,7 +128,7 @@ console.log("userState",userState);
       });
       return;
     }
-    dispatch(addUser({ ...state, userId: postData.data.id ,...postData.data}));
+    dispatch(addUser({ ...state, userId: postData.data.id, ...postData.data }));
     nextStep();
 
     // if (postData.success) {

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import {
   Box,
   Button,
@@ -21,7 +21,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { get } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
-import { setAllJobs } from "@/Reudx/slices/jobPost";
+import { setAllJobs } from "@/Redux/slices/jobPost";
 
 const JobPostTabs = ({ company }) => {
   const router = useRouter();
@@ -38,8 +38,7 @@ const JobPostTabs = ({ company }) => {
       );
       if (postData.success) {
         const { data } = postData;
-        console.log("data",data);
-        
+        console.log("data", data);
 
         dispatch(setAllJobs(data));
       }

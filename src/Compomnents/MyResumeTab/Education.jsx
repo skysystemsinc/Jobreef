@@ -7,7 +7,7 @@ import TextCard from "../TextCard/TextCard";
 import EducationCard from "../EducationCard/EducationCard";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import { useDispatch, useSelector } from "react-redux";
-import { addEmployee, setFormData } from "@/Reudx/slices/employee";
+import { addEmployee, setFormData } from "@/Redux/slices/employee";
 import { education } from "@/schema/stateSchema";
 import { deleteApi } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";

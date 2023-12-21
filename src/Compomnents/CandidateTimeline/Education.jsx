@@ -8,7 +8,7 @@ import EducationForm from "./EducationForm";
 import EducationCard from "../EducationCard/EducationCard";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteModal from "../DeleteModal/DeleteModal";
-import { addEmployee, setFormData } from "@/Reudx/slices/employee";
+import { addEmployee, setFormData } from "@/Redux/slices/employee";
 import { education } from "@/schema/stateSchema";
 import { deleteApi } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
@@ -57,7 +57,7 @@ const Education = ({
   const employeeState = useSelector(
     (state) => state.employeeRegister.value.employee
   );
-  
+
   const [state, setState] = useState({
     edit: false,
     loading: false,
@@ -149,12 +149,12 @@ const Education = ({
         }
       />
       {state.add || state.edit ? (
-        <Box display={"flex"} justifyContent={"center"} >
+        <Box display={"flex"} justifyContent={"center"}>
           <EducationForm state={state} setState={setState} />
         </Box>
       ) : (
         <Box width={"100%"} mx={"auto"}>
-          <Box >
+          <Box>
             {!employeeState?.education ? (
               <ExpCardLoading />
             ) : (
@@ -184,7 +184,6 @@ const Education = ({
               onClick={handleAddNew}
               px={"10px"}
               width="max-content"
-
               mb={"40px"}
               variant={"blue-btn"}
             >

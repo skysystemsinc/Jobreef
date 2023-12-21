@@ -9,7 +9,11 @@ const addEmployee = async (req, res) => {
         location: data.location,
         phoneNumber: data.phoneNumber,
         description: data.description,
-        userId: data.userId,
+        user: {
+          connect: {
+            id: data.userId,
+          },
+        },
         // workExperience: data.workExperience,
         // education: data.education,
         // certification: data.certification,
@@ -25,7 +29,7 @@ const addEmployee = async (req, res) => {
         skills: true,
         achievement: true,
         attachment: true,
-        user:true
+        user: true
       },
     });
 

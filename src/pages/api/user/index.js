@@ -22,6 +22,12 @@ const addUser = async (req, res) => {
 
     try {
       const otp = Math.floor(1000 + Math.random() * 9000);
+      let companyId = null;
+      if (data.companyId) {
+        companyId = data.companyId;
+        // Remove Company Id from data
+        delete data.companyId;
+      }
       //TODO otp will send on email
       const userCreated = await prisma.User.create({
         data: {
@@ -34,6 +40,13 @@ const addUser = async (req, res) => {
             },
           },
           ...data,
+          ...(companyId ? {
+            company: {
+              connect: {
+                id: companyId,
+              },
+            },
+          } : {}),
           otp: otp,
           otpTimestamp: new Date(),
           // password: data.password,
@@ -48,7 +61,6 @@ const addUser = async (req, res) => {
           // ...(data.employeeId !== undefined && { employeeId: data.employeeId }),
         },
         include: {
-          companyAdmin: true,
           company: true,
           employee: true,
         },

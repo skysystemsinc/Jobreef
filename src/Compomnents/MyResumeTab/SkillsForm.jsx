@@ -19,7 +19,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import endPoints from "@/Utils/endpoints";
-import { addEmployee, setFormData } from "@/Reudx/slices/employee";
+import { addEmployee, setFormData } from "@/Redux/slices/employee";
 import Loader from "../Loader/Loader";
 import { post, put } from "@/helper/fetch";
 const SkillsForm = ({
@@ -27,10 +27,9 @@ const SkillsForm = ({
 
   state,
 }) => {
-
   const router = useRouter();
   const toast = useToast();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const employeeState = useSelector(
     (state) => state.employeeRegister.value.employee
@@ -43,10 +42,10 @@ const SkillsForm = ({
     level: "",
   });
   const [loading, setLoading] = useState(false);
-console.log("formData",formData);
+  console.log("formData", formData);
   useSkipInitialEffect(() => {
     if (formData) {
-      setSkills({...formData});
+      setSkills({ ...formData });
     }
   }, [formData]);
   const handleChange = (e) => {
@@ -96,10 +95,12 @@ console.log("formData",formData);
     }
     setLoading(true);
 
-
-    console.log("body",skills);
+    console.log("body", skills);
     try {
-      const postData = await post(`${endPoints.skills}`, {...skills,employeeId:employeeState.id});
+      const postData = await post(`${endPoints.skills}`, {
+        ...skills,
+        employeeId: employeeState.id,
+      });
       if (postData.success) {
         setLoading(false);
         setState((prev) => {

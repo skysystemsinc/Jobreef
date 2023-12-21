@@ -29,12 +29,12 @@ import axios from "axios";
 import { BACKEND_URL } from "@/Utils/urls";
 import { company } from "@/schema/stateSchema";
 import { useDispatch, useSelector } from "react-redux";
-import { addCompany } from "@/Reudx/slices/company";
+import { addCompany } from "@/Redux/slices/company";
 
 const CompanyBio = ({ nextStep, State, setState }) => {
   const toast = useToast();
   const companyState = useSelector((state) => state.companyRegister.value);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [companyBio, setCompanyBio] = useState(companyState);
   const list = [
@@ -164,7 +164,6 @@ const CompanyBio = ({ nextStep, State, setState }) => {
           name={"description"}
           labelVariant={"label"}
           textarea
-          
           variant={"bg-teaxtarea"}
           placeholder="Describe Your Company..."
           label={"Description*"}

@@ -4,7 +4,7 @@ import PaginatedTable from "../PaginatedTable/PaginatedTable";
 import menu from "@/assets/Images/menu.svg";
 import { useRouter } from "next/router";
 import Popovers from "../PaginatedTable/Popovers";
-import { getTeamMembers } from "@/Reudx/slices/teamMembers";
+import { getTeamMembers } from "@/Redux/slices/teamMembers";
 import { useDispatch, useSelector } from "react-redux";
 import ReactTable from "../PaginatedTable/ReactTable";
 import DeleteModal from "../DeleteModal/DeleteModal";

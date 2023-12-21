@@ -5,7 +5,7 @@ import SortBy from "../SortBy/SortBy";
 import MobileSortBy from "../MobileSortBy/MobileSortBy";
 import SelectedCandidate from "./SelectedCandidate";
 import { useDispatch, useSelector } from "react-redux";
-import { getSelectedCandidates } from "@/Reudx/slices/candidates";
+import { getSelectedCandidates } from "@/Redux/slices/candidates";
 import SearchBox from "./SearchBox";
 import { CandidateCardLoading } from "../LoadingSkeleton/LoadingSkeleton";
 
@@ -21,7 +21,6 @@ const All = ({
   handleSelectCandidate,
   popOverList,
 }) => {
-  
   return (
     <Box mt={{ md: "31px", base: "15px" }}>
       {searchBox ? <SearchBox /> : null}
@@ -54,8 +53,7 @@ const All = ({
               return (
                 <Box key={ind}>
                   <CandidateCard
-                  jobData={item}
-                  
+                    jobData={item}
                     cardStatusDisable={cardStatusDisable}
                     data={item.employee}
                     matchCandidate={matchCandidate}

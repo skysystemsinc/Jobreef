@@ -8,7 +8,12 @@ const addCompany = async (req, res) => {
       data: {
         companyName: data.companyName,
         location: data.location,
-        userId: data.userId,
+        // userId: data.userId,
+        users: {
+          connect: {
+            id: data.userId,
+          },
+        },
         telePhone: data.telePhone,
         // country: data.country,
         // city: data.city,
@@ -24,7 +29,7 @@ const addCompany = async (req, res) => {
         socialLinks: data.socialLinks,
       },
       include: {
-        user: true,
+        users: true,
       },
     });
 

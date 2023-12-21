@@ -1,5 +1,5 @@
 import Context from "@/context/context";
-import store from "@/Reudx/store";
+import store from "@/Redux/store";
 import "@/styles/globals.css";
 import { theme } from "@/theme/theme";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -21,11 +21,11 @@ export default function App({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Role_context.Provider value={{ company: true }}>
-      <Context>
-        <Provider store={store}>
-          <Component {...pageProps} />
-        </Provider>
-      </Context>
+        <Context>
+          <Provider store={store}>
+            <Component {...pageProps} />
+          </Provider>
+        </Context>
       </Role_context.Provider>
     </ChakraProvider>
   );
@@ -48,7 +48,7 @@ export default function App({ Component, pageProps }) {
 
 
 // import Context from "@/context/context";
-// import store from "@/Reudx/store";
+// import store from "@/Redux/store";
 // import "@/styles/globals.css";
 // import { theme } from "@/theme/theme";
 // import { ChakraProvider } from "@chakra-ui/react";

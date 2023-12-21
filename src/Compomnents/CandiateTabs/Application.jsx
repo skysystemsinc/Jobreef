@@ -15,11 +15,11 @@ import {
   jobApplicants,
   setAll,
   setArchived,
-} from "@/Reudx/slices/jobApplicants";
+} from "@/Redux/slices/jobApplicants";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import endPoints from "@/Utils/endpoints";
 import { put } from "@/helper/fetch";
-import { getSelectedCandidates } from "@/Reudx/slices/candidates";
+import { getSelectedCandidates } from "@/Redux/slices/candidates";
 
 const Application = ({ filterKey }) => {
   const dispatch = useDispatch();

@@ -20,14 +20,17 @@ import { BsDot } from "react-icons/bs";
 import upload from "@/assets/Images/upload.svg";
 import { useDispatch, useSelector } from "react-redux";
 import NextPrevBtn from "./NextPrevBtn";
-import { addJob } from "@/Reudx/slices/jobPost";
+import { addJob } from "@/Redux/slices/jobPost";
 
 const JobLocation = ({ disableNextPrev, prevStep, nextStep }) => {
   const toast = useToast();
   const dispatch = useDispatch();
   const jobState = useSelector((state) => state.jobPost.value);
-  const [formData, setFormData] = useState({...jobState,...jobState.location});
-  
+  const [formData, setFormData] = useState({
+    ...jobState,
+    ...jobState.location,
+  });
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;

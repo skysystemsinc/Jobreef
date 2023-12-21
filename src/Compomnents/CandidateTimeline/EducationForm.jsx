@@ -22,7 +22,7 @@ import CheckBox from "../CheckBox/CheckBox";
 import Loader from "../Loader/Loader";
 import { post, put } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
-import { addEmployee } from "@/Reudx/slices/employee";
+import { addEmployee } from "@/Redux/slices/employee";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import { useDispatch, useSelector } from "react-redux";
 const EducationForm = ({ state, setState }) => {
@@ -344,7 +344,6 @@ const EducationForm = ({ state, setState }) => {
             name={"description"}
             labelVariant={"label"}
             type="text"
-
             variant={"bg-teaxtarea"}
             placeholder="Describe what you did and studied during this period"
             label={"Description"}

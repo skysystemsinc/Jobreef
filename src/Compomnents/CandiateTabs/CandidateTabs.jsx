@@ -23,16 +23,16 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAllCandidates,
   getFilterCandidates,
-} from "@/Reudx/slices/candidates";
+} from "@/Redux/slices/candidates";
 import data from "@/db/candidates.json";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import Search from "./Search";
 import CustomTabs from "../CustomeTabs/CustomeTabs";
 import endPoints from "@/Utils/endpoints";
-import { setAllJobs } from "@/Reudx/slices/jobPost";
+import { setAllJobs } from "@/Redux/slices/jobPost";
 import { get } from "@/helper/fetch";
 import CandidatesDropdown from "./CandidatesDropdown";
-import {jobApplicants} from "@/Reudx/slices/jobApplicants";
+import { jobApplicants } from "@/Redux/slices/jobApplicants";
 const CandidateTabs = ({ company }) => {
   const candidates = useSelector((state) => state.candidates.value.all);
   const allJobState = useSelector((state) => state.jobPost.jobs.allJobs);
@@ -120,7 +120,6 @@ const CandidateTabs = ({ company }) => {
     }
   }, [allJobState]);
 
-
   return (
     <>
       <Box display={{ md: "none", base: "block" }}>
@@ -149,10 +148,10 @@ const CandidateTabs = ({ company }) => {
               // border: "1px solid red",
             }}
           >
-            {tabLists?.map((item , ind) => {
+            {tabLists?.map((item, ind) => {
               return (
                 <Tab
-                key={ind}
+                  key={ind}
                   fontSize={{ md: "16px", base: "14px" }}
                   sx={globalStyles.tabelinkStyle}
                   _selected={globalStyles.selectTab}

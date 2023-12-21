@@ -30,7 +30,7 @@ import { BACKEND_URL } from "@/Utils/urls";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { httpRequest } from "@/helper/httpRrequest";
-import { addCompany } from "@/Reudx/slices/company";
+import { addCompany } from "@/Redux/slices/company";
 import { post, put } from "@/helper/fetch";
 
 const SocialLink = ({ nextStep, handlePrevious }) => {
@@ -105,7 +105,7 @@ const SocialLink = ({ nextStep, handlePrevious }) => {
     });
     try {
       const body = {
-        userId:isAuthenticated.userId,
+        userId: isAuthenticated.userId,
         companyName: companyState.companyName,
         industry: companyState.industry,
         directory: companyState.directory,
@@ -170,10 +170,7 @@ const SocialLink = ({ nextStep, handlePrevious }) => {
       ["companyId"]: companyId,
     };
     try {
-      const userAssociation = put(
-        `${endPoints.user}/${id}`,
-        body
-      );
+      const userAssociation = put(`${endPoints.user}/${id}`, body);
       // const userAssociation = axios({
       //   method: "PUT",
       //   url: `${BACKEND_URL}${endPoints.user}/${id}`,

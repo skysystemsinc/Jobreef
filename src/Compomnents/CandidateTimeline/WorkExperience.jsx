@@ -6,7 +6,7 @@ import ExperianceForm from "./ExperianceForm";
 import ExperianceCard from "../ExperianceCard/ExperianceCard";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { addEmployee, setFormData } from "@/Reudx/slices/employee";
+import { addEmployee, setFormData } from "@/Redux/slices/employee";
 import { workExperience } from "@/schema/stateSchema";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import endPoints from "@/Utils/endpoints";

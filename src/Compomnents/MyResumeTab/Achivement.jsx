@@ -7,7 +7,7 @@ import DeleteModal from "../DeleteModal/DeleteModal";
 import AchievementForm from "./AchievementForm";
 import AchievementCard from "../AchievementCard/AchievementCard";
 import { useDispatch, useSelector } from "react-redux";
-import { addEmployee, setFormData } from "@/Reudx/slices/employee";
+import { addEmployee, setFormData } from "@/Redux/slices/employee";
 import { achievement } from "@/schema/stateSchema";
 import { deleteApi } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";

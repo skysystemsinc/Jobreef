@@ -25,7 +25,7 @@ import endPoints from "@/Utils/endpoints";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { post, put } from "@/helper/fetch";
-import { addEmployee } from "@/Reudx/slices/employee";
+import { addEmployee } from "@/Redux/slices/employee";
 import Loader from "../Loader/Loader";
 import { workExperience } from "@/schema/stateSchema";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
