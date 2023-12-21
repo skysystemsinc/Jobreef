@@ -335,10 +335,167 @@ const jobFamilyOpt = [
     value: "Other",
   },
 ];
+const Seniority = [
+  {
+    label: "Entry Level",
+    value: "Entry Level",
+  },
+  {
+    label: "Mid-Level",
+    value: "Mid-Level",
+  },
+  {
+    label: "Senior Level",
+    value: "Senior Level",
+  },
+];
+const tags = [
+  {
+    label: "Urgently Hiring",
+    value: "Urgently Hiring",
+  },
+  {
+    label: "Multiple Position",
+    value: "Multiple Position",
+  },
+  {
+    label: "Benefits",
+    value: "Benefits",
+  },
+];
+const alertFrequency = [
+  {
+    label: "Daily",
+    value: "Daily",
+  },
+  {
+    label: "Weekly",
+    value: "Weekly",
+  },
+];
+const alertStatus = [
+  {
+    label: "Enabled",
+    value: "Enabled",
+  },
+  {
+    label: "Disabled",
+    value: "Disabled",
+  },
+];
+const educationOtp = [
+  {
+    label: "No Minimum",
+    value: "No Minimum",
+  },
+  {
+    label: "High School",
+    value: "High School",
+  },
+  {
+    label: "Trade School",
+    value: "Trade School",
+  },
+  {
+    label: "Undergraduate Degree (Associates or Bachelors)",
+    value: "Undergraduate Degree (Associates or Bachelors)",
+  },
+  {
+    label: "Graduate Degree",
+    value: "Graduate Degree",
+  },
+  {
+    label: "Graduate Degree",
+    value: "Graduate Degree",
+  },
+];
+const experienceOtp = [
+  {
+    label: "0 – 1 Year",
+    value: "0 – 1 Year",
+  },
+  {
+    label: "1 – 3 Years",
+    value: "1 – 3 Years",
+  },
+  {
+    label: "3 – 5 Years",
+    value: "3 – 5 Years",
+  },
+  {
+    label: "5 – 10 Years",
+    value: "5 – 10 Years",
+  },
+  {
+    label: "10 – 15 Years",
+    value: "10 – 15 Years",
+  },
+  {
+    label: "15+ Years",
+    value: "15+ Years",
+  },
+];
+const locationType = [
+  {
+    label: "Remote",
+    value: "Remote",
+  },
+  {
+    label: "Onsite",
+    value: "Onsite",
+  },
+  {
+    label: "hybrid",
+    value: "hybrid",
+  },
+];
+const operatorRole = [
+  {
+    label: "Standard Operator",
+    value: "Standard Operator",
+  },
+  {
+    label: "Super Admin",
+    value: "Super Admin",
+  },
+  {},
+];
+const status = [
+  {
+    label: "New",
+    value: "New",
+  },
+  {
+    label: "Under Review",
+    value: "Under Review",
+  },
+  {
+    label: "Interviewing",
+    value: "Interviewing",
+  },
+  {
+    label: "Accepted",
+    value: "Accepted",
+  },
+  {
+    label: "Rejected",
+    value: "Rejected",
+  },
+];
 const skills = [{ name: "", level: "" }];
 export {
+  tags,
+  status,
+  operatorRole,
+  locationType,
+  educationOtp,
+  alertStatus,
+  alertFrequency,
+  experienceOtp,
   industryOptions,
   skills,
+  Seniority,
+  jobFamilyOpt,
   EmploymentTypeOpt,
   directory,
   certification,
