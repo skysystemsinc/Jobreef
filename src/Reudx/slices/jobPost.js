@@ -1,3 +1,6 @@
+'use client'
+
+
 import endPoints from "@/Utils/endpoints";
 import { status } from "@/Utils/role";
 import { job } from "@/schema/stateSchema";

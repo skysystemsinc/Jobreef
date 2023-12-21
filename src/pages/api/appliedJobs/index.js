@@ -8,7 +8,7 @@ const add = async (req, res) => {
   };
 
   try {
-    const created = await prisma.appliedJobs.create({
+    const created = await prisma.AppliedJobs.create({
       data: body,
     });
 
@@ -29,7 +29,7 @@ const add = async (req, res) => {
 
 const GetAll = async (req, res) => {
   try {
-    const experience = await prisma.appliedJobs.findMany({
+    const experience = await prisma.AppliedJobs.findMany({
       include: {
         employee: true,
         job: true,
@@ -51,7 +51,7 @@ const GetAll = async (req, res) => {
 };
 const DeleteAll = async (req, res) => {
   try {
-    const deleteData = await prisma.appliedJobs.deleteMany({});
+    const deleteData = await prisma.AppliedJobs.deleteMany({});
     res.status(200).json({
       data: deleteData,
       message: "certification Deleted successfully",

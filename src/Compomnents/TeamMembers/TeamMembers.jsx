@@ -36,24 +36,30 @@ const TeamMembers = () => {
         //   original.employmentType === "" ? "-" : original.employmentType,
       },
       {
-        accessorKey: "employeeRole",
-        header: "Role",
-        // cell: ({ row: { original } }) => original.opening,
-        cell: ({ row: { original } }) => original.employeeRole ?? "-",
-      },
-      {
         accessorKey: "jobTitle",
         header: "Job Title",
         // original.employeeRole === "" ? "-" : original.employeeRole,
-        cell: ({ row: { original } }) =>
-          original.jobTitle === "" ? "-" : original.jobTitle,
+        cell: ({ row: { original } }) => original.jobTitle ?? "-",
       },
+      {
+        accessorKey: "role",
+        header: "Role",
+        // cell: ({ row: { original } }) => original.opening,
+        cell: ({ row: { original } }) => original.role ?? "-",
+      },
+
       {
         accessorKey: "active",
         header: "Status",
         // original.employeeRole === "" ? "-" : original.employeeRole,
         cell: ({ row: { original } }) =>
-          original.active || original.stages === 0 ? "Active" : "Disable",
+          !original.active
+            ? "Disable"
+            : !original.inviteAccepted
+            ? "Invite Pending"
+            : original.active
+            ? "Active"
+            : "Disable",
       },
       {
         accessorKey: "action",

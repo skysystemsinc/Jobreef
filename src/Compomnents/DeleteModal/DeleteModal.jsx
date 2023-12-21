@@ -14,13 +14,14 @@ import {
 } from "@chakra-ui/react";
 
 function DeleteModal({
-  deleteBtnLabel,
+
   name,
   loading,
   handleDelete,
   isOpen,
   onOpen,
   onClose,
+  deleteBtnLabel,
 }) {
   //   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -35,8 +36,8 @@ function DeleteModal({
             borderColor={"gray.500"}
             py={"12px"}
           >
-            <Heading variant={"p6"} color={"black.100"}>
-              Delete
+            <Heading variant={"p11"} fontWeight={600} className="sora" color={"black.100"}>
+              {deleteBtnLabel ??"Delete"}
             </Heading>
           </ModalHeader>
           <ModalCloseButton fontSize={"10px"} />

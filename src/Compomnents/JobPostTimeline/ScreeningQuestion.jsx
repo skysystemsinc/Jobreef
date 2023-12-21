@@ -10,6 +10,7 @@ import {
   List,
   ListIcon,
   ListItem,
+  RadioGroup,
   Textarea,
   UnorderedList,
   useMediaQuery,
@@ -34,7 +35,10 @@ import { addCompany } from "@/Reudx/slices/company";
 import { post, put } from "@/helper/fetch";
 import NextPrevBtn from "./NextPrevBtn";
 import { addJob } from "@/Reudx/slices/jobPost";
-
+import CheckBox from "../CheckBox/CheckBox";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import blueDelete from "@/assets/Images/blueDelete.svg";
+import RadioButton from "../RadioButton/RadioButton";
 const ScreeningQuestion = ({ disableNextPrev, nextStep, prevStep }) => {
   const toast = useToast();
   const dispatch = useDispatch();
@@ -68,12 +72,11 @@ const ScreeningQuestion = ({ disableNextPrev, nextStep, prevStep }) => {
     updatedLinks[index] = { ...updatedLinks[index], type: event.target.value };
     dispatch(addJob({ ...jobState, screeningQuestions: updatedLinks }));
   };
-  const handleAnsChange = (event, index) => {
-    console.log("event", event);
+  const handleAnsChange = (value, index) => {
     let updatedLinks = [...jobState.screeningQuestions];
     updatedLinks[index] = {
       ...updatedLinks[index],
-      rightAns: event.target.value,
+      rightAns: value,
     };
     dispatch(addJob({ ...jobState, screeningQuestions: updatedLinks }));
   };
@@ -104,7 +107,7 @@ const ScreeningQuestion = ({ disableNextPrev, nextStep, prevStep }) => {
     dispatch(addJob({ ...jobState, screeningQuestions: updateOtp }));
   };
 
-  const questionType = ["Single", "CheckBox Selection", "Multiple"];
+  const questionType = ["Short Answer", "Yes/No", "Multiple Choice"];
   const checkBox = ["Yes", "No"];
 
   return (
@@ -133,14 +136,18 @@ const ScreeningQuestion = ({ disableNextPrev, nextStep, prevStep }) => {
                 position={"relative"}
               >
                 {isSmallerThe500 ? (
-                  <Input
+                  <LabelInput
+                    defaultDropdown
                     dropdown
                     dropdownOption={questionType}
-                    value={item.type}
-                    defaultDropdown
-                    onChange={(e) => handleLinkChange(e, index)}
+                    state={item.type}
+                    setState={(e) => handleLinkChange(e, index)}
+                    labelVariant={"label"}
+                    type="text"
                     variant={"bg-input"}
+                    // readOnly={readOnly}
                     placeholder="Question Type"
+                    label={""}
                   />
                 ) : (
                   <LabelInput
@@ -164,66 +171,117 @@ const ScreeningQuestion = ({ disableNextPrev, nextStep, prevStep }) => {
                     position: "absolute",
                     top: {
                       md: "16px",
-                      base: "9px",
+                      base: "16px",
                     },
                     right: isSmallerThe500 ? "-30px" : "-30px",
                     fontSize: "23px",
                     color: "#2CA5C3",
                   }}
                 >
-                  <AiOutlineDelete onClick={() => handleDelete(index)} />
+                  {/* <RiDeleteBin6Line  onClick={() => handleDelete(index)} /> */}
+                  <Image
+                    width={"18px"}
+                    src={blueDelete.src}
+                    onClick={() => handleDelete(index)}
+                  />
                 </Box>
               </Box>
             </InputWrapper>
-            <Box mb={"20px"}>
+            <Box
+              mb={"20px"}
+              borderBottom={"1px solid"}
+              borderColor={"gray.100"}
+              pb={"20px"}
+            >
               {item.type == questionType[0] ? (
                 <Input
                   value={item.rightAns}
-                  onChange={(e) => handleAnsChange(e, index)}
+                  onChange={(e) => handleAnsChange(e.target.value, index)}
                   variant={"bg-input"}
-                  placeholder="Enter right answer"
+                  placeholder="Enter Preferred Answer"
                 />
               ) : item.type == questionType[1] ? (
-                <LabelInput
-                  defaultDropdown
-                  dropdown
-                  dropdownOption={checkBox}
-                  state={item.rightAns}
-                  setState={(e) => handleAnsChange(e, index)}
-                  labelVariant={"label"}
-                  type="text"
-                  variant={"bg-input"}
-                  // readOnly={readOnly}
-                  placeholder="Yes/No"
-                  label={""}
-                />
+                <Box>
+                  <Box
+                    mb={"14px"}
+                    display={"flex"}
+                    justifyContent={"center"}
+                    gap={{ md: "60px", base: "20px" }}
+                  >
+                    <LabelInput
+                      style={{ maxWidth: "130px" }}
+                      defaultDropdown
+                      state={"Yes"}
+                      labelVariant={"label"}
+                      type="text"
+                      variant={"bg-input"}
+                      // readOnly={readOnly}
+                      readOnly={true}
+                      inputStyle={{ paddingLeft: "56px" }}
+                      placeholder="Yes"
+                      label={""}
+                    />
+                    <LabelInput
+                      style={{ maxWidth: "130px" }}
+                      defaultDropdown
+                      state={"No"}
+                      inputStyle={{ paddingLeft: "56px" }}
+                      labelVariant={"label"}
+                      type="text"
+                      variant={"bg-input"}
+                      // readOnly={readOnly}
+                      readOnly={true}
+                      placeholder="Yes"
+                      label={""}
+                    />
+                  </Box>
+
+                  <RadioGroup
+                    defaultValue={item.rightAns}
+                    onChange={(e) => handleAnsChange(e, index)}
+                    display={"flex"}
+                    justifyContent={"center"}
+                    gap={{ md: "60px", base: "30px" }}
+                  >
+                    <RadioButton value={"Yes"} label={"Preferred Answer"} />
+                    <RadioButton value={"No"} label={"Preferred Answer"} />
+                  </RadioGroup>
+                </Box>
               ) : item.type == questionType[2] ? (
                 <Box>
-                  <InputWrapper
-                    style={{ marginBottom: "15px" }}
-                    key={index}
-                    gap={"15px"}
+                  <RadioGroup
+                    defaultValue="null"
+                    onChange={(e) => {
+                      handleAnsChange(e, index);
+                    }}
+                    width={"100%"}
                   >
-                    {item?.options?.map((option, ind) => {
-                      return (
-                        <Input
-                          // mt={"20px"}
-                          value={option.name}
-                          onChange={(e) =>
-                            handleChangeOption(e, ind, item, index)
-                          }
-                          variant={"bg-input"}
-                          placeholder={`Enter option ${ind + 1}`}
-                        />
-                      );
-                    })}
-                  </InputWrapper>
-                  <Input
-                    value={item.rightAns}
-                    onChange={(e) => handleAnsChange(e, index)}
-                    variant={"bg-input"}
-                    placeholder="Enter right answer"
-                  />
+                    <InputWrapper
+                      style={{ marginBottom: "15px" }}
+                      key={index}
+                      gap={"15px"}
+                    >
+                      {item?.options?.map((option, ind) => {
+                        return (
+                          <Box width={"100%"}>
+                            <Input
+                              mb={"10px"}
+                              value={option.name}
+                              onChange={(e) =>
+                                handleChangeOption(e, ind, item, index)
+                              }
+                              variant={"bg-input"}
+                              placeholder={`Enter option ${ind + 1}`}
+                            />
+                            <RadioButton
+                              value={option.name}
+                              label={"Preferred Answer"}
+                            />
+                          </Box>
+                        );
+                      })}
+                    </InputWrapper>
+                  </RadioGroup>
                 </Box>
               ) : null}
             </Box>

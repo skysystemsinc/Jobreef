@@ -273,9 +273,9 @@ const AchievementForm = ({ state, setState, style, handleSaveAch }) => {
           {loading ? (
             <Loader />
           ) : state.edit ? (
-            "Update  Achievement"
+            "Update   Awards"
           ) : (
-            " Save  Achievement"
+            " Save  Awards"
           )}
         </Button>
       </Box>

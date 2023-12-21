@@ -15,7 +15,7 @@ import {
 import React from "react";
 import menu from "@/assets/Images/menu.svg";
 
-const Popovers = ({ width, actionList }) => {
+const Popovers = ({ data, width, actionList }) => {
   const { isOpen, onToggle, onClose } = useDisclosure();
   return (
     <Popover
@@ -48,8 +48,9 @@ const Popovers = ({ width, actionList }) => {
           {actionList?.map((item, index) => {
             return (
               <Box
-                onClick={() => {
-                  item.handleEvent(), onClose();
+                onClick={(e) => {
+                  e.stopPropagation()
+                  item.handleEvent(data), onClose();
                 }}
                 cursor={"pointer"}
                 key={index}

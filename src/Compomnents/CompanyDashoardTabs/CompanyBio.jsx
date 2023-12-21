@@ -31,6 +31,7 @@ import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import endPoints from "@/Utils/endpoints";
 import Loader from "../Loader/Loader";
 import { put } from "@/helper/fetch";
+import { directory, industryOptions } from "@/schema/stateSchema";
 
 const CompanyBio = () => {
   const toast = useToast();
@@ -161,6 +162,7 @@ const CompanyBio = () => {
           label={"Company Name*"}
         />
         <LabelInput
+        defaultDropdown={industryOptions}
           state={formData.industry}
           name={"industry"}
           setState={handleChange}
@@ -178,6 +180,8 @@ const CompanyBio = () => {
         <LabelInput
           state={formData.directory}
           name={"directory"}
+        defaultDropdown={directory}
+
           setState={handleChange}
           labelVariant={"label"}
           type="text"

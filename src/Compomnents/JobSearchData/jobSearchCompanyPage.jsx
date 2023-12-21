@@ -27,30 +27,31 @@ import Instagram from "../../assets/Images/Instagram.svg";
 import location from "../../assets/Images/location.svg";
 import { useRouter } from "next/router";
 import Chip from "../Chip/Chip";
+import { DataArray } from "./tempSchema";
 
-const DataArray = [
-  {
-    imageurl: "",
-    title: "Senior System's Design Engineer",
-    name: "Microsoft",
-    tags: "Urgently Hiring",
-    location: "Redmond, Washington State",
-    Salary: "$150,000",
-    EmploymentType: "Full-Time",
-    Experience: "3",
-    ApplicationDeadline: "07/31/2023",
-    DesiredSkills: [
-      "Technical knowledge",
-      "System Architecture",
-      "Risk Management",
-      "Project Management",
-      "Quality Focus",
-      "Q/A Testing",
-      "LeaderShip",
-      "Product Design",
-    ],
-  },
-];
+// const DataArray = [
+//   {
+//     imageurl: "",
+//     title: "Senior System's Design Engineer",
+//     name: "Microsoft",
+//     tags: "Urgently Hiring",
+//     location: "Redmond, Washington State",
+//     Salary: "$150,000",
+//     EmploymentType: "Full-Time",
+//     Experience: "3",
+//     ApplicationDeadline: "07/31/2023",
+//     DesiredSkills: [
+//       "Technical knowledge",
+//       "System Architecture",
+//       "Risk Management",
+//       "Project Management",
+//       "Quality Focus",
+//       "Q/A Testing",
+//       "LeaderShip",
+//       "Product Design",
+//     ],
+//   },
+// ];
 
 const DataArray2 = [
   {
@@ -59,6 +60,9 @@ const DataArray2 = [
     name: "Microsoft",
     tags: "Urgently Hiring",
     location: "Redmond, Washington State",
+    SalaryRate:"Monthly",
+    JobModel: "Hybrid",
+
     Salary: "$150,000",
     EmploymentType: "Full-Time",
     Experience: "3",
@@ -74,27 +78,7 @@ const DataArray2 = [
       "Product Design",
     ],
   },
-  {
-    imageurl: "",
-    title: "Senior System's Design Engineer",
-    name: "Microsoft",
-    tags: "Urgently Hiring",
-    location: "Redmond, Washington State",
-    Salary: "$150,000",
-    EmploymentType: "Full-Time",
-    Experience: "3",
-    ApplicationDeadline: "07/31/2023",
-    DesiredSkills: [
-      "Technical knowledge",
-      "System Architecture",
-      "Risk Management",
-      "Project Management",
-      "Quality Focus",
-      "Q/A Testing",
-      "LeaderShip",
-      "Product Design",
-    ],
-  },
+
 ];
 
 const text = [
@@ -140,7 +124,7 @@ const JobSearchCompanyPage = () => {
   return (
     <Box margin="0px 50px 0px 50px" display={{ lg: "flex", base: "block" }}>
       <Box flex={2}>
-        {DataArray.map((object) => (
+        {DataArray2.map((object) => (
           <Box
             p={{ sm: "20px", base: "12px" }}
             width={"100%"}
@@ -236,13 +220,19 @@ const JobSearchCompanyPage = () => {
                       alignItems={"center"}
                     >
                       <Heading color={"gray.text"} variant={"p4"}>
-                        {object.Salary}
+                        {object.Salary}/{object.SalaryRate}
                       </Heading>
                       <Box fontSize={{ sm: "14px", base: "8px" }}>
                         <GoDotFill style={{ color: "#D9D9D9" }} />
                       </Box>
                       <Heading color={"gray.text"} variant={"p4"}>
                         {object.EmploymentType}
+                      </Heading>
+                      <Box fontSize={{ sm: "14px", base: "8px" }}>
+                        <GoDotFill style={{ color: "#D9D9D9" }} />
+                      </Box>
+                      <Heading color={"gray.text"} variant={"p4"}>
+                        {object.JobModel}
                       </Heading>
                       <Box fontSize={{ sm: "14px", base: "8px" }}>
                         <GoDotFill style={{ color: "#D9D9D9" }} />
@@ -504,7 +494,7 @@ const JobSearchCompanyPage = () => {
 
       </Heading>
 
-        {DataArray2.map((object) => (
+        {DataArray.map((object) => (
           <Box
             p={{ sm: "20px", base: "12px" }}
             width={"100%"}
@@ -582,13 +572,19 @@ const JobSearchCompanyPage = () => {
                       alignItems={"center"}
                     >
                       <Heading color={"gray.text"} variant={"p4"}>
-                        {object.Salary}
+                        {object.Salary}/{object.SalaryRate}
                       </Heading>
                       <Box fontSize={{ sm: "14px", base: "8px" }}>
                         <GoDotFill style={{ color: "#D9D9D9" }} />
                       </Box>
                       <Heading color={"gray.text"} variant={"p4"}>
                         {object.EmploymentType}
+                      </Heading>
+                      <Box fontSize={{ sm: "14px", base: "8px" }}>
+                        <GoDotFill style={{ color: "#D9D9D9" }} />
+                      </Box>
+                      <Heading color={"gray.text"} variant={"p4"}>
+                        {object.JobModel}
                       </Heading>
                       <Box fontSize={{ sm: "14px", base: "8px" }}>
                         <GoDotFill style={{ color: "#D9D9D9" }} />

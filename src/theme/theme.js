@@ -281,6 +281,17 @@ const components = {
       },
     },
   },
+  Radio:{
+    variants:{
+      "simple":{
+        label:{
+          fontSize: {md: "14px", base:"12px"},
+          fontFamily: "var(--chakra-\fonts-openSans)",
+          
+        }
+      }
+    },
+  },
   Input: {
     variants: {
       "shadow-input": {

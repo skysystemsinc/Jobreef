@@ -32,6 +32,7 @@ import endPoints from "@/Utils/endpoints";
 import { setAllJobs } from "@/Reudx/slices/jobPost";
 import { get } from "@/helper/fetch";
 import CandidatesDropdown from "./CandidatesDropdown";
+import {jobApplicants} from "@/Reudx/slices/jobApplicants";
 const CandidateTabs = ({ company }) => {
   const candidates = useSelector((state) => state.candidates.value.all);
   const allJobState = useSelector((state) => state.jobPost.jobs.allJobs);
@@ -40,31 +41,31 @@ const CandidateTabs = ({ company }) => {
   const dispatch = useDispatch();
   let [tabIndex, setTabIndex] = useState(0);
 
-  useEffect(() => {
-    dispatch(getAllCandidates(data));
-  }, []);
-  useSkipInitialEffect(() => {
-    if (candidates) {
-      const applications = candidates?.filter(
-        (item) => item.matchCandidate == false
-      );
-      dispatch(getFilterCandidates(applications));
-    }
-  }, [candidates]);
+  // useEffect(() => {
+  //   dispatch(getAllCandidates(data));
+  // }, []);
+  // useSkipInitialEffect(() => {
+  //   if (candidates) {
+  //     const applications = candidates?.filter(
+  //       (item) => item.matchCandidate == false
+  //     );
+  //     dispatch(getFilterCandidates(applications));
+  //   }
+  // }, [candidates]);
   const handleChange = (ind) => {
-    if (ind == 0) {
-      const applications = candidates?.filter(
-        (item) => item.matchCandidate == false
-      );
+    // if (ind == 0) {
+    //   const applications = candidates?.filter(
+    //     (item) => item.matchCandidate == false
+    //   );
 
-      dispatch(getFilterCandidates(applications));
-    } else {
-      const applications = candidates?.filter(
-        (item) => item.matchCandidate == true
-      );
+    //   dispatch(getFilterCandidates(applications));
+    // } else {
+    //   const applications = candidates?.filter(
+    //     (item) => item.matchCandidate == true
+    //   );
 
-      dispatch(getFilterCandidates(applications));
-    }
+    //   dispatch(getFilterCandidates(applications));
+    // }
     setTabIndex(ind);
   };
 
@@ -108,10 +109,18 @@ const CandidateTabs = ({ company }) => {
   };
 
   useEffect(() => {
-    if (companyState.id) {
+    if (companyState?.id) {
       getAllJobs();
     }
   }, [companyState]);
+
+  useEffect(() => {
+    if (allJobState) {
+      dispatch(jobApplicants(allJobState[0].id));
+    }
+  }, [allJobState]);
+
+
   return (
     <>
       <Box display={{ md: "none", base: "block" }}>
@@ -140,9 +149,10 @@ const CandidateTabs = ({ company }) => {
               // border: "1px solid red",
             }}
           >
-            {tabLists?.map((item) => {
+            {tabLists?.map((item , ind) => {
               return (
                 <Tab
+                key={ind}
                   fontSize={{ md: "16px", base: "14px" }}
                   sx={globalStyles.tabelinkStyle}
                   _selected={globalStyles.selectTab}

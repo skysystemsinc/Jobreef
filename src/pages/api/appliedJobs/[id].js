@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 const DeleteSingle = async (req, res) => {
   try {
     // const deleteUser = await UserModel.findOneAndDelete({ _id: req.query.id });
-    const deleteData = await prisma.Job.delete({
+    const deleteData = await prisma.AppliedJobs.delete({
       where: {
         id: req.query.id,
       },
@@ -12,12 +12,12 @@ const DeleteSingle = async (req, res) => {
 
     if (!deleteData) {
       return res.status(404).json({
-        message: `No job with id ${req.query.id}`,
+        message: `No data with id ${req.query.id}`,
         success: false,
       });
     }
     res.status(200).json({
-      message: "job deleted successfully",
+      message: "data deleted successfully",
       success: true,
       data: deleteData,
     });
@@ -35,7 +35,7 @@ const UpdateData = async (req, res) => {
   const data = req.body;
 
   try {
-    const user = await prisma.Job.update({
+    const updateQuery = await prisma.AppliedJobs.update({
       where: {
         id: req.query.id,
       },
@@ -43,18 +43,25 @@ const UpdateData = async (req, res) => {
         ...data,
       },
       include: {
-        company: true, // Include all location in the returned object
-        _count: {
-          select: {
-            applications: true,
+        employee: {
+          include: {
+            skills: true,
+            workExperience: true,
+            education: true,
+            certification: true,
+            skills: true,
+            user: true,
+            achievement: true,
+            attachment: true,
           },
-        },
+        }, // Include all location in the returned object
+        job: true,
       },
     });
 
     res.status(200).json({
-      message: "job updated successfully",
-      data: user,
+      message: "data updated successfully",
+      data: updateQuery,
       success: true,
     });
   } catch (err) {
@@ -69,25 +76,9 @@ const UpdateData = async (req, res) => {
 const GetSingleData = async (req, res) => {
   try {
     // const user = await UserModel.findOne({ _id: req.query.id });
-    const singleData = await prisma.Job.findUnique({
+    const singleData = await prisma.AppliedJobs.findUnique({
       include: {
-        company: true,
-        applications: {
-          include: {
-            employee: {
-              include: {
-                skills: true,
-                workExperience: true,
-                education: true,
-                certification: true,
-                skills: true,
-                user: true,
-                achievement: true,
-                attachment: true,
-              },
-            },
-          },
-        },
+        employee: true,
       },
       where: {
         id: req.query.id,
@@ -95,16 +86,15 @@ const GetSingleData = async (req, res) => {
     });
     if (!singleData) {
       return res.status(404).json({
-        message: `No job with id ${req.query.id}`,
+        message: `No data with id ${req.query.id}`,
         success: false,
       });
     }
     res.status(200).json({
-      data: singleData,
+      data: user,
       success: true,
     });
   } catch (err) {
-    console.log("jobs pge", err);
     res.status(500).json({
       error: err,
       message: `internal server error`,

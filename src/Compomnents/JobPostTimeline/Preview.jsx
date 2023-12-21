@@ -15,6 +15,7 @@ import Loader from "../Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { job } from "@/schema/stateSchema";
 import ScreeningQuestion from "./ScreeningQuestion";
+import { status } from "@/Utils/role";
 
 const Preview = ({ assignJob, isEdit, state, setState }) => {
   const toast = useToast();
@@ -68,7 +69,8 @@ const Preview = ({ assignJob, isEdit, state, setState }) => {
           country: jobState.country,
           city: jobState.city,
           province: jobState.province,
-          city: jobState.city,
+          address: jobState.address,
+
         },
         tags: tags,
         companyId: companyState.id,
@@ -110,10 +112,10 @@ const Preview = ({ assignJob, isEdit, state, setState }) => {
           country: jobState.country,
           city: jobState.city,
           province: jobState.province,
-          city: jobState.city,
+          address: jobState.address,
         },
         active: false,
-        status: 2,
+        status: status.draft,
         draft: true,
         tags: tags,
         companyId: companyState.id,

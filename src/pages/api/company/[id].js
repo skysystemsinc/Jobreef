@@ -66,9 +66,11 @@ const GetSingleCompany = async (req, res) => {
       where: {
         id: req.query.id,
       },
-      // include: {
-      //   location: true, // Include all location in the returned object
-      // },
+      include: {
+        companyEmployees:true,
+        user:true
+        // location: true, // Include all location in the returned object
+      },
     });
 
     if (!company) {

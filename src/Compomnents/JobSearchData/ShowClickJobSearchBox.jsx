@@ -213,19 +213,20 @@ const ShowClickJobSearchBox = ({ object, toggle, settoggle }) => {
                   alignItems={"center"}
                 >
                   <Heading color={"gray.text"} variant={"p4"}>
-                    {object.Salary}
+                    {object.Salary}/{object.SalaryRate}
                   </Heading>
-                  <Box fontSize={{ sm: "14px", base: "8px" }}>
-                    <GoDotFill style={{ color: "#D9D9D9" }} />
-                  </Box>
-                  <Heading color={"gray.text"} variant={"p4"}>
-                    {object.SalaryRate}
-                  </Heading>
+                
                   <Box fontSize={{ sm: "14px", base: "8px" }}>
                     <GoDotFill style={{ color: "#D9D9D9" }} />
                   </Box>
                   <Heading color={"gray.text"} variant={"p4"}>
                     {object.EmploymentType}
+                  </Heading>
+                  <Box fontSize={{ sm: "14px", base: "8px" }}>
+                    <GoDotFill style={{ color: "#D9D9D9" }} />
+                  </Box>
+                  <Heading color={"gray.text"} variant={"p4"}>
+                    {object.JobModel}
                   </Heading>
                   <Box fontSize={{ sm: "14px", base: "8px" }}>
                     <GoDotFill style={{ color: "#D9D9D9" }} />

@@ -152,8 +152,7 @@ const ActiveJobs = () => {
       {
         accessorKey: "spent",
         header: "Spent",
-        cell: ({ row: { original } }) =>
-          original?.spent === "" ? "-" : original?.spent,
+        cell: ({ row: { original } }) => original?.spent ?? "-",
       },
       // {
       //   accessorKey: "opening",
