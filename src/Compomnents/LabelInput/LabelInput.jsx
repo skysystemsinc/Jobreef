@@ -26,6 +26,7 @@ const LabelInput = ({
   textarea,
   multipleSelectDropdown,
   defaultDropdown,
+  inputStyle,
   iconStyle,
   defaultValue,
   icon,
@@ -44,9 +45,10 @@ const LabelInput = ({
   dropdown,
   readOnly,
   label,
+  style
 }) => {
   return (
-    <Box width={"100%"}>
+    <Box width={"100%"} sx={style}>
       <FormLabel
         marginBottom={"9px"}
         variant={labelVariant}
@@ -135,6 +137,7 @@ const LabelInput = ({
         <Input
           pattern={pattern}
           ref={inputRef}
+          sx={inputStyle}
           readOnly={readOnly}
           value={state ?? ""}
           name={name}
