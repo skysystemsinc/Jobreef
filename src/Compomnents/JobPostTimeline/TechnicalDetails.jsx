@@ -21,6 +21,7 @@ import upload from "@/assets/Images/upload.svg";
 import { useDispatch, useSelector } from "react-redux";
 import NextPrevBtn from "./NextPrevBtn";
 import { addJob } from "@/Reudx/slices/jobPost";
+import { Seniority, jobFamilyOpt, tags } from "@/schema/stateSchema";
 
 const TechnicalDetails = ({ disableNextPrev, prevStep, nextStep }) => {
   const toast = useToast();
@@ -105,6 +106,7 @@ const TechnicalDetails = ({ disableNextPrev, prevStep, nextStep }) => {
           state={formData.jobFamily}
           setState={handleChange}
           name={"jobFamily"}
+          dropdownOption={jobFamilyOpt}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -143,6 +145,7 @@ const TechnicalDetails = ({ disableNextPrev, prevStep, nextStep }) => {
         <LabelInput
           state={formData.seniorityLevel}
           setState={handleChange}
+          dropdownOption={Seniority}
           name={"seniorityLevel"}
           labelVariant={"label"}
           type="date"
@@ -173,6 +176,7 @@ const TechnicalDetails = ({ disableNextPrev, prevStep, nextStep }) => {
             console.log("e",e);
             setFormData({ ...formData, tags: e})
           }}
+          dropdownOption={tags}
           name={"tags"}
           labelVariant={"label"}
           type="text"

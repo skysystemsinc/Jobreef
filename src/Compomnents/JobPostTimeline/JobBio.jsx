@@ -8,7 +8,7 @@ import upload from "@/assets/Images/upload.svg";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import TextFormatting from "../TextFormatting/TextFormatting";
 import { useDispatch, useSelector } from "react-redux";
-import { job } from "@/schema/stateSchema";
+import { EmploymentTypeOpt, job, locationType } from "@/schema/stateSchema";
 import IconButton from "../IconButton/IconButton";
 import NextPrevBtn from "./NextPrevBtn";
 import { addJob } from "@/Reudx/slices/jobPost";
@@ -62,20 +62,7 @@ const JobBio = ({ disableNextPrev, prevStep, nextStep }) => {
       setFormData(jobState);
     }
   }, [jobState]);
-  const option = [
-    {
-      label: "Remote",
-      value: "Remote",
-    },
-    {
-      label: "On-site",
-      value: "On-site",
-    },
-    {
-      label: "hybrid",
-      value: "hybrid",
-    },
-  ];
+
   return (
     <Box>
       <InputWrapper>
@@ -94,6 +81,7 @@ const JobBio = ({ disableNextPrev, prevStep, nextStep }) => {
           setState={handleChange}
           name={"employmentType"}
           dropdown
+          dropdownOption={EmploymentTypeOpt}
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
@@ -124,7 +112,7 @@ const JobBio = ({ disableNextPrev, prevStep, nextStep }) => {
           labelVariant={"label"}
           type="text"
           variant={"bg-input"}
-          dropdownOption={option}
+          dropdownOption={locationType}
           dropdown
           placeholder="Select Job Location e.g. remote, on-site, hybrid"
           label={"Location Type"}
@@ -134,6 +122,7 @@ const JobBio = ({ disableNextPrev, prevStep, nextStep }) => {
         <LabelInput
           state={formData.applicationType}
           setState={handleChange}
+          
           name={"applicationType"}
           labelVariant={"label"}
           dropdownOption={applicationType}

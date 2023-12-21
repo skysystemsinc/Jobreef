@@ -20,6 +20,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserProfile } from "@/Reudx/slices/userProfileSlice";
 import axios from "axios";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
+import {
+  EmploymentTypeOpt,
+  alertFrequency,
+  alertStatus,
+  education,
+  educationOtp,
+  experienceOtp,
+  locationType,
+} from "@/schema/stateSchema";
 const JobAlertFrom = ({ handleSave }) => {
   const dispatch = useDispatch();
   const userProfile = useSelector((state) => state.userProfileSlice.value);
@@ -74,6 +83,7 @@ const JobAlertFrom = ({ handleSave }) => {
         <InputWrapper gap={{ xl: "50px", base: "20px" }}>
           <LabelInput
             state={state.alertFrequency}
+            dropdownOption={alertFrequency}
             setState={(e) => {
               setstate((prev) => {
                 return { ...prev, alertFrequency: e.target.value };
@@ -81,7 +91,7 @@ const JobAlertFrom = ({ handleSave }) => {
             }}
             labelVariant={"label"}
             type="text"
-            dropdown={readOnly ? false : true}
+            dropdown={true}
             readOnly={readOnly}
             setreadOnly={setreadOnly}
             variant={"bg-input"}
@@ -90,6 +100,7 @@ const JobAlertFrom = ({ handleSave }) => {
           />
           <LabelInput
             state={state.alertStatus}
+            dropdownOption={alertStatus}
             setState={(e) => {
               setstate((prev) => {
                 return { ...prev, alertStatus: e.target.value };
@@ -98,18 +109,17 @@ const JobAlertFrom = ({ handleSave }) => {
             labelVariant={"label"}
             type="text"
             readOnly={readOnly}
-            dropdown={readOnly ? false : true}
+            dropdown={true}
             setreadOnly={setreadOnly}
             variant={"bg-input"}
             placeholder="Select Status"
             label={"Alert Status"}
           />
         </InputWrapper>
-
         <InputWrapper gap={{ xl: "50px", base: "20px" }}>
           <LabelInput
             labelVariant={"label"}
-            dropdown={readOnly ? false : true}
+            dropdown={true}
             readOnly={readOnly}
             setreadOnly={setreadOnly}
             state={state.employeeType}
@@ -118,6 +128,7 @@ const JobAlertFrom = ({ handleSave }) => {
                 return { ...prev, employeeType: e.target.value };
               });
             }}
+            dropdownOption={EmploymentTypeOpt}
             type="text"
             variant={"bg-input"}
             placeholder="Select Employment Type"
@@ -131,8 +142,11 @@ const JobAlertFrom = ({ handleSave }) => {
                 return { ...prev, locationtype: e.target.value };
               });
             }}
-            dropdown={readOnly ? false : true}
+            dropdown={true}
             readOnly={readOnly}
+            dropdownOption={locationType}
+            // dropdownOption={}
+
             setreadOnly={setreadOnly}
             labelVariant={"label"}
             type="text"
@@ -145,8 +159,9 @@ const JobAlertFrom = ({ handleSave }) => {
         <InputWrapper gap={{ xl: "50px", base: "20px" }}>
           <LabelInput
             labelVariant={"label"}
-            dropdown={readOnly ? false : true}
+            dropdown={true}
             readOnly={readOnly}
+            dropdownOption={educationOtp}
             setreadOnly={setreadOnly}
             state={state.minimumEdu}
             setState={(e) => {
@@ -167,11 +182,13 @@ const JobAlertFrom = ({ handleSave }) => {
                 return { ...prev, maxExperiance: e.target.value };
               });
             }}
-            dropdown={readOnly ? false : true}
+            dropdownOption={experienceOtp}
+            dropdown={true}
             readOnly={readOnly}
             setreadOnly={setreadOnly}
             labelVariant={"label"}
             type="number"
+            drop
             variant={"bg-input"}
             placeholder="Select Minimum Experience"
             label={"Experience"}

@@ -151,7 +151,7 @@ const InActive = () => {
         accessorKey: "spent",
         header: "Spent",
         cell: ({ row: { original } }) =>
-          original?.spent === "" ? "-" : original?.spent,
+          original?.spent ?? "-" 
       },
       {
         accessorKey: "updatedAt",

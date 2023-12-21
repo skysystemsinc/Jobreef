@@ -19,8 +19,8 @@ import resume from "@/assets/Images/resume.svg";
 
 import my_job from "@/assets/Images/job-post.svg";
 
-// import header_profile from "@/assets/Images/profile_icon.svg";
-import header_profile from "@/assets/Images/profile.svg";
+import header_profile from "@/assets/Images/profile_icon.svg";
+// import header_profile from "@/assets/Images/profile.svg";
 import logout from "@/assets/Images/logout.svg";
 import { role, roles } from "@/Utils/role";
 import { useRouter } from "next/router";
@@ -30,7 +30,7 @@ import { setLoginUser } from "@/Reudx/slices/LoginUser";
 import endPoints from "@/Utils/endpoints";
 import { httpRequest } from "@/helper/httpRrequest";
 import { BACKEND_URL } from "@/Utils/urls";
-import {LoadingSkeleton} from "../LoadingSkeleton/LoadingSkeleton";
+import { LoadingSkeleton } from "../LoadingSkeleton/LoadingSkeleton";
 import { addCompany } from "@/Reudx/slices/company";
 import { addEmployee } from "@/Reudx/slices/employee";
 import { get } from "@/helper/fetch";
@@ -121,207 +121,206 @@ const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
   }, []);
   return (
     <>
-      
-      {/* {!loginUser ? (
+      {!loginUser ? (
         <LoadingSkeleton />
-      ) : ( */}
-      <Menu>
-        <MenuButton
-          as={Button}
-          variant={"unstyled"}
-          // border={"1px solid red"}
-          height={"max-content"}
-          width={"max-content"}
-          // rightIcon={<HiOutlineChevronDown color="red" fontSize={"24px"} />}
-        >
-          <Box
-            display={"flex"}
-            alignItems={"center"}
-            justifyContent={"flex-end"}
-            gap={"10px"}
-            position={"relative"}
+      ) : (
+        <Menu>
+          <MenuButton
+            as={Button}
+            variant={"unstyled"}
+            // border={"1px solid red"}
+            height={"max-content"}
+            width={"max-content"}
+            // rightIcon={<HiOutlineChevronDown color="red" fontSize={"24px"} />}
           >
-            <Image
-              width={{ md: "40px", base: "30px" }}
-              height={{ md: "40px", base: "30px" }}
-              borderRadius={"100px"}
-              objectFit={"cover"}
-              src={ loginUser?.profilePic?? header_profile.src}
-            />
             <Box
-              display={{ xl: "block", base: "none" }}
-              sx={hiddenStyle}
-              textAlign={"start"}
+              display={"flex"}
+              alignItems={"center"}
+              justifyContent={"flex-end"}
+              gap={"10px"}
+              position={"relative"}
             >
-              <Heading as={"p"} variant={"p4"}>
-                {" "}
-                {/* {`${loginUser?.firstName} ${loginUser?.lastName}`} */}
-                Jacob Jones
-              </Heading>
-              <Heading variant={"p1"}>
-                {/* {loginUser?.email} */}
-                jacobjones9@acme.com
-              </Heading>
-            </Box>
-
-            <Box display={{ xl: "block", base: "none" }}>
-              <HiOutlineChevronDown
-                style={{ position: "absolute", right: "8px", top: "3px" }}
-                color="black.100"
-                // fontSize={{ "2xl": "27px", base: "240px" }}
-                fontSize={"17px"}
+              <Image
+                width={{ md: "40px", base: "30px" }}
+                height={{ md: "40px", base: "30px" }}
+                borderRadius={"100px"}
+                objectFit={"cover"}
+                src={loginUser?.profilePic ?? header_profile.src}
               />
+              <Box
+                display={{ xl: "block", base: "none" }}
+                sx={hiddenStyle}
+                textAlign={"start"}
+              >
+                <Heading as={"p"} variant={"p4"}>
+                  {" "}
+                  {`${loginUser?.firstName} ${loginUser?.lastName}`}
+                  {/* Jacob Jones */}
+                </Heading>
+                <Heading variant={"p1"}>
+                  {loginUser?.email}
+                  {/* jacobjones9@acme.com */}
+                </Heading>
+              </Box>
+
+              <Box display={{ xl: "block", base: "none" }}>
+                <HiOutlineChevronDown
+                  style={{ position: "absolute", right: "8px", top: "3px" }}
+                  color="black.100"
+                  // fontSize={{ "2xl": "27px", base: "240px" }}
+                  fontSize={"17px"}
+                />
+              </Box>
             </Box>
-          </Box>
-        </MenuButton>
-        <MenuList py="0px">
-          {candidate
-            ? candidatedropdown.map((item, index) => {
-                return (
-                  <Link
-                    key={index}
-                    _hover={{ textDecoration: "none" }}
-                    href={item.pathname}
-                  >
-                    <MenuItem
+          </MenuButton>
+          <MenuList py="0px">
+            {candidate
+              ? candidatedropdown.map((item, index) => {
+                  return (
+                    <Link
                       key={index}
-                      transition={".5s"}
-                      _hover={{
-                        bg: "gray.200",
-                        "& .hoverText": { color: "blue.500" },
-                      }}
-                      borderBottom={"1px solid #0000001a"}
-                      // p={{ md: "14px 20px 16px 20px", base: "7px 16px 14px 16px" }}
-                      p={{
-                        md: "14px 20px 16px 20px",
-                        base: "13px 16px 13px 16px",
-                      }}
-
-                      // mb={"6px"}
+                      _hover={{ textDecoration: "none" }}
+                      href={item.pathname}
                     >
-                      <Box
-                        border={"1px solid black.100"}
-                        display={"flex"}
-                        justifyContent={"center"}
-                        alignItems={"center"}
-                        gap={"10px"}
-                        className="hoverText"
-                      >
-                        {/* <Image src={dasboadrd.src} /> */}
-                        {item.icon}
+                      <MenuItem
+                        key={index}
+                        transition={".5s"}
+                        _hover={{
+                          bg: "gray.200",
+                          "& .hoverText": { color: "blue.500" },
+                        }}
+                        borderBottom={"1px solid #0000001a"}
+                        // p={{ md: "14px 20px 16px 20px", base: "7px 16px 14px 16px" }}
+                        p={{
+                          md: "14px 20px 16px 20px",
+                          base: "13px 16px 13px 16px",
+                        }}
 
-                        <Heading
+                        // mb={"6px"}
+                      >
+                        <Box
+                          border={"1px solid black.100"}
+                          display={"flex"}
+                          justifyContent={"center"}
+                          alignItems={"center"}
+                          gap={"10px"}
                           className="hoverText"
-                          transition={".5s"}
-                          mb="1px"
-                          as={"p"}
-                          variant={"p4"}
                         >
-                          {" "}
-                          {item.title}
-                        </Heading>
-                      </Box>
-                    </MenuItem>
-                  </Link>
-                );
-              })
-            : operatorDropdown
-            ? operator.map((item, index) => {
-                return (
-                  <Link
-                    key={index}
-                    _hover={{ textDecoration: "none" }}
-                    href={item.pathname}
-                  >
-                    <MenuItem
+                          {/* <Image src={dasboadrd.src} /> */}
+                          {item.icon}
+
+                          <Heading
+                            className="hoverText"
+                            transition={".5s"}
+                            mb="1px"
+                            as={"p"}
+                            variant={"p4"}
+                          >
+                            {" "}
+                            {item.title}
+                          </Heading>
+                        </Box>
+                      </MenuItem>
+                    </Link>
+                  );
+                })
+              : operatorDropdown
+              ? operator.map((item, index) => {
+                  return (
+                    <Link
                       key={index}
-                      bg="transparent"
-                      transition={".5s"}
-                      _hover={{
-                        bg: "gray.200",
-                        "& .hoverText": { color: "blue.500" },
-                      }}
-                      borderBottom={"1px solid #0000001a"}
-                      p={{
-                        md: "14px 20px 16px 20px",
-                        base: "13px 16px 13px 16px",
-                      }}
-                      // mb={"6px"}
+                      _hover={{ textDecoration: "none" }}
+                      href={item.pathname}
                     >
-                      <Box
-                        border={"1px solid black.100"}
-                        display={"flex"}
-                        justifyContent={"center"}
-                        alignItems={"center"}
-                        gap={"10px"}
+                      <MenuItem
+                        key={index}
+                        bg="transparent"
+                        transition={".5s"}
+                        _hover={{
+                          bg: "gray.200",
+                          "& .hoverText": { color: "blue.500" },
+                        }}
+                        borderBottom={"1px solid #0000001a"}
+                        p={{
+                          md: "14px 20px 16px 20px",
+                          base: "13px 16px 13px 16px",
+                        }}
+                        // mb={"6px"}
                       >
-                        {item.icon}
-
-                        <Heading
-                          transition={".5s"}
-                          className="hoverText"
-                          mb="1px"
-                          as={"p"}
-                          variant={"p4"}
+                        <Box
+                          border={"1px solid black.100"}
+                          display={"flex"}
+                          justifyContent={"center"}
+                          alignItems={"center"}
+                          gap={"10px"}
                         >
-                          {" "}
-                          {item.title}
-                        </Heading>
-                      </Box>
-                    </MenuItem>
-                  </Link>
-                );
-              })
-            : companydropdown.map((item, index) => {
-                return (
-                  <Link
-                    key={index}
-                    _hover={{ textDecoration: "none" }}
-                    href={item.pathname}
-                  >
-                    <MenuItem
+                          {item.icon}
+
+                          <Heading
+                            transition={".5s"}
+                            className="hoverText"
+                            mb="1px"
+                            as={"p"}
+                            variant={"p4"}
+                          >
+                            {" "}
+                            {item.title}
+                          </Heading>
+                        </Box>
+                      </MenuItem>
+                    </Link>
+                  );
+                })
+              : companydropdown.map((item, index) => {
+                  return (
+                    <Link
                       key={index}
-                      bg="transparent"
-                      transition={".5s"}
-                      _hover={{
-                        bg: "gray.200",
-                        "& .hoverText": { color: "blue.500" },
-                      }}
-                      borderBottom={"1px solid #0000001a"}
-                      p={{
-                        md: "14px 20px 16px 20px",
-                        base: "13px 16px 13px 16px",
-                      }}
-                      // mb={"6px"}
+                      _hover={{ textDecoration: "none" }}
+                      href={item.pathname}
                     >
-                      <Box
-                        border={"1px solid black.100"}
-                        display={"flex"}
-                        justifyContent={"center"}
-                        alignItems={"center"}
-                        gap={"10px"}
+                      <MenuItem
+                        key={index}
+                        bg="transparent"
+                        transition={".5s"}
+                        _hover={{
+                          bg: "gray.200",
+                          "& .hoverText": { color: "blue.500" },
+                        }}
+                        borderBottom={"1px solid #0000001a"}
+                        p={{
+                          md: "14px 20px 16px 20px",
+                          base: "13px 16px 13px 16px",
+                        }}
+                        // mb={"6px"}
                       >
-                        {/* <Image src={dasboadrd.src} /> */}
-                        {item.icon}
-
-                        <Heading
-                          transition={".5s"}
-                          className="hoverText"
-                          mb="1px"
-                          as={"p"}
-                          variant={"p4"}
+                        <Box
+                          border={"1px solid black.100"}
+                          display={"flex"}
+                          justifyContent={"center"}
+                          alignItems={"center"}
+                          gap={"10px"}
                         >
-                          {" "}
-                          {item.title}
-                        </Heading>
-                      </Box>
-                    </MenuItem>
-                  </Link>
-                );
-              })}
-        </MenuList>
-      </Menu>
-       {/* )}  */}
+                          {/* <Image src={dasboadrd.src} /> */}
+                          {item.icon}
+
+                          <Heading
+                            transition={".5s"}
+                            className="hoverText"
+                            mb="1px"
+                            as={"p"}
+                            variant={"p4"}
+                          >
+                            {" "}
+                            {item.title}
+                          </Heading>
+                        </Box>
+                      </MenuItem>
+                    </Link>
+                  );
+                })}
+          </MenuList>
+        </Menu>
+      )}
     </>
   );
 };

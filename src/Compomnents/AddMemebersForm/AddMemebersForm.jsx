@@ -154,7 +154,7 @@ const AddMemebersForm = () => {
   };
 
   const roleDropdown = [
-    // { label: "Owner", value: roles.company },
+    { label: "Company Administrator", value: roles.owner },
     { label: "Recruiter", value: roles.recruiter },
   ];
   return (
