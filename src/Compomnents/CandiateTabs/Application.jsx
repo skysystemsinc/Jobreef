@@ -1,4 +1,4 @@
-import { Box, Image } from "@chakra-ui/react";
+import { Box, Image, useToast } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import ArchivedTabs from "../ArchivedTabs/ArchivedTabs";
 import All from "../ArchivedTabs/All";
@@ -11,14 +11,25 @@ import CandidatesDropdown from "./CandidatesDropdown";
 import { HiOutlineMail } from "react-icons/hi";
 import { BsChevronDown } from "react-icons/bs";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
-import { jobApplicants } from "@/Reudx/slices/jobApplicants";
+import {
+  jobApplicants,
+  setAll,
+  setArchived,
+} from "@/Reudx/slices/jobApplicants";
 import DeleteModal from "../DeleteModal/DeleteModal";
+import endPoints from "@/Utils/endpoints";
+import { put } from "@/helper/fetch";
+import { getSelectedCandidates } from "@/Reudx/slices/candidates";
 
 const Application = ({ filterKey }) => {
   const dispatch = useDispatch();
-  // const candidates = useSelector((state) => state.candidates.value.filter);
+  // const dispatch = useDispatch()
+  const toast = useToast();
   const [state, setState] = useState({
     archived: false,
+    loading: false,
+    reStore: false,
+    delete: false,
   });
   const selectedCandidates = useSelector(
     (state) => state.candidates.value.selected
@@ -29,24 +40,40 @@ const Application = ({ filterKey }) => {
   const archivedApplicants = useSelector(
     (state) => state.jobApplicantList.value.applicants.archived
   );
-  console.log("archivedApplicants", archivedApplicants);
-
-  // const allData =
-  //   candidates && candidates?.filter((item) => item[filterKey] == false);
-  // const archivedData =
-  //   candidates && candidates?.filter((item) => item[filterKey] == true);
-  //   const allJobState = useSelector((state) => state.jobPost.jobs.allJobs);
 
   const tablist = [
-    `All (${allApplicants?.length ?? 0})`,
+    `All (${allApplicants?.length ?? 0} )`,
     ` Archived (${archivedApplicants?.length ?? 0})`,
   ];
 
   const popOverListAll = [
-    { title: "Download Attachments" },
-    { title: "Archive" },
+    {
+      title: "Download Attachments",
+      handleEvent: (e) => {
+        console.log("log", e);
+      },
+    },
+    {
+      title: "Archive",
+      handleEvent: (e) => {
+        setState((prev) => ({ ...prev, archived: e }));
+      },
+    },
   ];
-  const popOverListArchived = ["Restore", "Delete"];
+  const popOverListArchived = [
+    {
+      title: "Restore",
+      handleEvent: (e) => {
+        setState((prev) => ({ ...prev, reStore: e }));
+      },
+    },
+    {
+      title: "Delete",
+      handleEvent: (e) => {
+        setState((prev) => ({ ...prev, delete: e }));
+      },
+    },
+  ];
 
   const sortArray = [
     { label: "Sort Candidates By", listItem: ["Date Applied", "Relevance"] },
@@ -72,8 +99,12 @@ const Application = ({ filterKey }) => {
       ],
     },
   ];
+  const handleSelectCandidate = (data) => {
+    dispatch(getSelectedCandidates(data));
+  };
   const componentList = [
     <All
+      handleSelectCandidate={handleSelectCandidate}
       sortArray={sortArray}
       // data={applicationScreen}
       data={allApplicants}
@@ -102,7 +133,115 @@ const Application = ({ filterKey }) => {
       icon: <BsChevronDown className="hoverColor" />,
     },
   ];
-  const handleArchived = () => {};
+
+  const handleArchived = async () => {
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: true,
+      };
+    });
+    try {
+      const postData = await put(
+        `${endPoints.appliedJobs}/${state.archived.id}`,
+        {
+          archived: true,
+        }
+      );
+
+      if (postData) {
+        toast({
+          position: "bottom-right",
+          title: "job paused successfully",
+          status: "success",
+          variant: "subtle",
+          isClosable: true,
+        });
+        setState((prev) => {
+          return {
+            ...prev,
+            loading: false,
+            archived: false,
+          };
+        });
+        dispatch(setArchived([...archivedApplicants, postData.data]));
+        dispatch(
+          setAll([
+            ...allApplicants.filter((item) => item.id !== postData.data.id),
+          ])
+        );
+      }
+    } catch (err) {
+      console.log("err", err);
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+        };
+      });
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
+  };
+  const handleRestore = async () => {
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: true,
+      };
+    });
+    try {
+      const postData = await put(
+        `${endPoints.appliedJobs}/${state.archived.id}`,
+        {
+          archived: true,
+        }
+      );
+
+      if (postData) {
+        toast({
+          position: "bottom-right",
+          title: "job paused successfully",
+          status: "success",
+          variant: "subtle",
+          isClosable: true,
+        });
+        setState((prev) => {
+          return {
+            ...prev,
+            loading: false,
+            archived: false,
+          };
+        });
+        dispatch(setArchived([...archivedApplicants, postData.data]));
+        dispatch(
+          setAll([
+            ...allApplicants.filter((item) => item.id !== postData.data.id),
+          ])
+        );
+      }
+    } catch (err) {
+      console.log("err", err);
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+        };
+      });
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
+  };
   return (
     <Box>
       <DeleteModal
@@ -115,7 +254,19 @@ const Application = ({ filterKey }) => {
             return { ...prev, archived: false };
           })
         }
-        deleteBtnLabel={"archived"}
+        deleteBtnLabel={"Archived"}
+      />
+      <DeleteModal
+        name={state?.reStore?.title}
+        loading={state.loading}
+        handleDelete={handleRestore}
+        isOpen={state.reStore}
+        onClose={() =>
+          setState((prev) => {
+            return { ...prev, reStore: false };
+          })
+        }
+        deleteBtnLabel={"Restore"}
       />
       <CandidatesDropdown />
 

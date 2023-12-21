@@ -282,12 +282,6 @@ const ScreeningQuestion = ({ disableNextPrev, nextStep, prevStep }) => {
                       })}
                     </InputWrapper>
                   </RadioGroup>
-                  {/* <Input
-                    value={item.rightAns}
-                    onChange={(e) => handleAnsChange(e, index)}
-                    variant={"bg-input"}
-                    placeholder="Enter right answer"
-                  /> */}
                 </Box>
               ) : null}
             </Box>

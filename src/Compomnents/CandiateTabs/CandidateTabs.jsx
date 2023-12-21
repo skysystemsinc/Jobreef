@@ -53,19 +53,19 @@ const CandidateTabs = ({ company }) => {
   //   }
   // }, [candidates]);
   const handleChange = (ind) => {
-    if (ind == 0) {
-      const applications = candidates?.filter(
-        (item) => item.matchCandidate == false
-      );
+    // if (ind == 0) {
+    //   const applications = candidates?.filter(
+    //     (item) => item.matchCandidate == false
+    //   );
 
-      dispatch(getFilterCandidates(applications));
-    } else {
-      const applications = candidates?.filter(
-        (item) => item.matchCandidate == true
-      );
+    //   dispatch(getFilterCandidates(applications));
+    // } else {
+    //   const applications = candidates?.filter(
+    //     (item) => item.matchCandidate == true
+    //   );
 
-      dispatch(getFilterCandidates(applications));
-    }
+    //   dispatch(getFilterCandidates(applications));
+    // }
     setTabIndex(ind);
   };
 
@@ -149,9 +149,10 @@ const CandidateTabs = ({ company }) => {
               // border: "1px solid red",
             }}
           >
-            {tabLists?.map((item) => {
+            {tabLists?.map((item , ind) => {
               return (
                 <Tab
+                key={ind}
                   fontSize={{ md: "16px", base: "14px" }}
                   sx={globalStyles.tabelinkStyle}
                   _selected={globalStyles.selectTab}

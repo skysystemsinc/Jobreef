@@ -14,6 +14,7 @@ const endPoints = {
   attachment:"attachment",
   achievement:"achievement",
   jobs:"jobs",
-  companyJobs:"companyJobs"
+  companyJobs:"companyJobs",
+  appliedJobs:"appliedJobs",
 };
 export default endPoints;

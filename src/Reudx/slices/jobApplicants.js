@@ -27,9 +27,16 @@ export const jobApplicants = createAsyncThunk("jobApplicants", async (id) => {
 const jobApplicantList = createSlice({
   name: "jobApplicantList",
   initialState: initialState,
-  reducers: {},
-  extraReducers:(builder)=> {
-    builder.addCase(jobApplicants.fulfilled, (state, action)=>{
+  reducers: {
+    setArchived: (state, action) => {
+      state.value.applicants.archived = action.payload;
+    },
+    setAll: (state, action) => {
+      state.value.applicants.all = action.payload;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(jobApplicants.fulfilled, (state, action) => {
       const all = action.payload.data.applications.filter(
         (item) => item.archived == false
       );
@@ -38,12 +45,11 @@ const jobApplicantList = createSlice({
       );
       state.value.applicants.all = all;
       state.value.applicants.archived = archived;
-    })
-    builder.addCase(jobApplicants.pending, (state, action)=>{
-
+    });
+    builder.addCase(jobApplicants.pending, (state, action) => {
       state.value.applicants.all = false;
       state.value.applicants.archived = false;
-    })
+    });
     // [jobApplicants.fulfilled]: (state, action) => {
     //   const all = action.payload.data.applications.filter(
     //     (item) => item.archived == false
@@ -62,5 +68,5 @@ const jobApplicantList = createSlice({
     // }
   },
 });
-// export const { setJobApplicants } = jobApplicantList.factions;
+export const { setArchived ,setAll } = jobApplicantList.actions;
 export default jobApplicantList.reducer;
