@@ -182,12 +182,12 @@ export const CandidateTimeline = ({ candidate, variant }) => {
                   ) : index == 4 ? (
                     <Skills prevStep={handlePrevious} nextStep={nextStep} />
                   ) : index == 5 ? (
+                    <Achievement prevStep={handlePrevious} nextStep={nextStep} />
+                    ) : index == 6 ? (
                     <TimelineAttachments
                       prevStep={handlePrevious}
                       nextStep={nextStep}
                     />
-                  ) : index == 6 ? (
-                    <Achievement prevStep={handlePrevious} nextStep={nextStep} />
                   ) : null}
                 </Box>
               </Step>

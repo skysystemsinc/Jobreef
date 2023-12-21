@@ -14,7 +14,7 @@ import {
 import { Box, Button, Heading, Flex, Input } from "@chakra-ui/react";
 import LabelInput from "../LabelInput/LabelInput";
 import InputWrapper from "../InputWrapper/InputWrapper";
-function CreditCardForm({handleCancel ,handleSave}) {
+function CreditCardForm({ handleCancel, handleSave }) {
   const [cardNumber, setCardNumber] = useState("");
   const [cardData, setCardData] = useState(null);
   const inputRef = useRef(null);
@@ -23,8 +23,12 @@ function CreditCardForm({handleCancel ,handleSave}) {
     name: "",
     expiry: "",
     cvc: "",
-    address:"",
+    address: "",
+    address: "",
+    city: "",
+    province: "",
     date: "",
+    country: "",
     month: "",
   });
 
@@ -101,19 +105,7 @@ function CreditCardForm({handleCancel ,handleSave}) {
             label={"Name On Card"}
           />
         </Box>
-        <Box my={"25px"}>
-          <LabelInput
-            setState={handleInputChange}
-            state={state.address}
-            name={"address"}
-            required
-            labelVariant={"label"}
-            type="tel"
-            variant={"bg-input"}
-            placeholder="Enter address"
-            label={"Billing address"}
-          />
-        </Box>
+
         <InputWrapper gap={{ xl: "80px", base: "20px" }}>
           <LabelInput
             state={state.cvc}
@@ -173,9 +165,64 @@ function CreditCardForm({handleCancel ,handleSave}) {
           </Box>
         </InputWrapper>
 
+        <Box mb={"20px"}>
+          <LabelInput
+            state={state.country}
+            setState={handleInputChange}
+            name={"country"}
+            labelVariant={"label"}
+            type="text"
+            variant={"bg-input"}
+            placeholder="Select Country"
+            dropdown
+            label={"Country*"}
+          />
+        </Box>
+        <Box mb={"20px"}>
+          <LabelInput
+            state={state.province}
+            setState={handleInputChange}
+            name={"province"}
+            dropdown
+            labelVariant={"label"}
+            type="text"
+            variant={"bg-input"}
+            placeholder="Select State/Province"
+            label={"State/Province"}
+          />
+        </Box>
+        <Box mb={"20px"}>
+          <LabelInput
+            state={state.city}
+            setState={handleInputChange}
+            name={"city"}
+            labelVariant={"label"}
+            type="text"
+            variant={"bg-input"}
+            placeholder="Enter City"
+            label={"City"}
+          />
+        </Box>
+        <Box mb={"20px"}>
+          <LabelInput
+            state={state.address}
+            setState={handleInputChange}
+            name={"address"}
+            labelVariant={"label"}
+            type="text"
+            variant={"bg-input"}
+            placeholder="Enter Street Address"
+            label={"Street Address"}
+          />
+        </Box>
+
         <Flex mb={"40px"} gap={"25px"} justifyContent="center" mt={"70px"}>
-          <Button  onClick={handleCancel} variant="outline-blue">Cancel</Button>
-          <Button onClick={handleSave} variant={"blue-btn"}>Save</Button>
+          <Button onClick={handleCancel} variant="outline-blue">
+            Cancel
+          </Button>
+          <Button onClick={handleSave} variant={"blue-btn"}>
+            Save
+          </Button>
         </Flex>
       </Box>
     </Box>

@@ -157,7 +157,7 @@ const Achievement = ({ prevStep, nextStep }) => {
               mb={"40px"}
               variant={"blue-btn"}
             >
-              Add Achievement
+              Add Awards
             </Button>
           </Flex>
           <Flex

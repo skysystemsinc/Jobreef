@@ -146,7 +146,7 @@ const Achievement = () => {
               mt={{ md: "41px", base: "20px" }}
               variant={"blue-btn"}
             >
-              Add Achievement
+              Add Award
             </Button>
           </Flex>
         </Box>
@@ -155,8 +155,8 @@ const Achievement = () => {
           <TextCard
             addHandle={handleAddNew}
             title={"Show-off Your Accomplishments"}
-            subittle={"Add Your Notable Achievements."}
-            btnLable={"Add Achievement"}
+            subittle={"Add Your Notable Awards."}
+            btnLable={"Add Award"}
           />
         </Box>
       )}

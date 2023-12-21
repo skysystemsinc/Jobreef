@@ -5,21 +5,20 @@ import React from "react";
 const CheckBox = ({ defaultCheck, selectSate, label, handleEvent }) => {
   return (
     <Checkbox
-      display={"flex"}
-      alignItems={"center"}
-      gap={"6px"}
+      // display={"flex"}
+      // alignItems={"center"}
+      // gap={"6px"}
       borderRadius={"10px"}
       onChange={handleEvent}
       checked={selectSate}
       defaultChecked={defaultCheck ? defaultCheck : false}
-      
       size="md"
-      colorScheme="green
-      "
-      // border={"1px solid "}
-      borderColor={selectSate ? "blue.500" : "gray.text"}
+      colorScheme="blue"
+      
       rounded={"sm"}
+      borderColor={selectSate ? "blue.500" : "gray.text"}
       sx={globalStyles.checkBoxStyle}
+
     >
       <Heading
         variant={"p1"}
