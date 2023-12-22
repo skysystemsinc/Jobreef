@@ -103,10 +103,11 @@ const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
       const postData = await get(`${endPoints.user}/${id}`);
       if (postData.success) {
         const { data } = postData;
+        console.log("data",data);
 
         dispatch(setLoginUser(postData.data));
         dispatch(addCompany(postData?.data?.company));
-        dispatch(getTeamMembers(postData?.data?.company?.companyEmployees));
+        // dispatch(getTeamMembers(postData?.data?.company?.companyEmployees));
 
         dispatch(addEmployee(postData?.data?.employee));
       }

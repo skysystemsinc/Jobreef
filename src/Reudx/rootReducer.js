@@ -10,7 +10,8 @@ import companyRegister from "./slices/company";
 import employeeRegister from "./slices/employee";
 import LoginUser from "./slices/LoginUser";
 import jobPost from "./slices/jobPost";
-import  jobApplicantList from "./slices/jobApplicants"
+import  jobApplicantList from "./slices/jobApplications"
+import  matchCandidateList from "./slices/matchCandidate"
 
 
 const rootReducer = combineReducers({
@@ -25,7 +26,9 @@ const rootReducer = combineReducers({
   employeeRegister,
   LoginUser,
   jobPost,
-  jobApplicantList:jobApplicantList                                
+  jobApplicantList:jobApplicantList ,
+                                 
+  matchCandidateList:matchCandidateList                               
 
 });
 export default rootReducer;

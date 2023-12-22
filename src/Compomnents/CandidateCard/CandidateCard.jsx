@@ -169,7 +169,9 @@ const CandidateCard = ({
               alignItems={"center"}
               flexWrap={"wrap"}
             >
-              {data?.skills?.map((item, ind) => {
+              { 
+              
+              data?.skills?.map((item, ind) => {
                 return (
                   <Box key={ind} mr={{ md: "18px", base: "14px" }} mb={"10px"}>
                     <Chip label={item.name} />

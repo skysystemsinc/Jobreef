@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 
 const DeleteEmployee = async (req, res) => {
   try {
-    const deleteExp = await prisma.Employee.delete({
+    const deleteExp = await prisma.Candidate.delete({
       where: {
         id: req.query.id,
       },
@@ -33,7 +33,7 @@ const UpdateEmployee = async (req, res) => {
   console.log("data", req.body);
 
   try {
-    const employee = await prisma.Employee.update({
+    const employee = await prisma.Candidate.update({
       where: {
         id: req.query.id,
       },
@@ -74,7 +74,7 @@ const UpdateEmployee = async (req, res) => {
 
 const GetSingleEmployee = async (req, res) => {
   try {
-    const employee = await prisma.Employee.findUnique({
+    const employee = await prisma.Candidate.findUnique({
       where: {
         id: req.query.id,
       },

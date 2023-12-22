@@ -234,7 +234,7 @@ const DesktopNav = () => {
               >
                 {navItem.label}
 
-                {ind == 1 || ind == 2 ? (
+                { ind == 2 ? (
                   <Box>
                     <TbCaretDown fontSize={"18px"} />
                   </Box>

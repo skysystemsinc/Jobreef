@@ -16,5 +16,8 @@ const endPoints = {
   jobs:"jobs",
   companyJobs:"companyJobs",
   appliedJobs:"appliedJobs",
+  teamMember:"team-member",
+  applications:"applications",
+  matchCandidate:"match-candidate",
 };
 export default endPoints;

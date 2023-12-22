@@ -19,7 +19,11 @@ const Login = async (req, res) => {
         email: email,
       },
       include: {
-        company: true,
+        company: {
+          include: {
+            companyEmployees: true,
+          },
+        },
         employee: {
           include: {
             skills: true,

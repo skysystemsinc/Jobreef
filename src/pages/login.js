@@ -34,6 +34,7 @@ import { roles } from "@/Utils/role";
 import { addCompany } from "@/Reudx/slices/company";
 import { addEmployee } from "@/Reudx/slices/employee";
 import { post } from "@/helper/fetch";
+import { getTeamMembers } from "@/Reudx/slices/teamMembers";
 
 export default function Login() {
   const router = useRouter();
@@ -71,6 +72,8 @@ export default function Login() {
         localStorage.setItem("id", data.id);
         dispatch(setLoginUser(postData.data));
         dispatch(addCompany(postData?.data?.company));
+        dispatch(getTeamMembers(postData?.data?.company?.companyEmployees));
+
         dispatch(addEmployee(postData?.data?.employee));
         if (data.role == roles.company) {
           router.push("/company/profile-setting");

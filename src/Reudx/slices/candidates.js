@@ -19,9 +19,14 @@ const candidates = createSlice({
       state.value.filter = action.payload;
     },
     getSelectedCandidates: (state, action) => {
-      state.value.selected = action.payload;
+      state.value.selected = {
+        ...action.payload,
+        ...action.payload.employee,
+        ...action.payload.employee.user,
+      };
     },
   },
 });
-export const { getAllCandidates, getFilterCandidates , getSelectedCandidates } = candidates.actions;
+export const { getAllCandidates, getFilterCandidates, getSelectedCandidates } =
+  candidates.actions;
 export default candidates.reducer;

@@ -94,7 +94,8 @@ const GetSingleUser = async (req, res) => {
         company: {
           include: {
             user: true,
-            companyEmployees:true
+            // companyEmployees:true
+            // companyAdmin:tru
           },
         },
         employee: {

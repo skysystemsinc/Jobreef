@@ -53,7 +53,7 @@ const JobPostTabs = ({ company }) => {
     if (companyState.id) {
       getAllJobs();
     }
-  }, []);
+  }, [companyState]);
 
   return (
     <>

@@ -29,11 +29,17 @@ import { BsChevronDown, BsStarFill } from "react-icons/bs";
 import { PiDownloadSimpleBold, PiNotepadLight } from "react-icons/pi";
 import CandidateTabs from "../CandidateTabs/CandidateTabs";
 
-const SelectedCandidateCard = ({  profileBtn, matchCandidate, toggle, setToggle }) => {
+const SelectedCandidateCard = ({
+  profileBtn,
+  matchCandidate,
+  handleReturn,
+  data,
+  details,
+}) => {
   const selectedCandidates = useSelector(
     (state) => state.candidates.value.selected
   );
-
+  console.log("selectedCandidates", selectedCandidates);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const iconWidth = {
     width: { md: "14px", base: "13px" },
@@ -46,46 +52,24 @@ const SelectedCandidateCard = ({  profileBtn, matchCandidate, toggle, setToggle 
     },
   };
 
-  // const profileBtn = [
-  //   {
-  //     name: "Send Message",
-  //     icon: <HiOutlineMail className="hoverColor" />,
-  //     // disable: matchCandidate ? false : true,
-  //     disable: matchCandidate ? false : true,
-
-
-  //   },
-  //   {
-  //     name: "false",
-  //     icon: <HiOutlineMail className="hoverColor" />,
-  //     disable: matchCandidate ? false : true,
-
-  //   },
-  //   {
-  //     name: "Status:",
-  //     span: "read",
-  //     icon: <BsChevronDown className="hoverColor" />,
-  //     disable: matchCandidate ? false : true,
-
-  //   },
-
-  // ];
   return (
     <>
-      <NotePadModal open={isOpen} onClose={onClose} />
+      {/* <NotePadModal open={isOpen} onClose={onClose} /> */}
 
       <Box
         border={"1px  solid"}
         borderRadius={"8px"}
         borderColor={"gray.lightBorder"}
         padding={"15px 30px "}
-        bg={"white1.100"}
+        bg={"white.100"}
       >
         <Box
           display={"flex"}
           justifyContent={"flex-end"}
           alignItems={"center"}
           gap={"5px"}
+          onClick={handleReturn}
+
           mb={"18px"}
           cursor={"pointer"}
           role="group"
@@ -95,6 +79,7 @@ const SelectedCandidateCard = ({  profileBtn, matchCandidate, toggle, setToggle 
             _groupHover={{
               color: "blue.500",
             }}
+            cursor={"pointer"}
             fontSize={"20px"}
             color={"gray.600"}
           >
@@ -113,11 +98,7 @@ const SelectedCandidateCard = ({  profileBtn, matchCandidate, toggle, setToggle 
             Return
           </Heading>
         </Box>
-        <Box
-          
-          
-          pb={"7px"}
-        >
+        <Box pb={"7px"}>
           <Box width={"100%"} flex={1}>
             <Box
               width={{ base: "100%" }}
@@ -146,7 +127,8 @@ const SelectedCandidateCard = ({  profileBtn, matchCandidate, toggle, setToggle 
                 />
                 <Box>
                   <Heading color={"gray.text"} as={"p"} variant={"p7"}>
-                    {selectedCandidates?.name}
+                    {/* {selectedCandidates?.name} */}
+                    {`${selectedCandidates?.firstName}  ${selectedCandidates?.lastName}`}
                   </Heading>
 
                   <Heading
@@ -156,7 +138,9 @@ const SelectedCandidateCard = ({  profileBtn, matchCandidate, toggle, setToggle 
                     as={"p"}
                     variant={"p4"}
                   >
-                    {selectedCandidates?.country}, {selectedCandidates?.state}
+                    {/* {selectedCandidates?.country}, {selectedCandidates?.state} */}
+                    {selectedCandidates?.location?.country},{" "}
+                    {selectedCandidates?.location?.province}
                   </Heading>
                   <Box>
                     <Box>
@@ -175,7 +159,7 @@ const SelectedCandidateCard = ({  profileBtn, matchCandidate, toggle, setToggle 
                         variant={"p4"}
                       >
                         Applied On:{" "}
-                        {moment(selectedCandidates?.createAt).format(
+                        {moment(selectedCandidates?.createdAt).format(
                           "DD/MM/YYYY"
                         )}
                       </Heading>
@@ -245,65 +229,9 @@ const SelectedCandidateCard = ({  profileBtn, matchCandidate, toggle, setToggle 
                 })}
               </Box>
             </Box>
-
-            {/* {matchCandidate ? null : (
-              <Box
-                onClick={() => {
-                  toggle ? setToggle(false) : setToggle(true);
-                }}
-                border={"1px solid"}
-                borderColor={"white.100"}
-                display={"flex"}
-                borderRadius={"10px"}
-                role="group"
-                alignItems={"center"}
-                my={"10px"}
-                gap={"5px"}
-                padding={"15px 0px"}
-                justifyContent={"center"}
-                boxShadow={
-                  " 0px 1px 2px 0px rgba(16, 24, 40, 0.06), 0px 1px 3px 0px rgba(16, 24, 40, 0.10)"
-                }
-                transition={".5s"}
-                cursor={"pointer"}
-                _hover={{
-                  backgroundColor: "gray.200",
-                  border: "1px solid  ",
-                  "& .hoverColor": {
-                    color: "blue.500",
-                  },
-                  borderColor: "blue.500",
-                }}
-              >
-                <Heading
-                  _groupHover={{
-                    color: "blue.500",
-                  }}
-                  color={"black.100"}
-                  variant={"p10"}
-                  transition={".5s"}
-                >
-                  {toggle ? "Close NotePad" : "Open Notepad"}
-                  <Heading
-                    transition={".5s"}
-                    _groupHover={{
-                      color: "blue.500",
-                    }}
-                    color={"black.100"}
-                    variant={"p10"}
-                    sx={{ fontWeight: 700, ml: "5px" }}
-                    as={"span"}
-                  ></Heading>
-                </Heading>
-
-                <Box fontSize={"16px"}></Box>
-              </Box>
-            )} */}
           </Box>
 
-          <CandidateTabs matchCandidate={matchCandidate}/>
-
-         
+          <CandidateTabs matchCandidate={matchCandidate} />
         </Box>
       </Box>
     </>

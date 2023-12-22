@@ -4,16 +4,19 @@ import PaginatedTable from "../PaginatedTable/PaginatedTable";
 import menu from "@/assets/Images/menu.svg";
 import { useRouter } from "next/router";
 import Popovers from "../PaginatedTable/Popovers";
-import { getTeamMembers } from "@/Reudx/slices/teamMembers";
+import { getTeamMembers, teamMemberList } from "@/Reudx/slices/teamMembers";
 import { useDispatch, useSelector } from "react-redux";
 import ReactTable from "../PaginatedTable/ReactTable";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import { put } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
+import { roles } from "@/Utils/role";
 const TeamMembers = () => {
   const toast = useToast();
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.teamMembers.value.allMembers);
+  const companyState = useSelector((state) => state.companyRegister.value);
+
   const [state, setState] = useState({
     activeUser: false,
     disableUser: false,
@@ -45,7 +48,13 @@ const TeamMembers = () => {
         accessorKey: "role",
         header: "Role",
         // cell: ({ row: { original } }) => original.opening,
-        cell: ({ row: { original } }) => original.role ?? "-",
+        cell: ({ row: { original } }) => (
+          <Box as="span" textTransform={"capitalize"}>
+            {original.role == roles.company
+              ? "Company Administrator"
+              : original.role ?? "-"}
+          </Box>
+        ),
       },
 
       {
@@ -193,6 +202,11 @@ const TeamMembers = () => {
       });
     }
   };
+  useEffect(() => {
+    if (companyState.id) {
+      dispatch(teamMemberList(companyState.id));
+    }
+  }, [companyState]);
 
   return (
     <>

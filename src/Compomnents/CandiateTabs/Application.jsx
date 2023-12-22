@@ -12,18 +12,20 @@ import { HiOutlineMail } from "react-icons/hi";
 import { BsChevronDown } from "react-icons/bs";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import {
-  jobApplicants,
+  jobApplications,
   setAll,
   setArchived,
-} from "@/Reudx/slices/jobApplicants";
+} from "@/Reudx/slices/jobApplications";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import endPoints from "@/Utils/endpoints";
-import { put } from "@/helper/fetch";
+import { deleteApi, put } from "@/helper/fetch";
 import { getSelectedCandidates } from "@/Reudx/slices/candidates";
+import SelectedCandidateCard from "../SelectedCandidateCard/SelectedCandidateCard";
+import { status } from "@/Utils/role";
 
 const Application = ({ filterKey }) => {
   const dispatch = useDispatch();
-  // const dispatch = useDispatch()
+  const [selectCandidate, setSelectCandidate] = useState(false);
   const toast = useToast();
   const [state, setState] = useState({
     archived: false,
@@ -31,14 +33,12 @@ const Application = ({ filterKey }) => {
     reStore: false,
     delete: false,
   });
-  const selectedCandidates = useSelector(
-    (state) => state.candidates.value.selected
-  );
+
   const allApplicants = useSelector(
-    (state) => state.jobApplicantList.value.applicants.all
+    (state) => state.jobApplicantList.value.application.all
   );
   const archivedApplicants = useSelector(
-    (state) => state.jobApplicantList.value.applicants.archived
+    (state) => state.jobApplicantList.value.application.archived
   );
 
   const tablist = [
@@ -64,6 +64,7 @@ const Application = ({ filterKey }) => {
     {
       title: "Restore",
       handleEvent: (e) => {
+        console.log("e", e);
         setState((prev) => ({ ...prev, reStore: e }));
       },
     },
@@ -100,7 +101,9 @@ const Application = ({ filterKey }) => {
     },
   ];
   const handleSelectCandidate = (data) => {
+    console.log("selected", data);
     dispatch(getSelectedCandidates(data));
+    setSelectCandidate(data);
   };
   const componentList = [
     <All
@@ -116,6 +119,7 @@ const Application = ({ filterKey }) => {
       sortArray={sortArray}
       data={archivedApplicants}
       filterKey={filterKey}
+      handleSelectCandidate={handleSelectCandidate}
       cardStatus={"Archived"}
       popOverList={popOverListArchived}
     />,
@@ -146,13 +150,14 @@ const Application = ({ filterKey }) => {
         `${endPoints.appliedJobs}/${state.archived.id}`,
         {
           archived: true,
+          // status:""
         }
       );
 
       if (postData) {
         toast({
           position: "bottom-right",
-          title: "job paused successfully",
+          title: "candidate archived successfully",
           status: "success",
           variant: "subtle",
           isClosable: true,
@@ -197,7 +202,7 @@ const Application = ({ filterKey }) => {
     });
     try {
       const postData = await put(
-        `${endPoints.appliedJobs}/${state.archived.id}`,
+        `${endPoints.appliedJobs}/${state.reStore.id}`,
         {
           archived: true,
         }
@@ -206,7 +211,7 @@ const Application = ({ filterKey }) => {
       if (postData) {
         toast({
           position: "bottom-right",
-          title: "job paused successfully",
+          title: "candidate restore successfully",
           status: "success",
           variant: "subtle",
           isClosable: true,
@@ -215,13 +220,15 @@ const Application = ({ filterKey }) => {
           return {
             ...prev,
             loading: false,
-            archived: false,
+            reStore: false,
           };
         });
-        dispatch(setArchived([...archivedApplicants, postData.data]));
+        dispatch(setAll([...allApplicants, postData.data]));
         dispatch(
-          setAll([
-            ...allApplicants.filter((item) => item.id !== postData.data.id),
+          setArchived([
+            ...archivedApplicants.filter(
+              (item) => item.id !== postData.data.id
+            ),
           ])
         );
       }
@@ -241,6 +248,63 @@ const Application = ({ filterKey }) => {
         isClosable: true,
       });
     }
+  };
+
+  const handleDelete = async () => {
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: true,
+      };
+    });
+    try {
+      const postData = await deleteApi(
+        `${endPoints.appliedJobs}/${state.delete.id}`
+      );
+
+      if (postData) {
+        toast({
+          position: "bottom-right",
+          title: "candidate delete successfully",
+          status: "success",
+          variant: "subtle",
+          isClosable: true,
+        });
+        setState((prev) => {
+          return {
+            ...prev,
+            loading: false,
+            delete: false,
+          };
+        });
+        // dispatch(setArchived([...archivedApplicants, postData.data]));
+        dispatch(
+          setArchived([
+            ...archivedApplicants.filter(
+              (item) => item.id !== postData.data.id
+            ),
+          ])
+        );
+      }
+    } catch (err) {
+      console.log("err", err);
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+        };
+      });
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
+  };
+  const handleReturn = () => {
+    setSelectCandidate(null);
   };
   return (
     <Box>
@@ -268,11 +332,27 @@ const Application = ({ filterKey }) => {
         }
         deleteBtnLabel={"Restore"}
       />
+      <DeleteModal
+        name={state?.delete?.title}
+        loading={state.loading}
+        handleDelete={handleDelete}
+        isOpen={state.delete}
+        onClose={() =>
+          setState((prev) => {
+            return { ...prev, delete: false };
+          })
+        }
+        // deleteBtnLabel={""}
+      />
       <CandidatesDropdown />
 
-      {selectedCandidates ? (
+      {selectCandidate ? (
         <Box mt={{ md: "31px", base: "15px" }}>
-          <SelectedCandidate profileBtn={profileBtn} />
+          {/* <SelectedCandidate profileBtn={profileBtn} /> */}
+          <SelectedCandidateCard
+            handleReturn={handleReturn}
+            profileBtn={profileBtn}
+          />
         </Box>
       ) : (
         <ArchivedTabs componentList={componentList} tablist={tablist} />

@@ -27,7 +27,7 @@ import { v4 as uuidv4 } from "uuid";
 import { post, put } from "@/helper/fetch";
 import { addEmployee } from "@/Reudx/slices/employee";
 import Loader from "../Loader/Loader";
-import { workExperience } from "@/schema/stateSchema";
+import { EmploymentTypeOpt, jobFamilyOpt, workExperience } from "@/schema/stateSchema";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 const ExperianceForm = ({ state, setState }) => {
   const toast = useToast();
@@ -348,6 +348,7 @@ const ExperianceForm = ({ state, setState }) => {
             variant={"bg-input"}
             placeholder="Select the type of employment"
             dropdown
+            dropdownOption={EmploymentTypeOpt}
             label={"Employment Type"}
             state={Experience.employeeType}
             setState={handleChange}
@@ -358,6 +359,7 @@ const ExperianceForm = ({ state, setState }) => {
             type="date"
             state={Experience.jobFamily}
             setState={handleChange}
+            dropdownOption={jobFamilyOpt}
             name={"jobFamily"}
             variant={"bg-input"}
             placeholder="Select the job family"

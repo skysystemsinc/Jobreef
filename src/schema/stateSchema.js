@@ -78,6 +78,7 @@ const education = {
   city: "",
   address: "",
   gpa: "",
+  educationLevel:"",
   description: "",
 };
 const certification = {
@@ -404,10 +405,7 @@ const educationOtp = [
     label: "Graduate Degree",
     value: "Graduate Degree",
   },
-  {
-    label: "Graduate Degree",
-    value: "Graduate Degree",
-  },
+
 ];
 const experienceOtp = [
   {

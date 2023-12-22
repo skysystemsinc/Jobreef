@@ -32,9 +32,9 @@ import endPoints from "@/Utils/endpoints";
 import { setAllJobs } from "@/Reudx/slices/jobPost";
 import { get } from "@/helper/fetch";
 import CandidatesDropdown from "./CandidatesDropdown";
-import {jobApplicants} from "@/Reudx/slices/jobApplicants";
+import { jobApplications } from "@/Reudx/slices/jobApplications";
+import {matchCandidate} from "@/Reudx/slices/matchCandidate";
 const CandidateTabs = ({ company }) => {
-  const candidates = useSelector((state) => state.candidates.value.all);
   const allJobState = useSelector((state) => state.jobPost.jobs.allJobs);
 
   const router = useRouter();
@@ -53,10 +53,11 @@ const CandidateTabs = ({ company }) => {
   //   }
   // }, [candidates]);
   const handleChange = (ind) => {
-    // if (ind == 0) {
-    //   const applications = candidates?.filter(
-    //     (item) => item.matchCandidate == false
-    //   );
+    if (ind == 1) {
+      if (allJobState) {
+        dispatch(matchCandidate(allJobState[0].id));
+      }
+    }
 
     //   dispatch(getFilterCandidates(applications));
     // } else {
@@ -116,10 +117,9 @@ const CandidateTabs = ({ company }) => {
 
   useEffect(() => {
     if (allJobState) {
-      dispatch(jobApplicants(allJobState[0].id));
+      dispatch(jobApplications(allJobState[0].id));
     }
   }, [allJobState]);
-
 
   return (
     <>
@@ -149,10 +149,10 @@ const CandidateTabs = ({ company }) => {
               // border: "1px solid red",
             }}
           >
-            {tabLists?.map((item , ind) => {
+            {tabLists?.map((item, ind) => {
               return (
                 <Tab
-                key={ind}
+                  key={ind}
                   fontSize={{ md: "16px", base: "14px" }}
                   sx={globalStyles.tabelinkStyle}
                   _selected={globalStyles.selectTab}

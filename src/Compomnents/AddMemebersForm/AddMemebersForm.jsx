@@ -98,9 +98,9 @@ const AddMemebersForm = () => {
       // role: roles.recruiter,
 
       // companyAdminId: companyState.id,
-      ...(formData.role == roles.recruiter && {
-        companyAdminId: companyState.id,
-      }),
+      companyAdminId: companyState.id,
+      // ...(formData.role == roles.recruiter && {
+      // }),
     });
     setState((prev) => {
       return {
@@ -109,7 +109,11 @@ const AddMemebersForm = () => {
       };
     });
     dispatch(addTeamMember({ ...formData }));
-    dispatch(getTeamMembers([...userState, postData.data]));
+    if (userState.length) {
+      dispatch(getTeamMembers([...userState, postData.data]));
+    } else {
+      dispatch(getTeamMembers([postData.data]));
+    }
     setState({ ...state, loading: false });
 
     router.push("/company/team-members");
@@ -136,7 +140,7 @@ const AddMemebersForm = () => {
     dispatch(addTeamMember({ ...formData }));
     dispatch(
       getTeamMembers([
-        ...userState.map((item) =>
+        ...userState?.map((item) =>
           item.id === postData.data.id ? postData.data : item
         ),
       ])
@@ -154,7 +158,7 @@ const AddMemebersForm = () => {
   };
 
   const roleDropdown = [
-    { label: "Company Administrator", value: roles.owner },
+    { label: "Company Administrator", value: roles.company },
     { label: "Recruiter", value: roles.recruiter },
   ];
   return (
