@@ -1,2 +1,2 @@
-const BACKEND_URL = "http://localhost:3000/api/"
+const BACKEND_URL = "/api/"
 export {BACKEND_URL}

@@ -4,7 +4,7 @@ import PaginatedTable from "../PaginatedTable/PaginatedTable";
 import menu from "@/assets/Images/menu.svg";
 import { useRouter } from "next/router";
 import Popovers from "../PaginatedTable/Popovers";
-import { getTeamMembers } from "@/Redux/slices/teamMembers";
+import { addFormData, getTeamMembers, teamMemberList } from "@/Redux/slices/teamMembers";
 import { useDispatch, useSelector } from "react-redux";
 import ReactTable from "../PaginatedTable/ReactTable";
 import DeleteModal from "../DeleteModal/DeleteModal";
@@ -16,6 +16,7 @@ const TeamMembers = () => {
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.teamMembers.value.allMembers);
   const companyState = useSelector((state) => state.companyRegister.value);
+  const loginUser = useSelector((state) => state.LoginUser.value);
 
   const [state, setState] = useState({
     activeUser: false,
@@ -24,82 +25,6 @@ const TeamMembers = () => {
   console.log("state", userState);
   const router = useRouter();
 
-  const columns = useMemo(
-    () => [
-      {
-        accessorKey: "name",
-        header: "Name",
-        cell: ({ row: { original } }) =>
-          original.firstName + " " + original.lastName,
-      },
-      {
-        accessorKey: "email",
-        header: "Email",
-        // cell: ({ row: { original } }) =>
-        //   original.employmentType === "" ? "-" : original.employmentType,
-      },
-      {
-        accessorKey: "jobTitle",
-        header: "Job Title",
-        // original.employeeRole === "" ? "-" : original.employeeRole,
-        cell: ({ row: { original } }) => original.jobTitle ?? "-",
-      },
-      {
-        accessorKey: "role",
-        header: "Role",
-        // cell: ({ row: { original } }) => original.opening,
-        cell: ({ row: { original } }) => (
-          <Box as="span" textTransform={"capitalize"}>
-            {original.role == roles.company
-              ? "Company Administrator"
-              : original.role ?? "-"}
-          </Box>
-        ),
-      },
-
-      {
-        accessorKey: "active",
-        header: "Status",
-        // original.employeeRole === "" ? "-" : original.employeeRole,
-        cell: ({ row: { original } }) =>
-          !original.active
-            ? "Disable"
-            : !original.inviteAccepted
-            ? "Invite Pending"
-            : original.active
-            ? "Active"
-            : "Disable",
-      },
-      {
-        accessorKey: "action",
-        header: "Action",
-        cell: ({ row: { original } }) => {
-          const activeActionList = [
-            { title: "Edit", handleEvent: () => handleEdit(original) },
-            {
-              title: "Disable",
-              handleEvent: () => setState({ ...state, disableUser: original }),
-            },
-          ];
-          const disableActionList = [
-            { title: "Edit", handleEvent: () => handleEdit(original) },
-            {
-              title: "Active",
-              handleEvent: () => setState({ ...state, activeUser: original }),
-            },
-          ];
-          return (
-            <Popovers
-              actionList={
-                original.active ? activeActionList : disableActionList
-              }
-            />
-          );
-        },
-      },
-    ],
-    []
-  );
   const handleActiveUser = async () => {
     setState((prev) => {
       return {
@@ -202,12 +127,91 @@ const TeamMembers = () => {
       });
     }
   };
+  const handleEdit = (data) => {
+    dispatch(addFormData(data))
+    router.push(`/company/add-members?id=${data.id}`);
+  };
   useEffect(() => {
-    if (companyState.id) {
-      dispatch(teamMemberList(companyState.id));
+    if (loginUser.id ) {
+      dispatch(teamMemberList(loginUser.id));
     }
-  }, [companyState]);
+  }, [loginUser]);
+  const columns = useMemo(
+    () => [
+      {
+        accessorKey: "name",
+        header: "Name",
+        cell: ({ row: { original } }) =>
+          original.firstName + " " + original.lastName,
+      },
+      {
+        accessorKey: "email",
+        header: "Email",
+        // cell: ({ row: { original } }) =>
+        //   original.employmentType === "" ? "-" : original.employmentType,
+      },
+      {
+        accessorKey: "jobTitle",
+        header: "Job Title",
+        // original.employeeRole === "" ? "-" : original.employeeRole,
+        cell: ({ row: { original } }) => original.jobTitle ?? "-",
+      },
+      {
+        accessorKey: "role",
+        header: "Role",
+        // cell: ({ row: { original } }) => original.opening,
+        cell: ({ row: { original } }) => (
+          <Box as="span" textTransform={"capitalize"}>
+            {original.role == roles.company
+              ? "Company Administrator"
+              : original.role ?? "-"}
+          </Box>
+        ),
+      },
 
+      {
+        accessorKey: "active",
+        header: "Status",
+        // original.employeeRole === "" ? "-" : original.employeeRole,
+        cell: ({ row: { original } }) =>
+          !original.active
+            ? "Disable"
+            : !original.inviteAccepted
+            ? "Invite Pending"
+            : original.active
+            ? "Active"
+            : "Disable",
+      },
+      {
+        accessorKey: "action",
+        header: "Action",
+        cell: ({ row: { original } }) => {
+          const activeActionList = [
+            { title: "Edit", handleEvent: () => handleEdit(original) },
+            {
+              title: "Disable",
+              handleEvent: () => setState({ ...state, disableUser: original }),
+            },
+          ];
+          const disableActionList = [
+            { title: "Edit", handleEvent: () => handleEdit(original) },
+            {
+              title: "Active",
+              handleEvent: () => setState({ ...state, activeUser: original }),
+            },
+          ];
+          return (
+            <Popovers
+              actionList={
+                original.active ? activeActionList : disableActionList
+              }
+            />
+          );
+        },
+      },
+    ],
+    []
+  );
   return (
     <>
       <DeleteModal

@@ -32,6 +32,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { httpRequest } from "@/helper/httpRrequest";
 import { addCompany } from "@/Redux/slices/company";
 import { post, put } from "@/helper/fetch";
+import { platformOpt } from "@/schema/stateSchema";
 
 const SocialLink = ({ nextStep, handlePrevious }) => {
   const toast = useToast();
@@ -163,30 +164,15 @@ const SocialLink = ({ nextStep, handlePrevious }) => {
     }
   };
   const handleUserAssociation = (companyId) => {
-    const role = isAuthenticated.role;
+    
     const id = isAuthenticated.userId;
     const body = {
-      role: role,
+      
       ["companyId"]: companyId,
     };
     try {
       const userAssociation = put(`${endPoints.user}/${id}`, body);
-      // const userAssociation = axios({
-      //   method: "PUT",
-      //   url: `${BACKEND_URL}${endPoints.user}/${id}`,
-      //   data: {
-      //     role: role,
-      //     location: [
-      //       {
-      //         country: State.country,
-      //         province: State.province,
-      //         city: State.city,
-      //         address: State.address,
-      //       },
-      //     ],
-      //     ["companyId"]: companyId,
-      //   },
-      // });
+   
       if (userAssociation) {
         setState((prev) => {
           return {
@@ -217,6 +203,7 @@ const SocialLink = ({ nextStep, handlePrevious }) => {
               labelVariant={"label"}
               type="text"
               variant={"bg-input"}
+              dropdownOption={platformOpt}
               placeholder="Select Platform"
               dropdown
               label={"Social Links"}

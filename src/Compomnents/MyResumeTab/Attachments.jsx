@@ -152,7 +152,7 @@ const Attachments = ({ style }) => {
   };
 
   useEffect(() => {
-    const data = employeeState.attachments;
+    const data = employeeState?.attachments;
     if (data) {
       setState((prev) => {
         return {

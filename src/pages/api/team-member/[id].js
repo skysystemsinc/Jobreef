@@ -6,7 +6,9 @@ const GET = async (req, res) => {
   try {
     const allUsers = await prisma.User.findMany({
       where: {
-        companyAdminId: id,
+        NOT: {
+          id: req.query.id,
+        }
       },
     });
     res.status(200).json({

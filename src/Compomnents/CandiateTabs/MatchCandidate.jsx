@@ -9,11 +9,12 @@ import DropDown from "../DropDown/DropDown";
 import blue_arrow_down from "@/assets/Images/blue-arrow-down.svg";
 import CandidatesDropdown from "./CandidatesDropdown";
 import { HiOutlineMail } from "react-icons/hi";
-import { getSelectedCandidates } from "@/Reudx/slices/candidates";
+import { getSelectedCandidates } from "@/Redux/slices/candidates";
+
 import DeleteModal from "../DeleteModal/DeleteModal";
 import endPoints from "@/Utils/endpoints";
 import { deleteApi, put } from "@/helper/fetch";
-import { setAll, setNotInterested } from "@/Reudx/slices/matchCandidate";
+import { setAll, setNotInterested } from "@/Redux/slices/matchCandidate";
 import SelectedCandidateCard from "../SelectedCandidateCard/SelectedCandidateCard";
 
 const MatchCandidate = ({ filterKey }) => {
@@ -81,10 +82,11 @@ const MatchCandidate = ({ filterKey }) => {
     {
       label: "Education",
       listItem: [
-        "Masters Degree or Higher",
-        "Bachelor’s Degree or Higher",
-        "Associate Degree or Higher",
-        "Closed",
+        "No Minimum",
+        "High School",
+        "Trade School",
+        "Undergraduate Degree (Associates or Bachelors)",
+        "Graduate Degree",
       ],
     },
 

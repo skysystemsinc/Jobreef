@@ -19,5 +19,6 @@ const endPoints = {
   teamMember:"team-member",
   applications:"applications",
   matchCandidate:"match-candidate",
+  employeeSkills:"employee-skills",
 };
 export default endPoints;

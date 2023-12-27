@@ -12,26 +12,34 @@ const Search = ({ filterKey }) => {
   const selectedCandidates = useSelector(
     (state) => state.candidates.value.selected
   );
+  const searchResult = useSelector(
+    (state) => state.searchList.value.search.searchResult
+  );
 
-  const allData =
-    candidates && candidates?.filter((item) => item[filterKey] == false);
-  const archivedData =
-    candidates && candidates?.filter((item) => item[filterKey] == true);
-
-  const tablist = [`Search Results`, `Saved (8)`];
+  const savedCandidates = useSelector(
+    (state) => state.jobApplicantList.value.saved
+  );
+  console.log("savedCandidates",savedCandidates);
+  const tablist = [`Search Results`, `Saved (${savedCandidates?.length ?? 0})`];
 
   const popOverListAll = ["Send Message", "Save Candidate"];
   const popOverListArchived = ["Send Message", "Delete"];
   const sortArray = [
     { label: "Sort Candidates By", listItem: ["Date Applied", "Relevance"] },
-    { label: "Status", listItem: ["New", "Read", "Interviewing", "Closed"] },
+
+    {
+      label: "Status",
+      listItem: ["New", "Under Review", "Interviewing", "Accepted", "Rejected"],
+    },
+
     {
       label: "Education",
       listItem: [
-        "Masters Degree or Higher",
-        "Bachelor’s Degree or Higher",
-        "Associate Degree or Higher",
-        "Closed",
+        "No Minimum",
+        "High School",
+        "Trade School",
+        "Undergraduate Degree (Associates or Bachelors)",
+        "Graduate Degree",
       ],
     },
 
@@ -48,9 +56,9 @@ const Search = ({ filterKey }) => {
   ];
   const componentList = [
     <All
-    sortArray={sortArray}
+      sortArray={sortArray}
       searchBox
-      data={allData}
+      data={searchResult}
       matchCandidate
       filterKey={filterKey}
       cardStatusDisable
@@ -60,9 +68,8 @@ const Search = ({ filterKey }) => {
     <Archived
       matchCandidate
       cardStatusDisable
-      data={archivedData}
-    sortArray={sortArray}
-
+      data={savedCandidates}
+      sortArray={sortArray}
       filterKey={filterKey}
       // cardStatus={"Archived"}
       popOverList={popOverListArchived}
@@ -76,9 +83,7 @@ const Search = ({ filterKey }) => {
     },
     {
       name: "Save",
-      icon: <IoSaveOutline  className="hoverColor" />,
-
-
+      icon: <IoSaveOutline className="hoverColor" />,
     },
   ];
   return (

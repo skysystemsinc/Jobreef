@@ -15,11 +15,12 @@ import {
   jobApplications,
   setAll,
   setArchived,
-} from "@/Redux/slices/jobApplicants";
+} from "@/Redux/slices/jobApplications";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import endPoints from "@/Utils/endpoints";
-import { put } from "@/helper/fetch";
+import { deleteApi, put } from "@/helper/fetch";
 import { getSelectedCandidates } from "@/Redux/slices/candidates";
+import SelectedCandidateCard from "../SelectedCandidateCard/SelectedCandidateCard";
 
 const Application = ({ filterKey }) => {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const Application = ({ filterKey }) => {
   );
 
   const tablist = [
-    `All (${allApplicants?.length ?? 0} )`,
+    `All (${allApplicants?.length ?? 0})`,
     ` Archived (${archivedApplicants?.length ?? 0})`,
   ];
 
@@ -76,14 +77,18 @@ const Application = ({ filterKey }) => {
 
   const sortArray = [
     { label: "Sort Candidates By", listItem: ["Date Applied", "Relevance"] },
-    { label: "Status", listItem: ["New", "Read", "Interviewing", "Closed"] },
+    {
+      label: "Status",
+      listItem: ["New", "Under Review", "Interviewing", "Accepted", "Rejected"],
+    },
     {
       label: "Education",
       listItem: [
-        "Masters Degree or Higher",
-        "Bachelor’s Degree or Higher",
-        "Associate Degree or Higher",
-        "Closed",
+        "No Minimum",
+        "High School",
+        "Trade School",
+        "Undergraduate Degree (Associates or Bachelors)",
+        "Graduate Degree",
       ],
     },
 

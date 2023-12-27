@@ -54,7 +54,6 @@ const SelectedCandidateCard = ({
 
   return (
     <>
-      {/* <NotePadModal open={isOpen} onClose={onClose} /> */}
 
       <Box
         border={"1px  solid"}
@@ -208,7 +207,7 @@ const SelectedCandidateCard = ({
                         transition={".5s"}
                       >
                         {item.name}
-                        <Heading
+                        {/* <Heading
                           transition={".5s"}
                           _groupHover={{
                             color: "blue.500",
@@ -219,7 +218,7 @@ const SelectedCandidateCard = ({
                           as={"span"}
                         >
                           {item.span}
-                        </Heading>
+                        </Heading> */}
                       </Heading>
                       {/* <PiDownloadSimpleBold color="#2CA5C3" /> */}
 

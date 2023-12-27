@@ -29,7 +29,7 @@ const SearchBox = () => {
         <Input
           type="text"
           variant="bg-input"
-          placeholder="Search for Jobs, Companies, and Keywords"
+          placeholder="Search for Experience, skills, and Keywords"
         //   _placeholder={{ color: "rgba(0, 0, 0, 0.6)",
         //   fontSize: "13px",
         

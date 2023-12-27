@@ -49,8 +49,9 @@ const employee = {
   },
   achievement: false,
   certification: false,
-  skills: false,
-  // id: "657c281299882859c18f6672",
+  // skills: false,
+  skills: [{ name: "", level: "" }],
+  // id: "658be00bc9539285d1b0c549",
   id: null,
 };
 const workExperience = {
@@ -78,7 +79,7 @@ const education = {
   city: "",
   address: "",
   gpa: "",
-  educationLevel:"",
+  educationLevel: "",
   description: "",
 };
 const certification = {
@@ -405,7 +406,6 @@ const educationOtp = [
     label: "Graduate Degree",
     value: "Graduate Degree",
   },
-
 ];
 const experienceOtp = [
   {
@@ -456,7 +456,7 @@ const operatorRole = [
     label: "Super Admin",
     value: "Super Admin",
   },
-  {},
+  
 ];
 const status = [
   {
@@ -480,9 +480,45 @@ const status = [
     value: "Rejected",
   },
 ];
+
+const platformOpt = [
+  {
+    label: "Facebook",
+    value: "Facebook",
+  },
+  {
+    label: "LinkedIn",
+    value: "LinkedIn",
+  },
+  {
+    label: "Instagram",
+    value: "Instagram",
+  },
+  
+];
+const skillsLevel = [
+  {
+    label: "beginner",
+    value: "beginner",
+  },
+  {
+    label: "intermediate",
+    value: "intermediate",
+  },
+  {
+    label: "Advanced",
+    value: "Advanced",
+  },
+  {
+    label: "Expert",
+    value: "Expert",
+  },
+];
 const skills = [{ name: "", level: "" }];
 export {
   tags,
+  skillsLevel,
+  platformOpt,
   status,
   operatorRole,
   locationType,

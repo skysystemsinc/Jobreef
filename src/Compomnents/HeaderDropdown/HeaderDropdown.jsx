@@ -107,8 +107,6 @@ const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
 
         dispatch(setLoginUser(postData.data));
         dispatch(addCompany(postData?.data?.company));
-        dispatch(getTeamMembers(postData?.data?.company?.users));
-
         dispatch(addEmployee(postData?.data?.employee));
       }
     } catch (error) {
