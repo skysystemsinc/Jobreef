@@ -21,7 +21,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import globalStyles from "@/styles/globalStyles";
 import { useDispatch, useSelector } from "react-redux";
-import { addTeamMember, getTeamMembers } from "@/Reudx/slices/teamMembers";
+import { addTeamMember, getTeamMembers } from "@/Redux/slices/teamMembers";
 import { post, put } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
 import Loader from "../Loader/Loader";
@@ -98,9 +98,9 @@ const AddMemebersForm = () => {
       // role: roles.recruiter,
 
       // companyAdminId: companyState.id,
-      companyAdminId: companyState.id,
-      // ...(formData.role == roles.recruiter && {
-      // }),
+      ...(formData.role == roles.recruiter && {
+        companyId: companyState.id,
+      }),
     });
     setState((prev) => {
       return {

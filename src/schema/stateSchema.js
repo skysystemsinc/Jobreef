@@ -8,7 +8,7 @@ const registration = {
   otp: "",
   userId: null,
 };
-let company = {
+const company = {
   id: "",
   companyName: "",
   industry: "",

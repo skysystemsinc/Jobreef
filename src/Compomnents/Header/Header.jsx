@@ -41,7 +41,7 @@ import { BACKEND_URL } from "@/Utils/urls";
 import endPoints from "@/Utils/endpoints";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { setLoginUser } from "@/Reudx/slices/LoginUser";
+import { setLoginUser } from "@/Redux/slices/LoginUser";
 import { TbCaretDown } from "react-icons/tb";
 import blueDownArrow from "@/assets/Images/blueDownArrow.svg";
 const HeaderDropdown = dynamic(

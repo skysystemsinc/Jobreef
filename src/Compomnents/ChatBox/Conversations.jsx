@@ -17,21 +17,19 @@ import ConversationCard from "../ConversationCard/ConversationCard";
 import globalStyles from "@/styles/globalStyles";
 import conversation from "@/db/chat.json";
 import { useDispatch } from "react-redux";
-import { getActiveConversation } from "@/Reudx/slices/chat";
+import { getActiveConversation } from "@/Redux/slices/chat";
 const Conversations = ({ disableEdit }) => {
   const dispatch = useDispatch();
   const [isSmallerThe500] = useMediaQuery("(max-width:992px)");
-  console.log("isSmallerThe500",isSmallerThe500)
+  console.log("isSmallerThe500", isSmallerThe500);
 
   const handleActiveConversation = (conversation) => {
     dispatch(getActiveConversation(conversation));
     // dispatch(getAllMessages(conversation));
-
   };
   useEffect(() => {
-    if(typeof  window != undefined){
-
-      if (window.innerWidth >992) {
+    if (typeof window != undefined) {
+      if (window.innerWidth > 992) {
         dispatch(getActiveConversation(conversation[0]));
       }
     }

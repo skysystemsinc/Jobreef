@@ -29,10 +29,10 @@ import { BACKEND_URL } from "@/Utils/urls";
 import endPoints from "@/Utils/endpoints";
 import Loader from "@/Compomnents/Loader/Loader";
 import { useDispatch } from "react-redux";
-import { setLoginUser } from "@/Reudx/slices/LoginUser";
+import { setLoginUser } from "@/Redux/slices/LoginUser";
 import { roles } from "@/Utils/role";
-import { addCompany } from "@/Reudx/slices/company";
-import { addEmployee } from "@/Reudx/slices/employee";
+import { addCompany } from "@/Redux/slices/company";
+import { addEmployee } from "@/Redux/slices/employee";
 import { post } from "@/helper/fetch";
 import { getTeamMembers } from "@/Reudx/slices/teamMembers";
 

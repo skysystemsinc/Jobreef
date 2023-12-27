@@ -30,7 +30,7 @@ import { BACKEND_URL } from "@/Utils/urls";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { httpRequest } from "@/helper/httpRrequest";
-import { addCompany } from "@/Reudx/slices/company";
+import { addCompany } from "@/Redux/slices/company";
 
 const SocialLink = ({ nextStep, handlePrevious }) => {
   const toast = useToast();

@@ -2,7 +2,7 @@ import BottomWaveImage from "@/Compomnents/BottomWaveImage/BottomWaveImage";
 import Footer from "@/Compomnents/Footer/Footer";
 import Header from "@/Compomnents/Header/Header";
 import ProfileSettingTabs from "@/Compomnents/ProfileSettingTabs/ProfileSettingTabs";
-import { setLoginUser } from "@/Reudx/slices/LoginUser";
+import { setLoginUser } from "@/Redux/slices/LoginUser";
 import endPoints from "@/Utils/endpoints";
 import { BACKEND_URL } from "@/Utils/urls";
 import { httpRequest } from "@/helper/httpRrequest";
@@ -21,7 +21,7 @@ const profileSetting = () => {
           width={{ xl: "70%", base: "100%" }}
           px={{ md: "20px", base: "10px" }}
         >
-          <ProfileSettingTabs candidate/>
+          <ProfileSettingTabs candidate />
         </Box>
       </Box>
       <Footer waveImage />

@@ -37,7 +37,6 @@ const steps = [
 ];
 
 export const CompanyTimeline = ({ variant }) => {
-
   const router = useRouter();
   const toast = useToast();
   const { nextStep, prevStep, reset, activeStep } = useSteps({
@@ -46,7 +45,7 @@ export const CompanyTimeline = ({ variant }) => {
   const hasCompletedAllSteps = activeStep === steps.length;
 
   const [compeletedStep, setcompeletedStep] = useState([]);
-  
+
   useEffect(() => {
     setcompeletedStep([...compeletedStep, activeStep]);
   }, [activeStep]);

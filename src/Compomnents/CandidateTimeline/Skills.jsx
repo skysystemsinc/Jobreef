@@ -27,7 +27,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import endPoints from "@/Utils/endpoints";
 import { post, put } from "@/helper/fetch";
-import { addEmployee } from "@/Reudx/slices/employee";
+import { addEmployee } from "@/Redux/slices/employee";
 import Loader from "../Loader/Loader";
 
 const Skills = ({ prevStep, nextStep }) => {
@@ -128,13 +128,12 @@ const Skills = ({ prevStep, nextStep }) => {
       });
     }
   };
-  
+
   useSkipInitialEffect(() => {
     if (!employeeState?.skills) {
-      setFormData([{name:"", level:''}]);
-    }else{
+      setFormData([{ name: "", level: "" }]);
+    } else {
       setFormData(employeeState.skills);
-
     }
   }, [employeeState]);
 

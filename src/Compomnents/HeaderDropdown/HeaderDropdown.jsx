@@ -26,15 +26,15 @@ import { role, roles } from "@/Utils/role";
 import { useRouter } from "next/router";
 import { Role_context } from "@/context/context";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoginUser } from "@/Reudx/slices/LoginUser";
+import { setLoginUser } from "@/Redux/slices/LoginUser";
 import endPoints from "@/Utils/endpoints";
 import { httpRequest } from "@/helper/httpRrequest";
 import { BACKEND_URL } from "@/Utils/urls";
 import { LoadingSkeleton } from "../LoadingSkeleton/LoadingSkeleton";
-import { addCompany } from "@/Reudx/slices/company";
-import { addEmployee } from "@/Reudx/slices/employee";
+import { addCompany } from "@/Redux/slices/company";
+import { addEmployee } from "@/Redux/slices/employee";
 import { get } from "@/helper/fetch";
-import { getTeamMembers } from "@/Reudx/slices/teamMembers";
+import { getTeamMembers } from "@/Redux/slices/teamMembers";
 const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -107,7 +107,7 @@ const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
 
         dispatch(setLoginUser(postData.data));
         dispatch(addCompany(postData?.data?.company));
-        // dispatch(getTeamMembers(postData?.data?.company?.companyEmployees));
+        dispatch(getTeamMembers(postData?.data?.company?.users));
 
         dispatch(addEmployee(postData?.data?.employee));
       }

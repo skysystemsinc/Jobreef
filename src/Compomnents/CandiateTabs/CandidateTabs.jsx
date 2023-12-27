@@ -23,17 +23,16 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAllCandidates,
   getFilterCandidates,
-} from "@/Reudx/slices/candidates";
+} from "@/Redux/slices/candidates";
 import data from "@/db/candidates.json";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import Search from "./Search";
 import CustomTabs from "../CustomeTabs/CustomeTabs";
 import endPoints from "@/Utils/endpoints";
-import { setAllJobs } from "@/Reudx/slices/jobPost";
+import { setAllJobs } from "@/Redux/slices/jobPost";
 import { get } from "@/helper/fetch";
 import CandidatesDropdown from "./CandidatesDropdown";
-import { jobApplications } from "@/Reudx/slices/jobApplications";
-import {matchCandidate} from "@/Reudx/slices/matchCandidate";
+import { jobApplicants } from "@/Redux/slices/jobApplicants";
 const CandidateTabs = ({ company }) => {
   const allJobState = useSelector((state) => state.jobPost.jobs.allJobs);
 

@@ -11,7 +11,7 @@ import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import { httpRequest } from "@/helper/httpRrequest";
 import { BACKEND_URL } from "@/Utils/urls";
 import endPoints from "@/Utils/endpoints";
-import { setLoginUser } from "@/Reudx/slices/LoginUser";
+import { setLoginUser } from "@/Redux/slices/LoginUser";
 import Loader from "../Loader/Loader";
 import { put } from "@/helper/fetch";
 import Otp from "./Otp";

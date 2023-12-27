@@ -29,7 +29,7 @@ import axios from "axios";
 import { BACKEND_URL } from "@/Utils/urls";
 import { company, directory, industryOptions } from "@/schema/stateSchema";
 import { useDispatch, useSelector } from "react-redux";
-import { addCompany } from "@/Reudx/slices/company";
+import { addCompany } from "@/Redux/slices/company";
 
 const CompanyBio = ({ nextStep, State, setState }) => {
   const toast = useToast();

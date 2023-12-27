@@ -15,13 +15,11 @@ import {
   jobApplications,
   setAll,
   setArchived,
-} from "@/Reudx/slices/jobApplications";
+} from "@/Redux/slices/jobApplicants";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import endPoints from "@/Utils/endpoints";
-import { deleteApi, put } from "@/helper/fetch";
-import { getSelectedCandidates } from "@/Reudx/slices/candidates";
-import SelectedCandidateCard from "../SelectedCandidateCard/SelectedCandidateCard";
-import { status } from "@/Utils/role";
+import { put } from "@/helper/fetch";
+import { getSelectedCandidates } from "@/Redux/slices/candidates";
 
 const Application = ({ filterKey }) => {
   const dispatch = useDispatch();

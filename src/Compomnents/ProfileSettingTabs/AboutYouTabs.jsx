@@ -18,13 +18,13 @@ import { useRouter } from "next/router";
 import { roles } from "@/Utils/role";
 import EditProifle from "../EditProifle/EditProifle";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserProfile } from "@/Reudx/slices/userProfileSlice";
+import { getUserProfile } from "@/Redux/slices/userProfileSlice";
 import axios from "axios";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import { BACKEND_URL } from "@/Utils/urls";
 import { httpRequest } from "@/helper/httpRrequest";
 import endPoints from "@/Utils/endpoints";
-import { setLoginUser } from "@/Reudx/slices/LoginUser";
+import { setLoginUser } from "@/Redux/slices/LoginUser";
 import Loader from "../Loader/Loader";
 import { put } from "@/helper/fetch";
 const AboutYouTabs = ({ candidate }) => {

@@ -87,13 +87,12 @@ model EmailPreferences {
 }
 
 model User {
-  id             String     @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt      DateTime   @default(now())
-  companyAdmin   Company?   @relation("companyAdmin", fields: [companyAdminId], references: [id])
-  companyAdminId String?    @db.ObjectId
-  employee       Candidate?
-  company        Company?   @relation("UserToCompany")
-  stages         Int?       @default(0)
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime  @default(now())
+  company   Company?  @relation(fields: [companyId], references: [id])
+  companyId String?   @db.ObjectId
+  employee  Candidate?
+  stages    Int?      @default(0)
 
   // 0 for pending invite
   inviteAccepted Boolean   @default(false)
@@ -120,30 +119,27 @@ model User {
 }
 
 model Company {
-  id               String         @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt        DateTime       @default(now())
-  user             User?          @relation("UserToCompany", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  userId           String?        @unique @db.ObjectId
-  companyEmployees User[]         @relation("companyAdmin")
-  companyName      String
-  industry         String?
-  directory        String
-  noOfEmployees    Int?
-  yearEstablished  Int?
-  description      String
-  webUrl           String?
-  telePhone        String?
-  companyLogo      String?
-  socialLinks      SocialLinks[]
-  location         LocationType[]
-  jobs             Job[]
+  id              String         @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt       DateTime       @default(now())
+  users           User[]
+  companyName     String
+  industry        String?
+  directory       String
+  noOfEmployees   Int?
+  yearEstablished Int?
+  description     String
+  webUrl          String?
+  telePhone       String?
+  companyLogo     String?
+  socialLinks     SocialLinks[]
+  location        LocationType[]
+  jobs            Job[]
 }
 
 model Candidate {
   createdAt      DateTime         @default(now())
   id             String           @id @default(auto()) @map("_id") @db.ObjectId
-  // user           User?
-  user           User?            @relation(fields: [userId], references: [id])
+  user           User             @relation(fields: [userId], references: [id])
   userId         String           @unique @db.ObjectId
   description    String?
   phoneNumber    Int?

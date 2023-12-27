@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import ReactTable from "../PaginatedTable/ReactTable";
 import moment from "moment";
-import { addJob, setAllJobs } from "@/Reudx/slices/jobPost";
+import { addJob, setAllJobs } from "@/Redux/slices/jobPost";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import { deleteApi, put } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
@@ -91,7 +91,9 @@ const InActive = () => {
       };
     });
     try {
-      const postData = await deleteApi(`${endPoints.jobs}/${state.deleteJob.id}`);
+      const postData = await deleteApi(
+        `${endPoints.jobs}/${state.deleteJob.id}`
+      );
       console.log("postData", postData);
 
       if (postData) {
@@ -111,9 +113,10 @@ const InActive = () => {
         });
         dispatch(
           setAllJobs([
-            ...allJobState.filter((item) =>
-              // item.id === postData.data.id ? postData.data : item
-              item.id !== postData.data.id
+            ...allJobState.filter(
+              (item) =>
+                // item.id === postData.data.id ? postData.data : item
+                item.id !== postData.data.id
             ),
           ])
         );
@@ -150,8 +153,7 @@ const InActive = () => {
       {
         accessorKey: "spent",
         header: "Spent",
-        cell: ({ row: { original } }) =>
-          original?.spent ?? "-" 
+        cell: ({ row: { original } }) => original?.spent ?? "-",
       },
       {
         accessorKey: "updatedAt",

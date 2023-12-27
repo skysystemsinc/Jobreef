@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import AssignJob from "./AssigneJob";
 import { post, put } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
-import { addJob, getAllJobs, setAllJobs } from "@/Reudx/slices/jobPost";
+import { addJob, getAllJobs, setAllJobs } from "@/Redux/slices/jobPost";
 import Loader from "../Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { job } from "@/schema/stateSchema";
@@ -70,7 +70,6 @@ const Preview = ({ assignJob, isEdit, state, setState }) => {
           city: jobState.city,
           province: jobState.province,
           address: jobState.address,
-
         },
         tags: tags,
         companyId: companyState.id,

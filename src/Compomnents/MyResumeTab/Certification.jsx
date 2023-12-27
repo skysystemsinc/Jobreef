@@ -8,7 +8,7 @@ import EducationCard from "../EducationCard/EducationCard";
 
 import CeritifcateCard from "../CeritifcateCard/CeritifcateCard";
 import DeleteModal from "../DeleteModal/DeleteModal";
-import { addEmployee, setFormData } from "@/Reudx/slices/employee";
+import { addEmployee, setFormData } from "@/Redux/slices/employee";
 import { certification } from "@/schema/stateSchema";
 import { useDispatch, useSelector } from "react-redux";
 import CertificationForm from "../CandidateTimeline/CertificateForm";

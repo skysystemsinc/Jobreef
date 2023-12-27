@@ -30,7 +30,7 @@ import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import AssignJob from "./AssigneJob";
 import { get } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
-import { addJob } from "@/Reudx/slices/jobPost";
+import { addJob } from "@/Redux/slices/jobPost";
 import { useDispatch, useSelector } from "react-redux";
 import ScreeningQuestion from "./ScreeningQuestion";
 
@@ -208,9 +208,15 @@ const JobPostTimeline = ({ isEdit, title }) => {
                   {index == 0 ? (
                     <JobBio nextStep={nextStep} prevStep={handlePrevious} />
                   ) : index == 1 ? (
-                    <TechnicalDetails nextStep={nextStep} prevStep={handlePrevious} />
+                    <TechnicalDetails
+                      nextStep={nextStep}
+                      prevStep={handlePrevious}
+                    />
                   ) : index == 2 ? (
-                    <JobLocation nextStep={nextStep} prevStep={handlePrevious} />
+                    <JobLocation
+                      nextStep={nextStep}
+                      prevStep={handlePrevious}
+                    />
                   ) : index == 3 ? (
                     <DesiredSkills
                       nextStep={nextStep}
@@ -219,9 +225,8 @@ const JobPostTimeline = ({ isEdit, title }) => {
                     />
                   ) : index == 4 ? (
                     <ScreeningQuestion
-                    
-                    nextStep={nextStep}
-                    prevStep={handlePrevious}
+                      nextStep={nextStep}
+                      prevStep={handlePrevious}
                     />
                   ) : null}
                 </Box>

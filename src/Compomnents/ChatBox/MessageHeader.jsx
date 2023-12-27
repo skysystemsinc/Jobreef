@@ -4,7 +4,7 @@ import profile from "@/assets/Images/profile.svg";
 import UnreadMessage from "../ChatBox/UnreadMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { HiOutlineChevronLeft } from "react-icons/hi";
-import { getActiveConversation } from "@/Reudx/slices/chat";
+import { getActiveConversation } from "@/Redux/slices/chat";
 const MessageHeader = () => {
   const dispatch = useDispatch();
   const activeConversation = useSelector((state) => state.chat.value.active);

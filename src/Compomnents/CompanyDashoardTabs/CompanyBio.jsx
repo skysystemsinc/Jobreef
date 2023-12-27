@@ -26,7 +26,7 @@ import IconButton from "../IconButton/IconButton";
 import white_edit from "@/assets/Images/white-edit.svg";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { getCompanyProfile } from "@/Reudx/slices/companyProfile";
+import { getCompanyProfile } from "@/Redux/slices/companyProfile";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import endPoints from "@/Utils/endpoints";
 import Loader from "../Loader/Loader";
@@ -162,7 +162,7 @@ const CompanyBio = () => {
           label={"Company Name*"}
         />
         <LabelInput
-        defaultDropdown={industryOptions}
+          defaultDropdown={industryOptions}
           state={formData.industry}
           name={"industry"}
           setState={handleChange}
@@ -180,8 +180,7 @@ const CompanyBio = () => {
         <LabelInput
           state={formData.directory}
           name={"directory"}
-        defaultDropdown={directory}
-
+          defaultDropdown={directory}
           setState={handleChange}
           labelVariant={"label"}
           type="text"

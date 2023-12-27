@@ -9,7 +9,7 @@ import EducationCard from "../EducationCard/EducationCard";
 import CertificationForm from "./CertificateForm";
 import CeritifcateCard from "../CeritifcateCard/CeritifcateCard";
 import { useDispatch, useSelector } from "react-redux";
-import { addEmployee, setFormData } from "@/Reudx/slices/employee";
+import { addEmployee, setFormData } from "@/Redux/slices/employee";
 import { certification } from "@/schema/stateSchema";
 import { deleteApi } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
