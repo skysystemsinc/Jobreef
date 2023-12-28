@@ -26,6 +26,9 @@ const MatchCandidate = ({ filterKey }) => {
     reStore: false,
     delete: false,
   });
+  const selectedJobState = useSelector(
+    (state) => state.jobApplicantList.value.selectedJob
+  );
   const [selectCandidate, setSelectCandidate] = useState(false);
   const allMatchCandidate = useSelector(
     (state) => state.matchCandidateList.value.matchCandidate.all
@@ -92,13 +95,8 @@ const MatchCandidate = ({ filterKey }) => {
 
     {
       label: "Skills",
+      listItem: [selectedJobState?.desiredSkills],
 
-      listItem: [
-        "Associate Degree or Higher",
-        "System Architecture",
-        "Product Design",
-        "Leadership",
-      ],
     },
   ];
   const componentList = [

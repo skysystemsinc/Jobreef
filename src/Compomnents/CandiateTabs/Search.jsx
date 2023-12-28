@@ -8,7 +8,10 @@ import { useSelector } from "react-redux";
 import { IoSaveOutline } from "react-icons/io5";
 import { HiOutlineMail } from "react-icons/hi";
 const Search = ({ filterKey }) => {
-  const candidates = useSelector((state) => state.candidates.value.filter);
+  
+  const selectedJobState = useSelector(
+    (state) => state.jobApplicantList.value.selectedJob
+  );
   const selectedCandidates = useSelector(
     (state) => state.candidates.value.selected
   );
@@ -45,13 +48,8 @@ const Search = ({ filterKey }) => {
 
     {
       label: "Skills",
+      listItem: [selectedJobState?.desiredSkills],
 
-      listItem: [
-        "Associate Degree or Higher",
-        "System Architecture",
-        "Product Design",
-        "Leadership",
-      ],
     },
   ];
   const componentList = [

@@ -1,11 +1,32 @@
 import prisma from "@/lib/prisma";
+import moment from "moment";
 
 const addExperience = async (req, res) => {
   const data = req.body;
+  let unit;
+  let difference;
+  const daysDifference = moment(data.startDate).diff(data?.endDate, "days");
+  const monthsDifference = moment(data.startDate).diff(data?.endDate, "months");
+  const weeksDifference = moment(data.startDate).diff(data?.endDate, "weeks");
+  const yearsDifference = moment(data.startDate).diff(data?.endDate, "years");
 
+  if (Math.abs(yearsDifference) >= 1) {
+    unit = "y";
+    difference = yearsDifference;
+  } else if (Math.abs(monthsDifference) >= 1) {
+    unit = "mo";
+    difference = monthsDifference;
+  } else if (Math.abs(weeksDifference) >= 1) {
+    unit = "w";
+    difference = weeksDifference;
+  } else {
+    unit = "d";
+    difference = daysDifference;
+  }
+  console.log(`Difference: ${difference} ${unit}`);
   try {
     const experienceCreated = await prisma.WorkExperience.create({
-      data: data,
+      data: { ...data, experience: `${Math.abs(difference)}${unit}` },
     });
 
     res.status(201).json({

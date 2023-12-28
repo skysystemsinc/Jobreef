@@ -253,10 +253,12 @@ export default function Login() {
               {state.loading ? <Loader /> : "  Login"}
             </Button>
             <Button
-              width={{ base: "max-content" }}
+              // width={{ base: "max-content" }}
+              width={{ md: "162px", base: "140px" }}
+
               boxShadow="0px 0px 4px 0px rgba(0, 0, 0, 0.25)"
               variant={"outline"}
-              fontSize={{ "2xl": "16px", sm: "14px", base: "12px" }}
+              fontSize={{  sm: "14px", base: "12px" }}
               leftIcon={<FcGoogle />}
               px={{ "2xl": "20px", base: "10px" }}
             >
@@ -264,7 +266,7 @@ export default function Login() {
                 <Text
                   variant={"p1"}
                   color={"gray.text"}
-                  fontSize={{ "2xl": "16px", sm: "13px", base: "11px" }}
+                  fontSize={{  sm: "13px", base: "11px" }}
                 >
                   Sign in with Google
                 </Text>

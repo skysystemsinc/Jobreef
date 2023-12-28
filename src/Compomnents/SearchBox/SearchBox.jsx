@@ -8,7 +8,7 @@ const SearchBox = ({placeholder}) => {
   return (
     <InputGroup>
       <InputRightElement height={"35px"} pointerEvents="none">
-        <Image src={search.src} width={"16px"} />
+        <Image src={search.src} width={"15px"} />
       </InputRightElement>
       <Input
         type="text"
@@ -23,7 +23,7 @@ const SearchBox = ({placeholder}) => {
         sx={{
           height: "35px",
           _placeholder: {
-            fontSize: "16px",
+            fontSize: "14px",
             color: "blue.700",
           },
         }}

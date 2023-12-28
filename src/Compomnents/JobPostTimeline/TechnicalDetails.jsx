@@ -96,7 +96,7 @@ const TechnicalDetails = ({ disableNextPrev, prevStep, nextStep }) => {
           setState={handleChange}
           name={"yearsOfExperience"}
           labelVariant={"label"}
-          type="text"
+          type="number"
           variant={"bg-input"}
           placeholder="Enter the years of experience desired for this job"
           label={"Years of Experience"}

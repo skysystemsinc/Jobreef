@@ -13,8 +13,7 @@ const initialState = {
     },
     candidate: false,
     saved: false,
-    // matchCandidate: false,
-    // search: false,
+    selectedJob: false,
   },
 };
 export const jobApplications = createAsyncThunk(
@@ -42,6 +41,9 @@ const jobApplicantList = createSlice({
     setSelectedCandidate: (state, action) => {
       state.value.candidate = action.payload;
     },
+    setSelectedJob: (state, action) => {
+      state.value.selectedJob = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(jobApplications.pending, (state, action) => {
@@ -51,7 +53,7 @@ const jobApplicantList = createSlice({
     builder.addCase(jobApplications.fulfilled, (state, action) => {
       const all = action.payload.data.filter((item) => item.archived == false);
       const saved = action.payload.data.filter((item) => item.saved == true);
-      console.log("saved",saved);
+      console.log("saved", saved);
       const archived = action.payload.data.filter(
         (item) => item.archived == true
       );
@@ -61,6 +63,6 @@ const jobApplicantList = createSlice({
     });
   },
 });
-export const { setArchived, setAll, setSelectedCandidate } =
+export const { setArchived, setAll, setSelectedCandidate , setSelectedJob } =
   jobApplicantList.actions;
 export default jobApplicantList.reducer;

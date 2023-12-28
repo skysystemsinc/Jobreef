@@ -32,7 +32,10 @@ import endPoints from "@/Utils/endpoints";
 import { setAllJobs } from "@/Redux/slices/jobPost";
 import { get } from "@/helper/fetch";
 import CandidatesDropdown from "./CandidatesDropdown";
-import { jobApplications } from "@/Redux/slices/jobApplications";
+import {
+  jobApplications,
+  setSelectedJob,
+} from "@/Redux/slices/jobApplications";
 import { matchCandidate } from "@/Redux/slices/matchCandidate";
 import { setSaved } from "@/Redux/slices/search";
 
@@ -49,8 +52,9 @@ const CandidateTabs = ({ company }) => {
         dispatch(matchCandidate(allJobState[0].id));
       }
     } else if (ind == 2) {
-      dispatch(setSaved([...allJobState?.filter((item) => item.saved == true)]));
-      
+      dispatch(
+        setSaved([...allJobState?.filter((item) => item.saved == true)])
+      );
     }
 
     setTabIndex(ind);
@@ -104,6 +108,8 @@ const CandidateTabs = ({ company }) => {
   useEffect(() => {
     if (allJobState) {
       dispatch(jobApplications(allJobState[0].id));
+
+      dispatch(setSelectedJob(allJobState[0]));
     }
   }, [allJobState]);
 

@@ -24,6 +24,10 @@ import SelectedCandidateCard from "../SelectedCandidateCard/SelectedCandidateCar
 
 const Application = ({ filterKey }) => {
   const dispatch = useDispatch();
+  const selectedJobState = useSelector(
+    (state) => state.jobApplicantList.value.selectedJob
+  );
+  console.log("selectedJobState", selectedJobState);
   const [selectCandidate, setSelectCandidate] = useState(false);
   const toast = useToast();
   const [state, setState] = useState({
@@ -36,6 +40,7 @@ const Application = ({ filterKey }) => {
   const allApplicants = useSelector(
     (state) => state.jobApplicantList.value.application.all
   );
+  console.log("allApplicants", allApplicants);
   const archivedApplicants = useSelector(
     (state) => state.jobApplicantList.value.application.archived
   );
@@ -95,12 +100,7 @@ const Application = ({ filterKey }) => {
     {
       label: "Skills",
 
-      listItem: [
-        "Associate Degree or Higher",
-        "System Architecture",
-        "Product Design",
-        "Leadership",
-      ],
+      listItem: [selectedJobState?.desiredSkills],
     },
   ];
   const handleSelectCandidate = (data) => {

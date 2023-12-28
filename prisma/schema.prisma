@@ -11,9 +11,9 @@ datasource db {
 }
 
 type LocationType {
-  country  String
-  province String
-  city     String
+  country  String?
+  province String?
+  city     String?
   address  String?
 }
 
@@ -87,12 +87,12 @@ model EmailPreferences {
 }
 
 model User {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime  @default(now())
-  company   Company?  @relation(fields: [companyId], references: [id])
-  companyId String?   @db.ObjectId
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime   @default(now())
+  company   Company?   @relation(fields: [companyId], references: [id])
+  companyId String?    @db.ObjectId
   employee  Candidate?
-  stages    Int?      @default(0)
+  stages    Int?       @default(0)
 
   // 0 for pending invite
   inviteAccepted Boolean   @default(false)
@@ -164,6 +164,7 @@ model WorkExperience {
   employeeType     String
   jobFamily        String
   jobSummary       String
+  experience       String
   startDate        DateTime     @default(now())
   endDate          DateTime?    @default(now())
   createdAt        DateTime     @default(now())
