@@ -16,6 +16,7 @@ const GET = async (req, res) => {
             education: true,
             certification: true,
             skills: true,
+            location:true,
             user: true,
             achievement: true,
             attachment: true,

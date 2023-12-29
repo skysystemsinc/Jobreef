@@ -52,6 +52,7 @@ const UpdateData = async (req, res) => {
             skills: true,
             user: true,
             achievement: true,
+            location:true,
             attachment: true,
           },
         }, // Include all location in the returned object

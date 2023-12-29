@@ -33,6 +33,7 @@ const Search = ({ filterKey }) => {
     {
       label: "Status",
       listItem: ["New", "Under Review", "Interviewing", "Accepted", "Rejected"],
+      // handleSelect:
     },
 
     {

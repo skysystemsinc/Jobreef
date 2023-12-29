@@ -8,11 +8,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSelectedCandidates } from "@/Redux/slices/candidates";
 import SearchBox from "./SearchBox";
 import { CandidateCardLoading } from "../LoadingSkeleton/LoadingSkeleton";
+import { get, post } from "@/helper/fetch";
+import endPoints from "@/Utils/endpoints";
+import { educationOtp, status } from "@/schema/stateSchema";
 
 const All = ({
   filterKey,
   matchCandidate,
-  sortArray,
+  // sortArray,
   cardStatus,
   cardStatusDisable,
   data,
@@ -21,6 +24,47 @@ const All = ({
   handleSelectCandidate,
   popOverList,
 }) => {
+  const selectedJobState = useSelector(
+    (state) => state.jobApplicantList.value.selectedJob
+  );
+
+  const handleStatusFilter = async (data, key) => {
+    console.log("filter", data, key);
+    const postData = await post(`${endPoints.filters}/${selectedJobState.id}`, {
+      status: data,
+    });
+    console.log("postData", postData);
+  };
+  const sortArray = [
+    {
+      label: "Sort Candidates By",
+      listItem: [
+        { label: "Date Applied", value: "" },
+        { label: "Relevance", value: "" },
+      ],
+    },
+    {
+      label: "Status",
+      listItem: status,
+      handleSelect: handleStatusFilter,
+    },
+    {
+      label: "Education",
+      listItem: educationOtp,
+    },
+
+    {
+      label: "Skills",
+
+      listItem: [
+        {
+          label: selectedJobState?.desiredSkills,
+          value: selectedJobState?.desiredSkills,
+        },
+      ],
+    },
+  ];
+
   return (
     <Box mt={{ md: "31px", base: "15px" }}>
       {searchBox ? <SearchBox /> : null}

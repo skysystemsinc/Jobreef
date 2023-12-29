@@ -2,24 +2,23 @@ import prisma from "@/lib/prisma";
 
 const addEmployee = async (req, res) => {
   const data = req.body;
-
+console.log("|data.location",data.location);
   try {
     const employeeCreated = await prisma.Candidate.create({
       data: {
-        location: data.location,
         phoneNumber: data.phoneNumber,
         description: data.description,
+        location:{
+          create:{
+            ...data.location
+          }
+        },
         user: {
           connect: {
             id: data.userId,
+            // location: data.location,
           },
         },
-        // workExperience: data.workExperience,
-        // education: data.education,
-        // certification: data.certification,
-        // skills: data.skills,
-        // achievement: data.achievement,
-        // attachment: data.attachment,
       },
       include: {
         skills: true,
@@ -29,9 +28,10 @@ const addEmployee = async (req, res) => {
         skills: true,
         achievement: true,
         attachment: true,
-        user: true
+        user: true,
       },
     });
+
 
     res.status(201).json({
       message: "Employee created successfully",

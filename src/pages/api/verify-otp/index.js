@@ -31,9 +31,9 @@ const verifyOtp = async (req, res) => {
         verified: true,
         ...(data.email && { email: data.email }),
       },
-      include: {
-        location: true, // Include all location in the returned object
-      },
+      // include: {
+      //   location: true, // Include all location in the returned object
+      // },
     });
     if (user) {
       res.status(200).json({

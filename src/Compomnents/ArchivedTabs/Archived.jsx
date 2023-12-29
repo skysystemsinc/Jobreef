@@ -24,7 +24,7 @@ const Archived = ({
     <Box mt={{ md: "31px", base: "15px" }}>
       {/* <SelectedCandidate/> */}
 
-      <MobileSortBy sortArray={sortArray} />
+      {/* <MobileSortBy sortArray={sortArray} /> */}
 
       <Box>
         <Box>

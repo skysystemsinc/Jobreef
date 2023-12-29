@@ -39,6 +39,11 @@ const UpdateEmployee = async (req, res) => {
       },
       data: {
         ...data,
+        location: {
+          update: {
+            ...data.location,
+          },
+        },
       },
       include: {
         skills: true,
@@ -48,6 +53,7 @@ const UpdateEmployee = async (req, res) => {
         skills: true,
         achievement: true,
         attachment: true,
+        location: true,
       },
     });
 
@@ -86,6 +92,7 @@ const GetSingleEmployee = async (req, res) => {
         skills: true,
         achievement: true,
         attachment: true,
+        location: true,
       },
     });
 

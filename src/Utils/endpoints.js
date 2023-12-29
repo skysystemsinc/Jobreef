@@ -21,5 +21,6 @@ const endPoints = {
   matchCandidate:"match-candidate",
   employeeSkills:"employee-skills",
   search:"search",
+  filters:"filters",
 };
 export default endPoints;

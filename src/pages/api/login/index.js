@@ -31,7 +31,7 @@ const Login = async (req, res) => {
             attachment: true,
           },
         },
-        location: true,
+        // location: true,
         emailPreferences: true,
       },
     });

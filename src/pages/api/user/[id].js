@@ -63,13 +63,13 @@ const UpdateUser = async (req, res) => {
       data: {
         ...data,
         otpTimestamp: new Date(),
-        location: {
-          create: data.location,
-        },
+        // location: {
+        //   create: data.location,
+        // },
       },
-      include: {
-        location: true, // Include all location in the returned object
-      },
+      // include: {
+      //   location: true, // Include all location in the returned object
+      // },
     });
 
     res.status(200).json({
@@ -117,7 +117,7 @@ const GetSingleUser = async (req, res) => {
             attachment: true,
           },
         },
-        location: true,
+        // location: true,
         emailPreferences: true,
       },
     });
