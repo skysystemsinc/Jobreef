@@ -30,6 +30,7 @@ import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import Loader from "../Loader/Loader";
 import { put } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
+import { platformOpt } from "@/schema/stateSchema";
 
 const SocialLink = () => {
   const [isSmallerThe500] = useMediaQuery("(max-width: 787px)");
@@ -170,6 +171,8 @@ const toast = useToast()
               setState={(e) => handlePlatformChange(e, index)}
               readOnly={state.readOnly}
               labelVariant={"label"}
+              dropdownOption={platformOpt}
+
               type="text"
               variant={"bg-input"}
               placeholder="Select Platform"

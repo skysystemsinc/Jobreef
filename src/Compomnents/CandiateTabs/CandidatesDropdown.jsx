@@ -4,8 +4,10 @@ import DropDown from "../DropDown/DropDown";
 import blue_arrow_down from "@/assets/Images/blue-arrow-down.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { DropdownLoading } from "../LoadingSkeleton/LoadingSkeleton";
-import { jobApplicants } from "@/Redux/slices/jobApplicants";
-import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
+import {
+  jobApplications,
+  setSelectedJob,
+} from "@/Redux/slices/jobApplications";
 
 const CandidatesDropdown = ({ style }) => {
   const allJobState = useSelector((state) => state.jobPost.jobs.allJobs);
@@ -14,7 +16,8 @@ const CandidatesDropdown = ({ style }) => {
   const handleSelectJob = (data) => {
     const parseData = JSON.parse(data.target.value);
     console.log("parseData", parseData);
-    dispatch(jobApplicants(parseData.id));
+    dispatch(jobApplications(parseData.id));
+    dispatch(setSelectedJob(parseData));
   };
 
   return (

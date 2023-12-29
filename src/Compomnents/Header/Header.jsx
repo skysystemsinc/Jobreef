@@ -178,8 +178,12 @@ const DesktopNav = () => {
           src={router.pathname === "/jobseeker" ? blueDownArrow.src : heart.src}
         />
       ),
-
-      pathName: "/jobseeker",
+      children: [
+        { label: "Career Advice" },
+        { label: "Resume Builder" },
+        { label: "Salary Calculator" },
+      ],
+      // pathName: "/jobseeker",
     },
     {
       label: "For Employers",
@@ -204,7 +208,7 @@ const DesktopNav = () => {
     <Stack direction={"row"} spacing={1}>
       {NAV_ITEMS.map((navItem, ind) => (
         <Box key={navItem.label}>
-          <Popover trigger={"hover"} placement={"bottom-start"}>
+          <Popover trigger={"hover"} placement={"top-start"}>
             <PopoverTrigger>
               <Link
                 variant={"blue-link"}
@@ -213,8 +217,6 @@ const DesktopNav = () => {
                 py={1}
                 transition={".5s"}
                 href={navItem.pathName ?? "#"}
-                // fontSize={"sm"}
-                // fontWeight={500}
                 display={"flex"}
                 alignItems={"center"}
                 gap={"2px"}
@@ -234,7 +236,7 @@ const DesktopNav = () => {
               >
                 {navItem.label}
 
-                {ind == 1 || ind == 2 ? (
+                {ind == 2 ? (
                   <Box>
                     <TbCaretDown fontSize={"18px"} />
                   </Box>
@@ -246,12 +248,10 @@ const DesktopNav = () => {
 
             {navItem.children && (
               <PopoverContent
-                border={0}
                 boxShadow={"xl"}
                 bg={popoverContentBgColor}
-                p={4}
                 rounded={"xl"}
-                minW={"sm"}
+                maxW={"max-content"}
               >
                 <Stack>
                   {navItem.children.map((child) => (
@@ -271,39 +271,28 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
   return (
     <Box
       as="div"
+      _hover={{ backgroundColor: "blue.100" }}
       href={href}
       role={"group"}
       display={"block"}
-      p={2}
       rounded={"md"}
-      _hover={{ bg: useColorModeValue("pink.50", "gray.900") }}
+      gap={"0px"}
     >
-      <Stack direction={"row"} align={"center"}>
-        <Box>
-          <Link
-            href={"/"}
-            transition={"all .3s ease"}
-            variant={"blue-link"}
-            color={"pink.100"}
-            _groupHover={{ color: "pink.400" }}
-            fontWeight={500}
-          >
-            {label ?? ""}
-          </Link>
-          {/* <Text fontSize={"sm"}>{subLabel}</Text> */}
-        </Box>
-        <Flex
+      {/* <Stack direction={"row"} align={"center"}> */}
+      <Box borderBottom={"1px solid"} py={"8px"} borderColor={"gray.300"} px={"10px"}>
+        <Link
+          href={"/"}
           transition={"all .3s ease"}
-          transform={"translateX(-10px)"}
-          opacity={0}
-          _groupHover={{ opacity: "100%", transform: "translateX(0)" }}
-          justify={"flex-end"}
-          align={"center"}
-          flex={1}
+          variant={"blue-link"}
+          color={"gray.text"}
+          _groupHover={{ color: "blue.500", textDecoration: "none" }}
+          fontWeight={500}
         >
-          <Icon color={"pink.400"} w={5} h={5} as={RxHamburgerMenu} />
-        </Flex>
-      </Stack>
+          {label ?? ""}
+        </Link>
+      </Box>
+
+      {/* </Stack> */}
     </Box>
   );
 };

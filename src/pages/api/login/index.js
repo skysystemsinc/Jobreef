@@ -19,7 +19,7 @@ const Login = async (req, res) => {
         email: email,
       },
       include: {
-        company: true,
+        company:true,
         employee: {
           include: {
             skills: true,
@@ -31,7 +31,7 @@ const Login = async (req, res) => {
             attachment: true,
           },
         },
-        location: true,
+        // location: true,
         emailPreferences: true,
       },
     });

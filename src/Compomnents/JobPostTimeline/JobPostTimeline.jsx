@@ -30,7 +30,7 @@ import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import AssignJob from "./AssigneJob";
 import { get } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
-import { addJob } from "@/Redux/slices/jobPost";
+import { addJob, getSingleJob } from "@/Redux/slices/jobPost";
 import { useDispatch, useSelector } from "react-redux";
 import ScreeningQuestion from "./ScreeningQuestion";
 
@@ -38,7 +38,7 @@ const JobPostTimeline = ({ isEdit, title }) => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const jobState = useSelector((state) => state.jobPost.jobs.allJobs);
+  const jobState = useSelector((state) => state.jobPost.value);
 
   const { id } = router.query;
   const steps = [
@@ -79,10 +79,11 @@ const JobPostTimeline = ({ isEdit, title }) => {
   };
   useEffect(() => {
     console.log("id", id);
-    if (id) {
-      getJob();
+    if ( id) {
+      // getJob();
+      dispatch(getSingleJob(id))
     }
-  }, [router.query]);
+  }, [id]);
   const handlePrevious = () => {
     prevStep();
     if (completedStep.includes(activeStep)) {

@@ -16,22 +16,8 @@ const SelectedCandidate = ({ profileBtn,  matchCandidate }) => {
       <Box width={"100%"}>
         <SelectedCandidateCard  profileBtn={profileBtn} matchCandidate={matchCandidate} toggle={toggle} setToggle={setToggle} />
       </Box>
-      {/* { toggle ? (matchCandidate ? null
-       :
-       <Box
-          width={{ "2xl": "700px", base: "520px" }}
-          display={{ lg: "block", base: "none" }}
-        >
-          <NotePad />
-        </Box>)
-       : null} */}
     </Box>
   );
 };
 
 export default SelectedCandidate;
-
-
-{/* <Button mb={{ md: "25px", base: "15px" }} variant={"blue-btn"} onClick={()=>{isOpen ? setIsOpen(false) : setIsOpen(true)}}>
-          {isOpen ? 'Exit NotePad' : 'Open Notepad'}
-        </Button> */}

@@ -22,6 +22,7 @@ import endPoints from "@/Utils/endpoints";
 import { addEmployee, setFormData } from "@/Redux/slices/employee";
 import Loader from "../Loader/Loader";
 import { post, put } from "@/helper/fetch";
+import { skillsLevel } from "@/schema/stateSchema";
 const SkillsForm = ({
   setState,
 
@@ -59,24 +60,7 @@ const SkillsForm = ({
     });
   };
 
-  const option = [
-    {
-      label: "beginner",
-      value: "beginner",
-    },
-    {
-      label: "intermediate",
-      value: "intermediate",
-    },
-    {
-      label: "proficient",
-      value: "proficient",
-    },
-    {
-      label: "expert",
-      value: "expert",
-    },
-  ];
+ 
 
   const handleSave = async () => {
     //TODO add validation of date
@@ -217,7 +201,7 @@ const SkillsForm = ({
           <LabelInput
             setState={handleChange}
             name={"level"}
-            dropdownOption={option}
+            dropdownOption={skillsLevel}
             state={skills.level}
             labelVariant={"label"}
             type="text"

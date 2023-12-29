@@ -17,14 +17,10 @@ const MobileSortBy = ({ sortArray }) => {
       {sortArray?.map((item, ind) => {
         return (
           <Box key={ind}>
-            <CheckBoxDropDown listItem={item.listItem} label={item.label} />
+            <CheckBoxDropDown handleSelect={item.handleSelect}  listItem={item.listItem} label={item.label} />
           </Box>
         );
       })}
-      {/* <CheckBoxDropDown listItme={listItme2} label="Status" />
-      <CheckBoxDropDown listItme={listItme3} label="Education" />
-      <CheckBoxDropDown listItme={listItme3} label="Skills" />
-       */}
     </Box>
   );
 };

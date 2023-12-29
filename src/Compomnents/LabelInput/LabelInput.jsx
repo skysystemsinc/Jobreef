@@ -20,6 +20,7 @@ import info from "@/assets/Images/info.svg";
 import TextFormatting from "../TextFormatting/TextFormatting";
 
 const LabelInput = ({
+  className,
   dropdownOption,
   pattern,
   name,
@@ -45,7 +46,7 @@ const LabelInput = ({
   dropdown,
   readOnly,
   label,
-  style
+  style,
 }) => {
   return (
     <Box width={"100%"} sx={style}>
@@ -102,6 +103,8 @@ const LabelInput = ({
         />
       ) : textFormatter ? (
         <TextFormatting
+          className={className}
+          readOnly={readOnly}
           value={state}
           setValue={setState}
           placeholder={placeholder}

@@ -14,62 +14,17 @@ const Archived = ({
   // cardStatus,
   sortArray,
   matchCandidate,
+  handleSelectCandidate,
   cardStatus,
   handleEvent,
   popOverList,
 }) => {
-  // const data = [
-  //   {
-  //     status: matchCandidate ? "New" : " Archived",
-  //     archived: false,
-  //     name: "Aaron Brown",
-  //     country: "Nassau",
-  //     matchCandidate: false,
-  //     notInterested: true,
-  //     state: "The Bahamas",
-  //     companyName: "ABC Company",
-  //     desiginatation: "Systems Analyst",
-  //     schoolName: "University of The Bahamas",
-  //     diploma: "Bachelor’s Degree",
-  //     skills: [
-  //       {
-  //         name: "Technical Knowledge",
-  //         level: "",
-  //       },
-  //       {
-  //         name: "System Architecture",
-  //         level: "",
-  //       },
-  //       {
-  //         name: "Risk Management",
-  //         level: "",
-  //       },
-  //       {
-  //         name: "Product Design",
-  //         level: "",
-  //       },
-  //       {
-  //         name: "Leadership",
-  //         level: "",
-  //       },
-  //       {
-  //         name: "Q/A Testing ",
-  //         level: "",
-  //       },
-  //     ],
-  //     canididateSummary:
-  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  //     jobSummary:
-  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  //     educationSummary:
-  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-  //   },
-  // ];
+  
   return (
     <Box mt={{ md: "31px", base: "15px" }}>
       {/* <SelectedCandidate/> */}
 
-      <MobileSortBy sortArray={sortArray} />
+      {/* <MobileSortBy sortArray={sortArray} /> */}
 
       <Box>
         <Box>
@@ -88,13 +43,16 @@ const Archived = ({
               return (
                 <Box key={ind}>
                   <CandidateCard
+                  jobData={item}
+
                     cardStatusDisable={cardStatusDisable}
                     data={item.employee}
                     status={item.status}
                     matchCandidate={matchCandidate}
                     cardStatus={cardStatus}
+
                     popOverList={popOverList}
-                    handleEvent={handleEvent}
+                    handleEvent={() => handleSelectCandidate(item)}
                   />
                 </Box>
               );

@@ -22,7 +22,7 @@ import { Link } from "@chakra-ui/next-js";
 import { BsDot, BsPlusLg } from "react-icons/bs";
 import upload from "@/assets/Images/upload.svg";
 import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
-import { skills } from "@/schema/stateSchema";
+import { skills, skillsLevel } from "@/schema/stateSchema";
 import { useDispatch, useSelector } from "react-redux";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import endPoints from "@/Utils/endpoints";
@@ -38,9 +38,7 @@ const Skills = ({ prevStep, nextStep }) => {
   );
   const [loading, setLoading] = useState(false);
 
-  const [formData, setFormData] = useState([
-    { ...skills, name: "", level: "" },
-  ]);
+  const [formData, setFormData] = useState(employeeState?.skills);
   console.log("formData", formData);
   const [isSmallerThe500] = useMediaQuery("(max-width: 787px)");
   const handleDelete = (index) => {
@@ -85,23 +83,20 @@ const Skills = ({ prevStep, nextStep }) => {
       return {
         name: item.name,
         level: item.level,
-        // employeeId: employeeState.id,
+        employeeId: employeeState.id,
       };
     });
-    const body = {
-      // employeeId: employeeState.id,
-      data: modifyPayload,
-    };
+
     try {
       const postData = await post(
-        `${endPoints.skills}/${employeeState.id}`,
-        body
+        `${endPoints.employee}/${endPoints.employeeSkills}/${employeeState.id}`,
+        modifyPayload
       );
       if (postData.success) {
         nextStep();
 
         setLoading(false);
-
+        setFormData(postData.data);
         dispatch(
           addEmployee({
             ...employeeState,
@@ -129,32 +124,6 @@ const Skills = ({ prevStep, nextStep }) => {
     }
   };
 
-  useSkipInitialEffect(() => {
-    if (!employeeState?.skills) {
-      setFormData([{ name: "", level: "" }]);
-    } else {
-      setFormData(employeeState.skills);
-    }
-  }, [employeeState]);
-
-  const option = [
-    {
-      label: "beginner",
-      value: "beginner",
-    },
-    {
-      label: "intermediate",
-      value: "intermediate",
-    },
-    {
-      label: "proficient",
-      value: "proficient",
-    },
-    {
-      label: "expert",
-      value: "expert",
-    },
-  ];
   return (
     <Box pr={"20px"}>
       {formData?.map((item, index) => {
@@ -183,7 +152,7 @@ const Skills = ({ prevStep, nextStep }) => {
                 />
               ) : (
                 <LabelInput
-                  dropdownOption={option}
+                  dropdownOption={skillsLevel}
                   state={item.level}
                   setState={(e) => handleLinkChange(e, index)}
                   labelVariant={"label"}

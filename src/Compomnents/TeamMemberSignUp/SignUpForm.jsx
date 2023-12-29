@@ -207,7 +207,7 @@ const SignUpForm = () => {
                 type="number"
                 variant={"bg-input"}
                 placeholder="Enter your Phone Number"
-                label={"Mobile Number"}
+                label={"Phone Number"}
               />
               <LabelInput
                 state={formData.jobTitle}

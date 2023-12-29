@@ -32,40 +32,31 @@ import endPoints from "@/Utils/endpoints";
 import { setAllJobs } from "@/Redux/slices/jobPost";
 import { get } from "@/helper/fetch";
 import CandidatesDropdown from "./CandidatesDropdown";
-import { jobApplicants } from "@/Redux/slices/jobApplicants";
+import {
+  jobApplications,
+  setSelectedJob,
+} from "@/Redux/slices/jobApplications";
+import { matchCandidate } from "@/Redux/slices/matchCandidate";
+import { setSaved } from "@/Redux/slices/search";
+
 const CandidateTabs = ({ company }) => {
-  const candidates = useSelector((state) => state.candidates.value.all);
   const allJobState = useSelector((state) => state.jobPost.jobs.allJobs);
 
   const router = useRouter();
   const dispatch = useDispatch();
   let [tabIndex, setTabIndex] = useState(0);
 
-  // useEffect(() => {
-  //   dispatch(getAllCandidates(data));
-  // }, []);
-  // useSkipInitialEffect(() => {
-  //   if (candidates) {
-  //     const applications = candidates?.filter(
-  //       (item) => item.matchCandidate == false
-  //     );
-  //     dispatch(getFilterCandidates(applications));
-  //   }
-  // }, [candidates]);
   const handleChange = (ind) => {
-    // if (ind == 0) {
-    //   const applications = candidates?.filter(
-    //     (item) => item.matchCandidate == false
-    //   );
+    if (ind == 1) {
+      if (allJobState) {
+        dispatch(matchCandidate(allJobState[0].id));
+      }
+    } else if (ind == 2) {
+      dispatch(
+        setSaved([...allJobState?.filter((item) => item.saved == true)])
+      );
+    }
 
-    //   dispatch(getFilterCandidates(applications));
-    // } else {
-    //   const applications = candidates?.filter(
-    //     (item) => item.matchCandidate == true
-    //   );
-
-    //   dispatch(getFilterCandidates(applications));
-    // }
     setTabIndex(ind);
   };
 
@@ -116,7 +107,9 @@ const CandidateTabs = ({ company }) => {
 
   useEffect(() => {
     if (allJobState) {
-      dispatch(jobApplicants(allJobState[0].id));
+      dispatch(jobApplications(allJobState[0].id));
+
+      dispatch(setSelectedJob(allJobState[0]));
     }
   }, [allJobState]);
 
@@ -162,34 +155,17 @@ const CandidateTabs = ({ company }) => {
               );
             })}
 
-            {tabIndex == 2 ? null : (
-              <CandidatesDropdown
-                style={{
-                  position: "absolute",
-                  bottom: "0px",
-                  right: "12px",
-                  display: {
-                    md: "block",
-                    base: "none",
-                  },
-                }}
-              />
-              // <Box
-              //   display={{ md: "block", base: "none" }}
-              //   position={"absolute"}
-              //   right={"12px"}
-              //   bottom={"0px"}
-              // >
-              //   <DropDown
-              //     dropdownOption={allJobState}
-              //     keyName={"title"}
-              //     defaultDropdown
-              //     icon={<Image src={blue_arrow_down.src} />}
-              //     placeholder={""}
-              //     variant={"bg-dropdown"}
-              //   />
-              // </Box>
-            )}
+            <CandidatesDropdown
+              style={{
+                position: "absolute",
+                bottom: "0px",
+                right: "12px",
+                display: {
+                  md: "block",
+                  base: "none",
+                },
+              }}
+            />
           </TabList>
         </Box>
 

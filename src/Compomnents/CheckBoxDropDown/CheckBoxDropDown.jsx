@@ -11,7 +11,7 @@ import {
 import React from "react";
 import { BiFilter, BiSortDown } from "react-icons/bi";
 import { TiTick } from "react-icons/ti";
-const CheckBoxDropDown = ({ label, listItem }) => {
+const CheckBoxDropDown = ({ handleSelect, label, listItem }) => {
   return (
     <Menu closeOnSelect={false}>
       <MenuButton
@@ -32,8 +32,7 @@ const CheckBoxDropDown = ({ label, listItem }) => {
           display={"flex"}
           alignItems={"center"}
         >
-            <BiFilter fontSize={"30px"} />{" "}
-
+          <BiFilter fontSize={"30px"} />{" "}
           <Heading
             width={"100%"}
             textAlign={"center"}
@@ -48,17 +47,23 @@ const CheckBoxDropDown = ({ label, listItem }) => {
       </MenuButton>
       <MenuList minWidth="max-content">
         {/* <MenuDivider /> */}
-        <MenuOptionGroup title="" type="checkbox">
+        <MenuOptionGroup
+          onChange={(e) => {
+            handleSelect(e);
+          }}
+          title=""
+          type="checkbox"
+        >
           {listItem?.map((item, index) => {
             return (
               <MenuItemOption
                 key={index}
                 sx={{ "& .chakra-menu__icon": { color: "#000" } }}
-                value={item}
+                value={item.value}
               >
                 <Heading fontWeight={400} variant={"p10"}>
                   {" "}
-                  {item}{" "}
+                  {item.label}{" "}
                 </Heading>
               </MenuItemOption>
             );

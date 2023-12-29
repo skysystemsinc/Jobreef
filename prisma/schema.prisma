@@ -11,9 +11,9 @@ datasource db {
 }
 
 type LocationType {
-  country  String
-  province String
-  city     String
+  country  String?
+  province String?
+  city     String?
   address  String?
 }
 
@@ -51,10 +51,12 @@ enum Status {
 }
 
 enum jobStatus {
-  new          @map("new")
+  New          @map("New")
   UnderReview  @map("Under Review")
-  Interviewing @map("Interviewing ")
+  Interviewing @map("Interviewing")
   draft        @map("draft")
+  Accepted     @map("Accepted")
+  Rejected     @map("Rejected")
 }
 
 enum Role {
@@ -67,13 +69,16 @@ enum Role {
 }
 
 model Location {
-  id       String  @id @default(auto()) @map("_id") @db.ObjectId
-  user     User?   @relation(fields: [userId], references: [id])
-  userId   String? @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  // employee   Candidate @relation(fields: [employeeId], references: [id])
+  // employeeId String    @unique @db.ObjectId
+
+  employee Candidate?
   country  String
   province String
   city     String
   address  String?
+  // User       User[]
 }
 
 model EmailPreferences {
@@ -87,12 +92,12 @@ model EmailPreferences {
 }
 
 model User {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime  @default(now())
-  company   Company?  @relation(fields: [companyId], references: [id])
-  companyId String?   @db.ObjectId
-  employee  Employee?
-  stages    Int?      @default(0)
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime   @default(now())
+  company   Company?   @relation(fields: [companyId], references: [id])
+  companyId String?    @db.ObjectId
+  employee  Candidate?
+  stages    Int?       @default(0)
 
   // 0 for pending invite
   inviteAccepted Boolean   @default(false)
@@ -114,7 +119,9 @@ model User {
   phoneNumber    Int?
   visible        Boolean   @default(true)
 
-  location         Location[]
+  // location         Location?         @relation(fields: [locationId], references: [id])
+  // locationId       String?           @db.ObjectId
+
   emailPreferences EmailPreferences?
 }
 
@@ -136,7 +143,7 @@ model Company {
   jobs            Job[]
 }
 
-model Employee {
+model Candidate {
   createdAt      DateTime         @default(now())
   id             String           @id @default(auto()) @map("_id") @db.ObjectId
   user           User             @relation(fields: [userId], references: [id])
@@ -148,14 +155,17 @@ model Employee {
   certification  Certification[]
   skills         Skills[]
   achievement    Achievement[]
-  location       LocationType
-  attachment     Attachment?
-  appliedJobs    appliedJobs[]
+  // location       Location?
+  location       Location?        @relation(fields: [locationId], references: [id])
+  locationId     String?          @unique @db.ObjectId
+
+  attachment  Attachment?
+  AppliedJobs AppliedJobs[]
 }
 
 model WorkExperience {
   id               String       @id @default(auto()) @map("_id") @db.ObjectId
-  employee         Employee?    @relation(fields: [employeeId], references: [id])
+  employee         Candidate?   @relation(fields: [employeeId], references: [id])
   employeeId       String?      @db.ObjectId
   companyName      String
   designation      String
@@ -164,6 +174,7 @@ model WorkExperience {
   employeeType     String
   jobFamily        String
   jobSummary       String
+  experience       String
   startDate        DateTime     @default(now())
   endDate          DateTime?    @default(now())
   createdAt        DateTime     @default(now())
@@ -171,10 +182,11 @@ model WorkExperience {
 
 model Education {
   id                String       @id @default(auto()) @map("_id") @db.ObjectId
-  employee          Employee?    @relation(fields: [employeeId], references: [id])
+  employee          Candidate?   @relation(fields: [employeeId], references: [id])
   employeeId        String?      @db.ObjectId
   schoolName        String
   diploma           String
+  educationLevel    String
   currentlyEnrolled Boolean?
   location          LocationType
   gpa               String
@@ -185,31 +197,31 @@ model Education {
 }
 
 model Certification {
-  id               String    @id @default(auto()) @map("_id") @db.ObjectId
-  employee         Employee? @relation(fields: [employeeId], references: [id])
-  employeeId       String?   @db.ObjectId
+  id               String     @id @default(auto()) @map("_id") @db.ObjectId
+  employee         Candidate? @relation(fields: [employeeId], references: [id])
+  employeeId       String?    @db.ObjectId
   certificateName  String
   organizationName String
   certificateId    String
-  createdAt        DateTime  @default(now())
-  issuedOn         DateTime  @default(now())
-  validUntil       DateTime? @default(now())
+  createdAt        DateTime   @default(now())
+  issuedOn         DateTime   @default(now())
+  validUntil       DateTime?  @default(now())
   noExpiry         Boolean?
   certificateMedia Media[]
 }
 
 model Skills {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  employee   Employee? @relation(fields: [employeeId], references: [id])
-  employeeId String?   @db.ObjectId
+  id         String     @id @default(auto()) @map("_id") @db.ObjectId
+  employee   Candidate? @relation(fields: [employeeId], references: [id])
+  employeeId String?    @db.ObjectId
   name       String
   level      String
 }
 
 model Achievement {
-  id                String    @id @default(auto()) @map("_id") @db.ObjectId
-  employee          Employee? @relation(fields: [employeeId], references: [id])
-  employeeId        String?   @db.ObjectId
+  id                String     @id @default(auto()) @map("_id") @db.ObjectId
+  employee          Candidate? @relation(fields: [employeeId], references: [id])
+  employeeId        String?    @db.ObjectId
   name              String
   issueOrganization String
 
@@ -218,9 +230,9 @@ model Achievement {
 }
 
 model Attachment {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  employee   Employee? @relation(fields: [employeeId], references: [id])
-  employeeId String    @unique @db.ObjectId
+  id         String     @id @default(auto()) @map("_id") @db.ObjectId
+  employee   Candidate? @relation(fields: [employeeId], references: [id])
+  employeeId String     @unique @db.ObjectId
   resume     Media[]
   additional Media[]
 }
@@ -261,21 +273,24 @@ model Job {
   screeningQuestions  ScreeningQuestions[]
   updatedAt           DateTime             @updatedAt
 
-  applications appliedJobs[]
+  applications AppliedJobs[]
 }
 
-model appliedJobs {
+model AppliedJobs {
   id            String         @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt     DateTime       @default(now())
   job           Job            @relation(fields: [jobId], references: [id])
   jobId         String         @db.ObjectId
-  employee      Employee       @relation(fields: [employeeId], references: [id])
+  employee      Candidate      @relation(fields: [employeeId], references: [id])
   employeeId    String         @db.ObjectId
   archived      Boolean        @default(false)
-  status        jobStatus      @default(new)
+  status        jobStatus      @default(New)
   screeningQues QuestionsAns[]
   attchments    Media[]
   messages      String[]
   saved         Boolean        @default(false)
+  interested    Boolean        @default(false)
   updatedAt     DateTime       @updatedAt
+
   // Add additional fields related to the job application if needed
 }

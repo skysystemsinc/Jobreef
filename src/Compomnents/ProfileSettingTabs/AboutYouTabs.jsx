@@ -67,7 +67,7 @@ const AboutYouTabs = ({ candidate }) => {
       firstName: state.firstName,
       lastName: state.lastName,
       accountType: state.accountType,
-      visible: JSON.parse(state?.visible?.value?.toLowerCase()),
+      visible: !candidate?true: JSON.parse(state?.visible?.value?.toLowerCase()),
       phoneNumber: parseInt(state.phoneNumber),
       profilePic: state.profilePic,
     };

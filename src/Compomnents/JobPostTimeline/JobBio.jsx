@@ -167,6 +167,7 @@ const JobBio = ({ disableNextPrev, prevStep, nextStep }) => {
               };
             });
           }}
+          className={"job"}
           name={"jobDescription"}
           labelVariant={"label"}
           textFormatter
