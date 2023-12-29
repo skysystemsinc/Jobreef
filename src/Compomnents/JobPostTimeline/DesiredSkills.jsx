@@ -25,7 +25,7 @@ import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
 import IconButton from "../IconButton/IconButton";
 import white_edit from "@/assets/Images/white-edit.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { addJob } from "@/Reudx/slices/jobPost";
+import { addJob } from "@/Redux/slices/jobPost";
 import NextPrevBtn from "./NextPrevBtn";
 
 const DesiredSkills = ({ disableNextPrev, style, prevStep, nextStep }) => {

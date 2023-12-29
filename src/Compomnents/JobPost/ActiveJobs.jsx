@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import ReactTable from "../PaginatedTable/ReactTable";
 import moment from "moment";
-import { addJob, setAllJobs } from "@/Reudx/slices/jobPost";
+import { addJob, setAllJobs } from "@/Redux/slices/jobPost";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import { put } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";

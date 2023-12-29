@@ -3,8 +3,9 @@
 
 import endPoints from "@/Utils/endpoints";
 import { status } from "@/Utils/role";
+import { get } from "@/helper/fetch";
 import { job } from "@/schema/stateSchema";
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: job,
@@ -14,13 +15,16 @@ const initialState = {
     allJobs: false,
     applicants: false,
   },
-  jobApplicants: {
-    application: false,
-    matchCandidate: false,
-    search: false,
-  },
 };
-
+export const getSingleJob = createAsyncThunk("getSingleJob", async (id) => {
+  try {
+    const postData = await get(`${endPoints.jobs}/${id}`, "GET");
+    return postData;
+  } catch (error) {
+    console.log("error", error);
+    return error;
+  }
+});
 const jobPost = createSlice({
   name: "jobPost",
   initialState: initialState,
@@ -41,6 +45,15 @@ const jobPost = createSlice({
       state.jobs.inActiveJobs = inActiveJobs;
     },
 
+  },
+  extraReducers: (builder) => {
+
+    builder.addCase(getSingleJob.pending, (state, action) => {
+      state.value = false;
+    });
+    builder.addCase(getSingleJob.fulfilled, (state, action) => {
+      state.value = action.payload.data;
+    });
   },
 });
 export const { addJob, setAllJobs } = jobPost.actions;

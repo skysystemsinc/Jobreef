@@ -21,7 +21,7 @@ import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import Loader from "../Loader/Loader";
 import { put } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
-import { addEmployee } from "@/Reudx/slices/employee";
+import { addEmployee } from "@/Redux/slices/employee";
 
 const Overview = ({ setTabIndex, tabIndex }) => {
   const toast = useToast();

@@ -24,7 +24,7 @@ import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import { useDispatch, useSelector } from "react-redux";
 import { post, put } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
-import { addEmployee } from "@/Reudx/slices/employee";
+import { addEmployee } from "@/Redux/slices/employee";
 import Loader from "../Loader/Loader";
 const CertificationForm = ({ state, setState }) => {
   const router = useRouter();
@@ -121,10 +121,9 @@ const CertificationForm = ({ state, setState }) => {
     }
   };
   const handleUpdate = async () => {
-   
     if (loading) return;
     const isValid = Object.values(formData).some((value) => value === "");
-  
+
     if (isValid || formData.issuedOn === null) {
       toast({
         position: "bottom-right",
@@ -191,8 +190,6 @@ const CertificationForm = ({ state, setState }) => {
       return { ...prev, add: false, edit: false };
     });
   };
-
-
 
   const handleUpload = (event, key, index) => {
     //  = Array.from(event.target.files);

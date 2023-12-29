@@ -16,5 +16,10 @@ const endPoints = {
   jobs:"jobs",
   companyJobs:"companyJobs",
   appliedJobs:"appliedJobs",
+  teamMember:"team-member",
+  applications:"applications",
+  matchCandidate:"match-candidate",
+  employeeSkills:"employee-skills",
+  search:"search",
 };
 export default endPoints;

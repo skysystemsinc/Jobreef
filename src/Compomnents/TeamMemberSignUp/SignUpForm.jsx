@@ -24,16 +24,16 @@ import ConfirmationBox from "../ConfirmationBox/ConfirmationBox";
 import { useSelector } from "react-redux";
 import { get, put } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
-import { setLoginUser } from "@/Reudx/slices/LoginUser";
-import { addCompany } from "@/Reudx/slices/company";
+import { setLoginUser } from "@/Redux/slices/LoginUser";
+import { addCompany } from "@/Redux/slices/company";
 const SignUpForm = () => {
   const router = useRouter();
   const { id } = router.query;
   // const [isContinue, setIsContinue] = useState(false);
   const [state, setState] = useState({
-    loading:false,
-    isContinue:false
-  })
+    loading: false,
+    isContinue: false,
+  });
   const [formData, setFormData] = useState({
     password: "",
     confirmPassword: "",
@@ -73,7 +73,6 @@ const SignUpForm = () => {
       lastName: formData.lastName,
       email: formData.email,
       password: formData.password,
-      
     };
     const postData = await put(
       `${endPoints.user}/${id}`,
@@ -208,7 +207,7 @@ const SignUpForm = () => {
                 type="number"
                 variant={"bg-input"}
                 placeholder="Enter your Phone Number"
-                label={"Mobile Number"}
+                label={"Phone Number"}
               />
               <LabelInput
                 state={formData.jobTitle}

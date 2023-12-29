@@ -17,12 +17,12 @@ import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
 import globalStyles from "@/styles/globalStyles";
-import { education } from "@/schema/stateSchema";
+import { education, educationOtp } from "@/schema/stateSchema";
 import CheckBox from "../CheckBox/CheckBox";
 import Loader from "../Loader/Loader";
 import { post, put } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
-import { addEmployee } from "@/Reudx/slices/employee";
+import { addEmployee } from "@/Redux/slices/employee";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import { useDispatch, useSelector } from "react-redux";
 const EducationForm = ({ state, setState }) => {
@@ -137,6 +137,7 @@ const EducationForm = ({ state, setState }) => {
       currentlyEnrolled: formData.currentlyEnrolled,
       gpa: formData.gpa,
       description: formData.description,
+      educationLevel: formData.educationLevel,
 
       location: {
         country: formData.country,
@@ -199,7 +200,7 @@ const EducationForm = ({ state, setState }) => {
       {/* <Image src={profile.src} /> */}
 
       <Box mt={"0px"}>
-        <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
+        <InputWrapper gap={{ xl: "40px", base: "20px" }}>
           <LabelInput
             labelVariant={"label"}
             type="text"
@@ -223,7 +224,7 @@ const EducationForm = ({ state, setState }) => {
         </InputWrapper>
 
         <Box border={"1px solid white"} mb={"30px"}>
-          <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
+          <InputWrapper gap={{ xl: "40px", base: "20px" }}>
             <LabelInput
               state={formData.startDate}
               setState={(e) => {
@@ -272,7 +273,7 @@ const EducationForm = ({ state, setState }) => {
             </Box>
           </InputWrapper>
         </Box>
-        <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
+        <InputWrapper gap={{ xl: "40px", base: "20px" }}>
           <LabelInput
             labelVariant={"label"}
             type="date"
@@ -296,7 +297,7 @@ const EducationForm = ({ state, setState }) => {
             label={"State / Province"}
           />
         </InputWrapper>
-        <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
+        <InputWrapper gap={{ xl: "40px", base: "20px" }}>
           <LabelInput
             state={formData.city}
             setState={handleChange}
@@ -320,7 +321,8 @@ const EducationForm = ({ state, setState }) => {
           />
         </InputWrapper>
 
-        <Box maxWidth={{ xl: "48%", base: "100%" }}>
+        {/* <Box maxWidth={{ xl: "48%", base: "100%" }}> */}
+        <InputWrapper gap={{ xl: "40px", base: "20px" }}>
           <LabelInput
             labelVariant={"label"}
             state={formData.gpa}
@@ -331,7 +333,19 @@ const EducationForm = ({ state, setState }) => {
             placeholder="Enter your GPA"
             label={"GPA"}
           />
-        </Box>
+          <LabelInput
+            labelVariant={"label"}
+            state={formData.educationLevel}
+            setState={handleChange}
+            name={"educationLevel"}
+            dropdownOption={educationOtp}
+            dropdown
+            type="text"
+            variant={"bg-input"}
+            placeholder="Select education level"
+            label={"Education level"}
+          />
+        </InputWrapper>
 
         <Box mb={{ md: "100px", base: "10px" }} mt={"20px"}>
           <LabelInput
@@ -344,7 +358,6 @@ const EducationForm = ({ state, setState }) => {
             name={"description"}
             labelVariant={"label"}
             type="text"
-
             variant={"bg-teaxtarea"}
             placeholder="Describe what you did and studied during this period"
             label={"Description"}

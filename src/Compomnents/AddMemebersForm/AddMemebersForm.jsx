@@ -14,21 +14,27 @@ import {
   UnorderedList,
   useToast,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LabelInput from "../LabelInput/LabelInput";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import axios from "axios";
 import { useRouter } from "next/router";
 import globalStyles from "@/styles/globalStyles";
 import { useDispatch, useSelector } from "react-redux";
-import { addTeamMember, getTeamMembers } from "@/Reudx/slices/teamMembers";
+import {
+  addTeamMember,
+  getSingleMember,
+  getTeamMembers,
+} from "@/Redux/slices/teamMembers";
 import { post, put } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
 import Loader from "../Loader/Loader";
 import { role, roles } from "@/Utils/role";
+import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 
 const AddMemebersForm = () => {
   const router = useRouter();
+  const { id } = router.query;
   const dispatch = useDispatch();
   const companyState = useSelector((state) => state.companyRegister.value);
 
@@ -37,7 +43,10 @@ const AddMemebersForm = () => {
     loading: false,
   });
   const userState = useSelector((state) => state.teamMembers.value.allMembers);
-  const singleUser = useSelector((state) => state.teamMembers.value.member);
+  const formDataState = useSelector(
+    (state) => state.teamMembers.value.formData
+  );
+  console.log("formDataState", formDataState);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -75,9 +84,14 @@ const AddMemebersForm = () => {
         return;
       }
       setState({ ...state, loading: true });
-      if (formData.id) {
+      // handleCreateUser();
+
+      if (id) {
+        console.log("formDataState.id", id);
         handleUpdateUser();
       } else {
+        console.log("else", id);
+
         handleCreateUser();
       }
     } catch (error) {}
@@ -95,12 +109,8 @@ const AddMemebersForm = () => {
   const handleCreateUser = async () => {
     const postData = await post(`${endPoints.user}`, {
       ...formData,
-      // role: roles.recruiter,
-
-      // companyAdminId: companyState.id,
-      ...(formData.role == roles.recruiter && {
-        companyAdminId: companyState.id,
-      }),
+      companyId: companyState.id,
+      role: formData.role,
     });
     setState((prev) => {
       return {
@@ -109,7 +119,11 @@ const AddMemebersForm = () => {
       };
     });
     dispatch(addTeamMember({ ...formData }));
-    dispatch(getTeamMembers([...userState, postData.data]));
+    if (userState.length) {
+      dispatch(getTeamMembers([...userState, postData.data]));
+    } else {
+      dispatch(getTeamMembers([postData.data]));
+    }
     setState({ ...state, loading: false });
 
     router.push("/company/team-members");
@@ -125,7 +139,7 @@ const AddMemebersForm = () => {
   const handleUpdateUser = async () => {
     delete formData?.id;
 
-    const postData = await put(`${endPoints.user}`, formData);
+    const postData = await put(`${endPoints.user}/${id}`, formData);
     setState((prev) => {
       return {
         ...prev,
@@ -134,13 +148,17 @@ const AddMemebersForm = () => {
     });
 
     dispatch(addTeamMember({ ...formData }));
-    dispatch(
-      getTeamMembers([
-        ...userState.map((item) =>
-          item.id === postData.data.id ? postData.data : item
-        ),
-      ])
-    );
+    if (userState) {
+      dispatch(
+        getTeamMembers([
+          ...userState?.map((item) =>
+            item.id === postData.data.id ? postData.data : item
+          ),
+        ])
+      );
+    }
+    router.push("/company/team-members");
+
     toast({
       position: "bottom-right",
       title: postData.message,
@@ -154,9 +172,21 @@ const AddMemebersForm = () => {
   };
 
   const roleDropdown = [
-    { label: "Company Administrator", value: roles.owner },
+    { label: "Company Administrator", value: roles.company },
     { label: "Recruiter", value: roles.recruiter },
   ];
+
+  useEffect(() => {
+    if (formDataState) {
+      setFormData(formDataState);
+    }
+  }, [formDataState]);
+  useEffect(() => {
+    if (!formDataState && id) {
+      dispatch(getSingleMember(id));
+    }
+  }, [id]);
+
   return (
     <Box minHeight={"82vh"} width={{ md: "70%", base: "100%" }} px={"10px"}>
       <Heading
@@ -164,7 +194,7 @@ const AddMemebersForm = () => {
         m={{ md: "42px 0px 40px 0px", base: "0px 0px 30px 0px" }}
         variant={"p6"}
       >
-        Add Team Member
+        {id ? "Update" : " Add"} Team Member
       </Heading>
       <InputWrapper>
         <LabelInput
@@ -229,7 +259,13 @@ const AddMemebersForm = () => {
           px={{ md: "35px", base: "20px" }}
           variant={"blue-btn"}
         >
-          {state.loading ? <Loader /> : "Send Invitation"}
+          {state.loading ? (
+            <Loader />
+          ) : id ? (
+            "Update member"
+          ) : (
+            "Send Invitation"
+          )}
         </Button>
       </Flex>
     </Box>

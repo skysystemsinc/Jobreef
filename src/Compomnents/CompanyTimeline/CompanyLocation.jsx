@@ -24,14 +24,13 @@ import Loader from "../Loader/Loader";
 import globalStyles from "@/styles/globalStyles";
 import { company } from "@/schema/stateSchema";
 import { useDispatch, useSelector } from "react-redux";
-import { addCompany } from "@/Reudx/slices/company";
+import { addCompany } from "@/Redux/slices/company";
 
 const CompanyLocation = ({ nextStep, handlePrevious, State, setState }) => {
   const toast = useToast();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const companyState = useSelector((state) => state.companyRegister.value);
 
-  
   const [companyLocation, setCompanyLocation] = useState(companyState);
   const handleNext = () => {
     if (
@@ -49,7 +48,7 @@ const CompanyLocation = ({ nextStep, handlePrevious, State, setState }) => {
       });
       return;
     }
-    dispatch(addCompany(companyLocation))
+    dispatch(addCompany(companyLocation));
     nextStep();
   };
 
@@ -127,7 +126,7 @@ const CompanyLocation = ({ nextStep, handlePrevious, State, setState }) => {
           variant={"blue-btn"}
           onClick={handleNext}
         >
-          { "Next"}
+          {"Next"}
         </Button>
       </Flex>
     </Box>

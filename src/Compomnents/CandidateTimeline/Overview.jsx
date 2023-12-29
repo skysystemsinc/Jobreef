@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loader/Loader";
 import { employee } from "@/schema/stateSchema";
 import { httpRequest } from "@/helper/httpRrequest";
-import { addEmployee } from "@/Reudx/slices/employee";
+import { addEmployee } from "@/Redux/slices/employee";
 import { post, put } from "@/helper/fetch";
 
 const Overview = ({ nextStep, activeStep, prevStep }) => {
@@ -43,12 +43,13 @@ const Overview = ({ nextStep, activeStep, prevStep }) => {
     }
     setLoading(true);
     try {
-      if (employeeState.id) {
+      if (employeeState?.id) {
         handleUpdateEmployee();
       } else {
         handleCreateEmployee();
       }
     } catch (err) {
+      console.log("err", err);
       setState((prev) => {
         return {
           ...prev,

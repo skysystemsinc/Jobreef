@@ -4,6 +4,7 @@ import { GoDotFill } from "react-icons/go";
 import { useSelector } from "react-redux";
 import Chip from "../Chip/Chip";
 import { FiDownload } from "react-icons/fi";
+import moment from "moment";
 const Resume = () => {
   const selectedCandidates = useSelector(
     (state) => state.candidates.value.selected
@@ -44,82 +45,59 @@ const Resume = () => {
             color={"gray.text"}
             as={"p"}
             variant={"p4"}
-          >
-            {selectedCandidates?.canididateSummary}
-          </Heading>
+            dangerouslySetInnerHTML={{
+              __html: selectedCandidates?.description,
+            }}
+          />
+
           <Heading color={"gray.text"} variant={"p7"}>
             Work Experience
           </Heading>
-          <Box
-            mt={{ md: "7px", base: "5px" }}
-            // mb={{ md: "10px", base: "10px" }}
-            mb={"10px"}
-            display={"flex"}
-            alignItems={"center"}
-            flexWrap={"wrap"}
-            gap={{ md: "10px", sm: "6px", base: "5px" }}
-          >
-            <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-              {selectedCandidates?.desiginatation}
-            </Heading>
-            <Box fontSize={{ sm: "14px", base: "8px" }}>
-              <GoDotFill style={{ color: "#D9D9D9" }} />
-            </Box>
+          {selectedCandidates?.workExperience?.map((item) => {
+            return (
+              <Box>
+                <Box
+                  mt={{ md: "7px", base: "5px" }}
+                  // mb={{ md: "10px", base: "10px" }}
+                  mb={"10px"}
+                  display={"flex"}
+                  alignItems={"center"}
+                  flexWrap={"wrap"}
+                  gap={{ md: "10px", sm: "6px", base: "5px" }}
+                >
+                  <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+                    {item?.designation}
+                  </Heading>
+                  <Box fontSize={{ sm: "14px", base: "8px" }}>
+                    <GoDotFill style={{ color: "#D9D9D9" }} />
+                  </Box>
 
-            <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-              {selectedCandidates?.companyName}
-            </Heading>
-            <Box fontSize={{ sm: "14px", base: "8px" }}>
-              <GoDotFill style={{ color: "#D9D9D9" }} />
-            </Box>
+                  <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+                    {item?.companyName}
+                  </Heading>
+                  <Box fontSize={{ sm: "14px", base: "8px" }}>
+                    <GoDotFill style={{ color: "#D9D9D9" }} />
+                  </Box>
 
-            <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-              {"04/2017 - Present"}
-            </Heading>
-          </Box>
-          <Heading
-            fontWeight={400}
-            color={"gray.text"}
-            as={"p"}
-            variant={"p12"}
-          >
-            {selectedCandidates?.jobSummary}
-          </Heading>
-          <Box
-            mt={{ md: "19px", base: "10px" }}
-            // mb={{ md: "8px", base: "3px" }}
-            mb={"10px"}
-            display={"flex"}
-            alignItems={"center"}
-            flexWrap={"wrap"}
-            gap={{ md: "10px", sm: "6px", base: "5px" }}
-          >
-            <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-              {selectedCandidates?.desiginatation}
-            </Heading>
-            <Box fontSize={{ sm: "14px", base: "8px" }}>
-              <GoDotFill style={{ color: "#D9D9D9" }} />
-            </Box>
-
-            <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-              {selectedCandidates?.companyName}
-            </Heading>
-            <Box fontSize={{ sm: "14px", base: "8px" }}>
-              <GoDotFill style={{ color: "#D9D9D9" }} />
-            </Box>
-
-            <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-              {"04/2017 - Present"}
-            </Heading>
-          </Box>
-          <Heading
-            fontWeight={400}
-            color={"gray.text"}
-            as={"p"}
-            variant={"p12"}
-          >
-            {selectedCandidates?.jobSummary}
-          </Heading>
+                  <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+                    {moment(item.startDate).format("MMMM YYYY")} {" - "}
+                    {item.endDate
+                      ? moment(item.endDate).format("MMMM YYYY")
+                      : "Present"}
+                  </Heading>
+                </Box>
+                <Heading
+                  fontWeight={400}
+                  color={"gray.text"}
+                  as={"p"}
+                  variant={"p12"}
+                  dangerouslySetInnerHTML={{
+                    __html: item?.jobSummary,
+                  }}
+                />
+              </Box>
+            );
+          })}
 
           <Heading
             mt={{ md: "25px", base: "10px" }}
@@ -128,42 +106,53 @@ const Resume = () => {
           >
             Education History
           </Heading>
-          <Box
-            mt={{ md: "7px", base: "5px" }}
-            // mb={{ md: "10px", base: "3px" }}
-            mb={"10px"}
-            display={"flex"}
-            alignItems={"center"}
-            flexWrap={"wrap"}
-            gap={{ md: "10px", sm: "6px", base: "5px" }}
-          >
-            <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-              {selectedCandidates?.diploma}
-            </Heading>
-            <Box fontSize={{ sm: "14px", base: "8px" }}>
-              <GoDotFill style={{ color: "#D9D9D9" }} />
-            </Box>
 
-            <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-              {selectedCandidates?.schoolName}
-            </Heading>
-            <Box fontSize={{ sm: "14px", base: "8px" }}>
-              <GoDotFill style={{ color: "#D9D9D9" }} />
-            </Box>
+          {selectedCandidates?.education?.map((item) => {
+            return (
+              <Box>
+                <Box
+                  mt={{ md: "7px", base: "5px" }}
+                  // mb={{ md: "10px", base: "3px" }}
+                  mb={"10px"}
+                  display={"flex"}
+                  alignItems={"center"}
+                  flexWrap={"wrap"}
+                  gap={{ md: "10px", sm: "6px", base: "5px" }}
+                >
+                  <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+                    {item?.diploma}
+                  </Heading>
+                  <Box fontSize={{ sm: "14px", base: "8px" }}>
+                    <GoDotFill style={{ color: "#D9D9D9" }} />
+                  </Box>
 
-            <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-              Currently Enrolled
-            </Heading>
-          </Box>
-          <Heading
-            fontWeight={400}
-            color={"gray.text"}
-            as={"p"}
-            variant={"p12"}
-          >
-            {selectedCandidates?.educationSummary}
-          </Heading>
+                  <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+                    {item?.schoolName}
+                  </Heading>
+                  <Box fontSize={{ sm: "14px", base: "8px" }}>
+                    <GoDotFill style={{ color: "#D9D9D9" }} />
+                  </Box>
 
+                  <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+                    {moment(item.startDate).format("MMMM YYYY")} {" - "}
+                    {item.endDate
+                      ? moment(item.endDate).format("MMMM YYYY")
+                      : "Currently Enrolled"}
+                  </Heading>
+                </Box>
+                <Heading
+                  fontWeight={400}
+                  color={"gray.text"}
+                  as={"p"}
+                  variant={"p12"}
+                  pl={"10px"}
+                  dangerouslySetInnerHTML={{
+                    __html: item?.description,
+                  }}
+                />
+              </Box>
+            );
+          })}
           <Heading
             mt={{ md: "25px", base: "10px" }}
             color={"gray.text"}
@@ -171,38 +160,48 @@ const Resume = () => {
           >
             Certification
           </Heading>
-          <Box
-            mt={{ md: "7px", base: "5px" }}
-            // mb={{ md: "10px", base: "3px" }}
-            mb={"10px"}
-            display={"flex"}
-            alignItems={"center"}
-            flexWrap={"wrap"}
-            gap={{ md: "10px", sm: "6px", base: "5px" }}
-          >
-            <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-              Walter Payton College Preparatory High School
-            </Heading>
-            <Box fontSize={{ sm: "14px", base: "8px" }}>
-              <GoDotFill style={{ color: "#D9D9D9" }} />
-            </Box>
 
-            <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-              September 2017 - July 2023
-            </Heading>
-            <Box fontSize={{ sm: "14px", base: "8px" }}>
-              <GoDotFill style={{ color: "#D9D9D9" }} />
-            </Box>
+          {selectedCandidates?.certification?.map((item) => {
+            return (
+              <Box
+                mt={{ md: "7px", base: "5px" }}
+                // mb={{ md: "10px", base: "3px" }}
+                mb={"10px"}
+                display={"flex"}
+                alignItems={"center"}
+                flexWrap={"wrap"}
+                gap={{ md: "10px", sm: "6px", base: "5px" }}
+              >
+                <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+                  {/* Walter Payton College Preparatory High School */}
+                  {item.certificateName}
+                </Heading>
+                <Box fontSize={{ sm: "14px", base: "8px" }}>
+                  <GoDotFill style={{ color: "#D9D9D9" }} />
+                </Box>
 
-            <Heading
-              whiteSpace={"pre-wrap"}
-              fontWeight={600}
-              color={"gray.text"}
-              variant={"p12"}
-            >
-              Certificate Verification ID: 2f8ae5bfaa4c46dc3bba77655130f32a
-            </Heading>
-          </Box>
+                <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+                  {/* September 2017 - July 2023 */}
+                  {moment(item.issuedOn).format("MMMM YYYY")} {" - "}
+                  {!item.noExpiry
+                    ? moment(item.validUntil).format("MMMM YYYY")
+                    : "this certificate has no expiry"}
+                </Heading>
+                <Box fontSize={{ sm: "14px", base: "8px" }}>
+                  <GoDotFill style={{ color: "#D9D9D9" }} />
+                </Box>
+
+                <Heading
+                  whiteSpace={"pre-wrap"}
+                  fontWeight={600}
+                  color={"gray.text"}
+                  variant={"p12"}
+                >
+                  Certificate Verification ID: {item.certificateId}
+                </Heading>
+              </Box>
+            );
+          })}
           <Heading
             mt={{ md: "25px", base: "10px" }}
             color={"gray.text"}
@@ -210,38 +209,43 @@ const Resume = () => {
           >
             Achievements
           </Heading>
-          <Box
-            mt={{ md: "7px", base: "5px" }}
-            // mb={{ md: "10px", base: "3px" }}
-            mb={"10px"}
-            display={"flex"}
-            alignItems={"center"}
-            flexWrap={"wrap"}
-            gap={{ md: "10px", sm: "6px", base: "5px" }}
-          >
-            <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-              Junior Achievement Award
-            </Heading>
-            <Box fontSize={{ sm: "14px", base: "8px" }}>
-              <GoDotFill style={{ color: "#D9D9D9" }} />
-            </Box>
 
-            <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
-              Junior Achievement
-            </Heading>
-            <Box fontSize={{ sm: "14px", base: "8px" }}>
-              <GoDotFill style={{ color: "#D9D9D9" }} />
-            </Box>
+          {selectedCandidates.achievement.map((item) => {
+            return (
+              <Box
+                mt={{ md: "7px", base: "5px" }}
+                // mb={{ md: "10px", base: "3px" }}
+                mb={"10px"}
+                display={"flex"}
+                alignItems={"center"}
+                flexWrap={"wrap"}
+                gap={{ md: "10px", sm: "6px", base: "5px" }}
+              >
+                <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+                  {item.name}
+                </Heading>
+                <Box fontSize={{ sm: "14px", base: "8px" }}>
+                  <GoDotFill style={{ color: "#D9D9D9" }} />
+                </Box>
 
-            <Heading
-              whiteSpace={"pre-wrap"}
-              fontWeight={600}
-              color={"gray.text"}
-              variant={"p12"}
-            >
-              06/2012
-            </Heading>
-          </Box>
+                <Heading fontWeight={600} color={"gray.text"} variant={"p12"}>
+                  {item.issueOrganization}
+                </Heading>
+                <Box fontSize={{ sm: "14px", base: "8px" }}>
+                  <GoDotFill style={{ color: "#D9D9D9" }} />
+                </Box>
+
+                <Heading
+                  whiteSpace={"pre-wrap"}
+                  fontWeight={600}
+                  color={"gray.text"}
+                  variant={"p12"}
+                >
+                  {moment(item.issuedOn).format("MMMM YYYY")}
+                </Heading>
+              </Box>
+            );
+          })}
           <Heading
             mt={{ md: "20px", base: "10px" }}
             color={"gray.text"}

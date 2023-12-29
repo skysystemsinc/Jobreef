@@ -35,7 +35,7 @@ const Popovers = ({ data, width, actionList }) => {
             e.stopPropagation(), onToggle();
           }}
           src={menu.src}
-          width={"20px"}
+          width={"24px"}
         />
       </PopoverTrigger>
       <PopoverContent

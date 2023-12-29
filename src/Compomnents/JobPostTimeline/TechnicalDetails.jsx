@@ -20,7 +20,7 @@ import { BsDot } from "react-icons/bs";
 import upload from "@/assets/Images/upload.svg";
 import { useDispatch, useSelector } from "react-redux";
 import NextPrevBtn from "./NextPrevBtn";
-import { addJob } from "@/Reudx/slices/jobPost";
+import { addJob } from "@/Redux/slices/jobPost";
 import { Seniority, jobFamilyOpt, tags } from "@/schema/stateSchema";
 
 const TechnicalDetails = ({ disableNextPrev, prevStep, nextStep }) => {
@@ -83,7 +83,6 @@ const TechnicalDetails = ({ disableNextPrev, prevStep, nextStep }) => {
           setState={handleChange}
           name={"minimumEducation"}
           labelVariant={"label"}
-          
           type="text"
           variant={"bg-input"}
           placeholder="Select Education Level for this job"
@@ -97,7 +96,7 @@ const TechnicalDetails = ({ disableNextPrev, prevStep, nextStep }) => {
           setState={handleChange}
           name={"yearsOfExperience"}
           labelVariant={"label"}
-          type="text"
+          type="number"
           variant={"bg-input"}
           placeholder="Enter the years of experience desired for this job"
           label={"Years of Experience"}
@@ -172,9 +171,9 @@ const TechnicalDetails = ({ disableNextPrev, prevStep, nextStep }) => {
       <InputWrapper>
         <LabelInput
           state={formData.tags}
-          setState={(e)=>{
-            console.log("e",e);
-            setFormData({ ...formData, tags: e})
+          setState={(e) => {
+            console.log("e", e);
+            setFormData({ ...formData, tags: e });
           }}
           dropdownOption={tags}
           name={"tags"}

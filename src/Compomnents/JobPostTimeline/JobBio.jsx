@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { EmploymentTypeOpt, job, locationType } from "@/schema/stateSchema";
 import IconButton from "../IconButton/IconButton";
 import NextPrevBtn from "./NextPrevBtn";
-import { addJob } from "@/Reudx/slices/jobPost";
+import { addJob } from "@/Redux/slices/jobPost";
 import { get } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
 
@@ -122,7 +122,6 @@ const JobBio = ({ disableNextPrev, prevStep, nextStep }) => {
         <LabelInput
           state={formData.applicationType}
           setState={handleChange}
-          
           name={"applicationType"}
           labelVariant={"label"}
           dropdownOption={applicationType}
@@ -168,6 +167,7 @@ const JobBio = ({ disableNextPrev, prevStep, nextStep }) => {
               };
             });
           }}
+          className={"job"}
           name={"jobDescription"}
           labelVariant={"label"}
           textFormatter

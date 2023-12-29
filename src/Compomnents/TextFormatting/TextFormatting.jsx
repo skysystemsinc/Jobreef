@@ -9,8 +9,9 @@ const ReactQuill = dynamic(() => import("react-quill"), {
 
 const TextFormatting = ({
   placeholder,
-
+  className,
   value,
+  readOnly,
   setValue,
 }) => {
   // const [value, setValue] = useState("");
@@ -49,6 +50,7 @@ const TextFormatting = ({
   return (
     <ReactQuill
       formats={formate}
+      className={className}
       modules={module}
       style={{
         // border: "none",
@@ -59,6 +61,7 @@ const TextFormatting = ({
       }}
       value={value}
       theme="snow"
+      readOnly={readOnly}
       placeholder={placeholder}
       onChange={setValue}
     />

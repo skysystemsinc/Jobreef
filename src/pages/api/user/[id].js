@@ -90,13 +90,22 @@ const GetSingleUser = async (req, res) => {
   try {
     // const user = await UserModel.findOne({ _id: req.query.id });
     const user = await prisma.User.findUnique({
+      where: {
+        id: req.query.id,
+      },
       include: {
-        company: {
-          include: {
-            user: true,
-            companyEmployees:true
-          },
-        },
+        company: true,
+        // {
+        //   include: {
+        //     users: {
+        //       where: {
+        //         NOT: {
+        //           id: req.query.id,
+        //         }
+        //       },
+        //     },
+        //   },
+        // },
         employee: {
           include: {
             skills: true,
@@ -110,9 +119,6 @@ const GetSingleUser = async (req, res) => {
         },
         location: true,
         emailPreferences: true,
-      },
-      where: {
-        id: req.query.id,
       },
     });
     if (!user) {

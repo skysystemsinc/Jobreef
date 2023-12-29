@@ -11,6 +11,7 @@ const add = async (req, res) => {
     currentlyEnrolled: data.currentlyEnrolled,
     gpa: data.gpa,
     description: data.description,
+    educationLevel: data.educationLevel,
     location: {
       country: data.country,
       province: data.province,

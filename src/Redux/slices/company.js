@@ -2,7 +2,7 @@ import { company } from "@/schema/stateSchema";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: company,
+  value: { ...company },
 };
 
 const companyRegister = createSlice({
@@ -10,7 +10,7 @@ const companyRegister = createSlice({
   initialState: initialState,
   reducers: {
     addCompany: (state, action) => {
-      console.log("action.payload",action.payload);
+      console.log("action.payload", action.payload);
       state.value = action.payload;
     },
   },

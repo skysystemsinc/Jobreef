@@ -61,7 +61,7 @@ const EducationCard = ({
               </Box>
 
               <Heading color={"gray.text"} sx={headingStyle} variant={"p4"}>
-                {moment(data.stateDate).format("MMMM YYYY")} {" - "}
+                {moment(data.startDate).format("MMMM YYYY")} {" - "}
                 {data.endDate
                   ? moment(data.endDate).format("MMMM YYYY")
                   : "Present"}

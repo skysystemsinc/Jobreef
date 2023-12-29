@@ -48,10 +48,10 @@ const UpdateCompany = async (req, res) => {
     res.status(200).json({
       message: "Company updated successfully",
       success: true,
-      data:company
+      data: company
     });
   } catch (err) {
-    console.log("err",err)
+    console.log("err", err)
     res.status(500).json({
       error: err,
       message: `internal server error`,
@@ -67,8 +67,7 @@ const GetSingleCompany = async (req, res) => {
         id: req.query.id,
       },
       include: {
-        companyEmployees:true,
-        user:true
+        users: true
         // location: true, // Include all location in the returned object
       },
     });
@@ -94,7 +93,7 @@ const GetSingleCompany = async (req, res) => {
 
 export default async function handler(req, res) {
   // switch the methods
-  
+
 
   switch (req.method) {
     case "GET": {

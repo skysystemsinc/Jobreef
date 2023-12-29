@@ -15,7 +15,7 @@ import LabelInput from "../LabelInput/LabelInput";
 import { achievement } from "@/schema/stateSchema";
 import { useDispatch, useSelector } from "react-redux";
 import endPoints from "@/Utils/endpoints";
-import { addEmployee } from "@/Reudx/slices/employee";
+import { addEmployee } from "@/Redux/slices/employee";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import Loader from "../Loader/Loader";
 import { post, put } from "@/helper/fetch";

@@ -6,7 +6,7 @@ import dummy_resume from "@/assets/Images/dummy_resume.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { post } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
-import { addEmployee } from "@/Reudx/slices/employee";
+import { addEmployee } from "@/Redux/slices/employee";
 import Loader from "../Loader/Loader";
 
 // import dummy_resume from "@/assets/pdf/dummy.pdf";
@@ -152,7 +152,7 @@ const Attachments = ({ style }) => {
   };
 
   useEffect(() => {
-    const data = employeeState.attachments;
+    const data = employeeState?.attachments;
     if (data) {
       setState((prev) => {
         return {

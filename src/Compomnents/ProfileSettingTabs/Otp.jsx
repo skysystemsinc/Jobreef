@@ -17,12 +17,12 @@ import axios from "axios";
 import { BACKEND_URL } from "@/Utils/urls";
 import endPoints from "@/Utils/endpoints";
 import { roles } from "@/Utils/role";
-import { setAuthentication } from "@/Reudx/slices/authentication";
+import { setAuthentication } from "@/Redux/slices/authentication";
 import { useDispatch, useSelector } from "react-redux";
 import { httpRequest } from "@/helper/httpRrequest";
-import { addUser } from "@/Reudx/slices/userRegistration";
+import { addUser } from "@/Redux/slices/userRegistration";
 import { registration } from "@/schema/stateSchema";
-import { setLoginUser } from "@/Reudx/slices/LoginUser";
+import { setLoginUser } from "@/Redux/slices/LoginUser";
 import { post, put } from "@/helper/fetch";
 import OtpProgressBar from "./OtpProgreesBar";
 
@@ -93,20 +93,18 @@ const Otp = ({
           return {
             ...prev,
             loading: false,
-            otp:""
+            otp: "",
           };
         });
         setOtpState((prev) => {
           return {
             ...prev,
-            email:verify.email,
+            email: verify.email,
             isEdit: false,
             readOnly: true,
             otp: false,
           };
         });
-
-
       }
     } catch (err) {
       console.log("err", err);
@@ -146,7 +144,6 @@ const Otp = ({
         body
       );
       dispatch(setLoginUser({ ...loginUser, ...postData.data }));
-
 
       if (postData.success) {
         setState((prev) => {

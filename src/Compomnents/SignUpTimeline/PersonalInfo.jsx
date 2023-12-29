@@ -16,15 +16,10 @@ import { useSteps } from "chakra-ui-steps";
 import Loader from "../Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addUser } from "@/Reudx/slices/userRegistration";
+import { addUser } from "@/Redux/slices/userRegistration";
 import { registration } from "@/schema/stateSchema";
 import CheckBox from "../CheckBox/CheckBox";
-const PersonalInfo = ({
-  handlePrevious,
-  activeStep,
-  nextStep,
-}) => {
-  
+const PersonalInfo = ({ handlePrevious, activeStep, nextStep }) => {
   const toast = useToast();
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.userRegistration.value);

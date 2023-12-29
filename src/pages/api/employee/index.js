@@ -4,12 +4,16 @@ const addEmployee = async (req, res) => {
   const data = req.body;
 
   try {
-    const employeeCreated = await prisma.Employee.create({
+    const employeeCreated = await prisma.Candidate.create({
       data: {
         location: data.location,
         phoneNumber: data.phoneNumber,
         description: data.description,
-        userId: data.userId,
+        user: {
+          connect: {
+            id: data.userId,
+          },
+        },
         // workExperience: data.workExperience,
         // education: data.education,
         // certification: data.certification,
@@ -25,7 +29,7 @@ const addEmployee = async (req, res) => {
         skills: true,
         achievement: true,
         attachment: true,
-        user:true
+        user: true
       },
     });
 
@@ -45,7 +49,7 @@ const addEmployee = async (req, res) => {
 
 const GetAllEmployee = async (req, res) => {
   try {
-    const employees = await prisma.Employee.findMany({
+    const employees = await prisma.Candidate.findMany({
       include: {
         user: true,
       },
@@ -64,7 +68,7 @@ const GetAllEmployee = async (req, res) => {
 };
 const DeleteAllEmployees = async (req, res) => {
   try {
-    const deleteEmployees = await prisma.Employee.deleteMany({});
+    const deleteEmployees = await prisma.Candidate.deleteMany({});
     res.status(200).json({
       data: deleteEmployees,
       message: "Employees Deleted successfully",
@@ -82,7 +86,7 @@ const DeleteAllEmployees = async (req, res) => {
 const updateObjectById = async (req, res) => {
   const { employeeId, objectId, arrayName, updatedData } = req.body;
   try {
-    const updatedEmployee = await prisma.Employee.update({
+    const updatedEmployee = await prisma.Candidate.update({
       where: { id: employeeId },
       data: {
         [arrayName]: {
