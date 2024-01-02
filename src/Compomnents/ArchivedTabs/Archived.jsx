@@ -10,6 +10,8 @@ import { CandidateCardLoading } from "../LoadingSkeleton/LoadingSkeleton";
 const Archived = ({
   filterKey,
   cardStatusDisable,
+  handleApplyFilter,
+  handleReset,
   data,
   // cardStatus,
   sortArray,
@@ -19,38 +21,45 @@ const Archived = ({
   handleEvent,
   popOverList,
 }) => {
-  
   return (
     <Box mt={{ md: "31px", base: "15px" }}>
-      {/* <SelectedCandidate/> */}
-
-      {/* <MobileSortBy sortArray={sortArray} /> */}
+      <MobileSortBy
+        handleApplyFilter={handleApplyFilter}
+        handleReset={handleReset}
+      />
 
       <Box>
         <Box>
           {!data ? (
             <CandidateCardLoading />
-          ) : data?.length ==0 ? (
-            <Box minH={"200px"}
-            display={"flex"}
-            alignItems={"center"}
-            justifyContent={"center"}
+          ) : data?.length == 0 ? (
+            <Box
+              minH={"200px"}
+              display={"flex"}
+              alignItems={"center"}
+              justifyContent={"center"}
             >
-              <Heading color={"blue.500"} textAlign={"center"} className="sora" fontWeight={700} variant={"p6"}>No candidates found</Heading>
+              <Heading
+                color={"blue.500"}
+                textAlign={"center"}
+                className="sora"
+                fontWeight={700}
+                variant={"p6"}
+              >
+                No candidates found
+              </Heading>
             </Box>
           ) : (
             data?.map((item, ind) => {
               return (
                 <Box key={ind}>
                   <CandidateCard
-                  jobData={item}
-
+                    jobData={item}
                     cardStatusDisable={cardStatusDisable}
                     data={item.employee}
                     status={item.status}
                     matchCandidate={matchCandidate}
                     cardStatus={cardStatus}
-
                     popOverList={popOverList}
                     handleEvent={() => handleSelectCandidate(item)}
                   />

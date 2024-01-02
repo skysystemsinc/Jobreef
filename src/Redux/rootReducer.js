@@ -13,6 +13,7 @@ import jobPost from "./slices/jobPost";
 import jobApplicantList from "./slices/jobApplications";
 import matchCandidateList from "./slices/matchCandidate";
 import searchList from "@/Redux/slices/search";
+import filters from "./slices/filters";
 
 const rootReducer = combineReducers({
   userProfileSlice,
@@ -30,5 +31,6 @@ const rootReducer = combineReducers({
 
   matchCandidateList: matchCandidateList,
   searchList: searchList,
+  filters:filters
 });
 export default rootReducer;

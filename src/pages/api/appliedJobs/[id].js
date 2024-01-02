@@ -52,10 +52,10 @@ const UpdateData = async (req, res) => {
             skills: true,
             user: true,
             achievement: true,
-            location:true,
+            location: true,
             attachment: true,
           },
-        }, // Include all location in the returned object
+        },
         job: true,
       },
     });
@@ -76,10 +76,24 @@ const UpdateData = async (req, res) => {
 };
 const GetSingleData = async (req, res) => {
   try {
-    // const user = await UserModel.findOne({ _id: req.query.id });
+    
+
     const singleData = await prisma.AppliedJobs.findUnique({
       include: {
-        employee: true,
+        employee: {
+          include: {
+            skills: true,
+            workExperience: true,
+            education: true,
+            certification: true,
+            skills: true,
+            user: true,
+            achievement: true,
+            location: true,
+            attachment: true,
+          },
+        },
+        job: true,
       },
       where: {
         id: req.query.id,
@@ -92,10 +106,11 @@ const GetSingleData = async (req, res) => {
       });
     }
     res.status(200).json({
-      data: user,
+      data: singleData,
       success: true,
     });
   } catch (err) {
+    console.log("err applied jobs",err);
     res.status(500).json({
       error: err,
       message: `internal server error`,
