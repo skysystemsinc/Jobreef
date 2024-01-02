@@ -2,16 +2,34 @@ import {
   Box,
   Button,
   Heading,
+  Image,
   Menu,
   MenuButton,
   MenuItemOption,
   MenuList,
   MenuOptionGroup,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { BiFilter, BiSortDown } from "react-icons/bi";
 import { TiTick } from "react-icons/ti";
-const CheckBoxDropDown = ({ handleSelect, label, listItem }) => {
+import whiteFilter from "@/assets/Images/whiteFilter.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectFilter } from "@/Redux/slices/filters";
+
+const CheckBoxDropDown = ({
+  // setSelected,selected,
+  key,
+  keyVal,
+  handleSelect,
+  label,
+  listItem,
+}) => {
+  // const [selected, setSelected] = useState([]);
+  const dispatch = useDispatch();
+  const filters = useSelector(
+    (state) => state.filters.value.filters
+  );
+
   return (
     <Menu closeOnSelect={false}>
       <MenuButton
@@ -22,17 +40,23 @@ const CheckBoxDropDown = ({ handleSelect, label, listItem }) => {
         color={"white.100"}
         as={Box}
         width={"max-content"}
-        minWidth={"180px"}
+        minWidth={"160px"}
         display={"flex"}
         whiteSpace={"nowrap"}
         alignItems={"center"}
+        cursor={"pointer"}
+        transition={".5s"}
+        _hover={{
+          backgroundColor: "blue.600",
+        }}
       >
         <Box
           // gap={"4px"}
           display={"flex"}
           alignItems={"center"}
         >
-          <BiFilter fontSize={"30px"} />{" "}
+          {/* <BiFilter fontSize={"30px"} />{" "} */}
+          <Image src={whiteFilter.src} width={"15px"}  />
           <Heading
             width={"100%"}
             textAlign={"center"}
@@ -50,8 +74,11 @@ const CheckBoxDropDown = ({ handleSelect, label, listItem }) => {
         <MenuOptionGroup
           onChange={(e) => {
             handleSelect(e);
+            // dispatch(setSelectFilter(e));
+            // setSelected(e);
           }}
           title=""
+          value={filters[keyVal]}
           type="checkbox"
         >
           {listItem?.map((item, index) => {

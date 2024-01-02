@@ -71,7 +71,7 @@ const SearchBox = () => {
           onChange={handleChange}
           value={formData.multipleSearch}
           variant="bg-input"
-          placeholder="Search for Experience: eg 1y 1mo 2w  , skills, and Keywords"
+          placeholder="Search for  skills, and Keywords"
           marginRight="2"
           bg={"gray.200"}
         />
@@ -85,7 +85,7 @@ const SearchBox = () => {
         <Input
           type="text"
           variant="bg-input"
-          placeholder="Search by Location e.g. “remote”"
+          placeholder="Search by Location e.g. “city” “state” "
           marginRight="2"
           name="location"
           onChange={handleChange}

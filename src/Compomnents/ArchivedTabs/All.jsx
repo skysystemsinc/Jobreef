@@ -14,7 +14,9 @@ import { educationOtp, status } from "@/schema/stateSchema";
 
 const All = ({
   filterKey,
+  handleReset,
   matchCandidate,
+  handleApplyFilter,
   // sortArray,
   cardStatus,
   cardStatusDisable,
@@ -24,52 +26,13 @@ const All = ({
   handleSelectCandidate,
   popOverList,
 }) => {
-  const selectedJobState = useSelector(
-    (state) => state.jobApplicantList.value.selectedJob
-  );
 
-  const handleStatusFilter = async (data, key) => {
-    console.log("filter", data, key);
-    const postData = await post(`${endPoints.filters}/${selectedJobState.id}`, {
-      status: data,
-    });
-    console.log("postData", postData);
-  };
-  const sortArray = [
-    {
-      label: "Sort Candidates By",
-      listItem: [
-        { label: "Date Applied", value: "" },
-        { label: "Relevance", value: "" },
-      ],
-    },
-    {
-      label: "Status",
-      listItem: status,
-      handleSelect: handleStatusFilter,
-    },
-    {
-      label: "Education",
-      listItem: educationOtp,
-    },
-
-    {
-      label: "Skills",
-
-      listItem: [
-        {
-          label: selectedJobState?.desiredSkills,
-          value: selectedJobState?.desiredSkills,
-        },
-      ],
-    },
-  ];
 
   return (
     <Box mt={{ md: "31px", base: "15px" }}>
       {searchBox ? <SearchBox /> : null}
       <Box>
-        <MobileSortBy sortArray={sortArray} />
+        <MobileSortBy handleReset={handleReset} handleApplyFilter={handleApplyFilter} />
       </Box>
       <Box width={"100%"}>
         <Box>

@@ -21,13 +21,13 @@ const POST = async (req, res) => {
   }
   if (searchQuery) {
     employeeFilters.push(
-      {
-        workExperience: {
-          some: {
-            experience: { equals: searchQuery },
-          },
-        },
-      },
+      // {
+      //   workExperience: {
+      //     some: {
+      //       experience: { equals: searchQuery },
+      //     },
+      //   },
+      // },
       {
         skills: {
           some: {
@@ -38,87 +38,71 @@ const POST = async (req, res) => {
     );
   }
   if (data.status) {
-    filters.push(
-      {
-        status: {
-          in: data.status,
+    filters.push({
+      status: {
+        in: data.status,
+      },
+    });
+  }
+  if (data.skills) {
+    employeeFilters.push({
+      skills: {
+        some: {
+          name: { contains: data.skills[0], mode: "insensitive" },
         },
       },
-      {
-        status: {
-          in: data.status,
-        },
-      }
-    );
+    });
   }
+  if (data.educationLevel) {
+    employeeFilters.push({
+      education: {
+        some: {
+          educationLevel: {
+            in: data.educationLevel,
+          },
+        },
+      },
+    });
+  }
+
   try {
     const job = await prisma.AppliedJobs.findMany({
       where: {
         jobId: id,
-        OR: filters,
-        employee: {
-          OR: employeeFilters,
-        },
-        // OR: [
-        //   {
-        //     status: {
-        //       in: data.status,
-        //     },
-        //   },
-        //   {
-        //     status: {
-        //       in: data.status,
-        //     },
-        //   },
-        // ],
-        // employee: {
-        //   OR: [
-        //     location !== ""
-        //       ? {
-        //           location: {
-        //             city: { contains: location, mode: "insensitive" },
-        //           },
-        //         }
-        //       : {},
-        //     location !== ""
-        //       ? {
-        //           location: {
-        //             province: { contains: location, mode: "insensitive" },
-        //           },
-        //         }
-        //       : {},
-        //     searchQuery !== ""
-        //       ? {
-        //           workExperience: {
-        //             some: {
-        //               experience: { equals: searchQuery },
-        //             },
-        //           },
-        //         }
-        //       : {},
-        //     searchQuery !== ""
-        //       ? {
-        //           skills: {
-        //             some: {
-        //               name: { contains: searchQuery, mode: "insensitive" },
-        //             },
-        //           },
-        //         }
-        //       : {},
-        //   ],
-        // },
+
+        ...(data.fixedKey ? { [data.fixedKey]: data.fixedValue } : {}),
+
+        AND: [
+          ...filters,
+
+          employeeFilters.length > 0
+            ? {
+                employee: {
+                  OR: employeeFilters,
+                },
+              }
+            : {},
+        ],
       },
 
       include: {
         job: true,
         employee: {
           include: {
-            location: true,
+            skills: true,
+            workExperience: true,
+            education: true,
+            certification: true,
+            skills: true,
             user: true,
+            achievement: true,
+            location: true,
+            attachment: true,
           },
         },
       },
     });
+    console.log("job", job);
     res.status(200).json({
       data: job,
       success: true,

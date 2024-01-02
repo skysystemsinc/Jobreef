@@ -62,7 +62,7 @@ const colors = {
     300: "#344054",
     200: "#F8FCFD",
     100: "#F4F9FF",
-    bg:"#F1F1F1"
+    bg: "#F1F1F1",
   },
   orange: {
     100: "#FB784B",
@@ -94,6 +94,7 @@ const components = {
   Button: {
     variants: {
       "blue-btn": {
+
         textAlign: "center",
         bg: "blue.500",
         height: { sm: "38px", base: "36px" },
@@ -112,6 +113,12 @@ const components = {
         transition: ".5s",
         _hover: {
           bg: "blue.600",
+        },
+        _disabled: {
+          _hover: {
+            color: "white.100",
+            bg: "blue.500 !important",
+          },
         },
       },
       "white-btn": {
@@ -281,15 +288,14 @@ const components = {
       },
     },
   },
-  Radio:{
-    variants:{
-      "simple":{
-        label:{
-          fontSize: {md: "14px", base:"12px"},
+  Radio: {
+    variants: {
+      simple: {
+        label: {
+          fontSize: { md: "14px", base: "12px" },
           fontFamily: "var(--chakra-\fonts-openSans)",
-          
-        }
-      }
+        },
+      },
     },
   },
   Input: {
@@ -307,7 +313,7 @@ const components = {
             color: "gray.light",
             fontWeight: 400,
             // textTransform: " capitalize",
-            fontSize:  "14px" 
+            fontSize: "14px",
           },
         },
 
@@ -401,7 +407,7 @@ const components = {
           bg: "gray.200",
 
           fontWeight: 600,
-          fontSize: {  base: "14px" },
+          fontSize: { base: "14px" },
           // textTransform: " capitalize",
 
           // _placeholder: {
