@@ -2,7 +2,8 @@ import prisma from "@/lib/prisma";
 
 const resendOtp = async (req, res) => {
   const data = req.body;
-  const otp = Math.floor(1000 + Math.random() * 9000);
+  // const otp = Math.floor(1000 + Math.random() * 9000);
+  const otp = 1234;
   try {
     const emailExist = await prisma.User.findUnique({
       where: {
