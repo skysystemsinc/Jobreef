@@ -1,3 +1,4 @@
+import prisma from "@/lib/prisma";
 const verifyOtp = async (req, res) => {
   const data = req.body
   const verify = await prisma.User.findUnique({
