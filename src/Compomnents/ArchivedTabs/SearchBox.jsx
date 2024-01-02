@@ -10,12 +10,14 @@ import React, { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import location from "../../assets/Images/location.svg";
 import { useRouter } from "next/router";
-import { get } from "@/helper/fetch";
+import { get, post } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearchResult } from "@/Redux/slices/search";
 
 const SearchBox = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const selectedJobState = useSelector(
     (state) => state.jobApplicantList.value.selectedJob
   );
@@ -34,13 +36,17 @@ const SearchBox = () => {
     });
   };
   const handleSearch = async () => {
+    if (formData.location == "" && formData.multipleSearch == "") return;
+    dispatch(setSearchResult(false));
+
     const encodeSearchQuery = encodeURI(formData.multipleSearch);
     console.log("encodeSearchQuery", encodeSearchQuery);
     // router.push(`/company/candidates?q=${encodeSearchQuery}`)
     try {
-      const postData = await get(
-        `${endPoints.search}/${selectedJobState.id}?q=${formData.multipleSearch}&location=${formData.location}`
+      const postData = await post(
+        `${endPoints.filters}/${selectedJobState.id}?searchQuery=${formData.multipleSearch}&location=${formData.location}`
       );
+      dispatch(setSearchResult(postData.data));
       console.log("postData", postData);
     } catch (err) {}
   };
@@ -65,7 +71,7 @@ const SearchBox = () => {
           onChange={handleChange}
           value={formData.multipleSearch}
           variant="bg-input"
-          placeholder="Search for Experience: eg 1y 1mo 2w  , skills, and Keywords"
+          placeholder="Search for  skills, and Keywords"
           marginRight="2"
           bg={"gray.200"}
         />
@@ -79,7 +85,7 @@ const SearchBox = () => {
         <Input
           type="text"
           variant="bg-input"
-          placeholder="Search by Location e.g. “remote”"
+          placeholder="Search by Location e.g. “city” “state” "
           marginRight="2"
           name="location"
           onChange={handleChange}

@@ -9,6 +9,7 @@ const initialState = {
       searchResult: [],
       saved: false,
     },
+    // filters: false,
   },
 };
 const searchList = createSlice({
@@ -21,6 +22,7 @@ const searchList = createSlice({
     setSaved: (state, action) => {
       state.value.search.saved = action.payload;
     },
+
   },
 });
 export const { setSearchResult, setSaved } = searchList.actions;

@@ -1,4 +1,4 @@
-import { Link } from "@chakra-ui/next-js";
+// import { Link } from "@chakra-ui/next-js";
 import { Box, Heading, Image } from "@chakra-ui/react";
 
 import React from "react";
@@ -12,6 +12,7 @@ import white_team from "@/assets/Images/white_team.svg";
 import white_job_post from "@/assets/Images/white-job-post.svg";
 import { useRouter } from "next/router";
 import white_candidate from "@/assets/Images/white_candidate.svg";
+import Link from "next/link";
 const SideBar = () => {
   const router = useRouter();
   const navLinks = [

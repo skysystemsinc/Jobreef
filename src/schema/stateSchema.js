@@ -465,7 +465,7 @@ const status = [
   },
   {
     label: "Under Review",
-    value: "Under Review",
+    value: "UnderReview",
   },
   {
     label: "Interviewing",

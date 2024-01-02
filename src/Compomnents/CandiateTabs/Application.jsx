@@ -18,9 +18,10 @@ import {
 } from "@/Redux/slices/jobApplications";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import endPoints from "@/Utils/endpoints";
-import { deleteApi, put } from "@/helper/fetch";
+import { deleteApi, post, put } from "@/helper/fetch";
 import { getSelectedCandidates } from "@/Redux/slices/candidates";
 import SelectedCandidateCard from "../SelectedCandidateCard/SelectedCandidateCard";
+import { setFilter, setSelectFilter } from "@/Redux/slices/filters";
 
 const Application = ({ filterKey }) => {
   const dispatch = useDispatch();
@@ -44,7 +45,9 @@ const Application = ({ filterKey }) => {
   const archivedApplicants = useSelector(
     (state) => state.jobApplicantList.value.application.archived
   );
-
+  const selectedFilterState = useSelector(
+    (state) => state.filters.value.filters
+  );
   const tablist = [
     `All (${allApplicants?.length ?? 0})`,
     ` Archived (${archivedApplicants?.length ?? 0})`,
@@ -108,17 +111,58 @@ const Application = ({ filterKey }) => {
     dispatch(getSelectedCandidates(data));
     setSelectCandidate(data);
   };
+  const handleAllFilter = async () => {
+    dispatch(setAll(false));
+
+    const postData = await post(`${endPoints.filters}/${selectedJobState.id}`, {
+      ...selectedFilterState,
+      fixedKey: "archived",
+      fixedValue: false,
+    });
+    dispatch(setAll(postData.data));
+  };
+  const handleArchivedFilter = async () => {
+    dispatch(setArchived(false));
+
+    const postData = await post(`${endPoints.filters}/${selectedJobState.id}`, {
+      ...selectedFilterState,
+      fixedKey: "archived",
+      fixedValue: true,
+    });
+    dispatch(setArchived(postData.data));
+  };
+  const handleAllReset = async () => {
+    dispatch(setAll(false));
+    const postData = await post(`${endPoints.filters}/${selectedJobState.id}`, {
+      fixedKey: "archived",
+      fixedValue: false,
+    });
+    dispatch(setAll(postData.data));
+    dispatch(setFilter(false));
+  };
+  const handleArchivedReset = async () => {
+    dispatch(setArchived(false));
+    const postData = await post(`${endPoints.filters}/${selectedJobState.id}`, {
+      fixedKey: "archived",
+      fixedValue: true,
+    });
+    dispatch(setArchived(postData.data));
+    dispatch(setFilter(false));
+  };
   const componentList = [
     <All
       handleSelectCandidate={handleSelectCandidate}
       sortArray={sortArray}
-      // data={applicationScreen}
+      handleReset={handleAllReset}
+      handleApplyFilter={handleAllFilter}
       data={allApplicants}
       filterKey={filterKey}
       cardStatus={"Interviewing"}
       popOverList={popOverListAll}
     />,
     <Archived
+      handleReset={handleArchivedReset}
+      handleApplyFilter={handleArchivedFilter}
       sortArray={sortArray}
       data={archivedApplicants}
       filterKey={filterKey}

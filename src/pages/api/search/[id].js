@@ -1,87 +1,55 @@
 import prisma from "@/lib/prisma";
 
 const GET = async (req, res) => {
-  const { id, q, location } = req.query;
+  const { id, searchQuery, location } = req.query;
   console.log("location", location, req.query);
   try {
     const job = await prisma.AppliedJobs.findMany({
       where: {
         jobId: id,
-
-        AND: [
-          {
-            employee: {
-              OR: [
-                {
+        employee: {
+          OR: [
+            location !== ""
+              ? {
                   location: {
-                    city: location,
-                    // city: {
-                    //   contains: location,
-                    //   mode: "insensitive",
-                    // },
+                    city: { contains: location, mode: "insensitive" },
                   },
-                },
-                {
+                }
+              : {},
+            location !== ""
+              ? {
                   location: {
-                    province: location,
-                    // province: { contains: location, mode: "insensitive" },
+                    province: { contains: location, mode: "insensitive" },
                   },
-                },
-                {
+                }
+              : {},
+            searchQuery !== ""
+              ? {
                   workExperience: {
                     some: {
-                      experience: { equals: q },
+                      experience: { equals: searchQuery },
                     },
                   },
-                },
-                {
+                }
+              : {},
+            searchQuery !== ""
+              ? {
                   skills: {
                     some: {
-                      name: { contains: q, mode: "insensitive" },
+                      name: { contains: searchQuery, mode: "insensitive" },
                     },
                   },
-                },
-              ],
-            },
-          },
-          //   {
-          //     employee: {
-          //       skills: {
-          //         some: {
-          //           //   name: q,
-          //           name: { equals: q },
-          //         },
-          //       },
-          //     },
-          //   },
-        ],
-        // OR: [
-        //   {
-        //     employee: {
-        //       workExperience: {
-        //         some: {
-        //           experience: { equals: q },
-        //         },
-        //       },
-        //     },
-        //   },
-        //   {
-        //     employee: {
-        //       skills: {
-        //         some: {
-        //           //   name: q,
-        //           name: { equals: q },
-        //         },
-        //       },
-        //     },
-        //   },
-        // ],
+                }
+              : {},
+          ],
+        },
       },
 
       include: {
         job: true,
         employee: {
           include: {
+            location: true,
             user: true,
           },
         },

@@ -8,11 +8,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSelectedCandidates } from "@/Redux/slices/candidates";
 import SearchBox from "./SearchBox";
 import { CandidateCardLoading } from "../LoadingSkeleton/LoadingSkeleton";
+import { get, post } from "@/helper/fetch";
+import endPoints from "@/Utils/endpoints";
+import { educationOtp, status } from "@/schema/stateSchema";
 
 const All = ({
   filterKey,
+  handleReset,
   matchCandidate,
-  sortArray,
+  handleApplyFilter,
+  // sortArray,
   cardStatus,
   cardStatusDisable,
   data,
@@ -21,11 +26,13 @@ const All = ({
   handleSelectCandidate,
   popOverList,
 }) => {
+
+
   return (
     <Box mt={{ md: "31px", base: "15px" }}>
       {searchBox ? <SearchBox /> : null}
       <Box>
-        <MobileSortBy sortArray={sortArray} />
+        <MobileSortBy handleReset={handleReset} handleApplyFilter={handleApplyFilter} />
       </Box>
       <Box width={"100%"}>
         <Box>
