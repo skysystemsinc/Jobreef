@@ -15,7 +15,7 @@ import React, { useState } from "react";
 import globalStyles from "@/styles/globalStyles";
 import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
 import { useRouter } from "next/router";
-import { role, roles } from "@/Utils/role";
+import { role, roles } from "@/Utils/constant";
 
 import DropDown from "../DropDown/DropDown";
 import CustomTabs from "../CustomeTabs/CustomeTabs";

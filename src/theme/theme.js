@@ -618,7 +618,7 @@ const components = {
         // color: "gray.text",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 700,
-        lineHeight: "20px",
+        lineHeight: "24px",
         fontSize: ["13px", "16px", "16px", "16px", "16px", "16px"],
       },
       p12: {

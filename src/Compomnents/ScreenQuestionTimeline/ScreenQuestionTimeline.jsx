@@ -22,7 +22,7 @@ import whitetick from "@/assets/Images/white-tick.svg";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import endPoints from "@/Utils/endpoints";
-import { roles } from "@/Utils/role";
+import { roles } from "@/Utils/constant";
 import { BACKEND_URL } from "@/Utils/urls";
 import Loader from "../Loader/Loader";
 import { useSelector } from "react-redux";

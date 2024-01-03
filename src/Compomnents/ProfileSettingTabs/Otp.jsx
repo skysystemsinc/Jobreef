@@ -16,7 +16,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { BACKEND_URL } from "@/Utils/urls";
 import endPoints from "@/Utils/endpoints";
-import { roles } from "@/Utils/role";
+import { roles } from "@/Utils/constant";
 import { setAuthentication } from "@/Redux/slices/authentication";
 import { useDispatch, useSelector } from "react-redux";
 import { httpRequest } from "@/helper/httpRrequest";

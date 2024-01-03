@@ -8,7 +8,7 @@ import leftblue_2 from "@/assets/Images/leftblue_2.png";
 import whitetick from "@/assets/Images/white-tick.svg";
 // import SignUpLayout from "../Layout/SignUpLayout";
 import Logo from "@/Compomnents/Logo/Logo";
-import { role, roles } from "@/Utils/role";
+import { role, roles } from "@/Utils/constant";
 import dynamic from "next/dynamic";
 import { Role_context } from "@/context/context";
 import leftorange from "../../../assets/Images/leftorange.svg";

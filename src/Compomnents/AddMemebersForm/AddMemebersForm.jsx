@@ -29,7 +29,7 @@ import {
 import { post, put } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
 import Loader from "../Loader/Loader";
-import { role, roles } from "@/Utils/role";
+import { role, roles } from "@/Utils/constant";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 
 const AddMemebersForm = () => {

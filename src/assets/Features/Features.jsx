@@ -14,7 +14,7 @@ const Features = () => {
         textAlign={"center"}
         fontWeight={700}
         color={"blue.500"}
-        mt={{ md: "70px", base: "30px" }}
+        mt={{ md: "60px", base: "30px" }}
         mb={{ md: "30px", base: "10px" }}
         variant={"h2"}
       >

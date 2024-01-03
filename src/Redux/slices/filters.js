@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   value: {
     filters: {
-      sortBy: "",
+      sortBy: [],
       status: [],
       educationLevel: [],
       skills: [],

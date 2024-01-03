@@ -5,13 +5,14 @@ import Footer from "@/Compomnents/Footer/Footer";
 import Header from "@/Compomnents/Header/Header";
 import HowItWork from "@/Compomnents/HowItWork/HowItWork";
 import JobreefRecruit from "@/Compomnents/JobreefRecruit/JobreefRecruit";
+
 import Pricing from "@/Compomnents/Pricing/Pricing";
 import TopCompanies from "@/Compomnents/TopCompanies/TopCompanies";
 import Features from "@/assets/Features/Features";
 import { Box } from "@chakra-ui/react";
 import React from "react";
 
-const employers = () => {
+const index = () => {
   return (
     <>
       <Header notLogin />
@@ -33,4 +34,4 @@ const employers = () => {
   );
 };
 
-export default employers;
+export default index;

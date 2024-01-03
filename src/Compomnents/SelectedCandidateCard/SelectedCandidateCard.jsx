@@ -33,28 +33,25 @@ const SelectedCandidateCard = ({
   profileBtn,
   matchCandidate,
   handleReturn,
-  data,
-  details,
 }) => {
   const selectedCandidates = useSelector(
     (state) => state.candidates.value.selected
   );
-  console.log("selectedCandidates", selectedCandidates);
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const iconWidth = {
-    width: { md: "14px", base: "13px" },
-  };
-  const hoverStyle = {
-    cursor: "pointer",
-    _hover: {
-      color: "blue.500",
-      cursor: "pointer",
-    },
-  };
+  // console.log("selectedCandidates", selectedCandidates);
+  // const { isOpen, onOpen, onClose } = useDisclosure();
+  // const iconWidth = {
+  //   width: { md: "14px", base: "13px" },
+  // };
+  // const hoverStyle = {
+  //   cursor: "pointer",
+  //   _hover: {
+  //     color: "blue.500",
+  //     cursor: "pointer",
+  //   },
+  // };
 
   return (
     <>
-
       <Box
         border={"1px  solid"}
         borderRadius={"8px"}
@@ -68,7 +65,6 @@ const SelectedCandidateCard = ({
           alignItems={"center"}
           gap={"5px"}
           onClick={handleReturn}
-
           mb={"18px"}
           cursor={"pointer"}
           role="group"
@@ -168,9 +164,9 @@ const SelectedCandidateCard = ({
               </Box>
               <Box>
                 {profileBtn.map((item) => {
-                  return !item.disable ? (
+                  return item.display ? (
                     <Box
-                      onClick={item.handleEvent}
+                      onClick={() => item.handleEvent(selectedCandidates)}
                       border={"1px solid"}
                       borderColor={"white.100"}
                       display={"flex"}
@@ -193,6 +189,7 @@ const SelectedCandidateCard = ({
                         border: "1px solid  ",
                         "& .hoverColor": {
                           color: "blue.500",
+                          transition:".4s"
                         },
                         borderColor: "blue.500",
                       }}
@@ -207,22 +204,9 @@ const SelectedCandidateCard = ({
                         transition={".5s"}
                       >
                         {item.name}
-                        {/* <Heading
-                          transition={".5s"}
-                          _groupHover={{
-                            color: "blue.500",
-                          }}
-                          color={"black.100"}
-                          variant={"p10"}
-                          sx={{ fontWeight: 700, ml: "5px" }}
-                          as={"span"}
-                        >
-                          {item.span}
-                        </Heading> */}
                       </Heading>
-                      {/* <PiDownloadSimpleBold color="#2CA5C3" /> */}
 
-                      <Box fontSize={"16px"}>{item.icon}</Box>
+                      <Box  fontSize={"16px"}>{item.icon}</Box>
                     </Box>
                   ) : null;
                 })}

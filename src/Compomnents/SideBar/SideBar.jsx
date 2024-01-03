@@ -13,13 +13,18 @@ import white_job_post from "@/assets/Images/white-job-post.svg";
 import { useRouter } from "next/router";
 import white_candidate from "@/assets/Images/white_candidate.svg";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { roles } from "@/Utils/constant";
 const SideBar = () => {
+  const loginUser = useSelector((state) => state.LoginUser.value);
+
   const router = useRouter();
   const navLinks = [
     {
       title: "Home",
       icon: home,
       pathname: "#",
+      display: true,
     },
     {
       title: "Job Posts",
@@ -30,6 +35,7 @@ const SideBar = () => {
           : job_post,
       pathname: "/company/job-post",
       activePathnames: ["/company/create-job-post", "/company/job-post"],
+      display: true,
     },
     {
       title: "Candidates",
@@ -37,6 +43,7 @@ const SideBar = () => {
         router.pathname == "/company/candidates" ? white_candidate : candidate,
       pathname: "/company/candidates",
       activePathnames: ["/company/candidates"],
+      display: true,
     },
     {
       title: "Team Members",
@@ -47,6 +54,8 @@ const SideBar = () => {
           : team,
       pathname: "/company/team-members",
       activePathnames: ["/company/add-members", "/company/team-members"],
+      display:
+        loginUser?.role == roles.recruiter || !loginUser?.role ? false : true,
     },
     {
       title: "Company Details",
@@ -56,6 +65,7 @@ const SideBar = () => {
           : blue_building,
       pathname: "/company/comapany-details",
       activePathnames: ["/company/comapany-details"],
+      display: true,
     },
   ];
   const activeStyle = {
@@ -92,7 +102,7 @@ const SideBar = () => {
       p={{ xl: "130px 20px 0px 10px", base: "100px 10px 0px 7px" }}
     >
       {navLinks.map((item, ind) => {
-        return (
+        return item.display ? (
           <Link key={ind} _hover={{ textDecor: "none" }} href={item.pathname}>
             <Box
               // sx={item.pathname == router.pathname ? activeStyle : null}
@@ -121,7 +131,7 @@ const SideBar = () => {
               </Heading>
             </Box>
           </Link>
-        );
+        ) : null;
       })}
     </Box>
   );

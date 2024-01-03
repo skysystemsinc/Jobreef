@@ -1,12 +1,13 @@
 import prisma from "@/lib/prisma";
 
 const GET = async (req, res) => {
-  const { id } = req.query;
-  console.log("companyId", id, req.query);
+  const { id, saved } = req.query;
+  console.log("query", id, req.query,saved);
   try {
     const job = await prisma.AppliedJobs.findMany({
       where: {
         jobId: id,
+        ...(saved ? { saved: true } : {}),
       },
       include: {
         employee: {
@@ -16,7 +17,7 @@ const GET = async (req, res) => {
             education: true,
             certification: true,
             skills: true,
-            location:true,
+            location: true,
             user: true,
             achievement: true,
             attachment: true,
@@ -24,6 +25,7 @@ const GET = async (req, res) => {
         },
       },
     });
+    console.log("job",job);
     res.status(200).json({
       data: job,
       success: true,

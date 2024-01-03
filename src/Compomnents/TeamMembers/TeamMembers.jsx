@@ -4,13 +4,17 @@ import PaginatedTable from "../PaginatedTable/PaginatedTable";
 import menu from "@/assets/Images/menu.svg";
 import { useRouter } from "next/router";
 import Popovers from "../PaginatedTable/Popovers";
-import { addFormData, getTeamMembers, teamMemberList } from "@/Redux/slices/teamMembers";
+import {
+  addFormData,
+  getTeamMembers,
+  teamMemberList,
+} from "@/Redux/slices/teamMembers";
 import { useDispatch, useSelector } from "react-redux";
 import ReactTable from "../PaginatedTable/ReactTable";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import { put } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
-import { roles } from "@/Utils/role";
+import { roles } from "@/Utils/constant";
 const TeamMembers = () => {
   const toast = useToast();
   const dispatch = useDispatch();
@@ -128,12 +132,12 @@ const TeamMembers = () => {
     }
   };
   const handleEdit = (data) => {
-    dispatch(addFormData(data))
+    dispatch(addFormData(data));
     router.push(`/company/add-members?id=${data.id}`);
   };
   useEffect(() => {
-    if (loginUser.id ) {
-      dispatch(teamMemberList(loginUser.id));
+    if (loginUser.id) {
+      dispatch(teamMemberList({id:loginUser.id,companyId: loginUser.companyId}));
     }
   }, [loginUser]);
   const columns = useMemo(

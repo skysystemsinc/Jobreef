@@ -14,7 +14,7 @@ import LabelInput from "../LabelInput/LabelInput";
 import Loader from "../Loader/Loader";
 import axios from "axios";
 import endPoints from "@/Utils/endpoints";
-import { accountType, roles } from "@/Utils/role";
+import { accountType, roles } from "@/Utils/constant";
 import { Role_context } from "@/context/context";
 import { BACKEND_URL } from "@/Utils/urls";
 import { useDispatch, useSelector } from "react-redux";

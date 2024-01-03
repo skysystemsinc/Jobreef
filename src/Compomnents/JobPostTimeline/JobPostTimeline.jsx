@@ -14,7 +14,7 @@ import { Step, Steps, useSteps } from "chakra-ui-steps";
 import grayArrow from "@/assets/Images/gray-arrow-down.svg";
 
 import { useRouter } from "next/router";
-import { role, roles } from "@/Utils/role";
+import { role, roles } from "@/Utils/constant";
 import globalStyles from "@/styles/globalStyles";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Role_context } from "@/context/context";

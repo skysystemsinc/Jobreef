@@ -14,8 +14,12 @@ import { get, post } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchResult } from "@/Redux/slices/search";
+import { setFilter } from "@/Redux/slices/filters";
 
-const SearchBox = () => {
+const SearchBox = ({ setIsApplied }) => {
+  const selectedFilterState = useSelector(
+    (state) => state.filters.value.filters
+  );
   const router = useRouter();
   const dispatch = useDispatch();
   const selectedJobState = useSelector(
@@ -39,15 +43,24 @@ const SearchBox = () => {
     if (formData.location == "" && formData.multipleSearch == "") return;
     dispatch(setSearchResult(false));
 
-    const encodeSearchQuery = encodeURI(formData.multipleSearch);
-    console.log("encodeSearchQuery", encodeSearchQuery);
-    // router.push(`/company/candidates?q=${encodeSearchQuery}`)
     try {
       const postData = await post(
         `${endPoints.filters}/${selectedJobState.id}?searchQuery=${formData.multipleSearch}&location=${formData.location}`
       );
       dispatch(setSearchResult(postData.data));
-      console.log("postData", postData);
+
+      dispatch(
+        // false
+        setFilter({
+          // ...selectedFilterState,
+          sortBy: [],
+          status: [],
+          educationLevel: [],
+          skills: [],
+          searchResult: formData,
+        })
+      );
+      setIsApplied(false);
     } catch (err) {}
   };
   return (

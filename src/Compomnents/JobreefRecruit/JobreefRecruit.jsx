@@ -3,7 +3,7 @@ import React from "react";
 import Target from "@/assets/Images/Target.svg";
 const JobreefRecruit = () => {
   return (
-    <Box position={"relative"} bg={"blue.500"} py={"26px"} >
+    <Box position={"relative"} bg={"blue.500"} py={"26px"}>
       <Container
         display={"flex"}
         maxW={"5xl"}
@@ -27,7 +27,7 @@ const JobreefRecruit = () => {
             fontWeight={400}
             variant={"p5"}
             maxWidth={"500px"}
-            lineHeight={{ md: "27px", base:"23px"}}
+            lineHeight={{ md: "27px", base: "23px" }}
           >
             Browse our database of candidates and filter resumes based on your
             job requirements. Use instant messaging to connect with qualified
@@ -40,14 +40,16 @@ const JobreefRecruit = () => {
           display={"flex"}
           justifyContent={"center"}
           alignItems={"center"}
-          position={"relative"} top={"0px"} zIndex={2}
-
+          position={"relative"}
+          top={"0px"}
+          zIndex={2}
         >
+          <Heading className="sora"  color={"white.100"} variant={"p5"}>starting at</Heading>
           <Heading
             fontWeight={700}
             color={"white.100"}
             className="sora"
-            mb={{md: "30px", base:"10px"}}
+            mb={{ md: "30px", base: "10px" }}
             variant={"h3"}
           >
             $99/month
@@ -56,7 +58,7 @@ const JobreefRecruit = () => {
         </Box>
         <Image
           position={"absolute"}
-          opacity={{md:1, base:0.6}}
+          opacity={{ md: 1, base: 0.6 }}
           top={"16px"}
           left={"0px"}
           zIndex={1}

@@ -1,3 +1,4 @@
+import { sortBy } from "@/Utils/constant";
 import prisma from "@/lib/prisma";
 
 const POST = async (req, res) => {
@@ -5,6 +6,14 @@ const POST = async (req, res) => {
   const data = req.body;
   const employeeFilters = [];
   const filters = [];
+  let sortByDate = {};
+  if (data?.sortBy?.includes(sortBy.dateApplied)) {
+    sortByDate = {
+      orderBy: {
+        createdAt: "desc", // or 'desc' based on your needs
+      },
+    };
+  }
   if (location) {
     employeeFilters.push(
       {
@@ -37,14 +46,14 @@ const POST = async (req, res) => {
       }
     );
   }
-  if (data.status) {
+  if (data?.status?.length > 0) {
     filters.push({
       status: {
         in: data.status,
       },
     });
   }
-  if (data.skills) {
+  if (data?.skills?.length > 0) {
     employeeFilters.push({
       skills: {
         some: {
@@ -53,7 +62,7 @@ const POST = async (req, res) => {
       },
     });
   }
-  if (data.educationLevel) {
+  if (data?.educationLevel?.length > 0) {
     employeeFilters.push({
       education: {
         some: {
@@ -64,9 +73,10 @@ const POST = async (req, res) => {
       },
     });
   }
-
+  console.log("sortByDate", sortByDate, employeeFilters, filters);
   try {
     const job = await prisma.AppliedJobs.findMany({
+      ...sortByDate,
       where: {
         jobId: id,
 
@@ -102,7 +112,7 @@ const POST = async (req, res) => {
         },
       },
     });
-    console.log("job", job);
+
     res.status(200).json({
       data: job,
       success: true,

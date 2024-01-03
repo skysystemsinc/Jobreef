@@ -161,49 +161,6 @@ const DesktopNav = () => {
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
   const router = useRouter();
 
-  const NAV_ITEMS = [
-    {
-      label: "Home",
-      pathName: "/",
-      // icon: <Image src={heart.src} />,
-    },
-    {
-      label: "Search Jobs",
-      pathName: "/candidate/job-search",
-    },
-    {
-      label: "For Job Seekers",
-      icon: (
-        <Image
-          src={router.pathname === "/jobseeker" ? blueDownArrow.src : heart.src}
-        />
-      ),
-      children: [
-        { label: "Career Advice" },
-        { label: "Resume Builder" },
-        { label: "Salary Calculator" },
-      ],
-      // pathName: "/jobseeker",
-    },
-    {
-      label: "For Employers",
-      icon: (
-        <Image
-          src={router.pathname === "/employers" ? blueDownArrow.src : heart.src}
-        />
-      ),
-
-      pathName: "/employers",
-    },
-    {
-      label: "Career Advice",
-      pathName: "#",
-    },
-    {
-      label: "Our Company ",
-      pathName: "#",
-    },
-  ];
   return (
     <Stack direction={"row"} spacing={1}>
       {NAV_ITEMS.map((navItem, ind) => (
@@ -236,7 +193,7 @@ const DesktopNav = () => {
               >
                 {navItem.label}
 
-                {ind == 2 ? (
+                {ind == 3 || ind == 2 ? (
                   <Box>
                     <TbCaretDown fontSize={"18px"} />
                   </Box>
@@ -255,7 +212,7 @@ const DesktopNav = () => {
               >
                 <Stack>
                   {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
+                    <DesktopSubNav key={child.label} {...child} href={child.pathName} />
                   ))}
                 </Stack>
               </PopoverContent>
@@ -272,16 +229,21 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
     <Box
       as="div"
       _hover={{ backgroundColor: "blue.100" }}
-      href={href}
+      // href={href}
       role={"group"}
       display={"block"}
       rounded={"md"}
       gap={"0px"}
     >
       {/* <Stack direction={"row"} align={"center"}> */}
-      <Box borderBottom={"1px solid"} py={"8px"} borderColor={"gray.300"} px={"10px"}>
+      <Box
+        borderBottom={"1px solid"}
+        py={"8px"}
+        borderColor={"gray.300"}
+        px={"10px"}
+      >
         <Link
-          href={"/"}
+          href={href}
           transition={"all .3s ease"}
           variant={"blue-link"}
           color={"gray.text"}
@@ -299,45 +261,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 
 const MobileNav = ({ candidate }) => {
   const router = useRouter();
-  const NAV_ITEMS = [
-    {
-      label: "Home",
-      pathName: "/",
-      // icon: <Image src={heart.src} />,
-    },
-    {
-      label: "Search Jobs",
-      pathName: "/candidate/job-search",
-    },
-    {
-      label: "For Job Seekers",
-      icon: (
-        <Image
-          src={router.pathname === "/jobseeker" ? blueDownArrow.src : heart.src}
-        />
-      ),
 
-      pathName: "/jobseeker",
-    },
-    {
-      label: "For Employers",
-      icon: (
-        <Image
-          src={router.pathname === "/employers" ? blueDownArrow.src : heart.src}
-        />
-      ),
-
-      pathName: "/employers",
-    },
-    {
-      label: "Career Advice",
-      pathName: "#",
-    },
-    {
-      label: "Our Company ",
-      pathName: "#",
-    },
-  ];
   return (
     <Stack
       bg={useColorModeValue("white", "gray.800")}
@@ -403,3 +327,43 @@ const MobileNavItem = ({ label, children, href }) => {
     </Stack>
   );
 };
+const NAV_ITEMS = [
+  {
+    label: "Home",
+    pathName: "/",
+    // icon: <Image src={heart.src} />,
+  },
+  {
+    label: "Search Jobs",
+    pathName: "/candidate/job-search",
+  },
+  {
+    label: "For Job Seekers",
+
+    children: [
+      { label: "Career Advice", pathName: "" },
+      { label: "Resume Builder", pathName: "" },
+      {
+        label: "Salary Calculator",
+        pathName: "",
+      },
+    ],
+    // pathName: "/jobseeker",
+  },
+  {
+    label: "For Employers",
+
+    children: [
+      { label: "Sponsored Jobs", pathName: "/employers" },
+      { label: "Jobreef Recruit", pathName: "" },
+    ],
+  },
+  {
+    label: "Career Advice",
+    pathName: "#",
+  },
+  {
+    label: "Our Company ",
+    pathName: "#",
+  },
+];

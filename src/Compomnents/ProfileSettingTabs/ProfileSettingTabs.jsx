@@ -18,7 +18,7 @@ import ChangePassword from "./ChangePassword";
 import globalStyles from "@/styles/globalStyles";
 import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
 import { useRouter } from "next/router";
-import { role, roles } from "@/Utils/role";
+import { role, roles } from "@/Utils/constant";
 import Preferences from "./Preferences";
 import Billing from "./Billing";
 import DropDown from "../DropDown/DropDown";
