@@ -6,7 +6,7 @@ const Pricing = () => {
   const pricingArray = [
     {
       title: "Standard Job Post",
-      amount: "4.99",
+      amount: "6.99",
       day: "/day",
       feature: [
         "Applicant Tracking",
@@ -17,7 +17,7 @@ const Pricing = () => {
     },
     {
       title: "Featured Job Post",
-      amount: "9.99",
+      amount: "11.99",
       day: "/day",
       feature: [
         "All Standard Features",
@@ -54,12 +54,19 @@ const Pricing = () => {
         >
           Pricing
         </Heading>
-        <Heading color={"gray.text"} fontWeight={400} variant={"p11"}>
-          Flexible pricing for any size business.
+        <Heading
+          maxWidth={"64%"}
+          mx={"auto"}
+          color={"gray.text"}
+          fontWeight={400}
+          variant={"p11"}
+        >
+          {/* Flexible pricing for any size business. */}
+          Sponsored posts allow you to pay only for the days you need to
+          advertise a job. No need for monthly commitments.
         </Heading>
       </Box>
       <Box
-        mb={{ md: "90px", base: "40px" }}
         columnGap={{ md: "60px", base: "40px" }}
         display={"grid"}
         gridTemplateColumns={{
@@ -70,11 +77,16 @@ const Pricing = () => {
         }}
       >
         {pricingArray.map((item) => {
-          return <PricingCard  data={item} />;
+          return <PricingCard data={item} />;
         })}
-        {/* <PricingCard />
-        <PricingCard /> */}
       </Box>
+      <Heading 
+        mb={{ md: "90px", base: "40px" }}
+      
+      textAlign={"center"} maxWidth={"52%"} mx={"auto"} variant={"p4"}>
+        By subscribing you agree to abide by all Terms and Conditions and to pay
+        the fees of your selected plan.
+      </Heading>
     </Container>
   );
 };

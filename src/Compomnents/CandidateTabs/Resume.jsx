@@ -53,9 +53,9 @@ const Resume = () => {
           <Heading color={"gray.text"} variant={"p7"}>
             Work Experience
           </Heading>
-          {selectedCandidates?.workExperience?.map((item) => {
+          {selectedCandidates?.workExperience?.map((item , ind) => {
             return (
-              <Box>
+              <Box key={ind}>
                 <Box
                   mt={{ md: "7px", base: "5px" }}
                   // mb={{ md: "10px", base: "10px" }}

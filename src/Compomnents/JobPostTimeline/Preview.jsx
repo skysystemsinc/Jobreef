@@ -15,7 +15,7 @@ import Loader from "../Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { job } from "@/schema/stateSchema";
 import ScreeningQuestion from "./ScreeningQuestion";
-import { status } from "@/Utils/role";
+import { status } from "@/Utils/constant";
 
 const Preview = ({ assignJob, isEdit, state, setState }) => {
   const toast = useToast();

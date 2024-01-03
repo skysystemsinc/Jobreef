@@ -28,7 +28,7 @@ const Application = ({ filterKey }) => {
   const selectedJobState = useSelector(
     (state) => state.jobApplicantList.value.selectedJob
   );
-  console.log("selectedJobState", selectedJobState);
+
   const [selectCandidate, setSelectCandidate] = useState(false);
   const toast = useToast();
   const [state, setState] = useState({
@@ -41,7 +41,7 @@ const Application = ({ filterKey }) => {
   const allApplicants = useSelector(
     (state) => state.jobApplicantList.value.application.all
   );
-  console.log("allApplicants", allApplicants);
+
   const archivedApplicants = useSelector(
     (state) => state.jobApplicantList.value.application.archived
   );
@@ -83,29 +83,6 @@ const Application = ({ filterKey }) => {
     },
   ];
 
-  const sortArray = [
-    { label: "Sort Candidates By", listItem: ["Date Applied", "Relevance"] },
-    {
-      label: "Status",
-      listItem: ["New", "Under Review", "Interviewing", "Accepted", "Rejected"],
-    },
-    {
-      label: "Education",
-      listItem: [
-        "No Minimum",
-        "High School",
-        "Trade School",
-        "Undergraduate Degree (Associates or Bachelors)",
-        "Graduate Degree",
-      ],
-    },
-
-    {
-      label: "Skills",
-
-      listItem: [selectedJobState?.desiredSkills],
-    },
-  ];
   const handleSelectCandidate = (data) => {
     console.log("selected", data);
     dispatch(getSelectedCandidates(data));
@@ -152,22 +129,16 @@ const Application = ({ filterKey }) => {
   const componentList = [
     <All
       handleSelectCandidate={handleSelectCandidate}
-      sortArray={sortArray}
       handleReset={handleAllReset}
       handleApplyFilter={handleAllFilter}
       data={allApplicants}
-      filterKey={filterKey}
-      cardStatus={"Interviewing"}
       popOverList={popOverListAll}
     />,
     <Archived
       handleReset={handleArchivedReset}
       handleApplyFilter={handleArchivedFilter}
-      sortArray={sortArray}
       data={archivedApplicants}
-      filterKey={filterKey}
       handleSelectCandidate={handleSelectCandidate}
-      cardStatus={"Archived"}
       popOverList={popOverListArchived}
     />,
   ];
@@ -175,12 +146,15 @@ const Application = ({ filterKey }) => {
   const profileBtn = [
     {
       name: "Send Message",
+      display: true,
+
       icon: <HiOutlineMail className="hoverColor" />,
     },
 
     {
-      name: "Status:",
-      span: "read",
+      name: "Status",
+      display: true,
+
       icon: <BsChevronDown className="hoverColor" />,
     },
   ];

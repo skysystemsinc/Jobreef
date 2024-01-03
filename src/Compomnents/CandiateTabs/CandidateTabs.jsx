@@ -37,10 +37,15 @@ import {
   setSelectedJob,
 } from "@/Redux/slices/jobApplications";
 import { matchCandidate } from "@/Redux/slices/matchCandidate";
-import { setSaved } from "@/Redux/slices/search";
+import { savedApplications, setSaved } from "@/Redux/slices/search";
 
 const CandidateTabs = ({ company }) => {
   const allJobState = useSelector((state) => state.jobPost.jobs.allJobs);
+  // const selectedJobState = useSelector((state) => state.jobApplicantList.value.selectedJob);
+  const selectedJobState = useSelector(
+    (state) => state.jobApplicantList.value.selectedJob
+  );
+  console.log("selectedJobState", selectedJobState);
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -52,9 +57,9 @@ const CandidateTabs = ({ company }) => {
         dispatch(matchCandidate(allJobState[0].id));
       }
     } else if (ind == 2) {
-      dispatch(
-        setSaved([...allJobState?.filter((item) => item.saved == true)])
-      );
+      if (selectedJobState) {
+        dispatch(savedApplications(selectedJobState.id));
+      }
     }
 
     setTabIndex(ind);

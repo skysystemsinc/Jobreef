@@ -30,6 +30,59 @@ const LoadingSkeleton = () => {
     </Flex>
   );
 };
+const ProfileSkeleton = () => {
+  return (
+    <Flex
+      gap={{ md: "30px", base: "20px" }}
+      alignItems={"center"}
+      maxW={"500px"}
+      flexWrap={{ md: "nowrap", base: "wrap" }}
+    >
+      <Box width={"max-content"}>
+        <SkeletonCircle
+          startColor="blue.200"
+          endColor="blue.400"
+          speed={0.9}
+          size="20"
+        />
+      </Box>
+      <Box width={"100%"}>
+        <Box>
+          <Skeleton
+            width={"200px"}
+            startColor="blue.200"
+            endColor="blue.400"
+            speed={0.9}
+            height="20px"
+            mb={"20px"}
+          />
+        </Box>
+        <Box
+          display={"flex"}
+          width={"100%"}
+          gap={{ md: "20px", base: "10px" }}
+          flexWrap={{md: "nowrap", base:"wrap"}}
+          justifyContent={"space-between"}
+        >
+          <Skeleton
+            startColor="blue.200"
+            endColor="blue.400"
+            speed={0.9}
+            width={"200px"}
+            height="10px"
+          />
+          <Skeleton
+            width={"200px"}
+            startColor="blue.200"
+            endColor="blue.400"
+            speed={0.9}
+            height="10px"
+          />
+        </Box>
+      </Box>
+    </Flex>
+  );
+};
 const CandidateCardLoading = () => {
   return (
     <Box
@@ -41,8 +94,8 @@ const CandidateCardLoading = () => {
       padding={"20px 16px"}
       bg={"white.100"}
     >
-      <Box   borderBottom={"1px solid "} borderColor={"gray.200"}>
-        <Box maxW={"70%"}   display={"flex"} gap={"60px"}>
+      <Box borderBottom={"1px solid "} borderColor={"gray.200"}>
+        <Box maxW={"70%"} display={"flex"} gap={"60px"}>
           <Box>
             <Skeleton
               startColor="blue.200"
@@ -101,13 +154,12 @@ const CandidateCardLoading = () => {
       </Box>
 
       <Box display={"flex"} mt={"20px"} gap={"60px"}>
-        <Box  width={"50%"} display={"flex"} flexWrap={"wrap"} gap={"10px"}>
+        <Box width={"50%"} display={"flex"} flexWrap={"wrap"} gap={"10px"}>
           <Skeleton
             startColor="blue.200"
             endColor="blue.400"
             speed={0.9}
             height="22px"
-            
             width={"120px"}
           />
           <Skeleton
@@ -115,7 +167,6 @@ const CandidateCardLoading = () => {
             endColor="blue.400"
             speed={0.9}
             height="22px"
-            
             width={"120px"}
           />
           <Skeleton
@@ -123,7 +174,6 @@ const CandidateCardLoading = () => {
             endColor="blue.400"
             speed={0.9}
             height="22px"
-            
             width={"120px"}
           />
           <Skeleton
@@ -131,7 +181,6 @@ const CandidateCardLoading = () => {
             endColor="blue.400"
             speed={0.9}
             height="22px"
-            
             width={"120px"}
           />
           <Skeleton
@@ -139,7 +188,6 @@ const CandidateCardLoading = () => {
             endColor="blue.400"
             speed={0.9}
             height="22px"
-            
             width={"120px"}
           />
           <Skeleton
@@ -147,7 +195,6 @@ const CandidateCardLoading = () => {
             endColor="blue.400"
             speed={0.9}
             height="22px"
-            
             width={"120px"}
           />
           <Skeleton
@@ -155,7 +202,6 @@ const CandidateCardLoading = () => {
             endColor="blue.400"
             speed={0.9}
             height="22px"
-            
             width={"120px"}
           />
         </Box>
@@ -217,6 +263,7 @@ const DropdownLoading = () => {
 
 export {
   ExpCardLoading,
+  ProfileSkeleton,
   LoadingSkeleton,
   DropdownLoading,
   CandidateCardLoading,

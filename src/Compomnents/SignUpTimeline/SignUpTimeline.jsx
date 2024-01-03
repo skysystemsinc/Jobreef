@@ -17,7 +17,7 @@ import PersonalInfo from "./PersonalInfo";
 import Password from "./Password";
 import Otp from "./Otp";
 import { useRouter } from "next/router";
-import { role, roles } from "@/Utils/role";
+import { role, roles } from "@/Utils/constant";
 import globalStyles from "@/styles/globalStyles";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Role_context } from "@/context/context";

@@ -125,6 +125,8 @@ const MatchCandidate = ({ filterKey }) => {
   const profileBtn = [
     {
       name: "Invite to Apply",
+      display:true,
+
       icon: <HiOutlineMail className="hoverColor" />,
     },
   ];

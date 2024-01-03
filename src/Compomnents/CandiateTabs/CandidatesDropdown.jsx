@@ -12,10 +12,10 @@ import {
 const CandidatesDropdown = ({ style }) => {
   const allJobState = useSelector((state) => state.jobPost.jobs.allJobs);
   const dispatch = useDispatch();
-  console.log("allJobState", allJobState);
+  
   const handleSelectJob = (data) => {
     const parseData = JSON.parse(data.target.value);
-    console.log("parseData", parseData);
+    
     dispatch(jobApplications(parseData.id));
     dispatch(setSelectedJob(parseData));
   };

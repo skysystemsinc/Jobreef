@@ -30,10 +30,9 @@ const All = ({
 
   return (
     <Box mt={{ md: "31px", base: "15px" }}>
-      {searchBox ? <SearchBox /> : null}
-      <Box>
-        <MobileSortBy handleReset={handleReset} handleApplyFilter={handleApplyFilter} />
-      </Box>
+      
+        <MobileSortBy searchBox={searchBox} handleReset={handleReset} handleApplyFilter={handleApplyFilter} />
+      
       <Box width={"100%"}>
         <Box>
           {!data ? (

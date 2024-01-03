@@ -16,7 +16,7 @@ import white_edit from "@/assets/Images/white-edit.svg";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
-import { roles } from "@/Utils/role";
+import { roles } from "@/Utils/constant";
 import EditProifle from "../EditProifle/EditProifle";
 import useSkipInitialEffect from "@/hooks/useSkipInitailEffect";
 import { useSelector } from "react-redux";

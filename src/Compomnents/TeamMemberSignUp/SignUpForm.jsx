@@ -18,7 +18,7 @@ import email from "@/assets/Images/email.svg";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import LabelInput from "../LabelInput/LabelInput";
 import { useRouter } from "next/router";
-import { roles } from "@/Utils/role";
+import { roles } from "@/Utils/constant";
 import EditProifle from "../EditProifle/EditProifle";
 import ConfirmationBox from "../ConfirmationBox/ConfirmationBox";
 import { useSelector } from "react-redux";
@@ -26,6 +26,8 @@ import { get, put } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
 import { setLoginUser } from "@/Redux/slices/LoginUser";
 import { addCompany } from "@/Redux/slices/company";
+import { ProfileSkeleton } from "../LoadingSkeleton/LoadingSkeleton";
+import Loader from "../Loader/Loader";
 const SignUpForm = () => {
   const router = useRouter();
   const { id } = router.query;
@@ -40,8 +42,8 @@ const SignUpForm = () => {
   });
   console.log("formData", formData);
   const profileStyle = {
-    width: { md: "100px", base: "70px" },
-    height: { md: "100px", base: "70px" },
+    width: { md: "80px", base: "70px" },
+    height: { md: "80px", base: "70px" },
   };
   const handleChange = (e) => {
     const name = e.target.name;
@@ -67,43 +69,54 @@ const SignUpForm = () => {
     }
   };
 
-  const handleUpdateUser = async () => {
+  const handleContinue = async () => {
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: true,
+      };
+    });
     const body = {
       firstName: formData.firstName,
       lastName: formData.lastName,
       email: formData.email,
       password: formData.password,
     };
-    const postData = await put(
-      `${endPoints.user}/${id}`,
+    try {
+      const postData = await put(
+        `${endPoints.user}/${id}`,
 
-      body
-    );
-    setState((prev) => {
-      return {
-        ...prev,
-        loading: false,
-      };
-    });
-    if (!postData.success) {
-      dispatch(addUser({ ...userState }));
-    } else {
-      nextStep();
-      dispatch(addUser({ ...state, userId: postData.data.id }));
+        body
+      );
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+          isContinue: true,
+        };
+      });
+    } catch (err) {
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+        };
+      });
+      toast({
+        position: "bottom-right",
+        title: "Error!",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
     }
-    toast({
-      position: "bottom-right",
-      title: postData.message,
-      status: postData.success ? "success" : "error",
-      variant: "subtle",
-      isClosable: true,
-    });
   };
   useEffect(() => {
     if (id) {
       getUser();
     }
   }, [router.query]);
+
   return (
     <Box mt={{ base: "34px" }}>
       {state.isContinue ? (
@@ -115,7 +128,7 @@ const SignUpForm = () => {
           />
 
           <Flex mt={{ md: "150px", base: "50px" }} justifyContent={"center"}>
-            <Button onClick={() => router.push("/")} variant={"blue-btn"}>
+            <Button onClick={() => router.push("/login")} variant={"blue-btn"}>
               Login
             </Button>
           </Flex>
@@ -131,37 +144,51 @@ const SignUpForm = () => {
             alignItems={"center"}
             gap={{ md: "25px", base: "10px" }}
           >
-            <Box>
-              <EditProifle
-                profileStyle={profileStyle}
-                profile={formData.profilePic}
-              />
-            </Box>
-            <Box>
-              <Heading variant={"p6"}>
-                {`${formData?.firstName} `} {`${formData?.lastName}`}
-              </Heading>
-              <Box
-                display={"flex"}
-                alignItems={"center"}
-                mt={{ md: "14px", base: "6px" }}
-                gap={{ md: "52px", base: "20px" }}
-              >
-                <Box display={"flex"} alignItems={"center"} gap={"7px"}>
-                  <Image src={company.src} width={"25px"} />
-                  <Heading variant={"p7"} color={"gray.light"} fontWeight={400}>
-                    {formData?.company?.companyName}
-                  </Heading>
+            {!formData?.firstName ? (
+              <ProfileSkeleton />
+            ) : (
+              <>
+                <Box>
+                  <EditProifle
+                    profileStyle={profileStyle}
+                    profile={formData.profilePic}
+                  />
                 </Box>
-                <Box display={"flex"} alignItems={"center"} gap={"7px"}>
-                  <Image src={email.src} width={"25px"} />
-                  <Heading variant={"p7"} color={"gray.light"} fontWeight={400}>
-                    {formData?.email}
-                    {/* charles@jobreef.com */}
+                <Box>
+                  <Heading variant={"p6"}>
+                    {`${formData?.firstName} `} {`${formData?.lastName}`}
                   </Heading>
+                  <Box
+                    display={"flex"}
+                    alignItems={"center"}
+                    mt={{ md: "10px", base: "6px" }}
+                    gap={{ md: "52px", base: "20px" }}
+                  >
+                    <Box display={"flex"} alignItems={"center"} gap={"7px"}>
+                      <Image src={company.src} width={"25px"} />
+                      <Heading
+                        variant={"p4"}
+                        color={"gray.light"}
+                        fontWeight={400}
+                      >
+                        {formData?.company?.companyName}
+                      </Heading>
+                    </Box>
+                    <Box display={"flex"} alignItems={"center"} gap={"7px"}>
+                      <Image src={email.src} width={"25px"} />
+                      <Heading
+                        variant={"p4"}
+                        color={"gray.light"}
+                        fontWeight={400}
+                      >
+                        {formData?.email}
+                        {/* charles@jobreef.com */}
+                      </Heading>
+                    </Box>
+                  </Box>
                 </Box>
-              </Box>
-            </Box>
+              </>
+            )}
           </Box>
           <Box mt={"50px"}>
             <InputWrapper
@@ -230,15 +257,13 @@ const SignUpForm = () => {
             mt={{ md: "60px", base: "30px" }}
           >
             <Button
-              onClick={() => {
-                setIsContinue(true);
-              }}
+              onClick={handleContinue}
               variant={"blue-btn"}
               display={"flex"}
               alignItems={"center"}
               gap={"7px"}
             >
-              Continue
+              {state.loading ? <Loader /> : " Continue"}
             </Button>
           </Box>
         </>

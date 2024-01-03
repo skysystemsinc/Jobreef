@@ -23,9 +23,12 @@ const FindTalentHere = () => {
             color={"white.100"}
             fontWeight={400}
             variant={"p7"}
+            maxWidth={"500px"}
             fontSize={{ sm: "16px", base: "15px", md: "18px" }}
           >
-            Take Talent Finding To The Next Level.
+            {/* Take Talent Finding To The Next Level. */}
+            Sponsor a job post on Jobreef and gain access to a suite of advanced
+            hiring tools.
           </Heading>
           <Heading
             mb={{ md: "20px", base: "15px" }}

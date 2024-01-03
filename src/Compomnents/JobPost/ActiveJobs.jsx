@@ -11,7 +11,7 @@ import { addJob, setAllJobs } from "@/Redux/slices/jobPost";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import { put } from "@/helper/fetch";
 import endPoints from "@/Utils/endpoints";
-import { status } from "@/Utils/role";
+import { status } from "@/Utils/constant";
 const ActiveJobs = () => {
   const router = useRouter();
   const toast = useToast();

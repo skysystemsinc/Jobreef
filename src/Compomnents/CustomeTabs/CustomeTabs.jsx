@@ -10,7 +10,7 @@ const CustomTabs = ({ tabs }) => {
     const selected = tabs.find((tab) => tab.value === value);
     setSelectedTab(selected);
   };
-  console.log("selectedTab", selectedTab);
+  
   return (
     <Box>
       <Box width={"100%"}>

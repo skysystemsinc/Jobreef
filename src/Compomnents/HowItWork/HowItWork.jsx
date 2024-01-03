@@ -45,6 +45,7 @@ const HowItWork = () => {
           }
         />
         <WorkCard
+        iconWidth={{width:{ md: "25px", base:"21px"},}}
           icon={bag.src}
           count={two.src}
           title={"Publish Job Post"}
@@ -54,6 +55,8 @@ const HowItWork = () => {
         />
 
         <WorkCard
+        iconWidth={{width:{ md: "25px", base:"21px"},}}
+
           count={three.src}
           icon={workprofile.src}
           title={"Track Applications"}

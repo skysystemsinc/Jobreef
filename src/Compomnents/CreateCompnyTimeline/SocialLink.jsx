@@ -23,7 +23,7 @@ import { BsDot, BsPlusLg } from "react-icons/bs";
 import upload from "@/assets/Images/upload.svg";
 import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
 import Loader from "../Loader/Loader";
-import { roles } from "@/Utils/role";
+import { roles } from "@/Utils/constant";
 import axios from "axios";
 import endPoints from "@/Utils/endpoints";
 import { BACKEND_URL } from "@/Utils/urls";

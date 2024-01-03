@@ -14,8 +14,9 @@ import {
 } from "@chakra-ui/react";
 
 function DeleteModal({
-
+  deleteDesc,
   name,
+  disableSaveButton,
   loading,
   handleDelete,
   isOpen,
@@ -36,8 +37,13 @@ function DeleteModal({
             borderColor={"gray.500"}
             py={"12px"}
           >
-            <Heading variant={"p11"} fontWeight={600} className="sora" color={"black.100"}>
-              {deleteBtnLabel ??"Delete"}
+            <Heading
+              variant={"p11"}
+              fontWeight={600}
+              className="sora"
+              color={"black.100"}
+            >
+              {deleteBtnLabel ?? "Delete"}
             </Heading>
           </ModalHeader>
           <ModalCloseButton fontSize={"10px"} />
@@ -50,12 +56,18 @@ function DeleteModal({
                 color={"black.100"}
                 fontWeight={500}
               >
-                Are you sure you want to { deleteBtnLabel??" delete"} it{" "}
-                <Box as="span" fontWeight={700}>
-                  {" "}
-                  {name}{" "}
-                </Box>
-                ?
+                {deleteDesc ? (
+                  deleteDesc
+                ) : (
+                  <>
+                    Are you sure you want to {deleteBtnLabel ?? " delete"} it{" "}
+                    <Box as="span" fontWeight={700}>
+                      {" "}
+                      {name}{" "}
+                    </Box>
+                    ?
+                  </>
+                )}
               </Heading>
             </Box>
           </ModalBody>
@@ -77,15 +89,17 @@ function DeleteModal({
             >
               Cancel
             </Button>
-            <Button
-              onClick={handleDelete}
-              height={"32px"}
-              width={"max-content"}
-              px={"20px"}
-              variant={"blue-btn"}
-            >
-              {loading ? <Loader /> : deleteBtnLabel ?? "Delete"}
-            </Button>
+            {disableSaveButton ? null : (
+              <Button
+                onClick={handleDelete}
+                height={"32px"}
+                width={"max-content"}
+                px={"24px"}
+                variant={"blue-btn"}
+              >
+                {loading ? <Loader /> : deleteBtnLabel ?? "Delete"}
+              </Button>
+            )}
           </ModalFooter>
         </ModalContent>
       </Modal>
