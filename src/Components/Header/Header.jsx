@@ -355,7 +355,7 @@ const NAV_ITEMS = [
 
     children: [
       { label: "Sponsored Jobs", pathName: "/employers" },
-      { label: "Jobreef Recruit", pathName: "" },
+      { label: "Jobreef Recruit", pathName: "/Jobreef-recruit" },
     ],
   },
   {
