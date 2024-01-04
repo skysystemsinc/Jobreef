@@ -1,9 +1,9 @@
-import Header from "@/Compomnents/Header/Header";
+import Header from "@/Components/Header/Header";
 import React from "react";
 import { Box } from "@chakra-ui/react";
-import NewsLetter from "@/Compomnents/NewsLetter/NewsLetter";
-import Footer from "@/Compomnents/Footer/Footer";
-import ContactUs from "@/Compomnents/ContactUs/ContactUs";
+import NewsLetter from "@/Components/NewsLetter/NewsLetter";
+import Footer from "@/Components/Footer/Footer";
+import ContactUs from "@/Components/ContactUs/ContactUs";
 
 const contact = () => {
   return (

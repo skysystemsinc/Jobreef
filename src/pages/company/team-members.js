@@ -1,6 +1,6 @@
-import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
-import CompanyDasboard from "@/Compomnents/Layout/DashboardLayout";
-import TeamMembers from "@/Compomnents/TeamMembers/TeamMembers";
+import DashboardFooter from "@/Components/Footer/DashboardFooter";
+import CompanyDasboard from "@/Components/Layout/DashboardLayout";
+import TeamMembers from "@/Components/TeamMembers/TeamMembers";
 
 import { Box, Button, Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";

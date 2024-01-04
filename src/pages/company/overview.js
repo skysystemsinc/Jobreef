@@ -1,11 +1,11 @@
-import CompanyTabs from "@/Compomnents/CompanyDashoardTabs/CompanyDashboardTabs";
+import CompanyTabs from "@/Components/CompanyDashoardTabs/CompanyDashboardTabs";
 
-import SideBar from "@/Compomnents/SideBar/SideBar";
+import SideBar from "@/Components/SideBar/SideBar";
 import { Box } from "@chakra-ui/react";
 import React from "react";
-import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
-import DashboardLayout from "@/Compomnents/Layout/DashboardLayout";
-import CompanyOverview from "@/Compomnents/CompanyOverview/CompanyOverview";
+import DashboardFooter from "@/Components/Footer/DashboardFooter";
+import DashboardLayout from "@/Components/Layout/DashboardLayout";
+import CompanyOverview from "@/Components/CompanyOverview/CompanyOverview";
 
 const index = () => {
   return (

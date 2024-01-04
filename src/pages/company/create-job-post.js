@@ -1,11 +1,11 @@
-// import { JobPostTimeline } from "@/Compomnents/JobPostTimeline/JobPostTimeline";
-import DashboardLayout from "@/Compomnents/Layout/DashboardLayout";
+// import { JobPostTimeline } from "@/Components/JobPostTimeline/JobPostTimeline";
+import DashboardLayout from "@/Components/Layout/DashboardLayout";
 
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
+import DashboardFooter from "@/Components/Footer/DashboardFooter";
 const JobPostTimeline = dynamic(
-  () => import("@/Compomnents/JobPostTimeline/JobPostTimeline"),
+  () => import("@/Components/JobPostTimeline/JobPostTimeline"),
   {
     ssr: false,
   }

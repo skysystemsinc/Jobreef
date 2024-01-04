@@ -1,17 +1,17 @@
-import ContactForm from "@/Compomnents/ContactForm/ContactForm";
-import ContactUs from "@/Compomnents/ContactUs/ContactUs";
-import FindTalentHere from "@/Compomnents/FindTalentHere/FindTalentHere";
-import Footer from "@/Compomnents/Footer/Footer";
-import Header from "@/Compomnents/Header/Header";
+import ContactForm from "@/Components/ContactForm/ContactForm";
+import ContactUs from "@/Components/ContactUs/ContactUs";
+import FindTalentHere from "@/Components/FindTalentHere/FindTalentHere";
+import Footer from "@/Components/Footer/Footer";
+import Header from "@/Components/Header/Header";
 
-import JobRecruitHero from "@/Compomnents/JobRecruitHero/JobRecruitHero";
-import JobreefRecruit from "@/Compomnents/JobreefRecruit/JobreefRecruit";
-import Features from "@/Compomnents/JobreefRecruitComp/Features";
-import HowItWork from "@/Compomnents/JobreefRecruitComp/HowitWorks";
-import PricingPlans from "@/Compomnents/JobreefRecruitComp/PricingPlans";
+import JobRecruitHero from "@/Components/JobRecruitHero/JobRecruitHero";
+import JobreefRecruit from "@/Components/JobreefRecruit/JobreefRecruit";
+import Features from "@/Components/JobreefRecruitComp/Features";
+import HowItWork from "@/Components/JobreefRecruitComp/HowitWorks";
+import PricingPlans from "@/Components/JobreefRecruitComp/PricingPlans";
 
-import Pricing from "@/Compomnents/Pricing/Pricing";
-import TopCompanies from "@/Compomnents/TopCompanies/TopCompanies";
+import Pricing from "@/Components/Pricing/Pricing";
+import TopCompanies from "@/Components/TopCompanies/TopCompanies";
 
 import { Box } from "@chakra-ui/react";
 import React from "react";

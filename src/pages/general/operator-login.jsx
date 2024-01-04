@@ -1,6 +1,6 @@
 import React from 'react'
 import General_login from "../../assets/Images/General_login.svg"
-import Login from '@/Compomnents/Login/Login';
+import Login from '@/Components/Login/Login';
 import {
   Box,
   Button,

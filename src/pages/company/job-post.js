@@ -1,9 +1,9 @@
 'use client'
-import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
-import JobPostTabs from "@/Compomnents/JobPost/JobPost";
-import CompanyDasboard from "@/Compomnents/Layout/DashboardLayout";
-import PaginatedTable from "@/Compomnents/PaginatedTable/PaginatedTable";
-import TeamMembers from "@/Compomnents/TeamMembers/TeamMembers";
+import DashboardFooter from "@/Components/Footer/DashboardFooter";
+import JobPostTabs from "@/Components/JobPost/JobPost";
+import CompanyDasboard from "@/Components/Layout/DashboardLayout";
+import PaginatedTable from "@/Components/PaginatedTable/PaginatedTable";
+import TeamMembers from "@/Components/TeamMembers/TeamMembers";
 
 import { Box, Button, Flex } from "@chakra-ui/react";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";

@@ -1,4 +1,4 @@
-import Header from "@/Compomnents/Header/Header";
+import Header from "@/Components/Header/Header";
 import React from "react";
 import { Box} from "@chakra-ui/react";
 import Desktopgrid from "./grid/desktopgrid";

@@ -1,12 +1,12 @@
-import CompanyTabs from "@/Compomnents/CompanyTabs/CompanyTabs";
-import OperatorLayout from "@/Compomnents/Layout/OperatorLayout";
+import CompanyTabs from "@/Components/CompanyTabs/CompanyTabs";
+import OperatorLayout from "@/Components/Layout/OperatorLayout";
 import React from "react";
 import { Box } from "@chakra-ui/react";
-import SearchBox from "@/Compomnents/SearchBox/SearchBox";
+import SearchBox from "@/Components/SearchBox/SearchBox";
 
-import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
+import DashboardFooter from "@/Components/Footer/DashboardFooter";
 
-import BlogTabs from "@/Compomnents/BlogTabs/BlogTabs";
+import BlogTabs from "@/Components/BlogTabs/BlogTabs";
 const blog = () => {
   return (
     <OperatorLayout>

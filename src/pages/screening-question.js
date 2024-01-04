@@ -1,6 +1,6 @@
-import DashboardFooter from '@/Compomnents/Footer/DashboardFooter'
-import Header from '@/Compomnents/Header/Header'
-import ScreeningQuestion from '@/Compomnents/ScreeningQuestion/ScreeningQuestion'
+import DashboardFooter from '@/Components/Footer/DashboardFooter'
+import Header from '@/Components/Header/Header'
+import ScreeningQuestion from '@/Components/ScreeningQuestion/ScreeningQuestion'
 import React from 'react'
 
 const index = () => {

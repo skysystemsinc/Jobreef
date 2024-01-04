@@ -1,9 +1,9 @@
-import Header from "@/Compomnents/Header/Header";
-import MyJobsTabs from "@/Compomnents/MyJobsTab/MyJobsTabs";
+import Header from "@/Components/Header/Header";
+import MyJobsTabs from "@/Components/MyJobsTab/MyJobsTabs";
 import { Box, Heading } from "@chakra-ui/react";
 import React from "react";
-import JobSearchCompanyPage from "../../Compomnents/JobSearchData/jobSearchCompanyPage";
-import Footer from "@/Compomnents/Footer/Footer";
+import JobSearchCompanyPage from "../../Components/JobSearchData/jobSearchCompanyPage";
+import Footer from "@/Components/Footer/Footer";
 
 const jobSearchSelected = () => {
   return (

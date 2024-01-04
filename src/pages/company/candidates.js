@@ -1,8 +1,8 @@
 
-import CandidateTabs from "@/Compomnents/CandiateTabs/CandidateTabs";
-import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
+import CandidateTabs from "@/Components/CandiateTabs/CandidateTabs";
+import DashboardFooter from "@/Components/Footer/DashboardFooter";
 
-import CompanyDasboard from "@/Compomnents/Layout/DashboardLayout";
+import CompanyDasboard from "@/Components/Layout/DashboardLayout";
 
 import { Box } from "@chakra-ui/react";
 import React from "react";
