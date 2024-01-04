@@ -52,7 +52,7 @@ enum Status {
 
 enum jobStatus {
   New          @map("New")
-  UnderReview  @map("Under Review")
+  UnderReview  @map("UnderReview")
   Interviewing @map("Interviewing")
   draft        @map("draft")
   Accepted     @map("Accepted")
@@ -141,6 +141,8 @@ model Company {
   socialLinks     SocialLinks[]
   location        LocationType[]
   jobs            Job[]
+
+  VatId String
 }
 
 model Candidate {

@@ -1,9 +1,9 @@
-import ContactForm from "@/Compomnents/ContactForm/ContactForm";
-import Faqs from "@/Compomnents/Faqs/Faqs";
-import Footer from "@/Compomnents/Footer/Footer";
-import Header from "@/Compomnents/Header/Header";
-import HowToGuid from "@/Compomnents/HowToGuid/HowToGuid";
-import SeekerTextBox from "@/Compomnents/SeekerTextBox/SeekerTextBox";
+import ContactForm from "@/Components/ContactForm/ContactForm";
+import Faqs from "@/Components/Faqs/Faqs";
+import Footer from "@/Components/Footer/Footer";
+import Header from "@/Components/Header/Header";
+import HowToGuid from "@/Components/HowToGuid/HowToGuid";
+import SeekerTextBox from "@/Components/SeekerTextBox/SeekerTextBox";
 import React from "react";
 
 const helpCenter = () => {

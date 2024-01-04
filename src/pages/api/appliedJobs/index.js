@@ -29,14 +29,26 @@ const add = async (req, res) => {
 
 const GetAll = async (req, res) => {
   try {
-    const experience = await prisma.AppliedJobs.findMany({
+    const allData = await prisma.AppliedJobs.findMany({
       include: {
-        employee: true,
+        employee: {
+          include: {
+            skills: true,
+            workExperience: true,
+            education: true,
+            certification: true,
+            skills: true,
+            user: true,
+            achievement: true,
+            location: true,
+            attachment: true,
+          },
+        },
         job: true,
       },
     });
     res.status(200).json({
-      data: experience,
+      data: allData,
       success: true,
     });
   } catch (err) {

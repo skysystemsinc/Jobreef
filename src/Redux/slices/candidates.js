@@ -23,6 +23,8 @@ const candidates = createSlice({
         ...action.payload,
         ...action.payload.employee,
         ...action.payload.employee.user,
+        
+        id: action.payload.id,
       };
     },
   },

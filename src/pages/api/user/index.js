@@ -21,7 +21,8 @@ const addUser = async (req, res) => {
     }
 
     try {
-      const otp = Math.floor(1000 + Math.random() * 9000);
+      // const otp = Math.floor(1000 + Math.random() * 9000);
+      const otp = 1234;
       let companyId = null;
       if (data.companyId) {
         companyId = data.companyId;

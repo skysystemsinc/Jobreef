@@ -1,14 +1,14 @@
-import Header from "@/Compomnents/Header/Header";
-import JobSearchData from "@/Compomnents/JobSearchData/JobSearchData";
-import JobSearchResults from "@/Compomnents/JobSearchData/JobSearchResults";
+import Header from "@/Components/Header/Header";
+import JobSearchData from "@/Components/JobSearchData/JobSearchData";
+import JobSearchResults from "@/Components/JobSearchData/JobSearchResults";
 import { Box, Button, Heading } from "@chakra-ui/react";
 import React from "react";
-import BottomWaveImage from "../../Compomnents/BottomWaveImage/BottomWaveImage";
+import BottomWaveImage from "../../Components/BottomWaveImage/BottomWaveImage";
 import { useState } from "react";
 import { Role_context } from "../../context/context";
 import { useContext } from "react";
-import JobSearchEntry from "@/Compomnents/JobSearchData/JobSearchEntry";
-import Footer from "@/Compomnents/Footer/Footer";
+import JobSearchEntry from "@/Components/JobSearchData/JobSearchEntry";
+import Footer from "@/Components/Footer/Footer";
 const JobSearch = () => {
   //need to be deleted temporarily useState
   const { getToggle } = useContext(Role_context);

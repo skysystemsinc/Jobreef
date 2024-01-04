@@ -1,4 +1,4 @@
-import CompanyRegiteration from "@/Compomnents/CompanyRegiteration/CompanyRegiteration";
+import CompanyRegiteration from "@/Components/CompanyRegiteration/CompanyRegiteration";
 import { Box } from "@chakra-ui/react";
 import React from "react";
 

@@ -17,9 +17,9 @@ import leftBlue from "@/assets/Images/leftBlue.png";
 import rightYellow from "@/assets/Images/lightYellow.png";
 import logo from "@/assets/Images/logo.svg";
 import google from "@/assets/Images/google.svg";
-import PasswordInput from "@/Compomnents/PasswordInput/PasswordInput";
+import PasswordInput from "@/Components/PasswordInput/PasswordInput";
 import { Link } from "@chakra-ui/next-js";
-import LabelInput from "@/Compomnents/LabelInput/LabelInput";
+import LabelInput from "@/Components/LabelInput/LabelInput";
 import { FcGoogle } from "react-icons/fc";
 import { color } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -27,10 +27,10 @@ import { useRouter } from "next/router";
 import { httpRequest } from "@/helper/httpRrequest";
 import { BACKEND_URL } from "@/Utils/urls";
 import endPoints from "@/Utils/endpoints";
-import Loader from "@/Compomnents/Loader/Loader";
+import Loader from "@/Components/Loader/Loader";
 import { useDispatch } from "react-redux";
 import { setLoginUser } from "@/Redux/slices/LoginUser";
-import { roles } from "@/Utils/role";
+import { roles } from "@/Utils/constant";
 import { addCompany } from "@/Redux/slices/company";
 import { addEmployee } from "@/Redux/slices/employee";
 import { post } from "@/helper/fetch";
@@ -71,10 +71,9 @@ export default function Login() {
         localStorage.setItem("id", data.id);
         dispatch(setLoginUser(postData.data));
         dispatch(addCompany(postData?.data?.company));
-        
 
         dispatch(addEmployee(postData?.data?.employee));
-        if (data.role == roles.company) {
+        if (data.role == roles.company || data.role == roles.recruiter) {
           router.push("/company/profile-setting");
         } else {
           router.push("/candidate/profile-setting");
@@ -255,10 +254,9 @@ export default function Login() {
             <Button
               // width={{ base: "max-content" }}
               width={{ md: "162px", base: "140px" }}
-
               boxShadow="0px 0px 4px 0px rgba(0, 0, 0, 0.25)"
               variant={"outline"}
-              fontSize={{  sm: "14px", base: "12px" }}
+              fontSize={{ sm: "14px", base: "12px" }}
               leftIcon={<FcGoogle />}
               px={{ "2xl": "20px", base: "10px" }}
             >
@@ -266,7 +264,7 @@ export default function Login() {
                 <Text
                   variant={"p1"}
                   color={"gray.text"}
-                  fontSize={{  sm: "13px", base: "11px" }}
+                  fontSize={{ sm: "13px", base: "11px" }}
                 >
                   Sign in with Google
                 </Text>

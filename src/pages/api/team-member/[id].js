@@ -1,11 +1,12 @@
 import prisma from "@/lib/prisma";
 
 const GET = async (req, res) => {
-  const { id } = req.query;
+  const { id ,companyId} = req.query;
   console.log("companyId", id, req.query);
   try {
     const allUsers = await prisma.User.findMany({
       where: {
+        companyId:companyId,
         NOT: {
           id: req.query.id,
         }

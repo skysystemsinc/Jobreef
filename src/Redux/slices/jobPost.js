@@ -2,7 +2,7 @@
 
 
 import endPoints from "@/Utils/endpoints";
-import { status } from "@/Utils/role";
+import { status } from "@/Utils/constant";
 import { get } from "@/helper/fetch";
 import { job } from "@/schema/stateSchema";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";

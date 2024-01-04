@@ -53,7 +53,7 @@ const jobApplicantList = createSlice({
     builder.addCase(jobApplications.fulfilled, (state, action) => {
       const all = action.payload.data.filter((item) => item.archived == false);
       const saved = action.payload.data.filter((item) => item.saved == true);
-      console.log("saved", saved);
+      
       const archived = action.payload.data.filter(
         (item) => item.archived == true
       );

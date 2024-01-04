@@ -1,4 +1,4 @@
-import CandidateRegistration from '@/Compomnents/CandidateRegistration/CandidateRegistration'
+import CandidateRegistration from '@/Components/CandidateRegistration/CandidateRegistration'
 import { Box } from '@chakra-ui/react'
 import React from 'react'
 

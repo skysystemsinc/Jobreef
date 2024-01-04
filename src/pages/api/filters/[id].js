@@ -1,3 +1,4 @@
+import { sortBy } from "@/Utils/constant";
 import prisma from "@/lib/prisma";
 
 const POST = async (req, res) => {
@@ -5,6 +6,14 @@ const POST = async (req, res) => {
   const data = req.body;
   const employeeFilters = [];
   const filters = [];
+  let sortByDate = {};
+  if (data?.sortBy?.includes(sortBy.dateApplied)) {
+    sortByDate = {
+      orderBy: {
+        createdAt: "desc", // or 'desc' based on your needs
+      },
+    };
+  }
   if (location) {
     employeeFilters.push(
       {
@@ -21,13 +30,13 @@ const POST = async (req, res) => {
   }
   if (searchQuery) {
     employeeFilters.push(
-      {
-        workExperience: {
-          some: {
-            experience: { equals: searchQuery },
-          },
-        },
-      },
+      // {
+      //   workExperience: {
+      //     some: {
+      //       experience: { equals: searchQuery },
+      //     },
+      //   },
+      // },
       {
         skills: {
           some: {
@@ -37,88 +46,73 @@ const POST = async (req, res) => {
       }
     );
   }
-  if (data.status) {
-    filters.push(
-      {
-        status: {
-          in: data.status,
+  if (data?.status?.length > 0) {
+    filters.push({
+      status: {
+        in: data.status,
+      },
+    });
+  }
+  if (data?.skills?.length > 0) {
+    employeeFilters.push({
+      skills: {
+        some: {
+          name: { contains: data.skills[0], mode: "insensitive" },
         },
       },
-      {
-        status: {
-          in: data.status,
-        },
-      }
-    );
+    });
   }
+  if (data?.educationLevel?.length > 0) {
+    employeeFilters.push({
+      education: {
+        some: {
+          educationLevel: {
+            in: data.educationLevel,
+          },
+        },
+      },
+    });
+  }
+  console.log("sortByDate", sortByDate, employeeFilters, filters);
   try {
     const job = await prisma.AppliedJobs.findMany({
+      ...sortByDate,
       where: {
         jobId: id,
-        OR: filters,
-        employee: {
-          OR: employeeFilters,
-        },
-        // OR: [
-        //   {
-        //     status: {
-        //       in: data.status,
-        //     },
-        //   },
-        //   {
-        //     status: {
-        //       in: data.status,
-        //     },
-        //   },
-        // ],
-        // employee: {
-        //   OR: [
-        //     location !== ""
-        //       ? {
-        //           location: {
-        //             city: { contains: location, mode: "insensitive" },
-        //           },
-        //         }
-        //       : {},
-        //     location !== ""
-        //       ? {
-        //           location: {
-        //             province: { contains: location, mode: "insensitive" },
-        //           },
-        //         }
-        //       : {},
-        //     searchQuery !== ""
-        //       ? {
-        //           workExperience: {
-        //             some: {
-        //               experience: { equals: searchQuery },
-        //             },
-        //           },
-        //         }
-        //       : {},
-        //     searchQuery !== ""
-        //       ? {
-        //           skills: {
-        //             some: {
-        //               name: { contains: searchQuery, mode: "insensitive" },
-        //             },
-        //           },
-        //         }
-        //       : {},
-        //   ],
-        // },
+
+        ...(data.fixedKey ? { [data.fixedKey]: data.fixedValue } : {}),
+
+        AND: [
+          ...filters,
+
+          employeeFilters.length > 0
+            ? {
+                employee: {
+                  OR: employeeFilters,
+                },
+              }
+            : {},
+        ],
       },
 
       include: {
         job: true,
         employee: {
           include: {
-            location: true,
+            skills: true,
+            workExperience: true,
+            education: true,
+            certification: true,
+            skills: true,
             user: true,
+            achievement: true,
+            location: true,
+            attachment: true,
           },
         },
       },
     });
+
     res.status(200).json({
       data: job,
       success: true,

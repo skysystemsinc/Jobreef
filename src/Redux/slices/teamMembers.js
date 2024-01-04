@@ -9,9 +9,9 @@ const initialState = {
     formData: false,
   },
 };
-export const teamMemberList = createAsyncThunk("teamMemberList", async (id) => {
+export const teamMemberList = createAsyncThunk("teamMemberList", async ({id, companyId}) => {
   try {
-    const postData = await get(`${endPoints.teamMember}/${id}`, "GET");
+    const postData = await get(`${endPoints.teamMember}/${id}?companyId=${companyId}`, "GET");
     return postData;
   } catch (error) {
     console.log("error", error);

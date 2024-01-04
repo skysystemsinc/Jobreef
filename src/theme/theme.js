@@ -62,7 +62,9 @@ const colors = {
     300: "#344054",
     200: "#F8FCFD",
     100: "#F4F9FF",
-    bg:"#F1F1F1"
+    bg: "#F1F1F1",
+    text:"#1F798F",
+    light:"#81BEC7"
   },
   orange: {
     100: "#FB784B",
@@ -94,6 +96,7 @@ const components = {
   Button: {
     variants: {
       "blue-btn": {
+
         textAlign: "center",
         bg: "blue.500",
         height: { sm: "38px", base: "36px" },
@@ -112,6 +115,12 @@ const components = {
         transition: ".5s",
         _hover: {
           bg: "blue.600",
+        },
+        _disabled: {
+          _hover: {
+            color: "white.100",
+            bg: "blue.500 !important",
+          },
         },
       },
       "white-btn": {
@@ -281,15 +290,15 @@ const components = {
       },
     },
   },
-  Radio:{
-    variants:{
-      "simple":{
-        label:{
-          fontSize: {md: "14px", base:"12px"},
+  Radio: {
+    variants: {
+      simple: {
+        label: {
+          fontSize: { md: "14px", base: "12px" },
           fontFamily: "var(--chakra-\fonts-openSans)",
-          
-        }
-      }
+          color:'black.100'
+        },
+      },
     },
   },
   Input: {
@@ -307,7 +316,7 @@ const components = {
             color: "gray.light",
             fontWeight: 400,
             // textTransform: " capitalize",
-            fontSize:  "14px" 
+            fontSize: "14px",
           },
         },
 
@@ -401,7 +410,7 @@ const components = {
           bg: "gray.200",
 
           fontWeight: 600,
-          fontSize: {  base: "14px" },
+          fontSize: { base: "14px" },
           // textTransform: " capitalize",
 
           // _placeholder: {
@@ -526,6 +535,15 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         margin: "0px",
       },
+      h4: {
+        fontWeight: 700,
+
+        color: "white.100",
+        fontSize: ["45px", "47px ", "53px ", "53px ", "55px ", "55px "],
+        lineHeight: { md: "28px", sm: "20px", base: "18px" },
+        fontFamily: "var(--chakra-\fonts-openSans)",
+        margin: "0px",
+      },
       // Variant for h2
 
       // h2: {
@@ -605,14 +623,14 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
 
-        fontSize: ["13px", "14px", "14px", "14px", "14px", "14px"],
+        fontSize: ["13px", "13px", "14px", "14px", "14px", "14px"],
       },
 
       p11: {
         // color: "gray.text",
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 700,
-        lineHeight: "20px",
+        lineHeight: "24px",
         fontSize: ["13px", "16px", "16px", "16px", "16px", "16px"],
       },
       p12: {
@@ -621,6 +639,13 @@ const components = {
         fontWeight: 400,
         fontSize: "13px",
         lineHeight: "21px",
+      },
+      p13: {
+        fontWeight: 500,
+        color: "gray.text ",
+        fontFamily: "var(--chakra-\fonts-openSans)",
+
+        fontSize: ["16px", "20px", "19px", "19px"],
       },
       // Add more variants for other heading levels as needed
     },

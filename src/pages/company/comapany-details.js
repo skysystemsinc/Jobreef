@@ -1,10 +1,10 @@
-import CompanyTabs from "@/Compomnents/CompanyDashoardTabs/CompanyDashboardTabs";
+import CompanyTabs from "@/Components/CompanyDashoardTabs/CompanyDashboardTabs";
 
-import CompanyDasboard from "@/Compomnents/Layout/DasboardLayout";
-import SideBar from "@/Compomnents/SideBar/SideBar";
+import CompanyDasboard from "@/Components/Layout/DashboardLayout";
+import SideBar from "@/Components/SideBar/SideBar";
 import { Box } from "@chakra-ui/react";
 import React from "react";
-import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
+import DashboardFooter from "@/Components/Footer/DashboardFooter";
 
 const comapanyDetails = () => {
   return (

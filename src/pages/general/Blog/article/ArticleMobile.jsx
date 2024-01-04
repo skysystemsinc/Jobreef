@@ -1,4 +1,4 @@
-import Header from "@/Compomnents/Header/Header";
+import Header from "@/Components/Header/Header";
 import React from "react";
 import {
   Box,
@@ -14,7 +14,7 @@ import {
 import Generalblog from "../../../../assets/Images/Generalblog.svg";
 import Avatar from "../../../../assets/Images/Avatar.png";
 import arrowupright from "../../../../assets/Images/arrow-up-right.svg";
-import ComponentMyChip from "@/Compomnents/ComponentMyChip/ComponentMyChip";
+import ComponentMyChip from "@/Components/ComponentMyChip/ComponentMyChip";
 import { FiSearch, FiMapPin } from "react-icons/fi";
 import woman from "../../../../assets/Images/woman.png";
 const categories = [

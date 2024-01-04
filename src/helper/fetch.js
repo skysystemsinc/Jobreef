@@ -14,7 +14,7 @@ export async function get(endpoint) {
         //   Authorization: "Bearer " + item,
       },
     });
-    console.log("response", response);
+    
     return await response.json();
 
     // if (response.ok) {

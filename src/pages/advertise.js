@@ -1,9 +1,9 @@
-import AdvertiseWithUs from "@/Compomnents/AdvertiseWithUs/AdvertiseWithUs";
-import AdvertisingBox from "@/Compomnents/AdvertisingBox/AdvertisingBox";
-import ContactForm from "@/Compomnents/ContactForm/ContactForm";
-import Footer from "@/Compomnents/Footer/Footer";
-import Header from "@/Compomnents/Header/Header";
-import TeamSlider from "@/Compomnents/TeamSlider/TeamSlider";
+import AdvertiseWithUs from "@/Components/AdvertiseWithUs/AdvertiseWithUs";
+import AdvertisingBox from "@/Components/AdvertisingBox/AdvertisingBox";
+import ContactForm from "@/Components/ContactForm/ContactForm";
+import Footer from "@/Components/Footer/Footer";
+import Header from "@/Components/Header/Header";
+import TeamSlider from "@/Components/TeamSlider/TeamSlider";
 import { Box, Container } from "@chakra-ui/react";
 import React from "react";
 

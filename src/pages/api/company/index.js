@@ -27,6 +27,7 @@ const addCompany = async (req, res) => {
         webUrl: data.webUrl,
         companyLogo: data.companyLogo,
         socialLinks: data.socialLinks,
+        VatId: data.VatId,
       },
       include: {
         users: true,

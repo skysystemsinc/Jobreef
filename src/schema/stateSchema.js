@@ -10,6 +10,7 @@ const registration = {
 };
 const company = {
   id: "",
+  VatId: "",
   companyName: "",
   industry: "",
   directory: "",
@@ -39,7 +40,7 @@ const employee = {
   state: "",
   province: "",
   city: "",
-  number: "",
+  phoneNumber: "",
   description: "",
   workExperience: false,
   education: false,
@@ -53,6 +54,16 @@ const employee = {
   skills: [{ name: "", level: "" }],
   // id: "658be00bc9539285d1b0c549",
   id: null,
+};
+const abuseReport = {
+  reportId: "",
+  abuseCategory: "",
+  contentType: "",
+  reportedOn: "",
+  status: "",
+  resolution: "",
+  reportedContent: "",
+  operatorComments: "",
 };
 const workExperience = {
   country: "",
@@ -456,7 +467,6 @@ const operatorRole = [
     label: "Super Admin",
     value: "Super Admin",
   },
-  
 ];
 const status = [
   {
@@ -494,7 +504,6 @@ const platformOpt = [
     label: "Instagram",
     value: "Instagram",
   },
-  
 ];
 const skillsLevel = [
   {
@@ -537,6 +546,7 @@ export {
   company,
   achievement,
   job,
+  abuseReport,
   education,
   employee,
   workExperience,

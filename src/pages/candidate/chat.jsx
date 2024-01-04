@@ -1,7 +1,7 @@
-import BottomWaveImage from "@/Compomnents/BottomWaveImage/BottomWaveImage";
-import ChatBox from "@/Compomnents/ChatBox/ChatBox";
-import Footer from "@/Compomnents/Footer/Footer";
-import Header from "@/Compomnents/Header/Header";
+import BottomWaveImage from "@/Components/BottomWaveImage/BottomWaveImage";
+import ChatBox from "@/Components/ChatBox/ChatBox";
+import Footer from "@/Components/Footer/Footer";
+import Header from "@/Components/Header/Header";
 import { Box, Heading } from "@chakra-ui/react";
 import React from "react";
 
