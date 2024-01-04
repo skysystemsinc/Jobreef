@@ -1,7 +1,7 @@
-import BottomWaveImage from "@/Compomnents/BottomWaveImage/BottomWaveImage";
-import Footer from "@/Compomnents/Footer/Footer";
-import Header from "@/Compomnents/Header/Header";
-import ProfileSettingTabs from "@/Compomnents/ProfileSettingTabs/ProfileSettingTabs";
+import BottomWaveImage from "@/Components/BottomWaveImage/BottomWaveImage";
+import Footer from "@/Components/Footer/Footer";
+import Header from "@/Components/Header/Header";
+import ProfileSettingTabs from "@/Components/ProfileSettingTabs/ProfileSettingTabs";
 import { Box, Heading } from "@chakra-ui/react";
 import React from "react";
 

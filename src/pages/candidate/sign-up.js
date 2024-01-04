@@ -2,7 +2,7 @@ import React from "react";
 
 import { Box, Heading, Image } from "@chakra-ui/react";
 
-import SignUp from "@/Compomnents/SignUp/SignUp";
+import SignUp from "@/Components/SignUp/SignUp";
 
 const index = () => {
   return (

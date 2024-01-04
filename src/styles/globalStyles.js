@@ -241,91 +241,7 @@ const globalStyles = {
       width: "calc(100% - 14px - calc(8px * 2)) !important",
     },
   },
-  stepperContainter2: {
-    width: {
-      xl: "90%",
-      lg: "80%",
-      md: "73%",
 
-      base: "99%",
-    },
-    // width: { md: "440px", base: "96%" },
-
-    // flexDir: "row !important",
-
-    "& .cui-steps__horizontal-step-container ": {
-      span: {
-        fontFamily: "open Sans !important",
-        fontSize: { "2xl": "16px", base: "13px" },
-        fontFamily: "open Sans !important",
-        fontWeight: " 500 !important",
-        // marginTop:'4px'
-      },
-    },
-
-    "& .cui-steps__step-icon-container": {
-      bg: "transparent",
-      marginBottom: { md: "11px", sm: "10px", base: "2px" },
-      border: "3px solid ",
-      borderColor: "gray.light ",
-      width: { sm: "30px", base: "28px" },
-      height: { sm: "30px", base: "28px" },
-      span: {
-        color: "gray.light",
-        _active: {
-          color: "blue.500",
-        },
-
-        fontFamily: "open Sans !important",
-        fontWeight: " 700 !important",
-        fontSize: { "2xl": "16px", base: "13px" },
-      },
-
-      _active: {
-        border: "3px solid blue.500 !important",
-        borderColor: "blue.500 !important",
-        bg: "blue.500",
-        color: "blue.500 !important",
-        "& .cui-steps__horizontal-step": {
-          "&::after": {
-            bg: "blue.500 !important",
-          },
-        },
-      },
-    },
-
-    "& .cui-steps__horizontal-step": {
-      _active: {
-        "&::after": {
-          bg: "blue.500 !important",
-        },
-      },
-
-      "&::after": {
-        bg: "gray.light !important",
-        height: "3px !important",
-        width: {
-          md: "82% !important",
-          sm: "80% !important",
-          base: "61% !important",
-        },
-        top: { sm: "17px   !important", base: "15px   !important" },
-        marginInlineEnd: "0px !important",
-        marginInlineStart: "0px !important",
-      },
-    },
-
-    "& .cui-steps__horizontal-step:first-of-type": {
-      // border: '1px solid ',
-      "& .cui-steps__step-icon-container": {
-        borderColor: "blue.500 !important",
-      },
-      span: {
-        color: "blue.500",
-        // fontSize:"100px"
-      },
-    },
-  },
   checkBoxStyle: {
     "& .chakra-checkbox__control": {
       // Add your custom styles here
@@ -338,5 +254,15 @@ const globalStyles = {
   toastStyle: {
     position: "bottom-right",
   },
+  shadowBox:{
+  boxShadow:"0px 5px 20px 0px rgba(16, 24, 40, 0.15)",
+  borderRadius:"8px",
+  border:"1px solid",
+  borderColor:"white.200",
+  backgroundColor:"white.100",
+  width:"100%"
+
+
+  }
 };
 export default globalStyles;

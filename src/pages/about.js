@@ -1,11 +1,11 @@
-import AboutUs from "@/Compomnents/AboutUs/AboutUs";
-import Footer from "@/Compomnents/Footer/Footer";
-import Header from "@/Compomnents/Header/Header";
-import HireTalent from "@/Compomnents/HireTalent/HireTalent";
-import NewsLetter from "@/Compomnents/NewsLetter/NewsLetter";
-import Opportunity from "@/Compomnents/Opportunity/Opportunity";
-import Testimonial from "@/Compomnents/Testimonial/Testimonial";
-import TopCompanies from "@/Compomnents/TopCompanies/TopCompanies";
+import AboutUs from "@/Components/AboutUs/AboutUs";
+import Footer from "@/Components/Footer/Footer";
+import Header from "@/Components/Header/Header";
+import HireTalent from "@/Components/HireTalent/HireTalent";
+import NewsLetter from "@/Components/NewsLetter/NewsLetter";
+import Opportunity from "@/Components/Opportunity/Opportunity";
+import Testimonial from "@/Components/Testimonial/Testimonial";
+import TopCompanies from "@/Components/TopCompanies/TopCompanies";
 import { Box } from "@chakra-ui/react";
 
 const About = () => {

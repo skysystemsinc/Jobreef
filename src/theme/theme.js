@@ -63,6 +63,8 @@ const colors = {
     200: "#F8FCFD",
     100: "#F4F9FF",
     bg: "#F1F1F1",
+    text:"#1F798F",
+    light:"#81BEC7"
   },
   orange: {
     100: "#FB784B",
@@ -294,6 +296,7 @@ const components = {
         label: {
           fontSize: { md: "14px", base: "12px" },
           fontFamily: "var(--chakra-\fonts-openSans)",
+          color:'black.100'
         },
       },
     },
@@ -532,6 +535,15 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         margin: "0px",
       },
+      h4: {
+        fontWeight: 700,
+
+        color: "white.100",
+        fontSize: ["45px", "47px ", "53px ", "53px ", "55px ", "55px "],
+        lineHeight: { md: "28px", sm: "20px", base: "18px" },
+        fontFamily: "var(--chakra-\fonts-openSans)",
+        margin: "0px",
+      },
       // Variant for h2
 
       // h2: {
@@ -611,7 +623,7 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
 
-        fontSize: ["13px", "14px", "14px", "14px", "14px", "14px"],
+        fontSize: ["13px", "13px", "14px", "14px", "14px", "14px"],
       },
 
       p11: {
@@ -627,6 +639,13 @@ const components = {
         fontWeight: 400,
         fontSize: "13px",
         lineHeight: "21px",
+      },
+      p13: {
+        fontWeight: 500,
+        color: "gray.text ",
+        fontFamily: "var(--chakra-\fonts-openSans)",
+
+        fontSize: ["16px", "20px", "19px", "19px"],
       },
       // Add more variants for other heading levels as needed
     },

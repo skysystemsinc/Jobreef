@@ -1,15 +1,15 @@
-import CompanyTabs from "@/Compomnents/CompanyTabs/CompanyTabs";
-import OperatorLayout from "@/Compomnents/Layout/OperatorLayout";
+import CompanyTabs from "@/Components/CompanyTabs/CompanyTabs";
+import OperatorLayout from "@/Components/Layout/OperatorLayout";
 import React from "react";
 import { Box } from "@chakra-ui/react";
-import SearchBox from "@/Compomnents/SearchBox/SearchBox";
+import SearchBox from "@/Components/SearchBox/SearchBox";
 
-import UsersTab from "@/Compomnents/UsersTab/UsersTab";
-import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
-import UserFrom from "@/Compomnents/UserForm/UserForm";
-import OperatorFrom from "@/Compomnents/OperatorsForm/OperatorsForm";
-import JobPostTimeline from "@/Compomnents/JobPostTimeline/JobPostTimeline";
-import OperatorJobPost from "@/Compomnents/OperatorJobPost/OperatorJobPost";
+import UsersTab from "@/Components/UsersTab/UsersTab";
+import DashboardFooter from "@/Components/Footer/DashboardFooter";
+import UserFrom from "@/Components/UserForm/UserForm";
+import OperatorFrom from "@/Components/OperatorsForm/OperatorsForm";
+import JobPostTimeline from "@/Components/JobPostTimeline/JobPostTimeline";
+import OperatorJobPost from "@/Components/OperatorJobPost/OperatorJobPost";
 const createJobPost = () => {
     const jobTimeline =[
         { label: "Assign Job" },

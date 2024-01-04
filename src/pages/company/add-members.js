@@ -1,6 +1,6 @@
-import AddMemebersForm from "@/Compomnents/AddMemebersForm/AddMemebersForm";
-import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
-import CompanyDasboard from "@/Compomnents/Layout/DasboardLayout";
+import AddMemebersForm from "@/Components/AddMemebersForm/AddMemebersForm";
+import DashboardFooter from "@/Components/Footer/DashboardFooter";
+import CompanyDasboard from "@/Components/Layout/DashboardLayout";
 import { Box, Button, Flex } from "@chakra-ui/react";
 import React from "react";
 

@@ -1,4 +1,4 @@
-import TeamMemberSignUp from '@/Compomnents/TeamMemberSignUp/TeamMemberSignUp'
+import TeamMemberSignUp from '@/Components/TeamMemberSignUp/TeamMemberSignUp'
 import React from 'react'
 
 const index = () => {

@@ -1,11 +1,11 @@
-import CompanyTabs from "@/Compomnents/CompanyTabs/CompanyTabs";
-import OperatorLayout from "@/Compomnents/Layout/OperatorLayout";
+import CompanyTabs from "@/Components/CompanyTabs/CompanyTabs";
+import OperatorLayout from "@/Components/Layout/OperatorLayout";
 import React from "react";
 import { Box } from "@chakra-ui/react";
-import SearchBox from "@/Compomnents/SearchBox/SearchBox";
-import ActiveJobs from "@/Compomnents/CompanyTabs/ActiveJobs";
-import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
-import JobPostTimeline from "@/Compomnents/JobPostTimeline/JobPostTimeline";
+import SearchBox from "@/Components/SearchBox/SearchBox";
+import ActiveJobs from "@/Components/CompanyTabs/ActiveJobs";
+import DashboardFooter from "@/Components/Footer/DashboardFooter";
+import JobPostTimeline from "@/Components/JobPostTimeline/JobPostTimeline";
 const index = () => {
   return (
     <OperatorLayout>

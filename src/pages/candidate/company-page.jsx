@@ -1,11 +1,11 @@
-import CompanyPageData from "@/Compomnents/CompanyPageData/CompanyPageData";
-import Footer from "@/Compomnents/Footer/Footer";
-import Header from "@/Compomnents/Header/Header";
-import JobSearchData from "@/Compomnents/JobSearchData/JobSearchData";
-import MyJobsTabs from "@/Compomnents/MyJobsTab/MyJobsTabs";
-import MessagesData from "@/Compomnents/MyMessages/MessagesData";
-import MyResumeTabs from "@/Compomnents/MyResumeTab/MyResumeTabs";
-import ProfileSettingTabs from "@/Compomnents/ProfileSettingTabs/ProfileSettingTabs";
+import CompanyPageData from "@/Components/CompanyPageData/CompanyPageData";
+import Footer from "@/Components/Footer/Footer";
+import Header from "@/Components/Header/Header";
+import JobSearchData from "@/Components/JobSearchData/JobSearchData";
+import MyJobsTabs from "@/Components/MyJobsTab/MyJobsTabs";
+import MessagesData from "@/Components/MyMessages/MessagesData";
+import MyResumeTabs from "@/Components/MyResumeTab/MyResumeTabs";
+import ProfileSettingTabs from "@/Components/ProfileSettingTabs/ProfileSettingTabs";
 import { Box, Heading } from "@chakra-ui/react";
 
 import React from "react";
