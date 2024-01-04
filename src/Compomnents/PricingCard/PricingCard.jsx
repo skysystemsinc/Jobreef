@@ -1,7 +1,8 @@
 import { Box, Button, Heading, Image } from "@chakra-ui/react";
 import React from "react";
 import blueTick from "@/assets/Images/blueclick.svg";
-const PricingCard = ({ data }) => {
+import { IoCheckmarkCircle } from "react-icons/io5";
+const PricingCard = ({ data, iconStyle, btnVariant , boxStyle }) => {
   const feature = [
     "Applicant Tracking",
     "Candidate Screening",
@@ -14,14 +15,16 @@ const PricingCard = ({ data }) => {
       backgroundColor={"white.100"}
       borderRadius={"5px"}
       mb={"20px"}
+      sx={boxStyle}
     >
       <Box
         borderRadius={" 5px 5px 0px 0px"}
         textAlign={"center"}
         bg={"blue.500"}
         py={"16px"}
+        className="header"
       >
-        <Heading color={"white.100"} fontWeight={600} variant={"p11"}>
+        <Heading  as={"h4"} color={"white.100"} fontWeight={600} variant={"p11"}>
           {data.title}
         </Heading>
       </Box>
@@ -36,10 +39,11 @@ const PricingCard = ({ data }) => {
       >
         <Heading
           color={"blue.500"}
-          className="sora"
+          className="sora amount"
           variant={"p8"}
           mb={"10px"}
           fontWeight={800}
+          
         >
           {data.amount}
 
@@ -47,12 +51,7 @@ const PricingCard = ({ data }) => {
             {data.day}
           </Box>
         </Heading>
-        <Box
-        // display={"flex"}
-        // justifyContent={"center"}
-        // alignItems={"center"}
-        // flexDirection={"column"}
-        >
+        <Box>
           {data.feature.map((item) => {
             return (
               <Box
@@ -61,10 +60,10 @@ const PricingCard = ({ data }) => {
                 mb={{ md: "7px", base: "9px" }}
                 gap={{ md: "20px", base: "10px" }}
               >
-                <Image
-                  width={{ md: "21px", base: "18px" }}
-                  src={blueTick.src}
-                />
+                <Box fontSize={"25px"} color={"blue.500"} sx={iconStyle}>
+                  <IoCheckmarkCircle />
+                </Box>
+
                 <Box
                   minW={"150px"}
                   // border={"1px solid red"}
@@ -85,13 +84,13 @@ const PricingCard = ({ data }) => {
         </Box>
 
         <Button
-          fontWeight={600}
+          // fontWeight={600}
           mt={"20px"}
           height={"35px"}
           borderRadius={"5px"}
           width={"max-content"}
           px={{ md: "45px", base: "40px" }}
-          variant={"blue-btn"}
+          variant={btnVariant}
         >
           Get Started
         </Button>

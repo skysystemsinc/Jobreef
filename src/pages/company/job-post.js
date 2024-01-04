@@ -1,7 +1,7 @@
 'use client'
 import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
 import JobPostTabs from "@/Compomnents/JobPost/JobPost";
-import CompanyDasboard from "@/Compomnents/Layout/DasboardLayout";
+import CompanyDasboard from "@/Compomnents/Layout/DashboardLayout";
 import PaginatedTable from "@/Compomnents/PaginatedTable/PaginatedTable";
 import TeamMembers from "@/Compomnents/TeamMembers/TeamMembers";
 

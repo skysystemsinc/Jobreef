@@ -21,15 +21,17 @@ import SubscriptionCard from "../SubscriptionCard/SubscriptionCard";
 import PaymentMethodeCard from "../PaymentMethodeCard/PaymentMethodeCard";
 import RecentOrders from "../RecentOrders/RecentOrders";
 import DeleteModal from "../DeleteModal/DeleteModal";
+import SubscriptionPlans from "../SubscriptionPlans/SubscriptionPlans";
 const Billing = () => {
   const [state, setState] = useState({
     add: false,
     edit: false,
     delete: false,
     paymentMethodeAdded: true,
+    SubscriptionPlans: false,
   });
   return (
-    <Box minH={"58vh"} mt={{ md: "91px", lg: "60px", base: "40px" }}>
+    <Box minH={"58vh"} mt={{ lg: "30px", base: "15px" }}>
       <DeleteModal
         onOpen={() =>
           setState((prev) => {
@@ -63,10 +65,17 @@ const Billing = () => {
             });
           }}
         />
+      ) : state.SubscriptionPlans ? (
+        <SubscriptionPlans />
       ) : (
         <>
           <Box mb={"20px"}>
-            <SubscriptionCard noActiveSub />
+            <SubscriptionCard
+              handleAdd={() =>
+                setState((prev) => ({ ...prev, SubscriptionPlans: true }))
+              }
+              noActiveSub
+            />
           </Box>
           <PaymentMethodeCard
             handleAdd={() => {

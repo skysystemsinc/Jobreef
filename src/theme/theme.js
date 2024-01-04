@@ -63,6 +63,8 @@ const colors = {
     200: "#F8FCFD",
     100: "#F4F9FF",
     bg: "#F1F1F1",
+    text:"#1F798F",
+    light:"#81BEC7"
   },
   orange: {
     100: "#FB784B",
@@ -528,6 +530,15 @@ const components = {
 
         color: "white.100",
         fontSize: ["27px", "30px ", "32px ", "32px ", "40px ", "40px "],
+        lineHeight: { md: "28px", sm: "20px", base: "18px" },
+        fontFamily: "var(--chakra-\fonts-openSans)",
+        margin: "0px",
+      },
+      h4: {
+        fontWeight: 700,
+
+        color: "white.100",
+        fontSize: ["45px", "47px ", "53px ", "53px ", "55px ", "55px "],
         lineHeight: { md: "28px", sm: "20px", base: "18px" },
         fontFamily: "var(--chakra-\fonts-openSans)",
         margin: "0px",

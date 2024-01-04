@@ -1,9 +1,16 @@
 import { Box, Button, Container, Heading, Image } from "@chakra-ui/react";
 import React from "react";
 import Target from "@/assets/Images/Target.svg";
-const JobreefRecruit = () => {
+const JobreefRecruit = ({
+  disableTarget,
+  title,
+  content,
+  amount,
+  btnLabel,
+  boxStyle
+}) => {
   return (
-    <Box position={"relative"} bg={"blue.500"} py={"26px"}>
+    <Box  position={"relative"} bg={"blue.500"} sx={boxStyle} py={"26px"}>
       <Container
         display={"flex"}
         maxW={"5xl"}
@@ -19,7 +26,8 @@ const JobreefRecruit = () => {
             variant={"h1"}
             maxWidth={"400px"}
           >
-            Search For Local Talent With Jobreef Recruit
+            {/* Search For Local Talent With Jobreef Recruit */}
+            {title}
           </Heading>
           <Heading
             mb={{ md: "12px", base: "5px" }}
@@ -29,9 +37,7 @@ const JobreefRecruit = () => {
             maxWidth={"500px"}
             lineHeight={{ md: "27px", base: "23px" }}
           >
-            Browse our database of candidates and filter resumes based on your
-            job requirements. Use instant messaging to connect with qualified
-            jobseekers
+            {content}
           </Heading>
         </Box>
 
@@ -44,7 +50,9 @@ const JobreefRecruit = () => {
           top={"0px"}
           zIndex={2}
         >
-          <Heading className="sora"  color={"white.100"} variant={"p5"}>starting at</Heading>
+          <Heading className="sora" color={"white.100"} variant={"p5"}>
+            starting at
+          </Heading>
           <Heading
             fontWeight={700}
             color={"white.100"}
@@ -52,19 +60,21 @@ const JobreefRecruit = () => {
             mb={{ md: "30px", base: "10px" }}
             variant={"h3"}
           >
-            $99/month
+            {amount}
           </Heading>
-          <Button variant={"yellow-btn"}>Find Your Next Hire</Button>
+          <Button variant={"yellow-btn"}>{btnLabel}</Button>
         </Box>
-        <Image
-          position={"absolute"}
-          opacity={{ md: 1, base: 0.6 }}
-          top={"16px"}
-          left={"0px"}
-          zIndex={1}
-          src={Target.src}
-          width={"90px"}
-        />
+        {disableTarget ? null : (
+          <Image
+            position={"absolute"}
+            opacity={{ md: 1, base: 0.6 }}
+            top={"16px"}
+            left={"0px"}
+            zIndex={1}
+            src={Target.src}
+            width={"90px"}
+          />
+        )}
       </Container>
     </Box>
   );

@@ -18,13 +18,20 @@ const employers = () => {
       <FindTalentHere />
       <Features />
       <Pricing />
-      <JobreefRecruit />
+      <JobreefRecruit
+        title={"Search For Local Talent With Jobreef Recruit"}
+        content={
+          "Browse our database of candidates and filter resumes based on your job requirements. Use instant messaging to connect with qualified jobseekers"
+        }
+        amount={"$99/month"}
+        btnLabel={"Learn More"}
+      />
       <HowItWork />
       <Box mb={"40px"}>
-      <TopCompanies />
+        <TopCompanies />
       </Box>
       <ContactForm
-        style={{ mb: "150px" }}
+        style={{ mb: "150px", }}
         smallText={"Together"}
         label={"Let’s Work "}
       />

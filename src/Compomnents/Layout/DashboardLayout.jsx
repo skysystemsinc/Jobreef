@@ -5,7 +5,7 @@ import { Box } from "@chakra-ui/react";
 import CompanyTabs from "../CompanyDashoardTabs/CompanyDashboardTabs";
 import BottomWaveImage from "../BottomWaveImage/BottomWaveImage";
 
-const DasboardLayout = ({ disableWaveImage, children }) => {
+const DashboardLayout = ({ disableWaveImage, children }) => {
   return (
     <>
       <Header />
@@ -26,4 +26,4 @@ const DasboardLayout = ({ disableWaveImage, children }) => {
   );
 };
 
-export default DasboardLayout;
+export default DashboardLayout;

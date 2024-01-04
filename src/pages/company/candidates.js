@@ -2,7 +2,7 @@
 import CandidateTabs from "@/Compomnents/CandiateTabs/CandidateTabs";
 import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
 
-import CompanyDasboard from "@/Compomnents/Layout/DasboardLayout";
+import CompanyDasboard from "@/Compomnents/Layout/DashboardLayout";
 
 import { Box } from "@chakra-ui/react";
 import React from "react";

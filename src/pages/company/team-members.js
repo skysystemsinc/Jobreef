@@ -1,5 +1,5 @@
 import DashboardFooter from "@/Compomnents/Footer/DashboardFooter";
-import CompanyDasboard from "@/Compomnents/Layout/DasboardLayout";
+import CompanyDasboard from "@/Compomnents/Layout/DashboardLayout";
 import TeamMembers from "@/Compomnents/TeamMembers/TeamMembers";
 
 import { Box, Button, Flex } from "@chakra-ui/react";

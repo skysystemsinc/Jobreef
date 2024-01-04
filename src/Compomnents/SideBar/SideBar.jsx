@@ -21,9 +21,9 @@ const SideBar = () => {
   const router = useRouter();
   const navLinks = [
     {
-      title: "Home",
+      title: "Overview",
       icon: home,
-      pathname: "#",
+      pathname: "/company/overview",
       display: true,
     },
     {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Button, Heading, Flex, Input } from "@chakra-ui/react";
-const SubscriptionCard = ({ noActiveSub }) => {
+const SubscriptionCard = ({handleAdd, noActiveSub }) => {
   return (
     <Box
       border={"1px solid"}
@@ -31,7 +31,7 @@ const SubscriptionCard = ({ noActiveSub }) => {
         )}
         {noActiveSub ? (
           <Button
-            // onClick={handleAdd}
+            onClick={handleAdd}
             width={"max-content"}
             variant={"outline-blue"}
           >
@@ -41,7 +41,7 @@ const SubscriptionCard = ({ noActiveSub }) => {
         ) : (
           <Button width={"max-content"} variant={"outline-blue"}>
             {" "}
-            Cancel Subscription
+            Manage Subscription
           </Button>
         )}
       </Box>

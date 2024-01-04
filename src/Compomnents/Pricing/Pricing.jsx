@@ -77,7 +77,7 @@ const Pricing = () => {
         }}
       >
         {pricingArray.map((item) => {
-          return <PricingCard data={item} />;
+          return <PricingCard  btnVariant={"blue-btn"} data={item} />;
         })}
       </Box>
       <Heading 

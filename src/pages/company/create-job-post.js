@@ -1,5 +1,5 @@
 // import { JobPostTimeline } from "@/Compomnents/JobPostTimeline/JobPostTimeline";
-import DasboardLayout from "@/Compomnents/Layout/DasboardLayout";
+import DashboardLayout from "@/Compomnents/Layout/DashboardLayout";
 
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
@@ -12,10 +12,10 @@ const JobPostTimeline = dynamic(
 );
 const crearteJobost = () => {
   return (
-    <DasboardLayout disableWaveImage>
+    <DashboardLayout disableWaveImage>
       <JobPostTimeline timeLine={[]} title="Create a New Job Post" />
       <DashboardFooter waveImage/>
-    </DasboardLayout>
+    </DashboardLayout>
   );
 };
 

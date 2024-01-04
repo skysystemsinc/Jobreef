@@ -79,8 +79,9 @@ const ContactForm = ({ style,label , smallText}) => {
             width={"max-content"}
             height={"40px"}
             px={"30px"}
-            fontWeight={600}
+            fontWeight={700}
             variant={"blue-btn"}
+            textTransform={"uppercase"}
           >
             Send
           </Button>
