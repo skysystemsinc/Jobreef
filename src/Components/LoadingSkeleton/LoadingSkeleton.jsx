@@ -3,7 +3,7 @@ import React from "react";
 
 const LoadingSkeleton = () => {
   return (
-    <Flex gap={"10px"} alignItems={"center"} width={"200px"}>
+    <Flex gap={"10px"} alignItems={"center"} width={{ md: "200px", base:"max-content"}}>
       <Box width={"max-content"}>
         <SkeletonCircle
           startColor="blue.200"
@@ -12,7 +12,7 @@ const LoadingSkeleton = () => {
           size="10"
         />
       </Box>
-      <Box width={"100%"}>
+      <Box width={"100%"} display={{ md: "block", base: "none" }}>
         <Skeleton
           startColor="blue.200"
           endColor="blue.400"
@@ -61,7 +61,7 @@ const ProfileSkeleton = () => {
           display={"flex"}
           width={"100%"}
           gap={{ md: "20px", base: "10px" }}
-          flexWrap={{md: "nowrap", base:"wrap"}}
+          flexWrap={{ md: "nowrap", base: "wrap" }}
           justifyContent={"space-between"}
         >
           <Skeleton

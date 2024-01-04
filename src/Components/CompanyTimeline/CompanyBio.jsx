@@ -159,19 +159,28 @@ const CompanyBio = ({ nextStep, State, setState }) => {
           label={"Website"}
         />
       </InputWrapper>
-      <Box width={"49%"} mb={"25px"}>
+      <InputWrapper>
         <LabelInput
           state={companyBio.telePhone}
-          setState={handleChange}
           name={"telePhone"}
+          setState={handleChange}
           labelVariant={"label"}
           type="number"
           variant={"bg-input"}
-          placeholder="Enter telephone"
-          // dropdown
+          placeholder="Enter Telephone "
           label={"Telephone"}
         />
-      </Box>
+        <LabelInput
+          state={companyBio.VatId}
+          name={"VatId"}
+          setState={handleChange}
+          labelVariant={"label"}
+          type="number"
+          variant={"bg-input"}
+          placeholder="Enter VAT/TAX ID "
+          label={"VAT/TAX ID"}
+        />
+      </InputWrapper>
       <InputWrapper>
         <LabelInput
           state={companyBio.description}

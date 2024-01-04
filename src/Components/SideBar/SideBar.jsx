@@ -10,6 +10,7 @@ import building from "@/assets/Images/building.svg";
 import blue_building from "@/assets/Images/blue_building.svg";
 import white_team from "@/assets/Images/white_team.svg";
 import white_job_post from "@/assets/Images/white-job-post.svg";
+import whitehome from "@/assets/Images/whitehome.svg";
 import { useRouter } from "next/router";
 import white_candidate from "@/assets/Images/white_candidate.svg";
 import Link from "next/link";
@@ -22,9 +23,10 @@ const SideBar = () => {
   const navLinks = [
     {
       title: "Overview",
-      icon: home,
+      icon: router.pathname == "/company/overview" ? whitehome : home,
       pathname: "/company/overview",
       display: true,
+      activePathnames: ["/company/overview"],
     },
     {
       title: "Job Posts",

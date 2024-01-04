@@ -52,7 +52,6 @@ const DropDown = ({
         >
           {dropdownOption ? (
             dropdownOption?.map((item, ind) => {
-              
               return item[keyName] ? (
                 <option key={ind} value={JSON.stringify(item)}>
                   {/* {item.label} */}
@@ -85,7 +84,13 @@ const DropDown = ({
         />
       ) : (
         <MultiSelect
-          sx={{ input: { width: "100% !important" } }}
+          sx={{
+ 
+            ul: {
+              color: "#000 !important",
+            },
+            input: { width: "100% !important",  },
+          }}
           options={dropdownOption ?? option}
           value={state ?? ""}
           label=""

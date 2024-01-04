@@ -16,6 +16,10 @@ import profile from "@/assets/Images/headerProfile.svg";
 import profile_white from "@/assets/Images/profile_white.svg";
 import upload_blog from "@/assets/Images/upload_blog.svg";
 import upload_blog_blue from "@/assets/Images/upload_blog_blue.svg";
+import abuseReportWhite from "@/assets/Images/abuseReportWhite.svg";
+import abuseReport from "@/assets/Images/abuseReport.svg";
+import whitehome from "@/assets/Images/whitehome.svg";
+
 import Logo from "../Logo/Logo";
 import sidebarLogo from "@/assets/Images/sidebarLogo.svg";
 const OperatorSidebar = () => {
@@ -23,9 +27,13 @@ const OperatorSidebar = () => {
   const { pathname } = router;
   const navLinks = [
     {
-      title: "Dashboard",
-      icon: home,
-      pathname: "#",
+      title: "Overview",
+      // icon: home,
+      icon: router.pathname == "/operator/overview" ? whitehome : home,
+
+      pathname: "/operator/overview",
+      activePathnames: ["/operator/overview"],
+
     },
     {
       title: "Job Posts",
@@ -85,6 +93,17 @@ const OperatorSidebar = () => {
 
       pathname: "/operator/blog",
     },
+    {
+      title: "Abuse Reports",
+      icon:
+        router.pathname == "/operator/abuse-report" 
+        // || router.pathname == "/operator/blog"
+          ? abuseReportWhite
+          : abuseReport,
+      activePathnames: ["/operator/abuse-report",],
+
+      pathname: "/operator/abuse-report",
+    },
   ];
   const activeStyle = {
     backgroundColor: "blue.500",
@@ -131,7 +150,7 @@ const OperatorSidebar = () => {
       >
         <Image width={"100px"} src={sidebarLogo.src} />
       </Box>
-      <Box p={{ xl: "130px 20px 0px 10px", base: "70px 10px 0px 7px" }}>
+      <Box p={{ xl: "70px 20px 0px 10px", base: "70px 10px 0px 7px" }}>
         {navLinks.map((item, ind) => {
           return (
             <Link key={ind} _hover={{ textDecor: "none" }} href={item.pathname}>

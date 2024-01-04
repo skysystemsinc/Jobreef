@@ -227,19 +227,28 @@ const CompanyBio = () => {
         />
       </InputWrapper>
       <InputWrapper>
-        <Box sx={{ width: "49%" }}>
-          <LabelInput
-            state={formData.telePhone}
-            name={"telePhone"}
-            setState={handleChange}
-            labelVariant={"label"}
-            readOnly={state.readOnly}
-            type="number"
-            variant={"bg-input"}
-            placeholder="Enter Telephone "
-            label={"Telephone"}
-          />
-        </Box>
+        <LabelInput
+          state={formData.telePhone}
+          name={"telePhone"}
+          setState={handleChange}
+          labelVariant={"label"}
+          readOnly={state.readOnly}
+          type="number"
+          variant={"bg-input"}
+          placeholder="Enter Telephone "
+          label={"Telephone"}
+        />
+        <LabelInput
+          state={formData.VatId}
+          name={"VatId"}
+          setState={handleChange}
+          labelVariant={"label"}
+          readOnly={state.readOnly}
+          type="number"
+          variant={"bg-input"}
+          placeholder="Enter VAT/TAX ID "
+          label={"VAT/TAX ID"}
+        />
       </InputWrapper>
       <InputWrapper>
         <LabelInput

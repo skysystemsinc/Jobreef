@@ -42,7 +42,7 @@ const MobileSortBy = ({searchBox, handleApplyFilter, handleReset }) => {
       key: "sortBy",
       listItem: [
         { label: "Date Applied", value: "dateApplied" },
-        { label: "Relevance", value: "relevance" },
+        { label: "Best Match", value: "Best Match" },
       ],
       handleSelect: (data) => handleFilter(data, "sortBy"),
     },

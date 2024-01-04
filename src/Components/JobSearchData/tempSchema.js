@@ -42,6 +42,16 @@ export const checkboxes = [
         { key: "$100,000 + Annual", value: 100000 },
       ],
     },
+    {
+      heading: "Education",
+      values: [
+        { key: "No Minimum", value: "No Minimum" },
+        { key: "High School", value: 50000 },
+        { key: "Trade School", value: 70000 },
+        { key: "Undergraduate Degree (Associates or Bachelors)", value: 100000 },
+        { key: "Graduate Degree", value: 100000 },
+      ],
+    },
   ];
   
 export const DataArray = [

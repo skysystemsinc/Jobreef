@@ -1,4 +1,4 @@
-import { Box, Button, Flex, useToast } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, useToast } from "@chakra-ui/react";
 import React, { useState } from "react";
 import JobBio from "./JobBio";
 import TechnicalDetails from "./TechnicalDetails";
@@ -237,7 +237,7 @@ const Preview = ({ assignJob, isEdit, state, setState }) => {
         width="100%"
         justify="center"
         mt={{ md: "15px", base: "0px" }}
-        mb={"30px"}
+        mb={"20px"}
         gap={4}
       >
         <Button onClick={handleCancel} variant="outline-blue">
@@ -247,6 +247,18 @@ const Preview = ({ assignJob, isEdit, state, setState }) => {
           {loading ? <Loader /> : id ? "Update Job" : "Post job"}
         </Button>
       </Flex>
+
+      <Heading
+        color={"gray.text"}
+        mx={"auto"}
+        maxW={"500px"}
+        textAlign={"center"}
+        variant={"p4"}
+        mb={"40px"}
+      >
+        By selecting Post job you agree to abide by all Terms and Conditions and
+        to pay the fees of incurred by this job listing.
+      </Heading>
     </Box>
   );
 };

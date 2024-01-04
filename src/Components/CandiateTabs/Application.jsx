@@ -22,6 +22,9 @@ import { deleteApi, post, put } from "@/helper/fetch";
 import { getSelectedCandidates } from "@/Redux/slices/candidates";
 import SelectedCandidateCard from "../SelectedCandidateCard/SelectedCandidateCard";
 import { setFilter, setSelectFilter } from "@/Redux/slices/filters";
+import TabThree from "../ArchivedTabs/TabThree";
+import { IoSaveOutline } from "react-icons/io5";
+import { FiArchive } from "react-icons/fi";
 
 const Application = ({ filterKey }) => {
   const dispatch = useDispatch();
@@ -49,11 +52,18 @@ const Application = ({ filterKey }) => {
     (state) => state.filters.value.filters
   );
   const tablist = [
+    `Shortlisted (${allApplicants?.length ?? 0})`,
     `All (${allApplicants?.length ?? 0})`,
     ` Archived (${archivedApplicants?.length ?? 0})`,
   ];
 
   const popOverListAll = [
+    {
+      title: "Shortlist Application",
+      handleEvent: (e) => {
+        console.log("log", e);
+      },
+    },
     {
       title: "Download Attachments",
       handleEvent: (e) => {
@@ -127,6 +137,13 @@ const Application = ({ filterKey }) => {
     dispatch(setFilter(false));
   };
   const componentList = [
+    <TabThree
+      handleSelectCandidate={handleSelectCandidate}
+      handleReset={handleAllReset}
+      handleApplyFilter={handleAllFilter}
+      data={allApplicants}
+      popOverList={popOverListAll}
+    />,
     <All
       handleSelectCandidate={handleSelectCandidate}
       handleReset={handleAllReset}
@@ -156,6 +173,21 @@ const Application = ({ filterKey }) => {
       display: true,
 
       icon: <BsChevronDown className="hoverColor" />,
+    },
+  ];
+
+  const profileBtnR2 = [
+    {
+      name: "Shortlist Application",
+      display: true,
+
+      icon: <IoSaveOutline className="hoverColor" />,
+    },
+
+    {
+      name: "Archive Application",
+      display: true,
+      icon: <FiArchive className="hoverColor" />,
     },
   ];
 
@@ -369,8 +401,8 @@ const Application = ({ filterKey }) => {
 
       {selectCandidate ? (
         <Box mt={{ md: "31px", base: "15px" }}>
-          {/* <SelectedCandidate profileBtn={profileBtn} /> */}
           <SelectedCandidateCard
+          profileBtnR2={profileBtnR2}
             handleReturn={handleReturn}
             profileBtn={profileBtn}
           />

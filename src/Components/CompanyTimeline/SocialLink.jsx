@@ -117,6 +117,7 @@ const SocialLink = ({ nextStep, handlePrevious }) => {
         companyLogo: companyState.logo,
         socialLinks: companyState.socialLinks,
         telePhone: companyState.telePhone,
+        VatId: companyState.VatId,
         location: [
           {
             country: companyState.country,

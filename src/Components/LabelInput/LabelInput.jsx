@@ -24,6 +24,7 @@ const LabelInput = ({
   dropdownOption,
   pattern,
   name,
+  textAreaStyle,
   textarea,
   multipleSelectDropdown,
   defaultDropdown,
@@ -99,6 +100,8 @@ const LabelInput = ({
           name={name}
           readOnly={readOnly}
           variant={variant}
+          sx={textAreaStyle}
+          
           resize={"none"}
         />
       ) : textFormatter ? (

@@ -40,9 +40,15 @@
   color: #bbbbc7 !important;
   font-family: "Open Sans";
 }
+.chakra-toast button{
+color: #000 !important;
 
-body {
+}
+/* body {
   color: black !important;
+} */
+.chakra-alert__title {
+  color: #000 !important;
 }
 .hoverStyle:hover {
   color: #2ca5c3;
@@ -88,6 +94,12 @@ body {
 .chakra-input input::placeholder {
   color: #bbbbc7 !important;
   font-size: 14px;
+}
+.chakra-input{
+color: #4A4A4A !important;
+}
+.css-1cqmney{
+  color: #797979 !important;
 }
 .css-xtrosc {
   font-weight: 400 !important;

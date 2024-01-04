@@ -212,8 +212,8 @@ const AchievementForm = ({ state, setState, style, handleSaveAch }) => {
             name={"name"}
             type="text"
             variant={"bg-input"}
-            placeholder="Enter the name of your certificate"
-            label={"Name of Achievement"}
+            placeholder="Enter the name of your award"
+            label={"Name of Award"}
           />
           <LabelInput
             labelVariant={"label"}

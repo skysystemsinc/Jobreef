@@ -50,7 +50,7 @@ const JobPostTimeline = ({ isEdit, title }) => {
   ];
 
   const { nextStep, prevStep, reset, activeStep } = useSteps({
-    initialStep: 0,
+    initialStep: 5,
   });
 
   const hasCompletedAllSteps = activeStep === steps.length;

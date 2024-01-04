@@ -160,28 +160,28 @@ const Overview = ({ setTabIndex, tabIndex }) => {
         </InputWrapper>
         <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
           <LabelInput
-            state={formData.country}
+            state={formData.city}
             setState={handleChange}
-            name={"country"}
+            name={"city"}
             readOnly={state.readOnly}
             labelVariant={"label"}
             type="text"
-            dropdown={state.readOnly ? false : true}
+            
             variant={"bg-input"}
-            placeholder="Select your home country"
-            label={"Country"}
+            placeholder="Enter city"
+            label={"City"}
           />
           <LabelInput
-            state={formData.province}
+            state={formData.phoneNumber}
             setState={handleChange}
-            name={"province"}
+            name={"phoneNumber"}
             readOnly={state.readOnly}
             labelVariant={"label"}
             type="text"
             variant={"bg-input"}
-            placeholder="Select your state / province"
-            label={"State / Province"}
-            dropdown={state.readOnly ? false : true}
+            placeholder="Phone Number"
+            label={" Enter your phone number"}
+            
           />
         </InputWrapper>
         <LabelInput
@@ -200,71 +200,7 @@ const Overview = ({ setTabIndex, tabIndex }) => {
           placeholder="Describe yourself for your employer"
           label={"Summary"}
         />
-        {/* <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
-          <LabelInput
-            state={formData.country}
-            setState={handleChange}
-            name={"country"}
-            readOnly={state.readOnly}
-            labelVariant={"label"}
-            type="text"
-            dropdown={state.readOnly ? false : true}
-            variant={"bg-input"}
-            placeholder="Select your home country"
-            label={"Country"}
-          />
-          <LabelInput
-            state={formData.province}
-            setState={handleChange}
-            name={"province"}
-            readOnly={state.readOnly}
-            labelVariant={"label"}
-            type="text"
-            variant={"bg-input"}
-            placeholder="Select your state / province"
-            label={"State / Province"}
-            dropdown={state.readOnly ? false : true}
-          />
-        </InputWrapper>
-
-        <InputWrapper gap={{ xl: "40px", "2xl": "76px", base: "20px" }}>
-          <LabelInput
-            state={formData.city}
-            setState={handleChange}
-            name={"city"}
-            labelVariant={"label"}
-            type="text"
-            readOnly={state.readOnly}
-            variant={"bg-input"}
-            placeholder="Enter City"
-            label={"City"}
-          />
-          <LabelInput
-            readOnly={state.readOnly}
-            labelVariant={"label"}
-            state={formData.phoneNumber}
-            setState={handleChange}
-            name={"phoneNumber"}
-            type="number"
-            variant={"bg-input"}
-            placeholder="Enter your phone number"
-            label={"Phone Number"}
-          />
-        </InputWrapper>
         
-        <LabelInput
-        // textFormatter
-          state={formData.description}
-          setState={handleChange}
-          name={"description"}
-          labelVariant={"label"}
-          readOnly={state.readOnly}
-          type="text"
-          variant={"bg-teaxtarea"}
-          placeholder="Describe yourself for your employer"
-          
-          label={"Summary"}
-        /> */}
 
         <Flex mt="50px" justifyContent={"center"} gap={"30px"}>
           {state.isEdit ? (

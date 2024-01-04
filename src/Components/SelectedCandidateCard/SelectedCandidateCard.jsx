@@ -28,10 +28,12 @@ import { AiOutlineStar } from "react-icons/ai";
 import { BsChevronDown, BsStarFill } from "react-icons/bs";
 import { PiDownloadSimpleBold, PiNotepadLight } from "react-icons/pi";
 import CandidateTabs from "../CandidateTabs/CandidateTabs";
+import IconButton from "./IconButton";
 
 const SelectedCandidateCard = ({
   profileBtn,
   matchCandidate,
+  profileBtnR2,
   handleReturn,
 }) => {
   const selectedCandidates = useSelector(
@@ -162,54 +164,64 @@ const SelectedCandidateCard = ({
                   </Box>
                 </Box>
               </Box>
-              <Box>
-                {profileBtn.map((item) => {
-                  return item.display ? (
-                    <Box
-                      onClick={() => item.handleEvent(selectedCandidates)}
-                      border={"1px solid"}
-                      borderColor={"white.100"}
-                      display={"flex"}
-                      borderRadius={"10px"}
-                      role="group"
-                      alignItems={"center"}
-                      my={"10px"}
-                      gap={"5px"}
-                      bg={"white.100"}
-                      padding={"15px 40px"}
-                      justifyContent={"center"}
-                      boxShadow={
-                        " 0px 1px 2px 0px rgba(16, 24, 40, 0.06), 0px 1px 3px 0px rgba(16, 24, 40, 0.10)"
-                      }
-                      // bg={"gray.200"}
-                      transition={".5s"}
-                      cursor={"pointer"}
-                      _hover={{
-                        backgroundColor: "gray.200",
-                        border: "1px solid  ",
-                        "& .hoverColor": {
-                          color: "blue.500",
-                          transition:".4s"
-                        },
-                        borderColor: "blue.500",
-                      }}
-                      sx={item.style}
-                    >
-                      <Heading
-                        _groupHover={{
-                          color: "blue.500",
-                        }}
-                        color={"black.100"}
-                        variant={"p10"}
-                        transition={".5s"}
-                      >
-                        {item.name}
-                      </Heading>
+              <Box gap={{ md:"10px", base:"4px"}} display={"flex"}
+              flexWrap={"wrap"}
+              >
+                <Box>
+                  {profileBtnR2?.map((item) => {
+                    return item.display ? (
+                      <IconButton item={item} />
+                    ) : // <Box
+                    //   onClick={() => item.handleEvent(selectedCandidates)}
+                    //   border={"1px solid"}
+                    //   borderColor={"white.100"}
+                    //   display={"flex"}
+                    //   borderRadius={"10px"}
+                    //   role="group"
+                    //   alignItems={"center"}
+                    //   my={"10px"}
+                    //   gap={"5px"}
+                    //   bg={"white.100"}
+                    //   padding={"15px 40px"}
+                    //   justifyContent={"center"}
+                    //   boxShadow={
+                    //     " 0px 1px 2px 0px rgba(16, 24, 40, 0.06), 0px 1px 3px 0px rgba(16, 24, 40, 0.10)"
+                    //   }
+                    //   // bg={"gray.200"}
+                    //   transition={".5s"}
+                    //   cursor={"pointer"}
+                    //   _hover={{
+                    //     backgroundColor: "gray.200",
+                    //     border: "1px solid  ",
+                    //     "& .hoverColor": {
+                    //       color: "blue.500",
+                    //       transition: ".4s",
+                    //     },
+                    //     borderColor: "blue.500",
+                    //   }}
+                    //   sx={item.style}
+                    // >
+                    //   <Heading
+                    //     _groupHover={{
+                    //       color: "blue.500",
+                    //     }}
+                    //     color={"black.100"}
+                    //     variant={"p10"}
+                    //     transition={".5s"}
+                    //   >
+                    //     {item.name}
+                    //   </Heading>
 
-                      <Box  fontSize={"16px"}>{item.icon}</Box>
-                    </Box>
-                  ) : null;
-                })}
+                    //   <Box color={"black.100"} fontSize={"16px"}>{item.icon}</Box>
+                    // </Box>
+                    null;
+                  })}
+                </Box>
+                <Box>
+                  {profileBtn.map((item) => {
+                    return item.display ? <IconButton item={item} /> : null;
+                  })}
+                </Box>
               </Box>
             </Box>
           </Box>

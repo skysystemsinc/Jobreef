@@ -296,6 +296,7 @@ const components = {
         label: {
           fontSize: { md: "14px", base: "12px" },
           fontFamily: "var(--chakra-\fonts-openSans)",
+          color:'black.100'
         },
       },
     },
@@ -622,7 +623,7 @@ const components = {
         fontFamily: "var(--chakra-\fonts-openSans)",
         fontWeight: 600,
 
-        fontSize: ["13px", "14px", "14px", "14px", "14px", "14px"],
+        fontSize: ["13px", "13px", "14px", "14px", "14px", "14px"],
       },
 
       p11: {
@@ -638,6 +639,13 @@ const components = {
         fontWeight: 400,
         fontSize: "13px",
         lineHeight: "21px",
+      },
+      p13: {
+        fontWeight: 500,
+        color: "gray.text ",
+        fontFamily: "var(--chakra-\fonts-openSans)",
+
+        fontSize: ["16px", "20px", "19px", "19px"],
       },
       // Add more variants for other heading levels as needed
     },

@@ -141,6 +141,8 @@ model Company {
   socialLinks     SocialLinks[]
   location        LocationType[]
   jobs            Job[]
+
+  VatId String
 }
 
 model Candidate {

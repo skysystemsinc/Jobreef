@@ -13,13 +13,13 @@ const OperatorHeader = () => {
   return (
     <Box
       width={"100%"}
-      boxShadow={" 0px 4px 4px 0px rgba(0, 0, 0, 0.25)"}
-      pr={"30px"}
+      // boxShadow={" 0px 4px 4px 0px rgba(0, 0, 0, 0.25)"}
+      pr={{ md: "30px", base: "5px" }}
       py={"10px"}
       display={"flex"}
       alignItems={"center"}
       justifyContent={"flex-end"}
-      gap={"27px"}
+      gap={{ md: "27px", base: "10px" }}
       bg={"white.100"}
     >
       <IconButton

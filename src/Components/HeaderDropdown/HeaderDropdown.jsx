@@ -162,7 +162,10 @@ const HeaderDropdown = ({ candidate, operatorDropdown, hiddenStyle }) => {
                 </Heading>
               </Box>
 
-              <Box display={{ xl: "block", base: "none" }}>
+              <Box
+                sx={hiddenStyle}
+              
+              display={{ xl: "block", base: "none" }}>
                 <HiOutlineChevronDown
                   style={{ position: "absolute", right: "8px", top: "3px" }}
                   color="black.100"

@@ -21,7 +21,7 @@ import upload from "@/assets/Images/upload.svg";
 import { useDispatch, useSelector } from "react-redux";
 import NextPrevBtn from "./NextPrevBtn";
 import { addJob } from "@/Redux/slices/jobPost";
-import { Seniority, jobFamilyOpt, tags } from "@/schema/stateSchema";
+import { Seniority, educationOtp, experienceOtp, jobFamilyOpt, tags } from "@/schema/stateSchema";
 
 const TechnicalDetails = ({ disableNextPrev, prevStep, nextStep }) => {
   const toast = useToast();
@@ -84,6 +84,8 @@ const TechnicalDetails = ({ disableNextPrev, prevStep, nextStep }) => {
           name={"minimumEducation"}
           labelVariant={"label"}
           type="text"
+          dropdown
+          dropdownOption={educationOtp}
           variant={"bg-input"}
           placeholder="Select Education Level for this job"
           label={"Minimum Education"}
@@ -97,8 +99,10 @@ const TechnicalDetails = ({ disableNextPrev, prevStep, nextStep }) => {
           name={"yearsOfExperience"}
           labelVariant={"label"}
           type="number"
+          dropdown
+          dropdownOption={experienceOtp}
           variant={"bg-input"}
-          placeholder="Enter the years of experience desired for this job"
+          placeholder="select the years of experience desired for this job"
           label={"Years of Experience"}
         />
         <LabelInput

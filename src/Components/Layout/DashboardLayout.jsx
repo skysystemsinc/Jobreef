@@ -11,14 +11,7 @@ const DashboardLayout = ({ disableWaveImage, children }) => {
       <Header />
       {disableWaveImage ? null : <BottomWaveImage />}
       <SideBar />
-      <Box
-        // position={"relative"}
-        // top={"0px"}
-        // zIndex={2}
-        ml={{ xl: "250px", base: "55px" }}
-        mt={"40px"}
-        minH={"87vh"}
-      >
+      <Box ml={{ xl: "250px", base: "55px" }} mt={"40px"} minH={"87vh"}>
         {/* <CompanyTabs /> */}
         {children}
       </Box>

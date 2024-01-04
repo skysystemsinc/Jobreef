@@ -30,6 +30,9 @@ const MyJobsTabs = () => {
     {
       title: "Job Alerts",
     },
+    {
+      title: "Application Invites",
+    },
   ];
   const tabs = [
     { label: "Applied Jobs", value: "Applied Jobs", content: <AppliedJobs /> },
@@ -87,6 +90,9 @@ const MyJobsTabs = () => {
           </TabPanel>
           <TabPanel>
             <JobAlert />
+          </TabPanel>
+          <TabPanel>
+            <AppliedJobs />
           </TabPanel>
         </TabPanels>
       </Tabs>
