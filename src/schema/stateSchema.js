@@ -110,6 +110,7 @@ const achievement = {
 };
 const job = {
   title: "",
+  internalJobId:"",
   employmentType: "",
   applicationDeadline: null,
   locationType: "",

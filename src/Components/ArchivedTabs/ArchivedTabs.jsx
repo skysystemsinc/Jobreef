@@ -14,7 +14,7 @@ import React, { useState } from "react";
 import globalStyles from "@/styles/globalStyles";
 import { useRouter } from "next/router";
 
-const ArchivedTabs = ({ setActiveTabIndex, tablist, componentList }) => {
+const ArchivedTabs = ({activeTabIndex, setActiveTabIndex, tablist, componentList }) => {
   const router = useRouter();
   let [tabIndex, setTabIndex] = useState(0);
   return (
@@ -28,7 +28,7 @@ const ArchivedTabs = ({ setActiveTabIndex, tablist, componentList }) => {
         }}
         width={{ lg: "100%", base: "100%" }}
         justifyContent={"flex-start"}
-        index={tabIndex}
+        index={activeTabIndex}
       >
         <TabList
           sx={{

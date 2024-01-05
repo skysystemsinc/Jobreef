@@ -4,6 +4,7 @@ import send from "@/assets/Images/send.svg";
 import deleteIcon from "@/assets/Images/delete.svg";
 import blue_arrow_down from "@/assets/Images/blue-arrow-down.svg";
 import DropDown from "../DropDown/DropDown";
+import moment from "moment";
 
 const NotePad = () => {
   return (
@@ -45,6 +46,9 @@ const NotePad = () => {
         </Box>
         <Heading mt={"20px"} variant={"p4"}>
           Author: Jacob Jonees
+        </Heading>
+        <Heading mt={"2px"} variant={"p4"}>
+          Date : {moment().format("YYYY/MM/DD")}
         </Heading>
       </Box>
 

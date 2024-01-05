@@ -1,20 +1,21 @@
-'use client'
+"use client";
 // const { BACKEND_URL } = require("@/Utils/urls");
-import { BACKEND_URL } from "@/Utils/urls"
+import { BACKEND_URL } from "@/Utils/urls";
 
-export async function get(endpoint) {
+export async function get(endpoint, body) {
   // const item = typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
   try {
     const response = await fetch(BACKEND_URL + endpoint, {
       method: "GET",
+      // body: {
+      //   ...(body ? JSON.stringify(body) : {}),
+      // },
       headers: {
         "Content-Type": "application/json",
-
-        //   Authorization: "Bearer " + item,
       },
     });
-    
+
     return await response.json();
 
     // if (response.ok) {

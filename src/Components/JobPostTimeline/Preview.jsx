@@ -166,6 +166,7 @@ const Preview = ({ assignJob, isEdit, state, setState }) => {
         jobFamily: jobState.jobFamily,
         rate: jobState.rate,
         tags: jobState.tags,
+        internalJobId: internalJobId.tags,
         location: {
           country: jobState.country,
           city: jobState.city,

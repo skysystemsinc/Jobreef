@@ -16,9 +16,13 @@ import endPoints from "@/Utils/endpoints";
 import { deleteApi, put } from "@/helper/fetch";
 import { setAll, setNotInterested } from "@/Redux/slices/matchCandidate";
 import SelectedCandidateCard from "../SelectedCandidateCard/SelectedCandidateCard";
+import TabThree from "../ArchivedTabs/TabThree";
 
 const MatchCandidate = ({ filterKey }) => {
   const toast = useToast();
+  const [activeTab, setActiveTab] = useState(0);
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
+
   const dispatch = useDispatch();
   const [state, setState] = useState({
     interested: false,
@@ -36,12 +40,13 @@ const MatchCandidate = ({ filterKey }) => {
   const notMatchCandidate = useSelector(
     (state) => state.matchCandidateList.value.matchCandidate.notInterested
   );
-  // const tablist = [
-  //   `All (${allData?.length ?? "0"})`,
-  //   `Not Interested (${archivedData?.length ?? "0"})`,
-  // ];
+  const invitedCandidates = useSelector(
+    (state) => state.matchCandidateList.value.matchCandidate.invited
+  );
+
   const tablist = [
     `All (${allMatchCandidate?.length ?? 0})`,
+    `Invite Sent (${invitedCandidates?.length ?? 0})`,
     ` Not Interested (${notMatchCandidate?.length ?? 0})`,
   ];
 
@@ -96,7 +101,6 @@ const MatchCandidate = ({ filterKey }) => {
     {
       label: "Skills",
       listItem: [selectedJobState?.desiredSkills],
-
     },
   ];
   const componentList = [
@@ -109,6 +113,15 @@ const MatchCandidate = ({ filterKey }) => {
       filterKey={filterKey}
       cardStatus={"Interviewing"}
       popOverList={popOverListAll}
+    />,
+    <TabThree
+      handleSelectCandidate={handleSelectCandidate}
+      // handleReset={handleAllReset}
+      // handleApplyFilter={handleAllFilter}
+      matchCandidate
+
+      data={invitedCandidates}
+      popOverList={[]}
     />,
     <Archived
       sortArray={sortArray}
@@ -125,7 +138,7 @@ const MatchCandidate = ({ filterKey }) => {
   const profileBtn = [
     {
       name: "Invite to Apply",
-      display:true,
+      display: true,
 
       icon: <HiOutlineMail className="hoverColor" />,
     },
@@ -345,10 +358,18 @@ const MatchCandidate = ({ filterKey }) => {
           <SelectedCandidateCard
             handleReturn={handleReturn}
             profileBtn={profileBtn}
+            matchCandidate
+            disableNotePad
+            disableStars
+            disableDate
           />
         </Box>
       ) : (
-        <ArchivedTabs componentList={componentList} tablist={tablist} />
+        <ArchivedTabs
+        activeTabIndex={activeTabIndex}
+          setActiveTabIndex={setActiveTabIndex}
+          
+        componentList={componentList} tablist={tablist} />
       )}
     </Box>
   );

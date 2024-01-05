@@ -1,7 +1,11 @@
 import { Box, Heading } from "@chakra-ui/react";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const IconButton = ({ item }) => {
+  const selectedCandidates = useSelector(
+    (state) => state.candidates.value.selected
+  );
   return (
     <Box
       onClick={() => item.handleEvent(selectedCandidates)}
@@ -11,7 +15,7 @@ const IconButton = ({ item }) => {
       borderRadius={{ md: "10px", base:"7px"}}
       role="group"
       alignItems={"center"}
-      my={"10px"}
+      my={{md:"10px",base:'4px'}}
       gap={"5px"}
       bg={"white.100"}
       padding={{ md: "15px 30px", base: "12px 10px" }}

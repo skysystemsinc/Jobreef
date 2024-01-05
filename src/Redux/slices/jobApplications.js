@@ -10,17 +10,20 @@ const initialState = {
     application: {
       all: false,
       archived: false,
+      shortListed: false,
     },
     candidate: false,
-    saved: false,
+    shortlisted: false,
     selectedJob: false,
   },
 };
 export const jobApplications = createAsyncThunk(
   "jobApplications",
-  async (id) => {
+  async ({ id, body }) => {
     try {
-      const postData = await get(`${endPoints.applications}/${id}`, "GET");
+      const postData = await get(
+        `${endPoints.applications}/${id}`
+      );
       return postData;
     } catch (error) {
       console.log("error", error);
@@ -38,6 +41,9 @@ const jobApplicantList = createSlice({
     setAll: (state, action) => {
       state.value.application.all = action.payload;
     },
+    setShortList: (state, action) => {
+      state.value.application.shortListed = action.payload;
+    },
     setSelectedCandidate: (state, action) => {
       state.value.candidate = action.payload;
     },
@@ -49,20 +55,25 @@ const jobApplicantList = createSlice({
     builder.addCase(jobApplications.pending, (state, action) => {
       state.value.application.all = false;
       state.value.application.archived = false;
+      state.value.application.shortListed = false;
     });
     builder.addCase(jobApplications.fulfilled, (state, action) => {
-      const all = action.payload.data.filter((item) => item.archived == false);
-      const saved = action.payload.data.filter((item) => item.saved == true);
-      
+      const all = action.payload.data.filter(
+        (item) => item.archived == false && item.shortListed == false
+      );
+      const shortlisted = action.payload.data.filter(
+        (item) => item.shortListed == true && item.archived == false
+      );
+
       const archived = action.payload.data.filter(
-        (item) => item.archived == true
+        (item) => item.archived == true && item.shortListed == false
       );
       state.value.application.all = all;
-      state.value.saved = saved;
+      state.value.application.shortListed = shortlisted;
       state.value.application.archived = archived;
     });
   },
 });
-export const { setArchived, setAll, setSelectedCandidate , setSelectedJob } =
+export const { setArchived, setAll,setShortList, setSelectedCandidate, setSelectedJob } =
   jobApplicantList.actions;
 export default jobApplicantList.reducer;

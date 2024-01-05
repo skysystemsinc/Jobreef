@@ -7,10 +7,15 @@ const POST = async (req, res) => {
   const employeeFilters = [];
   const filters = [];
   let sortByDate = {};
-  if (data?.sortBy?.includes(sortBy.dateApplied)) {
+  if (data?.sortBy?.includes(sortBy.name)) {
     sortByDate = {
       orderBy: {
-        createdAt: "desc", // or 'desc' based on your needs
+        employee:{
+          user:{
+            name:"desc"
+          }
+        }
+        // createdAt: , // or 'desc' based on your needs
       },
     };
   }
@@ -112,6 +117,8 @@ const POST = async (req, res) => {
         },
       },
     });
+
+    
 
     res.status(200).json({
       data: job,

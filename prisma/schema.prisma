@@ -141,8 +141,7 @@ model Company {
   socialLinks     SocialLinks[]
   location        LocationType[]
   jobs            Job[]
-
-  VatId String
+  VatId           String?
 }
 
 model Candidate {
@@ -255,6 +254,7 @@ model Job {
   flag                Boolean?             @default(false)
   draft               Boolean?             @default(false)
   title               String
+  internalJobId       String?
   employmentType      String
   locationType        String
   seniorityLevel      String
@@ -285,14 +285,15 @@ model AppliedJobs {
   jobId         String         @db.ObjectId
   employee      Candidate      @relation(fields: [employeeId], references: [id])
   employeeId    String         @db.ObjectId
-  archived      Boolean        @default(false)
   status        jobStatus      @default(New)
   screeningQues QuestionsAns[]
   attchments    Media[]
+  updatedAt     DateTime       @updatedAt
   messages      String[]
   saved         Boolean        @default(false)
   interested    Boolean        @default(false)
-  updatedAt     DateTime       @updatedAt
-
+  shortListed   Boolean        @default(false)
+  archived      Boolean        @default(false)
+  invited       Boolean        @default(false)
   // Add additional fields related to the job application if needed
 }

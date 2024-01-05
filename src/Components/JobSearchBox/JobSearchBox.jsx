@@ -103,7 +103,7 @@ const JobSearchBox = () => {
         display={{ xl: "none", base: "block" }}
       />
       <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
-        <Heading className="sora" mb={{ sm: "20px", base:"12px"}} variant={"p11"}>
+        <Heading color={"black.100"} className="sora" mb={{ sm: "20px", base:"12px"}} variant={"p11"}>
           Hiring? Post a Free Job
         </Heading>
         <Button fontWeight={600} variant={"blue-btn"} width={{ sm: "189px" , base:"130px"}} >

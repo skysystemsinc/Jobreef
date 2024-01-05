@@ -207,7 +207,10 @@ const Search = ({ filterKey }) => {
     dispatch(setSaved(postData.data));
     dispatch(setFilter(false));
   };
-  const tablist = [`Search Results`, `Saved (${savedCandidates?.length ?? 0})`];
+  const tablist = [
+    `Search Results`,
+    `Saved Contacts (${savedCandidates?.length ?? 0})`,
+  ];
   const popOverListAll = [
     {
       title: "Send Message",
@@ -216,7 +219,7 @@ const Search = ({ filterKey }) => {
       },
     },
     {
-      title: "Save Candidate",
+      title: "Save  Contact",
       handleEvent: (e) => {
         console.log("state.save", state.save);
         if (e.saved) {
@@ -233,9 +236,10 @@ const Search = ({ filterKey }) => {
     },
   ];
   const popOverListArchived = [
-    { title: "Send Message" },
+    { title: "Send Message", handleEvent: () => {} },
+    { title: "Invite to Apply", handleEvent: () => {} },
     {
-      title: "Delete",
+      title: "Delete Contact",
       handleEvent: (e) => {
         setState((prev) => ({ ...prev, delete: e }));
       },
@@ -264,7 +268,7 @@ const Search = ({ filterKey }) => {
     />,
   ];
 
-  const profileBtn = [
+  const secondProfileBtn = [
     {
       name: "Send Message",
       icon: <HiOutlineMail className="hoverColor" />,
@@ -272,7 +276,23 @@ const Search = ({ filterKey }) => {
       display: true,
     },
     {
-      name: "Save",
+      name: "Delete Contact",
+      icon: <HiOutlineMail className="hoverColor" />,
+      handleEvent: (e) => {
+        setState((prev) => ({ ...prev, delete: e }));
+      },
+      display: true,
+    },
+    {
+      name: "Invite to Apply",
+      icon: <HiOutlineMail className="hoverColor" />,
+      handleEvent: () => {},
+      display: true,
+    },
+  ];
+  const firstTabProfileBtn = [
+    {
+      name: "Save Contacts",
       display: activeTabIndex == 1 ? false : true,
       handleEvent: (data) => {
         setState((prev) => ({ ...prev, save: data }));
@@ -322,12 +342,19 @@ const Search = ({ filterKey }) => {
         <Box mt={{ md: "31px", base: "15px" }}>
           <SelectedCandidateCard
             handleReturn={handleReturn}
-            profileBtn={profileBtn}
+            profileBtn={
+              activeTabIndex === 0 ? firstTabProfileBtn : secondProfileBtn
+            }
+            notePaddisableNotePad={activeTabIndex==0?false:true}
             matchCandidate
+            disableStars
+            disableDate
           />
         </Box>
       ) : (
         <ArchivedTabs
+          // setActiveTabIndex={setActiveTabIndex}
+          activeTabIndex={activeTabIndex}
           setActiveTabIndex={setActiveTabIndex}
           componentList={componentList}
           tablist={tablist}

@@ -37,7 +37,7 @@ const steps = [
 
 export const CandidateTimeline = ({ candidate, variant }) => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
-    initialStep: 5,
+    initialStep: 0,
   });
 
   const [completedStep, setCompletedStep] = useState([]);
