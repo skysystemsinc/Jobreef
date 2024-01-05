@@ -90,7 +90,7 @@ const CandidateCard = ({
                 gap={"10px"}
               >
                 <Heading color={"gray.text"} variant={"p4"}>
-                  {data?.workExperience&& data?.workExperience[0]?.designation}
+                  {data?.workExperience && data?.workExperience[0]?.designation}
                 </Heading>
                 <Box fontSize={{ sm: "14px", base: "8px" }}>
                   <GoDotFill style={{ color: "#D9D9D9" }} />
@@ -137,7 +137,9 @@ const CandidateCard = ({
             <Image width={"15px"} src={Star.src} />
           </Box>
 
-          <Popovers width="100%" data={jobData}  actionList={popOverList} />
+          {popOverList?.length == 0 ? null : (
+            <Popovers width="100%" data={jobData} actionList={popOverList} />
+          )}
         </Box>
       </Box>
 
@@ -149,8 +151,7 @@ const CandidateCard = ({
         gap={"10px"}
         flexWrap={{ lg: "nowrap", base: "wrap" }}
       >
-
-        <Box  maxW={{ sm: "500px", base: "100%" }}>
+        <Box maxW={{ sm: "500px", base: "100%" }}>
           <Box>
             <Heading mt={{ md: "16px", base: "10px" }} variant={"p10"}>
               Relevant Skills
@@ -169,9 +170,7 @@ const CandidateCard = ({
               alignItems={"center"}
               flexWrap={"wrap"}
             >
-              { 
-              
-              data?.skills?.map((item, ind) => {
+              {data?.skills?.map((item, ind) => {
                 return (
                   <Box key={ind} mr={{ md: "18px", base: "14px" }} mb={"10px"}>
                     <Chip label={item.name} />
@@ -226,4 +225,3 @@ const CandidateCard = ({
 };
 
 export default CandidateCard;
-

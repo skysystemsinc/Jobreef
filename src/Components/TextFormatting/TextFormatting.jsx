@@ -29,8 +29,8 @@ const TextFormatting = ({
     "bullet",
     "indent",
     "link",
-    "image",
-    "video",
+    // "image",
+    // "video",
   ];
   const module = {
     toolbar: [
@@ -43,7 +43,8 @@ const TextFormatting = ({
         { indent: "-1" },
         { indent: "+1" },
       ],
-      ["link", "image", "video"],
+      // ["link", "image", "video"],
+      ["link"],
       ["clean"],
     ],
   };

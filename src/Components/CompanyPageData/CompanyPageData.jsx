@@ -4,124 +4,225 @@ import microsoft from "@/assets/Images/microsoft.svg";
 import { GoDotFill } from "react-icons/go";
 import { FiSearch, FiMapPin } from "react-icons/fi";
 import ComponentMyChip from "../MyJobsTab/ComponentMyChip";
-import employeedesignation from "../../assets/Images/employee-designation.svg"
-import Corporatebuilding from "../../assets/Images/Corporatebuilding.svg"
-import calendar from "../../assets/Images/calendar.svg"
-import LinkedIn from "../../assets/Images/LinkedIn.svg"
-import Facebook from "../../assets/Images/Facebook.svg"
-import Twitter from "../../assets/Images/Twitter.svg"
-import Instagram from "../../assets/Images/Instagram.svg"
-import location from "../../assets/Images/location.svg"
+import employeedesignation from "../../assets/Images/employee-designation.svg";
+import Corporatebuilding from "../../assets/Images/Corporatebuilding.svg";
+import calendar from "../../assets/Images/calendar.svg";
+import LinkedIn from "../../assets/Images/LinkedIn.svg";
+import Facebook from "../../assets/Images/Facebook.svg";
+import Twitter from "../../assets/Images/Twitter.svg";
+import Instagram from "../../assets/Images/Instagram.svg";
+import location from "../../assets/Images/location.svg";
+import AbuseReportButton from "../AbuseReportButton/AbuseReportButton";
 
-//Todo upper Sectioon 
+//Todo upper Sectioon
 const DataArray = [
-    {
-        imageurl: "",
-        title: "Senior System's Design Engineer",
-        name: "Microsoft",
-        tags: "Urgently Hiring",
-        location: "Redmond, Washington State",
-        Salary: "150,000$",
-        EmploymentType:"Full-Time",
-        Experience: "3",
-        ApplicationDeadline: "07/31/2023",
-        DesiredSkills: ["Technical knowledge", "System Architecture", "Risk Management", "Project Management",
-        "Quality Focus", "Q/A Testing", "LeaderShip", "Product Design"],
-    },
-    {
-      imageurl: "",
-      title: "Senior System's Design Engineer",
-      name: "Microsoft",
-      tags: "Urgently Hiring",
-      location: "Redmond, Washington State",
-      Salary: "150,000$",
-      EmploymentType:"Full-Time",
-      Experience: "3",
-      ApplicationDeadline: "07/31/2023",
-      DesiredSkills: ["Technical knowledge", "System Architecture", "Risk Management", "Project Management",
-      "Quality Focus", "Q/A Testing", "LeaderShip", "Product Design"],
-    },
-  ]
-
+  {
+    imageurl: "",
+    title: "Senior System's Design Engineer",
+    name: "Microsoft",
+    tags: "Urgently Hiring",
+    location: "Redmond, Washington State",
+    Salary: "150,000$",
+    EmploymentType: "Full-Time",
+    Experience: "3",
+    ApplicationDeadline: "07/31/2023",
+    DesiredSkills: [
+      "Technical knowledge",
+      "System Architecture",
+      "Risk Management",
+      "Project Management",
+      "Quality Focus",
+      "Q/A Testing",
+      "LeaderShip",
+      "Product Design",
+    ],
+  },
+  {
+    imageurl: "",
+    title: "Senior System's Design Engineer",
+    name: "Microsoft",
+    tags: "Urgently Hiring",
+    location: "Redmond, Washington State",
+    Salary: "150,000$",
+    EmploymentType: "Full-Time",
+    Experience: "3",
+    ApplicationDeadline: "07/31/2023",
+    DesiredSkills: [
+      "Technical knowledge",
+      "System Architecture",
+      "Risk Management",
+      "Project Management",
+      "Quality Focus",
+      "Q/A Testing",
+      "LeaderShip",
+      "Product Design",
+    ],
+  },
+];
 
 const CompanyPageData = () => {
   const actionList = ["Download Attachments", "Archive"];
 
   return (
-    <Box  margin={{lg:"0px 50px 0px 50px"}}>
-        <Box width={{lg:'80%',md:'100%',sm:"100%"}} >
-            <Box ml={5}>
-              <Box display={"flex"} mt={"0px"} alignItems={"center"} flexWrap={"wrap"}>
-                  <Image width={{ md: "53px", base: "35px" }} src={microsoft.src} marginRight={2}/>
-                      <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
-                          Microsoft
-                          <Box display={"flex"} alignItems={"center"}>
-                              <Heading
-                              variant={"p4"}
-                              color={"gray.text"}
-                              marginRight={1}
-                              >
-                              www.microsoft.com       
-                              </Heading>
-                          </Box>
-                      </Heading> 
-              </Box>
-              <Box display={"flex"} alignItems={"center"} flexWrap={"wrap"}  gap={6} mt={2}>
-                  <Heading display={"flex"} alignItems={"center"} color={"gray.text"} variant={"p4"}>
-                      <Image width={{ md: "20px", base: "16px" }} src={location.src} marginRight={2}/>
-                      Redmond, Washington State
-                  </Heading>
-                  <Box fontSize={{ sm: "14px", base: "8px" }}>
-                      <GoDotFill style={{ color: "#D9D9D9" }} />
-                  </Box>
-                  <Heading display={"flex"} alignItems={"center"} color={"gray.text"} variant={"p4"}>
-                  <Image style={{display:'inline-block'}} width={{ md: "20px", base: "16px" }} src={employeedesignation.src} marginRight={2}/>
-                      1,001 Employees
-                  </Heading>
-                  <Box fontSize={{ sm: "14px", base: "8px" }}>
-                      <GoDotFill style={{ color: "#D9D9D9" }} />
-                  </Box>
-                  <Heading display={"flex"} alignItems={"center"} color={"gray.text"} variant={"p4"}>
-                  <Image style={{display:'inline-block'}} width={{ md: "20px", base: "16px" }} src={Corporatebuilding.src} marginRight={2}/>
-                      Technology
-                  </Heading>
-              </Box>
-              <Box borderBottom="1px solid gray" pb={4} pr={4} mt={4} display={"flex"} justifyContent={"space-between"} alignItems={'center'}>
-                  <Heading color={"gray.text"} variant={"p4"} display="flex" alignItems={'center'}>
-                      <Image style={{ display: "inline-block" }} width={{ md: "20px", base: "16px" }} mr={2} src={calendar.src}  /> 
-                      Founded 1975
-                  </Heading>
-
-                  <Box gap={4} display={"flex"} >
-                      <Image style={{ display: "inline-block" }} width={{ md: "20px", base: "16px" }} src={LinkedIn.src}  />
-                      <Image style={{ display: "inline-block" }} width={{ md: "20px", base: "16px" }} src={Instagram.src}  />
-                      <Image style={{ display: "inline-block" }} width={{ md: "20px", base: "16px" }} src={Facebook.src}  />
-                      <Image style={{ display: "inline-block" }} width={{ md: "20px", base: "16px" }} src={Twitter.src}  />
-                  </Box>
-              </Box>
-            </Box>
-            <Box mt={5} ml={2}>
-                <Heading color={"gray.text"} variant={"p7"} mb={2}>
-                    Company OverView  
+    <Box margin={{ lg: "0px 50px 0px 50px" }}>
+      <Box width={{ lg: "80%", md: "100%", sm: "100%" }}>
+        <Box ml={5}>
+          <Box
+            display={"flex"}
+            mt={"0px"}
+            alignItems={"center"}
+            flexWrap={"wrap"}
+          >
+            <Image
+              width={{ md: "53px", base: "35px" }}
+              src={microsoft.src}
+              marginRight={2}
+            />
+            <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
+              Microsoft
+              <Box display={"flex"} alignItems={"center"}>
+                <Heading variant={"p4"} color={"gray.text"} marginRight={1}>
+                  www.microsoft.com
                 </Heading>
-                <Heading color={"gray.text"} variant={"p4"}>
-                    Microsoft Corporation is an American multinational technology corporation headquartered in Redmond, Washington. Microsoft's best-known software products are the Windows line of operating systems, the Microsoft 365 suite of productivity applications, and the Edge web browser. Its flagship hardware products are the Xbox video game consoles and the Microsoft Surface lineup of touchscreen personal computers. Microsoft ranked No. 14 in the 2022 Fortune 500 rankings of the largest United States corporations by total revenue; it was the world's largest software maker by revenue as of 2022.
-                </Heading>
-            </Box>
-        </Box>
-        {DataArray?(<Box mt={10} ml={2}>
-            <Heading color={"gray.text"} variant={"p7"}>
-                Current Openings
+              </Box>
             </Heading>
-        </Box>):(null)}
-        <Box display={"grid"}
-          gap={10}
-          mt={5}
-          gridTemplateColumns={{ xl: "repeat(2, 1fr)", base: "1fr" }}
-          width={{lg:'80%'}}
-          >        
-      {DataArray.map((object)=>
-            <Box
+          </Box>
+          <Box
+            display={"flex"}
+            alignItems={"center"}
+            flexWrap={"wrap"}
+            gap={6}
+            mt={2}
+          >
+            <Heading
+              display={"flex"}
+              alignItems={"center"}
+              color={"gray.text"}
+              variant={"p4"}
+            >
+              <Image
+                width={{ md: "20px", base: "16px" }}
+                src={location.src}
+                marginRight={2}
+              />
+              Redmond, Washington State
+            </Heading>
+            <Box fontSize={{ sm: "14px", base: "8px" }}>
+              <GoDotFill style={{ color: "#D9D9D9" }} />
+            </Box>
+            <Heading
+              display={"flex"}
+              alignItems={"center"}
+              color={"gray.text"}
+              variant={"p4"}
+            >
+              <Image
+                style={{ display: "inline-block" }}
+                width={{ md: "20px", base: "16px" }}
+                src={employeedesignation.src}
+                marginRight={2}
+              />
+              1,001 Employees
+            </Heading>
+            <Box fontSize={{ sm: "14px", base: "8px" }}>
+              <GoDotFill style={{ color: "#D9D9D9" }} />
+            </Box>
+            <Heading
+              display={"flex"}
+              alignItems={"center"}
+              color={"gray.text"}
+              variant={"p4"}
+            >
+              <Image
+                style={{ display: "inline-block" }}
+                width={{ md: "20px", base: "16px" }}
+                src={Corporatebuilding.src}
+                marginRight={2}
+              />
+              Technology
+            </Heading>
+          </Box>
+          <Box
+            borderBottom="1px solid gray"
+            pb={4}
+            pr={4}
+            mt={4}
+            display={"flex"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+          >
+            <Heading
+              color={"gray.text"}
+              variant={"p4"}
+              display="flex"
+              alignItems={"center"}
+            >
+              <Image
+                style={{ display: "inline-block" }}
+                width={{ md: "20px", base: "16px" }}
+                mr={2}
+                src={calendar.src}
+              />
+              Founded 1975
+            </Heading>
+
+            <Box gap={4} display={"flex"}>
+              <Image
+                style={{ display: "inline-block" }}
+                width={{ md: "20px", base: "16px" }}
+                src={LinkedIn.src}
+              />
+              <Image
+                style={{ display: "inline-block" }}
+                width={{ md: "20px", base: "16px" }}
+                src={Instagram.src}
+              />
+              <Image
+                style={{ display: "inline-block" }}
+                width={{ md: "20px", base: "16px" }}
+                src={Facebook.src}
+              />
+              <Image
+                style={{ display: "inline-block" }}
+                width={{ md: "20px", base: "16px" }}
+                src={Twitter.src}
+              />
+            </Box>
+          </Box>
+        </Box>
+        <Box mt={5} ml={2}>
+          <Heading color={"gray.text"} variant={"p7"} mb={2}>
+            Company OverView
+          </Heading>
+          <Heading color={"gray.text"} variant={"p4"}>
+            Microsoft Corporation is an American multinational technology
+            corporation headquartered in Redmond, Washington. Microsoft's
+            best-known software products are the Windows line of operating
+            systems, the Microsoft 365 suite of productivity applications, and
+            the Edge web browser. Its flagship hardware products are the Xbox
+            video game consoles and the Microsoft Surface lineup of touchscreen
+            personal computers. Microsoft ranked No. 14 in the 2022 Fortune 500
+            rankings of the largest United States corporations by total revenue;
+            it was the world's largest software maker by revenue as of 2022.
+          </Heading>
+        </Box>
+      </Box>
+      {DataArray ? (
+        <Box mt={10} ml={2}>
+          <Heading color={"gray.text"} variant={"p7"}>
+            Current Openings
+          </Heading>
+        </Box>
+      ) : null}
+      <Box
+        display={"grid"}
+        gap={10}
+        mt={5}
+        gridTemplateColumns={{ xl: "repeat(2, 1fr)", base: "1fr" }}
+        width={{ lg: "80%" }}
+      >
+        {DataArray.map((object) => (
+          <Box
             p={{ sm: "20px", base: "12px" }}
             width={"100%"}
             borderRadius={"8px"}
@@ -144,12 +245,25 @@ const CompanyPageData = () => {
                 alignItems={"flex-start"}
                 gap={{ md: "18px", base: "12px" }}
               >
-                <Box display={"flex"} mt={"0px"} alignItems={"center"} flexWrap={"wrap"}>
-                <Image width={{ md: "53px", base: "35px" }} src={microsoft.src} marginRight={2}/>
+                <Box
+                  display={"flex"}
+                  mt={"0px"}
+                  alignItems={"center"}
+                  flexWrap={"wrap"}
+                >
+                  <Image
+                    width={{ md: "53px", base: "35px" }}
+                    src={microsoft.src}
+                    marginRight={2}
+                  />
                   <Heading variant={"p7"} fontWeight={700} color={"gray.text"}>
                     {object.title}
                     <Box display={"flex"} alignItems={"center"}>
-                      <Heading variant={"p4"} color={"gray.text"} marginRight={1}>
+                      <Heading
+                        variant={"p4"}
+                        color={"gray.text"}
+                        marginRight={1}
+                      >
                         {object.name}
                       </Heading>
                       <Box ml={1} mt={"4px"} display="flex" alignItems="center">
@@ -157,98 +271,83 @@ const CompanyPageData = () => {
                       </Box>
                     </Box>
                   </Heading>
-                  
                 </Box>
               </Box>
             </Box>
-      
+
             <Box>
-              <Box display={"flex"} gap={"0px"} mt={"12px"} flexWrap={"wrap"} alignItems={"center"}>
-               <Heading variant={"p10"}>{object.location}</Heading>
+              <Box
+                display={"flex"}
+                gap={"0px"}
+                mt={"12px"}
+                flexWrap={"wrap"}
+                alignItems={"center"}
+              >
+                <Heading variant={"p10"}>{object.location}</Heading>
+                <Box
+                  mt={"10px"}
+                  display={"flex"}
+                  gap={"10px"}
+                  justifyContent={"space-between"}
+                  width={"100%"}
+                >
                   <Box
-                    mt={"10px"}
+                    flexWrap={"wrap"}
                     display={"flex"}
-                    gap={"10px"}
-                    justifyContent={"space-between"}
-                    width={"100%"}
+                    gap={"2px"}
+                    alignItems={"center"}
                   >
-                    <Box flexWrap={"wrap"} display={"flex"} gap={"2px"} alignItems={"center"}>
-                      <Heading color={"gray.text"} variant={"p4"}>
-                        {object.Salary}
-                      </Heading>
-                      <Box fontSize={{ sm: "14px", base: "8px" }}>
-                        <GoDotFill style={{ color: "#D9D9D9" }} />
-                      </Box>
-                      <Heading color={"gray.text"} variant={"p4"}>
-                        {object.EmploymentType}
-                      </Heading>
-                      <Box fontSize={{ sm: "14px", base: "8px" }}>
-                        <GoDotFill style={{ color: "#D9D9D9" }} />
-                      </Box>
-                      <Heading color={"gray.text"} variant={"p4"}>
-                        {object.Experience} years  
-                      </Heading>
-                      <Box fontSize={{ sm: "14px", base: "8px" }}>
-                        <GoDotFill style={{ color: "#D9D9D9" }} />
-                      </Box>
-                      <Heading color={"gray.text"} variant={"p4"}>
-                        Apply By: {object.ApplicationDeadline}
-                      </Heading>
+                    <Heading color={"gray.text"} variant={"p4"}>
+                      {object.Salary}
+                    </Heading>
+                    <Box fontSize={{ sm: "14px", base: "8px" }}>
+                      <GoDotFill style={{ color: "#D9D9D9" }} />
                     </Box>
+                    <Heading color={"gray.text"} variant={"p4"}>
+                      {object.EmploymentType}
+                    </Heading>
+                    <Box fontSize={{ sm: "14px", base: "8px" }}>
+                      <GoDotFill style={{ color: "#D9D9D9" }} />
+                    </Box>
+                    <Heading color={"gray.text"} variant={"p4"}>
+                      {object.Experience} years
+                    </Heading>
+                    <Box fontSize={{ sm: "14px", base: "8px" }}>
+                      <GoDotFill style={{ color: "#D9D9D9" }} />
+                    </Box>
+                    <Heading color={"gray.text"} variant={"p4"}>
+                      Apply By: {object.ApplicationDeadline}
+                    </Heading>
                   </Box>
-                </Box> 
+                </Box>
+              </Box>
               <Box>
                 <Heading mt={"22px"} variant={"p10"}>
-                   Desired Skills
+                  Desired Skills
                 </Heading>
               </Box>
 
-                <Box display={"flex"} mt={"20px"} alignItems={"center"} flexWrap={"wrap"}>
-                    {object.DesiredSkills.map((skill)=>{
-                        return(
-                            <Box key={Math.random()} mr={"20px"} mb={"10px"}>
-                                <ComponentMyChip label={skill} />
-                            </Box>
-                        )
-                    })}
-                </Box>
+              <Box
+                display={"flex"}
+                mt={"20px"}
+                alignItems={"center"}
+                flexWrap={"wrap"}
+              >
+                {object.DesiredSkills.map((skill) => {
+                  return (
+                    <Box key={Math.random()} mr={"20px"} mb={"10px"}>
+                      <ComponentMyChip label={skill} />
+                    </Box>
+                  );
+                })}
+              </Box>
             </Box>
           </Box>
-      )}
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-    
-    </Box>
-  
-
-            
-        
-        
-    
-
-
-
-
-
-
-
-
-
-
-        
-
-    
+        ))}
+      </Box>
+      <Box mt={"50px"}>
+        <AbuseReportButton />
+      </Box>
     </Box>
   );
 };

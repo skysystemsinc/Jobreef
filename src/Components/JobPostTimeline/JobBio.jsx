@@ -156,6 +156,21 @@ const JobBio = ({ disableNextPrev, prevStep, nextStep }) => {
         )}
       </InputWrapper>
 
+      <Box
+        marginBottom={{ md: "25px", base: "15px" }}
+        width={{ md: "49%", base: "100%" }}
+      >
+        <LabelInput
+          state={formData.internalJobId}
+          setState={handleChange}
+          className={"job"}
+          name={"internalJobId"}
+          labelVariant={"label"}
+          variant={"bg-input"}
+          placeholder="Enter Internal Job ID"
+          label={"Internal Job ID"}
+        />
+      </Box>
       <Box marginBottom={{ md: "25px", base: "15px" }}>
         <LabelInput
           state={formData.jobDescription}

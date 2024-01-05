@@ -16,7 +16,7 @@ const CandidatesDropdown = ({ style }) => {
   const handleSelectJob = (data) => {
     const parseData = JSON.parse(data.target.value);
     
-    dispatch(jobApplications(parseData.id));
+    dispatch(jobApplications({id: parseData.id, body:{}}));
     dispatch(setSelectedJob(parseData));
   };
 

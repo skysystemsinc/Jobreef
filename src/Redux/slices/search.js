@@ -11,11 +11,10 @@ const initialState = {
 
 export const savedApplications = createAsyncThunk(
   "savedApplications",
-  async (id) => {
+  async ({id, body}) => {
     try {
       const postData = await get(
-        `${endPoints.applications}/${id}?saved=${true}`,
-        "GET"
+        `${endPoints.applications}/${id}?filterBy=${JSON.stringify(body)}`
       );
       return postData;
     } catch (error) {
@@ -41,7 +40,6 @@ const searchList = createSlice({
       state.value.saved = false;
     });
     builder.addCase(savedApplications.fulfilled, (state, action) => {
-      
       state.value.saved = action.payload.data;
     });
   },

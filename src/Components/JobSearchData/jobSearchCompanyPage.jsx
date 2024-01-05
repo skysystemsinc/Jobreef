@@ -28,6 +28,7 @@ import location from "../../assets/Images/location.svg";
 import { useRouter } from "next/router";
 import Chip from "../Chip/Chip";
 import { DataArray } from "./tempSchema";
+import AbuseReportButton from "../AbuseReportButton/AbuseReportButton";
 
 // const DataArray = [
 //   {
@@ -478,6 +479,7 @@ const JobSearchCompanyPage = () => {
             </Box>
           </Box>
         </Box>
+        <AbuseReportButton/>
       </Box>
       {/* need to design right side from here */}
 

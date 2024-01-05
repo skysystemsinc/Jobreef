@@ -23,16 +23,18 @@ import Resume from "./Resume";
 import Attachment from "./Attachment";
 import NotePad from "../NotePad/NotePad";
 import ScreeningQuestion from "./ScreeningQuestion";
+import CandidatesHistory from "./CandidatesHistory";
 
-const CandidateTabs = ({ matchCandidate, company }) => {
+const CandidateTabs = ({ disableNotePad, matchCandidate, company }) => {
   console.log("company", company);
   const router = useRouter();
   let [tabIndex, setTabIndex] = useState(0);
   const tabList = [
     { title: "Resume" },
     { title: "Attachments", disable: matchCandidate ? true : false },
-    { title: "Notepad", disable: matchCandidate ? true : false },
+    { title: "Notepad", disable: disableNotePad ? true : false },
     { title: "Screening Questions", disable: matchCandidate ? true : false },
+    { title: "Candidate History" },
   ];
 
   return (
@@ -53,7 +55,7 @@ const CandidateTabs = ({ matchCandidate, company }) => {
           // flexDirection={{ sm: "row", base: "column" }}
         >
           {tabList.map((item) => {
-            return !item.disable ? (
+            return item.disable ? null : (
               <Tab
                 fontSize={{ md: "16px", base: "14px" }}
                 sx={globalStyles.buttonTab.tabelinkStyle}
@@ -62,7 +64,7 @@ const CandidateTabs = ({ matchCandidate, company }) => {
                 {" "}
                 {item.title}
               </Tab>
-            ) : null;
+            );
           })}
         </TabList>
 
@@ -80,6 +82,9 @@ const CandidateTabs = ({ matchCandidate, company }) => {
 
           <TabPanel p={"0px"}>
             <ScreeningQuestion />
+          </TabPanel>
+          <TabPanel p={"0px"}>
+            <CandidatesHistory />
           </TabPanel>
         </TabPanels>
       </Tabs>

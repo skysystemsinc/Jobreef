@@ -58,14 +58,21 @@ const CandidateTabs = ({ company }) => {
       }
     } else if (ind == 2) {
       if (selectedJobState) {
-        dispatch(savedApplications(selectedJobState.id));
+        dispatch(
+          savedApplications({
+            id: selectedJobState.id,
+            body: {
+              saved: true,
+            },
+          })
+        );
       }
     }
 
     setTabIndex(ind);
   };
 
-  const tabLists = ["Applications", "Matched Candidates", "Search"];
+  const tabLists = ["Applications", "Matched Candidates", "Recruit "];
   const tabs = [
     {
       label: "Applications",
@@ -78,8 +85,8 @@ const CandidateTabs = ({ company }) => {
       content: <MatchCandidate filterKey={"notInterested"} />,
     },
     {
-      label: "Search",
-      value: "Search",
+      label: "Recruit",
+      value: "Recruit",
       content: <Search filterKey={"notInterested"} />,
     },
 
@@ -112,7 +119,15 @@ const CandidateTabs = ({ company }) => {
 
   useEffect(() => {
     if (allJobState) {
-      dispatch(jobApplications(allJobState[0].id));
+      dispatch(
+        jobApplications({
+          id: allJobState[0].id,
+          body: {
+            shortListed: true,
+            archived: false,
+          },
+        })
+      );
 
       dispatch(setSelectedJob(allJobState[0]));
     }

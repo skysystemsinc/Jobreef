@@ -42,6 +42,7 @@ function DeleteModal({
               fontWeight={600}
               className="sora"
               color={"black.100"}
+              textTransform={"capitalize"}
             >
               {deleteBtnLabel ?? "Delete"}
             </Heading>

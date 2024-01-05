@@ -15,6 +15,7 @@ import {
   jobApplications,
   setAll,
   setArchived,
+  setShortList,
 } from "@/Redux/slices/jobApplications";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import endPoints from "@/Utils/endpoints";
@@ -28,6 +29,7 @@ import { FiArchive } from "react-icons/fi";
 
 const Application = ({ filterKey }) => {
   const dispatch = useDispatch();
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
   const selectedJobState = useSelector(
     (state) => state.jobApplicantList.value.selectedJob
   );
@@ -39,10 +41,15 @@ const Application = ({ filterKey }) => {
     loading: false,
     reStore: false,
     delete: false,
+    shortListRestore: false,
+    shortList: false,
   });
 
   const allApplicants = useSelector(
     (state) => state.jobApplicantList.value.application.all
+  );
+  const shortedListedApplicants = useSelector(
+    (state) => state.jobApplicantList.value.application.shortListed
   );
 
   const archivedApplicants = useSelector(
@@ -52,7 +59,7 @@ const Application = ({ filterKey }) => {
     (state) => state.filters.value.filters
   );
   const tablist = [
-    `Shortlisted (${allApplicants?.length ?? 0})`,
+    `Shortlisted (${shortedListedApplicants?.length ?? 0})`,
     `All (${allApplicants?.length ?? 0})`,
     ` Archived (${archivedApplicants?.length ?? 0})`,
   ];
@@ -61,7 +68,8 @@ const Application = ({ filterKey }) => {
     {
       title: "Shortlist Application",
       handleEvent: (e) => {
-        console.log("log", e);
+        // console.log("log", e);
+        setState((prev) => ({ ...prev, shortList: e }));
       },
     },
     {
@@ -92,11 +100,27 @@ const Application = ({ filterKey }) => {
       },
     },
   ];
+  const tabThreePopOverList = [
+    {
+      title: "Restore",
+      handleEvent: (e) => {
+        console.log("e", e);
+        setState((prev) => ({ ...prev, shortListRestore: e }));
+      },
+    },
+    {
+      title: "Delete",
+      handleEvent: (e) => {
+        setState((prev) => ({ ...prev, delete: e }));
+      },
+    },
+  ];
 
   const handleSelectCandidate = (data) => {
     console.log("selected", data);
     dispatch(getSelectedCandidates(data));
     setSelectCandidate(data);
+    setActiveTabIndex((prev) => prev);
   };
   const handleAllFilter = async () => {
     dispatch(setAll(false));
@@ -141,8 +165,8 @@ const Application = ({ filterKey }) => {
       handleSelectCandidate={handleSelectCandidate}
       handleReset={handleAllReset}
       handleApplyFilter={handleAllFilter}
-      data={allApplicants}
-      popOverList={popOverListAll}
+      data={shortedListedApplicants}
+      popOverList={tabThreePopOverList}
     />,
     <All
       handleSelectCandidate={handleSelectCandidate}
@@ -160,7 +184,7 @@ const Application = ({ filterKey }) => {
     />,
   ];
 
-  const profileBtn = [
+  const firstTabProfileBtn = [
     {
       name: "Send Message",
       display: true,
@@ -174,9 +198,6 @@ const Application = ({ filterKey }) => {
 
       icon: <BsChevronDown className="hoverColor" />,
     },
-  ];
-
-  const profileBtnR2 = [
     {
       name: "Shortlist Application",
       display: true,
@@ -188,6 +209,21 @@ const Application = ({ filterKey }) => {
       name: "Archive Application",
       display: true,
       icon: <FiArchive className="hoverColor" />,
+    },
+  ];
+  const secondTabProfileBtn = [
+    {
+      name: "Send Message",
+      display: true,
+
+      icon: <HiOutlineMail className="hoverColor" />,
+    },
+
+    {
+      name: "Status",
+      display: true,
+
+      icon: <BsChevronDown className="hoverColor" />,
     },
   ];
 
@@ -257,7 +293,7 @@ const Application = ({ filterKey }) => {
       const postData = await put(
         `${endPoints.appliedJobs}/${state.reStore.id}`,
         {
-          archived: true,
+          archived: false,
         }
       );
 
@@ -284,6 +320,116 @@ const Application = ({ filterKey }) => {
             ),
           ])
         );
+      }
+    } catch (err) {
+      console.log("err", err);
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+        };
+      });
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
+  };
+  const handleShortListRestore = async () => {
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: true,
+      };
+    });
+    try {
+      const postData = await put(
+        `${endPoints.appliedJobs}/${state.shortListRestore.id}`,
+        {
+          shortListed: false,
+        }
+      );
+
+      if (postData) {
+        toast({
+          position: "bottom-right",
+          title: "candidate restore successfully",
+          status: "success",
+          variant: "subtle",
+          isClosable: true,
+        });
+        setState((prev) => {
+          return {
+            ...prev,
+            loading: false,
+            shortListRestore: false,
+          };
+        });
+        dispatch(setAll([...allApplicants, postData.data]));
+        dispatch(
+          setShortList([
+            ...shortedListedApplicants.filter(
+              (item) => item.id !== postData.data.id
+            ),
+          ])
+        );
+      }
+    } catch (err) {
+      console.log("err", err);
+      setState((prev) => {
+        return {
+          ...prev,
+          loading: false,
+        };
+      });
+      toast({
+        position: "bottom-right",
+        title: "Error",
+        status: "error",
+        variant: "subtle",
+        isClosable: true,
+      });
+    }
+  };
+  const handleShortList = async () => {
+    setState((prev) => {
+      return {
+        ...prev,
+        loading: true,
+      };
+    });
+    try {
+      const postData = await put(
+        `${endPoints.appliedJobs}/${state.shortList.id}`,
+        {
+          shortListed: true,
+        }
+      );
+
+      if (postData) {
+        toast({
+          position: "bottom-right",
+          title: "candidate restore successfully",
+          status: "success",
+          variant: "subtle",
+          isClosable: true,
+        });
+        setState((prev) => {
+          return {
+            ...prev,
+            loading: false,
+            shortList: false,
+          };
+        });
+        dispatch(
+          setAll([
+            ...allApplicants.filter((item) => item.id !== postData.data.id),
+          ])
+        );
+        dispatch(setShortList([...shortedListedApplicants, postData.data]));
       }
     } catch (err) {
       console.log("err", err);
@@ -338,6 +484,13 @@ const Application = ({ filterKey }) => {
             ),
           ])
         );
+        dispatch(
+          setShortList([
+            ...shortedListedApplicants.filter(
+              (item) => item.id !== postData.data.id
+            ),
+          ])
+        );
       }
     } catch (err) {
       console.log("err", err);
@@ -358,6 +511,7 @@ const Application = ({ filterKey }) => {
   };
   const handleReturn = () => {
     setSelectCandidate(null);
+    setActiveTabIndex((prev) => prev);
   };
   return (
     <Box>
@@ -395,20 +549,51 @@ const Application = ({ filterKey }) => {
             return { ...prev, delete: false };
           })
         }
-        // deleteBtnLabel={""}
+      />
+      <DeleteModal
+        name={state?.shortListRestore?.title}
+        loading={state.loading}
+        handleDelete={handleShortListRestore}
+        isOpen={state.shortListRestore}
+        onClose={() =>
+          setState((prev) => {
+            return { ...prev, shortListRestore: false };
+          })
+        }
+        deleteBtnLabel={"Restore"}
+      />
+      <DeleteModal
+        name={state?.shortList?.title}
+        loading={state.loading}
+        handleDelete={handleShortList}
+        isOpen={state.shortList}
+        onClose={() =>
+          setState((prev) => {
+            return { ...prev, shortList: false };
+          })
+        }
+        deleteBtnLabel={"shortlist"}
       />
       <CandidatesDropdown />
 
       {selectCandidate ? (
         <Box mt={{ md: "31px", base: "15px" }}>
           <SelectedCandidateCard
-          profileBtnR2={profileBtnR2}
             handleReturn={handleReturn}
-            profileBtn={profileBtn}
+            profileBtn={
+              activeTabIndex == 0 || activeTabIndex == 2
+                ? secondTabProfileBtn
+                : firstTabProfileBtn
+            }
           />
         </Box>
       ) : (
-        <ArchivedTabs componentList={componentList} tablist={tablist} />
+        <ArchivedTabs
+          activeTabIndex={activeTabIndex}
+          setActiveTabIndex={setActiveTabIndex}
+          componentList={componentList}
+          tablist={tablist}
+        />
       )}
     </Box>
   );

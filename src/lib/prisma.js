@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import customFields from './customFields';
 
 let prisma;
 
@@ -12,4 +13,8 @@ if (process.env.NODE_ENV === 'production') {
   prisma = globalWithPrisma.prisma;
 }
 
-export default prisma;
+const prismaExtended = prisma.$extends({
+  result: customFields,
+});
+
+export default prismaExtended;

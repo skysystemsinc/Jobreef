@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import profile_icon from "@/assets/Images/profile_icon.svg";
-import { Box, Heading, Image, useDisclosure, Button } from "@chakra-ui/react";
+import { Box, Heading, Image, useDisclosure, Button, Flex } from "@chakra-ui/react";
 import Star from "../Stars/Star";
 import black_email from "@/assets/Images/black_email.svg";
 import black_arrow_left from "@/assets/Images/black_arrow_left.svg";
@@ -29,28 +29,20 @@ import { BsChevronDown, BsStarFill } from "react-icons/bs";
 import { PiDownloadSimpleBold, PiNotepadLight } from "react-icons/pi";
 import CandidateTabs from "../CandidateTabs/CandidateTabs";
 import IconButton from "./IconButton";
+import AbuseReportButton from "../AbuseReportButton/AbuseReportButton";
 
 const SelectedCandidateCard = ({
   profileBtn,
   matchCandidate,
-  profileBtnR2,
+  disableNotePad,
+  disableStars,
+  disableDate,
+
   handleReturn,
 }) => {
   const selectedCandidates = useSelector(
     (state) => state.candidates.value.selected
   );
-  // console.log("selectedCandidates", selectedCandidates);
-  // const { isOpen, onOpen, onClose } = useDisclosure();
-  // const iconWidth = {
-  //   width: { md: "14px", base: "13px" },
-  // };
-  // const hoverStyle = {
-  //   cursor: "pointer",
-  //   _hover: {
-  //     color: "blue.500",
-  //     cursor: "pointer",
-  //   },
-  // };
 
   return (
     <>
@@ -141,33 +133,40 @@ const SelectedCandidateCard = ({
                   </Heading>
                   <Box>
                     <Box>
-                      <Box mt={"8px"} mb={"5px"}>
-                        <Star
-                          starIcon={
-                            <BsStarFill color="#f4b024" fontSize={"15px"} />
-                          }
-                          star={[1, 2, 3, 4]}
-                        />
-                      </Box>
-                      <Heading
-                        fontWeight={400}
-                        color={"gray.text"}
-                        as={"p"}
-                        variant={"p4"}
-                      >
-                        Applied On:{" "}
-                        {moment(selectedCandidates?.createdAt).format(
-                          "DD/MM/YYYY"
-                        )}
-                      </Heading>
+                      {disableStars ? null : (
+                        <Box mt={"8px"} mb={"5px"}>
+                          <Star
+                            starIcon={
+                              <BsStarFill color="#f4b024" fontSize={"15px"} />
+                            }
+                            star={[1, 2, 3, 4]}
+                          />
+                        </Box>
+                      )}
+
+                      {disableDate ? null : (
+                        <Heading
+                          fontWeight={400}
+                          color={"gray.text"}
+                          as={"p"}
+                          variant={"p4"}
+                        >
+                          Applied On:{" "}
+                          {moment(selectedCandidates?.createdAt).format(
+                            "DD/MM/YYYY"
+                          )}
+                        </Heading>
+                      )}
                     </Box>
                   </Box>
                 </Box>
               </Box>
-              <Box gap={{ md:"10px", base:"4px"}} display={"flex"}
-              flexWrap={"wrap"}
+              <Box
+                gap={{ md: "10px", base: "4px" }}
+                display={"flex"}
+                flexWrap={"wrap"}
               >
-                <Box>
+                {/* <Box>
                   {profileBtnR2?.map((item) => {
                     return item.display ? (
                       <IconButton item={item} />
@@ -216,8 +215,17 @@ const SelectedCandidateCard = ({
                     // </Box>
                     null;
                   })}
-                </Box>
-                <Box>
+                </Box> */}
+                <Box
+                  columnGap={"8px"}
+                  display={"grid"}
+                  gridTemplateColumns={{
+                    lg: "repeat(2, 1fr)",
+                    md: "repeat(2, 1fr)",
+                    sm: "repeat(1, 1fr)",
+                    base: "repeat(1, 1fr)",
+                  }}
+                >
                   {profileBtn.map((item) => {
                     return item.display ? <IconButton item={item} /> : null;
                   })}
@@ -226,8 +234,15 @@ const SelectedCandidateCard = ({
             </Box>
           </Box>
 
-          <CandidateTabs matchCandidate={matchCandidate} />
+          <CandidateTabs
+            disableNotePad={disableNotePad}
+            matchCandidate={matchCandidate}
+          />
         </Box>
+
+        <Flex justifyContent={"flex-end"} mt={"10px"}>
+          <AbuseReportButton />
+        </Flex>
       </Box>
     </>
   );

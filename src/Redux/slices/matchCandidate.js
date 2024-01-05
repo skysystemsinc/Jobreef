@@ -8,8 +8,8 @@ const initialState = {
     matchCandidate: {
       all: false,
       notInterested: false,
+      invited: false,
     },
-    search: false,
   },
 };
 export const matchCandidate = createAsyncThunk("matchCandidate", async (id) => {
@@ -36,14 +36,19 @@ const matchCandidateList = createSlice({
     builder.addCase(matchCandidate.pending, (state, action) => {
       state.value.matchCandidate.all = false;
       state.value.matchCandidate.notInterested = false;
+      state.value.matchCandidate.i = false;
     });
     builder.addCase(matchCandidate.fulfilled, (state, action) => {
       const all = action.payload.data.filter((item) => item.interested == true);
       const notInterested = action.payload.data.filter(
         (item) => item.interested == false
       );
+      const invited = action.payload.data.filter(
+        (item) => item.interested == false && item.invited == true
+      );
       state.value.matchCandidate.all = all;
       state.value.matchCandidate.notInterested = notInterested;
+      state.value.matchCandidate.invited = invited;
     });
   },
 });
